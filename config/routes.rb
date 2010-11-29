@@ -1,7 +1,13 @@
 SwiftSite::Application.routes.draw do
-  resources :pages
+    
+  match 'pages/:path', :to => 'pages#show'
+  
+  resources :pages, :products
 
-  resources :products
+
+  # match 'pages/view/:path', :to => 'pages#view'
+
+  root :to => 'pages#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
