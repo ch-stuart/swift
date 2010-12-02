@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        The Widget
+    </title>
+    <link rel="stylesheet" href="javascripts/dragdealer-v0.9.5/dragdealer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+        }
+        ins {
+            text-decoration: none;
+        }
+        del {
+            text-decoration: line-through;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        :focus {
+            outline: 0;
+        }
+        /* General classes */
+
+        .top-spaced {
+            margin-top: 10px;
+        }
+        .bottom-spaced {
+            margin-bottom: 10px;
+        }
+        .clear {
+            clear: both;
+        }
+        .left-float {
+            float: left;
+        }
+        .right-float {
+            float: right;
+        }
+        .big {
+            font-size: 14px;
+        }
+        /* Slideshow */
+
+        #slideshow-menu-wrapper {
+            position: relative;
+            width: 480px;
+        }
+        #slideshow-menu-wrapper .cursor {
+            position: absolute;
+            width: 120px;
+            height: 63px;
+            border: 3px solid #444;
+        }
+        ul#slideshow-menu {
+
+        }
+        ul#slideshow-menu li {
+            float: left;
+            width: 120px;
+            margin: 0;
+        }
+        ul#slideshow-menu li a {
+            display: block;
+            margin: 3px;
+            padding: 10px;
+            background: #EEE;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+        }
+        ul#slideshow-menu li a .title {
+            display: block;
+            margin: 1px 0 7px 0;
+            color: #000;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 24px;
+            letter-spacing: -1px;
+        }
+        ul#slideshow-menu li a .description {
+            display: block;
+            color: #444;
+            font-size: 11px;
+            line-height: 11px;
+            text-transform: uppercase;
+        }
+        ul#slideshow-menu li a:hover {
+            background: #E1E1E1;
+            text-decoration: none;
+        }
+        ul#slideshow-menu li a:hover .title {
+        }
+        #slideshow {
+            width: 400px;
+            height: 267px;
+            overflow: hidden;
+        }
+        #slideshow .handle {
+            width: 1600px;
+            height: 267px;
+        }
+        #slideshow .handle .slide {
+            float: left;
+            width: 400px;
+            height: 267px;
+        }
+        #slideshow .handle .img1 {
+            background: url('http://code.ovidiu.ch/img/dragdealer/slide1.jpg') no-repeat 0 0;
+        }
+        #slideshow .handle .img2 {
+            background: url('http://code.ovidiu.ch/img/dragdealer/slide2.jpg') no-repeat 0 0;
+        }
+        #slideshow .handle .img3 {
+            background: url('http://code.ovidiu.ch/img/dragdealer/slide3.jpg') no-repeat 0 0;
+        }
+        #slideshow .handle .img4 {
+            background: url('http://code.ovidiu.ch/img/dragdealer/slide4.jpg') no-repeat 0 0;
+        }
+    </style>
+</head>
+<body>
+   <div id="slideshow" class="dragdealer">
+       <div class="handle">
+           <div class="slide img1"></div>
+           <div class="slide img2"></div>
+           <div class="slide img3"></div>
+           <div class="slide img4"></div>
+       </div>
+   </div>
+    <div id="slideshow-menu-wrapper">
+        <div id="slideshow-menu-cursor" class="cursor"></div>
+        <ul id="slideshow-menu">
+            <li>
+                <a id="slideshow-photo-1" href="#photo1">
+                    <span class="title">Lorem</span>
+                   <span class="description">Lorem ipsum dolor sit.</span>
+               </a>
+           </li>
+           <li>
+               <a id="slideshow-photo-2" href="#photo2">
+                   <span class="title">Ipsum</span>
+                   <span class="description">Lorem ipsum dolor sit.</span>
+               </a>
+           </li>
+           <li>
+               <a id="slideshow-photo-3" href="#photo3">
+                   <span class="title">Dolor</span>
+                   <span class="description">Lorem ipsum dolor sit.</span>
+               </a>
+           </li>
+           <li>
+               <a id="slideshow-photo-4" href="#photo4">
+                   <span class="title">Sit amet</span>
+                   <span class="description">Lorem ipsum dolor sit.</span>
+               </a>
+           </li>
+       </ul>
+   </div>
+    <script src="javascripts/dragdealer-v0.9.5/dragdealer.js"></script>
+    <script>
+        var menuWrapper = document.getElementById('slideshow-menu-wrapper');
+        var cursor = document.getElementById('slideshow-menu-cursor');
+
+        var slideshow = new Dragdealer('slideshow',
+        {
+        	steps: 4,
+        	loose: true,
+        	animationCallback: function(x, y)
+        	{
+        	    console.log('=> x ' + x)
+        	    console.log('=> diff ' + (menuWrapper.offsetWidth - cursor.offsetWidth))
+        		var left = x * (menuWrapper.offsetWidth - cursor.offsetWidth);
+        		cursor.style.left = String(left) + 'px';
+        	}
+        });
+        document.getElementById('slideshow-photo-1').onclick = function()
+        {
+            slideshow.setStep(1);
+            return false;
+        }
+        document.getElementById('slideshow-photo-2').onclick = function()
+        {
+            slideshow.setStep(2);
+            return false;
+        }
+        document.getElementById('slideshow-photo-3').onclick = function()
+        {
+            slideshow.setStep(3);
+            return false;
+        }
+        document.getElementById('slideshow-photo-4').onclick = function()
+        {
+            slideshow.setStep(4);
+            return false;
+        }
+    </script>
+</body>
+</html>
