@@ -27,8 +27,6 @@
         :focus {
             outline: 0;
         }
-        /* General classes */
-
         .clear {
             clear: both;
         }
@@ -38,8 +36,8 @@
         .right-float {
             float: right;
         }
-        /* Slideshow */
 
+        /* Slideshow */
         #slideshow-menu-wrapper {
             position: relative;
             width: 480px;
@@ -151,35 +149,27 @@
         var menuWrapper = document.getElementById('slideshow-menu-wrapper');
         var cursor = document.getElementById('slideshow-menu-cursor');
 
-        var slideshow = new Dragdealer('slideshow',
-        {
-        	steps: 4,
-        	loose: true,
-        	animationCallback: function(x, y)
-        	{
-        	    console.log('=> x ' + x)
-        	    console.log('=> diff ' + (menuWrapper.offsetWidth - cursor.offsetWidth))
-        		var left = x * (menuWrapper.offsetWidth - cursor.offsetWidth);
-        		cursor.style.left = String(left) + 'px';
-        	}
+        var slideshow = new Dragdealer('slideshow', {
+            steps: 4,
+            loose: true,
+            animationCallback: function(x, y) {
+                var left = x * (menuWrapper.offsetWidth - cursor.offsetWidth);
+                cursor.style.left = String(left) + 'px';
+            }
         });
-        document.getElementById('slideshow-photo-1').onclick = function()
-        {
+        document.getElementById('slideshow-photo-1').onclick = function() {
             slideshow.setStep(1);
             return false;
         }
-        document.getElementById('slideshow-photo-2').onclick = function()
-        {
+        document.getElementById('slideshow-photo-2').onclick = function() {
             slideshow.setStep(2);
             return false;
         }
-        document.getElementById('slideshow-photo-3').onclick = function()
-        {
+        document.getElementById('slideshow-photo-3').onclick = function() {
             slideshow.setStep(3);
             return false;
         }
-        document.getElementById('slideshow-photo-4').onclick = function()
-        {
+        document.getElementById('slideshow-photo-4').onclick = function() {
             slideshow.setStep(4);
             return false;
         }
