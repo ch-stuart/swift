@@ -1,0 +1,12 @@
+production: 
+  user: swift
+  pass: swift
+
+development: 
+    user: swift
+    pass: swift
+    flickr_user_id: 88116251@N00
+
+test: 
+    user: swift
+    pass: swift
