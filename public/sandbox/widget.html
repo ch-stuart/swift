@@ -24,27 +24,11 @@
         a {
             text-decoration: none;
         }
-        ins {
-            text-decoration: none;
-        }
-        del {
-            text-decoration: line-through;
-        }
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
         :focus {
             outline: 0;
         }
         /* General classes */
 
-        .top-spaced {
-            margin-top: 10px;
-        }
-        .bottom-spaced {
-            margin-bottom: 10px;
-        }
         .clear {
             clear: both;
         }
@@ -53,9 +37,6 @@
         }
         .right-float {
             float: right;
-        }
-        .big {
-            font-size: 14px;
         }
         /* Slideshow */
 
@@ -69,9 +50,6 @@
             height: 63px;
             border: 3px solid #444;
         }
-        ul#slideshow-menu {
-
-        }
         ul#slideshow-menu li {
             float: left;
             width: 120px;
@@ -82,31 +60,21 @@
             margin: 3px;
             padding: 10px;
             background: #EEE;
-            border-radius: 3px;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
         }
         ul#slideshow-menu li a .title {
             display: block;
-            margin: 1px 0 7px 0;
-            color: #000;
-            font-size: 24px;
-            font-weight: bold;
-            line-height: 24px;
-            letter-spacing: -1px;
+            font-size: 16px;
+            line-height: 16px;
         }
         ul#slideshow-menu li a .description {
             display: block;
-            color: #444;
-            font-size: 11px;
-            line-height: 11px;
+            font-size: 12px;
+            line-height: 12px;
             text-transform: uppercase;
         }
         ul#slideshow-menu li a:hover {
             background: #E1E1E1;
             text-decoration: none;
-        }
-        ul#slideshow-menu li a:hover .title {
         }
         #slideshow {
             width: 400px;
@@ -139,7 +107,11 @@
 <body>
    <div id="slideshow" class="dragdealer">
        <div class="handle">
-           <div class="slide img1"></div>
+           <div class="slide img1">
+                <p style="color: #fff">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+                </p>
+           </div>
            <div class="slide img2"></div>
            <div class="slide img3"></div>
            <div class="slide img4"></div>
