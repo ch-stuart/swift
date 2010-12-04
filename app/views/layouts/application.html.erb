@@ -7,7 +7,14 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <%= yield %>
+  <div id="box">
+    <% if logged_in? %>
+      <a id="logout" class="session_link" href="/logout">log out</a>
+    <% else %>
+      <a id="login" class="session_link" href="/logout">log out</a>
+    <% end %>
+    <%= yield %>
+  </div>
 </body>
 </html>
 

@@ -5,6 +5,9 @@ SwiftSite::Application.routes.draw do
 
   match 'pages/:path', :to => 'pages#show'
 
+  match 'logout', :to => 'application#logout'
+  match 'login', :to => 'application#login'
+
   # match 'pages/view/:path', :to => 'pages#view'
 
   root :to => 'pages#home'
@@ -65,4 +68,5 @@ SwiftSite::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+
 end

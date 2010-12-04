@@ -15,6 +15,8 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
 
+    @photos = Product.get_photos_for_tag @product
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @product }

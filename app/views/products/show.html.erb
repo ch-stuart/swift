@@ -25,6 +25,16 @@
   <%= @product.status %>
 </p>
 
+<ul id="fancybox_list">
+  <% @photos.each_key do |photo| -%>
+    <li class="fancybox_item">
+      <a class="fancybox" rel="fancybox" href="<%= @photos[photo]['large'] -%>" title="<%= @photos[photo]['title'] %>***<%= @photos[photo]['flickr_url'] -%>">
+        <img class="thumb" src="<%= @photos[photo]['medium'] %>">
+      </a>
+    </li>
+  <% end -%>
+</ul>
+
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
