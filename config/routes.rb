@@ -1,9 +1,9 @@
 SwiftSite::Application.routes.draw do
     
-  match 'pages/:path', :to => 'pages#show'
   
   resources :pages, :products
 
+  match 'pages/:path', :to => 'pages#show'
 
   # match 'pages/view/:path', :to => 'pages#view'
 
