@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
     
+  before_filter :authenticate, :except => [ :index, :home, :show ]
+    
   def home
     render :text => "swift industries"
   end
