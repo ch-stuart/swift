@@ -1,11 +1,12 @@
 SwiftSite::Application.routes.draw do
 
+  resources :pages, :products
+
+  get ':path' => 'pages#show', :constraints => { :path => /[A-Za-z]+/ }
+
   match 'logout', :to => 'application#logout'
   match 'login', :to => 'application#login'
 
-  match 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z]+/ }
-
-  resources :pages, :products
 
   root :to => 'pages#home'
 
