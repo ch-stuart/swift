@@ -22,8 +22,9 @@ class PagesController < ApplicationController
   def show
     if params[:path]
       @page = Page.find_by_path(params[:path])
-      @page = Page.find(params[:path]) if @page.nil?
       raise ActiveRecord::RecordNotFound, "Page not found" if @page.nil?
+    else
+      @page = Page.find(params[:id])
     end
 
     respond_to do |format|
