@@ -2,8 +2,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :authenticate, :except => [ :logout ]
+  before_filter :title
   
   helper_method :logged_in?
+  helper_method :title
+  
+  def title
+    @title = Company.find_by_id('1').title || "Swift Industries"
+  end
 
   def logged_in?
     session[:login]
@@ -12,10 +18,6 @@ class ApplicationController < ActionController::Base
   def logout
     do_logout
     render :text => "Quit your browser to logout."
-  end
-
-  def login
-      # authenticates
   end
 
   private
