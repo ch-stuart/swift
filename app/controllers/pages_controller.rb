@@ -2,14 +2,11 @@ class PagesController < ApplicationController
     
   before_filter :authenticate, :except => [ :index, :home, :show ]
     
-  def home
-    render :text => "swift industries"
-  end
-
   # GET /pages
   # GET /pages.xml
   def index
     @pages = Page.all
+    @subtitle = controller_name.titlecase
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +23,8 @@ class PagesController < ApplicationController
     else
       @page = Page.find(params[:id])
     end
+    
+    @subtitle = @page.title
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,6 +36,8 @@ class PagesController < ApplicationController
   # GET /pages/new.xml
   def new
     @page = Page.new
+    
+    @subtitle = "#{action_name.titlecase} Page"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,6 +48,7 @@ class PagesController < ApplicationController
   # GET /pages/1/edit
   def edit
     @page = Page.find(params[:id])
+    @subtitle = "#{action_name.titlecase} `#{@page.title.titlecase}`"
   end
 
   # POST /pages
