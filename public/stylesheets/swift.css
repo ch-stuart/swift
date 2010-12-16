@@ -12,3 +12,15 @@
 td, th {
     padding: 5px;
 }
+
+h1,h2,ul {
+    font-size: 18px;
+    margin: 20px 0 0 0;
+}
+h1 {
+    margin: 0 0 40px;
+    font-style: italic;
+}
+ul {
+    margin-top: 0;
+}
