@@ -1,14 +1,13 @@
 SwiftSite::Application.routes.draw do
 
-  resources :pages, :products
+  resources :pages, :products, :companies, :hub
+
+  match 'logout', :to => 'application#logout'
+  match 'login', :to => 'hub#index'
 
   get ':path' => 'pages#show', :constraints => { :path => /[A-Za-z]+/ }
 
-  match 'logout', :to => 'application#logout'
-  match 'login', :to => 'application#login'
-
-
-  root :to => 'pages#home'
+  root :to => 'homes#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
