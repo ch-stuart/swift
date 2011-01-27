@@ -1,6 +1,6 @@
 SwiftSite::Application.routes.draw do
 
-  resources :pages, :products, :companies, :hub
+  resources :pages, :products, :companies, :hub, :colors
 
   match 'logout', :to => 'application#logout'
   match 'login', :to => 'hub#index'
