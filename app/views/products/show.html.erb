@@ -1,45 +1,54 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @product.title %>
+<% unless @product.public? %>
+  <p class="private" style="position: absolute; top: 0; left: 0; padding: 2px 6px; border: 1px solid rgba(0,0,0,.2);-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3); border-top: 0;">
+    private!
+  </p>
+<% end %>
+<p id="notice">
+  <%= notice %>
 </p>
 
+<h2>
+  <%= @product.title %>
+</h2>
+
+
+<h3>
+  About <%= @product.title %>
+</h3>
 <p>
-  <b>Description:</b>
   <%= @product.description %>
 </p>
 
 <p>
-  <b>Price:</b>
-  <%= @product.price %>
+  $<%= @product.price %>
 </p>
 
+<h4>
+  Specs
+</h4>
 <p>
-  <b>Flickr tag:</b>
-  <%= @product.flickr_tag %>
-</p>
-
-<p>
-  <b>Specs:</b>
   <%= @product.specs %>
 </p>
 
-<p>
-  <b>Status:</b>
-  <%= @product.status %>
-</p>
+<% unless @photos.nil? %>
+  <ul id="fancybox_list">
+    <% @photos.each_key do |photo| -%>
+      <li class="fancybox_item">
+        <a class="fancybox" rel="fancybox" href="<%= @photos[photo]['large'] -%>" title="<%= @photos[photo]['title'] %>***<%= @photos[photo]['flickr_url'] -%>">
+          <img class="thumb" src="<%= @photos[photo]['medium'] %>">
+        </a>
+      </li>
+    <% end -%>
+  </ul>
+<% else %>
+  <p>
+    Photos are not available.
+  </p>
+<% end %>
 
-<ul id="fancybox_list">
-  <% @photos.each_key do |photo| -%>
-    <li class="fancybox_item">
-      <a class="fancybox" rel="fancybox" href="<%= @photos[photo]['large'] -%>" title="<%= @photos[photo]['title'] %>***<%= @photos[photo]['flickr_url'] -%>">
-        <img class="thumb" src="<%= @photos[photo]['medium'] %>">
-      </a>
-    </li>
-  <% end -%>
-</ul>
-
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<% if logged_in? %>
+  <% content_for :admin_links do %>
+    <%= link_to 'edit', edit_product_path(@product) %>
+    <%= link_to 'products', products_path %>
+  <% end %>
+<% end %>

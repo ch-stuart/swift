@@ -9,15 +9,16 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+  <div class="admin_links">
+    <% if logged_in? %>
+      <%= yield :admin_links %>
+      <a id="hub" class="hub_link" href="/hub">hub</a>
+      <a id="logout" class="session_link" href="/logout">log out</a>
+    <% else %>
+      <a id="login" class="session_link" href="/logout">log in</a>
+    <% end %>
+  </div>
   <div id="box">
-    <div class="admin_links">
-      <% if logged_in? %>
-        <a id="hub" class="hub_link" href="/hub">hub</a>
-        <a id="logout" class="session_link" href="/logout">log out</a>
-      <% else %>
-        <a id="login" class="session_link" href="/logout">log in</a>
-      <% end %>
-    </div>
     <%= yield %>
   </div>
 </body>
