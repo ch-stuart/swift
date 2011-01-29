@@ -25,6 +25,7 @@
             captionAnimation: 'fade', 			// fade, slideOpen, none
             captionAnimationSpeed: 800, 		// if so how quickly should they animate in
             bullets: false,						// true or false to activate the bullet navigation
+            bulletText: false,                  // text rather than bullets
             bulletThumbs: false,				// thumbnails for the bullets
             bulletThumbLocation: '',			// location from this file where thumbs will be
             afterSlideChange: function(){} 		// empty function 
@@ -252,14 +253,23 @@
             	orbitWrapper.append(bulletHTML);
             	var bullets = $('ul.orbit-bullets');
             	for(i=0; i<numberSlides; i++) {
-            		var liMarkup = $('<li>'+(i+1)+'</li>');
+            	    var liMarkup;
+                    // If we're only displaying bullets
+            	    if (options.bullets && !options.bulletThumbs && !options.bulletText) {
+            	        liMarkup = $('<li class="has-bullet">'+(i+1)+'</li>');
+            	    }
+                    // Bullet thumbs
             		if(options.bulletThumbs) {
             			var	thumbName = slides.eq(i).data('thumb');
             			if(thumbName) {
-            				var liMarkup = $('<li class="has-thumb">'+i+'</li>')
+            				liMarkup = $('<li class="has-thumb">'+i+'</li>')
             				liMarkup.css({"background" : "url("+options.bulletThumbLocation+thumbName+") no-repeat"});
             			}
-            		} 
+            		}
+            		// Bullet text
+            		if (options.bulletText) {
+            		    liMarkup = $('<li class="has-text">'+ slides.eq(i).data('text') +'</li>')
+            		}
             		$('ul.orbit-bullets').append(liMarkup);
             		liMarkup.data('index',i);
             		liMarkup.click(function() {

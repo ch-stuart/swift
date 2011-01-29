@@ -1,6 +1,24 @@
+<%= content_for :css do %>
+  <!--[if IE]>
+    <style>
+      .timer { display: none !important; }
+      div.caption { background:transparent; filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);zoom: 1; }
+    </style>
+  <![endif]-->
+<% end %>
+
 <h1>
   <%= @title %>
 </h1>
+
+<div id="featured"> 
+    <img src="images/tmp/DSCN4034.jpg" width="800" height="600" alt="DSCN4034" data-caption="#orb_cap_1" data-text="name 1">
+    <img src="images/tmp/DSCN4173.jpg" width="800" height="600" alt="DSCN4173" data-caption="#orb_cap_2" data-text="name 2">
+    <img src="images/tmp/DSCN4257.jpg" width="800" height="600" alt="DSCN4257" data-caption="#orb_cap_3" data-text="name 3">
+</div>
+<span class="orbit-caption" id="orb_cap_1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed.</span>
+<span class="orbit-caption" id="orb_cap_2">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+<span class="orbit-caption" id="orb_cap_3">Duis aute irure dolor in reprehenderit in voluptate in culpa qui officia deserunt mollit anim id est laborum.</span>
 
 <h2>
   products:
@@ -44,3 +62,15 @@
     - <%= @company.email %>
   </li>
 </ul>
+
+<%= content_for :js do %>
+  <script>
+    $(window).load(function() {
+      $('#featured').orbit({
+        bullets: true,
+        timer: false,
+        captions: true
+      });
+    });
+  </script>
+<% end %>

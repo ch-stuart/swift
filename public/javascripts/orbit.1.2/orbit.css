@@ -114,7 +114,7 @@ span.pause.active {
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 920px; }
+    /*width: 920px;*/ /* FIXME: set via js */ }
 
 
 /* DIRECTIONAL NAV
@@ -157,17 +157,21 @@ div.slider-nav span.left {
     float: left;
     margin-left: 5px;
     cursor: pointer;
-    color: #999;
+    color: #999; }
+
+.orbit-bullets li.active {
+    color: #222; }
+
+.orbit-bullets li.has-bullet {
     text-indent: -9999px;
     background: url(orbit/bullets.jpg) no-repeat 4px 0;
     width: 13px;
     height: 12px;
     overflow: hidden; }
 
-.orbit-bullets li.active {
-    color: #222;
+.orbit-bullets li.active.has-bullet {
     background-position: -8px 0; }
-    
+
 .orbit-bullets li.has-thumb {
     background: none;
     width: 100px;
@@ -176,3 +180,7 @@ div.slider-nav span.left {
 .orbit-bullets li.active.has-thumb {
     background-position: 0 0;
     border-top: 2px solid #000; }
+    
+.orbit-bullets li.has-text {
+    /* defaults */
+}

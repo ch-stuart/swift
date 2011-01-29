@@ -13,7 +13,10 @@
     <%= @title %><%= ": #{@subtitle}" unless @subtitle.nil? %>
   </title>
   <%= stylesheet_link_tag :all %>
+  <link rel="stylesheet" href="javascripts/orbit.1.2/orbit.css">
+  <%= yield :css -%>
   <%= csrf_meta_tag %>
+
 </head>
 <body>
   <div id="box">
@@ -21,6 +24,8 @@
   </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+  <script src="javascripts/orbit.1.2/jquery.orbit.js"></script>
+  <%= yield :js -%>
 
   <%# mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -%>
   <script>
