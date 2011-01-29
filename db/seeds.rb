@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+Company.create(
+    :title => "Swift Industries",
+    :email => "swiftindustry@yahoo.com",
+    :phone => "(206) 325.0054",
+    :address => "1422 20th AVE Seattle, WA 98122"
+)
