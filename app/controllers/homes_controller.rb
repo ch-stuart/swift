@@ -5,7 +5,7 @@ class HomesController < ApplicationController
   def index
     @pages = Page.all
     @products = Product.all
-    @company = Company.find_by_id('1')
+    @company = Company.first
   end
 
 end

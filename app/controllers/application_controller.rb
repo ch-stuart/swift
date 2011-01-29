@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :title
 
   def title
-    @title = Company.find_by_id('1').title || "Swift Industries"
+    @title = Company.first.title
   end
 
   def logged_in?
