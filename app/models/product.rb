@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+
+    has_many :parts
     
     def self.get_photos_for_tag product
         # http://snipplr.com/view/8954/create-nested-hashes/

@@ -3,10 +3,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate, :except => [ :logout ]
   before_filter :title
-  
+
   helper_method :logged_in?
   helper_method :title
-  
+
   def title
     @title = Company.find_by_id('1').title || "Swift Industries"
   end
