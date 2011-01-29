@@ -1,26 +1,34 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<%# paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -%> 
+<!--[if lt IE 7 ]> <html class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <%# Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -%>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>
     <%= @title %><%= ": #{@subtitle}" unless @subtitle.nil? %>
   </title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div class="admin_links">
-    <% if logged_in? %>
-      <%= yield :admin_links %>
-      <a id="hub" class="hub_link" href="/hub">hub</a>
-      <a id="logout" class="session_link" href="/logout">log out</a>
-    <% else %>
-      <a id="login" class="session_link" href="/logout">log in</a>
-    <% end %>
-  </div>
   <div id="box">
     <%= yield %>
   </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+
+  <%# mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -%>
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
 </body>
 </html>
 

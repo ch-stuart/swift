@@ -45,10 +45,3 @@
     Photos are not available.
   </p>
 <% end %>
-
-<% if logged_in? %>
-  <% content_for :admin_links do %>
-    <%= link_to 'edit', edit_product_path(@product) %>
-    <%= link_to 'products', products_path %>
-  <% end %>
-<% end %>
