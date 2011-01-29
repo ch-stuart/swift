@@ -36,7 +36,12 @@ class ProductsController < ApplicationController
   # GET /products/new.xml
   def new
     @product = Product.new
-
+    3.times do
+      part = @product.parts.build
+      # 4.times { question.answers.build }
+    end
+    
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @product }
@@ -52,7 +57,6 @@ class ProductsController < ApplicationController
   # POST /products.xml
   def create
     @product = Product.new(params[:product])
-
     respond_to do |format|
       if @product.save
         format.html { redirect_to(@product, :notice => 'Product was successfully created.') }

@@ -1,7 +1,8 @@
 class Product < ActiveRecord::Base
 
-    has_many :parts
-    
+    has_many :parts, :dependent => :destroy
+    accepts_nested_attributes_for :parts, :reject_if => lambda { |a| a[:title].blank? }, :allow_destroy => true
+
     def self.get_photos_for_tag product
         # http://snipplr.com/view/8954/create-nested-hashes/
         photos = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
