@@ -31,11 +31,15 @@ GEM
     arel (2.0.4)
     bluecloth (2.0.9)
     builder (2.1.2)
+    closure-compiler (1.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     flickraw (0.8.3)
       json (>= 1.1.1)
     i18n (0.4.1)
+    jammit (0.6.0)
+      closure-compiler (>= 0.1.0)
+      yui-compressor (>= 0.9.1)
     json (1.4.6)
     mail (2.2.10)
       activesupport (>= 2.3.6)
@@ -69,6 +73,7 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
     yaml_db (0.2.0)
+    yui-compressor (0.9.3)
 
 PLATFORMS
   ruby
@@ -76,6 +81,7 @@ PLATFORMS
 DEPENDENCIES
   bluecloth (= 2.0.9)
   flickraw (= 0.8.3)
+  jammit
   rails (= 3.0.3)
   sqlite3-ruby
   yaml_db
