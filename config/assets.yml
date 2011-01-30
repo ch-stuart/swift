@@ -1,5 +1,3 @@
-package_assets: always
-
 javascripts:
   common:
     - public/javascripts/orbit.1.2/jquery.orbit.js
