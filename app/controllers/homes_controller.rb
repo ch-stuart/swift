@@ -5,8 +5,8 @@ class HomesController < ApplicationController
   caches_page :index
 
   def index
-    @pages = Page.all
-    @products = Product.all
+    @pages = Page.find_all_by_status('Public')
+    @products = Product.find_all_by_status('Public')
     @company = Company.first
   end
 
