@@ -42,3 +42,9 @@ a:active {
 .private {
     background-color: #ffa;
 }
+
+.indent {
+    background-color: rgba(0,0,0,.05);
+    padding: 10px;
+    margin-left: 20px;
+}

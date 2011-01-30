@@ -1,6 +1,18 @@
-<p>
-  <%= f.label :title, "Part" %><br>
-  <%= f.text_field :title, :rows => 3 %><br>
-  <%= f.check_box :_destroy %>
-  <%= f.label :_destroy, "Remove Part" %>
-</p>
+<div class="indent">
+  <div class="field">
+    <%= f.label :title, "Part" %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :price, "Price" %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.check_box :_destroy %>
+    <%= f.label :_destroy, "Remove Part" %>
+  </div>
+
+  <%= f.fields_for :colors do |builder| %>
+    <%= render :partial => 'color_fields', :locals => { :f => builder } %>
+  <% end %>
+</div>

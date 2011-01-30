@@ -1,0 +1,10 @@
+<div class="indent">
+  <div class="field">
+    <%= f.label :title, "Color" %><br>
+    <%= f.select :title, Color.all.collect {|c| [ c.title, c.id ] }, { :include_blank => true } %>
+  </div>
+  <div class="field">
+    <%= f.check_box :_destroy %>
+    <%= f.label :_destroy, "Remove" %>
+  </div>
+</div>

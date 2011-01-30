@@ -36,9 +36,9 @@ class ProductsController < ApplicationController
   # GET /products/new.xml
   def new
     @product = Product.new
-    3.times do
+    1.times do
       part = @product.parts.build
-      # 4.times { question.answers.build }
+      2.times { part.colors.build }
     end
     
     
