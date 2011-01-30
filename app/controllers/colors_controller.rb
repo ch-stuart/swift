@@ -1,4 +1,7 @@
 class ColorsController < ApplicationController
+
+  caches_page :index, :show
+
   # GET /colors
   # GET /colors.xml
   def index

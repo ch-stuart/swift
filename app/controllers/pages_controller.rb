@@ -1,7 +1,9 @@
 class PagesController < ApplicationController
-    
+
   before_filter :authenticate, :except => [ :index, :home, :show ]
-    
+
+  caches_page :index, :show
+
   # GET /pages
   # GET /pages.xml
   def index

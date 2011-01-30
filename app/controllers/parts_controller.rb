@@ -1,4 +1,7 @@
 class PartsController < ApplicationController
+
+  caches_page :index, :show
+
   # GET /parts
   # GET /parts.xml
   def index

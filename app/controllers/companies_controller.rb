@@ -1,4 +1,7 @@
 class CompaniesController < ApplicationController
+
+  caches_page :index, :show
+
   # GET /companies
   # GET /companies.xml
   def index

@@ -1,4 +1,8 @@
 class ProductsController < ApplicationController
+
+  caches_page :index, :show
+  cache_sweeper :product_sweeper
+
   # GET /products
   # GET /products.xml
   def index
