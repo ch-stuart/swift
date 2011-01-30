@@ -38,6 +38,10 @@
   <%= f.fields_for :parts do |builder| %>
     <%= render :partial => 'parts_fields', :locals => { :f => builder } %>
   <% end %>
+  <p>
+    <%= link_to_add_fields "Add Part", f, :parts %>
+  </p>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,5 +1,6 @@
 javascripts:
   common:
+    - public/javascripts/application.js
     - public/javascripts/orbit.1.2/jquery.orbit.js
 
 stylesheets:

@@ -1,4 +1,4 @@
-<div class="indent">
+<div class="indent group">
   <div class="field">
     <%= f.label :title, "Part" %><br>
     <%= f.text_field :title %>
@@ -8,8 +8,8 @@
     <%= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.check_box :_destroy %>
-    <%= f.label :_destroy, "Remove Part" %>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to_function "Remove", "remove_fields(this)" %>
   </div>
 
   <%= f.fields_for :colors do |builder| %>
