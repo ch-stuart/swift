@@ -26,13 +26,11 @@
 </ul>
 
 <h2>
-  <%= link_to 'Companies', companies_path %>:
+  Company Info
 </h2>
 <ul>
-  <% @companies.each do |company| %>
-    <li>
-      - <%= link_to company.title, company %>
-    </li>
-  <% end %>
+  <li>
+    - <%= link_to @company.title, @company %>
+  </li>
 </ul>
   
