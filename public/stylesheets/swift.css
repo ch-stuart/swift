@@ -14,17 +14,31 @@ th {
 td, th {
     padding: 5px;
 }
-
-h1,h2,ul {
-    font-size: 18px;
+h1,h2,h3,h4,ul,p {
     margin: 20px 0 0 0;
+}
+p.hint {
+    margin-top: 0;
+    font-family: lucida grande, sans-serif;
+    font-size: 70%;
+    color: #888;
 }
 h1 {
     margin: 0 0 40px;
     font-style: italic;
 }
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+ul,li {
+    list-style-type: square;
+}
 ul {
     margin-top: 0;
+    padding-left: 20px;
 }
 
 a {
