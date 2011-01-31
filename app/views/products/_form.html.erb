@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.select :status, "<option>Private</option><option>Public</option>" %>    
+    <%= f.select :status, options_for_select(["Private", "Public"], :selected => @product.status) %>
   </div>
   <%= f.fields_for :parts do |builder| %>
     <%= render :partial => 'parts_fields', :locals => { :f => builder } %>
