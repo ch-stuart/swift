@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
     @product = Product.new
     1.times do
       part = @product.parts.build
-      2.times { part.colors.build }
+      # 2.times { part.colors.build }
     end
     
     
