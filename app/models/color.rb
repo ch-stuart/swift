@@ -1,6 +1,5 @@
 class Color < ActiveRecord::Base
 
-    # dont think this is needed?
-    # belongs_to :part
+    has_and_belongs_to_many :part
 
 end
