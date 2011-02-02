@@ -10,13 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110202053620) do
+ActiveRecord::Schema.define(:version => 20110202061436) do
 
   create_table "colors", :force => true do |t|
     t.string   "title"
     t.string   "hex"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "colors_parts", :id => false, :force => true do |t|
+    t.integer "part_id"
+    t.integer "color_id"
   end
 
   create_table "companies", :force => true do |t|
@@ -48,11 +53,6 @@ ActiveRecord::Schema.define(:version => 20110202053620) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "product_id"
-  end
-
-  create_table "parts_colors", :id => false, :force => true do |t|
-    t.integer "part_id"
-    t.integer "color_id"
   end
 
   create_table "products", :force => true do |t|

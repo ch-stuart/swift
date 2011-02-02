@@ -36,7 +36,10 @@
 <ul>
   <% @product.parts.each do |part| %>
     <li>
-      - <%= link_to part.title, part -%>
+      - <%= link_to part.title, part -%>: 
+      <% part.colors.find(:all).each do |color| %>
+      -- <%= color.title %>
+      <% end %>
     </li>
   <% end %>
 </ul>

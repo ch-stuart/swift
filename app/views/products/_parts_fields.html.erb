@@ -12,6 +12,15 @@
     <%= link_to_function "Remove", "remove_fields(this)" %>
   </div>
 
+
+  <div class="field">
+    <%= f.label :colors, "Colors" %><br>
+    <% Color.all.each_with_index do |color, i| %>
+      <%# TODO: figure out how to set the ID correctly? %>
+      <%= check_box_tag "product[parts_attributes][0][color_ids][]", color.id  %> <%= color.title -%> <br>
+    <% end %>
+  </div>  
+  
   <%# f.fields_for :colors do |builder| %>
     <%# render :partial => 'color_fields', :locals => { :f => builder } %>
   <%# end %>
