@@ -5,7 +5,7 @@ SwiftSite::Application.routes.draw do
   match 'logout', :to => 'application#logout'
   match 'login', :to => 'hub#index'
 
-  get ':path' => 'pages#show', :constraints => { :path => /[A-Za-z]+/ }
+  get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z]+/ }
 
   root :to => 'homes#index'
 
