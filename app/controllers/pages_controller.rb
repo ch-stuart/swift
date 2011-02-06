@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-  before_filter :authenticate, :except => [ :index, :home, :show ]
+  before_filter :authenticate, :except => [ :show ]
 
   caches_page :index, :show
 

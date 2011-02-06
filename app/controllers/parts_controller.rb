@@ -1,5 +1,6 @@
 class PartsController < ApplicationController
 
+  before_filter :authenticate
   caches_page :index, :show
 
   # GET /parts
