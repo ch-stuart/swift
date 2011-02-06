@@ -25,23 +25,23 @@
 <span class="orbit-caption" id="orb_cap_3">Duis aute irure dolor in reprehenderit in voluptate in culpa qui officia deserunt mollit anim id est laborum.</span>
 
 <h2>
-  products:
+  products
 </h2>
 <ul>
   <% @products.each do |product| %>
     <li>
-      - <%= link_to product.title, product %>
+      <%= link_to product.title, product %>
     </li>
   <% end %>
 </ul>
 
 <h2>
-  pages:
+  pages
 </h2>
 <ul>
   <% @pages.each do |page| %>
     <li>
-      - <%= link_to page.title, page %>
+      <%= link_to page.title, page %>
     </li>
   <% end %>
 </ul>
@@ -51,7 +51,7 @@
 </h2>
 <ul>
     <li>
-      - <%= link_to "blog", APP_CONFIG['personal_blog_url'] %>
+      <%= link_to "blog", APP_CONFIG['personal_blog_url'] %>
     </li>
 </ul>
 
@@ -60,10 +60,10 @@
 </h2>
 <ul>
   <li>
-    - <%= @company.phone %>
+    <%= @company.phone %>
   </li>
   <li>
-    - <%= @company.email %>
+    <%= @company.email %>
   </li>
 </ul>
 
