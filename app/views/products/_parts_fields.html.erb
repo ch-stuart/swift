@@ -19,15 +19,18 @@
   <div class="field">
     <%= f.label :colors %><br>
     <% Color.all.each do |color| %>
-      <%= check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id %> <%= color.title -%> <br>
+      <label>
+        <%= check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id %>
+        <%= color.title -%>
+      </label>
+      <br>
       <%# check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id, @product.parts['new_parts']['colors'].include?(color) %>
     <% end %>
   </div>  
   <div class="field destroy">
-    <%= f.hidden_field :_destroy %>
-    <%= link_to_function "Remove Part", "remove_fields(this)" %>
+    <label>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to_function "Remove Part", "remove_fields(this)" %>
+    </label>
   </div>
-  <%# f.fields_for :colors do |builder| %>
-    <%# render :partial => 'color_fields', :locals => { :f => builder } %>
-  <%# end %>
 </div>

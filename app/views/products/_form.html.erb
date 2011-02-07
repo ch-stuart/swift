@@ -41,10 +41,11 @@
   <%= f.fields_for :parts do |form| %>
     <%= render :partial => 'parts_fields', :locals => { :f => form } %>
   <% end %>
-  <p>
-    <%= link_to_add_fields "Add Part", f, :parts %>
-  </p>
-  
+  <div class="field add">
+    <label>
+      <%= link_to_add_fields "Add Part", f, :parts %>
+    </label>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
