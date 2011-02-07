@@ -10,6 +10,13 @@
   <%= @part.price %>
 </p>
 
+<p>
+  <b>Colors:</b>
+  <% @part.colors.find(:all).each do |color| %>
+    <%= color.title %>
+  <% end %>
+</p>
+
 
 <%= link_to 'Edit', edit_part_path(@part) %> |
 <%= link_to 'Back', parts_path %>

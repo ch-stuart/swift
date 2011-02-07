@@ -1,26 +1,32 @@
+<%# HACK: sets the product id. 2011-02-06 %>
+<%
+  if f.object.id.nil?
+    eye_dee = 'new_parts'
+  else
+    eye_dee = f.object.id
+  end
+%>
+
 <div class="indent group">
   <div class="field">
-    <%= f.label :title, "Part" %><br>
+    <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :price, "Price" %><br>
+    <%= f.label :price %><br>
     <%= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.hidden_field :_destroy %>
-    <%= link_to_function "Remove", "remove_fields(this)" %>
-  </div>
-
-
-  <div class="field">
-    <%= f.label :colors, "Colors" %><br>
-    <% Color.all.each_with_index do |color, i| %>
-      <%# TODO: figure out how to set the ID correctly? %>
-      <%= check_box_tag "product[parts_attributes][0][color_ids][]", color.id  %> <%= color.title -%> <br>
+    <%= f.label :colors %><br>
+    <% Color.all.each do |color| %>
+      <%= check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id %> <%= color.title -%> <br>
+      <%# check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id, @product.parts['new_parts']['colors'].include?(color) %>
     <% end %>
   </div>  
-  
+  <div class="field destroy">
+    <%= f.hidden_field :_destroy %>
+    <%= link_to_function "Remove Part", "remove_fields(this)" %>
+  </div>
   <%# f.fields_for :colors do |builder| %>
     <%# render :partial => 'color_fields', :locals => { :f => builder } %>
   <%# end %>

@@ -35,8 +35,11 @@
     <%= f.label :status %><br />
     <%= f.select :status, options_for_select(["Private", "Public"], :selected => @product.status) %>
   </div>
-  <%= f.fields_for :parts do |builder| %>
-    <%= render :partial => 'parts_fields', :locals => { :f => builder } %>
+  <div class="field">
+    <p>Parts</p>
+  </div>
+  <%= f.fields_for :parts do |form| %>
+    <%= render :partial => 'parts_fields', :locals => { :f => form } %>
   <% end %>
   <p>
     <%= link_to_add_fields "Add Part", f, :parts %>

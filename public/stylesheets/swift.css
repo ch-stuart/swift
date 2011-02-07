@@ -58,7 +58,17 @@ a:active {
 }
 
 .indent {
-    background-color: rgba(0,0,0,.05);
-    padding: 10px;
-    margin-left: 20px;
+    background-color: rgba(255,255,255,.50);
+    padding: 20px;
+    margin-bottom: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #eee;
+    max-width: 400px;
+}
+.destroy a {
+    color: #aaa;
+    font-family: lucida grande, sans-serif;
+    font-size: 70%;
+    background-color: transparent;
+    border: 0;
 }
