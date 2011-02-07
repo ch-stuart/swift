@@ -11,23 +11,20 @@ pre {
 .field_with_errors {
   padding: 0.2em;
   background-color: red;
+  color: white;
+  font-weight: bold;
   display: table;
 }
 #error_explanation {
-  border: 0.2em solid red;
-  padding: 1em;
-  padding-bottom: 0;
   margin-bottom: 2em;
-  background-color: #f0f0f0;
 }
 #error_explanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 0.5em 0.5em 0.5em 1.5em;
-  margin: -0.5em;
-  margin-bottom: 0;
+  font-size: 1.5em;
+  padding: 0.3em 0.8em;
+  margin: 0;
   background-color: #c00;
   color: #fff;
+  font-family: Helvetica, sans-serif;
 }
 #error_explanation ul li {
   font-size: 1.4em;
