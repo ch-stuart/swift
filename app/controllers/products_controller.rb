@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    # @photos = Product.get_photos_for_tag @product
+    @photos = Product.get_photos_for_tag @product
 
     unless logged_in?
       unless @product.public?
