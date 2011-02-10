@@ -1,15 +1,16 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+  <%= notice %>
+</p>
 
-<p>
-  <b>Title:</b>
+<p id="color_swatch" style="background-color: #<%= @color.hex %>;">
   <%= @color.title %>
+  <code>
+    (#<%= @color.hex %>)
+  </code>
 </p>
 
 <p>
-  <b>Hex:</b>
-  <%= @color.hex %>
+  <%= link_to 'Edit', edit_color_path(@color) %> |
+  <%= link_to 'Back', colors_path %>
 </p>
-
-
-<%= link_to 'Edit', edit_color_path(@color) %> |
-<%= link_to 'Back', colors_path %>
+  
