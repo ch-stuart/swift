@@ -3,26 +3,25 @@
 </h1>
 
 <h2>
-  <%= link_to 'Products', products_path %>:
+  <%= link_to 'Products', products_path %>
 </h2>
 <ul>
   <% @products.each do |product| %>
     <li>
-      - <%= link_to product.title, product %> <span class="private"><%= product.status if product.status == "Private" -%></span>
+      <%= link_to product.title, product %> <span class="private"><%= product.status if product.status == "Private" -%></span>
     </li>
   <% end %>
 </ul>
 
 <h2>
-  <%= link_to 'Pages', pages_path %>:
+  <%= link_to 'Pages', pages_path %>
 </h2>
 <ul>
   <% @pages.each do |page| %>
     <li>
-      - <%= link_to page.title, page %> <span class="private"><%= page.status if page.status == "Private" -%></span>
+      <%= link_to page.title, page %> <span class="private"><%= page.status if page.status == "Private" -%></span>
     </li>
   <% end %>
-  
 </ul>
 
 <h2>
@@ -30,7 +29,21 @@
 </h2>
 <ul>
   <li>
-    - <%= link_to @company.title, @company %>
+    <%= link_to @company.title, @company %>
   </li>
 </ul>
+
+<h2>
+  <%= link_to 'Colors', colors_path %>
+</h2>
+<ul>
+  <% @colors.each do |color| %>
+    <li>
+      <%= link_to color.title, color %> 
+      <span class="color_swatch" style="background-color: <%= color.hex -%>">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+    </li>
+  <% end %>
   
+</ul>

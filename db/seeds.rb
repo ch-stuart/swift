@@ -15,22 +15,22 @@ Company.create(
 
 Color.create(
     :title => "Hot Pink",
-    :hex => "de41a4"
+    :hex => "#de41a4"
 )
 
 Color.create(
     :title => "Black",
-    :hex => "000"
+    :hex => "#000"
 )
 
 Color.create(
     :title => "White",
-    :hex => "fff"
+    :hex => "#fff"
 )
 
 Color.create(
     :title => "Gray",
-    :hex => "aaa"
+    :hex => "#aaa"
 )
 
 Page.create(

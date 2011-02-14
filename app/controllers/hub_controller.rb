@@ -6,6 +6,7 @@ class HubController < ApplicationController
   def index
     @products = Product.all
     @pages = Page.all
+    @colors = Color.all
     @company = Company.first
   end
 

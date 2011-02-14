@@ -101,3 +101,8 @@ a:active {
     height: 300px;
     padding: 20px;
 }
+.color_swatch {
+    -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.5);
+    -moz-box-shadow:0 1px 2px rgba(0,0,0,0.5);
+    box-shadow:0 1px 2px rgba(0,0,0,0.5);
+}
