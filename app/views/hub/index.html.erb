@@ -39,10 +39,11 @@
 <ul>
   <% @colors.each do |color| %>
     <li>
-      <%= link_to color.title, color %> 
       <span class="color_swatch" style="background-color: <%= color.hex -%>">
         &nbsp;&nbsp;&nbsp;&nbsp;
       </span>
+      &nbsp;
+      <%= link_to color.title, color %> 
     </li>
   <% end %>
   
