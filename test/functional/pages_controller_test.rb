@@ -2,6 +2,7 @@ require 'test_helper'
 
 class PagesControllerTest < ActionController::TestCase
   setup do
+    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("swift:swift")
     @page = pages(:one)
   end
 
@@ -18,6 +19,8 @@ class PagesControllerTest < ActionController::TestCase
 
   test "should create page" do
     assert_difference('Page.count') do
+      @page.title = 'Uniquely unique'
+      @page.path = 'lorem'
       post :create, :page => @page.attributes
     end
 
