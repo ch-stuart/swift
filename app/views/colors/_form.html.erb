@@ -18,8 +18,21 @@
   <div class="field">
     <%= f.label :hex %><br />
     <%= f.text_field :hex %>
+    <div id="picker"></div>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+<% end %>
+
+
+<%= content_for :js do %>
+  <script>
+    $(document).ready(function(){
+      if (($('#color_hex').val().trim() === '')) {
+        $('#color_hex').val('#000000');
+      }
+      $('#picker').farbtastic('#color_hex');
+    });
+  </script>
 <% end %>

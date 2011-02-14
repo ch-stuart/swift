@@ -4,6 +4,7 @@ javascripts:
     - public/javascripts/rails.js
     - public/javascripts/application.js
     - public/javascripts/orbit.1.2/jquery.orbit.js
+    - public/javascripts/farbtastic/farbtastic.js
 
 stylesheets:
   common:
@@ -13,3 +14,5 @@ stylesheets:
     - public/stylesheets/form.css
     - public/stylesheets/hub/hub.css
     - public/javascripts/orbit.1.2/orbit.css
+    - public/javascripts/farbtastic/farbtastic.css
+    

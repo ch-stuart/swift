@@ -14,7 +14,7 @@
   <tr>
     <td><%= color.title %></td>
     <td><%= color.hex %></td>
-    <td style="background-color: #<%= color.hex -%>">
+    <td style="background-color: <%= color.hex -%>">
     <td><%= link_to 'Show', color %></td>
     <td><%= link_to 'Edit', edit_color_path(color) %></td>
     <td><%= link_to 'Destroy', color, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  title: Pink
-  hex: pink
+  title: Hot Pink
+  hex: "#de41a4"
 
 two:
-  title: Orange
-  hex: orange
+  title: Purple
+  hex: "#a93caa"
