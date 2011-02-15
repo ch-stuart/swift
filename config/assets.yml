@@ -9,10 +9,12 @@ javascripts:
 stylesheets:
   common:
     - public/stylesheets/reset-min.css
-    - public/stylesheets/scaffold.css
+    - public/stylesheets/base.css
     - public/stylesheets/type.css
+    - public/stylesheets/pub.css
+    - public/stylesheets/scaffold.css
     - public/stylesheets/form.css
-    - public/stylesheets/hub/hub.css
+    - public/stylesheets/hub.css
     - public/javascripts/orbit.1.2/orbit.css
     - public/javascripts/farbtastic/farbtastic.css
     

@@ -35,6 +35,7 @@ GEM
       abstract (>= 1.0.0)
     flickraw (0.8.3)
       json (>= 1.1.1)
+    haml (3.0.25)
     i18n (0.4.1)
     jammit (0.6.0)
       closure-compiler (>= 0.1.0)
@@ -83,6 +84,7 @@ PLATFORMS
 
 DEPENDENCIES
   flickraw (= 0.8.3)
+  haml
   jammit
   jquery-rails (>= 0.2.6)
   rails (= 3.0.3)
