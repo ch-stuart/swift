@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
-  before_filter :authenticate, :except => [ :show ]
-  caches_page :index, :show
+  before_filter :authenticate, :except => [ :show, :order, :colors ]
+  caches_page :index, :show, :order, :colors
   cache_sweeper :product_sweeper
 
   def index
@@ -9,6 +9,32 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
+    @photos = Product.get_photos_for_tag @product
+
+    unless logged_in?
+      unless @product.public?
+        # TODO: this should point to a proper 404 and allow the user to get
+        #       to somewhere useful.
+        return render :text => "404" 
+      end
+    end
+  end
+
+  def order
+    @product = Product.find(params[:id])
+    @photos = Product.get_photos_for_tag @product
+
+    unless logged_in?
+      unless @product.public?
+        # TODO: this should point to a proper 404 and allow the user to get
+        #       to somewhere useful.
+        return render :text => "404" 
+      end
+    end
+  end
+
+  def colors
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
 
