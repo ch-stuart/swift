@@ -7,10 +7,10 @@
   <%= notice %>
 </p>
 <h2>
-  <%= @product.title %>
+  ## <%= @product.title %>
 </h2>
 <h3>
-  About <%= @product.title %>
+  ### About <%= @product.title %>
 </h3>
 <p>
   <%= @product.description %>
@@ -18,14 +18,13 @@
 <p>
   $<%= @product.price %>
 </p>
-<h4>
-  Specs
-</h4>
+<h3>
+  ### Specs
+</h3>
 <p>
   <%= @product.specs %>
 </p>
-
-<% unless @photos.nil? %>
+<% unless @photos.empty? %>
   <div id="featured"> 
     <% @photos.each_key do |photo| -%>
       <img
@@ -48,7 +47,7 @@
   </div>
 <% else %>
   <p>
-    Photos are not available.
+    Photos are not available. :(
   </p>
 <% end %>
 

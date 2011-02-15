@@ -17,7 +17,7 @@
     <%= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.label :colors %><br>
+    <%= f.label :colors, "Available in the following colors" %><br>
     <% Color.all.each do |color| %>
       <label>
         <%= check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id %>

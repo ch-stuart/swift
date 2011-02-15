@@ -1,4 +1,14 @@
 body.pub {
-    background-color: #fff;
+    background-color: #FEFCFB;
     font-family: menlo, monaco, courier new;
+    
+    #box {
+        padding: 2em;
+    }
+    h2,h3,h4 {
+        text-decoration: underline;
+    }
+    p,h2,h3,h4,ul {
+        margin-top: 1em;
+    } 
 }

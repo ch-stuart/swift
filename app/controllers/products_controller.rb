@@ -47,6 +47,18 @@ class ProductsController < ApplicationController
     end
   end
 
+  def cart
+    @product = Product.find(params[:id])
+
+    unless logged_in?
+      unless @product.public?
+        # TODO: this should point to a proper 404 and allow the user to get
+        #       to somewhere useful.
+        return render :text => "404" 
+      end
+    end
+  end
+
   def new
     @product = Product.new
     # 1.times do

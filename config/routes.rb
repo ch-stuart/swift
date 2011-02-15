@@ -6,6 +6,7 @@ SwiftSite::Application.routes.draw do
     member do
       get 'order'
       get 'colors'
+      get 'cart'
     end
   end
 
