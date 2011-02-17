@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :kind, "Type" %><br />
+    <%= f.select :kind, options_for_select(["Product", "Accessory"], :selected => @product.kind) %>
+  </div>
+  <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>

@@ -16,6 +16,7 @@ SwiftSite::Application.routes.draw do
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z]+/ }
 
   root :to => 'homes#index'
+  match 'accessories', :to => 'homes#accessories'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

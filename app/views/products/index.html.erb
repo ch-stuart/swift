@@ -2,6 +2,7 @@
 <table>
   <tr>
     <th>Title</th>
+    <th>Type</th>
     <th>Description</th>
     <th>Price</th>
     <th>Flickr tag</th>
@@ -14,6 +15,7 @@
 <% @products.each do |product| %>
   <tr>
     <td><%= product.title %></td>
+    <td><%= product.kind %></td>
     <td><%= product.description %></td>
     <td><%= product.price %></td>
     <td><%= product.flickr_tag %></td>
