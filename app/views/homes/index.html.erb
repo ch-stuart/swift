@@ -55,17 +55,7 @@
     </li>
 </ul>
 
-<h2>
-  footer:
-</h2>
-<ul>
-  <li>
-    <%= @company.phone %>
-  </li>
-  <li>
-    <%= @company.email %>
-  </li>
-</ul>
+<%= render :partial => 'shared/footer' %>
 
 <%= content_for :js do %>
   <script>

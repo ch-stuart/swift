@@ -1,23 +1,15 @@
+
 class PagesController < ApplicationController
 
   before_filter :authenticate, :except => [ :show ]
 
   caches_page :index, :show
 
-  # GET /pages
-  # GET /pages.xml
   def index
     @pages = Page.all
     @subtitle = controller_name.titlecase
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @pages }
-    end
   end
 
-  # GET /pages/1
-  # GET /pages/1.xml
   def show
     if params[:path]
       @page = Page.find_by_path(params[:path])
@@ -25,75 +17,46 @@ class PagesController < ApplicationController
     else
       @page = Page.find(params[:id])
     end
-    
-    @subtitle = @page.title
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @page }
-    end
+    @company = Company.first
+    @subtitle = @page.title
   end
 
-  # GET /pages/new
-  # GET /pages/new.xml
   def new
     @page = Page.new
-    
     @subtitle = "#{action_name.titlecase} Page"
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @page }
-    end
   end
 
-  # GET /pages/1/edit
   def edit
     @page = Page.find(params[:id])
     @subtitle = "#{action_name.titlecase} `#{@page.title.titlecase}`"
   end
 
-  # POST /pages
-  # POST /pages.xml
   def create
     @page = Page.new(params[:page])
 
-    respond_to do |format|
-      if @page.save
-        format.html { redirect_to(@page, :notice => 'Page was successfully created.') }
-        format.xml  { render :xml => @page, :status => :created, :location => @page }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
-      end
+    if @page.save
+      redirect_to(@page, :notice => 'Page was successfully created.')
+    else
+      render :action => "new"
     end
   end
 
-  # PUT /pages/1
-  # PUT /pages/1.xml
   def update
     @page = Page.find(params[:id])
 
-    respond_to do |format|
-      if @page.update_attributes(params[:page])
-        format.html { redirect_to(@page, :notice => 'Page was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
-      end
+    if @page.update_attributes(params[:page])
+      redirect_to(@page, :notice => 'Page was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
-  # DELETE /pages/1
-  # DELETE /pages/1.xml
   def destroy
     @page = Page.find(params[:id])
     @page.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(pages_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(pages_url)
   end
+
 end

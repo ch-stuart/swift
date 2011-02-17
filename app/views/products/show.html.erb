@@ -55,6 +55,8 @@
   <%= link_to "Order it", :action => "order", :id => @product %>
 </p>
 
+<%= render :partial => 'shared/footer' %>
+
 <%= content_for :js do %>
   <script>
     $(window).load(function() {
