@@ -20,6 +20,7 @@
   <div id="box">
     <%= yield %>
   </div>
+  <%= yield :footer -%>
 
   <%= include_javascripts :common %>
   <%= yield :js -%>

@@ -1,7 +1,9 @@
 SwiftSite::Application.routes.draw do
 
+  get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
+
   resources :pages, :products, :companies, :hub, :colors, :parts
-  
+
   resources :products do
     member do
       get 'order'
@@ -12,8 +14,6 @@ SwiftSite::Application.routes.draw do
 
   match 'logout', :to => 'application#logout'
   match 'login', :to => 'hub#index'
-
-  get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z]+/ }
 
   root :to => 'homes#index'
   match 'accessories', :to => 'homes#accessories'

@@ -19,6 +19,7 @@ class PagesController < ApplicationController
     end
 
     @company = Company.first
+    @products = Product.where(:status => 'Public', :kind => 'Product')
     @subtitle = @page.title
   end
 

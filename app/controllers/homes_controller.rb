@@ -7,10 +7,12 @@ class HomesController < ApplicationController
   def index
     @pages = Page.find_all_by_status('Public')
     @products = Product.where(:status => 'Public', :kind => 'Product')
+    @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
     @company = Company.first
   end
-  
+
   def accessories
+    @products = Product.where(:status => 'Public', :kind => 'Product')
     @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
     @company = Company.first
   end

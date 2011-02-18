@@ -1,17 +1,23 @@
-<p id="footer">
-  --------------------------------
-</p>
-<ul>
-  <li>
-    <%= @company.phone %>
-  </li>
-  <li>
-    <%= @company.email %>
-  </li>
-  <li>
-    <%= link_to "Home", root_path %>
-  </li>
-  <li>
-    <%= link_to "Accessories", accessories_path %>
-  </li>
-</ul>
+<div id="footer">
+  <ul>
+    <% @products.each do |product| %>
+      <li>
+        <%= link_to product.title, product %>
+      </li>
+    <% end %>
+    <li>
+      <%= link_to "Accessories", accessories_path %>
+    </li>
+    <li>
+      <%= link_to "Our Story", Page.find_by_path('our_story') %>
+    </li>
+    <li>
+      <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] " %>
+    </li>
+    <li>
+      <span>
+        <%= @company.phone %>
+      </span>
+    </li>
+  </ul>
+</div>

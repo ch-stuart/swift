@@ -55,7 +55,9 @@
     </li>
 </ul>
 
-<%= render :partial => 'shared/footer' %>
+<%= content_for :footer do %>
+  <%= render :partial => 'shared/footer' %>
+<% end %>
 
 <%= content_for :js do %>
   <script>

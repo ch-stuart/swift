@@ -6,4 +6,6 @@
 
 <%= raw md @page.body %>
 
-<%= render :partial => 'shared/footer' %>
+<%= content_for :footer do %>
+  <%= render :partial => 'shared/footer' %>
+<% end %>

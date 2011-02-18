@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @products = Product.where(:status => 'Public', :kind => 'Product')
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
     @company = Company.first
