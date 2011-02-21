@@ -6,6 +6,10 @@
 
 <%= raw md @page.body %>
 
+<% if @page.video_html.present? %>
+  <%= raw @page.video_html %>
+<% end %>
+
 <%= content_for :footer do %>
   <%= render :partial => 'shared/footer' %>
 <% end %>

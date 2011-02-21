@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110217055145) do
+ActiveRecord::Schema.define(:version => 20110221003705) do
 
   create_table "colors", :force => true do |t|
     t.string   "title"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20110217055145) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "video_html"
   end
 
   create_table "parts", :force => true do |t|
