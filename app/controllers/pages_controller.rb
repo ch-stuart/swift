@@ -20,6 +20,7 @@ class PagesController < ApplicationController
 
     @company = Company.first
     @products = Product.where(:status => 'Public', :kind => 'Product')
+    @photos = Page.get_photos_for_tag @page
     @subtitle = @page.title
   end
 
