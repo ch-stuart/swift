@@ -19,7 +19,7 @@
     <%= f.label :path %><br />
     <%= f.text_field :path %><br />
     <p class="hint">
-      The URL the page can be accessed at.
+      The URL the page can be accessed at, e.g. <code>http://builtbyswift.com/dukes_of_hazzard</code>.
     </p>
   </div>
   <div class="field">
@@ -30,9 +30,22 @@
   <div class="field">
     <%= f.label :video_html %><br />
     <%= f.text_area :video_html %>
-    <%= render :partial => 'markdown_hint' %>
     <p class="hint">
       Get the embed html from the video site. Here's an <a href="http://d.pr/d1dh">example</a>.
+    </p>
+  </div>
+  <div class="field">
+    <%= f.label :flickr_tag %><br />
+    <%= f.text_field :flickr_tag %>
+    <p class="hint">
+      Enter a flickr tag to display a photo gallery. Leave blank for none.
+    </p>
+  </div>
+  <div class="field">
+    <%= f.label :featured %><br />
+    <%= f.select :featured, options_for_select(["Nope", "Featured"], :selected => @page.featured) %>
+    <p class="hint">
+      Should this appear on the front page? Only one page will be displayed so don't mark two as featured!
     </p>
   </div>
   <div class="field">

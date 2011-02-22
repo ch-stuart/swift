@@ -8,6 +8,7 @@
     <th>Body</th>
     <th>Path</th>
     <th>Status</th>
+    <th>Featured?</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +20,7 @@
     <td><%= page.body %></td>
     <td><%= page.path %></td>
     <td class="<%= 'private' unless page.public? -%>"><%= page.status %></td>
+    <td class="<%= 'featured' unless page.featured? -%>"><%= page.featured %></td>
     <td><%= link_to 'Show', page %></td>
     <td><%= link_to 'Edit', edit_page_path(page) %></td>
     <td><%= link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete %></td>

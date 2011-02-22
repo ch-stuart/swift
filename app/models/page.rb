@@ -7,4 +7,8 @@ class Page < ActiveRecord::Base
       return self.status == "Public"
     end
 
+    def featured?
+      return self.status == "Featured"
+    end
+
 end
