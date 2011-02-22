@@ -18,6 +18,11 @@
 </head>
 <body class="<%= (@hub == true) ? 'hub' : 'pub' %>">
   <div id="box">
+    <% unless @hub %>
+      <h1 id="page_title" class="logo">
+        <%= @title %>
+      </h1>
+    <% end %>
     <%= yield %>
   </div>
   <%= yield :footer -%>
