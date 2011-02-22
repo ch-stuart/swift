@@ -28,7 +28,18 @@ Product.create(
     :flickr_tag => "bouncy_lions",
     :specs => "Test Product Specs",
     :status => "Public",
-    :price => "299.99"
+    :price => "299.99",
+    :kind => "Product"
+)
+
+Product.create(
+    :title => "Test Accessory",
+    :description => "Test Accessory Description",
+    :flickr_tag => "jittery_goats",
+    :specs => "Test Accessory Specs",
+    :status => "Public",
+    :price => "99.99",
+    :kind => "Accessory"
 )
 
 Color.create(
