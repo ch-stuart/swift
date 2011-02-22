@@ -9,6 +9,7 @@
 <h2>
   ## <%= @product.title %>
 </h2>
+<%= render :partial => 'shared/slideshow_html' %>
 <h3>
   ### About <%= @product.title %>
 </h3>
@@ -31,23 +32,25 @@
   <% @product.parts.each do |part| %>
     <div class="field">
       <p>
+        <% if part.price.present? %>
+          <%= check_box_tag part.title %>
+        <% end %>
         <%= part.title %>
         <% if part.price.present? %>
           <%= "$#{part.price}" %>
         <% end %>
       </p>
-      <p>
-        <%= select_tag "#{part.title}_colors", options_from_collection_for_select(part.colors, "id", "title") %>
-      </p>
+      <% unless part.colors.empty? %>
+        <p>
+          <%= select_tag "#{part.title}_colors", options_from_collection_for_select(part.colors, "id", "title") %>
+        </p>
+      <% end %>
     </div>
   <% end %>
 </div>
-
-<%= render :partial => 'shared/slideshow_html' %>
-
 <h2>
   ### =>
 </h2>
 <p>
-  <%= link_to "Pick Colors", :action => "colors", :id => @product %>
+  <%= link_to "Checkout", :action => "cart", :id => @product %>
 </p>
