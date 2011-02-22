@@ -1,4 +1,4 @@
-<div id="footer">
+<footer>
   <ul>
     <% @products.each do |product| %>
       <li>
@@ -12,6 +12,9 @@
       <%= link_to "Our Story", Page.find_by_path('our_story') %>
     </li>
     <li>
+      <%= link_to "blog", APP_CONFIG['personal_blog_url'] %>
+    </li>
+    <li>
       <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] " %>
     </li>
     <li>
@@ -20,4 +23,4 @@
       </span>
     </li>
   </ul>
-</div>
+</footer>

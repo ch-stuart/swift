@@ -15,6 +15,6 @@ stylesheets:
     - public/stylesheets/scaffold.css
     - public/stylesheets/form.css
     - public/stylesheets/hub.css
+    - public/stylesheets/homes.css
     - public/javascripts/orbit.1.2/orbit.css
     - public/javascripts/farbtastic/farbtastic.css
-    

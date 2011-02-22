@@ -1,6 +1,6 @@
 body.pub {
     background-color: #FEFCFB;
-    font-family: menlo, monaco, courier new;
+    font-family: courier new, menlo, monaco;
 
     #box {
         margin: 4em auto 1em;
@@ -8,7 +8,7 @@ body.pub {
         padding: 1em;
         width: 96em;
     }
-    #footer {
+    footer {
         width: 98em;
         margin: 0 auto;
         padding-bottom: 10em;
@@ -16,19 +16,21 @@ body.pub {
             display: block;
             float: left;
             margin-right: 1em;
-        }
-        a, span {
-            text-transform: uppercase;
-            font-size: .8em;
-            font-family: helvetica neue, helvetica, arial, sans-serif;
-            color: #444;
-            text-decoration: none;
+            font-size: 95%;
+            a, span {
+                text-transform: uppercase;
+                font-family: helvetica neue, helvetica, arial, sans-serif;
+                color: #444;
+                text-decoration: none;
+            }
         }
     }
     h2,h3,h4 {
-        text-decoration: underline;
+        font-size: 2em;
+        font-weight: bold;
     }
     p,h2,h3,h4,ul {
         margin-top: 1em;
     }
+
 }
