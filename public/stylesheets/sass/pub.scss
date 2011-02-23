@@ -2,16 +2,32 @@ body.pub {
     background-color: #FEFCFB;
     font-family: courier new, menlo, monaco;
 
-    #box {
+    header {
         margin: 4em auto 1em;
+        padding: 0;
+        width: 98em;
+    }
+    #box {
+        margin: 1em auto 1em;
         border: 1px solid #BEBEBE;
         padding: 1em;
         width: 96em;
     }
+    #page_title.logo {
+        background: transparent url('/images/header-logo.gif') no-repeat;
+        width: 429px;
+        height: 110px;
+        text-indent: -10000px;
+    }
     footer {
+        position: relative;
         width: 98em;
         margin: 0 auto;
         padding-bottom: 10em;
+        ul {
+            padding-right: 20px;
+            line-height: 1.5;
+        }
         li {
             display: block;
             float: left;
@@ -23,6 +39,11 @@ body.pub {
                 color: #444;
                 text-decoration: none;
             }
+        }
+        img {
+            position: absolute;
+            right: .5em;
+            top: 0;
         }
     }
     h2,h3,h4 {

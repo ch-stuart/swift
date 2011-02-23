@@ -2,7 +2,7 @@ class HomesController < ApplicationController
 
   before_filter :authenticate, :except => [ :index, :accessories ]
 
-  caches_page :index
+  caches_page :index, :accessories
 
   def index
     @pages = Page.find_all_by_status('Public')

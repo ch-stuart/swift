@@ -1,0 +1,30 @@
+#swift_slideshow_wrapper {
+    #swift_slideshow {
+        img,
+        div { display: none; }
+    }
+    .orbit-caption {
+        a, a:visited {
+            text-decoration: none;
+            color: #fff;
+        }
+    }
+    ul.orbit-bullets {
+        position: static;
+        left: 0;
+        margin-left: 0;
+        li.has-text:first-child {
+            border-left: 1px dashed #333;
+        }
+        li.has-text {
+            display: block;
+            float: left;
+            width: 7em;
+            border: 1px dashed #333;
+            border-width: 0 1px 0 0;
+            margin: 0;
+            padding: .8em;
+            font-size: 1.3em;
+        }
+    }
+}

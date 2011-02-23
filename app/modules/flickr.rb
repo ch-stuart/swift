@@ -15,10 +15,15 @@ module Flickr
       # flickraw doesn't provide an url helper for the largest available size, so get it the long way
       sizes = flickr.photos.getSizes :photo_id => p.id
       large_info = sizes.find {|s| s.label == 'Medium 640' }
-      photos[p.id]['large'] = large_info.source
-      # get the width and height so we can put the sizes on the <img> tag
-      photos[p.id]['large_width'] = large_info.width
-      photos[p.id]['large_height'] = large_info.height
+
+      unless large_info.nil?
+        photos[p.id]['large'] = large_info.source
+        # get the width and height so we can put the sizes on the <img> tag
+        photos[p.id]['large_width'] = large_info.width
+        photos[p.id]['large_height'] = large_info.height
+      else
+
+      end
 
       # photos[p.id]['thumb'] = FlickRaw.url_t(info)
       # photos[p.id]['medium'] = FlickRaw.url_m(info)
@@ -28,3 +33,4 @@ module Flickr
   end
 
 end
+

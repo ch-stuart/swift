@@ -12,20 +12,27 @@
   <title>
     <%= @title %><%= ": #{@subtitle}" unless @subtitle.nil? %>
   </title>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
   <%= include_stylesheets :common, :media => 'all' %>
   <%= yield :css -%>
   <%= csrf_meta_tag %>
 </head>
 <body class="<%= (@hub == true) ? 'hub' : 'pub' %>">
-  <div id="box">
+  <header>
     <% unless @hub %>
       <h1 id="page_title" class="logo">
         <%= @title %>
       </h1>
     <% end %>
+  </header>
+  <div id="box">
     <%= yield %>
   </div>
-  <%= yield :footer -%>
+  <% unless @hub %>
+    <%= render :partial => 'shared/footer' %>
+  <% end %>
 
   <%= include_javascripts :common %>
   <%= yield :js -%>

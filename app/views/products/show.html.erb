@@ -25,12 +25,8 @@
   <%= @product.specs %>
 </p>
 
-<%= render :partial => 'shared/slideshow_html' %>
+<%= render :partial => 'shared/slideshow' %>
 
 <p>
   <%= link_to "Order it", :action => "order", :id => @product %>
 </p>
-
-<%= content_for :footer do %>
-  <%= render :partial => 'shared/footer' %>
-<% end %>
