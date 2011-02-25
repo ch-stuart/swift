@@ -20,16 +20,36 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
+    <%= f.label :short_title %><br />
+    <%= f.text_field :short_title %>
+    <p class="hint">
+      The short title will be used in space-constrained spaces (navigation lists, etc.).
+    </p>
+  </div>
+  <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
   <div class="field">
     <%= f.label :price %><br />
     <%= f.text_field :price %>
+    <p class="hint">
+      ex: 299.01
+    </p>
+  </div>
+  <div class="field">
+    <%= f.label :humane_price %><br />
+    <%= f.text_field :humane_price %>
+    <p class="hint">
+      ex: "$200 for a pair"
+    </p>
   </div>
   <div class="field">
     <%= f.label :flickr_tag %><br />
     <%= f.text_field :flickr_tag %>
+    <p class="hint">
+      Enter a flickr tag to display a photo gallery. Leave blank for none.
+    </p>
   </div>
   <div class="field">
     <%= f.label :specs %><br />
@@ -38,6 +58,9 @@
   <div class="field">
     <%= f.label :status %><br />
     <%= f.select :status, options_for_select(["Private", "Public"], :selected => @product.status) %>
+    <p class="hint">
+      Setting a product as private does not prevent a stranger from directly typing in the URL and finding it. It does, however, prevent it from being linked to from any pages on the site.
+    </p>
   </div>
   <div class="field">
     <p>Parts</p>
