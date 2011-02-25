@@ -1,9 +1,5 @@
 class HomesController < ApplicationController
 
-  before_filter :authenticate, :except => [ :index, :accessories ]
-
-  caches_page :index, :accessories
-
   def index
     response.headers['Cache-Control'] = 'public, max-age=600'
 

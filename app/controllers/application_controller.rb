@@ -1,26 +1,21 @@
 class ApplicationController < ActionController::Base
+
   protect_from_forgery
 
-  before_filter :authenticate, :except => [ :logout ]
-  before_filter :title
+  # before_filter :title
 
-  helper_method :logged_in?
-  helper_method :title
+  # helper_method :title
+
+
+  private
 
   def title
     @title = Company.first.title
   end
 
-  def logged_in?
-    session[:login]
-  end
-
   def logout
-    do_logout
     render :text => "Quit your browser to logout."
   end
-
-  private
 
   def authenticate
     @hub = true
@@ -28,10 +23,6 @@ class ApplicationController < ActionController::Base
       username == APP_CONFIG['user'] && password == APP_CONFIG['pass']
     end
     session[:login] = login
-  end
-
-  def do_logout
-    session[:login] = nil
   end
 
 end
