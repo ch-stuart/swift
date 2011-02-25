@@ -1,10 +1,9 @@
 class ApplicationController < ActionController::Base
-
   protect_from_forgery
 
+  before_filter :authenticate, :except => [ :logout ]
   before_filter :title
 
-  helper_method :logged_in?
   helper_method :title
 
   private
