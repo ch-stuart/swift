@@ -1,9 +1,18 @@
 module Flickr
 
-  def get_photos_for_tag product
+  def get_photos_for_tag obj
+    return [] if obj.flickr_tag.nil?
+
+    Rails.logger.info "=> get_photos_for_tag"
+
     # http://snipplr.com/view/8954/create-nested-hashes/
     photos = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
-    flickr.photos.search(:user_id => APP_CONFIG['flickr_user_id'], :tags => product.flickr_tag).each do |p|
+    flickr.photos.search(:user_id => APP_CONFIG['flickr_user_id'], :tags => obj.flickr_tag).each do |p|
+
+      Rails.logger.info "=> get_photos_for_tag: flickr.photos.search"
+
+      y p
+
       info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
 
       photos[p.id]['id'] = info['id']
