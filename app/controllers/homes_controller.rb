@@ -11,7 +11,7 @@ class HomesController < ApplicationController
     @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
     @company = Company.first
 
-    expires_in 10.minutes, :public => true
+    expires_in 12.hours, :public => true
   end
 
   def accessories
@@ -19,7 +19,7 @@ class HomesController < ApplicationController
     @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
     @company = Company.first
 
-    expires_in 10.minutes, :public => true
+    expires_in 12.hours, :public => true
   end
 
 end
