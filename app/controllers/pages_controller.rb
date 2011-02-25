@@ -11,6 +11,8 @@ class PagesController < ApplicationController
   end
 
   def show
+    response.headers['Cache-Control'] = 'public, max-age=14400'
+    
     if params[:path]
       @page = Page.find_by_path(params[:path])
       raise ActiveRecord::RecordNotFound, "Page not found" if @page.nil?
