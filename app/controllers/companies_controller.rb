@@ -1,8 +1,6 @@
 class CompaniesController < ApplicationController
 
-
   before_filter :authenticate
-  caches_page :index, :show
 
   # GET /companies
   # GET /companies.xml

@@ -1,10 +1,9 @@
 class HomesController < ApplicationController
 
   before_filter :authenticate, :except => [ :index, :accessories ]
-  caches_page :index, :accessories
 
   def index
-    response.headers['Cache-Control'] = 'public, max-age=600'
+    response.headers['Cache-Control'] = 'public, max-age=86400'
 
     @pages = Page.find_all_by_status('Public')
     @featured_page = Page.find_by_featured('Featured')
@@ -14,8 +13,7 @@ class HomesController < ApplicationController
   end
 
   def accessories
-    response.headers['Cache-Control'] = 'public, max-age=14400'
-    response.headers["Foo"]="Bar"
+    response.headers['Cache-Control'] = 'public, max-age=86400'
 
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @accessories = Product.where(:status => 'Public', :kind => 'Accessory')

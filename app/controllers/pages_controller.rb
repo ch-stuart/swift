@@ -1,9 +1,6 @@
-
 class PagesController < ApplicationController
 
   before_filter :authenticate, :except => [ :show ]
-
-  caches_page :index, :show
 
   def index
     @pages = Page.all
@@ -11,8 +8,8 @@ class PagesController < ApplicationController
   end
 
   def show
-    response.headers['Cache-Control'] = 'public, max-age=14400'
-    
+    response.headers['Cache-Control'] = 'public, max-age=86400'
+
     if params[:path]
       @page = Page.find_by_path(params[:path])
       raise ActiveRecord::RecordNotFound, "Page not found" if @page.nil?

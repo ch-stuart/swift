@@ -1,7 +1,6 @@
 class ColorsController < ApplicationController
 
   before_filter :authenticate
-  caches_page :index, :show
 
   def index
     @colors = Color.all
@@ -21,7 +20,7 @@ class ColorsController < ApplicationController
 
   def create
     @color = Color.new(params[:color])
-    
+
     if @color.save
       redirect_to(@color, :notice => 'Color was successfully created.')
     else
@@ -45,6 +44,6 @@ class ColorsController < ApplicationController
 
     redirect_to(colors_url)
   end
-  
+
 end
 
