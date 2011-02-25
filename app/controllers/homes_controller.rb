@@ -5,21 +5,22 @@ class HomesController < ApplicationController
   caches_page :index, :accessories
 
   def index
+    response.headers['Cache-Control'] = 'public, max-age=600'
+
     @pages = Page.find_all_by_status('Public')
     @featured_page = Page.find_by_featured('Featured')
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
     @company = Company.first
-
-    expires_in 12.hours, :public => true
   end
 
   def accessories
+    response.headers['Cache-Control'] = 'public, max-age=14400'
+    response.headers["Foo"]="Bar"
+
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
     @company = Company.first
-
-    expires_in 12.hours, :public => true
   end
 
 end
