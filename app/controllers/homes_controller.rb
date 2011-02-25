@@ -5,7 +5,7 @@ class HomesController < ApplicationController
   caches_page :index, :accessories
 
   def index
-    response.headers['Cache-Control'] = 'public, max-age=14400'
+    response.headers['Cache-Control'] = 'public, max-age=600'
 
     @pages = Page.find_all_by_status('Public')
     @featured_page = Page.find_by_featured('Featured')
