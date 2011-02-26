@@ -121,22 +121,23 @@ Product.create(
     :price => "75.00",
     :kind => "Accessory"
 )
-
 Color.create(
     :title => "Hot Pink",
     :hex => "#de41a4"
 )
-
+Color.create(
+    :title => "Black and Tan Waxy Wear",
+    :hex => "#de41a4",
+    :price => "25.00"
+)
 Color.create(
     :title => "Black",
     :hex => "#000"
 )
-
 Color.create(
     :title => "White",
     :hex => "#fff"
 )
-
 Color.create(
     :title => "Gray",
     :hex => "#aaa"
