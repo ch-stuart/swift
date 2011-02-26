@@ -18,12 +18,18 @@ class ProductsController < ApplicationController
   def order
     response.headers['Cache-Control'] = 'public, max-age=86400'
 
+    @products = Product.where(:status => 'Public', :kind => 'Product')
+    @company = Company.first
+
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
   end
 
   def colors
     response.headers['Cache-Control'] = 'public, max-age=86400'
+
+    @products = Product.where(:status => 'Public', :kind => 'Product')
+    @company = Company.first
 
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
@@ -32,6 +38,10 @@ class ProductsController < ApplicationController
   def cart
     response.headers['Cache-Control'] = 'public, max-age=86400'
 
+    @products = Product.where(:status => 'Public', :kind => 'Product')
+    @company = Company.first
+
+    @products = Product.where(:status => 'Public', :kind => 'Product')
     @product = Product.find(params[:id])
   end
 
