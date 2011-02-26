@@ -4,13 +4,15 @@
 
 <p id="color_swatch" style="background-color: <%= @color.hex %>;">
   <%= @color.title %>
-  <code>
-    (<%= @color.hex %>)
-  </code>
+  <% unless @color.price.nil? %>
+    <br> $<%= @color.price %>
+  <% end %>
+  <br>
+  <%= @color.hex %>
 </p>
 
 <p>
   <%= link_to 'Edit', edit_color_path(@color) %> |
   <%= link_to 'Back', colors_path %>
 </p>
-  
+

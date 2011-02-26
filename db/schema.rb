@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110226043705) do
+ActiveRecord::Schema.define(:version => 20110226184340) do
 
   create_table "colors", :force => true do |t|
     t.string   "title"
     t.string   "hex"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "price"
   end
 
   create_table "colors_parts", :id => false, :force => true do |t|

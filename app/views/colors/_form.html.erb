@@ -16,6 +16,13 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+    <p class="hint">
+        Leave empty if free.
+    </p>
+  </div>
+  <div class="field">
     <%= f.label :hex %><br />
     <%= f.text_field :hex %>
     <div id="picker"></div>
