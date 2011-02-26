@@ -1,14 +1,13 @@
 class ProductsController < ApplicationController
 
   before_filter :authenticate, :except => [ :show, :order, :colors ]
+  caches_page :show, :order, :colors, :cart
 
   def index
     @products = Product.all
   end
 
   def show
-    response.headers['Cache-Control'] = 'public, max-age=86400'
-
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
@@ -16,8 +15,6 @@ class ProductsController < ApplicationController
   end
 
   def order
-    response.headers['Cache-Control'] = 'public, max-age=86400'
-
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @company = Company.first
 
@@ -26,8 +23,6 @@ class ProductsController < ApplicationController
   end
 
   def colors
-    response.headers['Cache-Control'] = 'public, max-age=86400'
-
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @company = Company.first
 
@@ -36,8 +31,6 @@ class ProductsController < ApplicationController
   end
 
   def cart
-    response.headers['Cache-Control'] = 'public, max-age=86400'
-
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @company = Company.first
 
