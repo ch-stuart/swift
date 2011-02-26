@@ -3,7 +3,8 @@
   <nav>
     <div id="swift_slideshow">
       <% @products.each do |product| %>
-        <img src="images/tmp/DSCN4034.jpg" data-caption="#orb_cap_<%= product.id %>" data-text="<%= product.title %>">
+        <% photo_url = Product.get_photo_by_id product.flickr_photo %>
+        <img src="<%= photo_url %>" data-caption="#orb_cap_<%= product.id %>" data-text="<%= product.title %>">
       <% end %>
     </div>
   </nav>

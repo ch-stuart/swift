@@ -41,5 +41,15 @@ module Flickr
     return photos
   end
 
+  def get_photo_by_id id
+    return "" if id.nil?
+
+    sizes = flickr.photos.getSizes :photo_id => id
+    medium_640 = sizes.find do |size|
+      size.label == 'Medium 640'
+    end
+    medium_640.source
+  end
+
 end
 
