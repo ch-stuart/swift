@@ -40,7 +40,7 @@
           <%= "$#{part.price}" %>
         <% end %>
       </p>
-      <% unless part.colors.empty? %>
+      <% unless part.colors.nil? %>
         <p>
           <%= select_tag "#{part.title}_colors", options_from_collection_for_select(part.colors, "id", "title") %>
         </p>

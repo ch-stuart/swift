@@ -20,13 +20,31 @@
     <%= f.label :colors, "Available in the following colors" %><br>
     <% Color.all.each do |color| %>
       <label>
-        <%= check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id %>
-        <%= color.title -%>
+        <%
+          unless eye_dee == "new_parts"
+            # Does this color.id match any of colors set
+            needle = color
+            match = Part.find_by_id(eye_dee).colors.any? do |haystack|
+              haystack.id == needle.id
+            end
+          end
+        %>
+        <%= check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id, match %>
+        <%= color.title %>
+        [<%= color.id %>]
+        <% unless eye_dee == "new_parts" %>
+          [<% Part.find_by_id(eye_dee).colors.each do |color| %>
+            <%= color.id %>,
+          <% end %>]
+        <% end %>
+        <% unless color.price.nil? %>
+          $<%= color.price %>
+        <% end %>
       </label>
       <br>
       <%# check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id, @product.parts['new_parts']['colors'].include?(color) %>
     <% end %>
-  </div>  
+  </div>
   <div class="field destroy">
     <label>
       <%= f.hidden_field :_destroy %>
