@@ -31,12 +31,12 @@
         %>
         <%= check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id, match %>
         <%= color.title %>
-        [<%= color.id %>]
-        <% unless eye_dee == "new_parts" %>
-          [<% Part.find_by_id(eye_dee).colors.each do |color| %>
-            <%= color.id %>,
-          <% end %>]
-        <% end %>
+        <%# color.id %>
+        <%# unless eye_dee == "new_parts" %>
+          <%# Part.find_by_id(eye_dee).colors.each do |color| %>
+            <%# color.id %>
+          <%# end %>
+        <%# end %>
         <% unless color.price.nil? %>
           $<%= color.price %>
         <% end %>
