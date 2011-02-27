@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   caches_page :show, :order, :colors, :cart
 
   def index
-    @products = Product.all
+    @products = Product.all(:order => 'kind DESC')
   end
 
   def show

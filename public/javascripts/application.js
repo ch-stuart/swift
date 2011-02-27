@@ -14,4 +14,7 @@ function add_fields(link, association, content) {
 
 jQuery(document).ready(function($) {
     $('html').removeClass('no-js');
+    if ($(document.body).hasClass('hub')) {
+        $(document.documentElement).addClass('hub');
+    }
 });

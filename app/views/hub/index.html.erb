@@ -8,7 +8,10 @@
 <ul>
   <% @products.each do |product| %>
     <li>
-      <%= link_to product.title, product %> <span class="private"><%= product.status if product.status == "Private" -%></span>
+      <%= image_tag "#{product.kind}.png" %>
+      <%= image_tag "#{product.status}.png" %>
+      <%= link_to product.title, product %>
+      <%= link_to image_tag("edit.png"), edit_product_path(product), :class => 'icon_link' %>
     </li>
   <% end %>
 </ul>
@@ -19,7 +22,9 @@
 <ul>
   <% @pages.each do |page| %>
     <li>
+      <%= image_tag "#{page.status}.png" %>
       <%= link_to page.title, page %> <span class="private"><%= page.status if page.status == "Private" -%></span>
+      <%= link_to image_tag("edit.png"), edit_page_path(page), :class => 'icon_link' %>
     </li>
   <% end %>
 </ul>
@@ -43,8 +48,8 @@
         &nbsp;&nbsp;&nbsp;&nbsp;
       </span>
       &nbsp;
-      <%= link_to color.title, color %> 
+      <%= link_to color.title, color %>
     </li>
   <% end %>
-  
+
 </ul>

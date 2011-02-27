@@ -1,35 +1,34 @@
 <h1>Products</h1>
 <table>
   <tr>
+    <th>Type</th>
+    <th>Status</th>
     <th>Title</th>
     <th>Short Title</th>
-    <th>Type</th>
     <th>Description</th>
     <th>Price</th>
     <th>Humane Price</th>
     <th>Flickr Tag</th>
     <th>Featured Photo</th>
     <th>Specs</th>
-    <th>Status</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 <% @products.each do |product| %>
   <tr>
-    <td><%= product.title %></td>
+    <td><%= image_tag "#{product.kind}.png" %></td>
+    <td><%= image_tag "#{product.status}.png" %></td>
+    <td>
+      <%= link_to product.title, product %>
+      <%= link_to image_tag("edit.png"), edit_product_path(product) %>
+    </td>
     <td><%= product.short_title %></td>
-    <td><%= product.kind %></td>
-    <td><%= product.description %></td>
+    <td><%= truncate(product.description, :length => 10) %></td>
     <td><%= product.price %></td>
     <td><%= product.humane_price %></td>
     <td><%= product.flickr_tag %></td>
     <td><%= product.flickr_photo %></td>
-    <td><%= product.specs %></td>
-    <td  class="<%= 'private' unless product.public? -%>"><%= product.status %></td>
-    <td><%= link_to 'Show', product %></td>
-    <td><%= link_to 'Edit', edit_product_path(product) %></td>
-    <td><%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= truncate(product.specs, :length => 10) %></td>
+    <td><%= link_to image_tag("destroy.png"), product, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
