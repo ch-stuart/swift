@@ -9,11 +9,13 @@ application:
   flickr_shared_secret: 1776db9047fc768f
   personal_blog_url: http://cycleswift.wordpress.com/
   store_url: http://ww6.aitsafe.com/cf/add.cfm
+  store_userid: '87211780'
+  google_analytics_id: UA-21061816-2
 development:
   env: development
 
-production: 
+production:
   env: production
 
-test: 
+test:
   env: test
