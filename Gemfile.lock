@@ -33,6 +33,8 @@ GEM
     closure-compiler (1.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    exceptional (2.0.32)
+      rack
     flickraw (0.8.3)
       json (>= 1.1.1)
     haml (3.0.25)
@@ -83,6 +85,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  exceptional
   flickraw (= 0.8.3)
   haml
   jammit

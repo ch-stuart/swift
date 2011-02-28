@@ -8,6 +8,10 @@ gem "jammit"
 gem 'haml'
 gem 'sqlite3-ruby', '1.2.1', :require => 'sqlite3'
 
+group :dreamhost do
+  gem 'exceptional'
+end
+
 group :development do
   gem 'yaml_db'
 end
