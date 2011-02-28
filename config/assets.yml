@@ -5,6 +5,7 @@ javascripts:
     - public/javascripts/application.js
     - public/javascripts/orbit.1.2/jquery.orbit.js
     - public/javascripts/farbtastic/farbtastic.js
+    - public/javascripts/ICanHaz.js
 
 stylesheets:
   common:
