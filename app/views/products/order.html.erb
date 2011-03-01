@@ -1,10 +1,10 @@
-<form method="post" action="<%= APP_CONFIG['store_url'] %>">
+<form id="order_form" method="post" action="<%= APP_CONFIG['store_url'] %>" data-count="1">
   <%# Mal-e integration %>
   <input type="hidden" name="userid" value="<%= APP_CONFIG['store_userid'] %>">
   <input type="hidden" name="product1[]" value="<%= @product.title %>">
   <input type="hidden" name="price1" value="<%= @product.price %>">
   <input type="hidden" name="qty1" value="1">
-  <div id="addons"></div>
+  <div id="parts"></div>
 
   <% unless @product.public? %>
     <p class="private" style="position: absolute; top: 0; left: 0; padding: 2px 6px; border: 1px solid rgba(0,0,0,.2);-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3); border-top: 0;">
@@ -43,24 +43,30 @@
           <p>
             <%# If it has a price, display a checkbox so they can add it. %>
             <% if part.price.present? %>
-              <input type="checkbox" data-count="<%= part.id %>" data-product="<%= part.title %>" data-price="<%= part.price %>" class="add_product">
+              <input
+                type="checkbox"
+                class="has_price"
+                data-hash="<%= digest(part.title + part.id.to_s) %>"
+                data-product="<%= part.title %>"
+                data-price="<%= part.price %>">
             <% end %>
             <%= part.title %>
             <%= "$#{part.price}" if part.price.present? %>
           </p>
           <% unless part.colors.empty? %>
             <p>
-              <select name="product1[]">
+              <select name="product1[]" class="has_price" data-hash="<%= digest('select' + part.title) %>">
                 <% part.colors.each do |color| %>
                   <option
-                    class="<%= "has_price" unless color.price.nil? %>"
+                    data-hash="<%= digest(color.title + color.id.to_s) %>"
+                    data-product="<%= color.title %>"
+                    data-price="<%= color.price %>"
                     value="<%= part.title %> (<%= color.title %><%= " ($#{color.price})" unless color.price.nil? %>) ">
                     <%= color.title %>
                     <%= "($#{color.price})" unless color.price.nil? %>
                   </option>
                 <% end %>
               </select>
-              <%# select_tag "#{part.title}_colors", options_from_collection_for_select(part.colors, "id", "title") %>
             </p>
           <% end %>
         </div>
@@ -72,32 +78,56 @@
   <% end %>
   <p>
     <input type="submit">
-    <%# link_to "Checkout", :action => "cart", :id => @product %>
   </p>
 </form>
 <%= content_for :js do %>
   <script type="text/html" id="product_tmpl">
-    <div id="addon_{{ count }}">
+    <div id="part_{{ hash }}">
       <input type="hidden" name="product{{ count }}" value="{{ product }}">
       <input type="hidden" name="price{{ count }}" value="{{ price }}">
       <input type="hidden" name="qty{{ count }}" value="{{ qty }}>">
     </div>
   </script>
   <script>
-    $('.add_product').click(function() {
+    function increment_count() {
+      var count = parseInt($('#order_form').data('count'));
+      $('#order_form').data('count', count + 1);
+    }
+    $('input.has_price').change(function() {
       if ($(this).attr("checked")) {
-        var obj = {
-          'count': $(this).data('count'),
+        increment_count();
+
+        var html = ich.product_tmpl({
+          'hash': $(this).data('hash'),
+          'count': $('#order_form').data('count'),
           'product': $(this).data('product'),
           'price': $(this).data('price'),
           'qty': '1'
-        }
-        $('#addons').append(
-          ich.product_tmpl(obj)
-        )
+        });
+        $('#parts').append(html);
       } else {
-        var count = $(this).data('count');
-        $('#addon_' + count).remove();
+        $('#part_' + $(this).data('hash')).remove();
+      }
+    });
+    $('select.has_price').change(function() {
+      var select_hash = $(this).data('hash');
+      var idx = this.selectedIndex;
+      var options = $(this).find('option');
+      var option = options.get(idx);
+      var price = $(option).data('price');
+
+      $('#part_' + select_hash).remove();
+
+      if (price != "") {
+        increment_count();
+        var html = ich.product_tmpl({
+          'hash': select_hash,
+          'count': $('#order_form').data('count'),
+          'product': $(option).data('product'),
+          'price': $(option).data('price'),
+          'qty': '1'
+        });
+        $('#parts').append(html);
       }
     });
   </script>
