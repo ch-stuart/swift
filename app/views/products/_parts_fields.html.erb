@@ -1,9 +1,22 @@
-<%# HACK: sets the product id. 2011-02-06 %>
+<%#
+    HACK      HACK        HACK         HACK HACK   HACK   HACK     HACK
+    HACK      HACK      HACK  HA      HACK         HACK  HACK      HACK
+    HACK HACK HACK     HACK   HAC     HACK         HACKHACK        HACK
+    HACK      HACK    HACKHACK HACK   HACK         HACK  HACK
+    HACK      HACK   HACK      HACK    HACK HACK   HACK   HACK     HACK
+
+    1. Set the correct name value on the color checkboxes so they match
+       the corresponding part. The id must match...
+
+    See here for someone solving something similar:
+     http://chrisblunt.com/2009/10/12/rails-getting-the-id-of-form-fields-inside-a-fields_for-block/
+%>
 <%
   if f.object.id.nil?
     eye_dee = 'new_parts'
   else
     eye_dee = f.object.id
+    obj_name = f.object_name # product[parts_attributes][0]
   end
 %>
 
@@ -29,20 +42,17 @@
             end
           end
         %>
-        <%= check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id, match %>
+        <% if eye_dee == "new_parts" %>
+          <%= check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id, match %>
+        <% else %>
+          <%= check_box_tag "#{obj_name}[color_ids][]", color.id, match %>
+        <% end %>
         <%= color.title %>
-        <%# color.id %>
-        <%# unless eye_dee == "new_parts" %>
-          <%# Part.find_by_id(eye_dee).colors.each do |color| %>
-            <%# color.id %>
-          <%# end %>
-        <%# end %>
         <% unless color.price.nil? %>
           $<%= color.price %>
         <% end %>
       </label>
       <br>
-      <%# check_box_tag "product[parts_attributes][#{eye_dee}][color_ids][]", color.id, @product.parts['new_parts']['colors'].include?(color) %>
     <% end %>
   </div>
   <div class="field destroy">
