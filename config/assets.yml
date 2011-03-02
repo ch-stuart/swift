@@ -6,6 +6,7 @@ javascripts:
     - public/javascripts/orbit.1.2/jquery.orbit.js
     - public/javascripts/farbtastic/farbtastic.js
     - public/javascripts/ICanHaz.js
+    - public/javascripts/product_order.js
 
 stylesheets:
   common:
