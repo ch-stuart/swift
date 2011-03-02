@@ -1,86 +1,114 @@
-<form id="order_form" method="post" action="<%= APP_CONFIG['store_url'] %>" data-count="1">
-  <%# Mal-e integration %>
-  <input type="hidden" name="userid" value="<%= APP_CONFIG['store_userid'] %>">
-  <input type="hidden" name="product1[]" value="<%= @product.title %>">
-  <input type="hidden" name="price1" value="<%= @product.price %>">
-  <input type="hidden" name="qty1" value="1">
-  <div id="parts"></div>
+<p id="notice" style="margin: 0; padding: 0; overflow: hidden;">
+  <%= notice %>
+</p>
 
-  <% unless @product.public? %>
-    <p class="private" style="position: absolute; top: 0; left: 0; padding: 2px 6px; border: 1px solid rgba(0,0,0,.2);-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3); border-top: 0;">
-      private!
-    </p>
-  <% end %>
-  <p id="notice">
-    <%= notice %>
-  </p>
-  <h2>
-    <%= @product.title %>
-  </h2>
-  <%= render :partial => 'shared/slideshow' %>
-  <h3>
-    About <%= @product.title %>
-  </h3>
-  <p>
-    <%= @product.description %>
-  </p>
-  <p>
-    $<%= @product.price %>
-  </p>
-  <h3>
-    Specs
-  </h3>
-  <p>
-    <%= @product.specs %>
-  </p>
-  <% if @product.parts.present? %>
-    <h3>
-      Parts
-    </h3>
-    <div class="fields">
-      <% @product.parts.each do |part| %>
-        <div class="field">
-          <p>
-            <%# If it has a price, display a checkbox so they can add it. %>
-            <% if part.price.present? %>
-              <input
-                type="checkbox"
-                class="has_price"
-                data-hash="<%= digest(part.title + part.id.to_s) %>"
-                data-product="<%= part.title %>"
-                data-price="<%= part.price %>">
-            <% end %>
-            <%= part.title %>
-            <%= "$#{part.price}" if part.price.present? %>
-          </p>
-          <% unless part.colors.empty? %>
-            <p>
-              <select name="product1[]" class="has_price" data-hash="<%= digest('select' + part.title) %>">
-                <% part.colors.each do |color| %>
-                  <option
-                    data-hash="<%= digest(color.title + color.id.to_s) %>"
-                    data-product="<%= color.title %>"
-                    data-price="<%= color.price %>"
-                    <%# The value sets the title of the part which shows up at Mal's %>
-                    value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.nil? %>) ">
-                    <%= color.title %>
-                    <%= "($#{color.price})" unless color.price.nil? %>
-                  </option>
+<div class="col">
+    <% unless @product.public? %>
+      <p class="private" style="position: absolute; top: 0; left: 0; padding: 2px 6px; border: 1px solid rgba(0,0,0,.2);-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3); border-top: 0;">
+        private!
+      </p>
+    <% end %>
+    <%= render :partial => 'shared/slideshow' %>
+</div>
+<div class="col col_gray">
+    <form id="order_form" method="post" action="<%= APP_CONFIG['store_url'] %>" data-count="1">
+      <%# Mal-e integration %>
+      <input type="hidden" name="userid" value="<%= APP_CONFIG['store_userid'] %>">
+      <input type="hidden" name="product1[]" value="<%= @product.title %>">
+      <input type="hidden" name="price1" value="<%= @product.price %>">
+      <input type="hidden" name="qty1" value="1">
+      <div id="parts"></div>
+
+      <h3>
+        <%= @product.title %>
+      </h3>
+      <p>
+        <%= @product.description %>
+      </p>
+      <p>
+        $<%= @product.price %>
+      </p>
+      <h3>
+        Specs
+      </h3>
+      <p>
+        <%= @product.specs %>
+      </p>
+      <% if @product.parts.present? %>
+        <h3>
+          Customize your parts
+        </h3>
+        <div class="fields">
+          <% @product.parts.each do |part| %>
+            <div class="field">
+              <p class="label">
+                <%# If it has a price, display a checkbox so they can add it. %>
+                <% if part.price.present? %>
+                  <input
+                    type="checkbox"
+                    class="has_price"
+                    data-hash="<%= digest(part.title + part.id.to_s) %>"
+                    data-product="<%= part.title %>"
+                    data-price="<%= part.price %>">
                 <% end %>
-              </select>
-            </p>
+                <%= part.title %>
+                <%= "$#{part.price}" if part.price.present? %>
+              </p>
+              <% unless part.colors.empty? %>
+                <p class="input">
+                  <select name="product1[]" class="has_price" data-hash="<%= digest('select' + part.title) %>">
+                    <% part.colors.each do |color| %>
+                      <option
+                        data-hash="<%= digest(color.title + color.id.to_s) %>"
+                        data-product="<%= color.title %>"
+                        data-price="<%= color.price %>"
+                        <%# The value sets the title of the part which shows up at Mal's %>
+                        value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.nil? %>) ">
+                        <%= color.title %>
+                        <%= "($#{color.price})" unless color.price.nil? %>
+                      </option>
+                    <% end %>
+                  </select>
+                </p>
+              <% else %>
+                <p class="input no_color_choices">
+                  <i>No color choices.</i>
+                </p>
+              <% end %>
+            </div>
+            <br class="clear">
+            <div class="divider"></div>
           <% end %>
         </div>
-        <p>
-          ------
-        </p>
+        <ul id="color_swatches">
+            <li style="background-color: #ccc;">
+                Swift Colors:
+            </li>
+            <% @colors.each do |color| %>
+                <li style="background-color: <%= color.hex %>">
+                    <%= color.title %>
+                </li>
+            <% end %>
+        </ul>
       <% end %>
-    </div>
-  <% end %>
-  <p>
-    <input type="submit">
-  </p>
-</form>
+      <div class="fields">
+        <p class="label"></p>
+        <p class="input">
+          <button type="submit" id="submit_order">
+            Submit Order
+          </button>
+        </p>
+        <br class="clear">
+      </div>
+    </form>
+
+    <p id="footer_branding">
+      <%= link_to "Back to Bags", root_path, :id => "bike_btn" %>
+      <%= image_tag "footer-logo.gif", :id => "logo" %>
+    </p>
+</div>
+<br class="clear"
+
 <%= content_for :js do %>
   <script type="text/html" id="product_tmpl">
     <div id="part_{{ hash }}">

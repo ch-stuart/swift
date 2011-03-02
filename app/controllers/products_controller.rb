@@ -17,6 +17,7 @@ class ProductsController < ApplicationController
   def order
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @company = Company.first
+    @colors = Color.all
 
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
