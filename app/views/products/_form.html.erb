@@ -63,6 +63,20 @@
     <%= f.text_area :specs %>
   </div>
   <div class="field">
+    <%= f.label "Custom order question" %><br />
+    <%= f.text_field :question %>
+    <p class="hint">
+      One additional question you can ask a customer during the order process.
+    </p>
+  </div>
+  <div class="field">
+    <%= f.label "Custom order answer" %><br />
+    <%= f.text_field :answer %>
+    <p class="hint">
+      If the question has a set amount of choices, enter them as a comma-separated list, ex: <code>dogs, chimps, beavers</code>. Otherwise, leave the field blank if the answer is freeform.
+    </p>
+  </div>
+  <div class="field">
     <%= f.label :status %><br />
     <%= f.select :status, options_for_select(["Private", "Public"], :selected => @product.status) %>
     <p class="hint">

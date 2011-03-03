@@ -34,6 +34,32 @@
       <p>
         <%= @product.specs %>
       </p>
+      <% unless @product.question.blank? %>
+        <div class="fields">
+          <div class="field">
+            <p class="label">
+              <%= @product.question %>
+            </p>
+            <p class="input">
+              <% if @product.answer.blank? %>
+                <input type="text" name="product1[]">
+              <% else %>
+                <select name="product1[]">
+                  <option>
+                    Choose One
+                  </option>
+                  <% @product.answer.split(',').each do |option| %>
+                    <option>
+                      <%= option %>
+                    </option>
+                  <% end %>
+                </select>
+              <% end %>
+            </p>
+            <br class="clear">
+          </div>
+        </div>
+      <% end %>
       <% if @product.parts.present? %>
         <h3>
           Customize your parts
