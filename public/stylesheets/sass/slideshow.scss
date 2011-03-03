@@ -2,6 +2,14 @@
     #swift_slideshow {
         img,
         div { display: none; }
+
+        div {
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 640px;
+            height: 426px;
+            background-color: #000;
+        }
     }
     .orbit-caption {
         a, a:visited {
