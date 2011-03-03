@@ -144,7 +144,7 @@ Color.create(
 )
 Company.create(
     :title => "Swift Industries",
-    :email => "swiftindustry@yahoo.com",
+    :email => "info@builtbyswift.com",
     :phone => "(206) 325.0054",
     :address => "1422 20th AVE Seattle, WA 98122"
 )
