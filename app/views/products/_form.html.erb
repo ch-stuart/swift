@@ -84,6 +84,17 @@
     </p>
   </div>
   <div class="field">
+    <p>Sizes</p>
+  </div>
+  <%= f.fields_for :sizes do |sizes_fields| %>
+    <%= render :partial => 'sizes_fields', :locals => { :f => sizes_fields } %>
+  <% end %>
+  <div class="field add">
+    <label>
+      <%= link_to_add_fields "Add Size", f, :sizes %>
+    </label>
+  </div>
+  <div class="field">
     <p>Parts</p>
   </div>
   <%= f.fields_for :parts do |parts_fields| %>
@@ -93,6 +104,9 @@
     <label>
       <%= link_to_add_fields "Add Part", f, :parts %>
     </label>
+  </div>
+  <div class="field">
+    <p>Testimonials</p>
   </div>
   <%= f.fields_for :testimonials do |testimonials_fields| %>
     <%= render :partial => 'testimonials_fields', :locals => { :f => testimonials_fields } %>
