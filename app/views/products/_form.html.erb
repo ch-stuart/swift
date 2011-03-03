@@ -75,10 +75,17 @@
   <%= f.fields_for :parts do |parts_fields| %>
     <%= render :partial => 'parts_fields', :locals => { :f => parts_fields } %>
   <% end %>
-
   <div class="field add">
     <label>
       <%= link_to_add_fields "Add Part", f, :parts %>
+    </label>
+  </div>
+  <%= f.fields_for :testimonials do |testimonials_fields| %>
+    <%= render :partial => 'testimonials_fields', :locals => { :f => testimonials_fields } %>
+  <% end %>
+  <div class="field add">
+    <label>
+      <%= link_to_add_fields "Add Testimonial", f, :testimonials %>
     </label>
   </div>
   <div class="actions">

@@ -1,0 +1,16 @@
+<div class="indent group">
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+  <div class="field">
+    <%= f.label :author %><br>
+    <%= f.text_field :author %>
+  </div>
+  <div class="field destroy">
+    <label>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to_function "Remove Testimonial", "remove_fields(this)" %>
+    </label>
+  </div>
+</div>

@@ -7,10 +7,10 @@
   <%= notice %>
 </p>
 <h2>
-  ## <%= @product.title %>
+  <%= @product.title %>
 </h2>
 <h3>
-  ### About <%= @product.title %>
+  About <%= @product.title %>
 </h3>
 <p>
   <%= @product.description %>
@@ -19,14 +19,23 @@
   $<%= @product.price %>
 </p>
 <h3>
-  ### Specs
+  Specs
 </h3>
 <p>
   <%= @product.specs %>
 </p>
-
+<h3>
+  Testimonials
+</h3>
+<% @product.testimonials.each do |testimonial| %>
+  <p>
+    <%= testimonial.body %>
+  </p>
+  <p>
+    &mdash; <%= testimonial.author %>
+  </p>
+<% end %>
 <%= render :partial => 'shared/slideshow' %>
-
 <p>
   <%= link_to "Order it", :action => "order", :id => @product %>
 </p>
