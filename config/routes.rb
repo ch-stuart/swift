@@ -1,10 +1,8 @@
 SwiftSite::Application.routes.draw do
 
-  resources :testimonials
-
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
 
-  resources :pages, :products, :companies, :hub, :colors, :parts
+  resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials
 
   resources :products do
     member do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110303060913) do
+ActiveRecord::Schema.define(:version => 20110303080831) do
 
   create_table "colors", :force => true do |t|
     t.string   "title"
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(:version => 20110303060913) do
     t.string   "flickr_photo"
     t.string   "question"
     t.string   "answer"
+  end
+
+  create_table "sizes", :force => true do |t|
+    t.string   "title"
+    t.string   "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "product_id"
   end
 
   create_table "testimonials", :force => true do |t|
