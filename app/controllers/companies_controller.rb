@@ -2,8 +2,6 @@ class CompaniesController < ApplicationController
 
   before_filter :authenticate
 
-  # GET /companies
-  # GET /companies.xml
   def index
     @companies = Company.all
 
@@ -13,8 +11,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # GET /companies/1
-  # GET /companies/1.xml
   def show
     @company = Company.find(params[:id])
 
@@ -24,8 +20,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # GET /companies/new
-  # GET /companies/new.xml
   def new
     @company = Company.new
 
@@ -35,13 +29,10 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # GET /companies/1/edit
   def edit
     @company = Company.find(params[:id])
   end
 
-  # POST /companies
-  # POST /companies.xml
   def create
     @company = Company.new(params[:company])
 
@@ -56,8 +47,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # PUT /companies/1
-  # PUT /companies/1.xml
   def update
     @company = Company.find(params[:id])
 
@@ -72,8 +61,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # DELETE /companies/1
-  # DELETE /companies/1.xml
   def destroy
     @company = Company.find(params[:id])
     @company.destroy

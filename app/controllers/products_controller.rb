@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
 
   before_filter :authenticate, :except => [ :show, :order, :colors ]
-  caches_page :show, :order, :colors, :cart
+  caches_page :index, :show, :order, :new
+  cache_sweeper ProductSweeper
 
   def index
     @products = Product.all(:order => 'kind DESC')
@@ -21,22 +22,6 @@ class ProductsController < ApplicationController
 
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
-  end
-
-  def colors
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-    @company = Company.first
-
-    @product = Product.find(params[:id])
-    @photos = Product.get_photos_for_tag @product
-  end
-
-  def cart
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-    @company = Company.first
-
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-    @product = Product.find(params[:id])
   end
 
   def new
