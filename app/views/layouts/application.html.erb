@@ -20,6 +20,7 @@
   <%= csrf_meta_tag %>
 </head>
 <body class="<%= (@hub == true) ? 'hub' : 'pub' %>">
+  <%= yield :flash %>
   <header>
     <% if false %>
       <h1 id="page_title" class="logo">
@@ -27,11 +28,13 @@
       </h1>
     <% end %>
   </header>
-  <div id="box">
+  <div id="box" class="container_16">
     <%= yield %>
   </div>
   <% unless @hub %>
-    <%= render :partial => 'shared/footer' %>
+    <div class="container_16">
+      <%= render :partial => 'shared/footer' %>
+    </div>
   <% end %>
   <%= include_javascripts :common %>
   <%= yield :js -%>

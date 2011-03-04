@@ -1,3 +1,15 @@
+body.hub {
+    textarea {
+        width: 300px;
+    }
+    input[type='text'] {
+        width: 250px;
+    }
+    textarea,
+    input[type='text'] {
+        font-size: 12px;
+    }
+}
 textarea,input[type='text'] {
     padding: 0.2em 0.3em;
     -webkit-border-radius: 0.2em;
@@ -43,4 +55,38 @@ input[type=submit] {
     text-align: center;
     text-shadow: 0 1px 0 #fff;
     width: 150px;
+}
+
+
+pre {
+  background-color: #eee;
+  padding: 1em;
+}
+.field, .actions {
+  margin-bottom: 1em;
+}
+#notice {
+  color: green;
+}
+.field_with_errors {
+  padding: 0.2em;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  display: table;
+}
+#error_explanation {
+  margin-bottom: 2em;
+}
+#error_explanation h2 {
+  font-size: 1.5em;
+  padding: 0.3em 0.8em;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+  font-family: Helvetica, sans-serif;
+}
+#error_explanation ul li {
+  font-size: 1.4em;
+  list-style: square;
 }

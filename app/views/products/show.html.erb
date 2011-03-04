@@ -1,41 +1,56 @@
 <% unless @product.public? %>
-  <p class="private" style="position: absolute; top: 0; left: 0; padding: 2px 6px; border: 1px solid rgba(0,0,0,.2);-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3); border-top: 0;">
-    private!
-  </p>
+    <p id="private_notice">
+        private!
+    </p>
 <% end %>
-<p id="notice">
-  <%= notice %>
-</p>
-<h2>
-  <%= @product.title %>
-</h2>
-<h3>
-  About <%= @product.title %>
-</h3>
-<p>
-  <%= @product.description %>
-</p>
-<p>
-  $<%= @product.price %>
-</p>
-<h3>
-  Specs
-</h3>
-<p>
-  <%= @product.specs %>
-</p>
-<h3>
-  Testimonials
-</h3>
-<% @product.testimonials.each do |testimonial| %>
-  <p>
-    <%= testimonial.body %>
-  </p>
-  <p>
-    &mdash; <%= testimonial.author %>
-  </p>
+<%= content_for :flash do %>
+    <p id="notice">
+        <%= notice %>
+    </p>
 <% end %>
-<%= render :partial => 'shared/slideshow' %>
-<p>
-  <%= link_to "Order it", :action => "order", :id => @product %>
-</p>
+
+<div class="grid_8">
+    <%= render :partial => 'shared/slideshow' %>
+    <p class="product_description" style="margin-top: 10px;">
+        <%= @product.description %>
+    </p>
+</div>
+<div class="grid_8 col_gray">
+    <div style="padding: 10px 0 0 10px;">
+        <img src="http://placehold.it/440x420">
+        <h2 id="product_title">
+            <%= @product.title %>
+        </h2>
+        <h3 id="humane_price">
+            <%= @product.humane_price %>
+        </h3>
+        <p>
+          <%= @product.specs %>
+        </p>
+        <% if @product.testimonials.present? %>
+            <h3>
+                Testimonials
+            </h3>
+            <% @product.testimonials.each do |testimonial| %>
+                <p>
+                    <%= testimonial.body %>
+                </p>
+                <p>
+                    &mdash; <%= testimonial.author %>
+                </p>
+            <% end %>
+        <% end %>
+        <div class="grid_6 prefix_2 alpha omega">
+            <p id="design_your_bags">
+                <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
+            </p>
+        </div>
+        <div class="grid_3 prefix_5 alpha omega">
+            <%= link_to "Back to Bags", root_path, :id => "bike_btn" %>
+        </div>
+        <div class="grid_4 prefix_4 alpha omega" id="product_logo">
+            <%= image_tag "footer-logo.gif", :id => "logo" %>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>

@@ -1,52 +1,55 @@
 html.hub, body.hub {
     background-color: #fafafa;
     line-height: 1.6;
+    font-family: Georgia, sans-serif;
 
     #box {
-        margin: 0 auto;
-        padding: 40px 0;
-        width: 80%;
+        margin: 60px auto;
         position: relative;
     }
     th {
-        border-bottom: 0.1em solid #ccc;
+        border-bottom: 1px solid #ccc;
     }
     td, th {
-        padding: 0.5em 0.2em;
+        padding: 5px 2px;
     }
     h1,h2,h3,h4,ul,p {
-        margin: 2em 0 0 0;
+        margin: 20px 0 0 0;
     }
     p.hint {
         margin-top: 0;
         font-family: lucida grande, sans-serif;
-        font-size: 1.1em;
+        font-size: 12px;
         color: #888;
-        max-width: 36em;
+        max-width: 360px;
     }
     h1 {
-        margin: 0 0 2em;
-        font-size: 2.4em;
+        margin: 0 0 20px;
+        font-size: 24px;
     }
     h2 {
-        font-size: 2.0em;
-        margin: 1em 0 0;
+        font-size: 20px;
+        margin: 10px 0 0;
     }
     h3 {
-        font-size: 1.8em;
+        font-size: 18px;
+    }
+    h1,h2,h3 {
+        font-weight: normal;
     }
     ul,li {
         list-style-type: square;
+        margin-left: 0;
     }
     ul {
         margin-top: 0;
-        padding-left: 2em;
+        padding-left: 20px;
     }
     a {
         color: #555;
         background-color: #eee;
         text-decoration: none;
-        border-bottom: 0.1em solid #ddd;
+        border-bottom: 1px solid #ddd;
     }
     a:active {
         color: white;
@@ -58,15 +61,15 @@ html.hub, body.hub {
     }
     .indent {
         background-color: rgba(255,255,255,.50);
-        padding: 2em 2em 0 2em;
-        margin-bottom: 0.5em;
-        -webkit-border-radius: 0.5em;
-        border-radius: 0.5em;
-        border: 0.1em solid #eee;
-        max-width: 40em;
-        -moz-box-shadow: inset 0 0 0.1em 0 #f6f6f6;
-        -webkit-box-shadow: inset 0 0 0.1em 0 #f6f6f6;
-        box-shadow: inset 0 0 0.1em 0 #f6f6f6;
+        padding: 20px 20px 0 20px;
+        margin-bottom: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        border: 1px solid #eee;
+        max-width: 400px;
+        -moz-box-shadow: inset 0 0 1px 0 #f6f6f6;
+        -webkit-box-shadow: inset 0 0 1px 0 #f6f6f6;
+        box-shadow: inset 0 0 1px 0 #f6f6f6;
     }
     .destroy, .add {
         margin-bottom: 0;
@@ -78,7 +81,7 @@ html.hub, body.hub {
         font-size: 85%;
         background-color: transparent;
         border: 0;
-        padding: 0.1em;
+        padding: 1px;
     }
     .destroy > label > a:hover {
         color: #fff;
@@ -89,7 +92,7 @@ html.hub, body.hub {
         background-color: green;
     }
     .actions {
-        margin: 6em 0;
+        margin: 60px 0;
     }
 
     #color_swatch {
@@ -107,6 +110,6 @@ html.hub, body.hub {
     }
     code {
         font-family: menlo, monospace;
-        font-size: 1.1em;
+        font-size: 1.10px;
     }
 }

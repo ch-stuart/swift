@@ -1,3 +1,5 @@
+@import "color";
+
 body.pub {
     background-color: #FEFCFB;
     font-family: courier new, menlo, monaco;
@@ -11,10 +13,8 @@ body.pub {
         width: 98em;
     }
     #box {
-        margin: 1em auto 1em;
         border: 1px solid #BEBEBE;
-        padding: 1em;
-        width: 96em;
+        padding: 10px 0;
     }
     #page_title.logo {
         background: transparent url('/images/header-logo.gif') no-repeat;
@@ -22,41 +22,6 @@ body.pub {
         height: 110px;
         text-indent: -10000px;
     }
-    footer {
-        position: relative;
-        width: 98em;
-        margin: 0 auto;
-        padding-bottom: 10em;
-        ul {
-            padding-right: 20px;
-            line-height: 1.5;
-        }
-        li {
-            display: block;
-            float: left;
-            margin-right: 1em;
-            font-size: 1.3em;
-            a, span {
-                text-transform: uppercase;
-                font-family: helvetica neue, helvetica, arial, sans-serif;
-                color: #444;
-                text-decoration: none;
-            }
-        }
-        img {
-            position: absolute;
-            right: .5em;
-            top: 0;
-        }
-    }
-    h2,h3,h4 {
-        font-size: 2em;
-        font-weight: bold;
-    }
-    p,h2,h3,h4,ul {
-        margin-bottom: 1em;
-    }
-
     #color_swatches {
         position: fixed;
         z-index: 99999;
@@ -73,91 +38,35 @@ body.pub {
             text-shadow: 1px 1px 1px rgba(255, 255, 255, .6);
         }
     }
-    .col {
-        float: left;
-        position: relative;
-        width: 45em;
-        padding: 1.5em;
-    }
-    .col_gray {
-        background-color: #E5E5E5;
-        padding-bottom: 20em;
-    }
+    .col_gray { background-color: #E5E5E5; }
 
     #submit_order {
+        display: block;
         background: transparent url('/images/forward-shopping.gif') no-repeat;
         cursor: pointer;
         border: 0;
-        margin-top: 1em;
-        margin-left: -1em;
         width: 148px;
         height: 82px;
         font-size: 1.1em;
-        line-height: 100px;
+        line-height: 104px;
         text-align: center;
         text-transform: uppercase;
     }
-    #footer_branding {
-        margin: 0;
-        padding: 0;
-        line-height: 1;
-        #bike_btn {
-            position: absolute;
-            bottom: 5em;
-            right: 1em;
-
-            width: 116px;
-            height: 78px;
-            display: block;
-            background: transparent url('/images/bike.gif') no-repeat;
-            text-transform: uppercase;
-            line-height: 80px;
-            text-align: center;
-            font-size: 90%;
-        }
-        #logo {
-            display: block;
-
-            position: absolute;
-            bottom: 1em;
-            right: 1em;
-
-        }
+    #bike_btn {
+        width: 116px;
+        height: 78px;
+        display: block;
+        background: transparent url('/images/bike.gif') no-repeat;
+        text-transform: uppercase;
+        line-height: 80px;
+        text-align: center;
+        font-size: 90%;
     }
-
+    #logo {
+        display: block;
+    }
     a, button {
-        color: #C34093;
+        color: $hotpink;
         text-decoration: none;
     }
-
-    .fields {
-        p.label, p.input {
-            float: left;
-            line-height: 1.7;
-        }
-        p.label {
-            text-align: right;
-            margin-right: 1em;
-            width: 10em;
-        }
-        p.input {
-            width: 14em;
-        }
-        p.input.no_color_choices {
-            color: #aaa;
-            font-family: Georgia, times new roman, times, serif;
-            font-style: italic;
-        }
-        input[type=text],
-        select {
-            min-width: 200px;
-        }
-        .divider {
-            border-top: 1px dashed #ccc;
-            width: 60%;
-            margin: 0 auto 1em;
-
-        }
-    }
-
 }
