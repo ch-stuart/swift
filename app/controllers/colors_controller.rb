@@ -1,6 +1,8 @@
 class ColorsController < ApplicationController
 
   before_filter :authenticate
+  caches_page :index
+  cache_sweeper ColorSweeper
 
   def index
     @colors = Color.all

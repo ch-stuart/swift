@@ -1,22 +1,23 @@
-class ProductSweeper < ActionController::Caching::Sweeper
+class ColorSweeper < ActionController::Caching::Sweeper
 
-    observe Product
+    observe Color
 
-    def after_create(product)
-        expire_cache_for(product)
+    def after_create(color)
+        expire_cache_for(color)
     end
 
-    def after_update(product)
-        expire_cache_for(product)
+    def after_update(color)
+        expire_cache_for(color)
     end
 
-    def after_destroy(product)
-        expire_cache_for(product)
+    def after_destroy(color)
+        expire_cache_for(color)
     end
 
     private
 
-    def expire_cache_for(product)
+    def expire_cache_for(color)
+        expire_page(:controller => 'colors', :action => 'index')
         expire_page(:controller => 'products', :action => 'index')
         expire_page(:controller => 'homes', :action => 'index')
         expire_page(:controller => 'homes', :action => 'accessories')

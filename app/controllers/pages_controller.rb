@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
 
   before_filter :authenticate, :except => [ :show ]
+  caches_page :index, :show
+  cache_sweeper PageSweeper
 
   def index
     @pages = Page.all

@@ -1,6 +1,8 @@
 class CompaniesController < ApplicationController
 
   before_filter :authenticate
+  caches_page :index
+  cache_sweeper CompanySweeper
 
   def index
     @companies = Company.all

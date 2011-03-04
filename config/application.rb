@@ -37,7 +37,7 @@ module SwiftSite
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
-    config.action_controller.page_cache_directory = "#{config.root}/public/cache"
+    # config.action_controller.page_cache_directory = "#{config.root}/public/cache"
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]

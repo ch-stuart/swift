@@ -7,8 +7,6 @@ SwiftSite::Application.routes.draw do
   resources :products do
     member do
       get 'order'
-      get 'colors'
-      get 'cart'
     end
   end
 

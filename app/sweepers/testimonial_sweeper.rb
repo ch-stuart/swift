@@ -1,22 +1,23 @@
-class ProductSweeper < ActionController::Caching::Sweeper
+class TestimonialSweeper < ActionController::Caching::Sweeper
 
-    observe Product
+    observe Testimonial
 
-    def after_create(product)
-        expire_cache_for(product)
+    def after_create(testimonial)
+        expire_cache_for(testimonial)
     end
 
-    def after_update(product)
-        expire_cache_for(product)
+    def after_update(testimonial)
+        expire_cache_for(testimonial)
     end
 
-    def after_destroy(product)
-        expire_cache_for(product)
+    def after_destroy(testimonial)
+        expire_cache_for(testimonial)
     end
 
     private
 
-    def expire_cache_for(product)
+    def expire_cache_for(testimonial)
+        expire_page(:controller => 'testimonials', :action => 'index')
         expire_page(:controller => 'products', :action => 'index')
         expire_page(:controller => 'homes', :action => 'index')
         expire_page(:controller => 'homes', :action => 'accessories')
