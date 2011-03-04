@@ -11,7 +11,7 @@ application:
   personal_blog_url: http://cycleswift.wordpress.com/
   store_url: http://ww6.aitsafe.com/cf/addmulti.cfm
   store_userid: '87211780'
-  google_analytics_id: UA-21061816-2
+  google_analytics_id: UA-21808495-1
 development:
   env: development
 
