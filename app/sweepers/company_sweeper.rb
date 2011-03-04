@@ -21,7 +21,7 @@ class CompanySweeper < ActionController::Caching::Sweeper
         expire_page(:controller => 'products', :action => 'index')
         expire_page(:controller => 'homes', :action => 'index')
         expire_page(:controller => 'homes', :action => 'accessories')
-        expire_page(:controller => 'hubs', :action => 'index')
+        expire_page(:controller => 'hub', :action => 'index')
 
         Product.all.each do |product|
             expire_page(product_path(product))
