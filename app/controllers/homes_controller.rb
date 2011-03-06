@@ -6,7 +6,7 @@ class HomesController < ApplicationController
     caches_page :index, :accessories
 
     def index
-        if (request.host != "localhost")
+        if (request.host == "builtbyswift.com")
             render :text => 'built by swift'
             return
         end
