@@ -23,7 +23,7 @@
 </div>
 <div class="grid_13 omega photos">
     <% @products.each do |product| %>
-        <% photo_url = Product.get_photo_by_id product.flickr_photo %>
+        <% photo_url = Product.get_photo_by_id(product.flickr_photo, "Medium") %>
         <div class="photo" id="photo<%= product.id %>">
             <img src="<%= photo_url %>" width="510">
         </div>

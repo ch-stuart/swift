@@ -1,10 +1,9 @@
 @import "color";
+@import "fx";
 
 body.pub {
     #box {
-        -webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-        -moz-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        @include boxshadow;
     }
 
     .content_wrapper {
@@ -17,6 +16,7 @@ body.pub {
         position: relative;
         .content_wrapper {
             .content {
+                min-height: 500px;
                 padding-bottom: 120px;
                 background-color: $background_gray;
             }

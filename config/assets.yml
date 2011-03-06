@@ -23,6 +23,7 @@ stylesheets:
     - public/stylesheets/hub.css
     - public/stylesheets/homes.css
     - public/stylesheets/pages.css
+    - public/stylesheets/accessories.css
     - public/stylesheets/slideshow.css
     - public/stylesheets/logo.css
     - public/stylesheets/private.css
