@@ -10,19 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110303080831) do
+ActiveRecord::Schema.define(:version => 20110306043421) do
 
   create_table "colors", :force => true do |t|
     t.string   "title"
     t.string   "hex"
+    t.string   "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "price"
   end
 
   create_table "colors_parts", :id => false, :force => true do |t|
-    t.integer "part_id"
-    t.integer "color_id"
+    t.integer  "part_id"
+    t.integer  "color_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "companies", :force => true do |t|
@@ -44,19 +46,19 @@ ActiveRecord::Schema.define(:version => 20110303080831) do
     t.text     "body"
     t.string   "path"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "video_html"
     t.string   "flickr_tag"
     t.string   "featured"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "parts", :force => true do |t|
     t.string   "title"
     t.string   "price"
+    t.integer  "product_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "product_id"
   end
 
   create_table "products", :force => true do |t|
@@ -64,24 +66,25 @@ ActiveRecord::Schema.define(:version => 20110303080831) do
     t.text     "description"
     t.string   "flickr_tag"
     t.text     "specs"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "status"
     t.string   "price"
     t.string   "kind"
     t.string   "short_title"
     t.string   "humane_price"
     t.string   "flickr_photo"
+    t.string   "flickr_illustration"
     t.string   "question"
     t.string   "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sizes", :force => true do |t|
     t.string   "title"
     t.string   "price"
+    t.integer  "product_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "product_id"
   end
 
   create_table "testimonials", :force => true do |t|
