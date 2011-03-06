@@ -85,6 +85,7 @@
             function reset() {
                 $('.photo').hide()
                 $('.description').hide()
+                $('nav a').removeClass('active')
             }
             function init() {
                 reset()
@@ -94,6 +95,7 @@
 
             $('nav a.toggle').click(function(e){
                 reset()
+                $(this).addClass('active')
                 var photo = $(this).attr('data-photo');
                 var description = $(this).attr('data-description');
                 $(description).fadeIn()
