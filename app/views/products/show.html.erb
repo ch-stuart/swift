@@ -34,17 +34,19 @@
                   <%= @product.specs %>
                 </p>
                 <% if @product.testimonials.present? %>
-                    <h3>
-                        Testimonials
-                    </h3>
-                    <% @product.testimonials.each do |testimonial| %>
-                        <p>
-                            <%= testimonial.body %>
-                        </p>
-                        <p>
-                            &mdash; <%= testimonial.author %>
-                        </p>
-                    <% end %>
+                    <div id="testimonials">
+                        <h3>
+                            Testimonials
+                        </h3>
+                        <% @product.testimonials.each do |testimonial| %>
+                            <p class="testimonial_body">
+                                <%= testimonial.body %>
+                            </p>
+                            <p class="testimonial_author">
+                                &mdash; <%= testimonial.author %>
+                            </p>
+                        <% end %>
+                    </div>
                 <% end %>
                 <div class="grid_6 prefix_2 alpha omega">
                     <p id="design_your_bags">

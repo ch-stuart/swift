@@ -13,7 +13,8 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
     @company = Company.first
-    @illustration = Product.get_photo_by_id("5486540020", "Medium")
+    y @product.flickr_illustration
+    @illustration = Product.get_photo_by_id(@product.flickr_illustration, "Medium")
   end
 
   def order
