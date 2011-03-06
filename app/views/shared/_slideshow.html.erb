@@ -1,63 +1,109 @@
-<%= content_for :css do %>
-  <!--[if IE]>
-    <style>
-      .timer { display: none !important; }
-      div.caption { background:transparent; filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);zoom: 1; }
-    </style>
-  <![endif]-->
-<% end %>
-
 <% unless @photos.empty? %>
-  <div id="swift_slideshow_wrapper">
-    <div id="swift_slideshow">
-      <% @photos.each_key do |photo| %>
-        <%
-          if @photos[photo]['large_height'] == "640"
-            width = "283px"
-            height = "426px"
-          else
-            width = "640px"
-            height = "426px"
-          end
+    <div id="swift_slideshow_wrapper">
+        <div id="swift_slideshow">
+            <% @photos.each_with_index do |(photo,key),idx| %>
+                <%
+                    if @photos[photo]['large_height'] == "640"
+                        width = "283px"
+                        height = "426px"
+                    else
+                        width = "640px"
+                        height = "426px"
+                    end
+                %>
+                <div id="photo<%= @photos[photo]['id'] -%>"
+                     data-idx="<%= idx %>"
+                     class="photo"
+                     style="background-image: url(<%= @photos[photo]['large'] -%>);
+                        background-size: <%= width -%> <%= height -%>;
+                        -moz-background-size: <%= width -%> <%= height -%>;
+                        -webkit-background-size: <%= width -%> <%= height -%>;"
 
-        %>
-        <div
-          style="
-            background-image: url(<%= @photos[photo]['large'] -%>);
-            background-size: <%= width -%> <%= height -%>;
-            -moz-background-size: <%= width -%> <%= height -%>;
-            -webkit-background-size: <%= width -%> <%= height -%>;"
-          id="photo_<%= @photos[photo]['id'] -%>"
-          data-text="<%= @photos[photo]['title'].empty? ? 'Untitled' : @photos[photo]['title'] %>"
-          data-caption="#photo_caption_<%= @photos[photo]['id'] -%>"
+                        data-text="<%= @photos[photo]['title'].empty? ? 'Untitled' : @photos[photo]['title'] %>"
+                        data-caption="#photo_caption_<%= @photos[photo]['id'] -%>">
+                </div>
+                <div class="description" id="description<%= @photos[photo]['id'] -%>">
+                    <h4>
+                        <%= @photos[photo]['title'].empty? ? 'Untitled' : @photos[photo]['title'] -%>
+                    </h4>
+                    <div class="photo_description">
+                        <%= raw @photos[photo]['description'] -%>
+                    </div>
+                    <p>
+                        <a href="<%= @photos[photo]['flickr_url'] -%>">
+                            view on Flickr ->
+                        </a>
+                    </p>
+                    <div class="photo_nav">
+                        <div class="goto next" data-goto="<%= (idx.to_i + 1) %>">
+                            &#x2192;
+                        </div>
+                        <div class="goto previous" data-goto="<%= (idx.to_i - 1) %>">
+                            &#x2190;
+                        </div>
+                    </div>
+                </div>
+            <% end -%>
+            <div class="clear"></div>
+            <nav>
+                <% @photos.each_key do |photo| %>
+                    <div class="grid_3 alpha omega">
+                        <%= link_to "#{@photos[photo]['title'].empty? ? 'Untitled' : @photos[photo]['title']}",
+                                    @photos[photo]['flickr_url'],
+                                    'data-photo' => "#photo#{@photos[photo]['id']}",
+                                    'data-description' => "#description#{@photos[photo]['id']}",
+                                    :class => 'toggle eql_col' %>
+                    </div>
+                <% end %>
+                <div class="clear"></div>
+            </nav>
         </div>
-        <span class="orbit-caption" id="photo_caption_<%= @photos[photo]['id'] -%>">
-          <b>
-            <%= @photos[photo]['title'].empty? ? 'Untitled' : @photos[photo]['title'] -%>
-          </b>
-          <%= raw @photos[photo]['description'] -%>
-          <a href="<%= @photos[photo]['flickr_url'] -%>">
-            View on Flickr
-          </a>
-        </span>
-      <% end -%>
     </div>
-  </div>
-  <br class="clear">
+    <div class="clear"></div>
 <% else %>
   <img src="http://placehold.it/420x300">
 <% end %>
 
 <%= content_for :js do %>
   <script>
-    $(window).load(function() {
-      $('#swift_slideshow').orbit({
-        bullets: true,
-        bulletText: true,
-        timer: false,
-        directionalNav: false,
-        captions: true
-      });
+    $(document).ready(function() {
+        function reset() {
+            $('.photo').hide()
+            $('.description').hide()
+        }
+        function init() {
+            reset()
+            $('.photo').first().show()
+            $('.description').first().show()
+            
+            $('#swift_slideshow_wrapper nav').hide()
+        }
+
+        $('nav a.toggle').click(function(e){
+            reset()
+            var photo = $(this).attr('data-photo')
+            var description = $(this).attr('data-description')
+            $(description).fadeIn()
+            $(photo).fadeIn()
+            e.preventDefault()
+        })
+
+        var photos_count = $('.photo').size() - 1
+
+        $('.goto').click(function() {
+            reset()
+            var idx = $(this).data('goto')
+            if (idx < 0) idx = photos_count
+            if (idx > photos_count) idx = 0
+
+            console.log(photos_count)
+            console.log(idx)
+
+            $(".description").eq(idx).show()
+            $(".photo").eq(idx).fadeIn(900)
+        })
+
+        init()
     });
   </script>
 <% end %>

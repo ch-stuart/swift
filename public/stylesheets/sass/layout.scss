@@ -1,0 +1,36 @@
+@import "color";
+
+body.pub {
+    #box {
+        -webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        -moz-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .content_wrapper {
+        margin: 5px 0;
+        .content {
+            padding: 5px;
+        }
+    }
+    .right_col {
+        .content_wrapper {
+            .content {
+                background-color: $background_gray;
+            }
+        }
+    }
+
+
+    #bike_btn, #logo {
+        float: right;
+        margin-top: 15px;
+        margin-right: 10px;
+    }
+    #bike_btn {
+        margin-top: 120px;
+    }
+    #logo {
+        margin-bottom: 15px;
+    }
+}

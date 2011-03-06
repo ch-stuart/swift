@@ -1,4 +1,4 @@
-body.pub {
+#page_products_show.pub {
     #product_title {
         margin-top: 20px;
     }
@@ -11,5 +11,16 @@ body.pub {
     }
     #product_logo {
         margin: 20px 0;
+    }
+    .left_col .content {
+        padding: 0;
+
+        nav {
+            padding: 5px;
+        }
+        #product_description {
+            padding: 5px;
+            margin-top: 10px;
+        }
     }
 }

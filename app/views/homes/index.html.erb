@@ -1,47 +1,107 @@
-<div id="swift_slideshow_wrapper">
-  <nav>
-    <div id="swift_slideshow">
-      <% @products.each do |product| %>
-        <% photo_url = Product.get_photo_by_id product.flickr_photo %>
-        <img src="<%= photo_url %>" data-caption="#orb_cap_<%= product.id %>" data-text="<%= product.title %>">
-      <% end %>
+<div class="grid_11">
+    <header>
+        <h1 id="page_title" class="logo">
+            <%= @title %>
+        </h1>
+    </header>
+    <div class="descriptions">
+        <% @products.each do |product| %>
+            <div class="description" id="description<%= product.id %>">
+                <div class="content">
+                    <h2>
+                        <%= product.title %>
+                    </h2>
+                    <%= raw md truncate(product.description, :length => 420) %>
+                    <p>
+                        <%= link_to "read more ->", product %>
+                    </p>
+                    <p>
+                        <%= link_to "design your bags ->", order_product_path(product) %>
+                    </p>
+                </div>
+            </div>
+        <% end %>
     </div>
-  </nav>
-
-  <% @products.each do |product| %>
-    <span class="orbit-caption" id="orb_cap_<%= product.id %>">
-      <%= product.description %>
-      <%= link_to "read more ->", product %>
-    </span>
-  <% end %>
 </div>
-<br class="clear">
-
-<div id="featured_page">
-  <h3>
-    <%= @featured_page.title %>
-  </h3>
-  <article>
-    <p>
-      <%= truncate(@featured_page.body, :length => 255) %>
-    </p>
-  </article>
-  <p>
-    <%= link_to "read more ->", @featured_page %>
-  </p>
+<div class="grid_13 omega photos">
+    <% @products.each do |product| %>
+        <% photo_url = Product.get_photo_by_id product.flickr_photo %>
+        <div class="photo" id="photo<%= product.id %>">
+            <img src="<%= photo_url %>" width="510">
+        </div>
+    <% end %>
 </div>
-<br class="clear">
+<div class="clear"></div>
+<div class="grid_24">
+    <nav>
+        <% @products.each do |product| %>
+            <div class="grid_3 alpha omega">
+                <%= link_to product.short_title, product_path(product), 'data-photo' => "#photo#{product.id}", 'data-description' => "#description#{product.id}", :class => 'toggle eql_col' %>
+            </div>
+        <% end %>
+        <div class="grid_3 alpha omega">
+            <%= link_to "Accessories", accessories_path, :class => "eql_col last" %>
+        </div>
+        <div class="clear"></div>
+    </nav>
+</div>
+<div class="clear"></div>
+<div class="grid_12 suffix_1 eql_col2">
+    <article>
+        <h3>
+            <%= @featured_page.title %>
+        </h3>
+        <p>
+            <%= truncate(@featured_page.body, :length => 365) %>
+        </p>
+        <p>
+            <%= link_to "read more ->", @featured_page %>
+        </p>
+    </article>
+</div>
+<div class="grid_11 omega eql_col2">
+    <article>
+        <h3>
+            <%= @blog['title'] %>
+        </h3>
+        <p>
+            <%= raw @blog['description'] %>
+        </p>
+        <p>
+            <%= link_to "read more at the cycle swift blog ->", @blog['link'] %>
+        </p>
+    </article>
+</div>
+<div class="clear"></div>
 
 <%= content_for :js do %>
-  <script>
-    $(window).load(function() {
-      $('#swift_slideshow').orbit({
-        bullets: true,
-        bulletText: true,
-        timer: false,
-        directionalNav: false,
-        captions: true
-      });
-    });
-  </script>
+    <script>
+        $(document).ready(function() {
+            // layout
+            $('.eql_col').equalHeights()
+            $('.eql_col2').equalHeights()
+            $('.description').equalHeights()
+
+            function reset() {
+                $('.photo').hide()
+                $('.description').hide()
+            }
+            function init() {
+                reset()
+                $('.photo').first().show()
+                $('.description').first().show()
+            }
+
+            $('nav a.toggle').click(function(e){
+                reset()
+                var photo = $(this).attr('data-photo');
+                var description = $(this).attr('data-description');
+                $(description).fadeIn()
+                $(photo).fadeIn()
+                e.preventDefault()
+            })
+
+            init()
+        })
+    </script>
 <% end %>

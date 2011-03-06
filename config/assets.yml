@@ -2,26 +2,31 @@ javascripts:
   common:
     - public/javascripts/jquery.js
     - public/javascripts/rails.js
+    - public/javascripts/jquery.jgfeed.js
+    - public/javascripts/jquery.equalheights.js
     - public/javascripts/application.js
-    - public/javascripts/orbit.1.2/jquery.orbit.js
-    - public/javascripts/farbtastic/farbtastic.js
     - public/javascripts/ICanHaz.js
     - public/javascripts/product_order.js
+    - public/javascripts/farbtastic/farbtastic.js
 
 stylesheets:
   common:
     - public/stylesheets/960gs/code/css/reset.css
     - public/stylesheets/960gs/code/css/text.css
-    - public/stylesheets/960gs/code/css/960.css
+    - public/stylesheets/960gs/code/css/960_24_col.css
     - public/stylesheets/type.css
+    - public/stylesheets/layout.css
     - public/stylesheets/pub.css
-    - public/stylesheets/order_form.css
+    - public/stylesheets/order.css
     - public/stylesheets/product.css
     - public/stylesheets/footer.css
     - public/stylesheets/form.css
     - public/stylesheets/hub.css
     - public/stylesheets/homes.css
+    - public/stylesheets/pages.css
     - public/stylesheets/slideshow.css
+    - public/stylesheets/logo.css
     - public/stylesheets/private.css
+    - public/stylesheets/no_js.css
     - public/javascripts/orbit.1.2/orbit.css
     - public/javascripts/farbtastic/farbtastic.css

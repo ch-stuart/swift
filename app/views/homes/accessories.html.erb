@@ -1,10 +1,23 @@
-<h2>
-  Accessories
-</h2>
-<ul>
-  <% @accessories.each do |accessory| %>
-    <li>
-      <%= link_to accessory.title, accessory %>
-    </li>
-  <% end %>
-</ul>
+<div class="grid_24">
+    <h2>
+        Accessories
+    </h2>
+    <% @accessories.each do |accessory| %>
+        <div class="grid_8">
+            <h3>
+                <%= link_to accessory.title, accessory %>
+            </h3>
+            <%= raw md accessory.description %>
+        </div>
+    <% end %>
+</div>
+<div class="clear"></div>
+
+<%= content_for :js do %>
+    <script>
+        $(document).ready(function() {
+            $('.grid_8').first().addClass('alpha')
+            $('.grid_8:nth-child(3n+1)').addClass('omega').append("<div class='clear'></div>");
+        })
+    </script>
+<% end %>

@@ -1,0 +1,15 @@
+@import "color";
+
+#page_pages_show {
+    .content_wrapper {
+        article {
+            margin-top: 15px;
+            h2 {
+                text-transform: none;
+            }
+        }
+    }
+    .right_col .content {
+        height: 100%;
+    }
+}

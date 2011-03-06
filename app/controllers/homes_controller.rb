@@ -1,22 +1,43 @@
 class HomesController < ApplicationController
 
-  before_filter :authenticate, :except => [ :index, :accessories ]
-  caches_page :index, :accessories
+    require 'open-uri'
 
-  def index
-    return render :text => 'built by swift' if (request.host != "localhost")
+    before_filter :authenticate, :except => [ :index, :accessories ]
+    caches_page :index, :accessories
 
-    @pages = Page.find_all_by_status('Public')
-    @featured_page = Page.find_by_featured('Featured')
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-    @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
-    @company = Company.first
-  end
+    def index
+        if (request.host != "localhost")
+            render :text => 'built by swift'
+            return
+        end
 
-  def accessories
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-    @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
-    @company = Company.first
-  end
+        @pages = Page.find_all_by_status('Public')
+        @featured_page = Page.find_by_featured('Featured')
+        @products = Product.where(:status => 'Public', :kind => 'Product')
+        @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
+        @company = Company.first
 
+        @blog = get_latest_blog_post
+    end
+
+    def accessories
+        @products = Product.where(:status => 'Public', :kind => 'Product')
+        @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
+        @company = Company.first
+    end
+
+    private
+
+    def get_latest_blog_post
+        @blog = {}
+
+        xml = open("http://cycleswift.wordpress.com/feed/")
+        doc = Nokogiri::XML(xml)
+
+        @blog['title'] = doc.at_css("rss channel item title").text
+        @blog['link'] = doc.at_css("rss channel item link").text
+        @blog['description'] = doc.at_css("rss channel item description").text
+
+        @blog
+    end
 end

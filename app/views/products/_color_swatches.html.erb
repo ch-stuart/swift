@@ -1,0 +1,10 @@
+<ul id="color_swatches">
+    <li style="background-color: #ccc;">
+        Swift Colors:
+    </li>
+    <% @colors.each do |color| %>
+        <li style="background-color: <%= color.hex %>">
+            <%= color.title %>
+        </li>
+    <% end %>
+</ul>

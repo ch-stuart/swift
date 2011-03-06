@@ -1,0 +1,8 @@
+#no_js_notice {
+    background-color: yellow;
+    padding: 1em;
+    display: none;
+}
+.no-js #no_js_notice {
+    display: block;
+}

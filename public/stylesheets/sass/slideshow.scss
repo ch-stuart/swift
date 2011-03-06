@@ -1,38 +1,36 @@
-#swift_slideshow_wrapper {
-    #swift_slideshow {
-        img,
-        div { display: none; }
+@import "color";
 
-        div {
+#swift_slideshow_wrapper {
+    margin-top: 5px;
+    #swift_slideshow {
+        background-color: #111;
+
+        .photo,
+        .description {
+            display: none;
+        }
+        .photo {
             background-position: center;
             background-repeat: no-repeat;
-            width: 640px;
-            height: 426px;
-            background-color: #000;
+            width: 470px;
+            height: 380px;
         }
-    }
-    .orbit-caption {
-        a, a:visited {
-            text-decoration: none;
-            color: #fff;
-        }
-    }
-    ul.orbit-bullets {
-        position: static;
-        left: 0;
-        margin-left: 0;
-        li.has-text:first-child {
-            border-left: 1px dashed #333;
-        }
-        li.has-text {
-            display: block;
-            float: left;
-            width: 7em;
-            border: 1px dashed #333;
-            border-width: 0 1px 0 0;
-            margin: 0;
-            padding: .8em;
-            font-size: 1.3em;
+        .description {
+            margin: 0 0 5px;
+            font-family: helvetica, sans-serif;
+            padding: 5px;
+            background-color: $background_gray;
+            position: relative;
+            .photo_nav {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                font-size: 16px;
+                font-weight: bold;
+                div {
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

@@ -9,48 +9,61 @@
     </p>
 <% end %>
 
-<div class="grid_8">
-    <%= render :partial => 'shared/slideshow' %>
-    <p class="product_description" style="margin-top: 10px;">
-        <%= @product.description %>
-    </p>
-</div>
-<div class="grid_8 col_gray">
-    <div style="padding: 10px 0 0 10px;">
-        <img src="http://placehold.it/440x420">
-        <h2 id="product_title">
-            <%= @product.title %>
-        </h2>
-        <h3 id="humane_price">
-            <%= @product.humane_price %>
-        </h3>
-        <p>
-          <%= @product.specs %>
-        </p>
-        <% if @product.testimonials.present? %>
-            <h3>
-                Testimonials
-            </h3>
-            <% @product.testimonials.each do |testimonial| %>
-                <p>
-                    <%= testimonial.body %>
-                </p>
-                <p>
-                    &mdash; <%= testimonial.author %>
-                </p>
-            <% end %>
-        <% end %>
-        <div class="grid_6 prefix_2 alpha omega">
-            <p id="design_your_bags">
-                <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
+<div class="grid_12 left_col">
+    <div class="content_wrapper">
+        <div class="content">
+            <%= render :partial => 'shared/slideshow' %>
+            <p id="product_description">
+                <%= @product.description %>
             </p>
         </div>
-        <div class="grid_3 prefix_5 alpha omega">
+    </div>
+</div>
+<div class="grid_12 right_col">
+    <div class="content_wrapper">
+        <div class="content">
+            <img src="http://placehold.it/460x420">
+            <h2 id="product_title">
+                <%= @product.title %>
+            </h2>
+            <h3 id="humane_price">
+                <%= @product.humane_price %>
+            </h3>
+            <p>
+              <%= @product.specs %>
+            </p>
+            <% if @product.testimonials.present? %>
+                <h3>
+                    Testimonials
+                </h3>
+                <% @product.testimonials.each do |testimonial| %>
+                    <p>
+                        <%= testimonial.body %>
+                    </p>
+                    <p>
+                        &mdash; <%= testimonial.author %>
+                    </p>
+                <% end %>
+            <% end %>
+            <div class="grid_6 prefix_2 alpha omega">
+                <p id="design_your_bags">
+                    <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
+                </p>
+            </div>
+            <div class="clear"></div>
             <%= link_to "Back to Bags", root_path, :id => "bike_btn" %>
-        </div>
-        <div class="grid_4 prefix_4 alpha omega" id="product_logo">
+            <div class="clear"></div>
             <%= image_tag "footer-logo.gif", :id => "logo" %>
+            <div class="clear"></div>
         </div>
     </div>
 </div>
 <div class="clear"></div>
+
+<%= content_for :js do %>
+    <script>
+        $(window).load(function() {
+            $('.content').equalHeights()
+        })
+    </script>
+<% end %>

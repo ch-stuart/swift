@@ -19,7 +19,7 @@
   <%= yield :css -%>
   <%= csrf_meta_tag %>
 </head>
-<body class="<%= (@hub == true) ? 'hub' : 'pub' %>">
+<body class="<%= (@hub == true) ? 'hub' : 'pub' %>" id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
   <%= yield :flash %>
   <header>
     <% if false %>
@@ -28,17 +28,20 @@
       </h1>
     <% end %>
   </header>
-  <div id="box" class="container_16">
+  <div id="box" class="container_24">
     <%= yield %>
   </div>
   <% unless @hub %>
-    <div class="container_16">
+    <div class="container_24">
       <%= render :partial => 'shared/footer' %>
     </div>
   <% end %>
   <%= include_javascripts :common %>
   <%= yield :js -%>
   <%= render :partial => 'shared/analytics' unless RAILS_ENV == "development" %>
+  <p id="no_js_notice" class="container_24">
+      Portions of this site require javascript. You should turn it on!
+  </p>
 </body>
 </html>
 

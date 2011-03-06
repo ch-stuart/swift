@@ -2,6 +2,7 @@ module Flickr
 
   def get_photos_for_tag obj
     return [] if obj.flickr_tag.nil?
+    return [] if obj.flickr_tag.empty?
 
     Rails.logger.info "=> get_photos_for_tag"
 
@@ -10,8 +11,6 @@ module Flickr
     flickr.photos.search(:user_id => APP_CONFIG['flickr_user_id'], :tags => obj.flickr_tag).each do |p|
 
       Rails.logger.info "=> get_photos_for_tag: flickr.photos.search"
-
-      y p
 
       info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
 
