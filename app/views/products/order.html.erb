@@ -31,22 +31,22 @@
                 <% end %>
                 <input type="hidden" name="qty1" value="1">
                 <div id="parts"></div>
-                <h3>
+                <h2>
                     <%= @product.title %>
-                </h3>
+                </h2>
                 <p>
                     <%= @product.description %>
                 </p>
                 <% if @product.sizes.present? %>
-                    <p>
+                    <h3>
                         <% @product.sizes.each do |size| %>
                             <%= size.title %>: $<%= size.price %><br>
                         <% end %>
-                    </p>
+                    </h3>
                 <% else %>
-                    <p>
-                        $<%= @product.price %>
-                    </p>
+                    <h3>
+                        <%= @product.humane_price %>
+                    </h3>
                 <% end %>
                 <h3>
                     Specs
