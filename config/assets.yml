@@ -2,7 +2,6 @@ javascripts:
   common:
     - public/javascripts/jquery.js
     - public/javascripts/rails.js
-    - public/javascripts/jquery.jgfeed.js
     - public/javascripts/jquery.equalheights.js
     - public/javascripts/application.js
     - public/javascripts/ICanHaz.js
@@ -28,5 +27,4 @@ stylesheets:
     - public/stylesheets/logo.css
     - public/stylesheets/private.css
     - public/stylesheets/no_js.css
-    - public/javascripts/orbit.1.2/orbit.css
     - public/javascripts/farbtastic/farbtastic.css
