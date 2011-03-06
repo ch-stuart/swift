@@ -1,10 +1,11 @@
-<ul id="color_swatches">
-    <li style="background-color: #ccc;">
-        Swift Colors:
-    </li>
+<h3>
+    Colors
+</h3>
+<div id="color_swatches">
     <% @colors.each do |color| %>
-        <li style="background-color: <%= color.hex %>">
+        <div class="grid_2 alpha omega" style="background-color: <%= color.hex %>">
             <%= color.title %>
-        </li>
+        </div>
     <% end %>
-</ul>
+</div>
+

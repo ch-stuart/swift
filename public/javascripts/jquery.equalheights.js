@@ -26,8 +26,45 @@
 			}
 		});
 		if((maxHeight) && tallest > maxHeight) tallest = maxHeight;
+        // fix an issue where if the columns where extremely tall, the height is
+        // not high enough
+		if (tallest > 300) tallest = tallest + 80;
+        // set min-height instead of height. this is less scrollbar prone and 
+        // we don't care about IE.
 		return this.each(function() {
-			$(this).height(tallest).css("overflow","auto");
+			$(this).css({
+			    "min-height": tallest,
+			    "overflow-y":"auto",
+			    "overflow-x": "auto"
+			});
 		});
 	}
 })(jQuery);
+
+
+// Changes made to this plugin:
+// \ No newline at end of file
+// diff --git a/public/javascripts/jquery.equalheights.js b/public/javascripts/jquery.equalheights.js
+// index c5733e8..187f2e5 100644
+// --- a/public/javascripts/jquery.equalheights.js
+// +++ b/public/javascripts/jquery.equalheights.js
+// @@ -26,8 +26,17 @@
+//              }
+//          });
+//          if((maxHeight) && tallest > maxHeight) tallest = maxHeight;
+// +        // fix an issue where if the columns where extremely tall, the height is
+// +        // not high enough
+// +        if (tallest > 300) tallest = tallest + 80;
+// +        // set min-height instead of height. this is less scrollbar prone and 
+// +        // we don't care about IE.
+//          return this.each(function() {
+// -            $(this).height(tallest).css("overflow","auto");
+// +            $(this).css({
+// +                "min-height": tallest,
+// +                "overflow-y":"auto",
+// +                "overflow-x": "auto"
+// +            });
+//          });
+//      }
+//  })(jQuery);
+// \ No newline at end of file

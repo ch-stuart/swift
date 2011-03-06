@@ -19,9 +19,15 @@
             @include boxshadow;
         }
     }
-    .grid_24 {
-        position: relative;
-        padding-bottom: 240px;
+    #bike_btn {
+        margin-bottom: 10px;
+        padding-left: 5px;
+        margin-top: 50px;
     }
+    #logo {
+        padding-left: 24px;
+        padding-bottom: 25px;
+    }
+
 
 }

@@ -13,6 +13,9 @@
     <div class="content_wrapper">
         <div class="content">
             <%= render :partial => 'shared/slideshow' %>
+            <div class="text_content">
+                <%= render :partial => 'color_swatches' %>
+            </div>
         </div>
     </div>
 </div>
@@ -142,7 +145,6 @@
                             <div class="divider"></div>
                         <% end %>
                     </div>
-                    <%= render :partial => 'color_swatches' %>
                 <% end %>
                 <div class="fields">
                     <p class="label"></p>
@@ -155,10 +157,7 @@
                 </div>
             </form>
             <div class="clear"></div>
-            <%= link_to "Back to Bags", root_path, :id => "bike_btn" %>
-            <div class="clear"></div>
-            <%= image_tag "footer-logo.gif", :id => "logo", :style => "float: right" %>
-            <div class="clear"></div>
+            <%= render :partial => 'shared/right_col_footer_nav' %>
         </div>
     </div>
 </div>

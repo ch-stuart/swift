@@ -1,17 +1,18 @@
 @import "color";
 
 #page_pages_show {
-    .content_wrapper {
-        #swift_slideshow_wrapper {
-            margin-bottom: 15px;
-        }
-        article {
-            h2 {
-                text-transform: none;
+    .left_col {
+        #swift_slideshow_wrapper { margin-bottom: 15px; }
+        .content {
+            padding: 0;
+            .text_content {
+                padding: 0 10px;
+                article h2 { text-transform: none; }
             }
         }
     }
     .right_col .content {
-        height: 100%;
+        padding: 0 !important;
+        iframe { margin: 5px 0 0 5px; }
     }
 }
