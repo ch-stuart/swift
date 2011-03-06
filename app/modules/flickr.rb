@@ -18,11 +18,14 @@ module Flickr
       photos[p.id]['description'] = info['description']
       photos[p.id]['title'] = info['title']
       photos[p.id]['flickr_url'] = info['urls'][0]['_content']
-      photos[p.id]['square_thumb'] = FlickRaw.url_s(info)
+      # # photos[p.id]['square_thumb'] = FlickRaw.url_s(info)
+      # # photos[p.id]['medium'] = FlickRaw.url_m(info)
+      # # 500 x 333
+      # photos[p.id]['large'] = FlickRaw.url(info)
 
       # flickraw doesn't provide an url helper for the largest available size, so get it the long way
       sizes = flickr.photos.getSizes :photo_id => p.id
-      large_info = sizes.find {|s| s.label == 'Medium 640' }
+      large_info = sizes.find {|s| s.label == 'Medium' }
 
       unless large_info.nil?
         photos[p.id]['large'] = large_info.source
@@ -44,10 +47,10 @@ module Flickr
     return "" if id.nil?
 
     sizes = flickr.photos.getSizes :photo_id => id
-    medium_640 = sizes.find do |size|
-      size.label == 'Medium 640'
+    large = sizes.find do |size|
+      size.label == 'Large'
     end
-    medium_640.source
+    large.source
   end
 
 end

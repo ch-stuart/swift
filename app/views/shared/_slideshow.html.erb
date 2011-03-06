@@ -3,12 +3,12 @@
         <div id="swift_slideshow">
             <% @photos.each_with_index do |(photo,key),idx| %>
                 <%
-                    if @photos[photo]['large_height'] == "640"
-                        width = "283px"
-                        height = "426px"
+                    if @photos[photo]['large_height'] == "500"
+                        width = "265px"
+                        height = "353px"
                     else
-                        width = "640px"
-                        height = "426px"
+                        width = "470px"
+                        height = "353px"
                     end
                 %>
                 <div id="photo<%= @photos[photo]['id'] -%>"

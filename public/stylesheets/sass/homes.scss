@@ -30,11 +30,15 @@
     article, .description .content{
         padding: 10px;
     }
+    .description p:last-child {
+        margin-bottom: 5px;
+    }
     .grid_12.suffix_1 {
         border-right: 1px dashed $hotpink;
     }
     .photos {
         margin-top: 5px;
+        background-color: #111;
     }
     .photo {
         background-color: #111;

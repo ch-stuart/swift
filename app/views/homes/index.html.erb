@@ -11,11 +11,9 @@
                     <h2>
                         <%= product.title %>
                     </h2>
-                    <%= raw md truncate(product.description, :length => 420) %>
+                    <%= raw md truncate(product.description, :length => 320) %>
                     <p>
                         <%= link_to "read more ->", product %>
-                    </p>
-                    <p>
                         <%= link_to "design your bags ->", order_product_path(product) %>
                     </p>
                 </div>
@@ -89,6 +87,7 @@
             }
             function init() {
                 reset()
+                $('.toggle').first().addClass('active')
                 $('.photo').first().show()
                 $('.description').first().show()
             }
@@ -98,8 +97,8 @@
                 $(this).addClass('active')
                 var photo = $(this).attr('data-photo');
                 var description = $(this).attr('data-description');
-                $(description).fadeIn()
-                $(photo).fadeIn()
+                $(description).show()
+                $(photo).fadeIn(5000)
                 e.preventDefault()
             })
 
