@@ -1,6 +1,8 @@
 SwiftSite::Application.routes.draw do
 
+  get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
+
 
   resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials
 
