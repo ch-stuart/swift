@@ -2,8 +2,10 @@
 
 #page_pages_show {
     .content_wrapper {
+        #swift_slideshow_wrapper {
+            margin-bottom: 15px;
+        }
         article {
-            margin-top: 15px;
             h2 {
                 text-transform: none;
             }
