@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
     @company = Company.first
+    @illustration = Product.get_photo_by_id "5486540020"
   end
 
   def order

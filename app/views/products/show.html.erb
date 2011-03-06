@@ -22,39 +22,41 @@
 <div class="grid_12 right_col">
     <div class="content_wrapper">
         <div class="content">
-            <img src="http://placehold.it/460x420">
-            <h2 id="product_title">
-                <%= @product.title %>
-            </h2>
-            <h3 id="humane_price">
-                <%= @product.humane_price %>
-            </h3>
-            <p>
-              <%= @product.specs %>
-            </p>
-            <% if @product.testimonials.present? %>
-                <h3>
-                    Testimonials
+            <div id="illustration" style="background-image: url('<%= @illustration %>')"></div>
+            <div class="text_content">
+                <h2 id="product_title">
+                    <%= @product.title %>
+                </h2>
+                <h3 id="humane_price">
+                    <%= @product.humane_price %>
                 </h3>
-                <% @product.testimonials.each do |testimonial| %>
-                    <p>
-                        <%= testimonial.body %>
-                    </p>
-                    <p>
-                        &mdash; <%= testimonial.author %>
-                    </p>
-                <% end %>
-            <% end %>
-            <div class="grid_6 prefix_2 alpha omega">
-                <p id="design_your_bags">
-                    <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
+                <p>
+                  <%= @product.specs %>
                 </p>
+                <% if @product.testimonials.present? %>
+                    <h3>
+                        Testimonials
+                    </h3>
+                    <% @product.testimonials.each do |testimonial| %>
+                        <p>
+                            <%= testimonial.body %>
+                        </p>
+                        <p>
+                            &mdash; <%= testimonial.author %>
+                        </p>
+                    <% end %>
+                <% end %>
+                <div class="grid_6 prefix_2 alpha omega">
+                    <p id="design_your_bags">
+                        <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
+                    </p>
+                </div>
+                <div class="clear"></div>
+                <%= link_to "Back to Bags", root_path, :id => "bike_btn" %>
+                <div class="clear"></div>
+                <%= image_tag "footer-logo.gif", :id => "logo" %>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
-            <%= link_to "Back to Bags", root_path, :id => "bike_btn" %>
-            <div class="clear"></div>
-            <%= image_tag "footer-logo.gif", :id => "logo" %>
-            <div class="clear"></div>
         </div>
     </div>
 </div>

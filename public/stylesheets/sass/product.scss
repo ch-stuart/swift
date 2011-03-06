@@ -23,4 +23,21 @@
             margin-top: 10px;
         }
     }
+    .right_col .content {
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+        .text_content {
+            padding: 10px;
+        }
+    }
+    #illustration {
+        width: 470px;
+        height: 353px;
+        -webkit-background-size: 470px 353px;
+        -moz-background-size: 470px 353px;
+        background-size: 470px 353px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
 }
