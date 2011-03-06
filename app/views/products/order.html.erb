@@ -128,9 +128,9 @@
                                                     data-product="<%= color.title %>"
                                                     data-price="<%= color.price %>"
                                                     <%# The value sets the title of the part which shows up at Mal's %>
-                                                    value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.empty? %>) ">
+                                                    value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.nil? %>) ">
                                                     <%= color.title %>
-                                                    <%= "($#{color.price})" unless color.price.empty? %>
+                                                    <%= "($#{color.price})" unless color.price.nil? %>
                                                 </option>
                                             <% end %>
                                         </select>
