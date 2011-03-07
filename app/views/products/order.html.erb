@@ -35,6 +35,7 @@
                     <%= @product.title %>
                 </h2>
                 <p>
+                    <%= raw md @product.description %>
                 </p>
                 <% if @product.sizes.present? %>
                     <h3>
