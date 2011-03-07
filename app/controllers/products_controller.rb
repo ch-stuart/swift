@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   before_filter :authenticate, :except => [ :show, :order, :colors ]
-  caches_page :index, :show, :order
+  caches_page :show, :order
   cache_sweeper ProductSweeper
 
   def index

@@ -17,11 +17,8 @@ class SizeSweeper < ActionController::Caching::Sweeper
     private
 
     def expire_cache_for(size)
-        expire_page(:controller => 'sizes', :action => 'index')
-        expire_page(:controller => 'products', :action => 'index')
         expire_page(:controller => 'homes', :action => 'index')
         expire_page(:controller => 'homes', :action => 'accessories')
-        expire_page(:controller => 'hub', :action => 'index')
 
         Product.all.each do |product|
             expire_page(product_path(product))
