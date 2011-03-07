@@ -3,6 +3,7 @@ javascripts:
     - public/javascripts/jquery.js
     - public/javascripts/rails.js
     - public/javascripts/jquery.equalheights.js
+    - public/javascripts/jquery.noisy.js
     - public/javascripts/application.js
     - public/javascripts/ICanHaz.js
     - public/javascripts/product_order.js
