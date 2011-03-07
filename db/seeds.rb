@@ -121,27 +121,7 @@
 #     :price => "75.00",
 #     :kind => "Accessory"
 # )
-# Color.create(
-#     :title => "Hot Pink",
-#     :hex => "#de41a4"
-# )
-# Color.create(
-#     :title => "Black and Tan Waxy Wear",
-#     :hex => "#de41a4",
-#     :price => "25.00"
-# )
-# Color.create(
-#     :title => "Black",
-#     :hex => "#000"
-# )
-# Color.create(
-#     :title => "White",
-#     :hex => "#fff"
-# )
-# Color.create(
-#     :title => "Gray",
-#     :hex => "#aaa"
-# )
+
 Company.create(
     :title => "Swift Industries",
     :email => "info@builtbyswift.com",
@@ -156,3 +136,26 @@ Page.create(
     :status => "Public",
     :featured => "Featured"
 )
+
+Color.create( :title => "Black", :hex => "#000" )
+Color.create( :title => "White", :hex => "#fff" )
+Color.create( :title => "Yellow", :hex => "#f8e51b" )
+Color.create( :title => "Neon Green", :hex => "#78f43e" )
+Color.create( :title => "Teal", :hex => "#298e6a" )
+Color.create( :title => "Royal Blue", :hex => "#2312a5" )
+Color.create( :title => "Gray", :hex => "#cac9cf" )
+Color.create( :title => "Brown", :hex => "#473029" )
+Color.create( :title => "Burgundy", :hex => "#771830" )
+Color.create( :title => "Purple", :hex => "#52206a" )
+Color.create( :title => "Red", :hex => "#aa0909" )
+Color.create( :title => "Burnt Orange", :hex => "#c7390a" )
+Color.create( :title => "Hunter Orange", :hex => "#ff4100" )
+Color.create( :title => "Field Tan Waxed Canvas", :hex => "#7e6211" )
+Color.create( :title => "Olive", :hex => "#3e3b19" )
+Color.create( :title => "Hot Pink", :hex => "#f0248b" )
+Color.create( :title => "Ranger Tan Heavy Waxed Canvas", :hex => "#785c0d" )
+Color.create( :title => "Charcoal", :hex => "#31313a" )
+Color.create( :title => "Navy", :hex => "#272447" )
+Color.create( :title => "Turquoise", :hex => "#0ac2b6" )
+Color.create( :title => "Blue", :hex => "#1c31a6" )
+
