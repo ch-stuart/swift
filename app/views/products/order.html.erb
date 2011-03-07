@@ -23,14 +23,19 @@
     <div class="content_wrapper">
         <div class="content">
             <form id="order_form" method="post" action="<%= APP_CONFIG['store_url'] %>" data-count="1">
-                <%# Mal-e integration %>
+                <%# -------- START MAL's fields -------- %>
+                <%# Mal's userid %>
                 <input type="hidden" name="userid" value="<%= APP_CONFIG['store_userid'] %>">
+                <%# Mal's needs different params sent if the product has diff. prices based on size. %>
                 <% unless @product.sizes.present? %>
                     <input type="hidden" name="product1[]" value="<%= @product.title %>">
                     <input type="hidden" name="price1" value="<%= @product.price %>">
                 <% end %>
+                <%# we only send 1 product, all the time. might need to be changed in the future. %>
                 <input type="hidden" name="qty1" value="1">
+                <%# Parts fields get put in here for processing by Mal's %>
                 <div id="parts"></div>
+                <%# -------- END MAL's fields -------- %>
                 <h2>
                     <%= @product.title %>
                 </h2>
@@ -57,6 +62,9 @@
                 <% if @product.sizes.present? %>
                     <div class="fields">
                         <div class="field">
+                            <h3>
+                                Sizing
+                            </h3>
                             <p class="label">
                                 Choose your size!
                             </p>
@@ -128,9 +136,9 @@
                                                     data-product="<%= color.title %>"
                                                     data-price="<%= color.price %>"
                                                     <%# The value sets the title of the part which shows up at Mal's %>
-                                                    value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.nil? %>) ">
+                                                    value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.blank? %>) ">
                                                     <%= color.title %>
-                                                    <%= "($#{color.price})" unless color.price.nil? %>
+                                                    <%= "($#{color.price})" unless color.price.blank? %>
                                                 </option>
                                             <% end %>
                                         </select>
@@ -176,7 +184,7 @@
             $.productOrder()
         })
         $(window).load(function() {
-            this is causing misalignment
+            // this is causing misalignment
             $('.content').equalHeights(600)
         })
     </script>
