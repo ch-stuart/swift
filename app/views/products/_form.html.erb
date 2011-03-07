@@ -29,6 +29,7 @@
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
+    <%= render :partial => 'shared/markdown_hint' %>
   </div>
   <div class="field">
     <%= f.label :price %><br />
@@ -68,6 +69,7 @@
   <div class="field">
     <%= f.label :specs %><br />
     <%= f.text_area :specs %>
+    <%= render :partial => 'shared/markdown_hint' %>
   </div>
   <div class="field">
     <%= f.label "Custom order question" %><br />

@@ -28,9 +28,12 @@
   <div class="field">
     <%= f.label :price %><br>
     <%= f.text_field :price %>
+    <p class="hint">
+        ex: 150.00
+    </p>
   </div>
   <div class="field">
-    <%= f.label :colors, "Available in the following colors" %><br>
+    <%= f.label :colors, "Available in the following colors", :class => "available_in_the_following_colors" %><br>
     <% Color.all.each do |color| %>
       <label>
         <%
@@ -48,7 +51,7 @@
           <%= check_box_tag "#{obj_name}[color_ids][]", color.id, match %>
         <% end %>
         <%= color.title %>
-        <% unless color.price.nil? %>
+        <% unless color.price.blank? %>
           $<%= color.price %>
         <% end %>
       </label>
