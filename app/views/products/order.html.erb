@@ -35,7 +35,6 @@
                     <%= @product.title %>
                 </h2>
                 <p>
-                    <%= @product.description %>
                 </p>
                 <% if @product.sizes.present? %>
                     <h3>
@@ -53,6 +52,7 @@
                 </h3>
                 <p>
                     <%= @product.specs %>
+                    <%= raw md @product.specs %>
                 </p>
                 <% if @product.sizes.present? %>
                     <div class="fields">
