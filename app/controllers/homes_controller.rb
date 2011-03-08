@@ -6,11 +6,6 @@ class HomesController < ApplicationController
     caches_page :index, :accessories
 
     def index
-        if (request.host == "builtbyswift.com")
-            render :text => 'built by swift'
-            return
-        end
-
         @pages = Page.find_all_by_status('Public')
         @featured_page = Page.find_by_featured('Featured')
         @products = Product.where(:status => 'Public', :kind => 'Product')
