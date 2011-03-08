@@ -48,8 +48,10 @@
     }
     
     $.productOrder = function() {
-        handlers();
-        increment_count();
+        $(document).ready(function() {
+            handlers();
+            increment_count();
+        });
     };
 
 })(jQuery);

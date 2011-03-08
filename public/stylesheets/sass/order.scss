@@ -11,7 +11,10 @@
     .right_col {
         .content_wrapper {
             .content {
-                padding: 10px;
+                padding: 0;
+                .text_content {
+                    padding: 10px;
+                }
             }
         }
     }
