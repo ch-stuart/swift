@@ -16,18 +16,22 @@ body.pub {
         font-size: 14px;
     }
     #submit_order {
+        margin: 0;
+        padding: 0;
+        border: 0;
         display: block;
         background: transparent url('/images/forward-shopping.gif') no-repeat;
         cursor: pointer;
-        border: 0;
-        margin: 0;
-        padding: 0;
         width: 148px;
         height: 82px;
-        line-height: 1.5;
-        padding-top: 21px;
         text-align: center;
         text-transform: uppercase;
+    }
+    a#submit_order {
+        line-height: 103px;
+    }
+    button#submit_order {
+        padding-top: 21px;
     }
     #bike_btn {
         background: transparent url('/images/bike.gif') no-repeat;
