@@ -36,8 +36,6 @@
     });
 
     $.slideshow = function() {
-        $(document).ready(function() {
-            init();
-        });
+        init();
     };
 })(jQuery);

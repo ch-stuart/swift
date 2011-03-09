@@ -66,6 +66,8 @@
 
 <%= content_for :js do %>
   <script>
-    $.slideshow();
+    $(document).ready(function() {
+        $.slideshow();
+    });
   </script>
 <% end %>
