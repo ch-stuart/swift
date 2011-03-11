@@ -1,5 +1,6 @@
 javascripts:
   common:
+    - public/javascripts/console.js
     - public/javascripts/jquery.js
     - public/javascripts/rails.js
     - public/javascripts/jquery.equalheights.js

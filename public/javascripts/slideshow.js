@@ -28,9 +28,6 @@
         if (idx < 0) idx = photos_count;
         if (idx > photos_count) idx = 0;
 
-        console.log(photos_count);
-        console.log(idx);
-
         $(".description").eq(idx).show();
         $(".photo").eq(idx).fadeIn(900);
     });
