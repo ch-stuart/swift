@@ -10,7 +10,8 @@ Company.create(
     :title => "Swift Industries",
     :email => "info@builtbyswift.com",
     :phone => "(206) 325.0054",
-    :address => "1422 20th AVE Seattle, WA 98122"
+    :address => "1422 20th AVE Seattle, WA 98122",
+    :description => "Swift Industries designs and handmakes custom bicycle panniers and accessories. Customers choose their bag and pannier colors and Swift Industries sews them to order. Swift Industries offers handcrafted bicycle panniers, porteur bags, bicycle saddle bags, and randonneuring bags."
 )
 Page.create(
     :title => "Our Story",
