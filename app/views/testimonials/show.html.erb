@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Body:</b>
+  <%= @testimonial.body %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= @testimonial.author %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @testimonial.product_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_testimonial_path(@testimonial) %> |
+<%= link_to 'Back', testimonials_path %>
