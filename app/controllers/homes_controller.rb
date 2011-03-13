@@ -32,6 +32,8 @@ class HomesController < ApplicationController
         @blog['title'] = doc.at_css("rss channel item title").text
         @blog['link'] = doc.at_css("rss channel item link").text
         @blog['description'] = doc.at_css("rss channel item description").text
+        img = doc.css("media|content")[1]
+        @blog['img'] = img['url']
 
         @blog
     end

@@ -1,4 +1,5 @@
 @import "color";
+@import "fx";
 
 #page_homes_index.pub {
     nav {
@@ -23,6 +24,25 @@
             background-color: $background_gray;
         }
     }
+    table.goto {
+        width: 100%;
+        td {
+            width: 50%;
+            a {
+                font-family: georgia;
+                font-weight: bold;
+                font-style: italic;
+                border: 2px dashed $hotpink;
+                padding: 4px 9px;
+                background-color: $background_gray;
+                -webkit-border-radius: 4px;
+
+            }
+        }
+        td.col2 {
+            text-align: right;
+        }
+    }
     .descriptions {
         background-color: $background_gray;
         margin-bottom: 5px;
@@ -42,5 +62,11 @@
     }
     .photo {
         background-color: #111;
+    }
+    .blog_img {
+        display: block;
+        max-width: 400px;
+        @include boxshadow;
+        margin: 0 0 10px 0;
     }
 }

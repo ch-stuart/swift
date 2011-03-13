@@ -50,7 +50,7 @@
             <%= @featured_page.title %>
         </h3>
         <p>
-            <%= truncate(@featured_page.body, :length => 365) %>
+            <%= truncate(@featured_page.body, :length => 865) %>
         </p>
         <p>
             <%= link_to "read more ->", @featured_page %>
@@ -63,6 +63,7 @@
             <%= @blog['title'] %>
         </h3>
         <p>
+            <%= image_tag @blog['img'], :class => "blog_img" %>
             <%= raw @blog['description'] %>
         </p>
         <p>
