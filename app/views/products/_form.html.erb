@@ -129,3 +129,11 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<%= content_for :js do %>
+    <script>
+        $(document).ready(function() {
+            $.toggleColors();
+        });
+    </script>
+<% end %>

@@ -75,7 +75,8 @@ html.hub, body.hub {
         margin-bottom: 0;
     }
     .destroy > label > a,
-    .add > label > a {
+    .add > label > a,
+    a.action {
         color: #aaa;
         font-family: lucida grande, sans-serif;
         font-size: 85%;

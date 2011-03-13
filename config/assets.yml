@@ -8,6 +8,7 @@ javascripts:
     - public/javascripts/ICanHaz.js
     - public/javascripts/farbtastic/farbtastic.js
     - public/javascripts/application.js
+    - public/javascripts/hub.js
     - public/javascripts/slideshow.js
     - public/javascripts/product_order.js
 
