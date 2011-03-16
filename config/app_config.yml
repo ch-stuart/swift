@@ -9,8 +9,10 @@ application:
   # flickr_api_key: ba31da6a16b01b8f30b6dbb9a6e70c29
   # flickr_shared_secret: 1776db9047fc768f
   personal_blog_url: http://cycleswift.wordpress.com/
-  store_url: http://ww6.aitsafe.com/cf/addmulti.cfm
+  store_host: http://ww6.aitsafe.com
+  add_to_cart_path: /cf/addmulti.cfm
   store_userid: '87211780'
+  review_cart_path: /cf/review.cfm?userid=
   google_analytics_id: UA-21808495-1
 development:
   env: development

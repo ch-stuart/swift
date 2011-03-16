@@ -22,13 +22,7 @@
 </head>
 <body class="<%= (@hub == true) ? 'hub' : 'pub' %>" id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
   <%= yield :flash %>
-  <header>
-    <% if false %>
-      <h1 id="page_title" class="logo">
-        <%= @title %>
-      </h1>
-    <% end %>
-  </header>
+  <%= yield :pre_box %>
   <div id="box" class="container_24">
     <%= yield %>
   </div>

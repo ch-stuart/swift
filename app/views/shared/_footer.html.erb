@@ -22,6 +22,8 @@
         <%= @company.phone %>
       </span>
     </li>
+    <li>
+      <%= link_to "Review Your Cart/Checkout", "#{APP_CONFIG['store_host']}#{APP_CONFIG['review_cart_path']}#{APP_CONFIG['store_userid']}"%>
   </ul>
   <%= image_tag "fox.gif" %>
 </footer>

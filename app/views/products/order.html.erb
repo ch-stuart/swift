@@ -3,6 +3,7 @@
         private!
     </p>
 <% end %>
+<%= render :partial => 'shared/checkout' %>
 <div class="grid_12 left_col">
     <div class="content_wrapper">
         <div class="content">
@@ -18,7 +19,7 @@
     <div class="content_wrapper">
         <div class="content">
             <div class="text_content">
-                <form id="order_form" method="post" action="<%= APP_CONFIG['store_url'] %>" data-count="1">
+                <form id="order_form" method="post" action="<%= APP_CONFIG['store_host'] %><%= APP_CONFIG['add_to_cart_path'] %>" data-count="1">
                     <%# -------- START MAL's fields -------- %>
                     <%# Mal's userid %>
                     <input type="hidden" name="userid" value="<%= APP_CONFIG['store_userid'] %>">
