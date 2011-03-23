@@ -13,10 +13,16 @@
                         <%= product.title %>
                     </h2>
                     <%= raw md truncate(product.description, :length => 320) %>
-                    <p>
-                        <%= link_to "read more ->", product %>
-                        <%= link_to "design your bags ->", order_product_path(product) %>
-                    </p>
+                    <table class="goto">
+                        <tr>
+                            <td class="col1">
+                                <%= link_to "read more ->", product %>
+                            </td>
+                            <td class="col1">
+                                <%= link_to "design your bags ->", order_product_path(product) %>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         <% end %>
