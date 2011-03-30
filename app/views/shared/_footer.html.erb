@@ -1,29 +1,57 @@
 <footer>
-  <ul>
-    <% @products.each do |product| %>
-      <li>
-        <%= link_to product.title, product %>
-      </li>
-    <% end %>
-    <li>
-      <%= link_to "Accessories", accessories_path %>
-    </li>
-    <li>
-      <%= link_to "Our Story", Page.find_by_path('our_story') %>
-    </li>
-    <li>
-      <%= link_to "blog", APP_CONFIG['personal_blog_url'] %>
-    </li>
-    <li>
-      <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] " %>
-    </li>
-    <li>
-      <span>
-        <%= @company.phone %>
-      </span>
-    </li>
-    <li>
-      <%= link_to "Review Your Cart/Checkout", "#{APP_CONFIG['store_host']}#{APP_CONFIG['review_cart_path']}#{APP_CONFIG['store_userid']}"%>
-  </ul>
-  <%= image_tag "fox.gif" %>
+    <div class="grid_6">
+        <h3>
+            Our Products
+        </h3>
+        <ul>
+            <% @products.each do |product| %>
+                <li>
+                    <%= link_to product.title, product %>
+                </li>
+            <% end %>
+            <li>
+                <%= link_to "Accessories", accessories_path %>
+            </li>
+        </ul>
+    </div>
+    <div class="grid_6">
+        <h3>
+            About Us
+        </h3>
+        <ul>
+            <li>
+                <%= link_to "Our Story", Page.find_by_path('our_story') %>
+            </li>
+            <li>
+                <%= link_to "Cycle Swift Blog", APP_CONFIG['personal_blog_url'] %>
+            </li>
+        </ul>
+    </div>
+    <div class="grid_6">
+        <h3>
+            Shop
+        </h3>
+        <ul>
+            <li>
+                <%= link_to "Review Your Cart/Checkout", "#{APP_CONFIG['store_host']}#{APP_CONFIG['review_cart_path']}#{APP_CONFIG['store_userid']}"%>
+            </li>
+        </ul>
+    </div>
+    <div class="grid_6">
+        <h3>
+            Get in Touch
+        </h3>
+        <ul>
+            <li>
+                <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] " %>
+            </li>
+            <li>
+                <span>
+                    <%= @company.phone %>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <%= image_tag "fox.gif" %>
 </footer>
