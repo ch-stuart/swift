@@ -9,4 +9,13 @@ class HubController < ApplicationController
     @company = Company.first
   end
 
+  def expire_home
+      begin
+        expire_page :controller => "homes", :action => "index"
+        render :text => "page cache cleared"
+      rescue => e
+        render :text => "page cache NOT cleared"
+        y e
+      end
+  end
 end
