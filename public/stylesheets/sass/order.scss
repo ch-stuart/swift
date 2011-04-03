@@ -1,4 +1,29 @@
 #page_products_order {
+    .handmade {
+        margin-top: 3em;
+        .label {
+            .handmade_label {
+                display: block;
+                background: transparent url('/images/scissors.png') no-repeat;
+                text-transform: lowercase;
+                text-align: center;
+                text-indent: -19px;
+                width: 121px;
+                height: 42px;
+                line-height: 67px;
+            }
+        }
+        .input {
+            width: 20em !important;
+            span {
+                display: block;
+                font-family: Lucida Grande, Sans-serif;
+                font-size: 11px;
+                color: #666;
+                line-height: 1.4 !important;
+            }
+        }
+    }
     .left_col .content {
         padding: 0;
         .text_content {
