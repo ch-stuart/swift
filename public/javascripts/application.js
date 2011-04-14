@@ -18,10 +18,10 @@ jQuery(document).ready(function($) {
         $(document.documentElement).addClass('hub');
     }
     
-    // $('body').noisy({
-    //     intensity: 0.9, 
-    //     size: 200, 
-    //     opacity: 0.035,
-    //     monochrome: false
-    // });
+    $('body').noisy({
+        intensity: 0.9, 
+        size: 200, 
+        opacity: 0.035,
+        monochrome: false
+    });
 });
