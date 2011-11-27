@@ -45,9 +45,11 @@
   <p id="no_js_notice" class="container_24">
       Portions of this site require javascript. You should turn it on!
   </p>
-  <p id="humans" class="container_24">
+  <% unless @hub %>
+    <p id="humans" class="container_24">
       This site was built by <a href="http://enure.net/portfolio">Charles Stuart</a> and designed by <a href="http://tinylittlehammers.com/">Dylan Mcconnell</a>.
-  </p>
+    </p>
+  <% end %>
 </body>
 </html>
 
