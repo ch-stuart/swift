@@ -13,6 +13,7 @@
     <%= @title %><%= ": #{@subtitle}" unless @subtitle.nil? %> | handmade bicycle panniers and accessories
   </title>
   <meta description="<%= Company.first.description if Company.first.description.present? %>">
+  <link type="text/plain" rel="author" href="http://builtbyswift.com/humans.txt">
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -43,6 +44,9 @@
   <%= render :partial => 'shared/analytics' unless RAILS_ENV == "development" %>
   <p id="no_js_notice" class="container_24">
       Portions of this site require javascript. You should turn it on!
+  </p>
+  <p id="humans" class="container_24">
+      This site was built by <a href="http://enure.net/portfolio">Charles Stuart</a> and designed by <a href="http://tinylittlehammers.com/">Dylan Mcconnell</a>.
   </p>
 </body>
 </html>
