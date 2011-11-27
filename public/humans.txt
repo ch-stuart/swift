@@ -5,5 +5,5 @@ Site: http://enure.net
 Location: Missoula, MT
 
 Designer: Dylan McConnell
-Site: http://tinylittlehammers.com/
+Site: http://tinylittlehammers.com
 Location: PDX, OR
