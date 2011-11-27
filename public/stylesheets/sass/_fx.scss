@@ -1,7 +1,13 @@
 @mixin boxshadow {
     -webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+}
+
+@mixin boxshadow2 {
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.10);
 }
 
 @mixin textshadow {
