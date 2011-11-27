@@ -30,14 +30,24 @@
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
+    <p class="hint">
+        The text that google uses for the "summary" text for the site.
+    </p>
   </div>
   <div class="field">
     <%= f.label :delivery_time %><br />
     <%= f.text_area :delivery_time %>
+    <p class="hint">
+        The "handmade takes time" text on the order page.
+    </p>
   </div>
-  <p class="hint">
-      The "handmade takes time" text on the order page.
-  </p>
+  <div class="field">
+    <%= f.label :front_door_sign %><br />
+    <%= f.text_area :front_door_sign %>
+    <p class="hint">
+        This text will appear at the top of every page of the site.
+    </p>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

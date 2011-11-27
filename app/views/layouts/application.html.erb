@@ -21,6 +21,13 @@
   <%= csrf_meta_tag %>
 </head>
 <body class="<%= (@hub == true) ? 'hub' : 'pub' %>" id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
+  <% unless @hub %>
+    <% if @company.front_door_sign.present? %>
+      <h2 class="front_door_sign">
+        <%= @company.front_door_sign %>
+      </h2>
+    <% end %>
+  <% end %>
   <%= yield :flash %>
   <%= yield :pre_box %>
   <div id="box" class="container_24">
