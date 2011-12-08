@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111127202549) do
+ActiveRecord::Schema.define(:version => 20111208042033) do
 
   create_table "colors", :force => true do |t|
     t.string   "title"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20111127202549) do
     t.text     "description"
     t.text     "delivery_time"
     t.text     "front_door_sign"
+    t.boolean  "close_shop",         :default => false,                                                    :null => false
+    t.text     "close_shop_message", :default => "The shop is currently closed. Please check back later."
   end
 
   create_table "homes", :force => true do |t|
@@ -80,6 +82,9 @@ ActiveRecord::Schema.define(:version => 20111127202549) do
     t.string   "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "for_sale",             :default => true,                                                               :null => false
+    t.boolean  "not_for_sale",         :default => false,                                                              :null => false
+    t.text     "not_for_sale_message", :default => "This product is currently not for sale. Please check back later."
   end
 
   create_table "sizes", :force => true do |t|

@@ -1,0 +1,23 @@
+<h2>
+    <%= @product.title %>
+</h2>
+<div>
+    <%= raw md @product.description %>
+</div>
+<% if @product.sizes.present? %>
+    <h3>
+        <% @product.sizes.each do |size| %>
+            <%= size.title %>: $<%= size.price %><br>
+        <% end %>
+    </h3>
+<% else %>
+    <h3>
+        <%= @product.humane_price %>
+    </h3>
+<% end %>
+<h3>
+    Specs
+</h3>
+<div>
+    <%= raw md @product.specs %>
+</div>

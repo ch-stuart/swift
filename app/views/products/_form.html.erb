@@ -93,6 +93,17 @@
     </p>
   </div>
   <div class="field">
+    <%= f.label :not_for_sale %><br />
+    <%= f.check_box :not_for_sale %>
+    <p class="hint">
+      Turn the order form off?
+    </p>
+  </div>
+  <div class="field">
+    <%= f.label :not_for_sale_message %><br />
+    <%= f.text_area :not_for_sale_message %>
+  </div>
+  <div class="field">
     <p>Sizes</p>
   </div>
   <%= f.fields_for :sizes do |sizes_fields| %>

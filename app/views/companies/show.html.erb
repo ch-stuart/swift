@@ -36,6 +36,15 @@
 </p>
 
 <p>
-  <%= link_to 'Edit', edit_company_path(@company) %> |
-  <%= link_to 'Back', companies_path %>
+  <b>Is the shop closed?</b>
+  <%= @company.close_shop %>
+</p>
+
+<p>
+  <b>Shop closed message:</b>
+  <%= @company.close_shop_message %>
+</p>
+
+<p>
+  <%= link_to 'Edit', edit_company_path(@company) %>
 </p>
