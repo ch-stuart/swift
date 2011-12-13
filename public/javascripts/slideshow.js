@@ -1,35 +1,37 @@
 ;(function($){
+	var $box = $('#swift_slideshow_wrapper');
+	
     function reset() {
-        $('.photo').hide();
-        $('.description').hide();
+        $box.find('.photo').hide();
+        $box.find('.description').hide();
     }
     function init() {
         reset();
-        $('.photo').first().show();
-        $('.description').first().show();
+        $box.find('.photo').first().show();
+        $box.find('.description').first().show();
 
-        $('#swift_slideshow_wrapper nav').hide();
+        $box.find('nav').hide();
     }
 
     $('nav a.toggle').click(function(e){
         reset();
-        var photo = $(this).attr('data-photo');
-        var description = $(this).attr('data-description');
+        var photo = $(this).data('photo');
+        var description = $(this).data('description');
         $(description).fadeIn();
         $(photo).fadeIn();
         e.preventDefault();
     });
 
-    var photos_count = $('.photo').size() - 1;
+    var photos_count = $box.find('.photo').size() - 1;
 
-    $('.goto').click(function() {
+    $box.find('.goto').click(function() {
         reset();
         var idx = $(this).data('goto');
         if (idx < 0) idx = photos_count;
         if (idx > photos_count) idx = 0;
 
-        $(".description").eq(idx).show();
-        $(".photo").eq(idx).fadeIn(900);
+        $box.find(".description").eq(idx).show();
+        $box.find(".photo").eq(idx).fadeIn(900);
     });
 
     $.slideshow = function() {

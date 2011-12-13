@@ -40,7 +40,7 @@
     </div>
   <% end %>
   <%= include_javascripts :common %>
-  <%= yield :js -%>
+  <%= yield :js %>
   <%= render :partial => 'shared/analytics' unless RAILS_ENV == "development" %>
   <p id="no_js_notice" class="container_24">
       Portions of this site require javascript. You should turn it on!

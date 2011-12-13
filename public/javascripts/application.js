@@ -13,12 +13,12 @@ function add_fields(link, association, content) {
 }
 
 jQuery(document).ready(function($) {
-    $('html').removeClass('no-js');
+    $(document.documentElement).removeClass('no-js');
     if ($(document.body).hasClass('hub')) {
         $(document.documentElement).addClass('hub');
     }
     
-    $('body').noisy({
+    $(document.body).noisy({
         intensity: 0.9, 
         size: 200, 
         opacity: 0.035,
