@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all(:order => 'kind DESC')
+    render :layout => "hub"
   end
 
   def show
@@ -13,7 +14,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product
     @company = Company.first
-    y @product.flickr_illustration
     @illustration = Product.get_photo_by_id(@product.flickr_illustration, "Medium")
   end
 

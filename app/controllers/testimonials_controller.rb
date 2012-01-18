@@ -2,6 +2,7 @@ class TestimonialsController < ApplicationController
 
   before_filter :authenticate
   cache_sweeper TestimonialSweeper
+  layout 'hub'
 
   def index
     @testimonials = Testimonial.all

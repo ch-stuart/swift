@@ -2,6 +2,7 @@ class SizesController < ApplicationController
 
   before_filter :authenticate
   cache_sweeper SizeSweeper
+  layout 'hub'
 
   def index
     @sizes = Size.all

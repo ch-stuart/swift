@@ -1,12 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  
+  layout :resolve_layout
 
   before_filter :authenticate, :except => [ :logout ]
   before_filter :title
 
   helper_method :title
 
-  private
+  protected
 
   def title
     @title = Company.first.title
@@ -22,6 +24,15 @@ class ApplicationController < ActionController::Base
       username == APP_CONFIG['user'] && password == APP_CONFIG['pass']
     end
     session[:login] = login
+  end
+
+  def resolve_layout
+    case action_name
+    when "new", "edit", "create", "update", "destroy"
+      "hub"
+    else
+      "application"
+    end
   end
 
 end

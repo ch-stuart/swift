@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   def index
     @pages = Page.all
     @subtitle = controller_name.titlecase
+    render :layout => 'hub'
   end
 
   def show

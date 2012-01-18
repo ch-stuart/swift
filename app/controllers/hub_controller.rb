@@ -1,6 +1,7 @@
 class HubController < ApplicationController
 
   before_filter :authenticate
+  layout "hub"
 
   def index
     @products = Product.all

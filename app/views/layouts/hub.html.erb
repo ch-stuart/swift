@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>
+    <%= @title %><%= ": #{@subtitle}" unless @subtitle.blank? %> | handmade bicycle panniers and accessories
+  </title>
+  <%= stylesheet_link_tag "hub" %>  
+  <%= yield :css -%>
+  <%= csrf_meta_tag %>
+</head>
+<body class="hub" id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
+  <%= yield :flash %>
+  <%= yield :pre_box %>
+  <div id="box" class="container_24">
+    <%= yield %>
+  </div>
+  <%= javascript_include_tag "hub" %>
+  <%= yield :js %>
+</body>
+</html>

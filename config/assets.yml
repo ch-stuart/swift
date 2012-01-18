@@ -1,19 +1,37 @@
+# compress_assets: always
+# package_assets: always
+
 javascripts:
-  common:
+  hub:
+    - public/javascripts/console.js
+    - public/javascripts/jquery.js
+    - public/javascripts/rails.js
+    - public/javascripts/jquery.noisy.js
+    - public/javascripts/farbtastic/farbtastic.js
+    - public/javascripts/application.js
+    - public/javascripts/hub.js
+  pub:
     - public/javascripts/console.js
     - public/javascripts/jquery.js
     - public/javascripts/rails.js
     - public/javascripts/jquery.equalheights.js
     - public/javascripts/jquery.noisy.js
     - public/javascripts/ICanHaz.js
-    - public/javascripts/farbtastic/farbtastic.js
     - public/javascripts/application.js
-    - public/javascripts/hub.js
     - public/javascripts/slideshow.js
     - public/javascripts/product_order.js
 
 stylesheets:
-  common:
+  hub:
+    - public/stylesheets/960gs/code/css/reset.css
+    - public/stylesheets/960gs/code/css/text.css
+    - public/stylesheets/960gs/code/css/960_24_col.css
+    - public/stylesheets/form.css
+    - public/stylesheets/hub.css
+    - public/stylesheets/accessories.css
+    - public/stylesheets/private.css
+    - public/javascripts/farbtastic/farbtastic.css
+  pub:    
     - public/stylesheets/960gs/code/css/reset.css
     - public/stylesheets/960gs/code/css/text.css
     - public/stylesheets/960gs/code/css/960_24_col.css
@@ -24,7 +42,6 @@ stylesheets:
     - public/stylesheets/product.css
     - public/stylesheets/footer.css
     - public/stylesheets/form.css
-    - public/stylesheets/hub.css
     - public/stylesheets/homes.css
     - public/stylesheets/pages.css
     - public/stylesheets/accessories.css
