@@ -52,7 +52,7 @@ module SwiftSite
     config.assets.version = '1.0'
     
     # heroku requires this to be false
-    # config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = false
     
     # If you have other manifests or individual stylesheets and JavaScript files to include,
     # you can add them to the precompile array:
