@@ -6,7 +6,7 @@
     <%= @title %><%= ": #{@subtitle}" unless @subtitle.blank? %> | handmade bicycle panniers and accessories
   </title>
   <%= stylesheet_link_tag "hub" %>  
-  <%= yield :css -%>
+  <%= yield :css %>
   <%= csrf_meta_tag %>
 </head>
 <body class="hub" id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">

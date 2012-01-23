@@ -8,12 +8,13 @@
 html, body {
     background-color: #fafafa;
     line-height: 1.6;
-    font-family: Georgia, sans-serif;
+    font-family: Bitstream Vera Sans, Droid Sans, Lucida Grande, sans-serif;
+    font-size: 13px;
 }
-
 #box {
     margin: 60px auto;
     position: relative;
+    padding-bottom: 100px;
 }
 th {
     border-bottom: 1px solid #ccc;
@@ -63,6 +64,10 @@ a:active {
     color: white;
     background-color: blue;
     text-decoration: none;
+}
+a:hover {
+    color: black;
+    border-color: #aaa;
 }
 .private {
     background-color: #ffa;

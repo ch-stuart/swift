@@ -1,11 +1,10 @@
 <h1>Colors</h1>
-
 <table>
   <tr>
+    <th></th>
     <th>Title</th>
-    <th>Hex</th>
     <th>Price</th>
-    <th>Swatch</th>
+    <th>Hex</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,17 +12,17 @@
 
 <% @colors.each do |color| %>
   <tr>
-    <td><%= color.title %></td>
+    <td>
+        <div style="background-color: <%= color.hex -%>; width: 40px;">&nbsp;</div>
+    </td>
+    <td> <%= link_to color.title, color %></td>
+    <td><%= "$" if color.price.present? %><%= color.price %></td>
     <td><%= color.hex %></td>
-    <td><%= color.price %></td>
-    <td style="background-color: <%= color.hex -%>">
-    <td><%= link_to 'Show', color %></td>
     <td><%= link_to 'Edit', edit_color_path(color) %></td>
     <td><%= link_to 'Destroy', color, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
-
 <p>
-  <%= link_to 'New Color', new_color_path %>
+    <%= link_to 'New Color', new_color_path %>
 </p>
