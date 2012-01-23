@@ -121,12 +121,17 @@
                                         </p>
                                         <% unless part.colors.blank? %>
                                             <p class="input">
-                                                <select name="product1[]" class="color_select" data-color="true" data-hash="<%= digest('select' + part.title) %>">
+                                                <select
+                                                    name="product1[]"
+                                                    class="color_select"
+                                                    data-hash="<%= digest('select' + part.title) %>">
                                                     <% part.colors.each do |color| %>
                                                         <option
-                                                            data-hash="<%= digest(color.title + color.id.to_s) %>"
-                                                            data-color="<%= color.title %>"
-                                                            data-price="<%= color.price %>"
+                                                            <% if color.price.present? %>
+                                                                data-hash="<%= digest(color.title + color.id.to_s) %>"
+                                                                data-color="<%= color.title %>"
+                                                                data-price="<%= color.price %>"
+                                                            <% end %>
                                                             <%# The value sets the title of the part which shows up at Mals %>
                                                             value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.blank? %>) ">
                                                             <%= color.title %>

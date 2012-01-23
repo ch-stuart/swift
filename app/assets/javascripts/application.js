@@ -12,10 +12,12 @@
 jQuery(document).ready(function($) {
     $(document.documentElement).removeClass('no-js');
 
-    $(document.body).noisy({
-        intensity: 0.9, 
-        size: 200, 
-        opacity: 0.035,
-        monochrome: false
-    });
+    if (document.location.hostname !== "localhost") {
+        $(document.body).noisy({
+            intensity: 0.9, 
+            size: 200, 
+            opacity: 0.035,
+            monochrome: false
+        });
+    }
 });

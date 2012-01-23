@@ -34,7 +34,7 @@
                     'count':       $('#order_form').data('count'),
                     'hash':        $(this).data('hash'),
                     'price':       $option.data('price'),
-                    'color':       $option.data('color'),
+                    'product':     $option.data('color'),
                     'color_hash':  $option.data('hash')
                 };
                 // remove the part, add it again below
@@ -48,7 +48,7 @@
                 if (has_been_added_already) return;
                 
                 $('#parts').append( ich.product_tmpl(opts) );
-                $.prompt("Including &ldquo;" + opts.color + "&rdquo; adds a charge of $" + opts.price + " to this bag.");
+                $.prompt("Including &ldquo;" + opts.product + "&rdquo; adds a charge of $" + opts.price + " to this bag.");
                 increment_count();
             });
 
