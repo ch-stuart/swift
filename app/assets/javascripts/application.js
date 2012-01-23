@@ -4,13 +4,14 @@
 //= require console
 //= require jquery.equalheights
 //= require jquery.noisy
+//= require jquery.impromptu
 //= require ICanHaz
 //= require slideshow
 //= require product_order
 
 jQuery(document).ready(function($) {
     $(document.documentElement).removeClass('no-js');
-    
+
     $(document.body).noisy({
         intensity: 0.9, 
         size: 200, 

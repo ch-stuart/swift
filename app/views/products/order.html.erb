@@ -1,4 +1,5 @@
 <% unless @product.public? %>
+    <%# this notifies the administrator that the product is private. %>
     <p id="private_notice">
         private!
     </p>
@@ -9,6 +10,7 @@
         <div class="content">
             <%= render :partial => 'shared/slideshow' %>
             <div class="text_content">
+                <%# TODO move color to dropdown %>
                 <%= render :partial => 'color_swatches' %>
                 <div class="clear"></div>
             </div>
@@ -19,16 +21,19 @@
     <div class="content_wrapper">
         <div class="content">
             <div class="text_content">
+                <%# if the shop is closed, don't show the order form. %>
                 <% if @company.close_shop? %>
                     <h2 class="woah">
                         <span><%= @company.close_shop_message %></span>
                     </h2>
                     <%= render 'order_marketing' %>
+                <%# if the product is not for sale, don't show the order form. %>
                 <% elsif @product.not_for_sale? %>
                     <h2 class="woah">
                         <span><%= @product.not_for_sale_message %></span>
                     </h2>
                     <%= render 'order_marketing' %>
+                <%# else, show the order form. %>    
                 <% else %>
                     <form id="order_form" method="post" action="<%= APP_CONFIG['store_host'] %><%= APP_CONFIG['add_to_cart_path'] %>" data-count="1">
                         <%# -------- START MAL's fields -------- %>
@@ -44,6 +49,7 @@
                         <%# Parts fields get put in here for processing by Mal's %>
                         <div id="parts"></div>
                         <%# -------- END MAL's fields -------- %>
+                        <%# Show the marketing text for this product %>
                         <%= render 'order_marketing' %>
                         <% if @product.sizes.present? %>
                             <div class="fields">
@@ -55,7 +61,7 @@
                                         Choose your size!
                                     </p>
                                     <p class="input">
-                                        <select name="productpr1">
+                                        <select name="productpr1" class="size_select">
                                             <% @product.sizes.each do |size| %>
                                                 <option value="<%= @product.title %>, <%= size.title %>:<%= size.price %>">
                                                     <%= size.title %> ($<%= size.price %>)
@@ -105,23 +111,23 @@
                                             <% if part.price.present? %>
                                                 <input
                                                     type="checkbox"
-                                                    class="has_price"
-                                                    data-hash="<%= digest(part.title + part.id.to_s) %>"
+                                                    class="part_checkbox"
+                                                    data-hash="<%= digest(part.title +  part.id.to_s) %>"
                                                     data-product="<%= part.title %>"
                                                     data-price="<%= part.price %>">
                                             <% end %>
                                             <%= part.title %>
                                             <%= "$#{part.price}" if part.price.present? %>
                                         </p>
-                                        <% unless part.colors.empty? %>
+                                        <% unless part.colors.blank? %>
                                             <p class="input">
-                                                <select name="product1[]" class="has_price" data-hash="<%= digest('select' + part.title) %>">
+                                                <select name="product1[]" class="color_select" data-color="true" data-hash="<%= digest('select' + part.title) %>">
                                                     <% part.colors.each do |color| %>
                                                         <option
                                                             data-hash="<%= digest(color.title + color.id.to_s) %>"
-                                                            data-product="<%= color.title %>"
+                                                            data-color="<%= color.title %>"
                                                             data-price="<%= color.price %>"
-                                                            <%# The value sets the title of the part which shows up at Mal's %>
+                                                            <%# The value sets the title of the part which shows up at Mals %>
                                                             value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.blank? %>) ">
                                                             <%= color.title %>
                                                             <%= "($#{color.price})" unless color.price.blank? %>
@@ -170,7 +176,7 @@
 
 <%= content_for :js do %>
     <script type="text/html" id="product_tmpl">
-        <div id="part_{{ hash }}">
+        <div id="part_{{ hash }}" data-color-hash="{{ color_hash }}">
             <input type="hidden" name="product{{ count }}" value="{{ product }}">
             <input type="hidden" name="price{{ count }}" value="{{ price }}">
             <input type="hidden" name="qty{{ count }}" value="{{ qty }}>">
@@ -179,9 +185,9 @@
     <script>
         $(document).ready(function() {
             $.productOrder()
-        })
+        });
         $(window).load(function() {
             $('.content').equalHeights();
-        })
+        });
     </script>
 <% end %>

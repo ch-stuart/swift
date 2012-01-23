@@ -1,0 +1,58 @@
+@import 'color';
+
+/*
+------------------------------
+	Impromptu
+------------------------------
+*/
+.jqifade{
+	position: absolute; 
+	background-color: #aaaaaa; 
+}
+div.jqi{ 
+	width: 400px; 
+	position: absolute; 
+	background-color: $background_offwhite; 
+	text-align: left; 
+	border: solid 1px #eeeeee;
+	padding: 7px;
+    font-family: Helvetica, Arial, Sans-serif;
+}
+div.jqi .jqicontainer{ 
+
+}
+div.jqi .jqiclose{ 
+	position: absolute;
+	top: 4px; right: -2px; 
+	width: 18px; 
+	cursor: default; 
+	color: #bbbbbb; 
+}
+div.jqi .jqimessage{ 
+    font-size: 16px;
+	padding: 10px; 
+	color: 444; 
+}
+div.jqi .jqibuttons{ 
+	text-align: right; 
+	padding: 5px 0 5px 0; 
+}
+div.jqi button{ 
+	padding: 3px 10px; 
+	margin: 0 10px; 
+	background-color: $hotpink; 
+	border: solid 1px #f4f4f4; 
+	color: #ffffff; 
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+div.jqi button:hover{ 
+	background-color: #728A8C;
+}
+div.jqi button.jqidefaultbutton{
+	background-color: #BF5E26;
+}
+.jqiwarning .jqi .jqibuttons{ 
+	background-color: #BF5E26;
+}
