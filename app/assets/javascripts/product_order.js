@@ -1,4 +1,7 @@
 (function($){
+    var notified_customer = false,
+        max_priced_fabric = 0;
+    
     // Behavior for order form
     $.productOrder = function() {
         $('#order_form')
@@ -23,33 +26,63 @@
             })
             .end()
             .find('.color_select').change(function() {
-                var has_been_added_already = false;
-                var $option = $(this).find('option').eq(this.selectedIndex);
-                
-                // do not proceed if the color does not have a price.
-                if (!$option.data('price')) return;
+                var choices = [],
+                    max_price = 0,
+                    $max_option = null,
+                    opts = null;
 
-                var opts = {
+                // Empty the #parts
+                $('#parts').find('.color_part').remove();
+                
+                // Scan all color selects
+                $('#order_form').find('.color_select').each(function(){
+                    var $selected_option = $(this).find('option').eq(this.selectedIndex);
+                    
+                    // Find all that have a price option selected
+                    if ($selected_option.data('price')) {
+                        choices.push($selected_option);
+                    }
+                });
+                // Find the one with the highest price
+                choices.forEach(function($option){
+                    var new_price = parseInt($option.data('price'), 10);
+                    if (new_price > max_price) {
+                        max_price = new_price;
+                        $max_option = $option;
+                    }
+                });
+                console.log($max_option);
+
+                // DO NOT CONTINUE if we haven't found anything to add.
+                if (!$max_option) return;
+
+                // See if this is the most expensive fabric they've added
+                // If so, notify the customer again. I don't know if we want
+                // to do this, but we will for now.
+                if (parseInt($max_option.data('price'), 10) > max_priced_fabric) {
+                    max_priced_fabric = parseInt($max_option.data('price'), 10);
+                    notified_customer = false;
+                }
+                // Add it to the #parts
+                opts = {
                     'qty':         '1',
                     'count':       $('#order_form').data('count'),
                     'hash':        $(this).data('hash'),
-                    'price':       $option.data('price'),
-                    'product':     $option.data('color'),
-                    'color_hash':  $option.data('hash')
+                    'price':       $max_option.data('price'),
+                    'product':     $max_option.data('color'),
+                    'color_hash':  $max_option.data('hash'),
+                    'is_color':    true
                 };
-                // remove the part, add it again below
-                $('#part_' + opts.hash).remove();
-                $('#parts > div').each(function(idx, part){
-                    if ($(part).data('color-hash') === opts.color_hash) {
-                        has_been_added_already = true; }
-                });
-                // if they fabric has already been added (a fabric is 
-                // charged only once per bag), don't add it again.
-                if (has_been_added_already) return;
-                
-                $('#parts').append( ich.product_tmpl(opts) );
-                $.prompt("Including &ldquo;" + opts.product + "&rdquo; adds a charge of $" + opts.price + " to this bag.");
-                increment_count();
+                $('#parts').append(ich.product_tmpl(opts));
+                if (opts && !notified_customer) {
+                    // Dump the mustache template into a hidden div
+                    // so we can grab it back out. $.prompt() is not
+                    // compatible with ICH.
+                    $('#buffer').empty().append( ich.prompt_tmpl(opts) );
+                    $.prompt( $('#buffer').html() );
+                    increment_count();
+                    notified_customer = true;
+                }
             });
 
         // we increment the count, but we don't decrement. what the heck.
