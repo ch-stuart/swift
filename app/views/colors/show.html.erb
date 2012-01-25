@@ -2,13 +2,13 @@
   <%= notice %>
 </p>
 
-<p id="color_swatch" style="background-color: <%= @color.hex %>;">
-  <%= @color.title %>
-  <% unless @color.price.nil? %>
-    <br> $<%= @color.price %>
+<p id="color_swatch" class="color_swatch" style="background-color: <%= @color.hex %>;">
+  <span><%= @color.title %></span>
+  <% unless @color.price.blank? %>
+    <br> <span>$<%= @color.price %></span>
   <% end %>
   <br>
-  <%= @color.hex %>
+  <span><%= @color.hex %></span>
 </p>
 
 <p>

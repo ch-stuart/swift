@@ -8,10 +8,10 @@
 <ul>
   <% @products.each do |product| %>
     <li>
-      <%= image_tag "#{product.kind}.png" %>
-      <%= image_tag "#{product.status}.png" %>
+      <%= image_tag "#{product.kind}.png", :title => product.kind %>
+      <%= image_tag "#{product.status}.png", :title => product.status %>
       <%= link_to product.title, product %>
-      <%= link_to image_tag("edit.png"), edit_product_path(product), :class => 'icon_link' %>
+      <%= link_to image_tag("edit.png"), edit_product_path(product), :class => 'icon_link fadesIn' %>
     </li>
   <% end %>
 </ul>
@@ -24,7 +24,7 @@
     <li>
       <%= image_tag "#{page.status}.png" %>
       <%= link_to page.title, page %> <span class="private"><%= page.status if page.status == "Private" -%></span>
-      <%= link_to image_tag("edit.png"), edit_page_path(page), :class => 'icon_link' %>
+      <%= link_to image_tag("edit.png"), edit_page_path(page), :class => 'icon_link fadesIn' %>
     </li>
   <% end %>
 </ul>
@@ -52,8 +52,20 @@
         &nbsp;&nbsp;&nbsp;&nbsp;
       </span>
       &nbsp;
-      <%= link_to color.title, color %>
+      <%= link_to color.title, color %> <%= "$#{color.price}" unless color.price.blank? %>
+      <%= link_to image_tag("edit.png"), edit_color_path(color), :class => 'icon_link fadesIn' %>
     </li>
   <% end %>
-
 </ul>
+
+<%= content_for :js do %>
+    <script>
+        $('.icon_link').hide();
+        $('li').hover(function() {
+            $('.icon_link').hide();
+            $(this).find('.icon_link').fadeIn();
+        }, function() {
+            $(this).find('.icon_link').hide();
+        });
+    </script>
+<% end %>
