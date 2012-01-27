@@ -10,8 +10,7 @@
         <div class="content">
             <%= render :partial => 'shared/slideshow' %>
             <div class="text_content">
-                <%# TODO move color to dropdown %>
-                <%= render :partial => 'color_swatches' %>
+                <!-- TODO: put anything here? -->
                 <div class="clear"></div>
             </div>
         </div>
@@ -132,6 +131,7 @@
                                                                 data-color="<%= color.title %>"
                                                                 data-price="<%= color.price %>"
                                                             <% end %>
+                                                            data-hex="<%= color.hex %>"
                                                             <%# The value sets the title of the part which shows up at Mals %>
                                                             value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.blank? %>) ">
                                                             <%= color.title %>

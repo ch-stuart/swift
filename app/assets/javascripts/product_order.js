@@ -25,7 +25,7 @@
                 }
             })
             .end()
-            .find('.color_select').change(function() {
+            .find('.color_select').selectBox().change(function() {
                 var choices = [],
                     max_price = 0,
                     $max_option = null,

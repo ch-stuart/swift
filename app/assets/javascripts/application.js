@@ -5,6 +5,7 @@
 //= require jquery.equalheights
 //= require jquery.noisy
 //= require jquery.impromptu
+//= require jquery-selectBox/jquery.selectBox
 //= require ICanHaz
 //= require slideshow
 //= require product_order
