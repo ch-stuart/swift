@@ -1,6 +1,10 @@
 source :rubygems
 
 gem 'rails', '3.1.3'
+
+gem "foreman"
+gem "thin"
+
 gem 'flickraw', '0.8.3'
 gem 'rdiscount'
 gem 'nokogiri'
