@@ -11,6 +11,6 @@ The website for Swift Industries.
 
 `rails s thin`
 
-### Do test work
+### Do tests work
 
 No. :(

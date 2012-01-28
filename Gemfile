@@ -2,7 +2,9 @@ source :rubygems
 
 gem 'rails', '3.1.3'
 gem "thin"
-gem 'flickraw', '0.8.3'
+gem 'flickraw', '0.9.5'
+# faster?
+# gem 'flickraw-cached'
 gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails'
