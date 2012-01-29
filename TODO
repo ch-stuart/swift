@@ -2,3 +2,4 @@
 - optional parts should only be sent if the checkbox is checked http://builtbyswift.com/products/4/order 
 - fix 'accessories' on the homepage and fix navigation so it's flexible
 - use this: https://github.com/rlivsey/middleman
+- when you remove a part from a product edit form it's not very easy to tell it happened. fade it out?
