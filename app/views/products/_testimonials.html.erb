@@ -1,0 +1,15 @@
+<% if @product.testimonials.present? %>
+    <div id="testimonials">
+        <h3>
+            Testimonials
+        </h3>
+        <% @product.testimonials.each do |testimonial| %>
+            <p class="testimonial_body">
+                <%= raw md testimonial.body %>
+            </p>
+            <p class="testimonial_author">
+                &mdash; <%= testimonial.author %>
+            </p>
+        <% end %>
+    </div>
+<% end %>

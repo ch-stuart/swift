@@ -28,21 +28,7 @@
                 <p>
                   <%= raw md @product.specs %>
                 </p>
-                <% if @product.testimonials.present? %>
-                    <div id="testimonials">
-                        <h3>
-                            Testimonials
-                        </h3>
-                        <% @product.testimonials.each do |testimonial| %>
-                            <p class="testimonial_body">
-                                <%= raw md testimonial.body %>
-                            </p>
-                            <p class="testimonial_author">
-                                &mdash; <%= testimonial.author %>
-                            </p>
-                        <% end %>
-                    </div>
-                <% end %>
+                <%= render :partial => 'testimonials' %>
                 <div class="grid_6 prefix_2 alpha omega">
                     <p id="design_your_bags">
                         <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
