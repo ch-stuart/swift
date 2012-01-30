@@ -23,6 +23,11 @@
   <%= csrf_meta_tag %>
 </head>
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
+  <% if Rails.env == "development" %>
+    <h2 class="dev">
+      localhost
+    </h2>
+  <% end %>
   <% if @company.front_door_sign.present? %>
     <h2 class="front_door_sign">
       <%= @company.front_door_sign %>
