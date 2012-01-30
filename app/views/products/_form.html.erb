@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :kind, "Type" %><br />
-    <%= f.select :kind, options_for_select(["Product", "Accessory"], :selected => @product.kind) %>
+    <%= f.select :kind, Product::KINDS, :selected => @product.kind %>
   </div>
   <div class="field">
     <%= f.label :title %><br />
@@ -87,7 +87,7 @@
   </div>
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.select :status, options_for_select(["Private", "Public"], :selected => @product.status) %>
+    <%= f.select :status, Product::STATUSES, :selected => @product.status %>
     <p class="hint">
       Setting a product as private does not prevent a stranger from directly typing in the URL and finding it. It does, however, prevent it from being linked to from any pages on the site.
     </p>
