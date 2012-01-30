@@ -9,6 +9,7 @@
   <%# Always force latest IE rendering engine (even in intranet) & Chrome Frame
        Remove this if you use the .htaccess -%>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta viewport="width=995">
   <title>
     <%= @title %><%= ": #{@subtitle}" if @subtitle.present? %> | handmade bicycle panniers and accessories
   </title>
@@ -35,15 +36,14 @@
   <div class="container_24">
     <%= render :partial => 'shared/footer' %>
   </div>
-  <%= javascript_include_tag "application" %>
-  <%= yield :js %>
-  <%= render :partial => 'shared/analytics' unless Rails.env == "development" %>
   <p id="no_js_notice" class="container_24">
       Portions of this site require javascript. You should turn it on!
   </p>
   <p id="humans" class="container_24">
     This site was built by <a href="http://enure.net/portfolio">Charles Stuart</a> and designed by <a href="http://tinylittlehammers.com/">Dylan Mcconnell</a>.
   </p>
-  <!-- heroku -->
+  <%= javascript_include_tag "application" %>
+  <%= yield :js %>
+  <%= render :partial => 'shared/analytics' unless Rails.env == "development" %>
 </body>
 </html>
