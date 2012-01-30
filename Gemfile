@@ -8,6 +8,7 @@ gem 'flickraw', '0.9.5'
 gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails'
+gem 'dalli' # memcache
 
 group :assets do
   gem 'sass-rails', '~> 3.1.5'

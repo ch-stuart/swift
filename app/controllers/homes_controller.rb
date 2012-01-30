@@ -3,7 +3,8 @@ class HomesController < ApplicationController
     require 'open-uri'
 
     before_filter :authenticate, :except => [ :index, :accessories ]
-    caches_page :index, :accessories
+    # caches_page :index, :accessories
+    caches_action :index, :accessories
 
     def index
         @pages = Page.find_all_by_status('Public')
