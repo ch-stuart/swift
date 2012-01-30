@@ -13,4 +13,4 @@ The website for Swift Industries.
 
 ### Do tests work
 
-No. :(
+Yes, but only unit tests.
