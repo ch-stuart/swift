@@ -9,6 +9,7 @@ gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails'
 gem 'dalli' # memcache
+gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
 
 group :assets do
   gem 'sass-rails', '~> 3.1.5'
