@@ -32,7 +32,7 @@
     <% @products.each_with_index do |product,idx| %>
         <% photo_url = Product.get_photo_by_id(product.flickr_photo, "Medium") %>
         <div class="photo photo_<%= idx %>" id="photo<%= product.id %>" <%= "style='display:none'" unless idx == 0 %>>
-            <img data-src="<%= photo_url %>" data-backupsrc="<%= photo_url %>" width="510">
+            <img data-src="<%= photo_url %>" width="510">
         </div>
     <% end %>
 </div>

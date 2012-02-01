@@ -11,8 +11,6 @@ class PagesController < ApplicationController
   end
 
   def show
-    response.headers['Cache-Control'] = 'public, max-age=86400'
-
     if params[:path]
       @page = Page.find_by_path(params[:path])
       raise ActiveRecord::RecordNotFound, "Page not found" if @page.nil?
@@ -22,7 +20,7 @@ class PagesController < ApplicationController
 
     @company = Company.first
     @products = Product.where(:status => 'Public', :kind => 'Product')
-    @photos = Page.get_photos_for_tag @page
+    @photos = Page.get_photos_for_tag @page.flickr_tag
     @subtitle = @page.title
   end
 

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_filter :authenticate, :except => [ :show, :order, :colors ]
+  before_filter :authenticate, :except => [ :show, :order ]
   caches_action :show, :order
   cache_sweeper ProductSweeper
 
@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   def show
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @product = Product.find(params[:id])
-    @photos = Product.get_photos_for_tag @product
+    @photos = Product.get_photos_for_tag @product.flickr_tag
     @company = Company.first
     @illustration = Product.get_photo_by_id(@product.flickr_illustration, "Medium")
   end
@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
     @colors = Color.all
 
     @product = Product.find(params[:id])
-    @photos = Product.get_photos_for_tag @product
+    @photos = Product.get_photos_for_tag @product.flickr_tag
   end
 
   def new

@@ -3,7 +3,7 @@
         <div id="swift_slideshow">
             <% @photos.each_with_index do |(photo,key),idx| %>
                 <%
-                    if @photos[photo]['large_height'] == "500"
+                    if @photos[photo]['height'] == "500"
                         width = "265px"
                         height = "353px"
                     else
@@ -14,7 +14,7 @@
                 <div id="photo<%= @photos[photo]['id'] -%>"
                      data-idx="<%= idx %>"
                      class="photo"
-                     style="background-image: url(<%= @photos[photo]['large'] -%>);
+                     style="background-image: url(<%= @photos[photo]['url'] -%>);
                         background-size: <%= width -%> <%= height -%>;
                         -moz-background-size: <%= width -%> <%= height -%>;
                         -webkit-background-size: <%= width -%> <%= height -%>;"
@@ -24,14 +24,14 @@
                 </div>
                 <div class="description" id="description<%= @photos[photo]['id'] -%>">
                     <h4>
-                        <%= @photos[photo]['title'].empty? ? 'Untitled' : @photos[photo]['title'] -%>
+                        <%= @photos[photo]['title'].blank? ? 'Untitled' : @photos[photo]['title'] -%>
                     </h4>
                     <div class="photo_description">
-                        <%= raw @photos[photo]['description'] -%>
+                        <%= raw @photos[photo]['description'] %>
                     </div>
                     <p>
-                        <a href="<%= @photos[photo]['flickr_url'] -%>">
-                            view on Flickr ->
+                        <a href="<%= @photos[photo]['flickr_url'] %>">
+                            View on Flickr
                         </a>
                     </p>
                     <div class="photo_nav">
@@ -48,7 +48,7 @@
             <nav>
                 <% @photos.each_key do |photo| %>
                     <div class="grid_3 alpha omega">
-                        <%= link_to "#{@photos[photo]['title'].empty? ? 'Untitled' : @photos[photo]['title']}",
+                        <%= link_to "#{@photos[photo]['title'].blank? ? 'Untitled' : @photos[photo]['title']}",
                                     @photos[photo]['flickr_url'],
                                     'data-photo' => "#photo#{@photos[photo]['id']}",
                                     'data-description' => "#description#{@photos[photo]['id']}",

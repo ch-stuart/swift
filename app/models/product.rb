@@ -19,9 +19,9 @@ class Product < ActiveRecord::Base
   attr_reader :STATUSES
   validates :status, :inclusion => { :in => STATUSES, :message => "%{value} is not a valid status" }
 
-  validates_presence_of :title, :short_title, :price
-  validates_uniqueness_of :title, :flickr_tag, :short_title
-  validates_format_of :flickr_tag, :with => /^\A[A-Za-z0-9_\-]+\z$/
+  validates_presence_of :title, :short_title, :flickr_tag, :flickr_photo, :price
+  validates_uniqueness_of :title, :short_title, :flickr_tag, :flickr_photo, :flickr_illustration
+  validates_format_of :flickr_tag, :with => /^\A[A-Za-z0-9_\-]+\z$/, :if => :flickr_tag?
   validates_format_of :price, :with => /^\d{0,10}\.\d{2}$/, :message => "must be include dollars and cents, ex: 122.22"
   validates_format_of :flickr_photo, :with => FLICKR_ID_MATCH, :message => "is 10 digits long, all numbers.", :if => :flickr_photo?
   validates_format_of :flickr_illustration, :with => FLICKR_ID_MATCH, :message => "is 10 digits long, all numbers.", :if => :flickr_illustration?
