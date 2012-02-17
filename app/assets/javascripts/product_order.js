@@ -6,6 +6,7 @@
     $.productOrder = function() {
         $('#order_form')
             .find('.part_checkbox').change(function() {
+                // console.log("checkbox changed")
                 var $this = $(this);
                 if ($this.attr("checked")) {
                     $('#parts').append(
@@ -17,6 +18,7 @@
                             'product':  $this.data('product')
                         })
                     );
+                    // console.log("parts content " + $('#parts').html())
                     increment_count();
                 } else {
                     // remove the part from the order if they have
@@ -51,7 +53,7 @@
                         $max_option = $option;
                     }
                 });
-                console.log($max_option);
+                // console.log($max_option);
 
                 // DO NOT CONTINUE if we haven't found anything to add.
                 if (!$max_option) return;
@@ -74,15 +76,18 @@
                     'is_color':    true
                 };
                 $('#parts').append(ich.product_tmpl(opts));
+                
+                // console.log("parts content " + $('#parts').html())
+                
                 if (opts && !notified_customer) {
                     // Dump the mustache template into a hidden div
                     // so we can grab it back out. $.prompt() is not
                     // compatible with ICH.
                     $('#buffer').empty().append( ich.prompt_tmpl(opts) );
                     $.prompt( $('#buffer').html() );
-                    increment_count();
                     notified_customer = true;
                 }
+                increment_count();
             });
 
         // we increment the count, but we don't decrement. what the heck.
