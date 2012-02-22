@@ -62,6 +62,9 @@
                                     </p>
                                     <p class="input">
                                         <select name="productpr1" class="size_select">
+                                            <option data-hex="#444" value="invalid">
+                                                Choose One
+                                            </option>
                                             <% @product.sizes.each do |size| %>
                                                 <option value="<%= @product.title %>, <%= size.title %>:<%= size.price %>">
                                                     <%= size.title %> ($<%= size.price %>)
@@ -84,7 +87,7 @@
                                             <input type="text" name="product1[]">
                                         <% else %>
                                             <select name="product1[]">
-                                                <option>
+                                                <option value="invalid">
                                                     Choose One
                                                 </option>
                                                 <% @product.answer.split(',').each do |option| %>
@@ -110,14 +113,17 @@
                                             <%# If it has a price, display a checkbox so they can add it. %>
                                             <% if part.price.present? %>
                                                 <input
+                                                    id="checkbox_<%= digest(part.title +  part.id.to_s) %>"
                                                     type="checkbox"
                                                     class="part_checkbox"
                                                     data-hash="<%= digest(part.title +  part.id.to_s) %>"
                                                     data-product="<%= part.title %>"
                                                     data-price="<%= part.price %>">
                                             <% end %>
-                                            <%= part.title %>
-                                            <%= "$#{part.price}" if part.price.present? %>
+                                            <label for="checkbox_<%= digest(part.title +  part.id.to_s) %>">
+                                                <%= part.title %>
+                                                <%= "$#{part.price}" if part.price.present? %>
+                                            </label>
                                         </p>
                                         <% unless part.colors.blank? %>
                                             <p class="input">
@@ -125,6 +131,9 @@
                                                     name="product1[]"
                                                     class="color_select"
                                                     data-hash="<%= digest('select' + part.title) %>">
+                                                    <option data-hex="#444" value="invalid">
+                                                        Choose One
+                                                    </option>
                                                     <% part.colors.each do |color| %>
                                                         <option
                                                             <% if color.price.present? %>

@@ -1,10 +1,27 @@
 (function($){
-    var notified_customer = false,
-        max_priced_fabric = 0;
+    // Mals docs
+    // Adding multiple items to your cart
+    // https://www.mals-e.com/tpv.php?tp=6
+    
+    var notified_customer = false;
+    var max_priced_fabric = 0;
     
     // Behavior for order form
     $.productOrder = function() {
         $('#order_form')
+            .submit(function(e){
+                var invalid = false;
+                
+                $('#order_form select').each(function() {
+                    if ($(this).val() === "invalid") {
+                        invalid = true;
+                    }
+                })
+                if (invalid) {
+                    e.preventDefault();
+                    $.prompt("Not everything is filled out! Review your order and select a choice for each of the options.");
+                }
+            })
             .find('.part_checkbox').change(function() {
                 // console.log("checkbox changed")
                 var $this = $(this);
