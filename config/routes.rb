@@ -5,7 +5,7 @@ SwiftSite::Application.routes.draw do
 
   get 'hub/expire_home' => 'hub#expire_home'
 
-  match 'deploy_hook/expire_cache' => 'application#expire_cache'
+  # match 'deploy_hook/expire_cache' => 'application#expire_cache'
 
   resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials
 

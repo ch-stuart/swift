@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   helper_method :title
 
   # heroku post deploy hook
-  def expire_cache
-    ApplicationSweeper.instance.expire_cache
-    render :text => "expired"
-  end
+  # def expire_cache
+  #   ApplicationSweeper.instance.expire_cache
+  #   render :text => "expired"
+  # end
 
   protected
 
