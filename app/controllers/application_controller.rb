@@ -4,9 +4,15 @@ class ApplicationController < ActionController::Base
   layout :resolve_layout
 
   before_filter :authenticate, :except => [ :logout ]
-  before_filter :title
+  before_filter :title, :except => [ :expire_cache ]
 
   helper_method :title
+
+  # heroku post deploy hook
+  def expire_cache
+    ApplicationSweeper.instance.expire_cache
+    render :text => "expired"
+  end
 
   protected
 

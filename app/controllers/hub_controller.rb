@@ -19,4 +19,5 @@ class HubController < ApplicationController
         y e
       end
   end
+  
 end

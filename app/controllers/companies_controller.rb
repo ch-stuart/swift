@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
 
   before_filter :authenticate
-  cache_sweeper CompanySweeper
+  cache_sweeper ApplicationSweeper
   layout "hub"
 
   def index

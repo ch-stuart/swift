@@ -1,7 +1,7 @@
 class SizesController < ApplicationController
 
   before_filter :authenticate
-  cache_sweeper SizeSweeper
+  cache_sweeper ApplicationSweeper
   layout 'hub'
 
   def index

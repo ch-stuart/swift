@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   before_filter :authenticate, :except => [ :show ]
   caches_action :show
-  cache_sweeper PageSweeper
+  cache_sweeper ApplicationSweeper
 
   def index
     @pages = Page.all

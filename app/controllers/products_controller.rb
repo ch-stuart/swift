@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
 
   before_filter :authenticate, :except => [ :show, :order ]
   caches_action :show, :order
-  cache_sweeper ProductSweeper
+  cache_sweeper ApplicationSweeper
 
   def index
     @products = Product.all(:order => 'kind DESC')
