@@ -2,15 +2,15 @@ class ApplicationSweeper < ActionController::Caching::Sweeper
 
     observe Color, Company, Page, Product, Size, Testimonial
 
-    def after_create
+    def after_create record
         expire_cache
     end
 
-    def after_update
+    def after_update record
         expire_cache
     end
 
-    def after_destroy
+    def after_destroy record
         expire_cache
     end
 
