@@ -92,14 +92,14 @@ class ProductTest < ActiveSupport::TestCase
     assert !product2.save, "not unique"
   end
   
-  test "flickr_tag should be unique" do
+  test "flickr_tag doesn't have to be be unique" do
     product = Product.new @product
     product.save
     
     product2 = Product.new @product
     product2[:title] = "unique"
     product2[:short_title] = "unique"
-    assert !product2.save, "not unique"
+    assert product2.save, "not unique"
   end
   
 end
