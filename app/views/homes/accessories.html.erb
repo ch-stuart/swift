@@ -1,7 +1,8 @@
 <%= render :partial => 'shared/checkout' %>
 <div class="grid_24 alpha omega">
-    <% @accessories.each do |accessory| %>
-        <div class="grid_8">
+    <% @accessories.each_with_index do |accessory, index| %>
+        <% endcap = (index + 1).modulo(3) == 0 ? true : false %>
+        <div class="grid_8 omega">
             <div class="content_wrapper">
                 <div class="content">
                     <% photo_url = Product.get_photo_by_id(accessory.flickr_photo, "Small") %>
@@ -28,6 +29,9 @@
                 </div>
             </div>
         </div>
+        <% if endcap %>
+            <div class=clear></div>
+        <% end %>
     <% end %>
     <div class="clear"></div>
     <div class="grid_4 prefix_20 alpha omega">
@@ -40,12 +44,3 @@
     <div class="clear"></div>
 </div>
 <div class="clear"></div>
-
-<%= content_for :js do %>
-    <script>
-        $(document).ready(function() {
-            $('.grid_8').first().addClass('alpha')
-            $('.grid_8:nth-child(3n+1)').addClass('omega').append("<div class='clear'></div>");
-        })
-    </script>
-<% end %>
