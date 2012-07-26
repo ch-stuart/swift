@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :category_id, "Navigation Category" %><br />
-    <%= f.select :category_id, Category.all.collect {|c| [ c.title, c.id ] }, { :include_blank => false, :selected => @product.category_id } %>
+    <%= f.select :category_id, Category.all.collect {|c| [ c.title, c.id ] }, { :include_blank => true, :selected => @product.category_id } %>
   </div>
   <div class="field">
     <%= f.label :title %><br />
