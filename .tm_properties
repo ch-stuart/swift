@@ -1,1 +1,3 @@
+projectDirectory = "$CWD"
+windowTitle      = "$TM_DISPLAYNAME — Swift"
 tabSize = 4
