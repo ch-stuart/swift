@@ -1,6 +1,6 @@
 class ApplicationSweeper < ActionController::Caching::Sweeper
 
-    observe Color, Company, Page, Product, Size, Testimonial
+    observe Color, Company, Page, Product, Size, Testimonial, Category
 
     def after_create record
         expire_cache

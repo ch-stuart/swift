@@ -11,9 +11,24 @@
       <%= image_tag "#{product.kind}.png", :title => product.kind %>
       <%= image_tag "#{product.status}.png", :title => product.status %>
       <%= link_to product.title, product %>
+      <span style="color: #bbb">
+          <%= product.category.title if product.category.present? %>
+      </span>
       <%= link_to image_tag("edit.png"), edit_product_path(product), :class => 'icon_link fadesIn' %>
     </li>
   <% end %>
+</ul>
+
+<h2>
+    <%= link_to 'Categories', categories_path %>
+</h2>
+<ul>
+    <% @categories.each do |category| %>
+        <li>
+            <%= link_to category.title, category %>
+            <%= link_to image_tag("edit.png"), edit_category_path(category), :class => 'icon_link fadesIn' %>
+        </li>
+    <% end %>
 </ul>
 
 <h2>

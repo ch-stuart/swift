@@ -7,7 +7,7 @@ SwiftSite::Application.routes.draw do
 
   # match 'deploy_hook/expire_cache' => 'application#expire_cache'
 
-  resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials
+  resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials, :categories
 
   resources :products do
     member do

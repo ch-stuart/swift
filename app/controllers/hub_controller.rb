@@ -8,6 +8,7 @@ class HubController < ApplicationController
     @pages = Page.all
     @colors = Color.all
     @company = Company.first
+    @categories = Category.all
   end
 
   def expire_home

@@ -5,6 +5,8 @@ class Product < ActiveRecord::Base
   has_many :parts, :dependent => :destroy
   has_many :testimonials, :dependent => :destroy
   has_many :sizes, :dependent => :destroy
+  belongs_to :category
+
   accepts_nested_attributes_for :parts, :reject_if => lambda { |a| a[:title].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :testimonials, :reject_if => lambda { |a| a[:body].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :sizes, :reject_if => lambda { |a| a[:title].blank? }, :allow_destroy => true
