@@ -18,7 +18,8 @@ class ProductTest < ActiveSupport::TestCase
       :question => "What?",
       :answer => "42",
       :not_for_sale => false,
-      :not_for_sale_message => "We are all out. :("
+      :not_for_sale_message => "We are all out. :(",
+      :category_id => 1
     }
   end
 
@@ -31,6 +32,11 @@ class ProductTest < ActiveSupport::TestCase
     @product[:kind] = "bogus!"
     product = Product.new @product
     assert !product.save, "Should not save"
+  end
+
+  test "should note save without category" do
+    product = Product.new @product.except(:category_id)
+    assert !product.save, "should not save without category_id"
   end
   
   test "should note save with bad status" do
