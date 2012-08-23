@@ -9,6 +9,9 @@ class ApplicationController < ActionController::Base
   helper_method :title
 
   # heroku post deploy hook
+  # does not work. can't get sweeper to work
+  # can't call expire_action without there being a
+  # request
   # def expire_cache
   #   ApplicationSweeper.instance.expire_cache
   #   render :text => "expired"

@@ -9,11 +9,14 @@ The website for Swift Industries. Runs on Heroku.
     >> Rails.cache.clear
     >> exit
 
+If the assets get updated, the css and js will 404.
+Clearing the cache will fix this issue.
+
 ### Start for development
 
     $ rails s thin
 
-### Do tests work
+### Do tests work?
 
 Yes, but only unit tests.
 
