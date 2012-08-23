@@ -2,24 +2,38 @@
     nav {
         border: 1px solid $border_gray;
         border-width: 1px 0;
-        a {
-            line-height: 1.5;
-            border-left: 1px dashed $hotpink;
-            padding: 10px;
+        
+        .nav_item {
+            cursor: pointer;
             display: block;
-            text-transform: uppercase;
+            border-left: 1px dashed $hotpink;
+            padding: 6px;
+            line-height: 1.4;
             color: $text_gray;
             font-weight: bold;
+            
+            &.last {
+                border-right: 1px dashed $hotpink;
+                overflow: hidden !important;
+            }
+            &.category_item.active {
+                background-color: $background_gray;
+            }
+            &.product_item.active {
+                color: $hotpink;
+            }
+            &:hover {
+                color: $hotpink;
+            }
+            &.category_item {
+                text-transform: uppercase;
+            }
         }
-        a.last {
-            border-right: 1px dashed $hotpink;
-            overflow: hidden !important;
-        }
-        a:hover {
-            color: $hotpink;
-        }
-        a.active {
-            background-color: $background_gray;
+        .category_row {
+            border: 1px solid #CCC;
+            border-width: 1px 0 0;
+            background-color: #fafafa;
+            overflow: auto;
         }
     }
     table.goto {

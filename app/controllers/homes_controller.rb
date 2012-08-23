@@ -10,6 +10,7 @@ class HomesController < ApplicationController
         @pages = Page.find_all_by_status('Public')
         @featured_page = Page.find_by_featured('Featured')
         @products = Product.where(:status => 'Public', :kind => 'Product')
+        @categories = Category.all
         @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
         @company = Company.first
 
