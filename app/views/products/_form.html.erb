@@ -18,6 +18,9 @@
   <div class="field">
     <%= f.label :category_id, "Navigation Category" %><br />
     <%= f.select :category_id, Category.all.collect {|c| [ c.title, c.id ] }, { :include_blank => true, :selected => @product.category_id } %>
+    <p class="hint">
+      Leave blank if this is an Accessory or Stock product.
+    </p>
   </div>
   <div class="field">
     <%= f.label :title %><br />

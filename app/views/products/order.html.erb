@@ -170,20 +170,22 @@
                             </p>
                             <div class="clear"></div>
                         </div>
-                        <div class="fields handmade">
-                            <p class="label">
-                                <span class="handmade_label">handmade</span>
-                            </p>
-                            <p class="input">
-                                <span><%= @company.delivery_time %></span>
-                            </p>
-                            <div class="clear"></div>
-                        </div>
+                        <% unless @product.is_stock? %>
+                            <div class="fields handmade">
+                                <p class="label">
+                                    <span class="handmade_label">handmade</span>
+                                </p>
+                                <p class="input">
+                                    <span><%= @company.delivery_time %></span>
+                                </p>
+                                <div class="clear"></div>
+                            </div>
+                        <% end %>
                     </form>
                 <% end %>
             </div>
             <div class="clear"></div>
-            <%= render :partial => 'shared/right_col_footer_nav' %>
+            <%= render 'shared/right_col_footer_nav' %>
         </div>
     </div>
 </div>

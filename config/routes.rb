@@ -19,7 +19,8 @@ SwiftSite::Application.routes.draw do
   match 'login', :to => 'hub#index'
 
   root :to => 'homes#index'
-  match 'accessories', :to => 'homes#accessories'
+  match 'store', :to => 'homes#store'
+  match "accessories" => redirect("/store")
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
