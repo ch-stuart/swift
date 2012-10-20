@@ -14,7 +14,11 @@ Clearing the cache will fix this issue.
 
 ### Start for development
 
+Manually...
+
     $ rails s thin
+    
+Or, use pow.
 
 ### Do tests work?
 
