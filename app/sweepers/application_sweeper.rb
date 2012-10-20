@@ -16,7 +16,7 @@ class ApplicationSweeper < ActionController::Caching::Sweeper
 
     def expire_cache
         expire_action :controller => 'homes', :action => 'index'
-        expire_action :controller => 'homes', :action => 'accessories'
+        expire_action :controller => 'homes', :action => 'store'
 
         Product.all.each do |product|
             expire_action :controller => 'products', :action => 'show', :id => product.id

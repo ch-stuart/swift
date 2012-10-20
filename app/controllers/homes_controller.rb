@@ -2,9 +2,9 @@ class HomesController < ApplicationController
 
     require 'open-uri'
 
-    before_filter :authenticate, :except => [ :index, :accessories ]
-    # caches_page :index, :accessories
-    caches_action :index, :accessories
+    before_filter :authenticate, :except => [ :index, :store ]
+    # caches_page :index, :store
+    caches_action :index, :store
 
     def index
         @pages = Page.find_all_by_status('Public')
@@ -17,9 +17,10 @@ class HomesController < ApplicationController
         @blog = get_latest_blog_post
     end
 
-    def accessories
+    def store
         @products = Product.where(:status => 'Public', :kind => 'Product')
         @accessories = Product.where(:status => 'Public', :kind => 'Accessory')
+        @stock = Product.where(:status => 'Public', :kind => 'Stock')
         @company = Company.first
     end
 

@@ -13,7 +13,7 @@ class Product < ActiveRecord::Base
 
   FLICKR_ID_MATCH = /^\d{10}$/
   
-  KINDS = ["Product", "Accessory"]
+  KINDS = ["Product", "Accessory", "Stock"]
   attr_reader :KINDS
   validates :kind, :inclusion => { :in => KINDS, :message => "%{value} is not a valid type" }
   
@@ -21,7 +21,11 @@ class Product < ActiveRecord::Base
   attr_reader :STATUSES
   validates :status, :inclusion => { :in => STATUSES, :message => "%{value} is not a valid status" }
 
-  validates_presence_of :title, :short_title, :flickr_tag, :flickr_photo, :price, :category_id
+  validates_presence_of :title, :short_title, :flickr_tag, :flickr_photo, :price
+  # Accessories and Stock cannot have categories, otherwise they show up in the
+  # home page navigation categories.
+  validates_presence_of :category_id, :if => :is_product?
+
   validates_uniqueness_of :title, :short_title
   validates_format_of :flickr_tag, :with => /^\A[A-Za-z0-9_\-]+\z$/, :if => :flickr_tag?
   validates_format_of :price, :with => /^\d{0,10}\.\d{2}$/, :message => "must be include dollars and cents, ex: 122.22"
@@ -32,5 +36,17 @@ class Product < ActiveRecord::Base
     self.status == "Public"
   end
 
+  def is_accessory?
+    self.kind == "Accessory"
+  end
+  
+  def is_stock?
+    self.kind == "Stock"
+  end
+  
+  def is_product?
+    self.kind == "Product"
+  end
+  
 end
 
