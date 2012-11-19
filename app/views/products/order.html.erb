@@ -33,7 +33,7 @@
                         <span><%= @product.not_for_sale_message %></span>
                     </h2>
                     <%= render 'order_marketing' %>
-                <%# else, show the order form. %>    
+                <%# else, show the order form. %>
                 <% else %>
                     <form id="order_form" method="post" action="<%= APP_CONFIG['store_host'] %><%= APP_CONFIG['add_to_cart_path'] %>" data-count="1">
                         <%# -------- START MAL's fields -------- %>
@@ -170,7 +170,7 @@
                             </p>
                             <div class="clear"></div>
                         </div>
-                        <% unless @product.is_stock? %>
+                        <% if @product.is_product? %>
                             <div class="fields handmade">
                                 <p class="label">
                                     <span class="handmade_label">handmade</span>
