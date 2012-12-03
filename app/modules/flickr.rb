@@ -1,8 +1,8 @@
 module Flickr
-    
+
     def get_photos_for_tag tag
         return {} if tag.blank?
-        
+
         # http://snipplr.com/view/8954/create-nested-hashes/
         photos = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
 
@@ -12,7 +12,7 @@ module Flickr
         # ... 5 more to get the sizes
         # ... 5 more to get the medium size photos
         # boo
-        flickr.photos.search(:user_id => APP_CONFIG['flickr_user_id'], :tags => tag).each do |p|  
+        flickr.photos.search(:user_id => APP_CONFIG['flickr_user_id'], :tags => tag).each do |p|
             # Get photo info
             photo_info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
             # Save some photo info
@@ -28,11 +28,17 @@ module Flickr
             photos[p.id]['url']         = medium_size_photo.source
             photos[p.id]['height']      = medium_size_photo.height
         end
+
         photos
     end
-    
+
     def get_photo_by_id(id, size)
+        if Rails.cache.exist? id
+            return Rails.cache.read id
+        end
+
         return "" if id.blank?
+
         begin
             sizes = flickr.photos.getSizes :photo_id => id
         rescue Exception => e
@@ -40,6 +46,9 @@ module Flickr
             return ""
         end
         photo = sizes.find {|s| s.label == size }
+
+        Rails.cache.write id, photo.source
+
         photo.source
     end
 end

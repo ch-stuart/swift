@@ -7,6 +7,15 @@ body {
 button, p, h1, h2, h3, h4, h5, ul, li a {
     font-family: courier new, menlo, monaco;
 }
+
+.row-footer,
+.row-nojs,
+.row-humans,
+.row-prebox {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 #pre_box {
     margin-bottom: 5px;
     text-align: right;
@@ -22,8 +31,8 @@ button, p, h1, h2, h3, h4, h5, ul, li a {
 }
 
 #box {
-    border: 1px solid $border_gray;
-    background-color: #fff;
+//    border: 1px solid $border_gray;
+//    background-color: #fff;
 }
 #submit_order, #bike_btn {
     font-size: 14px;

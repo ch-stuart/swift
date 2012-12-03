@@ -2,7 +2,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require console
-//= require jquery.equalheights
+//= require jquery.fitvids
 //= require jquery.noisy
 //= require jquery.impromptu
 //= require jquery-selectBox/jquery.selectBox
@@ -10,10 +10,11 @@
 //= require slideshow
 //= require product_order
 
-jQuery(document).ready(function($) {
-    $(document.documentElement).removeClass('no-js');
 
-    if (document.location.hostname !== "localhost") {
+jQuery(document).ready(function($) {
+    $(document.documentElement).removeClass('nojs');
+
+    if (document.location.hostname !== "swift.dev") {
         $(document.body).noisy({
             intensity: 0.9, 
             size: 200, 

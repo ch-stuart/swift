@@ -1,5 +1,5 @@
 <%= render 'shared/checkout' %>
-<div class="grid_11">
+<div class="seven columns">
     <header>
         <h1 id="page_title" class="logo">
             <%= @title %>
@@ -7,7 +7,7 @@
     </header>
     <div id="descriptions" class="descriptions">
         <% @products.each_with_index do |product,idx| %>
-    		<div class="description description_<%= idx %>" id="description<%= product.id %>" <%= "style='display:none'" unless idx == 0 %>>
+            <div class="description description_<%= idx %>" id="description<%= product.id %>" <%= "style='display:none'" unless idx == 0 %>>
                 <div class="content">
                     <h2>
                         <%= product.title %>
@@ -28,7 +28,7 @@
         <% end %>
     </div>
 </div>
-<div id="photos" class="grid_13 omega photos">
+<div id="photos" class="nine columns photos">
     <% @products.each_with_index do |product,idx| %>
         <% photo_url = Product.get_photo_by_id(product.flickr_photo, "Medium") %>
         <div class="photo photo_<%= idx %>" id="photo<%= product.id %>" <%= "style='display:none'" unless idx == 0 %>>
@@ -36,33 +36,32 @@
         </div>
     <% end %>
 </div>
-<div class="clear"></div>
-<div class="grid_24">
-    <nav id="nav">
-        <% @categories.each do |category| %>
-            <div class="grid_3 alpha omega">
-                <span class="category_item nav_item" data-for="category_row_<%= category.id %>">
-                    <%= category.title %>
-                </span>
-            </div>
-        <% end %>
-        <div class="grid_3 alpha omega">
-            <%= link_to "Ready Made", store_path, :class => "nav_item category_item last" %>
+<br class="clear">
+<nav id="nav">
+    <% @categories.each do |category| %>
+        <div class="three columns alpha omega">
+            <span class="category_item nav_item" data-for="category_row_<%= category.id %>">
+                <%= category.title %>
+            </span>
         </div>
-        <% @categories.each do |category| %>
-            <div class="clear"></div>
-            <div id="category_row_<%= category.id %>" class="category_row" style="display:none">
-                <% category.products.each do |product| %>
-                    <div class="grid_3 alpha omega">
-                        <%= link_to product.short_title, product_path(product), 'data-photo' => "#photo#{product.id}", 'data-description' => "#description#{product.id}", :class => 'product_item nav_item' %>
-                    </div>
-                <% end %>
-            </div>
-        <% end %>
-    </nav>
-</div>
-<div class="clear"></div>
-<div class="grid_12 suffix_1 eql_col2 row_2">
+    <% end %>
+    <div class="three columns alpha omega">
+        <%= link_to "Ready Made", store_path, :class => "nav_item category_item last" %>
+    </div>
+    <br class="clear">
+    <% @categories.each do |category| %>
+        <div id="category_row_<%= category.id %>" class="category_row" style="display:none">
+            <% category.products.each do |product| %>
+                <div class="three columns alpha omega">
+                    <%= link_to product.short_title, product_path(product), 'data-photo' => "#photo#{product.id}", 'data-description' => "#description#{product.id}", :class => 'product_item nav_item' %>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+</nav>
+<br class="clear">
+
+<div class="eight columns">
     <article>
         <h3>
             <%= @featured_page.title %>
@@ -75,7 +74,7 @@
         </p>
     </article>
 </div>
-<div class="grid_11 omega eql_col2 row_2">
+<div class="eight columns">
     <article>
         <h3>
             <%= @blog['title'] %>
@@ -89,18 +88,18 @@
         </p>
     </article>
 </div>
-<div class="clear"></div>
+<br class="clear">
 
 <%= content_for :js do %>
     <script>
         $(document).ready(function() {
-			var $descs = $('#descriptions');
-			var $photos = $('#photos');
-			var $nav = $('#nav');
+            var $descs = $('#descriptions');
+            var $photos = $('#photos');
+            var $nav = $('#nav');
 
             function reset() {
-				$photos.find('.photo').hide();
-				$descs.find('.description').hide();
+                $photos.find('.photo').hide();
+                $descs.find('.description').hide();
                 $nav.find('.product_item').removeClass('active');
             }
 
@@ -114,7 +113,7 @@
                 $(description).show();
                 $img.attr('src', $img.data('src')).show()
                 $(photo).show();
-                
+
                 e.preventDefault();
             });
 
@@ -127,20 +126,20 @@
             });
 
             reset();
-			var $first_photo = $photos.find('.photo_0 img');
+            var $first_photo = $photos.find('.photo_0 img');
             $first_photo.attr('src', $first_photo.data('src')).show()
-			$photos.find('.photo_0').show();
-			$descs.find('.description_0').show();
+            $photos.find('.photo_0').show();
+            $descs.find('.description_0').show();
 
             $nav.find('.product_item').first().addClass('active');
             $nav.find('.category_item').first().addClass('active');
             $nav.find('.category_row').hide().first().show();
             $nav.find('.nav_item').equalHeights();
-                
+
             // layout
             $('.eql_col2').equalHeights();
             $descs.find('.description').equalHeights();
-            
+
         })
     </script>
 <% end %>

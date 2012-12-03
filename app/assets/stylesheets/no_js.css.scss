@@ -1,8 +1,10 @@
-#no_js_notice {
-    background-color: yellow;
-    padding: 1em;
-    display: none;
+.row-nojs {
+    display: none !important;
 }
-.no-js #no_js_notice {
-    display: block;
+.nojs .row-nojs {
+    display: block !important;
+}
+.row-nojs {
+    background-color: yellow;
+    padding: 20px;
 }

@@ -1,7 +1,6 @@
-footer {
+.row-footer {
     position: relative;
-    margin: 20px auto 10px;
-    padding-bottom: 10em;
+
     h3 {
         margin-bottom: 5px;
     }
@@ -31,10 +30,9 @@ footer {
         top: 0;
     }
 }
-#humans {
+.row-humans {
     font-family: helvetica neue, helvetica, arial, sans-serif;
     color: #888;
-    padding-bottom: 10px;
     a {
         color: #B8639D;
     }

@@ -3,39 +3,30 @@
         private!
     </p>
 <% end %>
-<%= render :partial => 'shared/checkout' %>
-<div class="grid_12 left_col">
-    <div class="content_wrapper">
-        <div class="content">
-            <%= render :partial => 'shared/slideshow' %>
-            <div class="text_content">
-                <article>
-                    <h2>
-                        <%= @page.title %>
-                    </h2>
-                    <%= raw md @page.body %>
-                </article>
-            </div>
-        </div>
-    </div>
+
+<%= render "shared/checkout" %>
+
+<div class="eight columns left_col">
+    <%= render 'shared/slideshow' %>
+    <article class="article">
+        <h2>
+            <%= @page.title %>
+        </h2>
+        <%= raw md @page.body %>
+    </article>
 </div>
-<div class="grid_12 right_col">
-    <div class="content_wrapper">
-        <div class="content">
-            <% if @page.video_html.present? %>
-                <%= raw @page.video_html %>
-            <% end %>
-            <div class="clear"></div>
-            <%= render :partial => 'shared/right_col_footer_nav' %>
-        </div>
-    </div>
+<div class="eight columns right_col">
+    <% if @page.video_html.present? %>
+        <%= raw @page.video_html %>
+    <% end %>
+    <%= render 'shared/right_col_footer_nav' %>
 </div>
-<div class="clear"></div>
+<br class="clear">
 
 <%= content_for :js do %>
     <script>
-        $(window).load(function() {
-           $('.content').equalHeights()
-        })
+        $(document).ready(function(){
+            $("#box").fitVids();
+        });
     </script>
 <% end %>

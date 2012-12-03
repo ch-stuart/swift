@@ -1,6 +1,7 @@
-@import '960gs/code/css/reset';
-@import '960gs/code/css/text';
-@import '960gs/code/css/960_24_col';
+@import 'skeleton/stylesheets/base';
+@import 'skeleton/stylesheets/skeleton';
+@import 'skeleton/stylesheets/layout';
+
 @import 'jquery.impromptu';
 @import 'jquery.selectBox';
 
@@ -21,3 +22,4 @@
 @import 'logo';
 @import 'private';
 @import 'no_js';
+
