@@ -1,35 +1,43 @@
-#page_homes_store {
-    h1.section_heading {
-        text-align: center;
-        padding: 40px 20px;
-    }
-    .content_wrapper {
-        padding: 10px;
-        h2 {
-            margin-top: 10px;
-            font-size: 16px;
-        }
-        .read_more {
-            text-transform: uppercase;
-            font-size: 12px;
-        }
-        h3.buy {
-            text-transform: uppercase;
-        }
-        a { color: #222; }
-        img {
-            @include boxshadow;
-            display: block;
-            margin: 0 auto;
-        }
-    }
-    #bike_btn {
-        margin-bottom: 10px;
-        padding-left: 5px;
-        margin-top: 50px;
-    }
-    #logo {
-        padding-left: 24px;
-        padding-bottom: 25px;
-    }
+.store-section-heading {
+    text-align: center;
+    padding: 40px 20px;
 }
+
+.store-item {
+    margin-bottom: 40px;
+}
+.store-item--image { width: 100%; }
+.store-item--heading {
+    text-align: left;
+    font-size: 14px;
+}
+.store-item--heading-link {
+    color: #333;
+}
+.store-item--link {
+    font-size: 14px;
+}
+
+.store-item--link {
+    display: inline-block;
+    margin-right: 20px;
+    font-family: georgia, serif;
+    font-weight: bold;
+    font-style: italic;
+    border: 1px solid #aaa;
+    padding: 5px 14px;
+    background-color: #fafafa;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    @include boxshadow2;
+    @include textshadow;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #fff),
+        color-stop(1, #fafafa)
+    );
+}
+
