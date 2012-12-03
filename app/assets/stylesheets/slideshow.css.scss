@@ -1,34 +1,41 @@
-#swift_slideshow_wrapper {
-    margin-top: 5px;
-    #swift_slideshow {
-        background-color: #111;
+.slideshow-photo {
+    width: 100%;
+}
+.slideshow-desc {
+    margin: 0;
+    font-family: helvetica, sans-serif;
+    padding: 5px;
+    background-color: $background_gray;
+    position: relative;
+}
+.slideshow-photo-wrapper {
+    position: relative;
+}
+.slideshow-nav-item {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
 
-        .photo,
-        .description {
-            display: none;
-        }
-        .photo {
-            background-position: center;
-            background-repeat: no-repeat;
-            width: 470px;
-            height: 353px;
-        }
-        .description {
-            margin: 0;
-            font-family: helvetica, sans-serif;
-            padding: 5px;
-            background-color: $background_gray;
-            position: relative;
-            .photo_nav {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                font-size: 16px;
-                font-weight: bold;
-                div {
-                    cursor: pointer;
-                }
-            }
-        }
+    background-color: #fff;
+    font-size: 30px;
+    padding: 10px;
+    opacity: 0.9;
+    color: #222;
+
+    &:active {
+        background-color: yellow;
     }
+}
+.slideshow-nav--next {
+    right: 0;
+}
+.slideshow-nav--previous {
+    left: 0;
+}
+.slideshow-info--flickr-link {
+    font-weight: normal;
+    text-transform: lowercase;
+    color: #888;
+    font-size: 80%;
+    font-family: helvetica neue, helvetica, arial, sans-serif;
 }

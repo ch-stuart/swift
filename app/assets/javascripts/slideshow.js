@@ -1,40 +1,38 @@
-;(function($){
-	var $box = $('#swift_slideshow_wrapper');
-	
-    function reset() {
-        $box.find('.photo').hide();
-        $box.find('.description').hide();
-    }
-    function init() {
-        reset();
-        $box.find('.photo').first().show();
-        $box.find('.description').first().show();
+jQuery.fn.slideshow = function() {
+    return this.each(function() {
 
-        $box.find('nav').hide();
-    }
+        var $wrapper = $(this)
+        var $items = $wrapper.find('.slideshow-item')
+        var size = $items.size()
+        var current = 1
 
-    $('nav a.toggle').click(function(e){
-        reset();
-        var photo = $(this).data('photo');
-        var description = $(this).data('description');
-        $(description).fadeIn();
-        $(photo).fadeIn();
-        e.preventDefault();
-    });
+        if (size == 1) {
+            $wrapper.find('.slideshow-nav').hide()
+            return
+        }
 
-    var photos_count = $box.find('.photo').size() - 1;
+        function go(dir) {
+            $items.hide()
 
-    $box.find('.goto').click(function() {
-        reset();
-        var idx = $(this).data('goto');
-        if (idx < 0) idx = photos_count;
-        if (idx > photos_count) idx = 0;
+            if (dir == 'next') {
+                if (current + 1 > size) current = 1
+                else current++
+            } else {
+                if (current - 1 == 0) current = size
+                else current--
+            }
+            // eq is 0-based
+            $items.eq(current - 1).fadeIn()
 
-        $box.find(".description").eq(idx).show();
-        $box.find(".photo").eq(idx).fadeIn(900);
-    });
+        }
 
-    $.slideshow = function() {
-        init();
-    };
-})(jQuery);
+        $items.hide().first().fadeIn()
+
+        $wrapper
+            .find('.slideshow-nav-item')
+            .on('click', function() {
+                go( $(this).data('dir') )
+            })
+
+    })
+}
