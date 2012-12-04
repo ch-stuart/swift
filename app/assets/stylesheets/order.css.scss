@@ -44,7 +44,7 @@
         }
     }
     .fields {
-        p.label, p.input {
+        p.label, .input {
             float: left;
             line-height: 1.7;
         }
@@ -53,10 +53,11 @@
             margin-right: 1em;
             width: 10em;
         }
-        p.input {
+        .input {
             width: 14em;
         }
-        p.input.no_color_choices {
+        .input
+.no_color_choices {
             color: #aaa;
             font-family: Georgia, times new roman, times, serif;
             font-style: italic;

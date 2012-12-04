@@ -11,9 +11,11 @@
 @import 'type';
 @import 'layout';
 @import 'pub';
+@import 'color_picker';
 @import 'order';
 @import 'product';
 @import 'footer';
+@import 'humans';
 @import 'form';
 @import 'homes';
 @import 'pages';
@@ -23,3 +25,6 @@
 @import 'private';
 @import 'no_js';
 
+a {
+    text-decoration: none;
+}

@@ -1,0 +1,20 @@
+<div class="input color-picker--wrapper">
+    <input type="hidden" class="color-picker--input">
+
+    <div class="color-picker--swatches">
+        <% colors.each do |color| %>
+            <div
+                class="color-picker--swatch"
+                style="background-color: <%= color.hex %>"
+                title='<%= color.title %> <%= "($#{color.price})" if color.price.present? %>'>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="color-picker--change button">
+        Change Color
+    </div>
+
+    <br class="clear">
+
+</div>

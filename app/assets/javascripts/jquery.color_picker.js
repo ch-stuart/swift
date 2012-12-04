@@ -1,0 +1,23 @@
+jQuery.fn.color_picker = function() {
+    return this.each(function() {
+
+        var $wrapper = $(this)
+        var $swatches = $wrapper.find('.color-picker--swatch')
+        var $button = $wrapper.find('.color-picker--change')
+        
+        $swatches.hide()
+        $swatches.first().show()
+        
+        $button.on('click', function() {
+            $button.hide()
+            $swatches.show()
+        })
+        
+        $swatches.on('click', function() {
+            $button.show()
+            $swatches.hide()
+            $(this).show()
+        })
+
+    })
+}

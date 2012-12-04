@@ -125,8 +125,9 @@
                                                 <%= "$#{part.price}" if part.price.present? %>
                                             </label>
                                         </p>
-                                        <% unless part.colors.blank? %>
-                                            <p class="input">
+                                        <% if part.colors.present? %>
+                                            <%= render "color_picker", :colors => part.colors %>
+                                            <p class="input" style="display:none">
                                                 <select
                                                     name="product1[]"
                                                     class="color_select"
@@ -213,9 +214,8 @@
     <script>
         $(document).ready(function() {
             $.productOrder()
-        });
-        $(window).load(function() {
-            $('.content').equalHeights();
+
+            $('.color-picker--wrapper').color_picker();
         });
     </script>
 <% end %>

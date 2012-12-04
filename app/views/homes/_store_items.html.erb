@@ -1,0 +1,15 @@
+<% endcap = (index + 1).modulo(3) == 0 ? true : false %>
+<div class="one-third column store-item">
+    <% photo_url = Product.get_photo_by_id(item.flickr_photo, "Small") %>
+    <img class="store-item--image" src="<%= photo_url %>">
+    <h2 class="store-item--heading">
+        <%= link_to item.title, item, :class => "store-item--heading-link" %> (<%= item.humane_price %>)
+    </h2>
+    <p>
+        <%= link_to "Read More", item, :class => "store-item--link" %>
+        <%= link_to "Buy", order_product_path(item), :class => "store-item--link" %>
+    </p>
+</div>
+<% if endcap %>
+    <br class=clear>
+<% end %>
