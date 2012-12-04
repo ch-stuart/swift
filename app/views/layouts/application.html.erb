@@ -9,9 +9,12 @@
     <%# Always force latest IE rendering engine (even in intranet) & Chrome Frame
        Remove this if you use the .htaccess %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta viewport="width=995">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script>
+        document.documentElement.className = document.documentElement.className.replace('nojs', ' ');
+    </script>
     <title>
-        <%= @title %><%= ": #{@subtitle}" if @subtitle.present? %> | handmade bicycle panniers and accessories
+        <%= "#{@subtitle} from " if @subtitle.present? %><%= @title %> | handmade bicycle panniers and accessories
     </title>
     <meta description="<%= Company.first.description if Company.first.description.present? %>">
     <link type="text/plain" rel="author" href="http://builtbyswift.com/humans.txt">
