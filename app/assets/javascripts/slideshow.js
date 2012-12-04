@@ -22,11 +22,11 @@ jQuery.fn.slideshow = function() {
                 else current--
             }
             // eq is 0-based
-            $items.eq(current - 1).fadeIn()
+            $items.eq(current - 1).show()
 
         }
 
-        $items.hide().first().fadeIn()
+        $items.hide().first().show()
 
         $wrapper
             .find('.slideshow-nav-item')
