@@ -1,30 +1,43 @@
+// Third-Party Base Grid
 @import 'skeleton/stylesheets/base';
 @import 'skeleton/stylesheets/skeleton';
 @import 'skeleton/stylesheets/layout';
 
+// Third-Party Components
 @import 'jquery.impromptu';
-@import 'jquery.selectBox';
 
+// Shared Styles
 @import 'color';
 @import 'fx';
-
 @import 'type';
-@import 'layout';
+@import 'form';
+
+// Layouts
 @import 'pub';
-@import 'color_picker';
-@import 'order';
-@import 'product';
+
+// Shared Page Subsections
 @import 'footer';
 @import 'humans';
-@import 'form';
-@import 'homes';
-@import 'pages';
-@import 'store';
-@import 'slideshow';
-@import 'logo';
 @import 'private';
 @import 'no_js';
+
+// Pages
+@import 'homes';
+@import 'store';
+@import 'order';
+
+// Components
+@import 'color_picker';
+@import 'slideshow';
+@import 'buttons';
 
 a {
     text-decoration: none;
 }
+
+#width {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
