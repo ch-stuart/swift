@@ -1,15 +1,38 @@
 <% if @product.testimonials.present? %>
-    <div id="testimonials">
-        <h3>
+
+    <div class="testimonials">
+        <h3 class="testimonials-heading">
             Testimonials
         </h3>
         <% @product.testimonials.each do |testimonial| %>
-            <p class="testimonial_body">
-                <%= raw md testimonial.body %>
-            </p>
-            <p class="testimonial_author">
-                &mdash; <%= testimonial.author %>
-            </p>
+            <div class="testimonial">
+                <p class="testimonial-body">
+                    <%= raw md testimonial.body %>
+                </p>
+                <p class="testimonial-author">
+                    &mdash; <%= testimonial.author %>
+                </p>
+            </div>
         <% end %>
     </div>
+    <%= content_for :js do %>
+        <script>
+            $('.testimonial')
+                .hide()
+                .first()
+                .show();
+
+            $('.testimonials')
+                .append('<p id=readMoreTestimonials class=button>Read More Testimonials</p>')
+                .find('#readMoreTestimonials')
+                .css('cursor', 'pointer')
+                .click(function() {
+                    $('.testimonial').show();
+                    $('#readMoreTestimonials').remove();
+                });
+        </script>
+    <% end %>
+
 <% end %>
+
+

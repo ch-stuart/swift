@@ -18,12 +18,12 @@
                     </div>
                 </div>
                 <div class="slideshow-info" id="desc<%= @photos[photo]['id'] -%>">
-                    <h4>
+                    <h5>
                         <%= @photos[photo]['title'].blank? ? 'Untitled' : @photos[photo]['title'] %>
                         <a class="slideshow-info--flickr-link" href="<%= @photos[photo]['flickr_url'] %>">
                             (View on Flickr)
                         </a>
-                    </h4>
+                    </h5>
                     <div class="slideshow-info--desc">
                         <%= raw @photos[photo]['description'] %>
                     </div>

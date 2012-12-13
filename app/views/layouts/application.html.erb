@@ -26,10 +26,8 @@
     <%= csrf_meta_tag %>
 </head>
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
-    <% if Rails.env == "development" %>
-            <h2 class="dev">
-                localhost
-            </h2>
+    <% if Rails.env == "developments" %>
+        <h2 class="dev">localhost</h2>
     <% end %>
     <% if @company.front_door_sign.present? %>
         <h2 class="front_door_sign">
@@ -37,9 +35,18 @@
         </h2>
     <% end %>
     <%= yield :flash %>
-    <div id="box" class="container">
-        <%= yield :pre_box %>
+    <div class="container container-logo">
+        <div class="sixteen columns clearfix row-logo" style="text-align: center">
+            <a href="/" class="link-home">
+                <%= image_tag "small-logo.png" %>
+            </a>
+            <%= render :partial => 'shared/checkout' %>
+        </div>
+    </div>
+    <div class="container container-main">
         <%= yield %>
+    </div>
+    <div class="container container-footer">
         <%= render 'shared/footer' %>
         <%= render 'shared/no_js' %>
         <%= render 'shared/humans' %>
@@ -47,6 +54,8 @@
     <%= javascript_include_tag "application" %>
     <%= yield :js %>
     <%= render 'shared/analytics' unless Rails.env == "development" %>
+
+    <div id="width"></div>
 </body>
 </html>
 

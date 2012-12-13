@@ -3,45 +3,27 @@
         private!
     </p>
 <% end %>
-<%= render :partial => 'shared/checkout' %>
-<div class="eight columns left_col">
-    <div class="content_wrapper">
-        <div class="content">
-            <%= render 'shared/slideshow' %>
-            <div id="product_description">
-                <%= raw md @product.description %>
-            </div>
-        </div>
-    </div>
+<div class="eleven columns col-main">
+    <h2>
+        <%= @product.title %>
+    </h2>
+    <%= render "shared/slideshow" %>
+    <%= raw md @product.description %>
+    <%= render 'testimonials' %>
 </div>
-<div class="eight columns right_col">
-    <div class="content_wrapper">
-        <div class="content">
-            <div id="illustration" style="background-image: url('<%= @illustration %>')"></div>
-            <div class="article">
-                <h2 id="product_title">
-                    <%= @product.title %>
-                </h2>
-                <h3 id="humane_price">
-                    <%= @product.humane_price %>
-                </h3>
-                <p>
-                  <%= raw md @product.specs %>
-                </p>
-                <%= render 'testimonials' %>
-                <div class="grid_6 prefix_2 alpha omega">
-                    <p id="design_your_bags">
-                        <% if @product.is_product? %>
-                            <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
-                        <% else %>
-                            <%= link_to "Buy it", order_product_path(@product), :id => "submit_order" %>
-                        <% end %>
-                    </p>
-                </div>
-            </div>
-            <br class="clear">
-            <%= render 'shared/right_col_footer_nav' %>
-        </div>
-    </div>
+<div class="five columns col-sidebar">
+    <p>
+        <% if @product.is_product? %>
+            <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
+        <% else %>
+            <%= link_to "Buy it", order_product_path(@product), :id => "submit_order" %>
+        <% end %>
+    </p>
+    <p>
+        <%= @product.humane_price %>
+    </p>
+    <p>
+        <%= raw md @product.specs %>
+    </p>
 </div>
 <br class="clear">

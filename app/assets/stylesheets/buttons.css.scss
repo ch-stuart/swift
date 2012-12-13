@@ -1,0 +1,32 @@
+#submit_order, #bike_btn {
+    font-size: 14px;
+}
+#submit_order {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: block;
+    background: transparent image-url('swift-bike.png') no-repeat;
+    cursor: pointer;
+    width: 150px;
+    height: 81px;
+    text-align: center;
+    text-transform: uppercase;
+}
+a#submit_order {
+    line-height: 104px;
+}
+button#submit_order {
+    padding-top: 23px;
+}
+#bike_btn {
+    background: transparent image-url('swift-wheel.png') no-repeat;
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+    text-indent: -7px;
+    width: 118px;
+    height: 81px;
+    line-height: 79px;
+    padding: 0;
+}

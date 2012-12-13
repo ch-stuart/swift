@@ -1,10 +1,4 @@
-<%= render 'shared/checkout' %>
 <div class="seven columns">
-    <header>
-        <h1 id="page_title" class="logo">
-            <%= @title %>
-        </h1>
-    </header>
     <div id="descriptions" class="descriptions">
         <% @products.each_with_index do |product,idx| %>
             <div class="description description_<%= idx %>" id="description<%= product.id %>" <%= "style='display:none'" unless idx == 0 %>>
