@@ -2,7 +2,6 @@
     text-align: center;
     padding: 40px 20px;
 }
-
 .store-item {
     margin-bottom: 40px;
 }
@@ -17,27 +16,9 @@
 .store-item--link {
     font-size: 14px;
 }
-
 .store-item--link {
     display: inline-block;
     margin-right: 20px;
     font-family: georgia, serif;
-    font-weight: bold;
-    font-style: italic;
-    border: 1px solid #aaa;
-    padding: 5px 14px;
-    background-color: #fafafa;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    @include boxshadow2;
-    @include textshadow;
-    background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #fff),
-        color-stop(1, #fafafa)
-    );
 }
 

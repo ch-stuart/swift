@@ -6,7 +6,6 @@
 //= require jquery.noisy
 //= require jquery.impromptu
 //= require jquery.color_picker
-//= require jquery-selectBox/jquery.selectBox
 //= require ICanHaz
 //= require slideshow
 //= require product_order
