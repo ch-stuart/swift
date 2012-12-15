@@ -33,6 +33,29 @@ jQuery.fn.slideshow = function() {
             .on('click', function() {
                 go( $(this).data('dir') )
             })
+            .end()
+            .find('.slideshow-photo')
+            .on('click', function() {
+                var img = new Image()
+                img.src = $(this).attr('src')
+                img.className = 'litebox'
+                img.style.display = 'none'
+                $(document.body).append(img)
+
+                var w = $('.litebox').width()
+                var h = $('.litebox').height()
+
+                $('.litebox')
+                    .css('margin-left', -(w / 2))
+                    .css('margin-top', -(h / 2))
+                    .show()
+                $('.mask').show()
+            })
+        
+        $(document.body).on('click', '.litebox', function() {
+            $('.litebox').remove()
+            $('.mask').hide()
+        })
 
     })
 }

@@ -1,7 +1,7 @@
 <% unless @photos.blank? %>
     <div class="slideshow-wrapper">
         <% @photos.each do |(photo,key)| %>
-            <div class="slideshow-item">
+            <div class="slideshow-item" style="display:none">
                 <div class="slideshow-photo-wrapper">
                     <img class="slideshow-photo"
                         id="photo<%= @photos[photo]['id'] %>"
@@ -18,12 +18,12 @@
                     </div>
                 </div>
                 <div class="slideshow-info" id="desc<%= @photos[photo]['id'] -%>">
-                    <h5>
+                    <p>
                         <%= @photos[photo]['title'].blank? ? 'Untitled' : @photos[photo]['title'] %>
                         <a class="slideshow-info--flickr-link" href="<%= @photos[photo]['flickr_url'] %>">
                             (View on Flickr)
                         </a>
-                    </h5>
+                    </p>
                     <div class="slideshow-info--desc">
                         <%= raw @photos[photo]['description'] %>
                     </div>
