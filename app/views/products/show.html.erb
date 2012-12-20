@@ -9,7 +9,12 @@
     </h2>
     <%= render "shared/slideshow" %>
     <%= raw md @product.description %>
-    <%= render 'testimonials' %>
+    <h3>
+        Specifications
+    </h3>
+    <p>
+        <%= raw md @product.specs %>
+    </p>
 </div>
 <div class="five columns col-sidebar">
     <p>
@@ -22,8 +27,6 @@
     <p>
         <%= @product.humane_price %>
     </p>
-    <p>
-        <%= raw md @product.specs %>
-    </p>
+    <%= render 'testimonials' %>
 </div>
 <br class="clear">
