@@ -1,4 +1,5 @@
 // ...
+//= require ua
 //= require jquery
 //= require jquery_ujs
 //= require console
@@ -12,16 +13,24 @@
 
 
 jQuery(document).ready(function($) {
-    $(document.documentElement).removeClass('nojs');
 
-    // if (document.location.hostname !== "swift.dev") {
+    $(document.documentElement).removeClass('nojs');
+    
+    if (UA.isMobile()) {
+        $(document.documentElement).addClass('is-mobile');
+    }
+    if (UA.isSafari()) {
+        $(document.documentElement).addClass('is-safari');
+    }
+
+    if (document.location.hostname !== "swift.dev") {
         $(document.body).noisy({
             intensity: 0.9, 
             size: 200, 
             opacity: 0.035,
             monochrome: false
         });
-    // }
+    }
     
     $(window).on('resize', function() {
         $('#width').text( $(document.body).css('width') )

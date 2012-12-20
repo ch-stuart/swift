@@ -27,6 +27,11 @@ module Flickr
             # Save medium size photo info
             photos[p.id]['url']         = medium_size_photo.source
             photos[p.id]['height']      = medium_size_photo.height
+
+            # Get large size photo
+            large_size_photo                = photo_sizes.find {|s| s.label == 'Large' }
+            photos[p.id]['large_url']       = large_size_photo.source
+            photos[p.id]['large_height']    = large_size_photo.height
         end
 
         photos

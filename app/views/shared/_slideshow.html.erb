@@ -7,7 +7,8 @@
                         id="photo<%= @photos[photo]['id'] %>"
                         data-text="<%= @photos[photo]['title'].blank? ? 'Untitled' : @photos[photo]['title'] %>"
                         data-caption="#photo_caption_<%= @photos[photo]['id'] %>"
-                        src="<%= @photos[photo]['url'] %>">
+                        src="<%= @photos[photo]['url'] %>"
+                        data-large="<%= @photos[photo]['large_url'] %>">
                     <div class="slideshow-nav">
                         <div class="slideshow-nav-item slideshow-nav--next" data-dir="next">
                             &raquo;

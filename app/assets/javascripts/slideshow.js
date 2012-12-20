@@ -1,4 +1,16 @@
 jQuery.fn.slideshow = function() {
+    
+    function sizeLitebox($litebox) {
+        var w = $litebox.width()
+        var h = $litebox.height()
+
+        $litebox
+            .css({
+                'margin-left':  -(w / 2),
+                'margin-top': -(h / 2)
+            })
+    }
+
     return this.each(function() {
 
         var $wrapper = $(this)
@@ -36,25 +48,40 @@ jQuery.fn.slideshow = function() {
             .end()
             .find('.slideshow-photo')
             .on('click', function() {
+                // Just go to the image directly
+                // if they're on a mobile device
+                if (UA.isMobile()) {
+                    document.location = $(this).data('large')
+                // Otherwise, show the litebox
+                } else {
+                    var img = new Image()
+                    img.src = $(this).data('large')
+                    img.className = 'litebox'
+                    img.style.display = 'none'
+                    
+                    $(document.body).append(img)
+
+                    sizeLitebox( $('.litebox') )
+                    
+                    $('.litebox, .mask').show()
+                }
+            })
+            
+        $wrapper
+            .find('.slideshow-photo').each(function() {
                 var img = new Image()
-                img.src = $(this).attr('src')
-                img.className = 'litebox'
-                img.style.display = 'none'
-                $(document.body).append(img)
-
-                var w = $('.litebox').width()
-                var h = $('.litebox').height()
-
-                $('.litebox')
-                    .css('margin-left', -(w / 2))
-                    .css('margin-top', -(h / 2))
-                    .show()
-                $('.mask').show()
+                img.src = $(this).data('large')
             })
         
         $(document.body).on('click', '.litebox', function() {
             $('.litebox').remove()
             $('.mask').hide()
+        })
+        
+        $(window).on('resize', function() {
+            if ($('.litebox').size() === 0) return;
+
+            sizeLitebox($('.litebox'))
         })
 
     })
