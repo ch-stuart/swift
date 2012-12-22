@@ -24,25 +24,6 @@
             }
         }
     }
-    .left_col .content {
-        padding: 0;
-        .article {
-            padding: 10px;
-        }
-        nav {
-            padding: 5px;
-        }
-    }
-    .right_col {
-        .content_wrapper {
-            .content {
-                padding: 0;
-                .article {
-                    padding: 10px;
-                }
-            }
-        }
-    }
     .fields {
         p.label, .input {
             float: left;
@@ -56,8 +37,7 @@
         .input {
             width: 14em;
         }
-        .input
-.no_color_choices {
+        .input .no_color_choices {
             color: #aaa;
             font-family: Georgia, times new roman, times, serif;
             font-style: italic;
@@ -73,17 +53,6 @@
             border-top: 1px dashed #ccc;
             width: 60%;
             margin: 0 auto 1em;
-        }
-    }
-    #color_swatches {
-        div {
-            color: #eee;
-            padding: 10px 10px;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, .6);
-            min-height: 70px;
-            font-family: helvetica, arial, sans-serif;;
-            font-size: 12px;
-            line-height: 1.4;
         }
     }
 }
