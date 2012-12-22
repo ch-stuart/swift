@@ -7,6 +7,9 @@
                 class="color-picker--swatch"
                 style="background-color: <%= color.hex %>"
                 title='<%= color.title %> <%= "($#{color.price})" if color.price.present? %>'>
+                <% if color.price.present? %>
+                    $<%= color.price %>
+                <% end %>
             </div>
         <% end %>
     </div>

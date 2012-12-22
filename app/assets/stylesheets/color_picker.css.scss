@@ -5,6 +5,9 @@
     width: 60px;
     height: 30px;
     float: left;
+    color: #fff;
+    font-family: sans-serif; // FIXME should be default
+    font-weight: bold;
 }
 .color-picker--change {
     float: left;
