@@ -32,14 +32,14 @@
             </div>
         <% end %>
     </div>
+    <%= content_for :js do %>
+      <script>
+        $(document).ready(function() {
+            $('.slideshow-wrapper').slideshow();
+        });
+      </script>
+    <% end %>
 <% else %>
-    <!-- No Photos -->
+    <!-- No Photos! -->
 <% end %>
 
-<%= content_for :js do %>
-  <script>
-    $(document).ready(function() {
-        $('.slideshow-wrapper').slideshow();
-    });
-  </script>
-<% end %>
