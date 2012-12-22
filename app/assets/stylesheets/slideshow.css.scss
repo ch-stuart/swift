@@ -76,3 +76,8 @@
     opacity: .6;
     z-index:1001;
 }
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}

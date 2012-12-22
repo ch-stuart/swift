@@ -18,7 +18,7 @@ jQuery.fn.slideshow = function() {
         var size = $items.size()
         var current = 1
 
-        if (size == 1) {
+        if (size === 1) {
             $wrapper.find('.slideshow-nav').hide()
             return
         }
@@ -62,8 +62,12 @@ jQuery.fn.slideshow = function() {
                     $(document.body).append(img)
 
                     sizeLitebox( $('.litebox') )
-                    
+
                     $('.litebox, .mask').show()
+
+                    $(document.body).addClass('stop-scrolling')
+                    
+                    window.scrollTo(0,0)
                 }
             })
             
@@ -76,6 +80,7 @@ jQuery.fn.slideshow = function() {
         $(document.body).on('click', '.litebox', function() {
             $('.litebox').remove()
             $('.mask').hide()
+            $(document.body).removeClass('stop-scrolling')
         })
         
         $(window).on('resize', function() {
