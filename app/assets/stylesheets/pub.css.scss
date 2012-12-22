@@ -34,9 +34,18 @@ button, p, h1, h2, h3, h4, h5, ul, li a {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.row-logo {
-    position: relative;
 
+.row-logo a {
+    display: block;
+}
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) {
+    .row-logo {
+        position: relative;
+
+        a { display: inline; }
+    }
     .link-checkout {
         position: absolute;
         right: 0;
