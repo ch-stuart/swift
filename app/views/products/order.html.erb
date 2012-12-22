@@ -26,11 +26,23 @@
         <%# render 'order_marketing' %>
         <%= render 'order_form' %>
     <% end %>
-    <%= render 'shared/right_col_footer_nav' %>
 </div>
 
 <div class="five columns">
-    <%= render :partial => 'shared/slideshow' %>
+    <%# render :partial => 'shared/slideshow' %>
+    <h3>
+        Delivery
+    </h3>
+    <% if @product.is_product? %>
+        <div class="fields handmade">
+            <p class="label">
+                <span class="handmade_label">handmade</span>
+            </p>
+            <p class="input">
+                <span><%= @company.delivery_time %></span>
+            </p>
+        </div>
+    <% end %>
     <h3>
         Specifications
     </h3>
@@ -62,6 +74,7 @@
         $(document).ready(function() {
             $.productOrder()
             $('.color-picker--wrapper').color_picker();
+            $('.color-picker--swatch').tooltip();
         });
     </script>
 <% end %>
