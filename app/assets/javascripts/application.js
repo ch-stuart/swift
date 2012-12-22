@@ -7,20 +7,23 @@
 //= require jquery.noisy
 //= require jquery.impromptu
 //= require jquery.color_picker
+//= require jquery.tooltip
 //= require ICanHaz
 //= require slideshow
 //= require product_order
 
 
 jQuery(document).ready(function($) {
+    
+    var $root = $(document.documentElement);
 
-    $(document.documentElement).removeClass('nojs');
+    $root.removeClass('nojs');
     
     if (UA.isMobile()) {
-        $(document.documentElement).addClass('is-mobile');
+        $root.addClass('is-mobile');
     }
     if (UA.isSafari()) {
-        $(document.documentElement).addClass('is-safari');
+        $root.addClass('is-safari');
     }
 
     if (document.location.hostname !== "swift.dev") {
