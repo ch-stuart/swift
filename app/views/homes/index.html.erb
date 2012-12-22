@@ -116,7 +116,6 @@
                 $('.category_item').removeClass('active');
                 $(this).addClass('active');
                 $('#' + $(this).data('for')).show();
-                $('.nav_item').equalHeights();
             });
 
             reset();
@@ -128,12 +127,6 @@
             $nav.find('.product_item').first().addClass('active');
             $nav.find('.category_item').first().addClass('active');
             $nav.find('.category_row').hide().first().show();
-            $nav.find('.nav_item').equalHeights();
-
-            // layout
-            $('.eql_col2').equalHeights();
-            $descs.find('.description').equalHeights();
-
         })
     </script>
 <% end %>
