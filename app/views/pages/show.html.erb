@@ -4,29 +4,43 @@
     </p>
 <% end %>
 
-<%= render "shared/checkout" %>
+<div class="sixteen columns left_col">
+    <h2>
+        <%= @page.title %>
+    </h2>
+    <div class="tabs">
+        <div class="tab">
+            Photos
+        </div>
+        <div class="tab">
+            Video
+        </div>
+        <div class="card">
+            <%= render 'shared/slideshow' %>
+        </div>
+        <div class="card">
+            <% if @page.video_html.present? %>
+                <%= raw @page.video_html %>
+            <% end %>
+        </div>
+    </div>
 
-<div class="eight columns left_col">
-    <%= render 'shared/slideshow' %>
     <article class="article">
-        <h2>
-            <%= @page.title %>
-        </h2>
         <%= raw md @page.body %>
     </article>
 </div>
-<div class="eight columns right_col">
-    <% if @page.video_html.present? %>
-        <%= raw @page.video_html %>
-    <% end %>
-    <%= render 'shared/right_col_footer_nav' %>
-</div>
 <br class="clear">
+
 
 <%= content_for :js do %>
     <script>
         $(document).ready(function(){
             $("#box").fitVids();
+
+            $('.tabs').tabs();
         });
+
+
     </script>
 <% end %>
+

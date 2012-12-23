@@ -8,6 +8,7 @@
 //= require jquery.impromptu
 //= require jquery.color_picker
 //= require jquery.tooltip
+//= require jquery.tabs
 //= require ICanHaz
 //= require slideshow
 //= require product_order
@@ -34,7 +35,7 @@ jQuery(document).ready(function($) {
             monochrome: false
         });
     }
-    
+
     $(window).on('resize', function() {
         $('#width').text( $(document.body).css('width') )
     })

@@ -1,0 +1,17 @@
+.card {
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+.tab {
+    cursor: pointer;
+    display: inline-block;
+    padding: .4rem;
+    margin: .4rem;
+}
+.tab.active {
+    background-color: #ffa;
+}
