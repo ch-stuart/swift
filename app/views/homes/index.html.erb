@@ -64,12 +64,12 @@
             <%= truncate(@featured_page.body, :length => 865) %>
         </p>
         <p>
-            <%= link_to "read more ->", @featured_page %>
+            <%= link_to raw("read more &rarr;"), @featured_page %>
         </p>
     </article>
 </div>
 <div class="eight columns">
-    <article>
+    <article class="blog">
         <h3>
             <%= @blog['title'] %>
         </h3>
@@ -78,55 +78,8 @@
             <%= raw @blog['description'] %>
         </p>
         <p>
-            <%= link_to "read more at the cycle swift blog ->", @blog['link'] %>
+            <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'] %>
         </p>
     </article>
 </div>
 <br class="clear">
-
-<%= content_for :js do %>
-    <script>
-        $(document).ready(function() {
-            var $descs = $('#descriptions');
-            var $photos = $('#photos');
-            var $nav = $('#nav');
-
-            function reset() {
-                $photos.find('.photo').hide();
-                $descs.find('.description').hide();
-                $nav.find('.product_item').removeClass('active');
-            }
-
-            $nav.on('click', '.product_item', function(e) {
-                var photo = $(this).data('photo');
-                var description = $(this).data('description');
-                var $img = $(photo).find('img');
-
-                reset();
-                $(this).addClass('active');
-                $(description).show();
-                $img.attr('src', $img.data('src')).show()
-                $(photo).show();
-
-                e.preventDefault();
-            });
-
-            $nav.on('click', '.category_item', function(e) {
-                $('.category_row').hide();
-                $('.category_item').removeClass('active');
-                $(this).addClass('active');
-                $('#' + $(this).data('for')).show();
-            });
-
-            reset();
-            var $first_photo = $photos.find('.photo_0 img');
-            $first_photo.attr('src', $first_photo.data('src')).show()
-            $photos.find('.photo_0').show();
-            $descs.find('.description_0').show();
-
-            $nav.find('.product_item').first().addClass('active');
-            $nav.find('.category_item').first().addClass('active');
-            $nav.find('.category_row').hide().first().show();
-        })
-    </script>
-<% end %>
