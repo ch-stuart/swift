@@ -8,23 +8,32 @@
     <h2>
         <%= @page.title %>
     </h2>
-    <div class="tabs">
-        <div class="tab">
-            Photos
+    <% if @photos.present? && @video_html.present? %>
+        <div class="tabs">
+            <div class="tab">
+                Photos
+            </div>
+            <div class="tab">
+                Video
+            </div>
+            <div class="card">
+                <%= render 'shared/slideshow' %>
+            </div>
+            <div class="card video-wrapper">
+                <div class="video-wrapper-sizer">
+                    <%= raw @video_html %>
+                </div>
+            </div>
         </div>
-        <div class="tab">
-            Video
+    <% elsif @photos.present? %>
+        <%= render 'shared/slideshow' %>
+    <% elsif @video_html.present? %>
+        <div class="video-wrapper">
+            <div class="video-wrapper-sizer">
+                <%= raw @video_html %>
+            </div>
         </div>
-        <div class="card">
-            <%= render 'shared/slideshow' %>
-        </div>
-        <div class="card">
-            <% if @page.video_html.present? %>
-                <%= raw @page.video_html %>
-            <% end %>
-        </div>
-    </div>
-
+    <% end %>
     <article class="article">
         <%= raw md @page.body %>
     </article>
@@ -35,12 +44,9 @@
 <%= content_for :js do %>
     <script>
         $(document).ready(function(){
-            $("#box").fitVids();
-
+            $('.video-wrapper').fitVids();
             $('.tabs').tabs();
         });
-
-
     </script>
 <% end %>
 

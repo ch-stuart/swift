@@ -3,14 +3,7 @@
 }
 .slideshow-photo-wrapper {
     position: relative;
-    background-color: #ccc;
-    background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        from(#ddd),
-        to(#bbb)
-    );
+    @extend .media-bg;
 }
 .slideshow-photo {
     max-width: 100%;

@@ -10,6 +10,7 @@
 @import 'color';
 @import 'type';
 @import 'form';
+@import 'media';
 
 // Layouts
 @import 'pub';
@@ -24,8 +25,10 @@
 @import 'homes';
 @import 'store';
 @import 'order';
+@import 'page';
 
 // Components
+@import 'video';
 @import 'color_picker';
 @import 'jquery.tooltip';
 @import 'jquery.tabs';

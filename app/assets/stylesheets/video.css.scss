@@ -1,0 +1,8 @@
+.video-wrapper {
+    @extend .media-bg;
+}
+.video-wrapper-sizer {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
