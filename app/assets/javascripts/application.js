@@ -37,6 +37,6 @@ jQuery(document).ready(function($) {
     }
 
     $(window).on('resize', function() {
-        $('#width').text( $(document.body).css('width') )
-    })
+        $('#width').text( $(document.body).css('width') );
+    });
 });
