@@ -26,21 +26,23 @@
     <%= csrf_meta_tag %>
 </head>
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
-    <% if Rails.env == "developments" %>
-        <h2 class="dev">localhost</h2>
-    <% end %>
     <% if @company.front_door_sign.present? %>
         <h2 class="front_door_sign">
             <%= @company.front_door_sign %>
         </h2>
     <% end %>
     <%= yield :flash %>
+    <%= render :partial => 'shared/checkout' %>
     <div class="container container-logo">
-        <div class="sixteen columns clearfix row-logo" style="text-align: center">
-            <a href="/" class="link-home">
-                <%= image_tag "small-logo.png" %>
-            </a>
-            <%= render :partial => 'shared/checkout' %>
+        <div class="sixteen columns clearfix row-header" style="text-align: center">
+            <h1 class="row-header--logo-wrap">
+                <a href="/" class="row-header--link">
+                    <%= image_tag "small-logo.png", :class => "row-header--logo" %>
+                </a>
+            </h1>
+            <h2 class="row-header--description">
+                <%= Company.first.description if Company.first.description.present? %>
+            </h2>
         </div>
     </div>
     <div class="container container-main">
