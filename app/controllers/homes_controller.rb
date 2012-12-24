@@ -15,6 +15,8 @@ class HomesController < ApplicationController
         @company = Company.first
 
         @blog = get_latest_blog_post
+
+        @photos = Home.get_photos
     end
 
     def store
