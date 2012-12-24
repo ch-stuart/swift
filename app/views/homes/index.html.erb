@@ -1,85 +1,44 @@
-<div class="seven columns">
-    <div id="descriptions" class="descriptions">
-        <% @products.each_with_index do |product,idx| %>
-            <div class="description description_<%= idx %>" id="description<%= product.id %>" <%= "style='display:none'" unless idx == 0 %>>
-                <div class="content">
-                    <h2>
-                        <%= product.title %>
-                    </h2>
-                    <%= raw md product.description %>
-                    <table class="goto">
-                        <tr>
-                            <td class="col1">
-                                <%= link_to "read more", product %>
-                            </td>
-                            <td class="col1">
-                                <%= link_to "design your bags", order_product_path(product) %>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        <% end %>
+<div class="row">
+    <div class="sixteen columns">
+        <img src="//placehold.it/960x400&text=Placeholder" class="hero-img">
     </div>
 </div>
-<div id="photos" class="nine columns photos">
-    <% @products.each_with_index do |product,idx| %>
-        <% photo_url = Product.get_photo_by_id(product.flickr_photo, "Medium") %>
-        <div class="photo photo_<%= idx %>" id="photo<%= product.id %>" <%= "style='display:none'" unless idx == 0 %>>
-            <img data-src="<%= photo_url %>" width="510">
-        </div>
-    <% end %>
+<div class="row">
+    <%= render "products_nav" %>
 </div>
-<br class="clear">
-<nav id="nav">
-    <% @categories.each do |category| %>
-        <div class="three columns alpha omega">
-            <span class="category_item nav_item" data-for="category_row_<%= category.id %>">
-                <%= category.title %>
-            </span>
-        </div>
-    <% end %>
-    <div class="three columns alpha omega">
-        <%= link_to "Ready Made", store_path, :class => "nav_item category_item last" %>
+<div class="row">
+    <div class="sixteen columns">
+        <p>
+            Also take a look at our <%= link_to "Ready Made", store_path, :class => "nav_item category_item last" %> store.
+        </p>
     </div>
-    <br class="clear">
-    <% @categories.each do |category| %>
-        <div id="category_row_<%= category.id %>" class="category_row" style="display:none">
-            <% category.products.each do |product| %>
-                <div class="three columns alpha omega">
-                    <%= link_to product.short_title, product_path(product), 'data-photo' => "#photo#{product.id}", 'data-description' => "#description#{product.id}", :class => 'product_item nav_item' %>
-                </div>
-            <% end %>
-        </div>
-    <% end %>
-</nav>
-<br class="clear">
-
-<div class="eight columns">
-    <article>
-        <h3>
-            <%= @featured_page.title %>
-        </h3>
-        <p>
-            <%= truncate(@featured_page.body, :length => 865) %>
-        </p>
-        <p>
-            <%= link_to raw("read more &rarr;"), @featured_page %>
-        </p>
-    </article>
 </div>
-<div class="eight columns">
-    <article class="blog">
-        <h3>
-            <%= @blog['title'] %>
-        </h3>
-        <p>
-            <%= image_tag @blog['img'], :class => "blog_img" %>
-            <%= raw @blog['description'] %>
-        </p>
-        <p>
-            <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'] %>
-        </p>
-    </article>
+<div class="row">
+    <div class="eight columns">
+        <article>
+            <h3>
+                <%= @featured_page.title %>
+            </h3>
+            <p>
+                <%= truncate(@featured_page.body, :length => 865) %>
+            </p>
+            <p>
+                <%= link_to raw("read more &rarr;"), @featured_page %>
+            </p>
+        </article>
+    </div>
+    <div class="eight columns">
+        <article class="blog">
+            <h3>
+                <%= @blog['title'] %>
+            </h3>
+            <p>
+                <%= image_tag @blog['img'], :class => "blog_img" %>
+                <%= raw @blog['description'] %>
+            </p>
+            <p>
+                <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'] %>
+            </p>
+        </article>
+    </div>
 </div>
-<br class="clear">
