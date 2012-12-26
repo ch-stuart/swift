@@ -3,54 +3,50 @@
         Customize your parts
     </h3>
     <% @product.parts.each do |part| %>
-        <div class="field">
-            <%# If it has a price, display a checkbox so they can add it. %>
-            <label for="checkbox_<%= digest(part.title +  part.id.to_s) %>">
-                <% if part.price.present? %>
-                    <input
-                        id="checkbox_<%= digest(part.title +  part.id.to_s) %>"
-                        type="checkbox"
-                        class="part_checkbox"
-                        data-hash="<%= digest(part.title +  part.id.to_s) %>"
-                        data-product="<%= part.title %>"
-                        data-price="<%= part.price %>">
-                <% end %>
-                <%= part.title %>
-                <%= "$#{part.price}" if part.price.present? %>
-            </label>
-            <% if part.colors.present? %>
-                <%= render "color_picker", :colors => part.colors %>
-                <p class="input" style="display:none">
-                    <select
-                        name="product1[]"
-                        class="color_select"
-                        data-hash="<%= digest('select' + part.title) %>">
-                        <option data-hex="#444" value="invalid">
-                            Choose One
-                        </option>
-                        <% part.colors.each do |color| %>
-                            <option
-                                <% if color.price.present? %>
-                                    data-hash="<%= digest(color.title + color.id.to_s) %>"
-                                    data-color="<%= color.title %>"
-                                    data-price="<%= color.price %>"
-                                <% end %>
-                                data-hex="<%= color.hex %>"
-                                <%# The value sets the title of the part which shows up at Mals %>
-                                value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.blank? %>) ">
-                                <%= color.title %>
-                                <%= "($#{color.price})" unless color.price.blank? %>
-                            </option>
-                        <% end %>
-                    </select>
-                </p>
-            <% else %>
-                <%#
-                <p class="input no_color_choices">
-                    <i>No color choices.</i>
-                </p>
-                %>
+        <%# If it has a price, display a checkbox so they can add it. %>
+        <label for="checkbox_<%= digest(part.title +  part.id.to_s) %>">
+            <% if part.price.present? %>
+                <input
+                    id="checkbox_<%= digest(part.title +  part.id.to_s) %>"
+                    type="checkbox"
+                    class="part_checkbox"
+                    data-hash="<%= digest(part.title +  part.id.to_s) %>"
+                    data-product="<%= part.title %>"
+                    data-price="<%= part.price %>">
             <% end %>
-        </div>
+            <%= part.title %>
+            <%= "$#{part.price}" if part.price.present? %>
+        </label>
+        <% if part.colors.present? %>
+            <%= render "color_picker", :colors => part.colors %>
+            <select
+                name="product1[]"
+                class="color_select"
+                data-hash="<%= digest('select' + part.title) %>">
+                <option data-hex="#444" value="invalid">
+                    Choose One
+                </option>
+                <% part.colors.each do |color| %>
+                    <option
+                        <% if color.price.present? %>
+                            data-hash="<%= digest(color.title + color.id.to_s) %>"
+                            data-color="<%= color.title %>"
+                            data-price="<%= color.price %>"
+                        <% end %>
+                        data-hex="<%= color.hex %>"
+                        <%# The value sets the title of the part which shows up at Mals %>
+                        value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.blank? %>) ">
+                        <%= color.title %>
+                        <%= "($#{color.price})" unless color.price.blank? %>
+                    </option>
+                <% end %>
+            </select>
+        <% else %>
+            <%#
+            <p class="input no_color_choices">
+                <i>No color choices.</i>
+            </p>
+            %>
+        <% end %>
     <% end %>
 <% end %>
