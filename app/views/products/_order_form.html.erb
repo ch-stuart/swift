@@ -13,30 +13,7 @@
     <div id="parts"></div>
     <%# -------- END MAL's fields -------- %>
     <%# Show the marketing text for this product %>
-    <% if @product.sizes.present? %>
-            <div class="field">
-                <h3>
-                    Sizing
-                </h3>
-                <p class="label">
-                    Choose your size!
-                </p>
-                <p class="input">
-                    <select name="productpr1" class="size_select">
-                        <option data-hex="#444" value="invalid">
-                            Choose One
-                        </option>
-                        <% @product.sizes.each do |size| %>
-                            <option value="<%= @product.title %>, <%= size.title %>:<%= size.price %>">
-                                <%= size.title %> ($<%= size.price %>)
-                            </option>
-                        <% end %>
-                    </select>
-                </p>
-                <div class="clear"></div>
-            </div>
-        </div>
-    <% end %>
+    <%= render 'order_form_sizes' %>
     <% unless @product.question.blank? %>
         <div class="fields">
             <div class="field">
