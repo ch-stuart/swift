@@ -1,4 +1,4 @@
-<% unless @product.question.blank? %>
+<% if @product.question.present? %>
     <label for="product-answer">
         <%= @product.question %>
     </label>
