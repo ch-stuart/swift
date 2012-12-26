@@ -1,5 +1,4 @@
-<div class="input color-picker--wrapper">
-    <input type="hidden" class="color-picker--input">
+<div class="color-picker--wrapper" data-for="#<%= digest('select' + part.title) %>">
 
     <div class="color-picker--swatches">
         <% colors.each do |color| %>

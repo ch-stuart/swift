@@ -18,8 +18,9 @@
             <%= "$#{part.price}" if part.price.present? %>
         </label>
         <% if part.colors.present? %>
-            <%= render "color_picker", :colors => part.colors %>
+            <%= render "color_picker", :part => part, :colors => part.colors %>
             <select
+                id="<%= digest('select' + part.title) %>"
                 name="product1[]"
                 class="color_select"
                 data-hash="<%= digest('select' + part.title) %>">
