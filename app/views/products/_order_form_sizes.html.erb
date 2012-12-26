@@ -1,20 +1,18 @@
 <% if @product.sizes.present? %>
-    <div class="field">
-        <h3>
-            Sizing
-        </h3>
-        <label for="productpr1">
-            Choose your size!
-        </label>
-        <select id="productpr1" name="productpr1">
-            <option value="invalid">
-                Choose One
+    <h3>
+        Sizing
+    </h3>
+    <label for="productpr1">
+        Choose your size!
+    </label>
+    <select id="productpr1" name="productpr1">
+        <option value="invalid">
+            Choose One
+        </option>
+        <% @product.sizes.each do |size| %>
+            <option value="<%= @product.title %>, <%= size.title %>:<%= size.price %>">
+                <%= size.title %> ($<%= size.price %>)
             </option>
-            <% @product.sizes.each do |size| %>
-                <option value="<%= @product.title %>, <%= size.title %>:<%= size.price %>">
-                    <%= size.title %> ($<%= size.price %>)
-                </option>
-            <% end %>
-        </select>
-    </div>
+        <% end %>
+    </select>
 <% end %>
