@@ -3,5 +3,5 @@
 projectDirectory = "$CWD"
 windowTitle      = "$TM_DISPLAYNAME — Swift"
 tabSize = 4
-exclude = "{$exclude,*.log}"
+exclude = "{$exclude,*.log,tmp/*}"
 
