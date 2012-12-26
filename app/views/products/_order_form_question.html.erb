@@ -3,7 +3,7 @@
         <%= @product.question %>
     </label>
     <% if @product.answer.blank? %>
-        <input id="product-answer" name="product1[]">
+        <input id="product-answer" name="product1[]" type="text">
     <% else %>
         <select id="product-answer" name="product1[]">
             <option value="invalid">
