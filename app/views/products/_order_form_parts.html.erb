@@ -23,8 +23,9 @@
                 id="<%= digest('select' + part.title) %>"
                 name="product1[]"
                 class="color_select"
-                data-hash="<%= digest('select' + part.title) %>">
-                <option data-hex="#444" value="invalid">
+                data-hash="<%= digest('select' + part.title) %>"
+                style="display:none">
+                <option value="invalid">
                     Choose One
                 </option>
                 <% part.colors.each do |color| %>
