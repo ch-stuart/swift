@@ -72,9 +72,9 @@
     </script>
     <script>
         $(document).ready(function() {
-            $.productOrder()
-            $('.color-picker--wrapper').color_picker();
-            $('.color-picker--swatch').tooltip();
-        });
+            $('#order_form').orderFormManager()
+            $('.color-picker--wrapper').color_picker()
+            $('.color-picker--swatch').tooltip()
+        })
     </script>
 <% end %>

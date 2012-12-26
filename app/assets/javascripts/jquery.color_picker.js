@@ -20,6 +20,7 @@ jQuery.fn.color_picker = function() {
             $(this).show()
 
             $select.get(0).selectedIndex = $(this).index() + 1
+            $select.trigger('change')
         })
 
     })
