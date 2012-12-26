@@ -3,20 +3,18 @@
         <h3>
             Sizing
         </h3>
-        <p class="label">
+        <label for="productpr1">
             Choose your size!
-        </p>
-        <p class="input">
-            <select name="productpr1" class="size_select">
-                <option data-hex="#444" value="invalid">
-                    Choose One
+        </label>
+        <select id="productpr1" name="productpr1">
+            <option value="invalid">
+                Choose One
+            </option>
+            <% @product.sizes.each do |size| %>
+                <option value="<%= @product.title %>, <%= size.title %>:<%= size.price %>">
+                    <%= size.title %> ($<%= size.price %>)
                 </option>
-                <% @product.sizes.each do |size| %>
-                    <option value="<%= @product.title %>, <%= size.title %>:<%= size.price %>">
-                        <%= size.title %> ($<%= size.price %>)
-                    </option>
-                <% end %>
-            </select>
-        </p>
+            <% end %>
+        </select>
     </div>
 <% end %>
