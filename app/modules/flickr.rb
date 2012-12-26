@@ -23,15 +23,21 @@ module Flickr
             # Get photo sizes
             photo_sizes                 = flickr.photos.getSizes :photo_id => photo_info['id']
             # Get medium size photo
-            medium_size_photo           = photo_sizes.find {|s| s.label == 'Medium' }
+            medium_photo                = photo_sizes.find {|s| s.label == 'Medium' }
             # Save medium size photo info
-            photos[p.id]['url']         = medium_size_photo.source
-            photos[p.id]['height']      = medium_size_photo.height
+            photos[p.id]['url']         = medium_photo.source
+            photos[p.id]['height']      = medium_photo.height
 
             # Get large size photo
-            large_size_photo                = photo_sizes.find {|s| s.label == 'Large' }
-            photos[p.id]['large_url']       = large_size_photo.source
-            photos[p.id]['large_height']    = large_size_photo.height
+            large_photo = photo_sizes.find {|s| s.label == 'Large' }
+
+            if large_photo.present?
+                photos[p.id]['large_url']    = large_photo.source
+                photos[p.id]['large_height'] = large_photo.height
+            else
+                photos[p.id]['large_url']    = medium_photo.source
+                photos[p.id]['large_height'] = medium_photo.height
+            end
         end
 
         photos
