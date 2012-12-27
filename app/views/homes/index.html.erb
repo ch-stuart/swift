@@ -13,13 +13,13 @@
 <div class="row">
     <div class="sixteen columns">
         <p>
-            Also take a look at our <%= link_to "Ready Made", store_path, :class => "nav_item category_item last" %> store.
+            Also take a look at our <%= link_to "Ready Made", store_path, :class => "hl-link" %> store.
         </p>
     </div>
 </div>
 <div class="row">
     <div class="eight columns">
-        <article>
+        <article class="featured-page">
             <h3>
                 <%= @featured_page.title %>
             </h3>
@@ -27,7 +27,7 @@
                 <%= truncate(@featured_page.body, :length => 865) %>
             </p>
             <p>
-                <%= link_to raw("read more &rarr;"), @featured_page %>
+                <%= link_to raw("read more &rarr;"), @featured_page, :class => "hl-link" %>
             </p>
         </article>
     </div>
@@ -41,7 +41,7 @@
                 <%= raw @blog['description'] %>
             </p>
             <p>
-                <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'] %>
+                <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'], :class => "hl-link" %>
             </p>
         </article>
     </div>

@@ -9,11 +9,10 @@
 .products-nav--category {
     margin-left: 0;
 }
-.products-nav--category-heading {
+.products-nav--category-item-link,
+.products-nav--category-item-link:visited {
+    color: $text_gray;
 }
-.products-nav--category-item {
-}
-
 
 #hero {
     height: 300px;
@@ -27,4 +26,14 @@
     -webkit-box-orient: horizontal;
     margin-top: 10px;
     height: 300px;
+}
+
+.hl-link,
+.hl-link:visited {
+    color: $hotpink;
+
+    &:hover {
+        color: $hotpink;
+        border-bottom: 1px solid $hotpink;
+    }
 }

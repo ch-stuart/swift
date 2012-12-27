@@ -35,9 +35,16 @@
 @import 'slideshow';
 @import 'buttons';
 
-a {
+
+// Override the base style set by Skeleton
+a, a:visited {
+    color: $hotpink;
     text-decoration: none;
 }
+a:hover, a:focus {
+    color: $hotpink;
+}
+// End override
 
 #width {
     position: absolute;

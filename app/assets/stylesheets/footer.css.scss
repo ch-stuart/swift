@@ -14,7 +14,11 @@
 }
 .footer-link {
     font-family: helvetica neue, helvetica, arial, sans-serif;
+    color: $text_gray;
 
+    &:visited {
+        color: $text_gray;
+    }
     &:hover {
         color: $hotpink;
     }
