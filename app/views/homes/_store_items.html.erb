@@ -1,7 +1,8 @@
 <% endcap = (index + 1).modulo(3) == 0 ? true : false %>
 <div class="one-third column store-item">
     <% photo_url = Product.get_photo_by_id(item.flickr_photo, "Small") %>
-    <img class="store-item--image" src="<%= photo_url %>">
+
+    <%= link_to(image_tag(photo_url, :class => "store-item--image"), item) %>
     <h2 class="store-item--heading">
         <%= link_to item.title, item, :class => "store-item--heading-link" %> (<%= item.humane_price %>)
     </h2>
