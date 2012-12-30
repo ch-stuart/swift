@@ -15,6 +15,8 @@ class ProductsController < ApplicationController
     @photos = Product.get_photos_for_tag @product.flickr_tag
     @company = Company.first
     @illustration = Product.get_photo_by_id(@product.flickr_illustration, "Medium")
+
+    render_404 unless @product.public?
   end
 
   def order
@@ -24,6 +26,8 @@ class ProductsController < ApplicationController
 
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product.flickr_tag
+
+    render_404 unless @product.public?
   end
 
   def new
