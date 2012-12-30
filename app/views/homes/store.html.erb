@@ -4,7 +4,7 @@
     <% end %>
 </div>
 <% @stock.each_with_index do |stock, index| %>
-    <%= render 'store_items', :item => stock, :index => index %>
+    <%= render "store_items", :item => stock, :index => index %>
 <% end %>
 
 <div class="sixteen columns">
@@ -14,7 +14,7 @@
 </div>
 
 <% @accessories.each_with_index do |accessory, index| %>
-    <%= render 'store_items', :item => accessory, :index => index %>
+    <%= render "store_items", :item => accessory, :index => index %>
 <% end %>
 
-<br class=clear>
+<br class="clear">
