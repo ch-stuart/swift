@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+
   layout :resolve_layout
 
   before_filter :authenticate, :except => [ :logout ]
@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
   # end
 
   protected
+
+  def render_404
+    raise ActionController::RoutingError.new("Not Found")
+  end
 
   def title
     @title = Company.first.title

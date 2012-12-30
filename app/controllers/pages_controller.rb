@@ -13,7 +13,7 @@ class PagesController < ApplicationController
   def show
     if params[:path]
       @page = Page.find_by_path(params[:path])
-      raise ActiveRecord::RecordNotFound, "Page not found" if @page.nil?
+      render_404 if @page.nil?
     else
       @page = Page.find(params[:id])
     end
@@ -22,6 +22,8 @@ class PagesController < ApplicationController
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @photos = Page.get_photos_for_tag @page.flickr_tag
     @subtitle = @page.title
+
+    render_404 unless @page.public?
   end
 
   def new

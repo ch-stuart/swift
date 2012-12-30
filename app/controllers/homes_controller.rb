@@ -24,7 +24,7 @@ class HomesController < ApplicationController
         @company = Company.first
     end
 
-    private
+    protected
 
     def get_latest_blog_post
         @blog = {}
