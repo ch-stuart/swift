@@ -69,7 +69,11 @@
             <%= @featured_page.title %>
         </h3>
         <p>
-            <%= truncate(@featured_page.body, :length => 865) %>
+            <% if @featured_page.summary.present? %>
+                <%= @featured_page.summary %>
+            <% else %>
+                <%= truncate(@featured_page.body, :length => 865) %>
+            <% end %>
         </p>
         <p>
             <%= link_to "read more ->", @featured_page %>

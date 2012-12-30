@@ -6,6 +6,7 @@
   <tr>
     <th>Status</th>
     <th>Title</th>
+    <th>Summary</th>
     <th>Body</th>
     <th>Path</th>
     <th>Featured?</th>
@@ -19,7 +20,8 @@
       <%= link_to page.title, page %>
       <%= link_to image_tag("edit.png"), edit_page_path(page) %>
     </td>
-    <td><%= truncate(page.body, :length => 60) %></td>
+    <td><%= truncate(page.summary, :length => 30) %></td>
+    <td><%= truncate(page.body, :length => 30) %></td>
     <td><%= page.path %></td>
     <td class="<%= 'featured' unless page.featured? -%>"><%= page.featured %></td>
     <td><%= link_to image_tag("destroy.png"), page, :confirm => 'Are you sure?', :method => :delete %></td>
