@@ -4,11 +4,16 @@
             <div class="slideshow-item" style="display:none">
                 <div class="slideshow-photo-wrapper">
                     <img class="slideshow-photo"
-                        id="photo<%= @photos[photo]['id'] %>"
-                        data-text="<%= @photos[photo]['title'].blank? ? 'Untitled' : @photos[photo]['title'] %>"
-                        data-caption="#photo_caption_<%= @photos[photo]['id'] %>"
-                        src="<%= @photos[photo]['url'] %>"
-                        data-large="<%= @photos[photo]['large_url'] %>">
+                        id="photo<%= @photos[photo]["id"] %>"
+                        data-text="<%= @photos[photo]["title"].blank? ? "Untitled" : @photos[photo]["title"] %>"
+                        data-caption="#photo_caption_<%= @photos[photo]["id"] %>"
+                        src="<%= @photos[photo]["url"] %>"
+                        data-large="<%= @photos[photo]["large_url"] %>">
+                        <%= render "shared/pin",
+                             :url => @photos[photo]["flickr_url"],
+                             :media => @photos[photo]["large_url"],
+                             :description => @photos[photo]["title"]
+                         %>
                     <div class="slideshow-nav">
                         <div class="slideshow-nav-item slideshow-nav--next" data-dir="next">
                             &raquo;
@@ -18,15 +23,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="slideshow-info" id="desc<%= @photos[photo]['id'] -%>">
+                <div class="slideshow-info" id="desc<%= @photos[photo]["id"] -%>">
                     <p>
-                        <%= @photos[photo]['title'].blank? ? 'Untitled' : @photos[photo]['title'] %>
-                        <a class="slideshow-info--flickr-link" href="<%= @photos[photo]['flickr_url'] %>">
+                        <%= @photos[photo]["title"].blank? ? "Untitled" : @photos[photo]["title"] %>
+                        <a class="slideshow-info--flickr-link" href="<%= @photos[photo]["flickr_url"] %>">
                             (View on Flickr)
                         </a>
                     </p>
                     <div class="slideshow-info--desc">
-                        <%= raw @photos[photo]['description'] %>
+                        <%= raw @photos[photo]["description"] %>
                     </div>
                 </div>
             </div>
@@ -38,6 +43,7 @@
             $('.slideshow-wrapper').slideshow();
         });
       </script>
+      <script src="//assets.pinterest.com/js/pinit.js"></script>
     <% end %>
 <% else %>
     <!-- No Photos! -->
