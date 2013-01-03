@@ -15,12 +15,21 @@ jQuery.fn.color_picker = function() {
         })
 
         $swatches.on('click', function() {
-            $button.show()
-            $swatches.hide()
-            $(this).show()
+            var $this = $(this)
 
-            $select.get(0).selectedIndex = $(this).index() + 1
-            $select.trigger('change')
+            var origColor = $this.css('background-color')
+
+            $this.css('background-color', tinycolor.darken(origColor))
+
+            setTimeout(function() {
+                $button.show()
+                $swatches.hide()
+                $this.show().css('background-color', origColor)
+
+                $select.get(0).selectedIndex = $this.index()
+                $select.trigger('change')
+            }, 222)
+            
         })
 
     })

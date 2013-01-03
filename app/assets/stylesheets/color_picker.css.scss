@@ -13,3 +13,9 @@
     float: left;
     margin-left: 15px;
 }
+
+.color-picker--swatch-blank {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEXr6+v///+HIERrAAAAFElEQVQIW2NksN/ISAz+f9CBGAwAxtEddZlnB4IAAAAASUVORK5CYII=);
+    background-repeat: repeat;
+    border: 1px solid #ccc;
+}

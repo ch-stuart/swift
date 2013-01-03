@@ -2,6 +2,7 @@
 //= require ua
 //= require jquery
 //= require jquery_ujs
+//= require tinycolor
 //= require console
 //= require jquery.fitvids
 //= require jquery.noisy
