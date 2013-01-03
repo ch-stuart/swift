@@ -32,7 +32,7 @@
         </h2>
     <% end %>
     <%= yield :flash %>
-    <%= render :partial => 'shared/checkout' %>
+    <%= render "shared/checkout" %>
     <div class="container container-logo">
         <div class="sixteen columns clearfix row-header" style="text-align: center">
             <h1 class="row-header--logo-wrap">
@@ -49,13 +49,13 @@
         <%= yield %>
     </div>
     <div class="container container-footer">
-        <%= render 'shared/footer' %>
-        <%= render 'shared/no_js' %>
-        <%= render 'shared/humans' %>
+        <%= render "shared/footer" %>
+        <%= render "shared/no_js" %>
+        <%= render "shared/humans" %>
     </div>
     <%= javascript_include_tag "application" %>
     <%= yield :js %>
-    <%= render 'shared/analytics' unless Rails.env == "development" %>
+    <%= render "shared/analytics" unless Rails.env == "development" %>
 
     <div id="width"></div>
     <div id="mask" class="mask"></div>
