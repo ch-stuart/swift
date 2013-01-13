@@ -63,7 +63,22 @@ module Flickr
         photo.source
     end
 
-    def get_photos
+    def get_photos_by_set id
+        photos = []
+
+        results = flickr.photosets.getPhotos :photoset_id => id
+
+        results["photo"].each do |photo|
+
+            sizes = flickr.photos.getSizes :photo_id => photo["id"]
+            medium = sizes.find {|size| size.label == "Medium" }
+            photos.push({ :id => photo["id"], :url => medium.source })
+        end
+
+        photos
+    end
+
+    def get_all_photos_for_user
         photos = []
 
         results = flickr.people.getPublicPhotos :user_id => APP_CONFIG['flickr_user_id'], :per_page => 10
