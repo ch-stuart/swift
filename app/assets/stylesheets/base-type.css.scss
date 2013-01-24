@@ -1,3 +1,16 @@
+.hl-link,
+.hl-link:visited {
+    color: $hotpink;
+
+    &:hover {
+        color: $hotpink;
+        border-bottom: 1px solid $hotpink;
+    }
+}
+
+// TODO
+//
+// - move to module
 .sign {
     line-height: 1.3;
     text-transform: none;
@@ -11,13 +24,11 @@
     margin-bottom: 30px;
     text-align: center;
 }
+// Displayed globally
 h2.front_door_sign {
     @extend .sign;
 }
-h2.dev {
-    @extend .sign;
-    background-color: rgb(100,100,110);
-}
+// Used on the order page
 h2.woah {
     font-family: helvetica, arial, sans-serif;
     font-weight: normal;

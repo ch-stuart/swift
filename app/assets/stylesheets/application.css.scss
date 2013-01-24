@@ -5,39 +5,35 @@
 
 // Includes
 @import 'include-color';
+@import 'include-media';
 
 // Base
 @import 'base-entypo';
 @import 'base-type';
 
-// Layout
-@import 'layout-video';
-
 // Modules
+@import 'module-blog';
 @import 'module-buttons';
 @import 'module-color.picker';
 @import 'module-form';
+@import 'module-hero';
 @import 'module-jquery.impromptu';
 @import 'module-jquery.tooltip';
 @import 'module-jquery.tabs';
-@import 'module-media';
 @import 'module-nav';
 @import 'module-nojs';
 @import 'module-private';
 @import 'module-slideshow';
-
+@import 'module-video';
 
 // Layouts
 @import 'layout-pub';
-
-// Shared Page Subsections
 @import 'layout-footer';
 @import 'layout-humans';
 
 // Pages
 @import 'glob-homes';
 @import 'glob-store';
-@import 'glob-order';
 @import 'glob-page';
 
 

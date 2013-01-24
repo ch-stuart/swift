@@ -1,0 +1,13 @@
+#hero {
+    height: 300px;
+    overflow: hidden;
+}
+#hero-scroll {
+    display: -webkit-box;
+}
+#hero img {
+    display: block;
+    -webkit-box-orient: horizontal;
+    margin-top: 10px;
+    height: 300px;
+}
