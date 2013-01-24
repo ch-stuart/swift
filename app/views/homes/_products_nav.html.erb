@@ -1,12 +1,11 @@
-<ul class="products-nav">
+<ul class="nav-list">
     <% @categories.each do |category| %>
-    <li class="products-nav--item <%= set_column_classes(@categories.length) %>">
-            <strong class="products-nav--category-heading"><%= category.title %></strong>
-            <ul class="products-nav--category">
+        <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+            <strong class="nav-list--group-heading"><%= category.title %></strong>
+            <ul class="nav-list--group">
                 <% category.products.each do |product| %>
-                    <li class="products-nav--category-item">
-                        <%= link_to product.title, product, :class => "products-nav--category-item-link" %><br>
-                        <%# TODO add short description %>
+                    <li class="nav-list--group-item">
+                        <%= link_to product.title, product, :class => "nav-list--group-item-link" %>
                     </li>
                 <% end %>
             </ul>

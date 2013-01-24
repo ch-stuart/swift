@@ -26,18 +26,30 @@
     <%= csrf_meta_tag %>
 </head>
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
+    <div class="container-menu-wrap">
+        <div class="container container-menu">
+            <div class="sixteen columns menu--row-btns">
+                <i id="global-menu-btn" class="entypo entypo-menu">&#9776;</i>
+                <%= image_tag "fox-100.png", :class => "menu-fox" %>
+                <a href="<%=APP_CONFIG['store_host']%><%=APP_CONFIG['review_cart_path']%><%=APP_CONFIG['store_userid']%>" title="View Your Cart or Checkout">
+                    <i class='entypo entypo-cart'>&#59197;</i>
+                </a>
+            </div>
+            <%= render 'shared/global_nav' %>
+        </div>
+    </div>
     <% if @company.front_door_sign.present? %>
         <h2 class="front_door_sign">
             <%= @company.front_door_sign %>
         </h2>
     <% end %>
     <%= yield :flash %>
-    <%= render "shared/checkout" %>
+    <%# render "shared/checkout" %>
     <div class="container container-logo">
         <div class="sixteen columns clearfix row-header" style="text-align: center">
             <h1 class="row-header--logo-wrap">
                 <a href="/" class="row-header--link">
-                    <%= image_tag "small-logo.png", :class => "row-header--logo" %>
+                    <%= image_tag "logo.png", :class => "row-header--logo" %>
                 </a>
             </h1>
             <h2 class="row-header--description">

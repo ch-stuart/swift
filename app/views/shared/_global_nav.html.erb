@@ -1,0 +1,53 @@
+<div id="global-menu" class="sixteen columns row menu--row-nav" style="display:none">
+    <div class="clearfix row">
+        <%= render "homes/products_nav" %>
+    </div>
+    <div class="clearfix row">
+        <ul class="nav-list">
+            <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+                <strong class="nav-list--group-heading">About Us</strong>
+                <ul class="nav-list--group">
+                    <li class="nav-list--group-item">
+                        <%= link_to "Our Story", Page.find_by_path('our_story'), :class => "nav-list--group-item-link" %>
+                    </li>
+                    <li>
+                        <%= link_to "Cycle Swift Blog", APP_CONFIG['personal_blog_url'], :class => "nav-list--group-item-link" %>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+                <strong class="nav-list--group-heading">Get in Touch</strong>
+                <ul class="nav-list--group">
+                    <li class="nav-list--group-item">
+                        <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "nav-list--group-item-link" %>
+                    </li>
+                    <li class="nav-list--group-item">
+                        <%= link_to @company.phone, @company.phone_link, :class => "nav-list--group-item-link" %>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+                <strong class="nav-list--group-heading">Be Social</strong>
+                <ul class="nav-list--group">
+                    <li class="nav-list--group-item">
+                        <%= link_to "Follow us on Twitter", APP_CONFIG['twitter_url'], :class => "nav-list--group-item-link" %>
+                    </li>
+                    <li class="nav-list--group-item">
+                        <%= link_to "Like us on Facebook", APP_CONFIG['facebook_url'], :class => "nav-list--group-item-link" %>
+                    </li>
+                    <li class="nav-list--group-item">
+                        <%= link_to "Follow us on Instagram", APP_CONFIG['instagram_url'], :class => "nav-list--group-item-link" %>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+                <strong class="nav-list--group-heading">Ready Made</strong>
+                <ul class="nav-list--group">
+                    <li class="nav-list--group-item">
+                        <%= link_to "Our Ready Made store", store_path, :class => "nav-list--group-item-link" %>.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

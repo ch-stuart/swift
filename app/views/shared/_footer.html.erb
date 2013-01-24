@@ -1,53 +1,50 @@
 <footer class="row-footer">
-    <div class="five columns">
-        <h3 class="footer-heading">
-            Our Products
-        </h3>
-        <ul class="footer-list">
-            <% @products.each do |product| %>
-                <li>
-                    <%= link_to product.title, product, :class => "footer-link" %>
+    <ul class="nav-list">
+        <li class="nav-list--item five columns">
+            <strong class="nav-list--group-heading">Our Products</strong>
+            <ul class="nav-list--group">
+                <% @products.each do |product| %>
+                    <li class="nav-list--group-item">
+                        <%= link_to product.title, product, :class => "nav-list--group-item-link" %>
+                    </li>
+                <% end %>
+                <li class="nav-list--group-item">
+                    <%= link_to "Ready Made", store_path, :class => "nav-list--group-item-link" %>
                 </li>
-            <% end %>
-            <li>
-                <%= link_to "Ready Made", store_path, :class => "footer-link" %>
-            </li>
-        </ul>
-    </div>
-    <div class="five columns">
-        <h3 class="footer-heading">
-            About Us
-        </h3>
-        <ul class="footer-list">
-            <li>
-                <%= link_to "Our Story", Page.find_by_path('our_story'), :class => "footer-link" %>
-            </li>
-            <li>
-                <%= link_to "Cycle Swift Blog", APP_CONFIG['personal_blog_url'], :class => "footer-link" %>
-            </li>
-        </ul>
-    </div>
-    <div class="five columns">
-        <h3 class="footer-heading">
-            Get in Touch
-        </h3>
-        <ul class="footer-list">
-            <li>
-                <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "footer-link" %>
-            </li>
-            <li>
-                <%= link_to @company.phone, @company.phone_link, :class => "footer-link" %>
-            </li>
-            <li>
-                <%= link_to "Follow us on Twitter", APP_CONFIG['twitter_url'], :class => "footer-link" %>
-            </li>
-            <li>
-                <%= link_to "Like us on Facebook", APP_CONFIG['facebook_url'], :class => "footer-link" %>
-            </li>
-            <li>
-                <%= link_to "Follow us on Instagram", APP_CONFIG['instagram_url'], :class => "footer-link" %>
-        </ul>
-    </div>
+            </ul>
+        </li>
+        <li class="nav-list--item five columns">
+            <strong class="nav-list--group-heading">About Us</strong>
+            <ul class="nav-list--group">
+                <li class="nav-list--group-item">
+                    <%= link_to "Our Story", Page.find_by_path('our_story'), :class => "nav-list--group-item-link" %>
+                </li>
+                <li class="nav-list--group-item">
+                    <%= link_to "Cycle Swift Blog", APP_CONFIG['personal_blog_url'], :class => "nav-list--group-item-link" %>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-list--item five columns">
+            <strong class="nav-list--group-heading">Get in Touch</strong>
+            <ul class="nav-list--group">
+                <li class="nav-list--group-item">
+                    <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "nav-list--group-item-link" %>
+                </li>
+                <li class="nav-list--group-item">
+                    <%= link_to @company.phone, @company.phone_link, :class => "nav-list--group-item-link" %>
+                </li>
+                <li class="nav-list--group-item">
+                    <%= link_to "Follow us on Twitter", APP_CONFIG['twitter_url'], :class => "nav-list--group-item-link" %>
+                </li>
+                <li class="nav-list--group-item">
+                    <%= link_to "Like us on Facebook", APP_CONFIG['facebook_url'], :class => "nav-list--group-item-link" %>
+                </li>
+                <li class="nav-list--group-item">
+                    <%= link_to "Follow us on Instagram", APP_CONFIG['instagram_url'], :class => "nav-list--group-item-link" %>
+                </li>
+            </ul>
+        </li>
+    </ul>
     <%= image_tag "fox.gif", :id => "footer_fox" %>
 </footer>
 <br class="clear">

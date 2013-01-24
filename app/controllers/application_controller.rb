@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+
   layout :resolve_layout
 
   before_filter :authenticate, :except => [ :logout ]

@@ -1,0 +1,14 @@
+
+.nav-list--item {
+    margin: 0;
+}
+.nav-list--group {
+    margin-left: 0;
+}
+.nav-list--group-item-link,
+.nav-list--group-item-link:visited {
+    color: $text_gray;
+}
+.nav-list--group-item-link:hover {
+    color: $hotpink;
+}

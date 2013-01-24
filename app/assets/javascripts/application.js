@@ -27,6 +27,16 @@ jQuery(document).ready(function($) {
     if (UA.isSafari()) {
         $root.addClass('is-safari');
     }
+    
+    $('#global-menu-btn').click(function() {
+        $(this).toggleClass('active');
+
+        if ($('#global-menu').css('display') === 'block') {
+            $('#global-menu').hide();
+        } else {
+            $('#global-menu').show();
+        }
+    });
 
     if (document.location.hostname !== "swift.dev") {
         $(document.body).noisy({
@@ -37,7 +47,7 @@ jQuery(document).ready(function($) {
         });
     }
 
-    $(window).on('resize', function() {
-        $('#width').text( $(document.body).css('width') );
-    });
+    // $(window).on('resize', function() {
+    //     $('#width').text( $(document.body).css('width') );
+    // });
 });

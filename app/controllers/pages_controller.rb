@@ -18,6 +18,7 @@ class PagesController < ApplicationController
       @page = Page.find(params[:id])
     end
 
+    @categories = Category.all
     @company = Company.first
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @photos = Page.get_photos_for_tag @page.flickr_tag

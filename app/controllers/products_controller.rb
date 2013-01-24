@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product.flickr_tag
@@ -19,6 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def order
+    @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @company = Company.first
     @colors = Color.all
