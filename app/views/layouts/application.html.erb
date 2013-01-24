@@ -30,7 +30,7 @@
         <div class="container container-menu">
             <div class="sixteen columns menu--row-btns">
                 <i id="global-menu-btn" class="entypo entypo-menu">&#9776;</i>
-                <%= image_tag "fox-100.png", :class => "menu-fox" %>
+                <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
                 <a href="<%=APP_CONFIG['store_host']%><%=APP_CONFIG['review_cart_path']%><%=APP_CONFIG['store_userid']%>" title="View Your Cart or Checkout">
                     <i class='entypo entypo-cart'>&#59197;</i>
                 </a>
@@ -60,10 +60,12 @@
     <div class="container container-main container-w-padding">
         <%= yield %>
     </div>
-    <div class="container container-footer">
-        <%= render "shared/footer" %>
-        <%= render "shared/no_js" %>
-        <%= render "shared/humans" %>
+    <div class="container-footer-wrap">
+        <div class="container container-footer">
+            <%= render "shared/footer" %>
+            <%= render "shared/no_js" %>
+            <%= render "shared/humans" %>
+        </div>
     </div>
     <%= javascript_include_tag "application" %>
     <%= yield :js %>

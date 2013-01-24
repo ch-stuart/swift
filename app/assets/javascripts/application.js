@@ -32,9 +32,9 @@ jQuery(document).ready(function($) {
         $(this).toggleClass('active');
 
         if ($('#global-menu').css('display') === 'block') {
-            $('#global-menu').hide();
+            $('#global-menu').slideUp();
         } else {
-            $('#global-menu').show();
+            $('#global-menu').slideDown();
         }
     });
 

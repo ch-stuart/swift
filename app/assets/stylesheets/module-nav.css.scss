@@ -1,10 +1,16 @@
-
 .nav-list--item {
     margin: 0;
 }
 .nav-list--group {
     margin-left: 0;
 }
+
+@media only screen and (max-width: 767px) {
+    .nav-list--group {
+        margin-bottom: 20px;
+    }
+}
+
 .nav-list--group-item-link,
 .nav-list--group-item-link:visited {
     color: $text_gray;

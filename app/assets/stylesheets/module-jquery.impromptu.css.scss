@@ -1,4 +1,4 @@
-@import 'color';
+@import 'include-color';
 
 /*
 ------------------------------
@@ -6,59 +6,59 @@
 ------------------------------
 */
 .jqifade{
-	position: absolute; 
-	background-color: #aaaaaa; 
+	position: absolute;
+	background-color: #aaaaaa;
 }
-div.jqi { 
-	width: 400px; 
-	position: absolute; 
-	background-color: $background_offwhite; 
-	text-align: left; 
+div.jqi {
+	width: 400px;
+	position: absolute;
+	background-color: $background_offwhite;
+	text-align: left;
 	border: solid 1px #eeeeee;
 	padding: 7px;
     font-family: Helvetica, Arial, Sans-serif;
-    
-    .jqiclose { 
+
+    .jqiclose {
     	position: absolute;
-    	top: 4px; right: -2px; 
-    	width: 18px; 
-    	cursor: default; 
-    	color: #bbbbbb; 
+    	top: 4px; right: -2px;
+    	width: 18px;
+    	cursor: default;
+    	color: #bbbbbb;
     }
-    .jqimessage { 
+    .jqimessage {
         font-size: 16px;
-    	padding: 10px; 
+    	padding: 10px;
     	color: 444;
         ul {
             margin-top: 10px;
         }
-        li { 
+        li {
             font-family: Helvetica, Arial, Sans-serif;
             font-size: 13px;
             margin-left: 17px;
         }
     }
-    .jqibuttons { 
-    	text-align: right; 
-    	padding: 5px 0 5px 0; 
+    .jqibuttons {
+    	text-align: right;
+    	padding: 5px 0 5px 0;
     }
-    button{ 
-    	padding: 3px 10px; 
-    	margin: 0 10px; 
-    	background-color: $hotpink; 
-    	border: solid 1px #f4f4f4; 
-    	color: #ffffff; 
+    button{
+    	padding: 3px 10px;
+    	margin: 0 10px;
+    	background-color: $hotpink;
+    	border: solid 1px #f4f4f4;
+    	color: #ffffff;
         font-family: Helvetica, Arial, sans-serif;
         font-size: 14px;
         font-weight: bold;
     }
-    button:hover{ 
+    button:hover{
     	background-color: #728A8C;
     }
     button.jqidefaultbutton{
     	background-color: #BF5E26;
     }
-    .jqiwarning .jqi .jqibuttons{ 
+    .jqiwarning .jqi .jqibuttons{
         background-color: #BF5E26;
     }
 }

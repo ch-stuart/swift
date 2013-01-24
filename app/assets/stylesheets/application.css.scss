@@ -3,39 +3,43 @@
 @import 'skeleton/stylesheets/skeleton';
 @import 'skeleton/stylesheets/layout';
 
-// Third-Party Components
-@import 'jquery.impromptu';
-@import 'entypo';
+// Includes
+@import 'include-color';
 
-// Shared Styles
-@import 'color';
-@import 'type';
-@import 'form';
-@import 'media';
+// Base
+@import 'base-entypo';
+@import 'base-type';
+
+// Layout
+@import 'layout-video';
+
+// Modules
+@import 'module-buttons';
+@import 'module-color.picker';
+@import 'module-form';
+@import 'module-jquery.impromptu';
+@import 'module-jquery.tooltip';
+@import 'module-jquery.tabs';
+@import 'module-media';
+@import 'module-nav';
+@import 'module-nojs';
+@import 'module-private';
+@import 'module-slideshow';
+
 
 // Layouts
-@import 'pub';
+@import 'layout-pub';
 
 // Shared Page Subsections
-@import 'footer';
-@import 'humans';
-@import 'private';
-@import 'no_js';
-@import 'nav';
+@import 'layout-footer';
+@import 'layout-humans';
 
 // Pages
-@import 'homes';
-@import 'store';
-@import 'order';
-@import 'page';
+@import 'glob-homes';
+@import 'glob-store';
+@import 'glob-order';
+@import 'glob-page';
 
-// Components
-@import 'video';
-@import 'color_picker';
-@import 'jquery.tooltip';
-@import 'jquery.tabs';
-@import 'slideshow';
-@import 'buttons';
 
 
 // Override the base style set by Skeleton
@@ -47,10 +51,3 @@ a:hover, a:focus {
     color: $hotpink;
 }
 // End override
-
-#width {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
