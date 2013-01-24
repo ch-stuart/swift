@@ -20,6 +20,7 @@ class HomesController < ApplicationController
     end
 
     def store
+        @categories = Category.all
         @products = Product.where(:status => "Public", :kind => "Product")
         @accessories = Product.where(:status => "Public", :kind => "Accessory")
         @stock = Product.where(:status => "Public", :kind => "Stock")
