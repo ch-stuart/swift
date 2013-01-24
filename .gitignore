@@ -4,3 +4,4 @@ db/*.sqlite3
 tmp/cache
 tmp/pids
 log/*.log
+app/assets/fonts/.DS_Store
