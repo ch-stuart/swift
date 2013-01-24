@@ -6,24 +6,35 @@
 <% end %>
 
 <div class="eleven columns">
-    <h2>
-        <%= @product.title %>
-    </h2>
+
+    <div class="row">
+        <% if @product.sizes.present? %>
+            <h2 class="product-title">
+                <%= @product.title %>
+            </h2>
+            <h4>
+                <% @product.sizes.each do |size| %>
+                    <%= size.title %>: $<%= size.price %>
+                <% end %>
+            </h4>
+        <% else %>
+            <h2 class="product-title">
+                <%= @product.title %> (<%= @product.humane_price %>)
+            </h2>
+        <% end %>
+    </div>
     <%# if the shop is closed, don't show the order form. %>
     <% if @company.close_shop? %>
         <h2 class="woah">
             <span><%= @company.close_shop_message %></span>
         </h2>
-        <%# render 'order_marketing' %>
     <%# if the product is not for sale, don't show the order form. %>
     <% elsif @product.not_for_sale? %>
         <h2 class="woah">
             <span><%= @product.not_for_sale_message %></span>
         </h2>
-        <%# render 'order_marketing' %>
     <%# else, show the order form. %>
     <% else %>
-        <%# render 'order_marketing' %>
         <%= render 'order_form' %>
     <% end %>
 </div>

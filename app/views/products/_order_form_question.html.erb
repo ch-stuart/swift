@@ -1,19 +1,21 @@
 <% if @product.question.present? %>
-    <label for="product-answer">
-        <%= @product.question %>
-    </label>
-    <% if @product.answer.blank? %>
-        <input id="product-answer" name="product1[]" type="text">
-    <% else %>
-        <select id="product-answer" name="product1[]">
-            <option value="invalid">
-                Choose One
-            </option>
-            <% @product.answer.split(',').each do |option| %>
-                <option>
-                    <%= option %>
+    <div class="row row-question">
+        <label for="product-answer" class="label">
+            <%= @product.question %>
+        </label>
+        <% if @product.answer.blank? %>
+            <input id="product-answer" name="product1[]" type="text" class="input">
+        <% else %>
+            <select id="product-answer" name="product1[]" class="input">
+                <option value="invalid">
+                    Choose One
                 </option>
-            <% end %>
-        </select>
-    <% end %>
+                <% @product.answer.split(',').each do |option| %>
+                    <option>
+                        <%= option %>
+                    </option>
+                <% end %>
+            </select>
+        <% end %>
+    </div>
 <% end %>
