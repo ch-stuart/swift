@@ -1,0 +1,52 @@
+date:        time:       comment:
+2012-12-02   1h 30m  Worked on responsive site. Twttr bootstrap.
+2012-12-02   2h 20m  made the slideshow mobile-compatible, generally improved implementation and navigation usability.
+2012-12-03   0h 34m  updated Store page (Stock and Accessories), removed some css to be reimplemnted later.
+2012-12-03   1h 27m  color picker and other stuff that i cant remember.
+2012-12-09   0h 26m  work on redesigning the product show page.
+2012-12-09   0h 09m  further work on product read more page.
+2012-12-10   0h 23m  changes for the product show page based on feedback from Martina.
+2012-12-12   1h 14m  stuff. see git commits.
+2012-12-15   0h 20m  re-arranging layout based on conversation with Martina.
+2012-12-15   0h 30m  support slideshow zooming, etc.
+2012-12-19   0h 20m  Slideshow....
+2012-12-20   0h 30m  tooltips for color swatches.
+2012-12-22   0h 31m  see logs... umm... making layout work on mobile, adjusting margins, etc.
+2012-12-22   0h 49m  worked on header design and home page styles.
+2012-12-22   0h 15m  tabs for the pages template.
+2012-12-22   0h 22m  various, see logs.
+2012-12-23   1h 00m  first progress on new layout and navigation model for home page.
+2012-12-23   0h 30m  worked on featured content on homepage. see commit.
+2012-12-26   1h 19m  order form stuff, making the color picker actually send values to Mals.
+2012-12-26   0h 15m  styling links on the homepage and adding instagram link.
+
+...
+
+2012-12-29 18:44 18:48 - remove "Shop" section from footer, remove "Buy" and "Read More" links on store page
+
+...
+
+## START 14:40 END 15:05
+
+- DONE remove private items showing up in home page nav, "Tweed Little Dear"
+- DONE make private items inaccessible
+
+## START 15:20 END 15:35
+
+- DONE add "summary" for our story/pages
+
+## Photosets on homepage
+
+START 15:55 PAUSE 16:26
+START 18:45 PAUSE 19:00
+
+## Pin it
+
+START 20:05 END 20:25
+
+- Add "pin it" button to photos
+
+## Set color picker as "Invalid" initially
+## Set color picker click highlight
+
+START 20:47 21:40
