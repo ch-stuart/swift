@@ -12,14 +12,16 @@
                 &mdash; <%= @product.testimonials.first.author %>
             </p>
         </div>
-		<div class="testimonial">
-            <p class="testimonial-body">
-                <%= raw md @product.testimonials.second.body %>
-            </p>
-            <p class="testimonial-author">
-                &mdash; <%= @product.testimonials.second.author %>
-            </p>
-        </div>
+		<% if @product.testimonials.second.present? %>
+			<div class="testimonial">
+	            <p class="testimonial-body">
+	                <%= raw md @product.testimonials.second.body %>
+	            </p>
+	            <p class="testimonial-author">
+	                &mdash; <%= @product.testimonials.second.author %>
+	            </p>
+	        </div>
+		<% end %>
 		<div class="testimonials-hidden">
 	        <% @product.testimonials.each_with_index do |testimonial, index| %>
 				<% next if index == 1 %>
