@@ -1,6 +1,6 @@
 <footer class="row-footer">
     <ul class="nav-list">
-        <li class="nav-list--item five columns">
+        <li class="nav-list--item four columns">
             <strong class="nav-list--group-heading">Our Products</strong>
             <ul class="nav-list--group">
                 <% @products.each do |product| %>
@@ -13,7 +13,7 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-list--item five columns">
+        <li class="nav-list--item four columns">
             <strong class="nav-list--group-heading">About Us</strong>
             <ul class="nav-list--group">
                 <li class="nav-list--group-item">
@@ -24,7 +24,7 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-list--item five columns">
+        <li class="nav-list--item four columns">
             <strong class="nav-list--group-heading">Get in Touch</strong>
             <ul class="nav-list--group">
                 <li class="nav-list--group-item">
@@ -33,6 +33,11 @@
                 <li class="nav-list--group-item">
                     <%= link_to @company.phone, @company.phone_link, :class => "nav-list--group-item-link" %>
                 </li>
+            </ul>
+        </li>
+        <li class="nav-list--item four columns">
+            <strong class="nav-list--group-heading">Be Social</strong>
+            <ul class="nav-list--group">
                 <li class="nav-list--group-item">
                     <%= link_to "Follow us on Twitter", APP_CONFIG['twitter_url'], :class => "nav-list--group-item-link" %>
                 </li>
