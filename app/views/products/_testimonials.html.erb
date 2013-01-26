@@ -24,7 +24,7 @@
 		<% end %>
 		<div class="testimonials-hidden">
 	        <% @product.testimonials.each_with_index do |testimonial, index| %>
-				<% next if index == 1 %>
+				<% next if index < 2 %>
 	            <div class="testimonial">
 	                <p class="testimonial-body">
 	                    <%= raw md testimonial.body %>
