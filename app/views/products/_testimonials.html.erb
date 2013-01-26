@@ -4,32 +4,54 @@
         <h3 class="testimonials-heading">
             Testimonials
         </h3>
-        <% @product.testimonials.each do |testimonial| %>
-            <div class="testimonial">
-                <p class="testimonial-body">
-                    <%= raw md testimonial.body %>
-                </p>
-                <p class="testimonial-author">
-                    &mdash; <%= testimonial.author %>
-                </p>
-            </div>
-        <% end %>
+		<div class="testimonial">
+            <p class="testimonial-body">
+                <%= raw md @product.testimonials.first.body %>
+            </p>
+            <p class="testimonial-author">
+                &mdash; <%= @product.testimonials.first.author %>
+            </p>
+        </div>
+		<div class="testimonial">
+            <p class="testimonial-body">
+                <%= raw md @product.testimonials.second.body %>
+            </p>
+            <p class="testimonial-author">
+                &mdash; <%= @product.testimonials.second.author %>
+            </p>
+        </div>
+		<div class="testimonials-hidden">
+	        <% @product.testimonials.each_with_index do |testimonial, index| %>
+				<% next if index == 1 %>
+	            <div class="testimonial">
+	                <p class="testimonial-body">
+	                    <%= raw md testimonial.body %>
+	                </p>
+	                <p class="testimonial-author">
+	                    &mdash; <%= testimonial.author %>
+	                </p>
+	            </div>  
+	        <% end %>
+		</div>
     </div>
     <%= content_for :js do %>
         <script>
-            $('.testimonial')
-                .hide()
-                .first()
-                .show();
-
-            $('.testimonials')
-                .append('<p id=readMoreTestimonials class=button>Read More Testimonials</p>')
-                .find('#readMoreTestimonials')
-                .css('cursor', 'pointer')
-                .click(function() {
-                    $('.testimonial').show();
-                    $('#readMoreTestimonials').remove();
-                });
+			$('.testimonials-hidden').hide();
+			
+			// Show additional testimonials
+			if ($('.testimonial').size() > 2) {
+	            $('.testimonials')
+	                .append('<p id=readMoreTestimonials class=button>Read More Testimonials</p>')
+	                .find('#readMoreTestimonials')
+	                .css('cursor', 'pointer')
+	                .click(function() {
+	                    $('.testimonials-hidden').slideDown({
+	                    	complete: function() {
+	                    		$('#readMoreTestimonials').css('visibility', 'hidden');
+	                    	}
+	                    });
+	                });
+			}
         </script>
     <% end %>
 
