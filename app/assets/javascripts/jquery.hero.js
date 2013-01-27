@@ -93,19 +93,14 @@ jQuery.fn.hero = function(params) {
 			r.run();
 		}
 		
-		$hero.find('.hero-close').click(function() {
+		$hero.find('.hero-close,.hero-open').click(function() {
 			$hero
-				.find('.hero-para').hide().end()
-				.find('.hero-close').hide().end()
-				.find('.hero-open').show();
+				.find('.hero-para').slideToggle().end()
+				.find('.hero-close').toggle().end()
+				.find('.hero-open').toggle();
 		});
 
-		$hero.find('.hero-open').click(function() {
-			$hero
-				.find('.hero-para').show().end()
-				.find('.hero-close').show().end()
-				.find('.hero-open').hide();
-		}).show();
+		$hero.find('.hero-open').show();
 		
 		$(window).load(init);
     });
