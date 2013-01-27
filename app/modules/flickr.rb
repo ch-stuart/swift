@@ -75,6 +75,10 @@ module Flickr
             photos.push({ :id => photo["id"], :url => medium.source })
         end
 
+        if photos.length > 10
+            photos = photos[0..9] 
+        end
+
         photos
     end
 
