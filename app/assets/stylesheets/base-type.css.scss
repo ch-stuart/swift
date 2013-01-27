@@ -28,16 +28,3 @@
 h2.front_door_sign {
     @extend .sign;
 }
-// Used on the order page
-h2.woah {
-    font-family: helvetica, arial, sans-serif;
-    font-weight: normal;
-    text-transform: none;
-    span {
-        padding: 1px;
-        background-color: yellow;
-        line-height: 1.4;
-    }
-
-}
-

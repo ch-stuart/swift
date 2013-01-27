@@ -1,6 +1,7 @@
 .product-title {
 
 }
+
 .form-order .row {
     padding: 20px 20px 20px 20px;
     background-color: #f5f5f5;
@@ -45,4 +46,16 @@
     height: 42px;
     line-height: 67px;
 	margin-bottom: 10px;
+}
+
+.woah {
+    padding: 1px;
+    background-color: #ff9;
+    line-height: 1.4;
+}
+.order-form-does-not-work-without-javascript {
+	display: none;
+}
+.nojs .order-form-does-not-work-without-javascript {
+	display: block;
 }

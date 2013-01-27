@@ -1,10 +1,3 @@
-<% unless @product.public? %>
-    <%# this notifies the administrator that the product is private. %>
-    <p id="private_notice">
-        private!
-    </p>
-<% end %>
-
 <div class="eleven columns">
 
     <div class="row">
@@ -25,18 +18,24 @@
     </div>
     <%# if the shop is closed, don't show the order form. %>
     <% if @company.close_shop? %>
-        <h2 class="woah">
-            <span><%= @company.close_shop_message %></span>
-        </h2>
+        <h3>
+            <span class="woah"><%= @company.close_shop_message %></span>
+        </h3>
     <%# if the product is not for sale, don't show the order form. %>
     <% elsif @product.not_for_sale? %>
-        <h2 class="woah">
-            <span><%= @product.not_for_sale_message %></span>
-        </h2>
+        <h3>
+            <span class="woah"><%= @product.not_for_sale_message %></span>
+        </h3>
     <%# else, show the order form. %>
     <% else %>
+	    <h3 class="order-form-does-not-work-without-javascript">
+	        <span class="woah">
+	        	The order form requires JavaScript. Please enable JavaScript in your browser.
+	        </span>
+	    </h3>
         <%= render 'order_form' %>
     <% end %>
+
 </div>
 
 <div class="five columns">
