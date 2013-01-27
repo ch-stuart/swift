@@ -34,3 +34,15 @@
 .row-submit {
     margin-top: 40px;
 }
+
+.handmade_label {
+	display: block;
+	background: transparent image-url('scissors.png') no-repeat;
+    text-transform: lowercase;
+    text-align: center;
+    text-indent: -19px;
+    width: 121px;
+    height: 42px;
+    line-height: 67px;
+	margin-bottom: 10px;
+}
