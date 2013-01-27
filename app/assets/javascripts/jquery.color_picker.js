@@ -7,7 +7,7 @@ jQuery.fn.color_picker = function() {
         var $button = $wrapper.find('.color-picker--change')
 
         $swatches.hide()
-        $swatches.first().show()
+        // $swatches.first().show()
 
         $button.on('click', function() {
             $button.hide()
@@ -22,11 +22,11 @@ jQuery.fn.color_picker = function() {
             $this.css('background-color', tinycolor.darken(origColor))
 
             setTimeout(function() {
-                $button.show()
+                $button.show().text('Change Color')
                 $swatches.hide()
                 $this.show().css('background-color', origColor)
 
-                $select.get(0).selectedIndex = $this.index()
+                $select.get(0).selectedIndex = $this.index() + 1
                 $select.trigger('change')
             }, 222)
             

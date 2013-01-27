@@ -35,7 +35,7 @@ jQuery.fn.orderFormManager = function() {
 		.find('.label').click(function() {
 			// This is stupid
 			var isChecked = $(this).parents('.label-input-pair').find('.part_checkbox').attr('checked');
-			var $colorPicker = $(this).parents('.label-input-pair').find('.input-color');
+			var $colorPicker = $(this).parents('.label-input-pair').find('.input-color-with-optional-part');
 
 			if (isChecked) {
 				$colorPicker.show();
