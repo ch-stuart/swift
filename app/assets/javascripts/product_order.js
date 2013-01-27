@@ -24,9 +24,27 @@ jQuery.fn.orderFormManager = function() {
                 $.prompt("Not everything is filled out! Review your order and select a choice for each of the options.");
             }
         })
+		// hide color pickers for optional parts until
+		// the user has indicated they want this part
+		// included
+		.find('.input-color-with-optional-part')
+		.hide()
+		.end()
+		// hide/show the color picker for an optional part
+		// based on whether or not the checkbox is checked
+		.find('.label').click(function() {
+			// This is stupid
+			var isChecked = $(this).parents('.label-input-pair').find('.part_checkbox').attr('checked');
+			var $colorPicker = $(this).parents('.label-input-pair').find('.input-color');
+
+			if (isChecked) {
+				$colorPicker.show();
+			} else {
+				$colorPicker.hide();
+			}
+		})
+		.end()
         .find('.part_checkbox').change(function() {
-            console.log("checkbox changed")
-                
             var $this = $(this);
             if ($this.attr("checked")) {
                 $('#parts').append(
