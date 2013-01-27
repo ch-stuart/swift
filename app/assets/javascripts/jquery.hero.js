@@ -84,6 +84,8 @@ jQuery.fn.hero = function(params) {
 					if (animDist < (totalWidth - $hero.width()) ) {
 						$heroScroller.animate({
 							'margin-left': -(animDist) + 'px'
+						}, {
+							duration: 'slow'
 						})
 					}
 				})
