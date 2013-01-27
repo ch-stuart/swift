@@ -37,15 +37,15 @@
         </li>
         <li class="nav-list--item four columns">
             <strong class="nav-list--group-heading">Be Social</strong>
-            <ul class="nav-list--group">
+            <ul class="nav-list--group nav-list--group-inline">
                 <li class="nav-list--group-item">
-                    <%= link_to "Follow us on Twitter", APP_CONFIG['twitter_url'], :class => "nav-list--group-item-link" %>
+                    <%= link_to raw("&#62217;"), APP_CONFIG['twitter_url'], :class => "nav-list--group-item-link entypo-social", :title => "Follow us on Twitter" %>
                 </li>
                 <li class="nav-list--group-item">
-                    <%= link_to "Like us on Facebook", APP_CONFIG['facebook_url'], :class => "nav-list--group-item-link" %>
+                    <%= link_to raw("&#62220;"), APP_CONFIG['facebook_url'], :class => "nav-list--group-item-link entypo-social", :title => "Like us on Facebook" %>
                 </li>
                 <li class="nav-list--group-item">
-                    <%= link_to "Follow us on Instagram", APP_CONFIG['instagram_url'], :class => "nav-list--group-item-link" %>
+                    <%= link_to raw("&#62253;"), APP_CONFIG['instagram_url'], :class => "nav-list--group-item-link entypo-social", :title => "Follow us on Instagram" %>
                 </li>
             </ul>
         </li>
@@ -53,3 +53,4 @@
     <%= image_tag "fox-100.png", :class => "footer-fox img-fox" %>
 </footer>
 <br class="clear">
+

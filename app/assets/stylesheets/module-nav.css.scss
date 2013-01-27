@@ -18,3 +18,9 @@
 .nav-list--group-item-link:hover {
     color: $hotpink;
 }
+
+.nav-list--group-inline li {
+	float: left;
+	margin-right: 12px;
+	margin-top: 10px;
+}
