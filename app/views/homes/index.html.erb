@@ -1,10 +1,18 @@
 <div class="row">
-    <div id="hero" class="sixteen columns">
+    <div id="hero" class="sixteen columns hero">
         <div id="hero-scroll">
             <% @photos.each do |photo| %>
-                <img src=<%= photo[:url] %>>
+                <img src=<%= photo[:url] %> class="hero-img">
             <% end %>
         </div>
+		<div class="hero-text">
+			<h4 class="hero-heading">
+				Ozette Randonneuring Bag
+			</h4>
+			<p class="hero-para">
+				The Ozette Randonneuring Bag is inspired by the timeless front box design, and touts Swift Industries’ signature in the details. Our bag is completely vinyl-lined because we know that rain shouldn’t stop you. Keep charts and your cue sheet visible in the top map-case, and pack food and rain gear directly within arm’s reach. Discovered a coffee shop or brewery along the way? Easily slip the Ozette from the decaleur and rack and bring it inside. When you’re planning an Sub-24 hour overnight (S240), go the extra mile with a matching Trunk Saddle Bag. (<a href="/products/5">read more</a>).
+			</p>
+		</div>
     </div>
 </div>
 <div class="row">

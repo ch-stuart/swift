@@ -1,13 +1,28 @@
-#hero {
+.hero {
     height: 300px;
     overflow: hidden;
+	position: relative;
 }
-#hero-scroll {
-
-}
-#hero img {
+.hero-img {
     display: block;
     float: left;
     margin-top: 10px;
     height: 300px;
+}
+.hero-text {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	max-width: 400px;
+	padding: 10px;
+	background-color: rgba(0,0,0,0.8);
+}
+.hero-heading,
+.hero-para {
+	color: #fff;
+	font-family: Helvetica Neue, Helevtica, Arial, Sans-serif;
+}
+
+.hero-heading {
+	font-weight: bold;
 }
