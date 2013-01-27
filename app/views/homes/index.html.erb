@@ -47,21 +47,8 @@
     </div>
 </div>
 
-<%= content_for :js do %>
-<script>
-    // var width = 0
-    //
-    // $('#hero-scroll').find('img').each(function() {
-    //     width += $(this).width()
-    // })
-    //
-    // width = width - $('#hero-scroll').width()
-    //
-    // $('#hero-scroll').animate({
-    //     'margin-left': -(width)+'px'
-    // },
-    // {
-    //     'duration': 20 * 1000
-    // })
-</script>
+<% content_for :js do %>
+	<script>
+		$('#hero').hero();
+	</script>
 <% end %>

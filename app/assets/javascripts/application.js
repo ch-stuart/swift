@@ -8,6 +8,7 @@
 //= require jquery.noisy
 //= require jquery.impromptu
 //= require jquery.color_picker
+//= require jquery.hero
 //= require jquery.tooltip
 //= require jquery.tabs
 //= require ICanHaz

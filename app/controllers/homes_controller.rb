@@ -16,7 +16,7 @@ class HomesController < ApplicationController
 
         @blog = get_latest_blog_post
 
-        @photos = Home.get_photos_by_set "72157631915465787"
+        @photos = Home.get_photos_by_set "72157629938152425"
     end
 
     def store
