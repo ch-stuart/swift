@@ -16,13 +16,35 @@
 	max-width: 400px;
 	padding: 10px;
 	background-color: rgba(0,0,0,0.8);
+	padding-right: 35px;
 }
 .hero-heading,
 .hero-para {
 	color: #fff;
 	font-family: Helvetica Neue, Helevtica, Arial, Sans-serif;
 }
-
 .hero-heading {
 	font-weight: bold;
+	line-height: 1.1;
+	margin-bottom: 5px;
+}
+.hero-para {
+	font-size: 12px;
+	line-height: 1.5;
+	font-family: verdana, tahoma, sans-serif;
+	display: none;
+}
+
+.hero-close,
+.hero-open {
+	width: 24px;
+	height: 24px; 
+	background-size: contain;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 40px;
+	color: #fff;
+	cursor: pointer;
+	display: none;
 }
