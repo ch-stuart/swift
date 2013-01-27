@@ -15,7 +15,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @photos = Product.get_photos_for_tag @product.flickr_tag
     @company = Company.first
-    @illustration = Product.get_photo_by_id(@product.flickr_illustration, "Medium")
     @subtitle = @product.title
   end
 
