@@ -16,7 +16,13 @@ class HomesController < ApplicationController
 
         @blog = get_latest_blog_post
 
-        @photos = Home.get_photos_by_set "72157629937482187"
+        @featured_product = Product.where(:featured_on_homepage => true).last
+        
+        if @featured_product.flickr_set.present?
+            @photos = Home.get_photos_by_set @featured_product.flickr_set
+        else
+            @photos = Home.get_photos_by_tag @featured_product.flickr_tag
+        end
     end
 
     def store

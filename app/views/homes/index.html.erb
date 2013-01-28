@@ -7,10 +7,11 @@
         </div>
 		<div class="hero-text">
 			<h5 class="hero-heading">
-				Ozette Randonneuring Bag
+				<%= @featured_product.title %>
 			</h5>
 			<p class="hero-para">
-				The Ozette Randonneuring Bag is inspired by the timeless front box design, and touts Swift Industries’ signature in the details. Our bag is completely vinyl-lined because we know that rain shouldn’t stop you. Keep charts and your cue sheet visible in the top map-case, and pack food and rain gear directly within arm’s reach. Discovered a coffee shop or brewery along the way? Easily slip the Ozette from the decaleur and rack and bring it inside. When you’re planning an Sub-24 hour overnight (S240), go the extra mile with a matching Trunk Saddle Bag. (<a href="/products/5">read more</a>).
+				<%= @featured_product.description %>
+				(<%= link_to "read more", @featured_product %>)
 			</p>
 			<div class="hero-close entypo">&#59236;</div>
 			<div class="hero-open entypo">&#59239;</div>

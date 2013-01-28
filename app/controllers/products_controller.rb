@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @product = Product.find(params[:id])
-    @photos = Product.get_photos_for_tag @product.flickr_tag
+    @photos = Product.get_photos_by_tag @product.flickr_tag
     @company = Company.first
     @subtitle = @product.title
   end
@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
     @colors = Color.all
 
     @product = Product.find(params[:id])
-    @photos = Product.get_photos_for_tag @product.flickr_tag
+    @photos = Product.get_photos_by_tag @product.flickr_tag
     @subtitle = @product.title
   end
 

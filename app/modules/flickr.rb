@@ -1,10 +1,9 @@
 module Flickr
 
-    def get_photos_for_tag tag
-        return {} if tag.blank?
+    def get_photos_by_tag tag
+        return [] if tag.blank?
 
-        # http://snipplr.com/view/8954/create-nested-hashes/
-        photos = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
+        photos = []
 
         # This unforunately takes many calls to flickr in order to get the photo URLs
         # Say you have 5 photos in a slideshow
@@ -16,28 +15,32 @@ module Flickr
             # Get photo info
             photo_info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
             # Save some photo info
-            photos[p.id]['id']          = photo_info['id']
-            photos[p.id]['description'] = photo_info['description']
-            photos[p.id]['title']       = photo_info['title']
-            photos[p.id]['flickr_url']  = photo_info['urls'][0]['_content']
+            
+            photo = {}
+            photo[:id] = photo_info['id']
+            photo[:description]         = photo_info['description']
+            photo[:title]       = photo_info['title']
+            photo[:flickr_url]  = photo_info['urls'][0]['_content']
             # Get photo sizes
             photo_sizes                 = flickr.photos.getSizes :photo_id => photo_info['id']
             # Get medium size photo
             medium_photo                = photo_sizes.find {|s| s.label == 'Medium' }
             # Save medium size photo info
-            photos[p.id]['url']         = medium_photo.source
-            photos[p.id]['height']      = medium_photo.height
+            photo[:url]         = medium_photo.source
+            photo[:height]      = medium_photo.height
 
             # Get large size photo
             large_photo = photo_sizes.find {|s| s.label == 'Large' }
 
             if large_photo.present?
-                photos[p.id]['large_url']    = large_photo.source
-                photos[p.id]['large_height'] = large_photo.height
+                photo[:large_url]    = large_photo.source
+                photo[:large_height] = large_photo.height
             else
-                photos[p.id]['large_url']    = medium_photo.source
-                photos[p.id]['large_height'] = medium_photo.height
+                photo[:large_url]    = medium_photo.source
+                photo[:large_height] = medium_photo.height
             end
+            
+            photos.push photo
         end
 
         photos
@@ -82,7 +85,7 @@ module Flickr
         photos
     end
 
-    def get_all_photos_for_user
+    def get_photos_by_user
         photos = []
 
         results = flickr.people.getPublicPhotos :user_id => APP_CONFIG['flickr_user_id'], :per_page => 10
