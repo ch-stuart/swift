@@ -32,5 +32,9 @@ date:        time (minutes):       comment:
 2013-01-26   45   Various TODOs
 2013-01-26   10   fix handmade button on order page
 2013-01-26   10   use social logos rather than text
-
+2013-01-27   25   Various TODOs and cleanup
+2013-01-27   80   implement base homepage hero
+2013-01-27   20   more work on homepage hero
+2013-01-27   10   add db migrations for homepage hero
+2013-01-27   15   hub form cleanup, using skeleton for base form css
 
