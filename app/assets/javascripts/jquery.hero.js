@@ -54,6 +54,8 @@ jQuery.fn.hero = function(params) {
 	var imgCount = 0;
 	var imgLoadCount = 0;
 	var r = new Runner(3000);
+	var link;
+	var linkHtml;
 
     return this.each(function() {
         var $hero = $(this);
@@ -101,6 +103,13 @@ jQuery.fn.hero = function(params) {
 		});
 
 		$hero.find('.hero-open').show();
+		
+		link = $hero.find('.hero-heading a').attr('href');
+		linkHtml = ' (<a id=hero-link>read more</a>)';
+		
+		$hero.find('.hero-paras p:last-child').append(linkHtml);
+		$('#hero-link').attr('href', link);
+		
 		
 		$(window).load(init);
     });
