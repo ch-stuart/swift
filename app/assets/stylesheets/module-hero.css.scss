@@ -18,16 +18,18 @@
 	background-color: black;
 	background-color: rgba(0,0,0,0.8);
 	padding-right: 35px;
+	max-height: 270px;
+	overflow: auto;
 }
 @media only screen and (min-width: 768px) {
 	.hero-text {
-		width: 400px;
+		width: 440px;
 	}
 }
 
 
 .hero-heading,
-.hero-para {
+.hero-paras {
 	color: #fff;
 	font-family: Helvetica Neue, Helevtica, Arial, Sans-serif;
 }
@@ -35,13 +37,19 @@
 	font-weight: bold;
 	line-height: 1.1;
 	margin-bottom: 5px;
+	
+	a, a:visited { color: #fff; }
 }
-.hero-para {
+.hero-paras {
+	display: none;
+}
+.hero-paras p {
 	font-size: 12px;
 	line-height: 1.45;
 	margin-bottom: 10px;
 	font-family: verdana, tahoma, sans-serif;
-	display: none;
+	
+	&:last-child { margin-bottom: 0; }
 }
 
 .hero-close,

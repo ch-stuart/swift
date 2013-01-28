@@ -7,12 +7,11 @@
         </div>
 		<div class="hero-text">
 			<h5 class="hero-heading">
-				<%= @featured_product.title %>
+				<%= link_to @featured_product.title, @featured_product %>
 			</h5>
-			<p class="hero-para">
-				<%= @featured_product.description %>
-				(<%= link_to "read more", @featured_product %>)
-			</p>
+			<div class="hero-paras">
+				<%= raw md @featured_product.description %>
+			</div>
 			<div class="hero-close entypo">&#59236;</div>
 			<div class="hero-open entypo">&#59239;</div>
 		</div>

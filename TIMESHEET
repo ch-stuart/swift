@@ -37,4 +37,6 @@ date:        time (minutes):       comment:
 2013-01-27   20   more work on homepage hero
 2013-01-27   10   add db migrations for homepage hero
 2013-01-27   15   hub form cleanup, using skeleton for base form css
+2013-01-27   30   allow Martina to configure homepage hero from Hub
+2013-01-27   10   format homepage hero product description as markdown
 

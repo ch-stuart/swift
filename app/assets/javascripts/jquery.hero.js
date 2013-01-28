@@ -95,7 +95,7 @@ jQuery.fn.hero = function(params) {
 		
 		$hero.find('.hero-close,.hero-open').click(function() {
 			$hero
-				.find('.hero-para').slideToggle().end()
+				.find('.hero-paras').slideToggle().end()
 				.find('.hero-close').toggle().end()
 				.find('.hero-open').toggle();
 		});
