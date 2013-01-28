@@ -5,7 +5,7 @@
             <ul class="nav-list--group">
                 <% category.products.each do |product| %>
                     <li class="nav-list--group-item">
-                        <%= link_to product.title, product, :class => "nav-list--group-item-link" %>
+                        <%= link_to product.short_title, product, :class => "nav-list--group-item-link" %>
                     </li>
                 <% end %>
             </ul>
