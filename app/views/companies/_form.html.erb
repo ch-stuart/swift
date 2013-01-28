@@ -12,51 +12,50 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br />
+    <%= f.label :phone %>
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :address %><br />
+    <%= f.label :address %>
     <%= f.text_area :address %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label :description %>
     <%= f.text_area :description %>
     <p class="hint">
         The text that google uses for the "summary" text for the site.
     </p>
   </div>
   <div class="field">
-    <%= f.label :delivery_time %><br />
+    <%= f.label :delivery_time %>
     <%= f.text_area :delivery_time %>
     <p class="hint">
         The "handmade takes time" text on the order page.
     </p>
   </div>
   <div class="field">
-    <%= f.label :front_door_sign %><br />
+    <%= f.label :front_door_sign %>
     <%= f.text_area :front_door_sign %>
     <p class="hint">
       This text will appear at the top of every public page.
     </p>
   </div>
-  <div class="field">
-    <%= f.label :close_shop %><br />
-    <%= f.check_box :close_shop %>
-    <p class="hint">
-      This will turn off the order forms.
-    </p>
+  <div class="field row">
+    <label for="company_close_shop">
+		<%= f.check_box :close_shop %>
+		Close the shop? (this will turn off the order forms)
+	</label>
   </div>
   <div class="field">
-    <%= f.label :close_shop_message %><br />
+    <%= f.label :close_shop_message %>
     <%= f.text_area :close_shop_message %>
     <p class="hint">
       This text will appear instead of the order form.

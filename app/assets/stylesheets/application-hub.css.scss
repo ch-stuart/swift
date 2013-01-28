@@ -1,71 +1,26 @@
+// Third-Party Base Grid
+@import 'skeleton/stylesheets/base';
+@import 'skeleton/stylesheets/skeleton';
+@import 'skeleton/stylesheets/layout';
+
 @import '../javascripts/farbtastic/farbtastic';
 
-@import 'form';
-@import 'private';
+@import 'module-form';
 
-html, body {
-    background-color: #fafafa;
-    line-height: 1.6;
-    font-family: Bitstream Vera Sans, Droid Sans, Lucida Grande, sans-serif;
-    font-size: 13px;
+body {
+	padding-top: 40px;
 }
-#box {
-    margin: 60px auto;
-    position: relative;
-    padding-bottom: 100px;
-}
-th {
-    border-bottom: 1px solid #ccc;
-}
-td, th {
-    padding: 5px 2px;
-}
-h1,h2,h3,h4,ul,p {
-    margin: 20px 0 0 0;
-}
-p.hint {
-    margin-top: 0;
-    font-family: lucida grande, sans-serif;
-    font-size: 12px;
+.hint {
+    margin-top: -20px;
     color: #888;
     max-width: 360px;
 }
-h1 {
-    margin: 0 0 20px;
-    font-size: 24px;
+th {
+	text-align: left;
+	border-bottom: 1px solid #ccc;
 }
-h2 {
-    font-size: 20px;
-    margin: 10px 0 0;
-}
-h3 {
-    font-size: 18px;
-}
-h1,h2,h3 {
-    font-weight: normal;
-}
-ul,li {
-    list-style-type: square;
-    margin-left: 0;
-}
-ul {
-    margin-top: 0;
-    padding-left: 20px;
-}
-a {
-    color: #002FA7;
-    text-decoration: none;
-}
-a:active {
-    color: white;
-    background-color: blue;
-    text-decoration: none;
-}
-a:hover {
-    color: black;
-}
-.private {
-    background-color: #ffa;
+th,td {
+	padding: 5px 5px 5px 0;
 }
 .indent {
     background-color: rgba(255,255,255,.50);
