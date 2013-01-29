@@ -15,11 +15,9 @@ function add_fields(link, association, content) {
   $(link).parent().before(content.replace(regexp, new_id));
 }
 
-;(function($){
-    $.toggleColors = function() {
-        $('.color_label').live('click', function(e){
-            e.preventDefault();
-            $(this).closest('.color_fields').find('.color_boxes').slideToggle();
-        });
-    };
-})(jQuery);
+$.toggleColors = function() {
+    $('.color_label').live('click', function(e){
+        e.preventDefault();
+        $(this).closest('.color_fields').find('.color_boxes').slideToggle();
+    });
+};
