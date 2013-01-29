@@ -47,6 +47,13 @@
     <%= render :partial => 'shared/markdown_hint' %>
   </div>
   <div class="field">
+    <%= f.label :short_description %>
+    <%= f.text_area :short_description %>
+	<p class="hint">
+		Used for the homepage hero.
+	</p>
+  </div>
+  <div class="field">
     <%= f.label :price %>
     <%= f.text_field :price %>
     <p class="hint">
