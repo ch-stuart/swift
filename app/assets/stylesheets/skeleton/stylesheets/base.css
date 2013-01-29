@@ -232,6 +232,7 @@
 		display: block;
 		margin-bottom: 20px;
 		background: #fff; }
+	textarea { width: 420px; line-height: 1.4; }
 	select {
 		padding: 0; }
 	input[type="text"]:focus,
