@@ -14,7 +14,6 @@ class ProductTest < ActiveSupport::TestCase
       :short_title => "B.B. Bag",
       :humane_price => "25 bucks!",
       :flickr_photo => "1234567891",
-      :flickr_illustration => "0987654321",
       :flickr_set => "0987654321",
       :question => "What?",
       :answer => "42",
@@ -58,13 +57,7 @@ class ProductTest < ActiveSupport::TestCase
     product = Product.new @product
     assert !product.save, "Should not save"
   end
-  
-  test "should not save with bad ill format" do
-    @product[:flickr_illustration] = "123456789"
-    product = Product.new @product
-    assert !product.save, "Should not save"
-  end
-  
+    
   test "should not save without title" do
     product = Product.new @product.except(:title)
     assert !product.save, "should not save without title"
