@@ -12,52 +12,47 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :path %><br />
-    <%= f.text_field :path %><br />
+    <%= f.label :path %>
+    <%= f.text_field :path %>
     <p class="hint">
       The URL the page can be accessed at, e.g. <code>http://builtbyswift.com/dukes_of_hazzard</code>.
     </p>
   </div>
   <div class="field">
-    <%= f.label :summary %><br />
-    <%= f.text_area :summary %>
-    <%= render "shared/markdown_hint", :also => "This text will appear on the homepage if the page is featured." %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br />
+    <%= f.label :body %>
     <%= f.text_area :body %>
-    <%= render "shared/markdown_hint" %>
+    <%= render :partial => 'shared/markdown_hint' %>
   </div>
   <div class="field">
-    <%= f.label :video_html %><br />
+    <%= f.label :video_html %>
     <%= f.text_area :video_html %>
     <p class="hint">
       Get the embed html from the video site. Here's an <a href="http://d.pr/d1dh">example</a>. The size should be `width: 460 height: 369`.
     </p>
   </div>
   <div class="field">
-    <%= f.label :flickr_tag %><br />
+    <%= f.label :flickr_tag %>
     <%= f.text_field :flickr_tag %>
     <p class="hint">
       Enter a flickr tag to display a photo gallery. Leave blank for none.
     </p>
   </div>
   <div class="field">
-    <%= f.label :featured %><br />
+    <%= f.label :featured %>
     <%= f.select :featured, options_for_select(["Nope", "Featured"], :selected => @page.featured) %>
     <p class="hint">
       Should this appear on the front page? Only one page will be displayed so don't mark two as featured!
     </p>
   </div>
   <div class="field">
-    <%= f.label :status %><br />
+    <%= f.label :status %>
     <%= f.select :status, options_for_select(["Private", "Public"], :selected => @page.status) %>
     <p class="hint">
-        The page will 404 if you set it as private. For now that means you can't preview it.
+      Setting a page as private does not prevent a stranger from directly typing in the URL and finding it. It does, however, prevent it from being linked to from any pages on the site.
     </p>
   </div>
   <div class="actions">

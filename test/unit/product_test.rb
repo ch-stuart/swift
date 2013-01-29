@@ -15,10 +15,12 @@ class ProductTest < ActiveSupport::TestCase
       :humane_price => "25 bucks!",
       :flickr_photo => "1234567891",
       :flickr_illustration => "0987654321",
+      :flickr_set => "0987654321",
       :question => "What?",
       :answer => "42",
       :not_for_sale => false,
       :not_for_sale_message => "We are all out. :(",
+      :featured_on_homepage => false,
       :category_id => 1
     }
   end

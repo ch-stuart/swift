@@ -1,5 +1,13 @@
 /* TEAM */
 
+## v2
+
+Developer & Designer: Charles Stuart
+Site: http://enure.net
+Location: Missoula, MT
+
+## v1
+
 Developer: Charles Stuart
 Site: http://enure.net
 Location: Missoula, MT

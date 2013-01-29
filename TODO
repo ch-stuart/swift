@@ -1,8 +1,6 @@
 ## TODO
 
-- For parts, make "Choose one..." the default color
-- optional parts should only be sent if the checkbox is checked http://builtbyswift.com/products/4/order 
-- fix 'accessories' on the homepage and fix navigation so it's flexible
-- use this: https://github.com/rlivsey/middleman? (No, probably not)
-- when you remove a part from a product edit form it's not very easy to tell it happened. fade it out?
-- add new relic: https://devcenter.heroku.com/articles/newrelic#cedar
+## Go live
+
+- wednesday evening
+- before 9 o'clock

@@ -1,7 +1,6 @@
-db/*.sqlite3
+*.sqlite3
 .bundle
-.rvmrc
 tmp/cache
 tmp/pids
 log/*.log
-.DS_Store
+*.DS_Store

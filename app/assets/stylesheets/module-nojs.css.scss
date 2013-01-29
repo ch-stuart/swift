@@ -1,0 +1,10 @@
+.row-nojs {
+    display: none !important;
+}
+.nojs .row-nojs {
+    display: block !important;
+}
+.row-nojs {
+    background-color: yellow;
+    padding: 20px;
+}

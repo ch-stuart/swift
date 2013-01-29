@@ -1,23 +1,51 @@
-@import '960gs/code/css/reset';
-@import '960gs/code/css/text';
-@import '960gs/code/css/960_24_col';
-@import 'jquery.impromptu';
-@import 'jquery.selectBox';
+// Third-Party Base Grid
+@import 'skeleton/stylesheets/base';
+@import 'skeleton/stylesheets/skeleton';
+@import 'skeleton/stylesheets/layout';
 
-@import 'color';
-@import 'fx';
+// Includes
+@import 'include-color';
+@import 'include-media';
 
-@import 'type';
-@import 'layout';
-@import 'pub';
-@import 'order';
-@import 'product';
-@import 'footer';
-@import 'form';
-@import 'homes';
-@import 'pages';
-@import 'store';
-@import 'slideshow';
-@import 'logo';
-@import 'private';
-@import 'no_js';
+// Base
+@import 'base-entypo';
+@import 'base-type';
+
+// Modules
+@import 'module-blog';
+@import 'module-buttons';
+@import 'module-color.picker';
+@import 'module-form';
+@import 'module-hero';
+@import 'module-jquery.impromptu';
+@import 'module-jquery.tooltip';
+@import 'module-jquery.tabs';
+@import 'module-nav';
+@import 'module-nojs';
+@import 'module-order.form';
+@import 'module-private';
+@import 'module-slideshow';
+@import 'module-store';
+@import 'module-testimonials';
+@import 'module-video';
+
+// Layouts
+@import 'layout-pub';
+@import 'layout-footer';
+@import 'layout-humans';
+
+// Pages
+@import 'glob-homes';
+@import 'glob-page';
+
+
+
+// Override the base style set by Skeleton
+a, a:visited {
+    color: $hotpink;
+    text-decoration: none;
+}
+a:hover, a:focus {
+    color: $hotpink;
+}
+// End override

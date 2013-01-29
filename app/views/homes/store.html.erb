@@ -1,88 +1,20 @@
-<%= render :partial => 'shared/checkout' %>
-<div class="grid_24">
+<div class="sixteen columns clearfix">
     <% if @stock.present? %>
-        <h1 class="section_heading">Ready Made</h1>
+        <h2 class="store-section-heading">Ready Made</h2>
     <% end %>
 </div>
-<div class="grid_24 alpha omega">
-    <% @stock.each_with_index do |stock, index| %>
-        <% endcap = (index + 1).modulo(3) == 0 ? true : false %>
-        <div class="grid_8 omega">
-            <div class="content_wrapper">
-                <div class="content">
-                    <% photo_url = Product.get_photo_by_id(stock.flickr_photo, "Small") %>
-                    <img src="<%= photo_url %>">
-                    <h2>
-                        <%= link_to stock.title, stock %>
-                    </h2>
-                    <div class="grid_1">
-                        <h3 class="humane_price">
-                            <%= stock.humane_price %>
-                        </h3>
-                    </div>
-                    <div class="grid_3 prefix_1">
-                        <p class="read_more">
-                            <%= link_to "read more ->", stock %>
-                        </p>
-                    </div>
-                    <div class="grid_2">
-                        <h3 class="buy">
-                            <%= link_to "BUY", order_product_path(stock) %>
-                        </h3>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </div>
-        <% if endcap %>
-            <div class=clear></div>
-        <% end %>
-    <% end %>
-</div>
-<div class="grid_24">
+<% @stock.each_with_index do |stock, index| %>
+    <%= render "store_items", :item => stock, :index => index %>
+<% end %>
+
+<div class="sixteen columns">
     <% if @accessories.present? %>
-        <h1 class="section_heading">Accessories</h1>
+        <h2 class="store-section-heading">Accessories</h2>
     <% end %>
 </div>
-<div class="grid_24 alpha omega">
-    <% @accessories.each_with_index do |accessory, index| %>
-        <% endcap = (index + 1).modulo(3) == 0 ? true : false %>
-        <div class="grid_8 omega">
-            <div class="content_wrapper">
-                <div class="content">
-                    <% photo_url = Product.get_photo_by_id(accessory.flickr_photo, "Small") %>
-                    <img src="<%= photo_url %>">
-                    <h2>
-                        <%= link_to accessory.title, accessory %>
-                    </h2>
-                    <div class="grid_1">
-                        <h3 class="humane_price">
-                            <%= accessory.humane_price %>
-                        </h3>
-                    </div>
-                    <div class="grid_3 prefix_1">
-                        <p class="read_more">
-                            <%= link_to "read more ->", accessory %>
-                        </p>
-                    </div>
-                    <div class="grid_2">
-                        <h3 class="buy">
-                            <%= link_to "BUY", order_product_path(accessory) %>
-                        </h3>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </div>
-        <% if endcap %>
-            <div class=clear></div>
-        <% end %>
-    <% end %>
-</div>
-<div class="grid_4 prefix_20 alpha omega">
-    <%= link_to "Back to Bags", root_path, :id => "bike_btn" %>
-</div>
-<div class="grid_6 prefix_18 alpha omega">
-    <%= image_tag "small-logo.png", :id => "logo" %>
-</div>
-<div class=clear></div>
+
+<% @accessories.each_with_index do |accessory, index| %>
+    <%= render "store_items", :item => accessory, :index => index %>
+<% end %>
+
+<br class="clear">

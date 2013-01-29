@@ -1,3 +1,4 @@
+<h1>Edit <%= @product.title if @product.title.present? %></h1>
 <%= form_for @product do |f| %>
   <% if @product.errors.any? %>
     <div id="error_explanation">
@@ -12,102 +13,123 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :kind, "Type" %><br />
+    <%= f.label :kind, "Type" %>
     <%= f.select :kind, Product::KINDS, :selected => @product.kind %>
   </div>
   <div class="field">
-    <%= f.label :category_id, "Navigation Category" %><br />
+    <%= f.label :category_id, "Navigation Category" %>
     <%= f.select :category_id, Category.all.collect {|c| [ c.title, c.id ] }, { :include_blank => true, :selected => @product.category_id } %>
     <p class="hint">
       Leave blank if this is an Accessory or Stock product.
     </p>
   </div>
+  <div class="field row">
+	  <label for="product_featured_on_homepage">
+		    <%= f.check_box :featured_on_homepage %>
+			Feature on homepage?
+	  </label>
+  </div>
+  
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :short_title %><br />
+    <%= f.label :short_title %>
     <%= f.text_field :short_title %>
     <p class="hint">
       The short title will be used in space-constrained spaces (navigation lists, etc.).
     </p>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label :description %>
     <%= f.text_area :description %>
     <%= render :partial => 'shared/markdown_hint' %>
   </div>
   <div class="field">
-    <%= f.label :price %><br />
+    <%= f.label :short_description %>
+    <%= f.text_area :short_description %>
+	<p class="hint">
+		Used for the homepage hero.
+	</p>
+  </div>
+  <div class="field">
+    <%= f.label :price %>
     <%= f.text_field :price %>
     <p class="hint">
       ex: 299.01
     </p>
   </div>
   <div class="field">
-    <%= f.label :humane_price %><br />
+    <%= f.label :humane_price %>
     <%= f.text_field :humane_price %>
     <p class="hint">
       ex: "$200 for a pair"
     </p>
   </div>
   <div class="field">
-    <%= f.label :flickr_tag %><br />
+    <%= f.label :flickr_tag %>
     <%= f.text_field :flickr_tag %>
     <p class="hint">
       Enter a flickr tag to display a photo gallery. Leave blank for none.
     </p>
   </div>
+  <!-- TODO remove this -->
   <div class="field">
-    <%= f.label :flickr_photo %><br />
+    <%= f.label :flickr_photo %>
     <%= f.text_field :flickr_photo %>
     <p class="hint">
       The flickr photo id [<a href="http://d.pr/Q7xE" target="_new">?</a>] for the featured photo, e.g. the one which shows up on the home page.
     </p>
   </div>
   <div class="field">
-    <%= f.label :flickr_illustration %><br />
+    <%= f.label :flickr_illustration %>
     <%= f.text_field :flickr_illustration %>
     <p class="hint">
       The flickr photo id [<a href="http://d.pr/Q7xE" target="_new">?</a>] for the illustration.
     </p>
   </div>
   <div class="field">
-    <%= f.label :specs %><br />
+    <%= f.label :flickr_set %>
+    <%= f.text_field :flickr_set %>
+    <p class="hint">
+      The flickr set id. Used for the homepage hero.
+    </p>
+  </div>
+  <div class="field">
+    <%= f.label :specs %>
     <%= f.text_area :specs %>
     <%= render :partial => 'shared/markdown_hint' %>
   </div>
   <div class="field">
-    <%= f.label "Custom order question" %><br />
+    <%= f.label "Custom order question" %>
     <%= f.text_field :question %>
     <p class="hint">
       One additional question you can ask a customer during the order process.
     </p>
   </div>
   <div class="field">
-    <%= f.label "Custom order answer" %><br />
+    <%= f.label "Custom order answer" %>
     <%= f.text_field :answer %>
     <p class="hint">
       If the question has a set amount of choices, enter them as a comma-separated list, ex: <code>dogs, chimps, beavers</code>. Otherwise, leave the field blank if the answer is freeform.
     </p>
   </div>
   <div class="field">
-    <%= f.label :status %><br />
+    <%= f.label :status %>
     <%= f.select :status, Product::STATUSES, :selected => @product.status %>
     <p class="hint">
         The page will 404 if you set it as private. For now that means you can't preview it.
     </p>
   </div>
-  <div class="field">
-    <%= f.label :not_for_sale %><br />
-    <%= f.check_box :not_for_sale %>
-    <p class="hint">
-      Turn the order form off?
-    </p>
+  <div class="field row">
+    <label for="product_not_for_sale">
+	    <%= f.check_box :not_for_sale %>
+		Turn the order form off?
+	</label>
   </div>
   <div class="field">
-    <%= f.label :not_for_sale_message %><br />
+    <%= f.label :not_for_sale_message %>
     <%= f.text_area :not_for_sale_message %>
   </div>
   <div class="field">

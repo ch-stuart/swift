@@ -10,24 +10,23 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @product = Product.find(params[:id])
-    @photos = Product.get_photos_for_tag @product.flickr_tag
+    @photos = Product.get_photos_by_tag @product.flickr_tag
     @company = Company.first
-    @illustration = Product.get_photo_by_id(@product.flickr_illustration, "Medium")
-
-    render_404 unless @product.public?
+    @subtitle = @product.title
   end
 
   def order
+    @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @company = Company.first
     @colors = Color.all
 
     @product = Product.find(params[:id])
-    @photos = Product.get_photos_for_tag @product.flickr_tag
-
-    render_404 unless @product.public?
+    @photos = Product.get_photos_by_tag @product.flickr_tag
+    @subtitle = @product.title
   end
 
   def new

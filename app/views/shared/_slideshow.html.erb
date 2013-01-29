@@ -1,73 +1,51 @@
-<% unless @photos.empty? %>
-    <div id="swift_slideshow_wrapper">
-        <div id="swift_slideshow">
-            <% @photos.each_with_index do |(photo,key),idx| %>
-                <%
-                    if @photos[photo]['height'] == "500"
-                        width = "265px"
-                        height = "353px"
-                    else
-                        width = "470px"
-                        height = "353px"
-                    end
-                %>
-                <div id="photo<%= @photos[photo]['id'] -%>"
-                     data-idx="<%= idx %>"
-                     class="photo"
-                     style="background-image: url(<%= @photos[photo]['url'] -%>);
-                        background-size: <%= width -%> <%= height -%>;
-                        -moz-background-size: <%= width -%> <%= height -%>;
-                        -webkit-background-size: <%= width -%> <%= height -%>;"
-
-                        data-text="<%= @photos[photo]['title'].empty? ? 'Untitled' : @photos[photo]['title'] %>"
-                        data-caption="#photo_caption_<%= @photos[photo]['id'] -%>">
-                </div>
-                <div class="description" id="description<%= @photos[photo]['id'] -%>">
-                    <h4>
-                        <%= @photos[photo]['title'].blank? ? 'Untitled' : @photos[photo]['title'] -%>
-                    </h4>
-                    <div class="photo_description">
-                        <%= raw @photos[photo]['description'] %>
+<% unless @photos.blank? %>
+    <div class="slideshow-wrapper">
+        <% @photos.each do |photo| %>
+            <div class="slideshow-item" style="display:none">
+                <div class="slideshow-photo-wrapper">
+                    <img class="slideshow-photo"
+                        id="photo<%= photo[:id] %>"
+                        data-text="<%= photo[:title].blank? ? "Untitled" : photo[:title] %>"
+                        data-caption="#photo_caption_<%= photo[:id] %>"
+                        src="<%= photo[:url] %>"
+                        data-large="<%= photo[:large_url] %>">
+                        <%= render "shared/pin",
+                             :url => photo[:flickr_url],
+                             :media => photo[:large_url],
+                             :description => photo[:title]
+                         %>
+                    <div class="slideshow-nav">
+                        <div class="slideshow-nav-item slideshow-nav--next" data-dir="next">
+                            &raquo;
+                        </div>
+                        <div class="slideshow-nav-item slideshow-nav--previous" data-dir="previous">
+                            &laquo;
+                        </div>
                     </div>
+                </div>
+                <div class="slideshow-info" id="desc<%= photo[:id] %>">
                     <p>
-                        <a href="<%= @photos[photo]['flickr_url'] %>">
-                            View on Flickr
+                        <%= photo[:title].blank? ? "Untitled" : photo[:title] %>
+                        <a class="slideshow-info--flickr-link" href="<%= photo[:flickr_url] %>">
+                            (View on Flickr)
                         </a>
                     </p>
-                    <div class="photo_nav">
-                        <div class="goto next" data-goto="<%= (idx.to_i + 1) %>">
-                            &#x2192;
-                        </div>
-                        <div class="goto previous" data-goto="<%= (idx.to_i - 1) %>">
-                            &#x2190;
-                        </div>
+                    <div class="slideshow-info--desc">
+                        <%= raw photo[:description] %>
                     </div>
                 </div>
-            <% end -%>
-            <div class="clear"></div>
-            <nav>
-                <% @photos.each_key do |photo| %>
-                    <div class="grid_3 alpha omega">
-                        <%= link_to "#{@photos[photo]['title'].blank? ? 'Untitled' : @photos[photo]['title']}",
-                                    @photos[photo]['flickr_url'],
-                                    'data-photo' => "#photo#{@photos[photo]['id']}",
-                                    'data-description' => "#description#{@photos[photo]['id']}",
-                                    :class => 'toggle eql_col' %>
-                    </div>
-                <% end %>
-                <div class="clear"></div>
-            </nav>
-        </div>
+            </div>
+        <% end %>
     </div>
-    <div class="clear"></div>
+    <%= content_for :js do %>
+      <script>
+        $(document).ready(function() {
+            $('.slideshow-wrapper').slideshow();
+        });
+      </script>
+      <script src="//assets.pinterest.com/js/pinit.js"></script>
+    <% end %>
 <% else %>
-    <!-- No Photos -->
+    <!-- No Photos! -->
 <% end %>
 
-<%= content_for :js do %>
-  <script>
-    $(document).ready(function() {
-        $.slideshow();
-    });
-  </script>
-<% end %>

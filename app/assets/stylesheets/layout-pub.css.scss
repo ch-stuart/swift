@@ -1,0 +1,113 @@
+body {
+    background-color: $background_offwhite;
+    border-top: 4px solid $hotpink;
+}
+
+.img-fox {
+    opacity: .6;
+    width: 45px;
+}
+.container-menu-wrap {
+    background-color: #eee;
+    border-bottom: 1px solid #dadada;
+    margin-bottom: 50px;
+}
+.container-menu {
+    padding: 10px 10px 2px 10px;
+    position: relative;
+
+    .menu--row-btns {
+        text-align: center;
+    }
+    .menu--row-nav {
+        padding: 30px 0;
+    }
+
+    .entypo {
+        position: absolute;
+        cursor: pointer;
+
+        &:hover,
+        &.active {
+            color: $hotpink;
+        }
+    }
+    .entypo-menu { left: 10px; }
+    .entypo-cart {
+        right: 10px;
+        font-size: 50px;
+    }
+}
+.container-main {
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+@media only screen and (min-width: 1001px) {
+    .container-w-padding {
+        padding: 20px;
+    }
+}
+@media only screen and (min-width: 789px) {
+    .container-w-padding {
+        padding: 10px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .container-main {
+        border: 0;
+        background-color: transparent;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .container-main {
+        box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.03);
+    }
+}
+
+.col-sidebar {
+    padding-top: 20px;
+}
+.col-main {
+    padding-top: 10px;
+}
+
+.container-logo,
+.container-main,
+.container-footer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.row-header--logo-wrap {
+    margin-bottom: 2px;
+}
+.row-header--logo {
+    width: 300px;
+}
+.row-header--description {
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.4;
+    font-size: 19px;
+}
+@media only screen and (max-width: 767px) {
+    .row-header--logo {
+        width: 280px;
+    }
+    .row-header--description {
+        font-size: 15px;
+    }
+}
+.container-main { margin-top: 15px; }
+.container-logo { margin-bottom: 15px; }
+
+@media only screen and (min-width: 768px) {
+    .link-checkout {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: #888 !important;
+        display: none;
+    }
+}
+

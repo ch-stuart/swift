@@ -18,9 +18,11 @@ class PagesController < ApplicationController
       @page = Page.find(params[:id])
     end
 
+    @categories = Category.all
     @company = Company.first
     @products = Product.where(:status => 'Public', :kind => 'Product')
-    @photos = Page.get_photos_for_tag @page.flickr_tag
+    @photos = Page.get_photos_by_tag @page.flickr_tag
+    @video_html = @page.video_html
     @subtitle = @page.title
 
     render_404 unless @page.public?

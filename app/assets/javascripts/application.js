@@ -1,19 +1,45 @@
 // ...
+//= require ua
 //= require jquery
 //= require jquery_ujs
+//= require tinycolor
 //= require console
-//= require jquery.equalheights
+//= require jquery.fitvids
 //= require jquery.noisy
 //= require jquery.impromptu
-//= require jquery-selectBox/jquery.selectBox
+//= require jquery.color_picker
+//= require jquery.hero
+//= require jquery.tooltip
+//= require jquery.tabs
 //= require ICanHaz
 //= require slideshow
 //= require product_order
 
-jQuery(document).ready(function($) {
-    $(document.documentElement).removeClass('no-js');
 
-    if (document.location.hostname !== "localhost") {
+jQuery(document).ready(function($) {
+    
+    var $root = $(document.documentElement);
+
+    $root.removeClass('nojs');
+    
+    if (UA.isMobile()) {
+        $root.addClass('is-mobile');
+    }
+    if (UA.isSafari()) {
+        $root.addClass('is-safari');
+    }
+    
+    $('#global-menu-btn').click(function() {
+        $(this).toggleClass('active');
+
+        if ($('#global-menu').css('display') === 'block') {
+            $('#global-menu').slideUp();
+        } else {
+            $('#global-menu').slideDown();
+        }
+    });
+
+    if (document.location.hostname !== "swift.dev") {
         $(document.body).noisy({
             intensity: 0.9, 
             size: 200, 
@@ -21,4 +47,8 @@ jQuery(document).ready(function($) {
             monochrome: false
         });
     }
+
+    // $(window).on('resize', function() {
+    //     $('#width').text( $(document.body).css('width') );
+    // });
 });
