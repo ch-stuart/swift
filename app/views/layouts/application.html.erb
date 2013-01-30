@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <%# paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -%>
-<!--[if lt IE 7 ]> <html class="nojs ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="nojs ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="nojs ie8"> <![endif]-->
+<!--[if lt IE 7 ]> <html class="nojs ie ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="nojs ie ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="nojs ie ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="nojs ie ie9"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html class="nojs"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
@@ -34,6 +35,7 @@
                 <a href="<%=APP_CONFIG['store_host']%><%=APP_CONFIG['review_cart_path']%><%=APP_CONFIG['store_userid']%>" title="View Your Cart or Checkout">
                     <i class='entypo entypo-cart'>&#59197;</i>
                 </a>
+				<br class="clear">
             </div>
             <%= render 'shared/global_nav' %>
         </div>

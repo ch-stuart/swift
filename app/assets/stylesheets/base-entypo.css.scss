@@ -11,8 +11,6 @@
 
 .entypo {
     font-family: "entypo";
-    font-size: 56px;
-    color: #aaa;
 }
 
 @font-face {
@@ -28,10 +26,20 @@
 
 .entypo-social {
     font-family: "entypo-social";
-    font-size: 56px;
-    color: #aaa !important;
-	
 	&:hover {
 	    color: $hotpink !important;
 	}
+}
+
+.entypo, .entypo-social {
+    color: #aaa !important;
+	font-size: 58px;
+	line-height: .4;
+}
+
+.ie .entypo {
+	line-height: 0;
+}
+.ie .entypo-social {
+	line-height: .1;
 }

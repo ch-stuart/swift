@@ -7,37 +7,53 @@ body {
     opacity: .6;
     width: 45px;
 }
+// TODO: there should be a global nav css,
+//       and this should be in it
 .container-menu-wrap {
     background-color: #eee;
     border-bottom: 1px solid #dadada;
     margin-bottom: 50px;
 }
 .container-menu {
-    padding: 10px 10px 2px 10px;
+    padding: 8px;
     position: relative;
 
-    .menu--row-btns {
-        text-align: center;
-    }
-    .menu--row-nav {
-        padding: 30px 0;
-    }
+	.menu-fox {
+		display: block;
+	}
+	.menu-fox {
+		position: absolute;
+		left: 50%;
+		margin-left: -22px; 
+		top: 8px;
+	}
 
     .entypo {
-        position: absolute;
         cursor: pointer;
+		display: block;
 
         &:hover,
         &.active {
             color: $hotpink;
         }
     }
-    .entypo-menu { left: 10px; }
+    .entypo-menu {
+		float: left;
+	}
     .entypo-cart {
-        right: 10px;
-        font-size: 50px;
+		float: right;
+		font-size: 48px;
+    }
+
+    .menu--row-nav {
+        padding: 30px 0;
     }
 }
+.ie .entypo-menu {
+	position: relative;
+	top: -3px;
+}
+
 .container-main {
     border: 1px solid #ddd;
     background-color: #fff;
