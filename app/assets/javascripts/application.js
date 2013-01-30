@@ -31,12 +31,7 @@ jQuery(document).ready(function($) {
     
     $('#global-menu-btn').click(function() {
         $(this).toggleClass('active');
-
-        if ($('#global-menu').css('display') === 'block') {
-            $('#global-menu').slideUp();
-        } else {
-            $('#global-menu').slideDown();
-        }
+		$('#global-menu').slideToggle();
     });
 
     if (document.location.hostname !== "swift.dev") {
