@@ -60,5 +60,8 @@ SwiftSite::Application.configure do
 
   # http://devcenter.heroku.com/articles/memcache
   config.cache_store = :dalli_store
+  
+  # fix for heroku
+  config.assets.precompile += %w( application-hub.css  )
 
 end
