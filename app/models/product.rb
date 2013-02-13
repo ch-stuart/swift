@@ -48,6 +48,10 @@ class Product < ActiveRecord::Base
   def is_product?
     self.kind == "Product"
   end
-  
+
+  def is_not_for_sale?
+    self.not_for_sale == true
+  end
+
 end
 

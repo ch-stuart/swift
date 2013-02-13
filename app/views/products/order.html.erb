@@ -22,7 +22,7 @@
             <span class="woah"><%= @company.close_shop_message %></span>
         </h3>
     <%# if the product is not for sale, don't show the order form. %>
-    <% elsif @product.not_for_sale? %>
+    <% elsif @product.is_not_for_sale? %>
         <h3>
             <span class="woah"><%= @product.not_for_sale_message %></span>
         </h3>
