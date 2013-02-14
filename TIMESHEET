@@ -1,4 +1,5 @@
 date:        time (minutes):       comment:
+2012-12-xx   30   Previous time not charged for.
 2012-12-02   90   Worked on responsive site. Twttr bootstrap.
 2012-12-02   140  made the slideshow mobile-compatible, generally improved implementation and navigation usability.
 2012-12-03   34   updated Store page (Stock and Accessories), removed some css to be reimplemnted later.
@@ -40,5 +41,17 @@ date:        time (minutes):       comment:
 2013-01-27   15   hub form cleanup, using skeleton for base form css
 2013-01-27   30   allow Martina to configure homepage hero from Hub
 2013-01-27   10   format homepage hero product description as markdown
-2013-01-27   15   add short description to products START 8:35
+2013-01-28   15   add short description to products
+2013-01-28   15   merge responsive branch into master branch
+2013-01-28   15   various cleanup
+2013-01-28   15   testing in various browsers
+2013-01-29	 80   fixing bugs in IE
+2013-01-30   10   adjusting "Our Story" page to include images
+2013-01-31   15   deploy to production, backup db
+2013-01-31   15   post-deploy fixes
 
+ = 1729 / 60 = 28.816666667
+
+///// INVOICED /////
+
+2013-02-13	15	 fixing caching issue where there were "two" sites, one with www, one without.
