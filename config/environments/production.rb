@@ -2,7 +2,7 @@ SwiftSite::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # https://github.com/joshsusser/refraction
-  config.middleware.insert_before(::Rack::Lock, ::Refraction, {})
+  # config.middleware.insert_before(::Rack::Lock, ::Refraction, {})
   
   # Code is not reloaded between requests
   config.cache_classes = true
