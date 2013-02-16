@@ -47,34 +47,23 @@
     font-family: helvetica neue, helvetica, arial, sans-serif;
 }
 
-.litebox {
+.lightbox {
     display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index:1002;
-    box-shadow: 0 0 5px black;
-    border: 10px solid #eee;
-    cursor: -webkit-zoom-out;
-    cursor: -moz-zoom-out;
-    max-width: 90%;
-    max-height: 90%;
+	position: relative;
+	max-width: 80%;
 }
-.mask {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: black;
-    opacity: .6;
-    z-index:1001;
+.lightbox-img {
+	max-width: 100%;
 }
-
-.stop-scrolling {
-    height: 100%;
-    overflow: hidden;
+.lightbox-close {
+	background-image: url(/assets/closebox.png);
+	background-repeat: no-repeat;
+	position: absolute;
+	top: -15px;
+	right: -15px;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
 }
 
 .pin-it-button-wrapper {

@@ -73,8 +73,7 @@
     <%= yield :js %>
     <%= render "shared/analytics" unless Rails.env == "development" %>
 
-    <div id="width"></div>
-    <div id="mask" class="mask"></div>
+	<div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
 </body>
 </html>
 
