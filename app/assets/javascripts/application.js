@@ -1,6 +1,7 @@
 // ...
 //= require ua
 //= require jquery
+//= require jquery.browser
 //= require jquery_ujs
 //= require tinycolor
 //= require console
