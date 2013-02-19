@@ -1,6 +1,8 @@
 module Flickr
 
     def get_photos_by_tag tag
+        return Rails.cache.read(tag) if Rails.cache.exist?(tag)
+        
         return [] if tag.blank?
 
         photos = []
@@ -42,14 +44,14 @@ module Flickr
             
             photos.push photo
         end
+        
+        Rails.cache.write(tag, photos)
 
         photos
     end
 
     def get_photo_by_id(id, size)
-        if Rails.cache.exist? id
-            return Rails.cache.read id
-        end
+        return Rails.cache.read(id) if Rails.cache.exist?(id)
 
         return "" if id.blank?
 
@@ -61,12 +63,14 @@ module Flickr
         end
         photo = sizes.find {|s| s.label == size }
 
-        Rails.cache.write id, photo.source
+        Rails.cache.write(id, photo.source)
 
         photo.source
     end
 
     def get_photos_by_set id
+        return Rails.cache.read(id) if Rails.cache.exist?(id)
+        
         photos = []
 
         results = flickr.photosets.getPhotos :photoset_id => id
@@ -82,10 +86,14 @@ module Flickr
             photos = photos[0..9] 
         end
 
+        Rails.cache.write(id, photos)
+        
         photos
     end
 
     def get_photos_by_user
+        return Rails.cache.read('user_photos') if Rails.cache.exist?('user_photos')
+        
         photos = []
 
         results = flickr.people.getPublicPhotos :user_id => APP_CONFIG['flickr_user_id'], :per_page => 10
@@ -95,6 +103,8 @@ module Flickr
             medium = sizes.find {|s| s.label == 'Medium' }
             photos.push({ :id => photo.id, :url => medium.source })
         end
+
+        Rails.cache.write('user_photos', photos)
 
         photos
     end

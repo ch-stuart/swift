@@ -17,8 +17,19 @@ class HubController < ApplicationController
         render :text => "cache cleared"
       rescue => e
         render :text => "cache NOT cleared"
-        y e
       end
+  end
+  
+  # Clear everything. Flickr is cached, so
+  # if something updates over there we don't
+  # know. Martina has to clear it manually.
+  def expire_flickr
+    begin
+      Rails.cache.clear
+      render :text => "cache cleared!"
+    rescue => e
+      render :text => "cache NOT cleared. :("
+    end
   end
   
 end
