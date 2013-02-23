@@ -46,7 +46,7 @@ jQuery.fn.orderFormManager = function() {
 		.end()
         .find('.part_checkbox').change(function() {
             var $this = $(this);
-            if ($this.attr("checked")) {
+            if ($this.prop('checked')) {
                 $('#parts').append(
                     ich.product_tmpl({
                         'qty':      '1',
