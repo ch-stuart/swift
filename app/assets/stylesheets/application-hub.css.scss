@@ -10,6 +10,15 @@
 body {
 	padding-top: 40px;
 }
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
+a:hover {
+	border-bottom:1px solid magenta;
+}
+
 .hint {
     margin-top: -20px;
     color: #888;
@@ -18,9 +27,13 @@ body {
 th {
 	text-align: left;
 	border-bottom: 1px solid #ccc;
+	font-weight: bold
 }
 th,td {
-	padding: 5px 5px 5px 0;
+	padding: 8px 10px;
+}
+tr:nth-child(odd) td {
+	background-color: #fafafa;
 }
 .indent {
     background-color: rgba(255,255,255,.50);
