@@ -55,3 +55,8 @@ date:        time (minutes):       comment:
 ///// INVOICED /////
 
 2013-02-13	15	 fixing caching issue where there were "two" sites, one with www, one without.
+2013-02-15  20	 [BUG] lightbox photo is not aligned correctly in Firefox & Opera on initial view 
+2013-02-15  10	 [low-pri] add close button to big photo
+2013-02-15  10   [security update] Update to Rails 3.1.11
+2013-02-18  10   fixed issue where photo zooming did not work because jQuery updated and $.browser went missing
+2013-02-18  10   Add caching for Flickr API reads. Improves site performance. If you add/edit/remove photos at Flickr clear the Flickr cache via the hub.
