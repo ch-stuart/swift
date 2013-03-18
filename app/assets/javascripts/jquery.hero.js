@@ -81,7 +81,7 @@ jQuery.fn.hero = function(params) {
 					var currentScrollDist = Math.abs(parseInt($heroScroller.css('margin-left'), 10));
 					var animDist = currentScrollDist + dist;
 				
-					console.log(animDist);
+					// console.log(animDist);
 				
 					if (animDist < (totalWidth - $hero.width()) ) {
 						$heroScroller.animate({
