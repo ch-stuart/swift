@@ -4,7 +4,7 @@ More info at: http://icanhazjs.com
 */
 ;(function () {
 /*
-  mustache.js — Logic-less templates in JavaScript
+  mustache.js - Logic-less templates in JavaScript
 
   See http://mustache.github.com/ for more info.
 */

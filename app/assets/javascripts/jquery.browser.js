@@ -1,3 +1,4 @@
+/*global navigator jQuery */
 // https://github.com/jquery/jquery-browser/blob/master/src/jquery.browser.js
 
 ;(function( jQuery ) {

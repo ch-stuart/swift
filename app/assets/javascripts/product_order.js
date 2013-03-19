@@ -1,3 +1,5 @@
+/*global jQuery $ ich console */
+
 // Mals docs
 // Adding multiple items to your cart
 // https://www.mals-e.com/tpv.php?tp=6
