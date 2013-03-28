@@ -3,50 +3,47 @@
 // Mals docs
 // Adding multiple items to your cart
 // https://www.mals-e.com/tpv.php?tp=6
-    
-    
+
 // Behavior for order form
 jQuery.fn.orderFormManager = function() {
-    
+
     var notified_customer = false;
     var max_priced_fabric = 0;
-    
-    $(this)
-        .submit(function(e){
-            var invalid = false;
-                
-            $('#order_form select').each(function() {
-                console.log('invalid?', $(this).val() );
-                if ($(this).val() === "invalid") {
-                    invalid = true;
-                }
-            });
-            if (invalid) {
-                e.preventDefault();
-                $.prompt("Not everything is filled out! Review your order and select a choice for each of the options.");
-            }
-        })
-		// hide color pickers for optional parts until
-		// the user has indicated they want this part
-		// included
-		.find('.input-color-with-optional-part')
-		.hide()
-		.end()
-		// hide/show the color picker for an optional part
-		// based on whether or not the checkbox is checked
-		.find('.label').click(function() {
-			// This is stupid
-			var isChecked = $(this).parents('.label-input-pair').find('.part_checkbox').prop('checked');
-			var $colorPicker = $(this).parents('.label-input-pair').find('.input-color-with-optional-part');
+    var $form = $(this);
 
-			if (isChecked) {
-				$colorPicker.show();
-			} else {
-				$colorPicker.hide();
-			}
-		})
-		.end()
-        .find('.part_checkbox').change(function() {
+    // we increment the count, but we don't decrement. what the heck.
+    function increment_count() {
+        // get the product current count, increment it.
+        var count = parseInt($form.data('count'), 10);
+        $form.data('count', count + 1);
+    }
+    increment_count();
+
+    // hide color pickers for optional parts until
+    // the user has indicated they want this part
+    // included
+    $form
+        .find('.input-color-with-optional-part')
+        .hide();
+
+    // hide/show the color picker for an optional part
+    // based on whether or not the checkbox is checked
+    $form
+        .find('.label').click(function() {
+            // This is stupid
+            var isChecked = $(this).parents('.label-input-pair').find('.input-checkbox').prop('checked');
+            var $colorPicker = $(this).parents('.label-input-pair').find('.input-color-with-optional-part');
+
+            if (isChecked) {
+                $colorPicker.show();
+            } else {
+                $colorPicker.hide();
+            }
+        });
+
+    // Manage add-on parts
+    $form
+        .find('.input-checkbox').change(function() {
             var $this = $(this);
             if ($this.prop('checked')) {
                 $('#parts').append(
@@ -58,28 +55,42 @@ jQuery.fn.orderFormManager = function() {
                         'product':  $this.data('product')
                     })
                 );
-                console.log("parts content " + $('#parts').html());
                 increment_count();
             } else {
                 // remove the part from the order if they have
                 // unchecked the box.
                 $('#part_' + $this.data('hash')).remove();
             }
-        })
-        .end()
-        .find('.color_select').change(function() {
-            var choices = [],
-                max_price = 0,
-                $max_option = null,
-                opts = null;
+            console.log("=> parts", $('#parts').html());
+        });
 
+    // Add remove error class to size pickers
+    $form
+        .find('.select-size').change(function() {
+            var $label = $(this).parents('.label-input-pair').find('.label');
+            if ($(this).val() === "invalid") {
+                $label.addClass('error');
+            } else {
+                $label.removeClass('error');
+            }
+        });
+
+    // color pickers
+    $form
+        .find('.select-color').change(function() {
+            var choices = [];
+            var max_price = 0;
+            var $max_option = null;
+            var opts = null;
+
+            $(this).parents('.label-input-pair').find('.label').removeClass('error');
             // Empty the #parts
             $('#parts').find('.color_part').remove();
-                
+
             // Scan all color selects
-            $('#order_form').find('.color_select').each(function(){
+            $form.find('.select-color').each(function(){
                 var $selected_option = $(this).find('option').eq(this.selectedIndex);
-                    
+
                 // Find all that have a price option selected
                 if ($selected_option.data('price')) {
                     choices.push($selected_option);
@@ -93,7 +104,6 @@ jQuery.fn.orderFormManager = function() {
                     $max_option = $option;
                 }
             });
-            console.log($max_option);
 
             // DO NOT CONTINUE if we haven't found anything to add.
             if (!$max_option) return;
@@ -108,7 +118,7 @@ jQuery.fn.orderFormManager = function() {
             // Add it to the #parts
             opts = {
                 'qty':         '1',
-                'count':       $('#order_form').data('count'),
+                'count':       $form.data('count'),
                 'hash':        $(this).data('hash'),
                 'price':       $max_option.data('price'),
                 'product':     $max_option.data('color'),
@@ -116,9 +126,9 @@ jQuery.fn.orderFormManager = function() {
                 'is_color':    true
             };
             $('#parts').append(ich.product_tmpl(opts));
-                
-            console.log("parts content " + $('#parts').html());
-                
+
+            console.log("=> parts", $('#parts').html());
+
             if (opts && !notified_customer) {
                 // Dump the mustache template into a hidden div
                 // so we can grab it back out. $.prompt() is not
@@ -130,14 +140,33 @@ jQuery.fn.orderFormManager = function() {
             increment_count();
         });
 
-    // we increment the count, but we don't decrement. what the heck.
-    function increment_count() {
-        // get the product current count, increment it.
-        var count = parseInt($('#order_form').data('count'), 10);
-        $('#order_form').data('count', count + 1);
-    }
+    $form
+        .submit(function(e){
+            var invalid = false;
 
-    increment_count();
+            $form.find('select').each(function() {
+                if ($(this).val() === "invalid") {
+                    invalid = true;
+
+                    $(this).parents('.label-input-pair').find('.label').addClass('error');
+
+                    // If the checkbox exists, and it's not checked, do not invalidate form
+                    var hasCheckbox = $(this).parents('.label-input-pair').find('.input-checkbox').size() > 0;
+                    var isChecked = $(this).parents('.label-input-pair').find('.input-checkbox').prop('checked');
+
+                    if (hasCheckbox && !isChecked) {
+                        $(this).parents('.label-input-pair').find('.label').removeClass('error');
+                        invalid = false;
+                    }
+                }
+            });
+            if (invalid) {
+                e.preventDefault();
+                $.prompt("Not everything is filled out! Review your order and select a choice for each of the options.");
+            }
+        });
+
+
 };
 
 
