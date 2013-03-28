@@ -145,18 +145,17 @@ jQuery.fn.orderFormManager = function() {
             var invalid = false;
 
             $form.find('select').each(function() {
+                // If the checkbox exists, and it's not checked, do not invalidate form
+                var hasCheckbox = $(this).parents('.label-input-pair').find('.input-checkbox').size() > 0;
+                var isChecked = $(this).parents('.label-input-pair').find('.input-checkbox').prop('checked');
+
                 if ($(this).val() === "invalid") {
-                    invalid = true;
-
-                    $(this).parents('.label-input-pair').find('.label').addClass('error');
-
-                    // If the checkbox exists, and it's not checked, do not invalidate form
-                    var hasCheckbox = $(this).parents('.label-input-pair').find('.input-checkbox').size() > 0;
-                    var isChecked = $(this).parents('.label-input-pair').find('.input-checkbox').prop('checked');
-
                     if (hasCheckbox && !isChecked) {
-                        $(this).parents('.label-input-pair').find('.label').removeClass('error');
-                        invalid = false;
+                        // It has a checkbox, but it's not checked, so
+                        // we don't care that the select is not valid
+                    } else {
+                        $(this).parents('.label-input-pair').find('.label').addClass('error');
+                        invalid = true;
                     }
                 }
             });
