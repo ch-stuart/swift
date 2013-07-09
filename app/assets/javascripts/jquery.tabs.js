@@ -1,3 +1,4 @@
+/*global jQuery $ */
 jQuery.fn.tabs = function(params) {
 
     var defaults = {

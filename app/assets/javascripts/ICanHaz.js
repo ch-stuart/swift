@@ -2,9 +2,9 @@
 ICanHaz.js version 0.10 -- by @HenrikJoreteg
 More info at: http://icanhazjs.com
 */
-(function () {
+;(function () {
 /*
-  mustache.js — Logic-less templates in JavaScript
+  mustache.js - Logic-less templates in JavaScript
 
   See http://mustache.github.com/ for more info.
 */

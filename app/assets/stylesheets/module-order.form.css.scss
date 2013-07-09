@@ -16,11 +16,15 @@
     margin: 0 0 20px 0;
 }
 .input-color-with-optional-part {
-	margin-top: 10px;
-	margin-left: 20px;
+    margin-top: 10px;
+    margin-left: 20px;
 }
 .label {
     margin-bottom: 5px;
+        
+    &.error {
+        color: red;
+    }
 }
 .input {
 
@@ -37,15 +41,15 @@
 }
 
 .handmade_label {
-	display: block;
-	background: transparent image-url('scissors.png') no-repeat;
+    display: block;
+    background: transparent image-url('scissors.png') no-repeat;
     text-transform: lowercase;
     text-align: center;
     text-indent: -19px;
     width: 121px;
     height: 42px;
     line-height: 67px;
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .woah {
@@ -54,8 +58,8 @@
     line-height: 1.4;
 }
 .order-form-does-not-work-without-javascript {
-	display: none;
+    display: none;
 }
 .nojs .order-form-does-not-work-without-javascript {
-	display: block;
+    display: block;
 }

@@ -11,7 +11,7 @@
  * 
  */
  
-(function($) {
+;(function($) {
 	$.prompt = function(message, options) {
 		options = $.extend({},$.prompt.defaults,options);
 		$.prompt.currentPrefix = options.prefix;

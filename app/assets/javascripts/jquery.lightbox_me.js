@@ -17,7 +17,7 @@
 */
 
 
-(function($) {
+;(function($) {
 
     $.fn.lightbox_me = function(options) {
 

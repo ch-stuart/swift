@@ -15,7 +15,7 @@
                         <input
                             id="checkbox_<%= digest(part.title +  part.id.to_s) %>"
                             type="checkbox"
-                            class="part_checkbox input input-checkbox"
+                            class="input input-checkbox"
                             data-hash="<%= digest(part.title +  part.id.to_s) %>"
                             data-product="<%= part.title %>"
                             data-price="<%= part.price %>">
@@ -29,7 +29,7 @@
                         <select
                             id="<%= digest('select' + part.title) %>"
                             name="product1[]"
-                            class="color_select"
+                            class="select-color"
                             data-hash="<%= digest('select' + part.title) %>"
                             style="display:none">
                             <option value="invalid">
@@ -51,12 +51,6 @@
                             <% end %>
                         </select>
                     </div>
-                <% else %>
-                    <%#
-                    <p class="input no_color_choices">
-                        <i>No color choices.</i>
-                    </p>
-                    %>
                 <% end %>
             </div>
         <% end %>

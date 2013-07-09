@@ -38,20 +38,22 @@
     </div>
     <%= content_for :js do %>
         <script>
-			// Show additional testimonials
-			if ($('.testimonial').size() > 2) {
-	            $('.testimonials')
-	                .append('<p id=readMoreTestimonials class=button>Read More Testimonials</p>')
-	                .find('#readMoreTestimonials')
-	                .css('cursor', 'pointer')
-	                .click(function() {
-	                    $('.testimonials-hidden').slideDown({
-	                    	complete: function() {
-	                    		$('#readMoreTestimonials').css('visibility', 'hidden');
-	                    	}
-	                    });
-	                });
-			}
+			$(document).ready(function() {
+				// Show additional testimonials
+				if ($('.testimonial').size() > 2) {
+		            $('.testimonials')
+		                .append('<p id=readMoreTestimonials class=button>Read More Testimonials</p>')
+		                .find('#readMoreTestimonials')
+		                .css('cursor', 'pointer')
+		                .click(function() {
+		                    $('.testimonials-hidden').slideDown({
+		                    	complete: function() {
+		                    		$('#readMoreTestimonials').css('visibility', 'hidden');
+		                    	}
+		                    });
+		                });
+				}
+			});
         </script>
     <% end %>
 

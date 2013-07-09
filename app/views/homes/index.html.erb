@@ -47,6 +47,8 @@
 
 <% content_for :js do %>
 	<script>
-		$('#hero').hero();
+		$(document).ready(function() {
+			$('#hero').hero();
+		});
 	</script>
 <% end %>

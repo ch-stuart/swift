@@ -2,7 +2,7 @@
 // https://github.com/bgrins/TinyColor
 // 2012-11-28, Brian Grinstead, MIT License
 
-(function(root) {
+;(function(root) {
 
 var trimLeft = /^[\s,#]+/,
     trimRight = /\s+$/,

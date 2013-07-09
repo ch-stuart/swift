@@ -1,3 +1,4 @@
+/*global jQuery setTimeout $ window */
 /*
  * An animation step manager.
  */
@@ -47,12 +48,11 @@ var Runner = function(ms) {
     };
 };
 
-jQuery.fn.hero = function(params) {
+jQuery.fn.hero = function() {
 
 	var totalWidth = 0;
 	var widths = [];
 	var imgCount = 0;
-	var imgLoadCount = 0;
 	var r = new Runner(3000);
 	var link;
 	var linkHtml;
@@ -65,33 +65,31 @@ jQuery.fn.hero = function(params) {
 		imgCount = $imgs.size();
 		
 		function init() {
-			$heroScroller
-				.find('img')
-				.each(function() {
-					var imgWidth = $(this).width()
-					totalWidth += imgWidth
-					widths.push(imgWidth)
-				});
+			$imgs.each(function() {
+				var imgWidth = $(this).width();
+				totalWidth += imgWidth;
+				widths.push(imgWidth);
+			});
 			
 			$heroScroller
 				.css('width', totalWidth + 'px');
 
-			widths.forEach(function(dist, index) {
+			widths.forEach(function(dist) {
 				r.add(function() {
 					var currentScrollDist = Math.abs(parseInt($heroScroller.css('margin-left'), 10));
 					var animDist = currentScrollDist + dist;
 				
-					console.log(animDist);
+					// console.log(animDist);
 				
 					if (animDist < (totalWidth - $hero.width()) ) {
 						$heroScroller.animate({
 							'margin-left': -(animDist) + 'px'
 						}, {
 							duration: 'slow'
-						})
+						});
 					}
-				})
-			})
+				});
+			});
 			r.run();
 		}
 		
