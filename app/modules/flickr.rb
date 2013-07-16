@@ -2,7 +2,7 @@ module Flickr
 
     def get_photos_by_tag tag
         return Rails.cache.read(tag) if Rails.cache.exist?(tag)
-        
+
         return [] if tag.blank?
 
         photos = []
@@ -17,16 +17,21 @@ module Flickr
             # Get photo info
             photo_info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
             # Save some photo info
-            
-            photo = {}
-            photo[:id] = photo_info['id']
-            photo[:description]         = photo_info['description']
+
+            photo               = {}
+            photo[:id]          = photo_info['id']
+            photo[:description] = photo_info['description']
             photo[:title]       = photo_info['title']
             photo[:flickr_url]  = photo_info['urls'][0]['_content']
             # Get photo sizes
-            photo_sizes                 = flickr.photos.getSizes :photo_id => photo_info['id']
+            photo_sizes         = flickr.photos.getSizes :photo_id => photo_info['id']
+
             # Get medium size photo
-            medium_photo                = photo_sizes.find {|s| s.label == 'Medium' }
+            medium_photo        = photo_sizes.find {|s| s.label == 'Medium' }
+
+            # Don't proceed if we can't get a medium photo
+            next if medium_photo.blank?
+
             # Save medium size photo info
             photo[:url]         = medium_photo.source
             photo[:height]      = medium_photo.height
@@ -41,10 +46,10 @@ module Flickr
                 photo[:large_url]    = medium_photo.source
                 photo[:large_height] = medium_photo.height
             end
-            
+
             photos.push photo
         end
-        
+
         Rails.cache.write(tag, photos)
 
         photos
@@ -70,7 +75,7 @@ module Flickr
 
     def get_photos_by_set id
         return Rails.cache.read(id) if Rails.cache.exist?(id)
-        
+
         photos = []
 
         results = flickr.photosets.getPhotos :photoset_id => id
@@ -83,17 +88,17 @@ module Flickr
         end
 
         if photos.length > 10
-            photos = photos[0..9] 
+            photos = photos[0..9]
         end
 
         Rails.cache.write(id, photos)
-        
+
         photos
     end
 
     def get_photos_by_user
         return Rails.cache.read('user_photos') if Rails.cache.exist?('user_photos')
-        
+
         photos = []
 
         results = flickr.people.getPublicPhotos :user_id => APP_CONFIG['flickr_user_id'], :per_page => 10
