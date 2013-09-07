@@ -9,7 +9,8 @@ gem 'flickraw', '0.9.5'
 gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails'
-gem 'dalli' # memcache
+gem 'dalli' # memcachier
+gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
 
 group :assets do
