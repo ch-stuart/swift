@@ -20,6 +20,10 @@ Manually...
     
 Or, use pow.
 
+### Test on IE via Virtual Box
+
+Yes, do this. Also, use xip.io to get to swift.dev if you're using pow.
+
 ### Do tests work?
 
 Yes, but only unit tests.
