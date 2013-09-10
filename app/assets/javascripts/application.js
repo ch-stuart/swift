@@ -1,4 +1,5 @@
 // ...
+//= require array.foreach
 //= require ua
 //= require jquery
 //= require jquery.browser
@@ -16,7 +17,6 @@
 //= require ICanHaz
 //= require slideshow
 //= require product_order
-
 
 jQuery(document).ready(function($) {
     
