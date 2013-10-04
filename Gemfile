@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.14'
 gem "thin"
 gem 'flickraw', '0.9.5'
 # faster?
 # gem 'flickraw-cached'
 gem 'rdiscount'
 gem 'nokogiri'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.2.1'
 gem 'dalli' # memcachier
 gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
