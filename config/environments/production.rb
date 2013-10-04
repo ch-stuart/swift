@@ -64,15 +64,17 @@ SwiftSite::Application.configure do
   # fix for heroku
   config.assets.precompile += %w( application-hub.css  )
 
+  # REMOVED Uglifier 2.x does not support this...,
+  # at least with this method signature. cstuart 2013-10-03
   # Ensure this only runs in the :assets bundler group
   # https://gist.github.com/toolmantim/3184063
-  if defined? Uglifier
-    config.assets.js_compressor = Uglifier.new(
-      # Add new lines
-      :beautify => true,
-      # Don't add indentation
-      :beautify_options => {:indent_level => 0}
-    )
-  end
+  # if defined? Uglifier
+  #   config.assets.js_compressor = Uglifier.new(
+  #     # Add new lines
+  #     :beautify => true,
+  #     # Don't add indentation
+  #     :beautify_options => {:indent_level => 0}
+  #   )
+  # end
 
 end
