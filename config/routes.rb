@@ -29,6 +29,7 @@ SwiftSite::Application.routes.draw do
 
   match 'logout', :to => 'application#logout'
   match 'login', :to => 'hub#index'
+  match 'wholesale_login', :to => 'application#wholesale_login'
 
   root :to => 'homes#index'
   match 'store', :to => 'homes#store'

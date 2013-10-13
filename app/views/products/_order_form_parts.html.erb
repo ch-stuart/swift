@@ -18,10 +18,10 @@
                             class="input input-checkbox"
                             data-hash="<%= digest(part.title +  part.id.to_s) %>"
                             data-product="<%= part.title %>"
-                            data-price="<%= part.price %>">
+                            data-price="<%= part.price_for(session[:is_wholesale_user]) %>">
                     <% end %>
                     <%= part.title %>
-                    <%= "$#{part.price}" if part.price.present? %>
+                    <%= "$#{part.price_for(session[:is_wholesale_user])}" if part.price.present? %>
                 </label>
                 <% if part.colors.present? %>
 					<div class="input input-color <%= 'input-color-with-optional-part' if part.price.present? && part.colors.present? %>">
@@ -40,13 +40,13 @@
                                     <% if color.price.present? %>
                                         data-hash="<%= digest(color.title + color.id.to_s) %>"
                                         data-color="<%= color.title %>"
-                                        data-price="<%= color.price %>"
+                                        data-price="<%= color.price_for(session[:is_wholesale_user]) %>"
                                     <% end %>
                                     data-hex="<%= color.hex %>"
                                     <%# The value sets the title of the part which shows up at Mals %>
-                                    value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.blank? %>) ">
+                                    value="<%= part.title %> (<%= color.title %><%= ": $#{color.price_for(session[:is_wholesale_user])}" unless color.price.blank? %>) ">
                                     <%= color.title %>
-                                    <%= "($#{color.price})" unless color.price.blank? %>
+                                    <%= "($#{color.price_for(session[:is_wholesale_user])})" unless color.price.blank? %>
                                 </option>
                             <% end %>
                         </select>

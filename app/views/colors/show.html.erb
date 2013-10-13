@@ -7,6 +7,9 @@
   <% unless @color.price.blank? %>
     <br> <span>$<%= @color.price %></span>
   <% end %>
+  <% unless @color.wholesale_price.blank? %>
+    <br> <span>$<%= @color.wholesale_price %> (wholesale)</span>
+  <% end %>
   <br>
   <span><%= @color.hex %></span>
 </p>

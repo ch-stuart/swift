@@ -12,6 +12,8 @@
     <th>Description</th>
     <th>Price</th>
     <th>Humane Price</th>
+    <th>Wholesale Price</th>
+    <th>Wholesale Humane Price</th>
     <th>Flickr Tag</th>
     <th>Featured Photo</th>
     <th>Specs</th>
@@ -31,6 +33,8 @@
     <td><%= truncate(product.description, :length => 10) %></td>
     <td><%= product.price %></td>
     <td><%= product.humane_price %></td>
+    <td><%= product.wholesale_price %></td>
+    <td><%= product.wholesale_humane_price %></td>
     <td><%= product.flickr_tag %></td>
     <td><%= product.flickr_photo %></td>
     <td><%= truncate(product.specs, :length => 10) %></td>

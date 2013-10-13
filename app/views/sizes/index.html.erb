@@ -4,6 +4,7 @@
   <tr>
     <th>Title</th>
     <th>Price</th>
+    <th>Wholesale Price</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,6 +14,7 @@
   <tr>
     <td><%= size.title %></td>
     <td><%= size.price %></td>
+    <td><%= size.wholesale_price %></td>
     <td><%= link_to 'Show', size %></td>
     <td><%= link_to 'Edit', edit_size_path(size) %></td>
     <td><%= link_to 'Destroy', size, :confirm => 'Are you sure?', :method => :delete %></td>

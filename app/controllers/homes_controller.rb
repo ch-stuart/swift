@@ -2,9 +2,10 @@ class HomesController < ApplicationController
 
     require "open-uri"
 
-    before_filter :authenticate, :except => [ :index, :store ]
-    # caches_page :index, :store
-    caches_action :index, :store
+    before_filter :authenticate_admin, :except => [ :index, :store ]
+    caches_action :index, :store, :cache_path => Proc.new { |c|
+        { 'user_type' => session[:is_wholesale_user] ? "WS" : "STANDARD" }
+    }
 
     def index
         @pages = Page.find_all_by_status("Public")

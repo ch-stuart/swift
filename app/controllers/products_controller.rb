@@ -1,7 +1,10 @@
 class ProductsController < ApplicationController
 
-  before_filter :authenticate, :except => [ :show, :order ]
-  caches_action :show, :order
+  before_filter :authenticate_admin, :except => [ :show, :order ]
+  caches_action :show, :order, :cache_path => Proc.new { |c|
+      { 'user_type' => session[:is_wholesale_user] ? "WS" : "STANDARD" }
+  }
+  
   cache_sweeper ApplicationSweeper
 
   def index
@@ -10,9 +13,9 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
-    @product = Product.find(params[:id])
     @photos = Product.get_photos_by_tag @product.flickr_tag
     @company = Company.first
     @subtitle = @product.title
@@ -21,12 +24,11 @@ class ProductsController < ApplicationController
   end
 
   def order
+    @product = Product.find(params[:id])
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @company = Company.first
     @colors = Color.all
-
-    @product = Product.find(params[:id])
     @photos = Product.get_photos_by_tag @product.flickr_tag
     @subtitle = @product.title
     
@@ -35,10 +37,6 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    # 1.times do
-    #   part = @product.parts.build
-    #   # 2.times { part.colors.build }
-    # end
   end
 
   def edit

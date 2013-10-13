@@ -56,20 +56,34 @@
 			Used for the homepage hero.
 		</p>
 	</div>
-	<div class="field">
-		<%= f.label :price %>
-		<%= f.text_field :price %>
-		<p class="hint">
-			ex: 299.01
-		</p>
-	</div>
-	<div class="field">
-		<%= f.label :humane_price %>
-		<%= f.text_field :humane_price %>
-		<p class="hint">
-			ex: "$200 for a pair"
-		</p>
-	</div>
+    <div class="field">
+        <%= f.label :price %>
+        <%= f.text_field :price %>
+        <p class="hint">
+            ex: 299.00
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label :wholesale_price %>
+        <%= f.text_field :wholesale_price %>
+        <p class="hint">
+            ex: 249.00
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label :humane_price %>
+        <%= f.text_field :humane_price %>
+        <p class="hint">
+            ex: "$299 for a pair"
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label :wholesale_humane_price %>
+        <%= f.text_field :wholesale_humane_price %>
+        <p class="hint">
+            ex: "$249 for a pair"
+        </p>
+    </div>
   	<div class="field">
 		<%= f.label :specs %>
 		<%= f.text_area :specs %>

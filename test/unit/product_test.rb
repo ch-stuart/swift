@@ -10,11 +10,13 @@ class ProductTest < ActiveSupport::TestCase
       :specs => "1 foot x 1 foot x 1 foot",
       :status => "Public",
       :price => "25.00",
+      :wholesale_price => "20.00",
       :kind => "Product",
       :short_title => "B.B. Bag",
       :humane_price => "25 bucks!",
+      :wholesale_humane_price => "20 bucks!",
       :flickr_photo => "1234567891",
-      :flickr_set => "0987654321",
+      :flickr_set => "12345678901234567",
       :question => "What?",
       :answer => "42",
       :not_for_sale => false,
@@ -71,36 +73,6 @@ class ProductTest < ActiveSupport::TestCase
   test "should not save without short title" do
     product = Product.new @product.except(:short_title)
     assert !product.save, "should not save without short title"
-  end
-  
-  test "short title should be unique" do
-    product = Product.new @product
-    product.save
-    
-    product2 = Product.new @product
-    product2[:title] = "unique"
-    product2[:flickr_tag] = "unique"
-    assert !product2.save, "not unique"
-  end
-  
-  test "title should be unique" do
-    product = Product.new @product
-    product.save
-    
-    product2 = Product.new @product
-    product2[:short_title] = "unique"
-    product2[:flickr_tag] = "unique"
-    assert !product2.save, "not unique"
-  end
-  
-  test "flickr_tag doesn't have to be be unique" do
-    product = Product.new @product
-    product.save
-    
-    product2 = Product.new @product
-    product2[:title] = "unique"
-    product2[:short_title] = "unique"
-    assert product2.save, "not unique"
   end
   
 end

@@ -1,6 +1,6 @@
 class PartsController < ApplicationController
 
-  before_filter :authenticate
+  before_filter :authenticate_admin
   # caches_page :index, :show
   # 
   # def index

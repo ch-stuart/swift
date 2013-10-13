@@ -7,12 +7,12 @@
             </h2>
             <h4>
                 <% @product.sizes.each do |size| %>
-                    <%= size.title %>: $<%= size.price %>
+                    <%= size.title %>: $<%= size.price_for(session[:is_wholesale_user]) %>
                 <% end %>
             </h4>
         <% else %>
             <h2 class="product-title">
-                <%= @product.title %> (<%= @product.humane_price %>)
+                <%= @product.title %> (<%= @product.humane_price_for(session[:is_wholesale_user]) %>)
             </h2>
         <% end %>
     </div>

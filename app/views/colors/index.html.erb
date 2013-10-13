@@ -10,6 +10,7 @@
     <th></th>
     <th>Title</th>
     <th>Price</th>
+    <th>Wholesale Price</th>
     <th>Hex</th>
     <th></th>
     <th></th>
@@ -23,6 +24,7 @@
     </td>
     <td> <%= link_to color.title, color %></td>
     <td><%= "$" if color.price.present? %><%= color.price %></td>
+    <td><%= "$" if color.wholesale_price.present? %><%= color.wholesale_price %></td>
     <td><%= color.hex %></td>
     <td><%= link_to 'Edit', edit_color_path(color) %></td>
     <td><%= link_to 'Destroy', color, :confirm => 'Are you sure?', :method => :delete %></td>

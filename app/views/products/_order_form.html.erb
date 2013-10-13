@@ -7,7 +7,7 @@
         <%# Mal's needs different params sent if the product has diff. prices based on size. %>
         <% unless @product.sizes.present? %>
             <input type="hidden" name="product1[]" value="<%= @product.title %>">
-            <input type="hidden" name="price1" value="<%= @product.price %>">
+            <input type="hidden" name="price1" value="<%= @product.price_for(session[:is_wholesale_user]) %>">
         <% end %>
         <%# we only send 1 product, all the time. might need to be changed in the future. %>
         <input type="hidden" name="qty1" value="1">

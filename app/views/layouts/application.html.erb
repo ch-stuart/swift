@@ -34,6 +34,16 @@
     <%= csrf_meta_tag %>
 </head>
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
+    <% if @company.front_door_sign.present? %>
+        <h2 class="front_door_sign">
+            <%= @company.front_door_sign %>
+        </h2>
+    <% end %>
+    <% if session[:is_wholesale_user] %>
+        <h2 class="front_door_sign">
+            You are signed in as a wholesaler. Prices are adjusted (lowered). Minimum $500 purchase required.
+        </h2>
+    <% end %>
     <div class="container-menu-wrap">
         <div class="container container-menu">
             <div class="sixteen columns menu--row-btns">
@@ -47,11 +57,6 @@
             <%= render 'shared/global_nav' %>
         </div>
     </div>
-    <% if @company.front_door_sign.present? %>
-        <h2 class="front_door_sign">
-            <%= @company.front_door_sign %>
-        </h2>
-    <% end %>
     <%= yield :flash %>
     <%# render "shared/checkout" %>
     <div class="container container-logo">
