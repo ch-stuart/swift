@@ -38,12 +38,24 @@
       Get the embed html from the video site. Here's an <a href="http://d.pr/d1dh">example</a>. The size should be `width: 460 height: 369`.
     </p>
   </div>
+  <div class="field row">
+    <label for="page_show_video_on_homepage">
+      <%= f.check_box :show_video_on_homepage %>
+      Show video on homepage?
+    </label>
+  </div>
   <div class="field">
     <%= f.label :flickr_tag %>
     <%= f.text_field :flickr_tag %>
     <p class="hint">
       Enter a flickr tag to display a photo gallery. Leave blank for none.
     </p>
+  </div>
+  <div class="field row">
+    <label for="page_show_photos_on_homepage">
+      <%= f.check_box :show_photos_on_homepage %>
+      Show photo(s) on homepage?
+    </label>
   </div>
   <div class="field">
     <%= f.label :featured %>
