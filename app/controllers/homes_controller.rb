@@ -8,7 +8,7 @@ class HomesController < ApplicationController
 
     def index
         @pages = Page.find_all_by_status("Public")
-        @featured_page = Page.find_by_featured("Featured")
+        @featured_pages = Page.where(:featured => "Featured").reverse
         @products = Product.where(:status => "Public", :kind => "Product")
         @categories = Category.all
         @accessories = Product.where(:status => "Public", :kind => "Accessory")

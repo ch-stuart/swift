@@ -13,31 +13,33 @@
 </div>
 <div class="row">
   <div class="eight columns">
-    <article class="featured-page">
-      <h3>
-        <%= @featured_page.title %>
-      </h3>
-      <% if @featured_page.show_video_on_homepage == true %>
-        <div class="featured-page__video-wrap">
-          <%= raw @featured_page.video_html %>
-        </div>
-      <% end %>
-      <% if @featured_page.show_photos_on_homepage == true %>
-        <div class="featured-page__photos-wrap">
-          <!-- TODO photos -->
-        </div>
-      <% end %>
-      <p class="featured-page__summary">
-        <% if @featured_page.summary.present? %>
-          <%= @featured_page.summary %>
-        <% else %>
-          <%= truncate(@featured_page.body, :length => 865) %>
+    <% @featured_pages.each do |featured_page| %>
+      <article class="featured-page">
+        <h3>
+          <%= featured_page.title %>
+        </h3>
+        <% if featured_page.show_video_on_homepage == true %>
+          <div class="featured-page__video-wrap">
+            <%= raw featured_page.video_html %>
+          </div>
         <% end %>
-      </p>
-      <p>
-        <%= link_to raw("read more &rarr;"), @featured_page, :class => "hl-link" %>
-      </p>
-    </article>
+        <% if featured_page.show_photos_on_homepage == true %>
+          <div class="featured-page__photos-wrap">
+            <!-- TODO photos -->
+          </div>
+        <% end %>
+        <p class="featured-page__summary">
+          <% if featured_page.summary.present? %>
+            <%= featured_page.summary %>
+          <% else %>
+            <%= truncate(featured_page.body, :length => 865) %>
+          <% end %>
+        </p>
+        <p>
+          <%= link_to raw("read more &rarr;"), featured_page, :class => "hl-link" %>
+        </p>
+      </article>
+    <% end %>
   </div>
   <div class="eight columns">
     <article class="blog">
