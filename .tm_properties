@@ -2,6 +2,5 @@
 
 projectDirectory = "$CWD"
 windowTitle      = "$TM_DISPLAYNAME — Swift"
-tabSize 		 = 4
-exclude 		 = "{$exclude,*.log,tmp/*,*.sqlite*}"
-
+tabSize          = 2
+exclude          = "{$exclude,*.log,tmp/*,*.sqlite*}"
