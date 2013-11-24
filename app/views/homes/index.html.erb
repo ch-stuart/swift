@@ -29,13 +29,15 @@
             <%= link_to(image_tag(photo_url, :class => "scale-with-grid"), featured_page) %>
           </div>
         <% end %>
-        <p class="featured-page__summary">
-          <% if featured_page.summary.present? %>
-            <%= featured_page.summary %>
-          <% else %>
-            <%= truncate(featured_page.body, :length => 865) %>
+        <% if featured_page.summary.present? || featured_page.body.present? %>
+          <p class="featured-page__summary">
+            <% if featured_page.summary.present? %>
+              <%= featured_page.summary %>
+            <% else %>
+              <%= truncate(featured_page.body, :length => 865) %>
+            <% end %>
+          </p>
           <% end %>
-        </p>
         <p>
           <%= link_to raw("read more &rarr;"), featured_page, :class => "hl-link" %>
         </p>
