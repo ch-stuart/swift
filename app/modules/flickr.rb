@@ -1,9 +1,14 @@
 module Flickr
 
     def get_photos_by_tag tag
+        Rails.logger.info "Flickr.get_photos_by_tag #{tag}"
+
         return Rails.cache.read(tag) if Rails.cache.exist?(tag)
 
-        return [] if tag.blank?
+        if tag.blank?
+          Rails.logger.warn "Tag is blank. Returning empty array"
+          return []
+        end
 
         photos = []
 
@@ -30,7 +35,10 @@ module Flickr
             medium_photo        = photo_sizes.find {|s| s.label == 'Medium' }
 
             # Don't proceed if we can't get a medium photo
-            next if medium_photo.blank?
+            if medium_photo.blank?
+              Rails.logger.warn "Cannot get medium sized photo. Skipping."
+              next
+            end
 
             # Save medium size photo info
             photo[:url]         = medium_photo.source
@@ -43,6 +51,7 @@ module Flickr
                 photo[:large_url]    = large_photo.source
                 photo[:large_height] = large_photo.height
             else
+                Rails.logger.warn "Could not get large photo. Using medium photo instead."
                 photo[:large_url]    = medium_photo.source
                 photo[:large_height] = medium_photo.height
             end
