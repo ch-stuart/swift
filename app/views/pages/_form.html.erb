@@ -51,10 +51,17 @@
       Enter a flickr tag to display a photo gallery. Leave blank for none.
     </p>
   </div>
+  <div class="field">
+    <%= f.label :flickr_photo %>
+    <%= f.text_field :flickr_photo %>
+    <p class="hint">
+      Enter a flickr id [<a href="http://d.pr/Q7xE" target="_new">?</a>] to display a photo on the homepage. Leave blank for none.
+    </p>
+  </div>
   <div class="field row">
-    <label for="page_show_photos_on_homepage">
-      <%= f.check_box :show_photos_on_homepage %>
-      Show photo(s) on homepage?
+    <label for="page_show_photo_on_homepage">
+      <%= f.check_box :show_photo_on_homepage %>
+      Show photo on homepage?
     </label>
   </div>
   <div class="field">

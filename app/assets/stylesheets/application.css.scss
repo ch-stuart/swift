@@ -49,3 +49,8 @@ a:hover, a:focus {
     color: $hotpink;
 }
 // End override
+
+
+img.center-in-grid {
+	display: block;
+	margin: 0 auto; }

@@ -18,14 +18,15 @@
         <h3>
           <%= featured_page.title %>
         </h3>
-        <% if featured_page.show_video_on_homepage == true %>
+        <% if featured_page.show_video_on_homepage %>
           <div class="featured-page__video-wrap">
             <%= raw featured_page.video_html %>
           </div>
         <% end %>
-        <% if featured_page.show_photos_on_homepage == true %>
-          <div class="featured-page__photos-wrap">
-            <!-- TODO photos -->
+        <% if featured_page.show_photo_on_homepage %>
+          <div class="featured-page__photo-wrap">
+            <% photo_url = Page.get_photo_by_id(featured_page.flickr_photo, "Medium") %>
+            <%= link_to(image_tag(photo_url, :class => "scale-with-grid"), featured_page) %>
           </div>
         <% end %>
         <p class="featured-page__summary">

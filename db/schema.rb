@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131123203856) do
+ActiveRecord::Schema.define(:version => 20131124000759) do
 
   create_table "categories", :force => true do |t|
     t.string    "title"
@@ -54,18 +54,19 @@ ActiveRecord::Schema.define(:version => 20131123203856) do
   end
 
   create_table "pages", :force => true do |t|
-    t.string    "title"
-    t.text      "body"
-    t.string    "path"
-    t.string    "status"
-    t.string    "video_html"
-    t.string    "flickr_tag"
-    t.string    "featured"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.text      "summary"
-    t.boolean   "show_video_on_homepage",  :default => false, :null => false
-    t.boolean   "show_photos_on_homepage", :default => false, :null => false
+    t.string   "title"
+    t.text     "body"
+    t.string   "path"
+    t.string   "status"
+    t.string   "video_html"
+    t.string   "flickr_tag"
+    t.string   "featured"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "summary"
+    t.boolean  "show_video_on_homepage", :default => false, :null => false
+    t.boolean  "show_photo_on_homepage", :default => false, :null => false
+    t.string   "flickr_photo"
   end
 
   create_table "parts", :force => true do |t|
