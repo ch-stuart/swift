@@ -46,14 +46,14 @@
   </div>
   <div class="field">
     <%= f.label :flickr_tag %>
-    <%= f.text_field :flickr_tag %>
+    <%= f.text_field :flickr_tag, class: "js-flickr_tag" %>
     <p class="hint">
-      Enter a flickr tag to display a photo gallery. Leave blank for none.
+      Enter a flickr tag to display a photo gallery. Leave blank for none. <a href="#" class="js-flickr_tag-link"></a>
     </p>
   </div>
   <div class="field">
     <%= f.label :flickr_photo %>
-    <%= f.text_field :flickr_photo %>
+    <%= f.text_field :flickr_photo, class: 'js-flickr_id' %>
     <p class="hint">
       Enter a flickr id [<a href="http://d.pr/Q7xE" target="_new">?</a>] to display a photo on the homepage. Leave blank for none.
     </p>
