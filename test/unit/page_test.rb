@@ -17,16 +17,6 @@ class PageTest < ActiveSupport::TestCase
     assert page.save, "should save page"
   end
 
-  test "should not save page without title" do
-    page = Page.new @page.except(:title)
-    assert !page.save, "should not save page"
-  end
-
-  test "should not save page without body" do
-    page = Page.new @page.except(:body)
-    assert !page.save, "should not save page"
-  end
-
   test "should not save page without path" do
     page = Page.new @page.except(:path)
     assert !page.save, "should not save page"
