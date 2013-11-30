@@ -26,7 +26,7 @@ class PagesController < ApplicationController
     @subtitle   = @page.title
 
     if @page.flickr_photo.present?
-      @photo = Page.get_photo_by_id(@page.flickr_photo, "Large")
+      @photo = Page.get_photo_by_id(@page.flickr_photo)
     else
       @photo = nil
     end

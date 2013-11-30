@@ -1,5 +1,7 @@
 module Flickr
 
+  flickr_photo_sizes = %w{Large Medium Small Thumbnail}
+
   def get_photos_by_tag tag
     Rails.logger.info "Flickr.get_photos_by_tag #{tag}"
 
@@ -64,7 +66,7 @@ module Flickr
     photos
   end
 
-  def get_photo_by_id(id, size)
+  def get_photo_by_id(id, size=nil)
     return Rails.cache.read(id) if Rails.cache.exist?(id)
 
     return "" if id.blank?
@@ -75,7 +77,15 @@ module Flickr
       Rails.logger.info "Flickr.get_photo_by_id failed. #{e}"
       return ""
     end
-    photo = sizes.find {|s| s.label == size }
+
+    if size
+      photo = sizes.find {|s| s.label == size }
+    else
+      flickr_photo_sizes.each do |size|
+        photo = sizes.find {|s| s.label == size }
+        break unless photo.nil?
+      end
+    end
 
     Rails.cache.write(id, photo.source)
 
