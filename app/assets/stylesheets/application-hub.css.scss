@@ -8,32 +8,33 @@
 @import 'module-form';
 
 body {
-	padding-top: 40px;
+  padding-top: 40px;
 }
-
 a {
-	text-decoration: none;
-	font-weight: bold;
+  text-decoration: none;
+  font-weight: bold;
 }
 a:hover {
-	border-bottom:1px solid magenta;
+  border-bottom:1px solid magenta;
 }
-
 .hint {
     margin-top: -20px;
     color: #888;
     max-width: 360px;
 }
+.hint--for-checkbox {
+  margin-top: 0;
+}
 th {
-	text-align: left;
-	border-bottom: 1px solid #ccc;
-	font-weight: bold
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold
 }
 th,td {
-	padding: 8px 10px;
+  padding: 8px 10px;
 }
 tr:nth-child(odd) td {
-	background-color: #fafafa;
+  background-color: #fafafa;
 }
 .indent {
     background-color: rgba(255,255,255,.50);
