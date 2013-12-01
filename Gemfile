@@ -3,7 +3,7 @@ ruby '1.9.3'
 
 gem 'rails', '3.2.14'
 gem "thin"
-gem 'flickraw', '0.9.5'
+gem 'flickraw', '0.9.7'
 # faster?
 # gem 'flickraw-cached'
 gem 'rdiscount'
