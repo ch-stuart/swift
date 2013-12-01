@@ -9,8 +9,8 @@ jQuery.fn.slideshow = function() {
         var current = 1;
 
         if (size === 1) {
+            // Nowhere to navigate to, so hide it.
             $wrapper.find('.slideshow-nav').hide();
-            return;
         }
 
         function go(dir) {

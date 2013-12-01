@@ -20,7 +20,9 @@ module Flickr
     # ... 5 more to get the sizes
     # ... 5 more to get the medium size photos
     # boo
-    flickr.photos.search(:user_id => APP_CONFIG['flickr_user_id'], :tags => tag).each do |p|
+    flickr.photos.search(:user_id => APP_CONFIG['flickr_user_id'], :tags => URI.escape(tag)).each do |p|
+      # Rails.logger.info "Getting photo: #{p.inspect}"
+
       # Get photo info
       photo_info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
 
@@ -114,6 +116,7 @@ module Flickr
     photos
   end
 
+  # NOT USED
   def get_photos_by_user
     return Rails.cache.read('user_photos') if Rails.cache.exist?('user_photos')
 
