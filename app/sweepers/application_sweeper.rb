@@ -29,6 +29,7 @@ class ApplicationSweeper < ActionController::Caching::Sweeper
         expire_fragment 'footer'
         expire_fragment 'global_nav'
         expire_fragment 'meta_description'
+        expire_fragment 'company_description'
     end
 
 end
