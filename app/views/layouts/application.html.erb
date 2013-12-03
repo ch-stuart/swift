@@ -17,7 +17,9 @@
     <title>
         <%= "#{@subtitle} from " if @subtitle.present? %><%= @title %> | handmade bicycle panniers and accessories
     </title>
-    <meta description="<%= Company.first.description if Company.first.description.present? %>">
+    <% cache 'meta_description' do %>
+      <meta description="<%= Company.first.description if Company.first.description.present? %>">
+    <% end %>
     <link type="text/plain" rel="author" href="http://builtbyswift.com/humans.txt">
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>

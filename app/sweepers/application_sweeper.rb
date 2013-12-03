@@ -25,6 +25,10 @@ class ApplicationSweeper < ActionController::Caching::Sweeper
         Page.all.each do |page|
             expire_action :controller => 'pages', :action => 'show', :id => page.id
         end
+
+        expire_fragment 'footer'
+        expire_fragment 'global_nav'
+        expire_fragment 'meta_description'
     end
 
 end
