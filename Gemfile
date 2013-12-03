@@ -2,10 +2,9 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'rails', '3.2.14'
+gem 'pg'
 gem "thin"
 gem 'flickraw', '0.9.7'
-# faster?
-# gem 'flickraw-cached'
 gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails', '~> 2.2.1'
@@ -20,7 +19,6 @@ group :assets do
 end
 
 group :production do
-  gem 'pg'
   gem 'foreman'
 end
 
