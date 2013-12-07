@@ -5,16 +5,17 @@ class ProductTest < ActiveSupport::TestCase
   def setup
     @product = {
       :title => "Big Big Bag",
+      :short_title => "BB Bag",
       :description => "You've never seen a bag this big",
+      :short_description => "You've never seen a bag this big",
       :flickr_tag => "flickr_tag-is-nice",
       :specs => "1 foot x 1 foot x 1 foot",
       :status => "Public",
       :price => "25.00",
       :kind => "Product",
-      :short_title => "B.B. Bag",
       :humane_price => "25 bucks!",
-      :flickr_photo => "1234567891",
-      :flickr_set => "0987654321",
+      :flickr_photo => "1234567890",
+      :flickr_set => "09876543210987653",
       :question => "What?",
       :answer => "42",
       :not_for_sale => false,
@@ -26,7 +27,7 @@ class ProductTest < ActiveSupport::TestCase
 
   test "should save" do
     product = Product.new @product
-    assert product.save, "Should save"
+    assert product.save!, "Should save"
   end
 
   test "should note save with bad kind" do
@@ -52,12 +53,18 @@ class ProductTest < ActiveSupport::TestCase
     assert !product.save, "Should not save"
   end
   
-  test "should not save with bad photo format" do
-    @product[:flickr_photo] = "12345678910"
+  test "should not save with bad photo format (12 digits not legal)" do
+    @product[:flickr_photo] = "123456789100"
     product = Product.new @product
     assert !product.save, "Should not save"
   end
-    
+
+  test "should save with 11 digits (used to be only 10 digits, flickr added enough photos)" do
+    @product[:flickr_photo] = "12345678910"
+    product = Product.new @product
+    assert product.save, "Should save"
+  end
+
   test "should not save without title" do
     product = Product.new @product.except(:title)
     assert !product.save, "should not save without title"
