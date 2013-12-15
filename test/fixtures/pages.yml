@@ -13,14 +13,14 @@ two:
   status: Private
 
 three:
-  title: title
+  title: this is the featured page
   body: body
   path: this_page
   status: Public
   video_html: "<video></video>"
   flickr_tag: flickrtag
   flickr_photo: 123412122
-  featured: "true"
+  featured: "Featured"
   summary: "summary"
   show_video_on_homepage: false
   show_photo_on_homepage: false
