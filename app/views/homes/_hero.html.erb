@@ -1,23 +1,24 @@
 <div id="hero" class="sixteen columns hero">
-    <div id="hero-scroll">
-        <% @photos.each do |photo| %>
-            <img src=<%= photo[:url] %> class="hero-img">
-        <% end %>
+  <div id="hero-scroll">
+    <% @photos.each do |photo| %>
+      <img src=<%= photo[:url] %> class="hero-img">
+    <% end %>
+  </div>
+  <div class="hero-text">
+    <h5 class="hero-heading">
+      <%= link_to @featured_product.title, @featured_product %>
+    </h5>
+    <div class="hero-paras">
+      <% if @featured_product.short_description.present? %>
+        <p>
+          <%= @featured_product.short_description %>
+        </p>
+      <% else %>
+        <%= raw md @featured_product.description %>
+      <% end %>
     </div>
-		<div class="hero-text">
-			<h5 class="hero-heading">
-				<%= link_to @featured_product.title, @featured_product %>
-			</h5>
-			<div class="hero-paras">
-				<% if @featured_product.short_description.present? %>
-					<p>
-						<%= @featured_product.short_description %>
-					</p>
-				<% else %>
-					<%= raw md @featured_product.description %>
-				<% end %>
-			</div>
-			<div class="hero-close entypo">&#59236;</div>
-			<div class="hero-open entypo">&#59239;</div>
-		</div>
+    <div class="hero-close entypo">&#59236;</div>
+    <div class="hero-open entypo">&#59239;</div>
+  </div>
 </div>
+

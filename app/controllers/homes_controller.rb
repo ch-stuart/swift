@@ -17,11 +17,11 @@ class HomesController < ApplicationController
         @blog = get_latest_blog_post
 
         @featured_product = Product.where(:featured_on_homepage => true).first
-        
+
         if @featured_product.blank?
             @featured_product = Product.first
         end
-            
+
         if @featured_product.flickr_set.present?
             @photos = Home.get_photos_by_set @featured_product.flickr_set
         else
