@@ -10,8 +10,12 @@ class Page < ActiveRecord::Base
     self.status == "Public"
   end
 
+  def private?
+    self.status == "Private"
+  end
+
   def featured?
-    self.status == "Featured"
+    self.featured == "Featured"
   end
 
 end

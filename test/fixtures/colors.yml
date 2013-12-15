@@ -5,5 +5,6 @@ one:
   hex: "#de41a4"
 
 two:
-  title: Purple
+  title: Leather
   hex: "#a93caa"
+  price: "0.99"

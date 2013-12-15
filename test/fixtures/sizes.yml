@@ -2,8 +2,8 @@
 
 one:
   title: MyString
-  price: MyString
+  price: "0.99"
 
 two:
   title: MyString
-  price: MyString
+  price: "12.99"
