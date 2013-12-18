@@ -20,7 +20,7 @@ module Flickr
     # ... 5 more to get the sizes
     # ... 5 more to get the medium size photos
     # boo
-    flickr.photos.search(:user_id => APP_CONFIG['flickr_user_id'], :tags => URI.escape(tag)).each do |p|
+    flickr.photos.search(:user_id => APP_CONFIG[:flickr_user_id], :tags => URI.escape(tag)).each do |p|
       # Rails.logger.info "Getting photo: #{p.inspect}"
 
       # Get photo info
@@ -122,7 +122,7 @@ module Flickr
 
     photos = []
 
-    results = flickr.people.getPublicPhotos :user_id => APP_CONFIG['flickr_user_id'], :per_page => 10
+    results = flickr.people.getPublicPhotos :user_id => APP_CONFIG[:flickr_user_id], :per_page => 10
 
     results.each do |photo|
       sizes = flickr.photos.getSizes :photo_id => photo.id

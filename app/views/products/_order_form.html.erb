@@ -1,9 +1,9 @@
-<form id="order_form" class="form-order" method="post" action="<%= APP_CONFIG['store_host'] %><%= APP_CONFIG['add_to_cart_path'] %>" data-count="1">
+<form id="order_form" class="form-order" method="post" action="<%= APP_CONFIG[:store_host] %><%= APP_CONFIG[:add_to_cart_path] %>" data-count="1">
 
     <div style="display:none">
         <%# -------- START MAL's fields -------- %>
         <%# Mal's userid %>
-        <input type="hidden" name="userid" value="<%= APP_CONFIG['store_userid'] %>">
+        <input type="hidden" name="userid" value="<%= APP_CONFIG[:store_userid] %>">
         <%# Mal's needs different params sent if the product has diff. prices based on size. %>
         <% unless @product.sizes.present? %>
             <input type="hidden" name="product1[]" value="<%= @product.title %>">

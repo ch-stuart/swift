@@ -43,6 +43,9 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     flickraw (0.9.7)
     foreman (0.63.0)
       dotenv (>= 0.7)
@@ -133,6 +136,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   dalli
+  figaro
   flickraw (= 0.9.7)
   foreman
   jquery-rails (~> 2.2.1)

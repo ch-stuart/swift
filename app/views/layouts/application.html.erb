@@ -35,7 +35,7 @@
         <i id="global-menu-btn" class="entypo entypo-menu">&#9776;</i>
         <% cache 'fox_and_cart' do %>
           <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
-          <a href="<%=APP_CONFIG['store_host']%><%=APP_CONFIG['review_cart_path']%><%=APP_CONFIG['store_userid']%>" title="View Your Cart or Checkout">
+          <a href="<%=APP_CONFIG[:store_host]%><%=APP_CONFIG[:review_cart_path]%><%=APP_CONFIG[:store_userid]%>" title="View Your Cart or Checkout">
             <i class='entypo entypo-cart'>&#59197;</i>
           </a>
         <% end %>

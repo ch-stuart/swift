@@ -11,6 +11,7 @@ gem 'jquery-rails', '~> 2.2.1'
 gem 'dalli' # memcachier
 gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
+gem 'figaro'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '

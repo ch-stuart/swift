@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   def authenticate
     @hub = true
     login = authenticate_or_request_with_http_basic do |username, password|
-      username == APP_CONFIG['user'] && password == APP_CONFIG['pass']
+      username == APP_CONFIG[:user] && password == APP_CONFIG[:pass]
     end
     session[:login] = login
   end

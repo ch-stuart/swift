@@ -4,3 +4,5 @@ tmp/cache
 tmp/pids
 log/*.log
 *.DS_Store
+# Ignore application configuration
+/config/application.yml
