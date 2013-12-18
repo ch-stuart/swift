@@ -3,7 +3,6 @@ class HomesController < ApplicationController
     require "open-uri"
 
     before_filter :authenticate, :except => [ :index, :store ]
-    # caches_page :index, :store
     caches_action :index, :store
 
     def index
