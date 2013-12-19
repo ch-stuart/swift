@@ -1,4 +1,7 @@
 ENV["RAILS_ENV"] = "test"
+
+begin; require 'turn/autorun'; rescue LoadError; end
+
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 

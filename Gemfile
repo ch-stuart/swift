@@ -27,3 +27,7 @@ group :development do
   gem 'sqlite3'
   gem 'taps'
 end
+
+group :test do
+  gem 'turn'
+end
