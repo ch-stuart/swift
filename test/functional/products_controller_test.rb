@@ -32,6 +32,11 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show product order" do
+    get :order, :id => @product.to_param
+    assert_response :success
+  end
+
   test "should get edit" do
     get :edit, :id => @product.to_param
     assert_response :success

@@ -55,4 +55,9 @@ class HomesControllerTest < ActionController::TestCase
     assert_select ".row-humans", 1
   end
 
+  test "should get store" do
+    get :store
+    assert_response :success
+  end
+
 end

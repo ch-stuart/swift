@@ -1,15 +1,6 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  title: MyString
-  email: MyString
-  phone: MyString
-  address: MyText
-  description: MyString
-
-two:
-  title: MyString
-  email: MyString
-  phone: MyString
-  address: MyText
-  description: MyString
+  title: Company Title
+  email: company@email.com
+  phone: "206 335 6908"
+  address: "1212 E Pike Street, Seattle WA 98122"
+  description: "This is the company description"
