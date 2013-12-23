@@ -5,13 +5,18 @@ module Flickr
   def get_photos_by_tag tag
     Rails.logger.info "Flickr.get_photos_by_tag #{tag}"
 
-    return Rails.cache.read(tag) if Rails.cache.exist?(tag)
-
+    # return [] if not tag
     if tag.blank?
       Rails.logger.warn "Tag is blank. Returning empty array"
       return []
+    else
+      # check for photos in cache if tag is present
+      if Rails.cache.exist?(tag)
+        return Rails.cache.read(tag)
+      end
     end
 
+    # go get them if they are not cached
     photos = []
 
     # This unforunately takes many calls to flickr in order to get the photo URLs
@@ -69,9 +74,13 @@ module Flickr
   end
 
   def get_photo_by_id(id, size=nil)
-    return Rails.cache.read(id) if Rails.cache.exist?(id)
-
-    return "" if id.blank?
+    if id.blank?
+      return ""
+    else
+      if Rails.cache.exist?(id)
+        return Rails.cache.read(id)
+      end
+    end
 
     begin
       sizes = flickr.photos.getSizes :photo_id => id
@@ -95,7 +104,13 @@ module Flickr
   end
 
   def get_photos_by_set id
-    return Rails.cache.read(id) if Rails.cache.exist?(id)
+    if id.blank?
+      return []
+    else
+      if Rails.cache.exist?(id)
+        return Rails.cache.read(id)
+      end
+    end
 
     photos = []
 
@@ -116,23 +131,23 @@ module Flickr
     photos
   end
 
-  # NOT USED
-  def get_photos_by_user
-    return Rails.cache.read('user_photos') if Rails.cache.exist?('user_photos')
-
-    photos = []
-
-    results = flickr.people.getPublicPhotos :user_id => APP_CONFIG[:flickr_user_id], :per_page => 10
-
-    results.each do |photo|
-      sizes = flickr.photos.getSizes :photo_id => photo.id
-      medium = sizes.find {|s| s.label == 'Medium' }
-      photos.push({ :id => photo.id, :url => medium.source })
-    end
-
-    Rails.cache.write('user_photos', photos)
-
-    photos
-  end
+  # # NOT USED
+  # def get_photos_by_user
+  #   return Rails.cache.read('user_photos') if Rails.cache.exist?('user_photos')
+  # 
+  #   photos = []
+  # 
+  #   results = flickr.people.getPublicPhotos :user_id => APP_CONFIG[:flickr_user_id], :per_page => 10
+  # 
+  #   results.each do |photo|
+  #     sizes = flickr.photos.getSizes :photo_id => photo.id
+  #     medium = sizes.find {|s| s.label == 'Medium' }
+  #     photos.push({ :id => photo.id, :url => medium.source })
+  #   end
+  # 
+  #   Rails.cache.write('user_photos', photos)
+  # 
+  #   photos
+  # end
 
 end
