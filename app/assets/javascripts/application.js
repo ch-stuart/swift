@@ -1,11 +1,12 @@
 // ...
+//= require console
 //= require array.foreach
 //= require ua
 //= require jquery
 //= require jquery.browser
 //= require jquery_ujs
+//= require angular
 //= require tinycolor
-//= require console
 //= require jquery.fitvids
 //= require jquery.noisy
 //= require jquery.impromptu
@@ -17,6 +18,7 @@
 //= require ICanHaz
 //= require slideshow
 //= require product_order
+//= require shopping_cart
 
 jQuery(document).ready(function($) {
 
@@ -33,7 +35,7 @@ jQuery(document).ready(function($) {
 
     $('#global-menu-btn').click(function() {
         $(this).toggleClass('active');
-    	$('#global-menu').slideToggle();
+        $('#global-menu').slideToggle();
     });
 
     if (document.location.hostname !== "swift.dev") {
