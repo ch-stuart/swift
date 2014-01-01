@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_filter :authenticate, :except => [ :show, :order ]
+  before_filter :authenticate, :except => [ :show, :order, :order2 ]
   caches_action :show, :order
   cache_sweeper ApplicationSweeper
 
@@ -17,10 +17,35 @@ class ProductsController < ApplicationController
     @company = Company.first
     @subtitle = @product.title
 
+    respond_to do |format|
+      format.html
+      format.json do
+        render :json => @product.to_json(:include => [
+          {
+            :parts => { :include => :colors },
+          },
+          :sizes
+        ])
+      end
+    end
+
     render_404 unless @product.public?
   end
 
   def order
+    @categories = Category.all
+    @products = Product.where(:status => 'Public', :kind => 'Product')
+    @company = Company.first
+    @colors = Color.all
+
+    @product = Product.find(params[:id])
+    @photos = Product.get_photos_by_tag @product.flickr_tag
+    @subtitle = @product.title
+
+    render_404 unless @product.public?
+  end
+
+  def order2
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @company = Company.first

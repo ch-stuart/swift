@@ -25,6 +25,9 @@ SwiftSite::Application.routes.draw do
     member do
       get 'order'
     end
+    member do
+      get 'order2'
+    end
   end
 
   match 'logout', :to => 'application#logout'
