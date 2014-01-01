@@ -26,20 +26,20 @@
 
 .entypo-social {
     font-family: "entypo-social";
-	&:hover {
-	    color: $hotpink !important;
-	}
+    &:hover {
+        color: $hotpink !important;
+    }
 }
 
 .entypo, .entypo-social {
     color: #aaa;
-	font-size: 58px;
-	line-height: .4;
+    font-size: 58px;
+    line-height: .4;
 }
 
 .ie .entypo {
-	line-height: 0;
+    line-height: 0;
 }
 .ie .entypo-social {
-	line-height: .1;
+    line-height: .1;
 }

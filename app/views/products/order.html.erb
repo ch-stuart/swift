@@ -28,11 +28,11 @@
         </h3>
     <%# else, show the order form. %>
     <% else %>
-	    <h3 class="order-form-does-not-work-without-javascript">
-	        <span class="woah">
-	        	The order form requires JavaScript. Please enable JavaScript in your browser.
-	        </span>
-	    </h3>
+        <h3 class="order-form-does-not-work-without-javascript">
+            <span class="woah">
+            	The order form requires JavaScript. Please enable JavaScript in your browser.
+            </span>
+        </h3>
         <%= render 'order_form' %>
     <% end %>
 
@@ -45,9 +45,9 @@
             Delivery Time
         </h3>
         <div class="handmade_label">handmade</div>
-		<p>
-			<%= @company.delivery_time %>
-		</p>
+    	<p>
+    		<%= @company.delivery_time %>
+    	</p>
     <% end %>
     <h3>
         Specifications

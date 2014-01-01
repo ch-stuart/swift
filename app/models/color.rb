@@ -5,5 +5,5 @@ class Color < ActiveRecord::Base
     validates_presence_of :title, :hex
     validates :hex, :hex_color => true
     validates_format_of :price, :with => /^\d{0,10}\.\d{2}$/, :message => "must be include dollars and cents, ex: 35.00", :if => :price?
-    
+
 end

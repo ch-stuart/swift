@@ -9,12 +9,12 @@ class HomesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
   end
-  
+
   test "should use application layout" do
     get :index
     assert_template layout: "layouts/application"
   end
-  
+
   test "should display a featured page" do
     get :index
     assert_select ".featured-page", 1

@@ -87,6 +87,3 @@ class AddTables < ActiveRecord::Migration
         drop_table :testimonials
     end
 end
-
-
-

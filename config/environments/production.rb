@@ -1,6 +1,6 @@
 SwiftSite::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-  
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
@@ -60,7 +60,7 @@ SwiftSite::Application.configure do
 
   # http://devcenter.heroku.com/articles/memcache
   config.cache_store = :dalli_store
-  
+
   # fix for heroku
   config.assets.precompile += %w( application-hub.css  )
 

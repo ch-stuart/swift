@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     @photos = Product.get_photos_by_tag @product.flickr_tag
     @company = Company.first
     @subtitle = @product.title
-    
+
     render_404 unless @product.public?
   end
 
@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @photos = Product.get_photos_by_tag @product.flickr_tag
     @subtitle = @product.title
-    
+
     render_404 unless @product.public?
   end
 

@@ -19,27 +19,27 @@
 //= require product_order
 
 jQuery(document).ready(function($) {
-    
+
     var $root = $(document.documentElement);
 
     $root.removeClass('nojs');
-    
+
     if (UA.isMobile()) {
         $root.addClass('is-mobile');
     }
     if (UA.isSafari()) {
         $root.addClass('is-safari');
     }
-    
+
     $('#global-menu-btn').click(function() {
         $(this).toggleClass('active');
-		$('#global-menu').slideToggle();
+    	$('#global-menu').slideToggle();
     });
 
     if (document.location.hostname !== "swift.dev") {
         $(document.body).noisy({
-            intensity: 0.9, 
-            size: 200, 
+            intensity: 0.9,
+            size: 200,
             opacity: 0.035,
             monochrome: false
         });

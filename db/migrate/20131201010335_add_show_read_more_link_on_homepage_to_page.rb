@@ -4,4 +4,3 @@ class AddShowReadMoreLinkOnHomepageToPage < ActiveRecord::Migration
     add_column :pages, :hide_read_more_link_on_homepage, :boolean, :null => false, :default => false
   end
 end
-

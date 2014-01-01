@@ -15,7 +15,7 @@ class CompanyTest < ActiveSupport::TestCase
         :close_shop_message => "we're not open"
     }
   end
-  
+
   test "should create company" do
     company = Company.new @company
     assert company.save, "Should save"

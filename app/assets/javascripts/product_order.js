@@ -167,5 +167,3 @@ jQuery.fn.orderFormManager = function() {
 
 
 };
-
-

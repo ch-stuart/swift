@@ -4,7 +4,7 @@
         <h3 class="testimonials-heading">
             Testimonials
         </h3>
-		<div class="testimonial">
+    	<div class="testimonial">
             <p class="testimonial-body">
                 <%= raw md @product.testimonials.first.body %>
             </p>
@@ -12,51 +12,49 @@
                 &mdash; <%= @product.testimonials.first.author %>
             </p>
         </div>
-		<% if @product.testimonials.second.present? %>
-			<div class="testimonial">
-	            <p class="testimonial-body">
-	                <%= raw md @product.testimonials.second.body %>
-	            </p>
-	            <p class="testimonial-author">
-	                &mdash; <%= @product.testimonials.second.author %>
-	            </p>
-	        </div>
-		<% end %>
-		<div class="testimonials-hidden">
-	        <% @product.testimonials.each_with_index do |testimonial, index| %>
-				<% next if index < 2 %>
-	            <div class="testimonial">
-	                <p class="testimonial-body">
-	                    <%= raw md testimonial.body %>
-	                </p>
-	                <p class="testimonial-author">
-	                    &mdash; <%= testimonial.author %>
-	                </p>
-	            </div>  
-	        <% end %>
-		</div>
+    	<% if @product.testimonials.second.present? %>
+    		<div class="testimonial">
+                <p class="testimonial-body">
+                    <%= raw md @product.testimonials.second.body %>
+                </p>
+                <p class="testimonial-author">
+                    &mdash; <%= @product.testimonials.second.author %>
+                </p>
+            </div>
+    	<% end %>
+    	<div class="testimonials-hidden">
+            <% @product.testimonials.each_with_index do |testimonial, index| %>
+    			<% next if index < 2 %>
+                <div class="testimonial">
+                    <p class="testimonial-body">
+                        <%= raw md testimonial.body %>
+                    </p>
+                    <p class="testimonial-author">
+                        &mdash; <%= testimonial.author %>
+                    </p>
+                </div>
+            <% end %>
+    	</div>
     </div>
     <%= content_for :js do %>
         <script>
-			$(document).ready(function() {
-				// Show additional testimonials
-				if ($('.testimonial').size() > 2) {
-		            $('.testimonials')
-		                .append('<p id=readMoreTestimonials class=button>Read More Testimonials</p>')
-		                .find('#readMoreTestimonials')
-		                .css('cursor', 'pointer')
-		                .click(function() {
-		                    $('.testimonials-hidden').slideDown({
-		                    	complete: function() {
-		                    		$('#readMoreTestimonials').css('visibility', 'hidden');
-		                    	}
-		                    });
-		                });
-				}
-			});
+    		$(document).ready(function() {
+    			// Show additional testimonials
+    			if ($('.testimonial').size() > 2) {
+    	            $('.testimonials')
+    	                .append('<p id=readMoreTestimonials class=button>Read More Testimonials</p>')
+    	                .find('#readMoreTestimonials')
+    	                .css('cursor', 'pointer')
+    	                .click(function() {
+    	                    $('.testimonials-hidden').slideDown({
+    	                    	complete: function() {
+    	                    		$('#readMoreTestimonials').css('visibility', 'hidden');
+    	                    	}
+    	                    });
+    	                });
+    			}
+    		});
         </script>
     <% end %>
 
 <% end %>
-
-

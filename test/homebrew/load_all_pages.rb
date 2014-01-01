@@ -6,4 +6,3 @@
   system "open http://builtbyswift.com/products/#{num}/order"
   sleep(1)
 end
-  

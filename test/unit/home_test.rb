@@ -1,5 +1,5 @@
 # require 'test_helper'
-# 
+#
 # class HomeTest < ActiveSupport::TestCase
 #   # Replace this with your real tests.
 #   test "the truth" do

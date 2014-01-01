@@ -134,19 +134,19 @@ module Flickr
   # # NOT USED
   # def get_photos_by_user
   #   return Rails.cache.read('user_photos') if Rails.cache.exist?('user_photos')
-  # 
+  #
   #   photos = []
-  # 
+  #
   #   results = flickr.people.getPublicPhotos :user_id => APP_CONFIG[:flickr_user_id], :per_page => 10
-  # 
+  #
   #   results.each do |photo|
   #     sizes = flickr.photos.getSizes :photo_id => photo.id
   #     medium = sizes.find {|s| s.label == 'Medium' }
   #     photos.push({ :id => photo.id, :url => medium.source })
   #   end
-  # 
+  #
   #   Rails.cache.write('user_photos', photos)
-  # 
+  #
   #   photos
   # end
 

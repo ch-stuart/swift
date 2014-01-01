@@ -19,7 +19,7 @@ class HubController < ApplicationController
         render :text => "cache NOT cleared"
       end
   end
-  
+
   # Clear everything. Flickr is cached, so
   # if something updates over there we don't
   # know. Martina has to clear it manually.
@@ -31,5 +31,5 @@ class HubController < ApplicationController
       render :text => "cache NOT cleared. :("
     end
   end
-  
+
 end

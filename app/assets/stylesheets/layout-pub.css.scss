@@ -18,19 +18,19 @@ body {
     padding: 8px;
     position: relative;
 
-	.menu-fox {
-		display: block;
-	}
-	.menu-fox {
-		position: absolute;
-		left: 50%;
-		margin-left: -22px; 
-		top: 8px;
-	}
+    .menu-fox {
+    	display: block;
+    }
+    .menu-fox {
+    	position: absolute;
+    	left: 50%;
+    	margin-left: -22px;
+    	top: 8px;
+    }
 
     .entypo {
         cursor: pointer;
-		display: block;
+    	display: block;
 
         &:hover,
         &.active {
@@ -38,11 +38,11 @@ body {
         }
     }
     .entypo-menu {
-		float: left;
-	}
+    	float: left;
+    }
     .entypo-cart {
-		float: right;
-		font-size: 48px;
+    	float: right;
+    	font-size: 48px;
     }
 
     .menu--row-nav {
@@ -50,8 +50,8 @@ body {
     }
 }
 .ie .entypo-menu {
-	position: relative;
-	top: -3px;
+    position: relative;
+    top: -3px;
 }
 
 .container-main {
@@ -126,4 +126,3 @@ body {
         display: none;
     }
 }
-

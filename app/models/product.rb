@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
 
   extend Flickr
-  
+
   has_many :parts, :dependent => :destroy
   has_many :testimonials, :dependent => :destroy
   has_many :sizes, :dependent => :destroy
@@ -13,11 +13,11 @@ class Product < ActiveRecord::Base
 
   FLICKR_ID_MATCH = /^\d{10,11}$/
   FLICKR_SET_MATCH = /^\d{17}$/
-  
+
   KINDS = ["Product", "Accessory", "Stock"]
   attr_reader :KINDS
   validates :kind, :inclusion => { :in => KINDS, :message => "%{value} is not a valid type" }
-  
+
   STATUSES = ["Public", "Private"]
   attr_reader :STATUSES
   validates :status, :inclusion => { :in => STATUSES, :message => "%{value} is not a valid status" }
@@ -40,11 +40,11 @@ class Product < ActiveRecord::Base
   def is_accessory?
     self.kind == "Accessory"
   end
-  
+
   def is_stock?
     self.kind == "Stock"
   end
-  
+
   def is_product?
     self.kind == "Product"
   end
@@ -54,4 +54,3 @@ class Product < ActiveRecord::Base
   end
 
 end
-
