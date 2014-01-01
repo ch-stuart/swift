@@ -20,12 +20,29 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render :json => @product.to_json(:include => [
-          {
-            :parts => { :include => :colors },
-          },
-          :sizes
-        ])
+        product_attrs = [:title, :status, :price, :kind, :short_title, :humane_price, :question, :answer, :not_for_sale, :not_for_sale_message]
+        part_attrs    = [:title, :price]
+        color_attrs   = [:title, :price, :hex]
+        size_attrs    = [:title, :price]
+
+        render :json => @product.to_json(
+          :only => product_attrs,
+          :include => [
+            {
+              :parts => {
+                :only => part_attrs,
+                :include => {
+                  :colors => {
+                    :only => color_attrs
+                  }
+                }
+              },
+            },
+            :sizes => {
+              :only => size_attrs
+            }
+          ]
+        )
       end
     end
 
