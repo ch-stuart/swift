@@ -62,19 +62,6 @@ class ProductsController < ApplicationController
     render_404 unless @product.public?
   end
 
-  def order2
-    @categories = Category.all
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-    @company = Company.first
-    @colors = Color.all
-
-    @product = Product.find(params[:id])
-    @photos = Product.get_photos_by_tag @product.flickr_tag
-    @subtitle = @product.title
-
-    render_404 unless @product.public?
-  end
-
   def new
     @product = Product.new
     # 1.times do
