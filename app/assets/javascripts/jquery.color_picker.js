@@ -1,7 +1,6 @@
 /*global jQuery $ tinycolor setTimeout */
 jQuery.fn.color_picker = function() {
     return this.each(function() {
-
         var $wrapper = $(this);
         var $select = $($wrapper.data('for'));
         var $swatches = $wrapper.find('.color-picker--swatch');

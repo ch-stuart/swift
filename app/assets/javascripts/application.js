@@ -17,8 +17,8 @@
 //= require jquery.tabs
 //= require ICanHaz
 //= require slideshow
-//= require product_order
-//= require shopping_cart
+//= require angular.order
+//= require angular.shopping_cart
 
 jQuery(document).ready(function($) {
 

@@ -35,12 +35,10 @@
         </h3>
         <div ng-app="">
             <div ng-controller="OrderCtrl">
-                {{ product.title }}
+                <%= render 'order_form' %>
             </div>
         </div>
-
     <% end %>
-
 </div>
 
 <div class="five columns">
@@ -63,23 +61,3 @@
 </div>
 
 <div id="buffer" style="display: none;"></div>
-<%= content_for :js do %>
-    <script>
-        $(document).ready(function() {
-            $('.color-picker--wrapper').color_picker();
-            $('.color-picker--swatch').tooltip();
-        });
-
-        function OrderCtrl($scope, $http) {
-            var id = location.pathname.split('/')[2];
-
-            $http
-                .get('/products/'+ id +'.json')
-                .success(function(json) {
-                    $scope.product = json.product;
-                    
-                    
-                });
-        }
-    </script>
-<% end %>

@@ -1,25 +1,34 @@
-<div class="color-picker--wrapper" data-for="#<%= digest('select' + part.title) %>">
+<div
+    ng-hide="part.price && !part.activated"
+    class="color-picker--wrapper">
 
-    <div class="color-picker--swatches">
-    	<%#
-        <div
-            class="color-picker--swatch color-picker--swatch-blank"
-            title="Choose One...">
-        </div>
-    	%>
-        <% colors.each do |color| %>
-            <div
-                class="color-picker--swatch"
-                style="background-color: <%= color.hex %>; border: 1px solid <%= color.hex %>"
-                title='<%= color.title %> <%= "($#{color.price})" if color.price.present? %>'>
-                <% if color.price.present? %>
-                    $<%= color.price %>
-                <% end %>
-            </div>
-        <% end %>
+    <div
+        ng-show="part.selectedColor"
+        class="color-picker--swatch color-picker--swatch-selected"
+        style="background-color: {{ part.selectedColor.hex }}; border: 1px solid {{ part.selectedColor.hex }}"
+        title='{{ part.selectedColor.title }}  (${{ part.selectedColor.price }})'>
+        <span ng-show="part.selectedColor.price">
+            ${{ part.selectedColor.price }}
+        </span>
     </div>
 
-    <div class="color-picker--change button remove-bottom">
+    <div class="color-picker--swatches" ng-show="part.showColors">
+        <div
+            ng-repeat="color in part.colors"
+            ng-click="onColorSwatchClicked()"
+            class="color-picker--swatch"
+            style="background-color: {{ color.hex }}; border: 1px solid {{ color.hex }}"
+            title='{{ color.title }}  (${{ color.price }})'>
+            <span ng-show="color.price">
+                ${{ color.price }}
+            </span>
+        </div>
+    </div>
+
+    <div
+        class="color-picker--change button remove-bottom"
+        ng-click="onChooseColorButtonClicked()"
+        ng-show="!part.showColors">
         Choose Color
     </div>
 

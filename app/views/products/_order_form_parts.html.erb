@@ -1,58 +1,32 @@
-<% if @product.parts.present? %>
+<div ng-show="product.parts">
     <h4 class="order-section-heading">
         Customize your parts
     </h4>
     <div class="row row-parts">
-        <% @product.parts.each do |part| %>
+        <div ng-repeat="part in product.parts">
             <div class="label-input-pair">
-                <%# If it has a price, display a checkbox so they can add it. %>
-                <label class="label"
-                    <% if part.price.present? %>
-                        for="checkbox_<%= digest(part.title +  part.id.to_s) %>"
-                    <% end %>
-                >
-                    <% if part.price.present? %>
-                        <input
-                            id="checkbox_<%= digest(part.title +  part.id.to_s) %>"
-                            type="checkbox"
-                            class="input input-checkbox"
-                            data-hash="<%= digest(part.title +  part.id.to_s) %>"
-                            data-product="<%= part.title %>"
-                            data-price="<%= part.price %>">
-                    <% end %>
-                    <%= part.title %>
-                    <%= "$#{part.price}" if part.price.present? %>
+                <!-- TODO need to re-implement clickable label? -->
+                <label class="label">
+                    <input
+                        ng-show="part.price"
+                        ng-model="part.activated"
+                        id="checkbox_"
+                        type="checkbox"
+                        class="input input-checkbox"
+                        data-hash="TODO"
+                        data-product="{{ part.title }}"
+                        data-price="{{ part.price }}">
+
+                    {{ part.title }}
+                    <span ng-show="part.price">
+                        ${{ part.price }}
+                    </span>
                 </label>
-                <% if part.colors.present? %>
-    				<div class="input input-color <%= 'input-color-with-optional-part' if part.price.present? && part.colors.present? %>">
-                        <%= render "color_picker", :part => part, :colors => part.colors %>
-                        <select
-                            id="<%= digest('select' + part.title) %>"
-                            name="product1[]"
-                            class="select-color"
-                            data-hash="<%= digest('select' + part.title) %>"
-                            style="display:none">
-                            <option value="invalid">
-                                Choose One
-                            </option>
-                            <% part.colors.each do |color| %>
-                                <option
-                                    <% if color.price.present? %>
-                                        data-hash="<%= digest(color.title + color.id.to_s) %>"
-                                        data-color="<%= color.title %>"
-                                        data-price="<%= color.price %>"
-                                    <% end %>
-                                    data-hex="<%= color.hex %>"
-                                    <%# The value sets the title of the part which shows up at Mals %>
-                                    value="<%= part.title %> (<%= color.title %><%= ": $#{color.price}" unless color.price.blank? %>) ">
-                                    <%= color.title %>
-                                    <%= "($#{color.price})" unless color.price.blank? %>
-                                </option>
-                            <% end %>
-                        </select>
-                    </div>
-                <% end %>
+                
+                <%= render 'color_picker' %>
+                <!-- TODO this color_picker is also supposed to 
+                     set the value of a <select> -->
             </div>
-        <% end %>
+        </div>
     </div>
-<% end %>
+</div>

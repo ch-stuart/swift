@@ -1,4 +1,4 @@
-<% if @product.sizes.present? %>
+<div ng-show="product.sizes">
     <h4 class="order-section-heading">
         Sizing
     </h4>
@@ -11,12 +11,10 @@
                 <option value="invalid">
                     Choose One
                 </option>
-                <% @product.sizes.each do |size| %>
-                    <option value="<%= @product.title %>, <%= size.title %>:<%= size.price %>">
-                        <%= size.title %> ($<%= size.price %>)
-                    </option>
-                <% end %>
+                <option ng-repeat="size in product.sizes" value="{{ product.title }}, {{ size.title }}:{{ size.price }}">
+                    {{ size.title }} (${{ size.price }})
+                </option>
             </select>
         </div>
     </div>
-<% end %>
+</div>

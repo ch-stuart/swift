@@ -10,8 +10,6 @@
     font-family: verdana, tahoma, sans-serif;
     font-size: 12px;
     cursor: pointer;
-
-    display: none;
 }
 
 .color-picker--change {
@@ -22,9 +20,6 @@
     float: left;
 }
 
-.color-picker--swatch-blank {
-    // Checkerboard pattern
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEXr6+v///+HIERrAAAAFElEQVQIW2NksN/ISAz+f9CBGAwAxtEddZlnB4IAAAAASUVORK5CYII=);
-    background-repeat: repeat;
-    border: 1px solid #ccc;
+.color-picker--swatch-selected {
+    margin-right: 15px;
 }
