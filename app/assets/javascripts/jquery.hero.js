@@ -65,39 +65,39 @@ jQuery.fn.hero = function() {
         imgCount = $imgs.size();
 
         function init() {
-        	$imgs.each(function() {
-        		var imgWidth = $(this).width();
-        		totalWidth += imgWidth;
-        		widths.push(imgWidth);
-        	});
+            $imgs.each(function() {
+            	var imgWidth = $(this).width();
+            	totalWidth += imgWidth;
+            	widths.push(imgWidth);
+            });
 
-        	$heroScroller
-        		.css('width', totalWidth + 'px');
+            $heroScroller
+            	.css('width', totalWidth + 'px');
 
-        	widths.forEach(function(dist) {
-        		r.add(function() {
-        			var currentScrollDist = Math.abs(parseInt($heroScroller.css('margin-left'), 10));
-        			var animDist = currentScrollDist + dist;
+            widths.forEach(function(dist) {
+            	r.add(function() {
+            		var currentScrollDist = Math.abs(parseInt($heroScroller.css('margin-left'), 10));
+            		var animDist = currentScrollDist + dist;
 
-        			// console.log(animDist);
+            		// console.log(animDist);
 
-        			if (animDist < (totalWidth - $hero.width()) ) {
-        				$heroScroller.animate({
-        					'margin-left': -(animDist) + 'px'
-        				}, {
-        					duration: 'slow'
-        				});
-        			}
-        		});
-        	});
-        	r.run();
+            		if (animDist < (totalWidth - $hero.width()) ) {
+            			$heroScroller.animate({
+            				'margin-left': -(animDist) + 'px'
+            			}, {
+            				duration: 'slow'
+            			});
+            		}
+            	});
+            });
+            r.run();
         }
 
         $hero.find('.hero-close,.hero-open').click(function() {
-        	$hero
-        		.find('.hero-paras').slideToggle().end()
-        		.find('.hero-close').toggle().end()
-        		.find('.hero-open').toggle();
+            $hero
+            	.find('.hero-paras').slideToggle().end()
+            	.find('.hero-close').toggle().end()
+            	.find('.hero-open').toggle();
         });
 
         $hero.find('.hero-open').show();

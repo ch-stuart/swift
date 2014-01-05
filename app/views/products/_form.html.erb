@@ -3,12 +3,12 @@
 <%= form_for @product do |f| %>
     <% if @product.errors.any? %>
         <div id="error_explanation">
-        	<h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
-        	<ul>
-        		<% @product.errors.full_messages.each do |msg| %>
-        			<li><%= msg %></li>
-        		<% end %>
-        	</ul>
+            <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+            <ul>
+            	<% @product.errors.full_messages.each do |msg| %>
+            		<li><%= msg %></li>
+            	<% end %>
+            </ul>
         </div>
     <% end %>
 
@@ -20,14 +20,14 @@
         <%= f.label :category_id, "Navigation Category" %>
         <%= f.select :category_id, Category.all.collect {|c| [ c.title, c.id ] }, { :include_blank => true, :selected => @product.category_id } %>
         <p class="hint">
-        	Leave blank if this is an Accessory or Stock product.
+            Leave blank if this is an Accessory or Stock product.
         </p>
     </div>
     <div class="field">
         <%= f.label :status %>
         <%= f.select :status, Product::STATUSES, :selected => @product.status %>
         <p class="hint">
-        	The page will 404 if you set it as private. For now that means you can't preview it.
+            The page will 404 if you set it as private. For now that means you can't preview it.
         </p>
     </div>
     <h3>
@@ -41,7 +41,7 @@
         <%= f.label :short_title %>
         <%= f.text_field :short_title %>
         <p class="hint">
-        	The short title will be used in space-constrained spaces (navigation lists, etc.).
+            The short title will be used in space-constrained spaces (navigation lists, etc.).
         </p>
     </div>
     <div class="field">
@@ -53,21 +53,21 @@
         <%= f.label :short_description %>
         <%= f.text_area :short_description %>
         <p class="hint">
-        	Used for the homepage hero.
+            Used for the homepage hero.
         </p>
     </div>
     <div class="field">
         <%= f.label :price %>
         <%= f.text_field :price %>
         <p class="hint">
-        	ex: 299.01
+            ex: 299.01
         </p>
     </div>
     <div class="field">
         <%= f.label :humane_price %>
         <%= f.text_field :humane_price %>
         <p class="hint">
-        	ex: "$200 for a pair"
+            ex: "$200 for a pair"
         </p>
     </div>
       <div class="field">
@@ -80,8 +80,8 @@
     </h3>
     <div class="field row">
         <label for="product_featured_on_homepage">
-        	<%= f.check_box :featured_on_homepage %>
-        	Feature on homepage?
+            <%= f.check_box :featured_on_homepage %>
+            Feature on homepage?
         </label>
     </div>
     <h3>
@@ -91,21 +91,21 @@
         <%= f.label :flickr_set %>
         <%= f.text_field :flickr_set %>
         <p class="hint">
-        	The flickr set id. Used for the homepage hero.
+            The flickr set id. Used for the homepage hero.
         </p>
     </div>
     <div class="field">
         <%= f.label :flickr_tag %>
         <%= f.text_field :flickr_tag, class: "js-flickr_tag" %>
         <p class="hint">
-        	Enter a flickr tag to display a photo gallery. Leave blank for none. <a href="#" class="js-flickr_tag-link"></a>
+            Enter a flickr tag to display a photo gallery. Leave blank for none. <a href="#" class="js-flickr_tag-link"></a>
         </p>
     </div>
     <div class="field">
         <%= f.label :flickr_photo %>
         <%= f.text_field :flickr_photo %>
         <p class="hint">
-        	The flickr photo id [<a href="http://d.pr/Q7xE" target="_new">?</a>] is used for the featured photo on the Ready Made page.
+            The flickr photo id [<a href="http://d.pr/Q7xE" target="_new">?</a>] is used for the featured photo on the Ready Made page.
         </p>
     </div>
     <h3>
@@ -115,20 +115,20 @@
         <%= f.label "Custom order question" %>
         <%= f.text_field :question %>
         <p class="hint">
-        	One additional question you can ask a customer during the order process.
+            One additional question you can ask a customer during the order process.
         </p>
     </div>
     <div class="field">
         <%= f.label "Custom order answer" %>
         <%= f.text_field :answer %>
         <p class="hint">
-        	If the question has a set amount of choices, enter them as a comma-separated list, ex: <code>dogs, chimps, beavers</code>. Otherwise, leave the field blank if the answer is freeform.
+            If the question has a set amount of choices, enter them as a comma-separated list, ex: <code>dogs, chimps, beavers</code>. Otherwise, leave the field blank if the answer is freeform.
         </p>
     </div>
     <div class="field row">
         <label for="product_not_for_sale">
-        	<%= f.check_box :not_for_sale %>
-        	Turn the order form off?
+            <%= f.check_box :not_for_sale %>
+            Turn the order form off?
         </label>
     </div>
     <div class="field">
@@ -143,7 +143,7 @@
     <% end %>
     <div class="field add">
         <label>
-        	<%= link_to_add_fields "Add Size", f, :sizes %>
+            <%= link_to_add_fields "Add Size", f, :sizes %>
         </label>
     </div>
     <h3>
@@ -154,7 +154,7 @@
     <% end %>
     <div class="field add">
         <label>
-        	<%= link_to_add_fields "Add Part", f, :parts %>
+            <%= link_to_add_fields "Add Part", f, :parts %>
         </label>
     </div>
     <h3>
@@ -165,7 +165,7 @@
     <% end %>
     <div class="field add">
         <label>
-        	<%= link_to_add_fields "Add Testimonial", f, :testimonials %>
+            <%= link_to_add_fields "Add Testimonial", f, :testimonials %>
         </label>
     </div>
     <div class="actions">
@@ -176,7 +176,7 @@
 <%= content_for :js do %>
     <script>
         $(document).ready(function() {
-        	$.toggleColors();
+            $.toggleColors();
         });
     </script>
 <% end %>
