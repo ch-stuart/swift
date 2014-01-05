@@ -19,18 +19,18 @@ body {
     position: relative;
 
     .menu-fox {
-    	display: block;
+        display: block;
     }
     .menu-fox {
-    	position: absolute;
-    	left: 50%;
-    	margin-left: -22px;
-    	top: 8px;
+        position: absolute;
+        left: 50%;
+        margin-left: -22px;
+        top: 8px;
     }
 
     .entypo {
         cursor: pointer;
-    	display: block;
+        display: block;
 
         &:hover,
         &.active {
@@ -38,11 +38,11 @@ body {
         }
     }
     .entypo-menu {
-    	float: left;
+        float: left;
     }
     .entypo-cart {
-    	float: right;
-    	font-size: 48px;
+        float: right;
+        font-size: 48px;
     }
 
     .menu--row-nav {

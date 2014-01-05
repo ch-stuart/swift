@@ -1,6 +1,6 @@
 /*global window console */
 ;(function() {
-    
+
     // Feature detect + local reference
     var storage,
         fail,
@@ -11,7 +11,7 @@
         (storage = window.localStorage).setItem(uid, uid);
         fail = storage.getItem(uid) != uid;
         storage.removeItem(uid);
-        
+
         if (fail) {
             storage = null;
         }
@@ -20,7 +20,7 @@
     }
 
     // function Cart() {
-    //     
+    //
     // }
 
 })();

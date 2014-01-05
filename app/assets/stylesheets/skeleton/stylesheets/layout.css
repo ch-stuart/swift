@@ -42,9 +42,9 @@
 /* #Font-Face
 ================================================== */
 /*     This is the proper syntax for an @font-face file
-    	Just create a "fonts" folder at the root,
-    	copy your FontName into code below and remove
-    	comment brackets */
+        Just create a "fonts" folder at the root,
+        copy your FontName into code below and remove
+        comment brackets */
 
 /*    @font-face {
         font-family: 'FontName';
