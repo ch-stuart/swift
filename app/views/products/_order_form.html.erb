@@ -1,20 +1,7 @@
-<form id="order_form" class="form-order" method="post" action="<%= APP_CONFIG[:store_host] %><%= APP_CONFIG[:add_to_cart_path] %>" data-count="1">
-
-    <div style="display:none">
-        <%# -------- START MAL's fields -------- %>
-        <%# Mal's userid %>
-        <input type="hidden" name="userid" value="<%= APP_CONFIG[:store_userid] %>">
-        <%# Mal's needs different params sent if the product has diff. prices based on size. %>
-        <% unless @product.sizes.present? %>
-            <input type="hidden" name="product1[]" value="<%= @product.title %>">
-            <input type="hidden" name="price1" value="<%= @product.price %>">
-        <% end %>
-        <%# we only send 1 product, all the time. might need to be changed in the future. %>
-        <input type="hidden" name="qty1" value="1">
-        <%# Parts fields get put in here for processing by Mal's %>
-        <div id="parts"></div>
-        <%# -------- END MAL's fields -------- %>
-    </div>
+<form
+    id="order_form"
+    class="form-order"
+    ng-submit="onFormSubmit()">
 
     <%= render 'order_form_sizes' %>
     <%= render 'order_form_question' %>

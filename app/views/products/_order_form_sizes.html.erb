@@ -4,14 +4,14 @@
     </h4>
     <div class="row row-sizes">
         <div class="label-input-pair">
-            <label for="productpr1" class="label">
+            <label class="label">
                 Choose your size!
             </label>
-            <select id="productpr1" name="productpr1" class="select-size">
-                <option value="invalid">
+            <select class="select-size" ng-model="product.selectedSize" ng-change="onSizeSelectChanged()">
+                <option value="Choose One">
                     Choose One
                 </option>
-                <option ng-repeat="size in product.sizes" value="{{ product.title }}, {{ size.title }}:{{ size.price }}">
+                <option ng-repeat="size in product.sizes" value="{{ size.title }}::{{ size.price }}">
                     {{ size.title }} (${{ size.price }})
                 </option>
             </select>

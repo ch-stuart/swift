@@ -10,6 +10,7 @@
                     <input
                         ng-show="part.price"
                         ng-model="part.activated"
+                        ng-click="onPartCheckboxClicked()"
                         id="checkbox_"
                         type="checkbox"
                         class="input input-checkbox"
@@ -22,10 +23,8 @@
                         ${{ part.price }}
                     </span>
                 </label>
-                
+
                 <%= render 'color_picker' %>
-                <!-- TODO this color_picker is also supposed to 
-                     set the value of a <select> -->
             </div>
         </div>
     </div>
