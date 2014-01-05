@@ -6,7 +6,7 @@
         <div ng-repeat="part in product.parts">
             <div class="label-input-pair">
                 <!-- TODO need to re-implement clickable label? -->
-                <label class="label">
+                <label class="label {{ part.inputIsInvalid }}">
                     <input
                         ng-show="part.price"
                         ng-model="part.activated"

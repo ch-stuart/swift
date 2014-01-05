@@ -26,7 +26,7 @@
     </div>
 
     <div
-        class="color-picker--change button remove-bottom"
+        class="color-picker--change button remove-bottom {{ part.inputIsInvalid }}"
         ng-click="onChooseColorButtonClicked()"
         ng-show="!part.showColors">
         Choose Color
