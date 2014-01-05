@@ -14,13 +14,9 @@
         <select
             ng-show="product.originalAnswer"
             ng-model="product.selectedAnswer"
-            class="input">
-            <option value="Choose One">
-                Choose One
-            </option>
-            <option ng-repeat="answer in product.answer">
-                {{ answer }}
-            </option>
+            ng-options="answer for answer in product.answer"
+            class="input"
+            required>
         </select>
     </div>
 </div>

@@ -1,7 +1,8 @@
 <form
     id="order_form"
     class="form-order"
-    ng-submit="onFormSubmit()">
+    ng-submit="onFormSubmit()"
+    novalidate>
 
     <%= render 'order_form_sizes' %>
     <%= render 'order_form_question' %>
@@ -12,9 +13,6 @@
     <div class="row row-submit">
         <button type="submit" id="submit_order">
             Submit Order
-        </button>
-        <button type="submit" id="add_to_cart">
-            Add to Cart and Buy More Stuff
         </button>
     </div>
 

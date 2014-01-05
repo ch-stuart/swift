@@ -1,4 +1,33 @@
 /*global OrderCtrl location console */
+
+// var app = angular.module('swift', []);
+//
+// app.directive('validateColor', function() {
+//     return {
+//         restrict: 'A',
+//         require: 'ngModel',
+//         link: function (scope, element, attrs, ngModel) {
+//             function validate() {
+//                 console.log('running validations');
+//                 if (scope.part.activated && !scope.part.selectedColor) {
+//                     console.log('this is not valid because the part has a price and not selected color');
+//                     return false;
+//                 }
+//                 if (!scope.part.price && !scope.part.selectedColor) {
+//                     console.log('this part is not valid because it has no price and no selected color');
+//                     return false
+//                 }
+//                 return true;
+//             }
+//
+//             scope.$watch(function() {
+//                 return ngModel.$viewValue;
+//             }, validate);
+//         }
+//     }
+// });
+
+
 function OrderCtrl($scope, $http) {
 
     var id = location.pathname.split('/')[2];
@@ -13,8 +42,7 @@ function OrderCtrl($scope, $http) {
         });
 
     function setupSize() {
-        // Default
-        this.product.selectedSize = 'Choose One';
+        this.product.selectedSize = this.product.sizes[0];
 
         // Set this so we can use it later when setting the
         // new title if the user picks a size
@@ -27,32 +55,47 @@ function OrderCtrl($scope, $http) {
         // based on whether or not it's
         this.product.originalAnswer = this.product.answer;
 
-
-        // Turn it into an array
+        // Turn answer choices String into Array
         if (this.product.answer) {
-            // Default
-            this.product.selectedAnswer = 'Choose One';
-
             // Split it up
             this.product.answer = this.product.answer.split(', ');
+
+            // Default
+            this.product.selectedAnswer = this.product.answer[0];
         }
     }
 
     function validateForm() {
+        var isValid = true;
+
+        // Reset invalid state
         $scope.product.parts
             .forEach(function(part) {
                 delete part.inputIsInvalid;
             });
 
+        // Check for parts which have a price, where
+        // the part is active yet there is no selected
+        // color and mark them as invalid.
         $scope.product.parts
             .filter(function(part) {
                 return part.activated && !part.selectedColor;
             })
             .forEach(function(part) {
-                part.inputIsInvalid = 'input-is-invalid';
+                isValid = false;
+                part.inputIsInvalid = 'input--dirty';
             });
 
-        console.log($scope.product.parts);
+        $scope.product.parts
+            .filter(function(part) {
+                return !part.price & !part.selectedColor;
+            })
+            .forEach(function(part) {
+                isValid = false;
+                part.inputIsInvalid = 'input--dirty';
+            });
+
+        return isValid;
     }
 
     // Sum of prices for parts with prices
@@ -110,15 +153,8 @@ function OrderCtrl($scope, $http) {
     }
 
     $scope.onSizeSelectChanged = function() {
-        if (this.product.selectedSize) {
-            if (this.product.selectedSize === "Choose One") {
-                this.product.title = this.product.originalTitle;
-                this.product.price = this.product.originalPrice;
-            } else {
-                this.product.title = this.product.originalTitle + ' (' + this.product.selectedSize.split('::')[0] + ')';
-                this.product.price = this.product.selectedSize.split('::')[1];
-            }
-        }
+        this.product.title = this.product.originalTitle + ' (' + this.product.selectedSize.title + ')';
+        this.product.price = this.product.selectedSize.price;
     };
 
     $scope.onChooseColorButtonClicked = function() {
@@ -128,6 +164,7 @@ function OrderCtrl($scope, $http) {
     $scope.onColorSwatchClicked = function() {
         this.part.selectedColor = this.color;
         this.part.showColors = !this.part.showColors;
+        validateForm();
     };
 
     $scope.onPartCheckboxClicked = function() {
@@ -135,11 +172,14 @@ function OrderCtrl($scope, $http) {
     };
 
     $scope.onFormSubmit = function() {
-        validateForm();
+        var isFormValid = validateForm();
 
-        $scope.product.totalPrice = calculateTotalPrice();
-
-        console.log($scope.product.totalPrice);
+        if (isFormValid) {
+            $scope.product.totalPrice = calculateTotalPrice();
+            console.log($scope.product.totalPrice);
+        } else {
+            console.log('form is not valid');
+        }
     };
 
     // $('.color-picker--wrapper').color_picker();

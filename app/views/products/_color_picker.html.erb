@@ -16,6 +16,8 @@
         <div
             ng-repeat="color in part.colors"
             ng-click="onColorSwatchClicked()"
+            ng-model="part.selectedColor"
+            for="part_{{ part.id }}__color_{{ color.id }}"
             class="color-picker--swatch"
             style="background-color: {{ color.hex }}; border: 1px solid {{ color.hex }}"
             title='{{ color.title }}  (${{ color.price }})'>
@@ -23,6 +25,11 @@
                 ${{ color.price }}
             </span>
         </div>
+        <!-- <input
+            type="hidden"
+            ng-model="part.selectedColor"
+            validate-color> -->
+        <span ng-show="form.$error.validateColor">Pick a color!</span>
     </div>
 
     <div

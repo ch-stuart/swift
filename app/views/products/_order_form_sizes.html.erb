@@ -7,13 +7,11 @@
             <label class="label">
                 Choose your size!
             </label>
-            <select class="select-size" ng-model="product.selectedSize">
-                <option value="Choose One">
-                    Choose One
-                </option>
-                <option ng-repeat="size in product.sizes" value="{{ size.title }}::{{ size.price }}">
-                    {{ size.title }} (${{ size.price }})
-                </option>
+            <select
+                ng-model="product.selectedSize"
+                ng-change="onSizeSelectChanged()"
+                ng-options="s.title + ' ($' + s.price + ')' for s in product.sizes"
+                required>
             </select>
         </div>
     </div>

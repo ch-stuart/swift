@@ -56,7 +56,14 @@ img.center-in-grid {
     margin: 0 auto; }
 
 
+select.ng-invalid.ng-dirty,
+input.ng-invalid {
+  border: 1px solid red;
+}
 
-.input-is-invalid {
-    background-color: red;
+
+
+
+.input--dirty {
+    border: 1px solid red;
 }
