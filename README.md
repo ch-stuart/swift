@@ -17,8 +17,8 @@ Clearing the cache will fix this issue.
 Manually...
 
     $ rails s thin
-    
-Or, use pow.
+
+Or, use [pow](//pow.cx).
 
 ### Sync Database
 
