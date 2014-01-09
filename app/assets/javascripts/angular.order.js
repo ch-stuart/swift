@@ -1,33 +1,5 @@
 /*global OrderCtrl location console */
 
-// var app = angular.module('swift', []);
-//
-// app.directive('validateColor', function() {
-//     return {
-//         restrict: 'A',
-//         require: 'ngModel',
-//         link: function (scope, element, attrs, ngModel) {
-//             function validate() {
-//                 console.log('running validations');
-//                 if (scope.part.activated && !scope.part.selectedColor) {
-//                     console.log('this is not valid because the part has a price and not selected color');
-//                     return false;
-//                 }
-//                 if (!scope.part.price && !scope.part.selectedColor) {
-//                     console.log('this part is not valid because it has no price and no selected color');
-//                     return false
-//                 }
-//                 return true;
-//             }
-//
-//             scope.$watch(function() {
-//                 return ngModel.$viewValue;
-//             }, validate);
-//         }
-//     }
-// });
-
-
 function OrderCtrl($scope, $http) {
 
     var id = location.pathname.split('/')[2];
@@ -125,10 +97,7 @@ function OrderCtrl($scope, $http) {
         try {
             var fabricPrices = $scope.product.parts
                 .filter(function(part) {
-                    return part.selectedColor;
-                })
-                .filter(function(part) {
-                    return part.selectedColor.price;
+                    return part.selectedColor && part.selectedColor.price;
                 })
                 .map(function(part) {
                     return parseFloat(part.selectedColor.price);
@@ -136,12 +105,30 @@ function OrderCtrl($scope, $http) {
 
                 // check for empty [], return 0 if empty
                 return fabricPrices.length ? Math.max.apply(null, fabricPrices) : 0;
-        } catch (e) {
+        } catch(e) {
             // console.warn(e);
             return 0;
         }
     }
 
+    // @returns part having most expensive fabric
+    function getMostExpensiveFabric() {
+        try {
+            return $scope.product.parts
+                .filter(function(part) {
+                    return part.selectedColor && part.selectedColor.price;
+                })
+                .sort(function(a, b) {
+                    return parseFloat(b.selectedColor.price) - parseFloat(a.selectedColor.price);
+                })
+                .shift();
+
+        } catch(e) {
+            return null;
+        }
+    }
+
+    // @returns total price for product
     function calculateTotalPrice() {
         // Sum of:
         //
@@ -164,7 +151,31 @@ function OrderCtrl($scope, $http) {
     $scope.onColorSwatchClicked = function() {
         this.part.selectedColor = this.color;
         this.part.showColors = !this.part.showColors;
-        validateForm();
+
+        if (getMostExpensiveFabric()) {
+            var newPart = getMostExpensiveFabric();
+
+            if ($scope.product.mostExpensiveFabric) {
+                var oldPart = $scope.product.mostExpensiveFabric;
+                var newPartPrice = parseFloat(newPart.selectedColor.price);
+                var oldPartPrice = parseFloat(oldPart.selectedColor.price);
+
+                if (newPartPrice > oldPartPrice) {
+                    $scope.product.mostExpensiveFabric = newPart;
+                }
+            } else {
+                $scope.product.mostExpensiveFabric = newPart;
+            }
+        } else {
+            delete $scope.product.mostExpensiveFabric;
+        }
+        // TODO update validation so when the user
+        // corrects the issue the error state goes
+        // away. the key thing is that we actually
+        // only want to adjust this elements error
+        // state, not all of them. well, we don't want
+        // to mark untouched fields as invalid just
+        // because we're ... whatever
     };
 
     $scope.onPartCheckboxClicked = function() {
