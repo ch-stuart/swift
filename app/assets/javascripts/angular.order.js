@@ -13,6 +13,9 @@ function OrderCtrl($scope, $http) {
             setupQA.call($scope);
         });
 
+    // Initialize values for Sizes fields
+    //
+    // @returns nothing
     function setupSize() {
         this.product.selectedSize = this.product.sizes[0];
 
@@ -22,6 +25,9 @@ function OrderCtrl($scope, $http) {
         this.product.originalPrice = this.product.price;
     }
 
+    // Initialize values for Question & Answer fields
+    //
+    // @returns nothing
     function setupQA() {
         // Set this so we can hide/show the input/select
         // based on whether or not it's
@@ -37,6 +43,9 @@ function OrderCtrl($scope, $http) {
         }
     }
 
+    // Validate the form
+    //
+    // @returns isValid (boolean)
     function validateForm() {
         var isValid = true;
 
@@ -71,6 +80,8 @@ function OrderCtrl($scope, $http) {
     }
 
     // Sum of prices for parts with prices
+    //
+    // @returns total price of active parts
     function calculateTotalPriceOfParts() {
         try {
             return $scope.product.parts
@@ -89,10 +100,14 @@ function OrderCtrl($scope, $http) {
         }
     }
 
+    // Get Price of Most Expensive Fabric
+    //
     // You only pay once for fabric per product. You
     // pay for the most expensive fabric. Therefore
     // if your fabric choices were [$12, $99, $2], you
     // would be charged $99 for your fabric choice.
+    //
+    // @returns most expensive fabrice price (number)
     function calculateTotalPriceOfFabrics() {
         try {
             var fabricPrices = $scope.product.parts
