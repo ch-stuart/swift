@@ -1,9 +1,5 @@
-.product-title {
-
-}
-
-.form-order .row {
-    padding: 20px 20px 20px 20px;
+.row--order {
+    padding: 20px;
     background-color: #f5f5f5;
     border: 1px solid #dcdcdc;
     border-radius: 3px;
@@ -13,7 +9,7 @@
     margin-top: 40px;
 }
 .label-input-pair {
-    margin: 0 0 20px 0;
+    margin: 0 0 20px;
 }
 .input-color-with-optional-part {
     margin-top: 10px;
@@ -26,17 +22,21 @@
         color: red;
     }
 }
-.input {
+// .input {
+// 
+// }
+// .input-checkbox {
+// 
+// }
+// .input-color {
+// 
+// }
 
+.row--fabric-notice {
+    background-color: #ffc;
 }
-.input-checkbox {
 
-}
-.input-color {
-
-}
-
-.row-submit {
+.row--submit {
     margin-top: 40px;
 }
 

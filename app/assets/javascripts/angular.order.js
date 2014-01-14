@@ -196,6 +196,10 @@ function OrderCtrl($scope, $http) {
     $scope.onPartCheckboxClicked = function() {
         delete this.part.selectedColor;
     };
+    
+    $scope.onUserAcknowledgedFabricChargeNotice = function() {
+        $scope.product.userAcknowledgedFabricChargeNotice = true;
+    };
 
     $scope.onFormSubmit = function() {
         var isFormValid = validateForm();
