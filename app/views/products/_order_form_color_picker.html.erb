@@ -1,5 +1,5 @@
 <div
-    ng-hide="part.price && !part.activated"
+    ng-hide="!part.colors || part.price && !part.activated"
     class="color-picker--wrapper">
 
     <div
@@ -12,10 +12,11 @@
         </span>
     </div>
 
-    <div class="color-picker--swatches" ng-show="part.showColors">
+    <div class="color-picker--swatches" ng-show="part.colors && part.showColors">
         <div
             ng-repeat="color in part.colors"
             ng-click="onColorSwatchClicked()"
+            ng-show="part.colors"
             ng-model="part.selectedColor"
             for="part_{{ part.id }}__color_{{ color.id }}"
             class="color-picker--swatch"
@@ -35,7 +36,7 @@
     <div
         class="color-picker--change button remove-bottom {{ part.inputIsInvalid }}"
         ng-click="onChooseColorButtonClicked()"
-        ng-show="!part.showColors">
+        ng-show="part.colors && !part.showColors">
         Choose Color
     </div>
 

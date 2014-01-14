@@ -9,9 +9,24 @@ function OrderCtrl($scope, $http) {
         .success(function(json) {
             $scope.product = json.product;
 
+            setupColors.call($scope);
             setupSize.call($scope);
             setupQA.call($scope);
         });
+
+    // Remove colors array if it's empty
+    //
+    // Why? because Angular thinks that part.colors is truthy
+    //
+    // @returns nothing
+    function setupColors() {
+        this.product.parts.forEach(function(part) {
+            if (part.colors.length === 0) {
+                console.log(part.colors);
+                delete part.colors;
+            }
+        });
+    }
 
     // Initialize values for Sizes fields
     //
@@ -196,7 +211,7 @@ function OrderCtrl($scope, $http) {
     $scope.onPartCheckboxClicked = function() {
         delete this.part.selectedColor;
     };
-    
+
     $scope.onUserAcknowledgedFabricChargeNotice = function() {
         $scope.product.userAcknowledgedFabricChargeNotice = true;
     };
