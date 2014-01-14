@@ -3,16 +3,16 @@
         Customize your parts
     </h4>
     <div class="row row--order row--fabric-notice" ng-show="product.mostExpensiveFabric && !product.userAcknowledgedFabricChargeNotice">
-        <p>
+        <h5>
             Including &ldquo;{{ product.mostExpensiveFabric.selectedColor.title }}&rdquo; adds a
             charge of ${{ product.mostExpensiveFabric.selectedColor.price }} to this bag.
-        </p>
-        <ul>
+        </h5>
+        <ul class="row--fabric-notice__ul">
             <li>You will only be charged for your most expensive fabric choice.</li>
             <li>The charge is only applied once per bag.</li>
             <li>Use it as many times as you&rsquo;d like!</li>
         </ul>
-        <div class="button button--fabric-notice" ng-click="onUserAcknowledgedFabricChargeNotice()">Okay!</div>
+        <div class="button row--fabric-notice__btn" ng-click="onUserAcknowledgedFabricChargeNotice()">Okay!</div>
     </div>
     <div class="row row--order row--parts">
         <div ng-repeat="part in product.parts">
