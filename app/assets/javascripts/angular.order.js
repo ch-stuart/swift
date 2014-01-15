@@ -1,4 +1,4 @@
-/*global OrderCtrl location console */
+/*global OrderCtrl location console angular */
 
 function OrderCtrl($scope, $http) {
 
@@ -55,6 +55,54 @@ function OrderCtrl($scope, $http) {
             // Default
             this.product.selectedAnswer = this.product.answer[0];
         }
+    }
+
+    // Save a product purchase. Grab the relevant
+    // data to the purchase... Goal is to be able to
+    //
+    // 1. Tell the customer and shop owner what was
+    //    purchased
+    // 2. Be able to update the product later (so using
+    //    this state, recreate the form)
+    //
+    // @returns Object savedPurchase
+    function savePurchase() {
+        var prod = angular.copy($scope.product);
+        var save = {};
+            save.parts = [];
+
+        function saveIf(prop) {
+            if (prod[prop]) {
+                save[prop] = prod[prop];
+            }
+        }
+
+        function savePart(part) {
+            delete part.colors;
+            delete part.showColors;
+            delete part.$$hashKey;
+
+            save.parts.push(part);
+        }
+
+        saveIf('answer');
+        saveIf('question');
+        saveIf('selectedSize');
+        saveIf('totalPrice');
+
+        prod.parts.forEach(function(part) {
+            if (part.price && part.activated) {
+                savePart(part);
+            }
+        });
+
+        prod.parts.forEach(function(part) {
+            if (!part.price && part.selectedColor) {
+                savePart(part);
+            }
+        });
+
+        return save;
     }
 
     // Validate the form
@@ -222,9 +270,11 @@ function OrderCtrl($scope, $http) {
 
         if (isFormValid) {
             $scope.product.totalPrice = calculateTotalPrice();
-            console.log($scope.product.totalPrice);
+            var saved = savePurchase();
+            console.log(saved);
+            console.log('Form is vald. Total price:', $scope.product.totalPrice);
         } else {
-            console.log('form is not valid');
+            console.warn('form is not valid');
         }
     };
 
