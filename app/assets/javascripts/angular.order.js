@@ -75,13 +75,15 @@ function OrderCtrl($scope, $http) {
         // color and mark them as invalid.
         $scope.product.parts
             .filter(function(part) {
-                return part.activated && !part.selectedColor;
+                return part.activated && part.colors && !part.selectedColor;
             })
             .forEach(function(part) {
                 isValid = false;
                 part.inputIsInvalid = 'input--dirty';
             });
 
+        // Check for parts that have no price, and no
+        // selected color
         $scope.product.parts
             .filter(function(part) {
                 return !part.price & !part.selectedColor;
