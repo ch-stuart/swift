@@ -22,7 +22,6 @@ function OrderCtrl($scope, $http) {
     function setupColors() {
         this.product.parts.forEach(function(part) {
             if (part.colors.length === 0) {
-                console.log(part.colors);
                 delete part.colors;
             }
         });
@@ -229,7 +228,6 @@ function OrderCtrl($scope, $http) {
         }
     };
 
-    // $('.color-picker--wrapper').color_picker();
     // $('.color-picker--swatch').tooltip();
 
 }
