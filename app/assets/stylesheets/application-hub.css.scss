@@ -40,12 +40,9 @@ tr:nth-child(odd) td {
     background-color: rgba(255,255,255,.50);
     padding: 20px 20px 0 20px;
     margin-bottom: 5px;
-    -webkit-border-radius: 5px;
     border-radius: 5px;
     border: 1px solid #eee;
     max-width: 400px;
-    -moz-box-shadow: inset 0 0 1px 0 #f6f6f6;
-    -webkit-box-shadow: inset 0 0 1px 0 #f6f6f6;
     box-shadow: inset 0 0 1px 0 #f6f6f6;
 }
 .destroy, .add {
@@ -73,16 +70,12 @@ a.action {
 }
 
 #color_swatch {
-    -webkit-box-shadow:0 3px 5px rgba(0,0,0,0.5);
-    -moz-box-shadow:0 3px 5px rgba(0,0,0,0.5);
     box-shadow:0 3px 5px rgba(0,0,0,0.5);
     width: 300px;
     height: 300px;
     padding: 20px;
 }
 .color_swatch {
-    -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.5);
-    -moz-box-shadow:0 1px 2px rgba(0,0,0,0.5);
     box-shadow:0 1px 2px rgba(0,0,0,0.5);
 }
 .color_swatch span {
