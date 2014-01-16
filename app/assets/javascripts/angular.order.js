@@ -90,17 +90,13 @@ function OrderCtrl($scope, $http) {
         saveIf('selectedSize');
         saveIf('totalPrice');
 
-        prod.parts.forEach(function(part) {
-            if (part.price && part.activated) {
+        prod.parts
+            .filter(function(part) {
+                return part.price && part.activated || !part.price && part.selectedColor;
+            })
+            .forEach(function(part) {
                 savePart(part);
-            }
-        });
-
-        prod.parts.forEach(function(part) {
-            if (!part.price && part.selectedColor) {
-                savePart(part);
-            }
-        });
+            });
 
         return save;
     }
