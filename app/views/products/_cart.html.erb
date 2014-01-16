@@ -1,0 +1,64 @@
+<div class="shoppin-cart" ng-show="showCart">
+    <h3>
+        Shoppin&rsquo; Cart
+    </h3>
+    <div class="row">
+        <table class="shoppin-cart__table">
+            <thead>
+                <th>
+                    Product
+                </th>
+                <th>
+                    Parts
+                </th>
+                <th>
+                    Total Price
+                </th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in cart">
+                    <td>
+                        {{ product.title }} ${{ product.price }}
+                    </td>
+                    <td>
+                        <ul>
+                            <li ng-repeat="part in product.parts">
+                                <strong>Name:</strong> {{ part.title }}
+                                <span ng-show="part.selectedColor">
+                                    <br><strong>Fabric:</strong> {{ part.selectedColor.title }}
+                                    <span ng-show="part.selectedColor.price">
+                                        <br><strong>Fabric Price:</strong> ${{ part.selectedColor.price }}
+                                    </span>
+                                </span>
+                                <span ng-show="part.price">
+                                    <br><strong>Part Price:</strong> ${{ part.price }}
+                                </span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        ${{ product.totalPrice }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row shoppin-cart__toolbar">
+        <button>
+            Shop More
+        </button>
+        <button>
+            Check Out
+        </button>
+    </div>
+    <div class="row remove-bottom shoppin-cart__fabric-charge-notice">
+        <h5>
+            A Note About Our Fabric Charges
+        </h5>
+        <ul class="shoppin-cart__fabric-charge-notice__ul nice-list">
+            <li>For each product, you will only be charged for your most expensive fabric choice.</li>
+            <li>The charge is only applied once per bag.</li>
+            <li>Use it as many times as you&rsquo;d like!</li>
+        </ul>
+    </div>
+</div>

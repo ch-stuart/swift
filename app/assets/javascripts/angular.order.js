@@ -1,4 +1,4 @@
-/*global OrderCtrl location console angular */
+/*global OrderCtrl location console angular $ */
 
 // iterate over localStorage
 // for (var i = 0; i < localStorage.length; i++){
@@ -94,10 +94,14 @@ function OrderCtrl($scope, $http) {
             save.parts.push(part);
         }
 
+        saveIf('id');
+        saveIf('title');
+        saveIf('price');
+        saveIf('totalPrice');
         saveIf('answer');
         saveIf('question');
         saveIf('selectedSize');
-        saveIf('totalPrice');
+        saveIf('mostExpensiveFabric');
 
         prod.parts
             .filter(function(part) {
@@ -282,10 +286,14 @@ function OrderCtrl($scope, $http) {
         if (isFormValid) {
             $scope.product.totalPrice = calculateTotalPrice();
             var saved = savePurchase();
-            console.log(saved);
             console.log('Form is vald. Total price:', $scope.product.totalPrice);
 
-            localStorage.setItem('savedPurchase', JSON.stringify(saved));
+            if (!$scope.cart) {
+                $scope.cart = [];
+            }
+            $scope.cart.push(saved);
+
+            $scope.showCart = true;
         } else {
             console.warn('form is not valid');
         }
