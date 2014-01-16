@@ -219,11 +219,17 @@ function OrderCtrl($scope, $http) {
         this.product.price = this.product.selectedSize.price;
     };
 
+    var isTooltipsInitialized;
     $scope.onChooseColorButtonClicked = function() {
+        if (!isTooltipsInitialized) {
+            $('.color-picker--swatch').tooltip();
+            isTooltipsInitialized = true;
+        }
         this.part.showColors = !this.part.showColors;
     };
 
     $scope.onColorSwatchClicked = function() {
+
         this.part.selectedColor = this.color;
         this.part.showColors = !this.part.showColors;
 
@@ -273,7 +279,5 @@ function OrderCtrl($scope, $http) {
             console.warn('form is not valid');
         }
     };
-
-    // $('.color-picker--swatch').tooltip();
 
 }
