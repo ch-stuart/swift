@@ -1,5 +1,14 @@
 /*global OrderCtrl location console angular */
 
+// iterate over localStorage
+// for (var i = 0; i < localStorage.length; i++){
+//     var key = localStorage.key(i);
+//     var value = localStorage[key];
+//
+//     console.log(key, value);
+// }
+
+
 function OrderCtrl($scope, $http) {
 
     var id = location.pathname.split('/')[2];
@@ -275,6 +284,8 @@ function OrderCtrl($scope, $http) {
             var saved = savePurchase();
             console.log(saved);
             console.log('Form is vald. Total price:', $scope.product.totalPrice);
+
+            localStorage.setItem('savedPurchase', JSON.stringify(saved));
         } else {
             console.warn('form is not valid');
         }
