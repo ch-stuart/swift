@@ -1,4 +1,4 @@
-/*global OrderCtrl location console angular $ */
+/*global OrderCtrl console angular $ localStorage location document alert */
 
 // iterate over localStorage
 // for (var i = 0; i < localStorage.length; i++){
@@ -11,17 +11,40 @@
 
 function OrderCtrl($scope, $http) {
 
-    var id = location.pathname.split('/')[2];
+    // Stupid hacky way to do this. Whatevers for now.
+    if (document.getElementById('page_products_order')) {
+        var id = location.pathname.split('/')[2];
+        $http
+            .get('/products/'+ id +'.json')
+            .success(function(json) {
+                $scope.product = json.product;
 
-    $http
-        .get('/products/'+ id +'.json')
-        .success(function(json) {
-            $scope.product = json.product;
+                setupColors.call($scope);
+                setupSize.call($scope);
+                setupQA.call($scope);
+            });
+    }
 
-            setupColors.call($scope);
-            setupSize.call($scope);
-            setupQA.call($scope);
-        });
+    // Check if we have products stored in a cart
+    // in localStorage
+    var cartContents = localStorage.getItem('cart');
+    if (cartContents) {
+        // if we do, parse them.
+        cartContents = JSON.parse(cartContents);
+
+        // then set them as the .cart array
+        $scope.cart = cartContents;
+
+        // display a stupid message
+        if (cartContents.length > 1) {
+            $scope.cartMessage = "(You have " + cartContents.length + " products in your cart)";
+        } else {
+            $scope.cartMessage = "(You have " + cartContents.length + " product in your cart)";
+        }
+        // make the cart pink so we can tell there is stuff
+        // in it. hooyah
+        $scope.isCartNotEmpty = 'active';
+    }
 
     // Remove colors array if it's empty
     //
@@ -87,11 +110,13 @@ function OrderCtrl($scope, $http) {
         }
 
         function savePart(part) {
-            delete part.colors;
-            delete part.showColors;
-            delete part.$$hashKey;
+            var newPart = {};
+            newPart.id = part.id;
+            newPart.price = part.price;
+            newPart.selectedColor = part.selectedColor;
+            newPart.title = part.title;
 
-            save.parts.push(part);
+            save.parts.push(newPart);
         }
 
         ;['id', 'title', 'price', 'totalPrice', 'answer',
@@ -101,9 +126,9 @@ function OrderCtrl($scope, $http) {
             .filter(function(part) {
                 return part.price && part.activated || !part.price && part.selectedColor;
             })
-            .forEach(function(part) {
-                savePart(part);
-            });
+            .forEach(savePart);
+
+        delete prod.$$hashKey;
 
         return save;
     }
@@ -287,6 +312,18 @@ function OrderCtrl($scope, $http) {
             }
             $scope.cart.push(saved);
 
+            // TODO always grab the products out of local
+            // storage, put em back in to the cart on page
+            // load, then add new product to cart here,
+            // then calculate new total price. wah.
+            // var cartTotalPrice = 0;
+            // $scope.cart.products.forEach(function(product) {
+            //     cartTotalPrice = cartTotalPrice + product.totalPrice;
+            // });
+            // $scope.cart.totalPrice = cartTotalPrice;
+
+            localStorage.setItem('cart', JSON.stringify(angular.copy($scope.cart)));
+
             $scope.showCart = true;
         } else {
             console.warn('form is not valid');
@@ -295,10 +332,13 @@ function OrderCtrl($scope, $http) {
 
     $scope.onShopMoreButtonClicked = function() {
         $scope.showCart = false;
-        window.location = "/";
     };
 
     $scope.onCheckOutButtonClicked = function() {
-        alert('should check out now')
+        alert('should check out now');
+    };
+
+    $scope.onGlobalCartButtonClicked = function() {
+        $scope.showCart = true;
     };
 }
