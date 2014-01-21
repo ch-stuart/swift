@@ -293,4 +293,12 @@ function OrderCtrl($scope, $http) {
         }
     };
 
+    $scope.onShopMoreButtonClicked = function() {
+        $scope.showCart = false;
+        window.location = "/";
+    };
+
+    $scope.onCheckOutButtonClicked = function() {
+        alert('should check out now')
+    };
 }
