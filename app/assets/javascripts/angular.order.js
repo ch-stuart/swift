@@ -94,14 +94,8 @@ function OrderCtrl($scope, $http) {
             save.parts.push(part);
         }
 
-        saveIf('id');
-        saveIf('title');
-        saveIf('price');
-        saveIf('totalPrice');
-        saveIf('answer');
-        saveIf('question');
-        saveIf('selectedSize');
-        saveIf('mostExpensiveFabric');
+        ;['id', 'title', 'price', 'totalPrice', 'answer',
+          'question', 'selectedSize', 'mostExpensiveFabric'].forEach(saveIf);
 
         prod.parts
             .filter(function(part) {
