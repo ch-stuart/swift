@@ -14,15 +14,16 @@
                 <th>
                     Total Price
                 </th>
+                <th></th>
             </thead>
             <tbody>
-                <tr ng-repeat="product in cart">
+                <tr ng-repeat="savedProduct in cart">
                     <td>
-                        {{ product.title }} ${{ product.price }}
+                        {{ savedProduct.title }} ${{ savedProduct.price }}
                     </td>
                     <td>
                         <ul>
-                            <li ng-repeat="part in product.parts">
+                            <li ng-repeat="part in savedProduct.parts">
                                 <strong>Name:</strong> {{ part.title }}
                                 <span ng-show="part.selectedColor">
                                     <br><strong>Fabric:</strong> {{ part.selectedColor.title }}
@@ -37,7 +38,12 @@
                         </ul>
                     </td>
                     <td>
-                        ${{ product.totalPrice }}
+                        ${{ savedProduct.totalPrice }}
+                    </td>
+                    <td>
+                        <button ng-click="onRemoveFromCartButtonClicked(savedProduct.uniqueId)">
+                            Remove
+                        </button>
                     </td>
                 </tr>
             </tbody>

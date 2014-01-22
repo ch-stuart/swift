@@ -8,7 +8,6 @@
 //     console.log(key, value);
 // }
 
-
 function OrderCtrl($scope, $http) {
 
     // Stupid hacky way to do this. Whatevers for now.
@@ -130,8 +129,17 @@ function OrderCtrl($scope, $http) {
 
         delete prod.$$hashKey;
 
+        save.uniqueId = Date.now()
+
         return save;
     }
+
+    // Saves the cart array to localStorage, overwriting whatever
+    // was there previously.
+    function saveCartToLocalStorage() {
+        localStorage.setItem('cart', JSON.stringify(angular.copy($scope.cart)));
+    }
+
 
     // Validate the form
     //
@@ -322,7 +330,7 @@ function OrderCtrl($scope, $http) {
             // });
             // $scope.cart.totalPrice = cartTotalPrice;
 
-            localStorage.setItem('cart', JSON.stringify(angular.copy($scope.cart)));
+            saveCartToLocalStorage();
 
             $scope.showCart = true;
         } else {
@@ -340,5 +348,21 @@ function OrderCtrl($scope, $http) {
 
     $scope.onGlobalCartButtonClicked = function() {
         $scope.showCart = true;
+    };
+
+    // Removes the selected item from the cart
+    //
+    // Updates $scope.cart and the cart stored in localStorage
+    //
+    // @returns nothing
+    $scope.onRemoveFromCartButtonClicked = function(uniqueId) {
+        var shouldRemove = confirm('Are you sure you want to remove this product from your cart? It cannot be undone.');
+
+        if (shouldRemove) {
+            $scope.cart = $scope.cart.filter(function(product) {
+                return product.uniqueId !== uniqueId;
+            });
+            saveCartToLocalStorage();
+        }
     };
 }
