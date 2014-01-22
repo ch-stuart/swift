@@ -5,8 +5,8 @@
     box-sizing: border-box;
     transform: translate(-50%, 0);
 
-    position: fixed;
-    top: 10%;
+    position: absolute;
+    top: 5%;
     left: 50%;
     width: 90%;
     z-index: 12;
@@ -19,8 +19,8 @@
     .shoppin-cart {
         width: auto;
         padding: 30px;
-        min-width: 60%;
-        max-width: 800px;
+        min-width: 95%;
+        max-width: 1000px;
     }
 }
 
