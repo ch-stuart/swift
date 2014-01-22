@@ -37,8 +37,8 @@
           <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
           <span
               ng-click="onGlobalCartButtonClicked()"
-              title="View Your Cart {{ cartMessage }}">
-            <i class='entypo entypo-cart {{ isCartNotEmpty }}'>&#59197;</i>
+              title="View Your Cart {{ cart.message }}">
+            <i class='entypo entypo-cart {{ cart.isNotEmpty }}'>&#59197;</i>
           </span>
         <% end %>
         <br class="clear">

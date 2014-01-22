@@ -31,18 +31,26 @@ function OrderCtrl($scope, $http) {
         // if we do, parse them.
         cartContents = JSON.parse(cartContents);
 
-        // then set them as the .cart array
+        // then set them as the .cart object
         $scope.cart = cartContents;
 
+        // So either need to never save this
+        // or delete it here.
+        delete $scope.cart.showCart;
+        delete $scope.cart.message;
+        delete $scope.cart.isNotEmpty;
+
         // display a stupid message
-        if (cartContents.length > 1) {
-            $scope.cartMessage = "(You have " + cartContents.length + " products in your cart)";
-        } else {
-            $scope.cartMessage = "(You have " + cartContents.length + " product in your cart)";
+        if (cartContents.products.length === 1) {
+            $scope.cart.message = "(You have " + cartContents.products.length + " products in your cart)";
+        } else if (cartContents.products.length > 1) {
+            $scope.cart.message = "(You have " + cartContents.products.length + " product in your cart)";
         }
         // make the cart pink so we can tell there is stuff
         // in it. hooyah
-        $scope.isCartNotEmpty = 'active';
+        if (cartContents.products.length) {
+            $scope.cart.isNotEmpty = 'active';
+        }
     }
 
     // Remove colors array if it's empty
@@ -138,6 +146,14 @@ function OrderCtrl($scope, $http) {
     // was there previously.
     function saveCartToLocalStorage() {
         localStorage.setItem('cart', JSON.stringify(angular.copy($scope.cart)));
+    }
+
+    function calculateCartTotalPrice() {
+        var cartTotalPrice = 0;
+        $scope.cart.products.forEach(function(product) {
+            cartTotalPrice = cartTotalPrice + product.totalPrice;
+        });
+        $scope.cart.totalPrice = cartTotalPrice;
     }
 
 
@@ -316,30 +332,24 @@ function OrderCtrl($scope, $http) {
             console.log('Form is vald. Total price:', $scope.product.totalPrice);
 
             if (!$scope.cart) {
-                $scope.cart = [];
+                $scope.cart = {};
             }
-            $scope.cart.push(saved);
-
-            // TODO always grab the products out of local
-            // storage, put em back in to the cart on page
-            // load, then add new product to cart here,
-            // then calculate new total price. wah.
-            // var cartTotalPrice = 0;
-            // $scope.cart.products.forEach(function(product) {
-            //     cartTotalPrice = cartTotalPrice + product.totalPrice;
-            // });
-            // $scope.cart.totalPrice = cartTotalPrice;
+            if (!$scope.cart.products) {
+                $scope.cart.products = []
+            }
+            $scope.cart.products.push(saved);
 
             saveCartToLocalStorage();
+            calculateCartTotalPrice();
 
-            $scope.showCart = true;
+            $scope.cart.showCart = true;
         } else {
             console.warn('form is not valid');
         }
     };
 
     $scope.onShopMoreButtonClicked = function() {
-        $scope.showCart = false;
+        $scope.cart.showCart = false;
     };
 
     $scope.onCheckOutButtonClicked = function() {
@@ -347,21 +357,26 @@ function OrderCtrl($scope, $http) {
     };
 
     $scope.onGlobalCartButtonClicked = function() {
-        $scope.showCart = true;
+        calculateCartTotalPrice();
+        $scope.cart.showCart = true;
     };
 
     // Removes the selected item from the cart
     //
-    // Updates $scope.cart and the cart stored in localStorage
+    // Updates $scope.cart and the cart stored in localStorage.
+    //
+    // TODO check if there are zero items left in the
+    // cart and react accordingly
     //
     // @returns nothing
     $scope.onRemoveFromCartButtonClicked = function(uniqueId) {
         var shouldRemove = confirm('Are you sure you want to remove this product from your cart? It cannot be undone.');
 
         if (shouldRemove) {
-            $scope.cart = $scope.cart.filter(function(product) {
+            $scope.cart.products = $scope.cart.products.filter(function(product) {
                 return product.uniqueId !== uniqueId;
             });
+            calculateCartTotalPrice();
             saveCartToLocalStorage();
         }
     };
