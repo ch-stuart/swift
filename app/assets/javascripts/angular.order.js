@@ -1,4 +1,4 @@
-/*global OrderCtrl console angular $ localStorage location document alert */
+/*global OrderCtrl console angular $ localStorage location document alert confirm */
 
 // iterate over localStorage
 // for (var i = 0; i < localStorage.length; i++){
@@ -137,7 +137,8 @@ function OrderCtrl($scope, $http) {
 
         delete prod.$$hashKey;
 
-        save.uniqueId = Date.now()
+        save.uniqueId = Date.now();
+        save.quantity = 1;
 
         return save;
     }
@@ -151,7 +152,7 @@ function OrderCtrl($scope, $http) {
     function calculateCartTotalPrice() {
         var cartTotalPrice = 0;
         $scope.cart.products.forEach(function(product) {
-            cartTotalPrice = cartTotalPrice + product.totalPrice;
+            cartTotalPrice = cartTotalPrice + (product.totalPrice * product.quantity);
         });
         $scope.cart.totalPrice = cartTotalPrice;
     }
@@ -335,7 +336,7 @@ function OrderCtrl($scope, $http) {
                 $scope.cart = {};
             }
             if (!$scope.cart.products) {
-                $scope.cart.products = []
+                $scope.cart.products = [];
             }
             $scope.cart.products.push(saved);
 
@@ -379,5 +380,9 @@ function OrderCtrl($scope, $http) {
             calculateCartTotalPrice();
             saveCartToLocalStorage();
         }
+    };
+
+    $scope.onProductQuantityChanged = function() {
+        calculateCartTotalPrice();
     };
 }
