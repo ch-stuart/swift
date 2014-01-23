@@ -382,7 +382,13 @@ function OrderCtrl($scope, $http) {
         }
     };
 
-    $scope.onProductQuantityChanged = function() {
+    $scope.onProductQuantityChanged = function($event) {
+        $scope.cart.products.forEach(function(product) {
+            if (!product.quantity) {
+                product.quantity = 1;
+            }
+        });
+
         calculateCartTotalPrice();
     };
 }
