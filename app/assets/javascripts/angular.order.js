@@ -1,4 +1,4 @@
-/*global OrderCtrl console angular $ localStorage location document alert */
+/*global OrderCtrl console angular $ localStorage location document alert confirm */
 
 // iterate over localStorage
 // for (var i = 0; i < localStorage.length; i++){
@@ -51,6 +51,11 @@ function OrderCtrl($scope, $http) {
         if (cartContents.products.length) {
             $scope.cart.isNotEmpty = 'active';
         }
+    }
+    // Otherwise, set up a dummy obj
+    else {
+        $scope.cart = {};
+        $scope.cart.products = [];
     }
 
     // Remove colors array if it's empty
@@ -137,7 +142,7 @@ function OrderCtrl($scope, $http) {
 
         delete prod.$$hashKey;
 
-        save.uniqueId = Date.now()
+        save.uniqueId = Date.now();
 
         return save;
     }
@@ -335,7 +340,7 @@ function OrderCtrl($scope, $http) {
                 $scope.cart = {};
             }
             if (!$scope.cart.products) {
-                $scope.cart.products = []
+                $scope.cart.products = [];
             }
             $scope.cart.products.push(saved);
 
