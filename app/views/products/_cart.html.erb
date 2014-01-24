@@ -14,6 +14,9 @@
                 <th>
                     Price
                 </th>
+                <th>
+                    Quantity
+                </th>
                 <th></th>
             </thead>
             <tbody>
@@ -38,7 +41,17 @@
                         </ul>
                     </td>
                     <td>
-                        ${{ savedProduct.totalPrice }}
+                        {{ savedProduct.totalPrice | currency }}
+                    </td>
+                    <td>
+                        <input
+                            type=number
+                            min=1
+                            max=999
+                            class=shoppin-cart__quantity
+                            ng-model=savedProduct.quantity
+                            ng-change="onProductQuantityChanged()"
+                            value="{{ savedProduct.quantity }}">
                     </td>
                     <td>
                         <button ng-click="onRemoveFromCartButtonClicked(savedProduct.uniqueId)">
@@ -51,7 +64,7 @@
                         <strong>Total Price:</strong>
                     </td>
                     <td>
-                        ${{ cart.totalPrice }}
+                        {{ cart.totalPrice | currency }}
                     </td>
                     <td>
                 </tr>

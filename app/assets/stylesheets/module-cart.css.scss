@@ -11,7 +11,7 @@
     width: 90%;
     z-index: 12;
 
-    box-shadow: 0 0 20px #555;
+    box-shadow: 0 0 10px #555;
 
     padding: 10px;
 }
@@ -42,6 +42,9 @@
     }
 }
 
+.shoppin-cart__quantity {
+    width: 3em;
+}
 
 .shoppin-cart__fabric-charge-notice {
     margin-top: 30px;

@@ -63,9 +63,12 @@ date:        time (minutes):       comment:
 
 ///// INVOICED /////
 
-2014-01-21  20  Allow user to remove products from cart
-2014-01-20  40  Make shopping cart button in global toolbar functional
-2014-01-20  40  Wire up basic functionality to shopping cart buttons
 2014-01-20  10  Refactor
+2014-01-20  40  Wire up basic functionality to shopping cart buttons
+2014-01-20  40  Make shopping cart button in global toolbar functional
+2014-01-21  20  Allow user to remove products from cart
+2014-01-21  30  Display total price for cart. Recalculate as needed. Empty message if cart is empty
+2014-01-22  30  Allow user to set quantity for a product in the cart
+2014-01-22  10  Do not allow quantity to be set lower than 1. User can remove. Also format currency.
 2014-01-23  05  Fix issue where an empty cart would cause the cart view to break.
 2014-01-23  05  Fix issue where accessory page did not load

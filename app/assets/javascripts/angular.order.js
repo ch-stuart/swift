@@ -143,6 +143,7 @@ function OrderCtrl($scope, $http) {
         delete prod.$$hashKey;
 
         save.uniqueId = Date.now();
+        save.quantity = 1;
 
         return save;
     }
@@ -156,7 +157,7 @@ function OrderCtrl($scope, $http) {
     function calculateCartTotalPrice() {
         var cartTotalPrice = 0;
         $scope.cart.products.forEach(function(product) {
-            cartTotalPrice = cartTotalPrice + product.totalPrice;
+            cartTotalPrice = cartTotalPrice + (product.totalPrice * product.quantity);
         });
         $scope.cart.totalPrice = cartTotalPrice;
     }
@@ -384,5 +385,15 @@ function OrderCtrl($scope, $http) {
             calculateCartTotalPrice();
             saveCartToLocalStorage();
         }
+    };
+
+    $scope.onProductQuantityChanged = function($event) {
+        $scope.cart.products.forEach(function(product) {
+            if (!product.quantity) {
+                product.quantity = 1;
+            }
+        });
+
+        calculateCartTotalPrice();
     };
 }
