@@ -4,10 +4,25 @@ one:
   title: Unique
   body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   path: woo
-  status: public
+  status: Public
 
 two:
   title: And Interesting
   body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   path: goo
   status: Private
+
+three:
+  title: this is the featured page
+  body: body
+  path: this_page
+  status: Public
+  video_html: "<video></video>"
+  flickr_tag: flickrtag
+  flickr_photo: 123412122
+  featured: "Featured"
+  summary: "summary"
+  show_video_on_homepage: false
+  show_photo_on_homepage: false
+  hide_title_on_homepage: false
+  hide_read_more_link_on_homepage: false

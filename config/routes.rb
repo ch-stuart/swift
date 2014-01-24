@@ -9,8 +9,8 @@ SwiftSite::Application.routes.draw do
     match '(*any)' => redirect { |params, request|
       URI.parse(request.url).tap { |uri| uri.host.sub!(/^www\./i, '') }.to_s
     }
-  end  
-    
+  end
+
   get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
 

@@ -1,6 +1,6 @@
 /*global jQuery $ UA document Image */
 jQuery.fn.slideshow = function() {
-    
+
     return this.each(function() {
 
         var $wrapper = $(this);
@@ -9,8 +9,8 @@ jQuery.fn.slideshow = function() {
         var current = 1;
 
         if (size === 1) {
+            // Nowhere to navigate to, so hide it.
             $wrapper.find('.slideshow-nav').hide();
-            return;
         }
 
         function go(dir) {
@@ -52,7 +52,7 @@ jQuery.fn.slideshow = function() {
                     });
                 }
             });
-        
+
         if (!UA.isMobile()) {
             $wrapper
                 .find('.slideshow-photo').each(function() {

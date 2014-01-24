@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-    
+
     before_filter :authenticate_admin
     cache_sweeper ApplicationSweeper
     layout "hub"

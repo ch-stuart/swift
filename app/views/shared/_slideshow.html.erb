@@ -1,4 +1,4 @@
-<% unless @photos.blank? %>
+<% if @photos.present? %>
     <div class="slideshow-wrapper">
         <% @photos.each do |photo| %>
             <div class="slideshow-item" style="display:none">
@@ -48,4 +48,3 @@
 <% else %>
     <!-- No Photos! -->
 <% end %>
-

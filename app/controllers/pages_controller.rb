@@ -21,11 +21,17 @@ class PagesController < ApplicationController
     end
 
     @categories = Category.all
-    @company = Company.first
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-    @photos = Page.get_photos_by_tag @page.flickr_tag
+    @company    = Company.first
+    @products   = Product.where(:status => 'Public', :kind => 'Product')
+    @photos     = Page.get_photos_by_tag @page.flickr_tag
     @video_html = @page.video_html
-    @subtitle = @page.title
+    @subtitle   = @page.title
+
+    if @page.flickr_photo.present?
+      @photo = Page.get_photo_by_id(@page.flickr_photo)
+    else
+      @photo = nil
+    end
 
     render_404 unless @page.public?
   end

@@ -4,7 +4,6 @@ class ProductsController < ApplicationController
   caches_action :show, :order, :cache_path => Proc.new { |c|
       { 'user_type' => session[:is_wholesale_user] ? "WS" : "STANDARD" }
   }
-  
   cache_sweeper ApplicationSweeper
 
   def index
@@ -19,7 +18,36 @@ class ProductsController < ApplicationController
     @photos = Product.get_photos_by_tag @product.flickr_tag
     @company = Company.first
     @subtitle = @product.title
-    
+
+    respond_to do |format|
+      format.html
+      format.json do
+        product_attrs = [:id, :title, :status, :price, :kind, :short_title, :humane_price, :question, :answer, :not_for_sale, :not_for_sale_message]
+        part_attrs    = [:id, :title, :price]
+        color_attrs   = [:id, :title, :price, :hex]
+        size_attrs    = [:id, :title, :price]
+
+        render :json => @product.to_json(
+          :only => product_attrs,
+          :include => [
+            {
+              :parts => {
+                :only => part_attrs,
+                :include => {
+                  :colors => {
+                    :only => color_attrs
+                  }
+                }
+              },
+            },
+            :sizes => {
+              :only => size_attrs
+            }
+          ]
+        )
+      end
+    end
+
     render_404 unless @product.public?
   end
 
@@ -31,7 +59,7 @@ class ProductsController < ApplicationController
     @colors = Color.all
     @photos = Product.get_photos_by_tag @product.flickr_tag
     @subtitle = @product.title
-    
+
     render_404 unless @product.public?
   end
 

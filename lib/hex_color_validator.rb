@@ -7,9 +7,9 @@
 class HexColorValidator < ActiveModel::EachValidator
   # Verifies a color string is 7 characters long and contains
   # only hex values after the pound sign.
-  def validate_each(object, attribute, value)  
-    unless value =~ /^#[0-9a-fA-F]{3,6}$/ 
-      object.errors[attribute] << (options[:message] || " is not a properly formatted color string")  
-    end  
-  end  
-end 
+  def validate_each(object, attribute, value)
+    unless value =~ /^#[0-9a-fA-F]{3,6}$/
+      object.errors[attribute] << (options[:message] || " is not a properly formatted color string")
+    end
+  end
+end

@@ -30,6 +30,11 @@ class ApplicationSweeper < ActionController::Caching::Sweeper
             expire_action :controller => 'pages', :action => 'show', :id => page.id, :user_type => 'WS'
             expire_action :controller => 'pages', :action => 'show', :id => page.id, :user_type => 'STANDARD'
         end
+
+        expire_fragment 'footer'
+        expire_fragment 'global_nav'
+        expire_fragment 'meta_description'
+        expire_fragment 'company_description'
     end
 
 end

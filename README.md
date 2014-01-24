@@ -9,7 +9,7 @@ The website for Swift Industries. Runs on Heroku.
     >> Rails.cache.clear
     >> exit
 
-If the assets get updated, the css and js will 404.
+If the assets get updated, the CSS and JS will 404.
 Clearing the cache will fix this issue.
 
 ### Start for development
@@ -17,8 +17,12 @@ Clearing the cache will fix this issue.
 Manually...
 
     $ rails s thin
-    
-Or, use pow.
+
+Or, use [pow](//pow.cx).
+
+### Sync Database
+
+    $ heroku pg:pull HEROKU_POSTGRESQL_ORANGE swift-dev
 
 ### Test on IE via Virtual Box
 

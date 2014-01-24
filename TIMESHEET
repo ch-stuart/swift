@@ -20,7 +20,7 @@ date:        time (minutes):       comment:
 2012-12-23   30   worked on featured content on homepage. see commit.
 2012-12-26   79   order form stuff, making the color picker actually send values to Mals.
 2012-12-26   15   styling links on the homepage and adding instagram link.
-2012-12-28	 15   set a padding on .container-main when possible
+2012-12-28   15   set a padding on .container-main when possible
 2012-12-29   10   remove "Shop" section from footer, remove "Buy" and "Read More" links on store page
 2012-12-29   5    make image clickable on store page
 2012-12-30   20   Add "pin it" button to photos
@@ -45,7 +45,7 @@ date:        time (minutes):       comment:
 2013-01-28   15   merge responsive branch into master branch
 2013-01-28   15   various cleanup
 2013-01-28   15   testing in various browsers
-2013-01-29	 80   fixing bugs in IE
+2013-01-29   80   fixing bugs in IE
 2013-01-30   10   adjusting "Our Story" page to include images
 2013-01-31   15   deploy to production, backup db
 2013-01-31   15   post-deploy fixes
@@ -54,9 +54,21 @@ date:        time (minutes):       comment:
 
 ///// INVOICED /////
 
-2013-02-13	15	 fixing caching issue where there were "two" sites, one with www, one without.
-2013-02-15  20	 [BUG] lightbox photo is not aligned correctly in Firefox & Opera on initial view 
-2013-02-15  10	 [low-pri] add close button to big photo
+2013-02-13  15   fixing caching issue where there were "two" sites, one with www, one without.
+2013-02-15  20   [BUG] lightbox photo is not aligned correctly in Firefox & Opera on initial view
+2013-02-15  10   [low-pri] add close button to big photo
 2013-02-15  10   [security update] Update to Rails 3.1.11
 2013-02-18  10   fixed issue where photo zooming did not work because jQuery updated and $.browser went missing
 2013-02-18  10   Add caching for Flickr API reads. Improves site performance. If you add/edit/remove photos at Flickr clear the Flickr cache via the hub.
+
+///// INVOICED /////
+
+2014-01-20  10  Refactor
+2014-01-20  40  Wire up basic functionality to shopping cart buttons
+2014-01-20  40  Make shopping cart button in global toolbar functional
+2014-01-21  20  Allow user to remove products from cart
+2014-01-21  30  Display total price for cart. Recalculate as needed. Empty message if cart is empty
+2014-01-22  30  Allow user to set quantity for a product in the cart
+2014-01-22  10  Do not allow quantity to be set lower than 1. User can remove. Also format currency.
+2014-01-23  05  Fix issue where an empty cart would cause the cart view to break.
+2014-01-23  05  Fix issue where accessory page did not load

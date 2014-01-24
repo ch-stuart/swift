@@ -1,40 +1,46 @@
 <div class="sixteen columns">
-	<h1 class="row">
-	  Swift Industries Hub
-	</h1>
+  <h1 class="row">
+    Swift Industries Hub
+  </h1>
 </div>
 <div class="four columns">
-	<ul class="row">
-		<li>
-			<%= link_to "Products", products_path %>
-		</li>
-		<li>
-			<%= link_to 'Categories', categories_path %>
-		</li>
-		<li>
-			<%= link_to 'Pages', pages_path %>
-		</li>
-		<li>
-			<%= link_to 'Colors', colors_path %>
-		</li>
-		<li>
-			<%= link_to "Company Info", @company %>
-		</li>
-	</ul>
+  <ul class="row">
+    <li>
+      <%= link_to "Products", products_path %>
+    </li>
+    <li>
+      <%= link_to 'Categories', categories_path %>
+    </li>
+    <li>
+      <%= link_to 'Pages', pages_path %>
+    </li>
+    <li>
+      <%= link_to 'Colors', colors_path %>
+    </li>
+    <li>
+      <%= link_to "Company Info", @company %>
+    </li>
+  </ul>
 </div>
 <div class="four columns">
-	<ul>
-		<li>
-			<div>
-				<%= link_to "Clear home page page cache", hub_expire_home_path, class: "button remove-bottom" %>
-			</div>
-		    <p style="margin-top:5px; color: #888">Because of page caching (which makes the home page load as fast as possible), the home page content will not automatically update when the "Cycle Swift" blog has been updated.</p>
-		</li>
-		<li>
-			<div>
-				<%= link_to "Clear the flickr cache", hub_expire_flickr_path, class: "button remove-bottom" %><br>
-			</div>
-		    <p style="margin-top:5px; color: #888">If you've updated photos at Flickr, click this to clear the Flickr cache.</p>
-		</li>
-	</ul>
+  <ul>
+    <li>
+      <div>
+        <%= link_to "Clear home page page cache", hub_expire_home_path, class: "button remove-bottom" %>
+      </div>
+        <p style="margin-top:5px; color: #888">Because of page caching (which makes the home page load as fast as possible), the home page content will not automatically update when the "Cycle Swift" blog has been updated.</p>
+    </li>
+    <li>
+      <div>
+        <%= link_to "Clear the flickr cache", hub_expire_flickr_path, class: "button remove-bottom" %><br>
+      </div>
+        <p style="margin-top:5px; color: #888">If you've updated photos at Flickr, click this to clear the Flickr cache.</p>
+    </li>
+    <li>
+      <div>
+        <%= link_to "Flickr Photos", "http://flickr.com/photos/#{APP_CONFIG[:flickr_user_id]}", class: "button remove-bottom" %><br>
+      </div>
+        <p style="margin-top:5px; color: #888">The flickr photo library used by the site.</p>
+    </li>
+  </ul>
 </div>

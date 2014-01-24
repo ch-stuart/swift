@@ -23,3 +23,34 @@ $.toggleColors = function() {
         $(this).closest('.color_fields').find('.color_boxes').slideToggle();
     });
 };
+
+// Preview the flickr tag...
+// Assumes there is only one flickr tag per page
+function createFlickrTagLink() {
+    var FLICKR_BASE_URL = 'http://www.flickr.com/photos/swiftpanniers/tags/';
+
+    if ($(this).val()) {
+        $('.js-flickr_tag-link')
+            .attr('href', FLICKR_BASE_URL + $(this).val())
+            .attr('target', '_new')
+            .text('View on Flickr');
+    } else {
+        $('.js-flickr_tag-link')
+        .attr('href', '#')
+        .text('')
+    }
+}
+
+jQuery(function() {
+    $('.js-flickr_tag').each(function() {
+        createFlickrTagLink.call(this);
+    });
+
+    $('.js-flickr_tag').change(function() {
+        createFlickrTagLink.call(this);
+    });
+
+    $('.js-flickr_tag').keypress(function() {
+        createFlickrTagLink.call(this);
+    })
+});

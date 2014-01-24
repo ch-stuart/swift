@@ -13,5 +13,5 @@ class Part < ActiveRecord::Base
     def price_for is_wholesale_user
         is_wholesale_user ? self.wholesale_price : self.price
     end
-    
+
 end

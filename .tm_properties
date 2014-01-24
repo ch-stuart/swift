@@ -1,6 +1,6 @@
 # https://gist.github.com/1478685
 
-projectDirectory = "$CWD"
-tabSize 		 = 4
-exclude 		 = "{$exclude,*.log,tmp/*,*.sqlite*}"
-
+projectDirectory  = "$CWD"
+tabSize           = 2
+softTabs          = true
+exclude           = "{$exclude,*.log,tmp/*,*.sqlite*}"

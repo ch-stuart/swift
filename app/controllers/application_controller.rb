@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   def logout
     render :text => "Quit your browser to logout."
   end
-  
+
   def wholesale_login
     redirect_to "/"
   end
@@ -39,14 +39,14 @@ class ApplicationController < ActionController::Base
   def authenticate_admin
     @hub = true
     login = authenticate_or_request_with_http_basic do |username, password|
-      username == APP_CONFIG['admin_user'] && password == APP_CONFIG['admin_pass']
+      username == APP_CONFIG[:admin_user] && password == APP_CONFIG[:admin_pass]
     end
     session[:is_admin_user] = login
   end
 
   def authenticate_wholesale
     login = authenticate_or_request_with_http_basic do |username, password|
-      username == APP_CONFIG['wholesale_user'] && password == APP_CONFIG['wholesale_pass']
+      username == APP_CONFIG[:wholesale_user] && password == APP_CONFIG[:wholesale_pass]
     end
     session[:is_wholesale_user] = login
   end

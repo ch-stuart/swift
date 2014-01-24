@@ -1,0 +1,62 @@
+.shoppin-cart {
+    background-color: #ffe;
+    border-radius: 0;
+
+    box-sizing: border-box;
+    transform: translate(-50%, 0);
+
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    width: 90%;
+    z-index: 12;
+
+    box-shadow: 0 0 10px #555;
+
+    padding: 10px;
+}
+@media only screen and (min-width: 768px) {
+    .shoppin-cart {
+        width: auto;
+        padding: 30px;
+        min-width: 95%;
+        max-width: 1000px;
+    }
+}
+
+.shoppin-cart__table {
+    width: 100%;
+
+    th {
+        text-align: left;
+        font-weight: bold;
+        font-family: georgia, serif;
+        border-bottom: 1px solid #bbb;
+        font-size: 120%;
+    }
+    td {
+        border-bottom: 1px solid #ddd;
+    }
+    th, td {
+        padding: 10px;
+    }
+}
+
+.shoppin-cart__quantity {
+    width: 3em;
+}
+
+.shoppin-cart__fabric-charge-notice {
+    margin-top: 30px;
+
+    h5, li {
+        color: #444;
+    }
+}
+.shoppin-cart__fabric-charge-notice__ul {
+    margin-bottom: 0;
+}
+
+.shoppin-cart__toolbar {
+    text-align: right;
+}

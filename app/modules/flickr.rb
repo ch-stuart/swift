@@ -1,117 +1,153 @@
 module Flickr
 
-    def get_photos_by_tag tag
-        return Rails.cache.read(tag) if Rails.cache.exist?(tag)
+  flickr_photo_sizes = %w{Large Medium Small Thumbnail}
 
-        return [] if tag.blank?
+  def get_photos_by_tag tag
+    Rails.logger.info "Flickr.get_photos_by_tag #{tag}"
 
-        photos = []
-
-        # This unforunately takes many calls to flickr in order to get the photo URLs
-        # Say you have 5 photos in a slideshow
-        # ... 1 call to get all of the tags
-        # ... 5 more to get the sizes
-        # ... 5 more to get the medium size photos
-        # boo
-        flickr.photos.search(:user_id => APP_CONFIG['flickr_user_id'], :tags => tag).each do |p|
-            # Get photo info
-            photo_info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
-            # Save some photo info
-
-            photo               = {}
-            photo[:id]          = photo_info['id']
-            photo[:description] = photo_info['description']
-            photo[:title]       = photo_info['title']
-            photo[:flickr_url]  = photo_info['urls'][0]['_content']
-            # Get photo sizes
-            photo_sizes         = flickr.photos.getSizes :photo_id => photo_info['id']
-
-            # Get medium size photo
-            medium_photo        = photo_sizes.find {|s| s.label == 'Medium' }
-
-            # Don't proceed if we can't get a medium photo
-            next if medium_photo.blank?
-
-            # Save medium size photo info
-            photo[:url]         = medium_photo.source
-            photo[:height]      = medium_photo.height
-
-            # Get large size photo
-            large_photo = photo_sizes.find {|s| s.label == 'Large' }
-
-            if large_photo.present?
-                photo[:large_url]    = large_photo.source
-                photo[:large_height] = large_photo.height
-            else
-                photo[:large_url]    = medium_photo.source
-                photo[:large_height] = medium_photo.height
-            end
-
-            photos.push photo
-        end
-
-        Rails.cache.write(tag, photos)
-
-        photos
+    # return [] if not tag
+    if tag.blank?
+      Rails.logger.warn "Tag is blank. Returning empty array"
+      return []
+    else
+      # check for photos in cache if tag is present
+      if Rails.cache.exist?(tag)
+        return Rails.cache.read(tag)
+      end
     end
 
-    def get_photo_by_id(id, size)
-        return Rails.cache.read(id) if Rails.cache.exist?(id)
+    # go get them if they are not cached
+    photos = []
 
-        return "" if id.blank?
+    # This unforunately takes many calls to flickr in order to get the photo URLs
+    # Say you have 5 photos in a slideshow
+    # ... 1 call to get all of the tags
+    # ... 5 more to get the sizes
+    # ... 5 more to get the medium size photos
+    # boo
+    flickr.photos.search(:user_id => APP_CONFIG[:flickr_user_id], :tags => URI.escape(tag)).each do |p|
+      # Rails.logger.info "Getting photo: #{p.inspect}"
 
-        begin
-            sizes = flickr.photos.getSizes :photo_id => id
-        rescue Exception => e
-            Rails.logger.info "Flickr.get_photo_by_id failed. #{e}"
-            return ""
-        end
+      # Get photo info
+      photo_info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
+
+      # Save some photo info
+      photo               = {}
+      photo[:id]          = photo_info['id']
+      photo[:description] = photo_info['description']
+      photo[:title]       = photo_info['title']
+      photo[:flickr_url]  = photo_info['urls'][0]['_content']
+      # Get photo sizes
+      photo_sizes         = flickr.photos.getSizes :photo_id => photo_info['id']
+
+      # Get medium size photo
+      medium_photo        = photo_sizes.find {|s| s.label == 'Medium' }
+
+      # Don't proceed if we can't get a medium photo
+      if medium_photo.blank?
+        Rails.logger.warn "Cannot get medium sized photo. Skipping."
+        next
+      end
+
+      # Save medium size photo info
+      photo[:url]         = medium_photo.source
+      photo[:height]      = medium_photo.height
+
+      # Get large size photo
+      large_photo = photo_sizes.find {|s| s.label == 'Large' }
+
+      if large_photo.present?
+        photo[:large_url]    = large_photo.source
+        photo[:large_height] = large_photo.height
+      else
+        Rails.logger.warn "Could not get large photo. Using medium photo instead."
+        photo[:large_url]    = medium_photo.source
+        photo[:large_height] = medium_photo.height
+      end
+
+      photos.push photo
+    end
+
+    Rails.cache.write(tag, photos)
+
+    photos
+  end
+
+  def get_photo_by_id(id, size=nil)
+    if id.blank?
+      return ""
+    else
+      if Rails.cache.exist?(id)
+        return Rails.cache.read(id)
+      end
+    end
+
+    begin
+      sizes = flickr.photos.getSizes :photo_id => id
+    rescue Exception => e
+      Rails.logger.info "Flickr.get_photo_by_id failed. #{e}"
+      return ""
+    end
+
+    if size
+      photo = sizes.find {|s| s.label == size }
+    else
+      flickr_photo_sizes.each do |size|
         photo = sizes.find {|s| s.label == size }
-
-        Rails.cache.write(id, photo.source)
-
-        photo.source
+        break unless photo.nil?
+      end
     end
 
-    def get_photos_by_set id
-        return Rails.cache.read(id) if Rails.cache.exist?(id)
+    Rails.cache.write(id, photo.source)
 
-        photos = []
+    photo.source
+  end
 
-        results = flickr.photosets.getPhotos :photoset_id => id
-
-        results["photo"].each do |photo|
-
-            sizes = flickr.photos.getSizes :photo_id => photo["id"]
-            medium = sizes.find {|size| size.label == "Medium" }
-            photos.push({ :id => photo["id"], :url => medium.source })
-        end
-
-        if photos.length > 10
-            photos = photos[0..9]
-        end
-
-        Rails.cache.write(id, photos)
-
-        photos
+  def get_photos_by_set id
+    if id.blank?
+      return []
+    else
+      if Rails.cache.exist?(id)
+        return Rails.cache.read(id)
+      end
     end
 
-    def get_photos_by_user
-        return Rails.cache.read('user_photos') if Rails.cache.exist?('user_photos')
+    photos = []
 
-        photos = []
+    results = flickr.photosets.getPhotos :photoset_id => id
 
-        results = flickr.people.getPublicPhotos :user_id => APP_CONFIG['flickr_user_id'], :per_page => 10
-
-        results.each do |photo|
-            sizes = flickr.photos.getSizes :photo_id => photo.id
-            medium = sizes.find {|s| s.label == 'Medium' }
-            photos.push({ :id => photo.id, :url => medium.source })
-        end
-
-        Rails.cache.write('user_photos', photos)
-
-        photos
+    results["photo"].each do |photo|
+      sizes = flickr.photos.getSizes :photo_id => photo["id"]
+      medium = sizes.find {|size| size.label == "Medium" }
+      photos.push({ :id => photo["id"], :url => medium.source })
     end
+
+    if photos.length > 10
+      photos = photos[0..9]
+    end
+
+    Rails.cache.write(id, photos)
+
+    photos
+  end
+
+  # # NOT USED
+  # def get_photos_by_user
+  #   return Rails.cache.read('user_photos') if Rails.cache.exist?('user_photos')
+  #
+  #   photos = []
+  #
+  #   results = flickr.people.getPublicPhotos :user_id => APP_CONFIG[:flickr_user_id], :per_page => 10
+  #
+  #   results.each do |photo|
+  #     sizes = flickr.photos.getSizes :photo_id => photo.id
+  #     medium = sizes.find {|s| s.label == 'Medium' }
+  #     photos.push({ :id => photo.id, :url => medium.source })
+  #   end
+  #
+  #   Rails.cache.write('user_photos', photos)
+  #
+  #   photos
+  # end
 
 end

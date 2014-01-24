@@ -1,6 +1,6 @@
 <h1>Products</h1>
 <p>
-	<%= link_to 'New Product', new_product_path, class: "button" %>
+    <%= link_to 'New Product', new_product_path, class: "button" %>
 </p>
 <table>
   <tr>
@@ -24,8 +24,8 @@
     <td><%= image_tag "#{product.kind}.png" %></td>
     <td><%= image_tag "#{product.status}.png" %></td>
     <td>
-		<%= link_to image_tag("edit.png"), edit_product_path(product) %>
-	</td>
+        <%= link_to image_tag("edit.png"), edit_product_path(product) %>
+    </td>
     <td>
       <%= link_to product.title, product %>
     </td>
@@ -38,9 +38,9 @@
     <td><%= product.flickr_tag %></td>
     <td><%= product.flickr_photo %></td>
     <td><%= truncate(product.specs, :length => 10) %></td>
-	<td>
-		<%= link_to image_tag("destroy.png"), product, :confirm => 'Are you sure?', :method => :delete %>
-	</td>
+    <td>
+        <%= link_to image_tag("destroy.png"), product, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>

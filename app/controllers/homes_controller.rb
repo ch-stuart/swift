@@ -9,7 +9,7 @@ class HomesController < ApplicationController
 
     def index
         @pages = Page.find_all_by_status("Public")
-        @featured_page = Page.find_by_featured("Featured")
+        @featured_pages = Page.where(:featured => "Featured").reverse
         @products = Product.where(:status => "Public", :kind => "Product")
         @categories = Category.all
         @accessories = Product.where(:status => "Public", :kind => "Accessory")
@@ -18,11 +18,11 @@ class HomesController < ApplicationController
         @blog = get_latest_blog_post
 
         @featured_product = Product.where(:featured_on_homepage => true).first
-        
+
         if @featured_product.blank?
             @featured_product = Product.first
         end
-            
+
         if @featured_product.flickr_set.present?
             @photos = Home.get_photos_by_set @featured_product.flickr_set
         else

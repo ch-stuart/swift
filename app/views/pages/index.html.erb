@@ -26,9 +26,9 @@
     <td><%= page.path %></td>
     <td class="<%= 'featured' unless page.featured? -%>"><%= page.featured %></td>
     <td>
-		<%= link_to image_tag("edit.png"), edit_page_path(page) %>
-		<%= link_to image_tag("destroy.png"), page, :confirm => 'Are you sure?', :method => :delete %>
-	</td>
+        <%= link_to image_tag("edit.png"), edit_page_path(page) %>
+        <%= link_to image_tag("destroy.png"), page, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>

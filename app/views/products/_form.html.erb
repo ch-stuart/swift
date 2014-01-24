@@ -1,73 +1,66 @@
 <h1>Edit <%= @product.title if @product.title.present? %></h1>
 
 <%= form_for @product do |f| %>
-	<% if @product.errors.any? %>
-		<div id="error_explanation">
-			<h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
-			<ul>
-				<% @product.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-	
-	<div class="field">
-		<%= f.label :kind, "Type" %>
-		<%= f.select :kind, Product::KINDS, :selected => @product.kind %>
-	</div>
-	<div class="field">
-		<%= f.label :category_id, "Navigation Category" %>
-		<%= f.select :category_id, Category.all.collect {|c| [ c.title, c.id ] }, { :include_blank => true, :selected => @product.category_id } %>
-		<p class="hint">
-			Leave blank if this is an Accessory or Stock product.
-		</p>
-	</div>
-	<div class="field">
-		<%= f.label :status %>
-		<%= f.select :status, Product::STATUSES, :selected => @product.status %>
-		<p class="hint">
-			The page will 404 if you set it as private. For now that means you can't preview it.
-		</p>
-	</div>
-	<h3>
-		Marketing
-	</h3>
-	<div class="field">
-		<%= f.label :title %>
-		<%= f.text_field :title %>
-	</div>
-	<div class="field">
-		<%= f.label :short_title %>
-		<%= f.text_field :short_title %>
-		<p class="hint">
-			The short title will be used in space-constrained spaces (navigation lists, etc.).
-		</p>
-	</div>
-	<div class="field">
-		<%= f.label :description %>
-		<%= f.text_area :description %>
-		<%= render :partial => 'shared/markdown_hint' %>
-	</div>
-	<div class="field">
-		<%= f.label :short_description %>
-		<%= f.text_area :short_description %>
-		<p class="hint">
-			Used for the homepage hero.
-		</p>
-	</div>
+    <% if @product.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+            <ul>
+            	<% @product.errors.full_messages.each do |msg| %>
+            		<li><%= msg %></li>
+            	<% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+        <%= f.label :kind, "Type" %>
+        <%= f.select :kind, Product::KINDS, :selected => @product.kind %>
+    </div>
+    <div class="field">
+        <%= f.label :category_id, "Navigation Category" %>
+        <%= f.select :category_id, Category.all.collect {|c| [ c.title, c.id ] }, { :include_blank => true, :selected => @product.category_id } %>
+        <p class="hint">
+            Leave blank if this is an Accessory or Stock product.
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label :status %>
+        <%= f.select :status, Product::STATUSES, :selected => @product.status %>
+        <p class="hint">
+            The page will 404 if you set it as private. For now that means you can't preview it.
+        </p>
+    </div>
+    <h3>
+        Marketing
+    </h3>
+    <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </div>
+    <div class="field">
+        <%= f.label :short_title %>
+        <%= f.text_field :short_title %>
+        <p class="hint">
+            The short title will be used in space-constrained spaces (navigation lists, etc.).
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+        <%= render :partial => 'shared/markdown_hint' %>
+    </div>
+    <div class="field">
+        <%= f.label :short_description %>
+        <%= f.text_area :short_description %>
+        <p class="hint">
+            Used for the homepage hero.
+        </p>
+    </div>
     <div class="field">
         <%= f.label :price %>
         <%= f.text_field :price %>
         <p class="hint">
-            ex: 299.00
-        </p>
-    </div>
-    <div class="field">
-        <%= f.label :wholesale_price %>
-        <%= f.text_field :wholesale_price %>
-        <p class="hint">
-            ex: 249.00
+            ex: 299.01
         </p>
     </div>
     <div class="field">
@@ -75,6 +68,13 @@
         <%= f.text_field :humane_price %>
         <p class="hint">
             ex: "$299 for a pair"
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label :wholesale_price %>
+        <%= f.text_field :wholesale_price %>
+        <p class="hint">
+            ex: 249.00
         </p>
     </div>
     <div class="field">
@@ -188,9 +188,9 @@
 <% end %>
 
 <%= content_for :js do %>
-	<script>
-		$(document).ready(function() {
-			$.toggleColors();
-		});
-	</script>
+    <script>
+        $(document).ready(function() {
+            $.toggleColors();
+        });
+    </script>
 <% end %>

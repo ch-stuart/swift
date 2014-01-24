@@ -15,6 +15,12 @@
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
+  <div class="field row">
+    <label for="page_hide_title_on_homepage">
+      <%= f.check_box :hide_title_on_homepage %>
+      Hide title on homepage?
+    </label>
+  </div>
   <div class="field">
     <%= f.label :path %>
     <%= f.text_field :path %>
@@ -38,18 +44,46 @@
       Get the embed html from the video site. Here's an <a href="http://d.pr/d1dh">example</a>. The size should be `width: 460 height: 369`.
     </p>
   </div>
+  <div class="field row">
+    <label for="page_show_video_on_homepage">
+      <%= f.check_box :show_video_on_homepage %>
+      Show video on homepage?
+    </label>
+  </div>
   <div class="field">
     <%= f.label :flickr_tag %>
-    <%= f.text_field :flickr_tag %>
+    <%= f.text_field :flickr_tag, class: "js-flickr_tag" %>
     <p class="hint">
-      Enter a flickr tag to display a photo gallery. Leave blank for none.
+      Enter a flickr tag to display a photo gallery. Leave blank for none. <a href="#" class="js-flickr_tag-link"></a>
     </p>
+  </div>
+  <div class="field">
+    <%= f.label :flickr_photo %>
+    <%= f.text_field :flickr_photo, class: 'js-flickr_id' %>
+    <p class="hint">
+      Enter a flickr id [<a href="http://d.pr/Q7xE" target="_new">?</a>] to display a photo on the homepage. Leave blank for none.
+    </p>
+  </div>
+  <div class="field row">
+    <label for="page_show_photo_on_homepage">
+      <%= f.check_box :show_photo_on_homepage %>
+      Show photo on homepage?
+    </label>
   </div>
   <div class="field">
     <%= f.label :featured %>
     <%= f.select :featured, options_for_select(["Nope", "Featured"], :selected => @page.featured) %>
     <p class="hint">
-      Should this appear on the front page? Only one page will be displayed so don't mark two as featured!
+      Should this appear on the homepage?
+    </p>
+  </div>
+  <div class="field row">
+    <label for="page_hide_read_more_link_on_homepage">
+      <%= f.check_box :hide_read_more_link_on_homepage %>
+      Hide "read more" link on homepage?
+    </label>
+    <p class="hint hint--for-checkbox">
+      If this page is featured on the homepage, should the "read more" link be hidden?
     </p>
   </div>
   <div class="field">

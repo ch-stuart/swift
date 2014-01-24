@@ -1,13 +1,65 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  title: MyString
-  description: MyText
-  flickr_tag: MyString
-  specs: MyText
+  title: Prod1 Title
+  description: prod1 description
+  flickr_tag: smrtp001
+  specs: specs
+  status: Public
+  price: 0.99
+  humane_price: $2.99 for pair
+  wholesale_price: 0.99
+  wholesale_humane_price: $2.99 for pair
+  kind: Product
+  short_title: Prod1Short
+  flickr_photo: 3993933993
+  # question: What is your question?
+  # answer: This is your answer
+  not_for_sale: false
+  not_for_sale_message: This is not currently for sale.
+  featured_on_homepage: false
+  flickr_set: 72157638081847424
+  short_description: This is the short description.
+  category: one
 
 two:
-  title: MyString
-  description: MyText
-  flickr_tag: MyString
-  specs: MyText
+  title: Prod2 Title
+  description: prod2 description
+  flickr_tag: sss001
+  specs: specs
+  status: Public
+  price: 0.99
+  humane_price: $2.99 for pair
+  wholesale_price: 0.99
+  wholesale_humane_price: $2.99 for pair
+  kind: Product
+  short_title: Prod2Short
+  flickr_photo: 3993933993
+  # question: What is your question?
+  # answer: This is your answer
+  not_for_sale: false
+  not_for_sale_message: This is not currently for sale.
+  featured_on_homepage: false
+  flickr_set: 72157637886349806
+  short_description: This is the short description.
+  category: two
+
+three:
+  title: Prod3 Title
+  description: prod3 description
+  flickr_tag: toolpouch
+  specs: specs
+  status: Public
+  price: 0.99
+  humane_price: $2.99 for pair
+  wholesale_price: 0.99
+  wholesale_humane_price: $2.99 for pair
+  kind: Product
+  short_title: Prod3Short
+  flickr_photo: 3993933993
+  # question: What is your question?
+  # answer: This is your answer
+  not_for_sale: false
+  not_for_sale_message: This is not currently for sale.
+  featured_on_homepage: false
+  flickr_set: 72157637894428825
+  short_description: This is the short description.
+  category: one

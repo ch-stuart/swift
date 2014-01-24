@@ -11,20 +11,10 @@ class PageTest < ActiveSupport::TestCase
       :flickr_tag => "foo_bar"
     }
   end
-  
+
   test "should create page" do
     page = Page.new @page
     assert page.save, "should save page"
-  end
-
-  test "should not save page without title" do
-    page = Page.new @page.except(:title)
-    assert !page.save, "should not save page"
-  end
-
-  test "should not save page without body" do
-    page = Page.new @page.except(:body)
-    assert !page.save, "should not save page"
   end
 
   test "should not save page without path" do
@@ -35,27 +25,27 @@ class PageTest < ActiveSupport::TestCase
   test "title should be unique" do
     page = Page.new @page
     page.save
-    
+
     page2 = {
       :title => "foo bar",
       :body => "la la la",
       :path => "boo"
     }
-    page2 = Page.new 
+    page2 = Page.new
     assert !page2.save, "title has to be unique"
   end
-    
+
   test "path should be unique" do
     page = Page.new @page
     page.save
-    
+
     page2 = {
       :title => "foo bar baz",
       :body => "la la la",
       :path => "foo_bar"
     }
-    page2 = Page.new 
+    page2 = Page.new
     assert !page2.save, "path should be unique"
   end
-    
+
 end

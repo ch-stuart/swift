@@ -8,7 +8,7 @@ class TestimonialTest < ActiveSupport::TestCase
       :author => "dougie"
     }
   end
-  
+
   test "should create testimonial" do
     t = Testimonial.new @testimonial
     assert t.save, "should save"

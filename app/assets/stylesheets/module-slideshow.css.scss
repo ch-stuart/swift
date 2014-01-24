@@ -30,8 +30,8 @@
     padding: 10px;
     opacity: 0.9;
     color: #222;
-	
-	font-family: georgia, serif;
+
+    font-family: georgia, serif;
 }
 .slideshow-nav--next {
     right: 0;
@@ -49,21 +49,21 @@
 
 .lightbox {
     display: none;
-	position: relative;
-	max-width: 80%;
+    position: relative;
+    max-width: 80%;
 }
 .lightbox-img {
-	max-width: 100%;
+    max-width: 100%;
 }
 .lightbox-close {
-	background-image: url(/assets/closebox.png);
-	background-repeat: no-repeat;
-	position: absolute;
-	top: -15px;
-	right: -15px;
-	width: 30px;
-	height: 30px;
-	cursor: pointer;
+    background-image: url(/assets/closebox.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
 
 .pin-it-button-wrapper {

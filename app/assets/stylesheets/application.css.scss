@@ -14,6 +14,7 @@
 // Modules
 @import 'module-blog';
 @import 'module-buttons';
+@import 'module-cart';
 @import 'module-color.picker';
 @import 'module-form';
 @import 'module-hero';
@@ -49,3 +50,32 @@ a:hover, a:focus {
     color: $hotpink;
 }
 // End override
+
+
+img.center-in-grid {
+    display: block;
+    margin: 0 auto; }
+
+
+.nice-list {
+    list-style-type: square;
+    margin-left: 14px;
+    margin-top: 15px;
+    li {
+        margin-bottom: 4px;
+    }
+}
+
+
+
+select.ng-invalid.ng-dirty,
+input.ng-invalid {
+  border: 1px solid red;
+}
+
+
+
+
+.input--dirty {
+    border: 1px solid red;
+}
