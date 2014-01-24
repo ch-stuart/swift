@@ -67,3 +67,4 @@ date:        time (minutes):       comment:
 2014-01-20  40  Make shopping cart button in global toolbar functional
 2014-01-20  40  Wire up basic functionality to shopping cart buttons
 2014-01-20  10  Refactor
+2014-01-23  05  Fix issue where an empty cart would cause the cart view to break.
