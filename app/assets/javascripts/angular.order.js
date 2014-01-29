@@ -1,4 +1,4 @@
-/*global OrderCtrl console angular $ localStorage location document alert confirm */
+/*global OrderCtrl console angular $ localStorage location document alert confirm window */
 
 // iterate over localStorage
 // for (var i = 0; i < localStorage.length; i++){
@@ -9,6 +9,8 @@
 // }
 
 function OrderCtrl($scope, $http) {
+
+    $scope.IS_WHOLESALE_USER = window.__iswsu__;
 
     // Stupid hacky way to do this. Whatevers for now.
     if (document.getElementById('page_products_order')) {
@@ -359,6 +361,10 @@ function OrderCtrl($scope, $http) {
     };
 
     $scope.onCheckOutButtonClicked = function() {
+        if ($scope.IS_WHOLESALE_USER && $scope.cart.totalPrice < 500) {
+            return alert('Minimum $500 purchase required for wholesale purchasers.');
+        }
+
         alert('should check out now');
     };
 
@@ -387,7 +393,7 @@ function OrderCtrl($scope, $http) {
         }
     };
 
-    $scope.onProductQuantityChanged = function($event) {
+    $scope.onProductQuantityChanged = function() {
         $scope.cart.products.forEach(function(product) {
             if (!product.quantity) {
                 product.quantity = 1;

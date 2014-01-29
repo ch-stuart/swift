@@ -82,6 +82,9 @@
       <%= render "shared/humans" %>
     </div>
   </div>
+  <% if session[:is_wholesale_user] %>
+  <script>window.__iswsu__=true</script>
+  <% end %>
   <%= javascript_include_tag "application" %>
   <%= yield :js %>
   <%= render "shared/analytics" unless Rails.env == "development" %>
