@@ -15,6 +15,8 @@ function OrderCtrl($scope, $http) {
     // Stupid hacky way to do this. Whatevers for now.
     if (document.getElementById('page_products_order')) {
         var id = location.pathname.split('/')[2];
+        var productToUpdate = localStorage.getItem('update');
+
         $http
             .get('/products/'+ id +'.json')
             .success(function(json) {
@@ -23,6 +25,9 @@ function OrderCtrl($scope, $http) {
                 setupColors.call($scope);
                 setupSize.call($scope);
                 setupQA.call($scope);
+                if (productToUpdate) {
+                    setupUpdate.call($scope, productToUpdate);
+                }
             });
     }
 
@@ -58,6 +63,28 @@ function OrderCtrl($scope, $http) {
     else {
         $scope.cart = {};
         $scope.cart.products = [];
+    }
+
+    function setupUpdate(update) {
+        console.log('update', JSON.parse(update));
+        console.log('this.product', this.product);
+
+        // kill it so we don't get in a loop
+        // localStorage.removeItem('update');
+
+        update = JSON.parse(update);
+
+        if (update.selectedAnswer) {
+            this.product.selectedAnswer = update.selectedAnswer;
+        }
+
+        if (update.selectedSize) {
+            var match = this.product.sizes.filter(function(size) {
+                return size.id === update.selectedSize.id;
+            })[0];
+
+            this.product.selectedSize = match;
+        }
     }
 
     // Remove colors array if it's empty
@@ -133,7 +160,7 @@ function OrderCtrl($scope, $http) {
             save.parts.push(newPart);
         }
 
-        ;['id', 'title', 'price', 'totalPrice', 'answer',
+        ;['id', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer',
           'question', 'selectedSize', 'mostExpensiveFabric'].forEach(saveIf);
 
         prod.parts
@@ -163,7 +190,6 @@ function OrderCtrl($scope, $http) {
         });
         $scope.cart.totalPrice = cartTotalPrice;
     }
-
 
     // Validate the form
     //
@@ -351,6 +377,7 @@ function OrderCtrl($scope, $http) {
             calculateCartTotalPrice();
 
             $scope.cart.showCart = true;
+            window.scrollTo(0, 0);
         } else {
             console.warn('form is not valid');
         }
@@ -377,9 +404,6 @@ function OrderCtrl($scope, $http) {
     //
     // Updates $scope.cart and the cart stored in localStorage.
     //
-    // TODO check if there are zero items left in the
-    // cart and react accordingly
-    //
     // @returns nothing
     $scope.onRemoveFromCartButtonClicked = function(uniqueId) {
         var shouldRemove = confirm('Are you sure you want to remove this product from your cart? It cannot be undone.');
@@ -391,6 +415,32 @@ function OrderCtrl($scope, $http) {
             calculateCartTotalPrice();
             saveCartToLocalStorage();
         }
+    };
+
+    // Edits the selected item from the cart
+    //
+    // Does this temporarily remove the item from
+    // the cart?
+    //
+    // @returns nothing
+    $scope.onEditFromCartButtonClicked = function(product, uniqueId) {
+        $scope.cart.showCart = false;
+
+        // Use indexOf and slice or whatever to remove the product?
+        $scope.cart.products = $scope.cart.products.filter(function(product) {
+            return product.uniqueId !== uniqueId;
+        });
+
+        saveCartToLocalStorage();
+
+        // Save this puppy to localStorage
+        localStorage.setItem('update', JSON.stringify(angular.copy(product)))
+
+        // Redirect
+        window.location = '/products/' + product.id + '/order'
+
+        // Will check for "edit" item in LS on page load
+        // and load form state if need be
     };
 
     $scope.onProductQuantityChanged = function() {

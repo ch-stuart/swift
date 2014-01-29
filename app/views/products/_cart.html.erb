@@ -56,6 +56,9 @@
                             value="{{ savedProduct.quantity }}">
                     </td>
                     <td>
+                        <button ng-click="onEditFromCartButtonClicked(savedProduct, savedProduct.uniqueId)">
+                            Edit
+                        </button>
                         <button ng-click="onRemoveFromCartButtonClicked(savedProduct.uniqueId)">
                             Remove
                         </button>
