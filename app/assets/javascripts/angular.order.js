@@ -66,11 +66,8 @@ function OrderCtrl($scope, $http) {
     }
 
     function setupUpdate(update) {
-        console.log('update', JSON.parse(update));
-        console.log('this.product', this.product);
-
         // kill it so we don't get in a loop
-        // localStorage.removeItem('update');
+        localStorage.removeItem('update');
 
         update = JSON.parse(update);
 
@@ -79,11 +76,34 @@ function OrderCtrl($scope, $http) {
         }
 
         if (update.selectedSize) {
-            var match = this.product.sizes.filter(function(size) {
+            this.product.selectedSize = this.product.sizes.filter(function(size) {
                 return size.id === update.selectedSize.id;
             })[0];
+        }
 
-            this.product.selectedSize = match;
+        if (update.parts) {
+            // Loop through all of the parts on the product
+            // we are updating
+            update.parts.forEach(function(updatePart) {
+
+                // match up the part from the update product
+                // with the current product
+                var matchingPart = this.product.parts.filter(function(part) {
+                    return part.id === updatePart.id;
+                })[0];
+
+                // If the part exists in the update, then it's selected
+                // if it has a price
+                if (matchingPart.price) {
+                    matchingPart.activated = true;
+                }
+                // And if it has a selectedColor, find it and set it
+                if (updatePart.selectedColor) {
+                    matchingPart.selectedColor = matchingPart.colors.filter(function(color) {
+                        return color.id === updatePart.selectedColor.id;
+                    })[0];
+                }
+            }, this);
         }
     }
 
