@@ -1,7 +1,7 @@
 APP_CONFIG = {
-  admin_user:           ENV['ADMIN_USER'],
-  admin_pass:           ENV['ADMIN_PASS'],
-  wholesale_pass:       ENV['WHOLESALE_USER'],
+  admin_user:           ENV['HUB_USER'],
+  admin_pass:           ENV['HUB_PASS'],
+  wholesale_user:       ENV['WHOLESALE_USER'],
   wholesale_pass:       ENV['WHOLESALE_PASS'],
   flickr_user_id:       ENV['SWIFT_FLICKR_USER_ID'],
   flickr_api_key:       ENV['SWIFT_API_KEY'],
