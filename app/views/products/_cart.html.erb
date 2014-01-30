@@ -24,7 +24,7 @@
             <tbody>
                 <tr ng-repeat="savedProduct in cart.products">
                     <td>
-                        {{ savedProduct.title }} ${{ savedProduct.price }}
+                        {{ savedProduct.title }} {{ savedProduct.price | currency }}
                     </td>
                     <td>
                         <ul>

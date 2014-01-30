@@ -130,6 +130,8 @@ function OrderCtrl($scope, $http) {
         // new title if the user picks a size
         this.product.originalTitle = this.product.title;
         this.product.originalPrice = this.product.price;
+
+        $scope.onSizeSelectChanged();
     }
 
     // Initialize values for Question & Answer fields
@@ -326,7 +328,7 @@ function OrderCtrl($scope, $http) {
 
     $scope.onSizeSelectChanged = function() {
         this.product.title = this.product.originalTitle + ' (' + this.product.selectedSize.title + ')';
-        this.product.price = this.product.selectedSize.price;
+        this.product.price = parseFloat(this.product.selectedSize.price);
     };
 
     var isTooltipsInitialized;
