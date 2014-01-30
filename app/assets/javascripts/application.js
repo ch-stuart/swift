@@ -1,6 +1,6 @@
 // ...
 //= require console
-//= require array.foreach
+//= require underscore
 //= require ua
 //= require jquery
 //= require jquery.browser
