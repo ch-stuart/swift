@@ -22,8 +22,12 @@ function OrderCtrl($scope, $http) {
             .success(function(json) {
                 $scope.product = json.product;
 
+                if ($scope.IS_WHOLESALE_USER) {
+                    setupPricesForWholesale.call($scope);
+                }
                 setupSize.call($scope);
                 setupQA.call($scope);
+
                 if (productToUpdate) {
                     setupUpdate.call($scope, productToUpdate);
                 }
@@ -140,6 +144,36 @@ function OrderCtrl($scope, $http) {
             // Default
             this.product.selectedAnswer = this.product.answer[0];
         }
+    }
+
+    function setupPricesForWholesale() {
+        // Adjust main price
+        $scope.product.price = $scope.product.wholesale_price
+        $scope.product.humane_price = $scope.product.wholesale_humane_price
+
+        // Adjust size prices
+        $scope.product.sizes.forEach(function(size) {
+            size.price = size.wholesale_price;
+        });
+        // Adjust part prices
+        $scope.product.parts.forEach(function(part) {
+            if (part.price) {
+                part.price = part.wholesale_price;
+            }
+        });
+
+        // Adjust fabric prices
+        $scope.product.parts.forEach(function(part) {
+            if (part.colors) {
+                part.colors.forEach(function(color) {
+                    if (color.price) {
+                        color.price = color.wholesale_price;
+                    }
+                });
+            }
+        });
+
+        // Jesus
     }
 
     // Save a product purchase. Grab the relevant
