@@ -419,8 +419,8 @@ function OrderCtrl($scope, $http) {
         }
     };
 
-    $scope.onShopMoreButtonClicked = function() {
-        $scope.cart.showCart = false;
+    $scope.onContinueShoppingButtonClicked = function() {
+        window.location = "/";
     };
 
     $scope.onCheckOutButtonClicked = function() {
