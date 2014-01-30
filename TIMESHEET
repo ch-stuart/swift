@@ -78,3 +78,4 @@ date:        time (minutes):       comment:
 2014-01-29  10  Fix issue where product price was not correct if user never touched the size drop down
 2014-01-29  20  Fix bugs when editing a product from the cart
 2014-01-29  25  Display and use wholesale prices for products, sizes, parts and fabrics
+2014-01-29  30  Begining on polyfilling Array iteration methods for older browsers
