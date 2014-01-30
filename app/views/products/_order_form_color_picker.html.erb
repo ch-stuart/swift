@@ -1,8 +1,6 @@
 <div
     ng-hide="!part.colors.length || part.price && !part.activated"
     class="color-picker--wrapper">
-
-    <!-- FIXME color.price_for(session[:is_wholesale_user] -->
     <div
         ng-show="part.selectedColor"
         class="color-picker--swatch color-picker--swatch-selected"
@@ -27,10 +25,6 @@
                 ${{ color.price }}
             </span>
         </div>
-        <!-- <input
-            type="hidden"
-            ng-model="part.selectedColor"
-            validate-color> -->
         <span ng-show="form.$error.validateColor">Pick a color!</span>
     </div>
 

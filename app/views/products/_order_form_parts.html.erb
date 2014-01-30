@@ -17,8 +17,6 @@
     <div class="row row--order row--parts">
         <div ng-repeat="part in product.parts">
             <div class="label-input-pair">
-
-              <!-- FIXME part.price_for(session[:is_wholesale_user]) -->
                 <label class="label {{ part.inputIsInvalid }}">
                     <input
                         ng-show="part.price"
@@ -29,13 +27,11 @@
                         data-hash="TODO"
                         data-product="{{ part.title }}"
                         data-price="{{ part.price }}">
-
                     {{ part.title }}
                     <span ng-show="part.price">
                         ${{ part.price }}
                     </span>
                 </label>
-
                 <%= render 'order_form_color_picker' %>
             </div>
         </div>
