@@ -91,11 +91,11 @@ function OrderCtrl($scope, $http) {
         if (update.parts) {
             // Loop through all of the parts on the product
             // we are updating
-            update.parts.forEach(function(updatePart) {
+            _.each(update.parts, function(updatePart) {
 
                 // match up the part from the update product
                 // with the current product
-                var matchingPart = this.product.parts.filter(function(part) {
+                var matchingPart = _.filter(this.product.parts, function(part) {
                     return part.id === updatePart.id;
                 })[0];
 
@@ -106,7 +106,7 @@ function OrderCtrl($scope, $http) {
                 }
                 // And if it has a selectedColor, find it and set it
                 if (updatePart.selectedColor) {
-                    matchingPart.selectedColor = matchingPart.colors.filter(function(color) {
+                    matchingPart.selectedColor = _.filter(matchingPart.colors, function(color) {
                         return color.id === updatePart.selectedColor.id;
                     })[0];
                 }
@@ -152,28 +152,25 @@ function OrderCtrl($scope, $http) {
         $scope.product.humane_price = $scope.product.wholesale_humane_price
 
         // Adjust size prices
-        $scope.product.sizes.forEach(function(size) {
+        _.each($scope.product.sizes, function(size) {
             size.price = size.wholesale_price;
         });
         // Adjust part prices
-        $scope.product.parts.forEach(function(part) {
+        _.each($scope.product.parts, function(part) {
             if (part.price) {
                 part.price = part.wholesale_price;
             }
         });
-
         // Adjust fabric prices
-        $scope.product.parts.forEach(function(part) {
+        _.each($scope.product.parts, function(part) {
             if (part.colors) {
-                part.colors.forEach(function(color) {
+                _.each(part.colors, function(color) {
                     if (color.price) {
                         color.price = color.wholesale_price;
                     }
                 });
             }
         });
-
-        // Jesus
     }
 
     // Save a product purchase. Grab the relevant
@@ -206,8 +203,8 @@ function OrderCtrl($scope, $http) {
             save.parts.push(newPart);
         }
 
-        ;['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer',
-          'question', 'selectedSize', 'mostExpensiveFabric'].forEach(saveIf);
+        _.each(['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer',
+          'question', 'selectedSize', 'mostExpensiveFabric'], saveIf);
 
         prod.parts
             .filter(function(part) {
@@ -233,7 +230,7 @@ function OrderCtrl($scope, $http) {
 
     function calculateCartTotalPrice() {
         var cartTotalPrice = 0;
-        $scope.cart.products.forEach(function(product) {
+        _.each($scope.cart.products, function(product) {
             cartTotalPrice = cartTotalPrice + (product.totalPrice * product.quantity);
         });
         $scope.cart.totalPrice = cartTotalPrice;
@@ -246,10 +243,9 @@ function OrderCtrl($scope, $http) {
         var isValid = true;
 
         // Reset invalid state
-        $scope.product.parts
-            .forEach(function(part) {
-                delete part.inputIsInvalid;
-            });
+        _.each($scope.product.parts, function(part) {
+            delete part.inputIsInvalid;
+        });
 
         // Check for parts which have a price, where
         // the part is active yet there is no selected
@@ -423,7 +419,7 @@ function OrderCtrl($scope, $http) {
             // If this is a product that was already in the cart that
             // we are editing, remove the old version from the cart before
             // adding this one.
-            $scope.cart.products = $scope.cart.products.filter(function(productInCart) {
+            $scope.cart.products = _.filter($scope.cart.products, function(productInCart) {
                 return productInCart.uniqueId !== saved.uniqueId;
             });
 
@@ -503,7 +499,7 @@ function OrderCtrl($scope, $http) {
     };
 
     $scope.onProductQuantityChanged = function() {
-        $scope.cart.products.forEach(function(product) {
+        _.each($scope.cart.products, function(product) {
             if (!product.quantity) {
                 product.quantity = 1;
             }
