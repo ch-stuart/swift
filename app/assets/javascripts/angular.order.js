@@ -71,6 +71,10 @@ function OrderCtrl($scope, $http) {
 
         update = JSON.parse(update);
 
+        // Set this so that when (and if) they re-add it
+        // to the cart remove we the previous product.
+        this.product.uniqueId = update.uniqueId;
+
         if (update.selectedAnswer) {
             this.product.selectedAnswer = update.selectedAnswer;
         }
@@ -182,7 +186,7 @@ function OrderCtrl($scope, $http) {
             save.parts.push(newPart);
         }
 
-        ;['id', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer',
+        ;['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer',
           'question', 'selectedSize', 'mostExpensiveFabric'].forEach(saveIf);
 
         prod.parts
@@ -193,7 +197,9 @@ function OrderCtrl($scope, $http) {
 
         delete prod.$$hashKey;
 
-        save.uniqueId = Date.now();
+        if (!save.uniqueId) {
+            save.uniqueId = Date.now();
+        }
         save.quantity = 1;
 
         return save;
@@ -393,6 +399,14 @@ function OrderCtrl($scope, $http) {
             if (!$scope.cart.products) {
                 $scope.cart.products = [];
             }
+
+            // If this is a product that was already in the cart that
+            // we are editing, remove the old version from the cart before
+            // adding this one.
+            $scope.cart.products = $scope.cart.products.filter(function(productInCart) {
+                return productInCart.uniqueId !== saved.uniqueId;
+            });
+
             $scope.cart.products.push(saved);
 
             saveCartToLocalStorage();
@@ -448,15 +462,18 @@ function OrderCtrl($scope, $http) {
     $scope.onEditFromCartButtonClicked = function(product, uniqueId) {
         $scope.cart.showCart = false;
 
-        // Use indexOf and slice or whatever to remove the product?
-        $scope.cart.products = $scope.cart.products.filter(function(product) {
-            return product.uniqueId !== uniqueId;
-        });
+        // Remove product from cart
+        // CHANGED no, don't remove it. If they don't resubmit it to the
+        // cart we want to keep this one here. Only remove when they're
+        // adding it back...
+        // $scope.cart.products = $scope.cart.products.filter(function(product) {
+        //     return product.uniqueId !== uniqueId;
+        // });
 
         saveCartToLocalStorage();
 
         // Save this puppy to localStorage
-        localStorage.setItem('update', JSON.stringify(angular.copy(product)))
+        localStorage.setItem('update', JSON.stringify(product))
 
         // Redirect
         window.location = '/products/' + product.id + '/order'
