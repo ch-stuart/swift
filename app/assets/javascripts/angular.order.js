@@ -22,7 +22,6 @@ function OrderCtrl($scope, $http) {
             .success(function(json) {
                 $scope.product = json.product;
 
-                setupColors.call($scope);
                 setupSize.call($scope);
                 setupQA.call($scope);
                 if (productToUpdate) {
@@ -109,19 +108,6 @@ function OrderCtrl($scope, $http) {
                 }
             }, this);
         }
-    }
-
-    // Remove colors array if it's empty
-    //
-    // Why? because Angular thinks that part.colors is truthy
-    //
-    // @returns nothing
-    function setupColors() {
-        this.product.parts.forEach(function(part) {
-            if (part.colors.length === 0) {
-                delete part.colors;
-            }
-        });
     }
 
     // Initialize values for Sizes fields
