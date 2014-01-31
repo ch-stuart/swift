@@ -1,16 +1,9 @@
+/*jshint browser: true */
 /*global OrderCtrl console angular $ localStorage location document alert confirm window */
-
-// iterate over localStorage
-// for (var i = 0; i < localStorage.length; i++){
-//     var key = localStorage.key(i);
-//     var value = localStorage[key];
-//
-//     console.log(key, value);
-// }
 
 function OrderCtrl($scope, $http) {
 
-    $scope.IS_WHOLESALE_USER = window.__iswsu__;
+    var IS_WHOLESALE_USER = window.__iswsu__;
 
     // Stupid hacky way to do this. Whatevers for now.
     if (document.getElementById('page_products_order')) {
@@ -22,7 +15,7 @@ function OrderCtrl($scope, $http) {
             .success(function(json) {
                 $scope.product = json.product;
 
-                if ($scope.IS_WHOLESALE_USER) {
+                if (IS_WHOLESALE_USER) {
                     setupPricesForWholesale.call($scope);
                 }
                 setupSize.call($scope);
@@ -436,11 +429,15 @@ function OrderCtrl($scope, $http) {
     };
 
     $scope.onContinueShoppingButtonClicked = function() {
-        window.location = "/";
+        if (window.location.pathname !== "/") {
+            window.location = "/";
+        } else {
+            $scope.cart.showCart = false;
+        }
     };
 
     $scope.onCheckOutButtonClicked = function() {
-        if ($scope.IS_WHOLESALE_USER && $scope.cart.totalPrice < 500) {
+        if (IS_WHOLESALE_USER && $scope.cart.totalPrice < 500) {
             return alert('Minimum $500 purchase required for wholesale purchasers.');
         }
 
