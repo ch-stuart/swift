@@ -1,3 +1,5 @@
+# TODO remove format.xml
+
 class TestimonialsController < ApplicationController
 
   before_filter :authenticate_admin
