@@ -29,66 +29,68 @@
   <%= csrf_meta_tag %>
 </head>
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>" ng-controller="OrderCtrl">
-  <% if @company.front_door_sign.present? %>
-    <h2 class="front_door_sign">
-      <%= @company.front_door_sign %>
-    </h2>
-  <% end %>
-  <% if session[:is_wholesale_user] %>
-    <h2 class="front_door_sign">
-      You are signed in as a wholesaler. Prices are adjusted (lowered). Minimum $500 purchase required.
-    </h2>
-  <% end %>
-  <div class="container-menu-wrap">
-    <div class="container container-menu">
-      <div class="sixteen columns menu--row-btns">
-        <i id="global-menu-btn" class="entypo entypo-menu">&#9776;</i>
-        <% cache 'fox_and_cart' do %>
-          <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
-          <span
-              ng-click="onGlobalCartButtonClicked()"
-              title="View Your Cart {{ cart.message }}">
-            <i class='entypo entypo-cart {{ cart.isNotEmpty }}'>&#59197;</i>
-          </span>
-        <% end %>
-        <br class="clear">
-      </div>
-      <%= render 'shared/global_nav' %>
-    </div>
-  </div>
-  <%= yield :flash %>
-  <%# render "shared/checkout" %>
-  <div class="container container-logo">
-    <div class="sixteen columns clearfix row-header" style="text-align: center">
-      <h1 class="row-header--logo-wrap">
-        <a href="/" class="row-header--link" title="Go Home">
-          <%= image_tag "logo.png", :class => "row-header--logo", :alt => "Swift Industries" %>
-        </a>
-      </h1>
-      <h2 class="row-header--description">
-        <% cache 'company_description' do %>
-          <%= Company.first.description if Company.first.description.present? %>
-        <% end %>
+  <div ng-hide="cart.showCart">
+    <% if @company.front_door_sign.present? %>
+      <h2 class="front_door_sign">
+        <%= @company.front_door_sign %>
       </h2>
+    <% end %>
+    <% if session[:is_wholesale_user] %>
+      <h2 class="front_door_sign">
+        You are signed in as a wholesaler. Prices are adjusted (lowered). Minimum $500 purchase required.
+      </h2>
+    <% end %>
+    <div class="container-menu-wrap">
+      <div class="container container-menu">
+        <div class="sixteen columns menu--row-btns">
+          <i id="global-menu-btn" class="entypo entypo-menu">&#9776;</i>
+          <% cache 'fox_and_cart' do %>
+            <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
+            <span
+                ng-click="onGlobalCartButtonClicked()"
+                title="View Your Cart {{ cart.message }}">
+              <i class='entypo entypo-cart {{ cart.isNotEmpty }}'>&#59197;</i>
+            </span>
+          <% end %>
+          <br class="clear">
+        </div>
+        <%= render 'shared/global_nav' %>
+      </div>
     </div>
-  </div>
-  <div class="container container-main container-w-padding">
-    <%= yield %>
-  </div>
-  <div class="container-footer-wrap">
-    <div class="container container-footer">
-      <%= render "shared/footer" %>
-      <%= render "shared/no_js" %>
-      <%= render "shared/humans" %>
+    <%= yield :flash %>
+    <%# render "shared/checkout" %>
+    <div class="container container-logo">
+      <div class="sixteen columns clearfix row-header" style="text-align: center">
+        <h1 class="row-header--logo-wrap">
+          <a href="/" class="row-header--link" title="Go Home">
+            <%= image_tag "logo.png", :class => "row-header--logo", :alt => "Swift Industries" %>
+          </a>
+        </h1>
+        <h2 class="row-header--description">
+          <% cache 'company_description' do %>
+            <%= Company.first.description if Company.first.description.present? %>
+          <% end %>
+        </h2>
+      </div>
     </div>
+    <div class="container container-main container-w-padding">
+      <%= yield %>
+    </div>
+    <div class="container-footer-wrap">
+      <div class="container container-footer">
+        <%= render "shared/footer" %>
+        <%= render "shared/no_js" %>
+        <%= render "shared/humans" %>
+      </div>
+    </div>
+    <% if session[:is_wholesale_user] %>
+    <script>window.__iswsu__=true</script>
+    <% end %>
+    <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
   </div>
-  <% if session[:is_wholesale_user] %>
-  <script>window.__iswsu__=true</script>
-  <% end %>
+  <%= render "products/cart" %>
   <%= javascript_include_tag "application" %>
   <%= yield :js %>
   <%= render "shared/analytics" unless Rails.env == "development" %>
-  <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
-  <%= render "products/cart" %>
 </body>
 </html>
