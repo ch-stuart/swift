@@ -29,8 +29,12 @@ end
 group :development do
   gem 'sqlite3'
   gem 'taps'
+  gem 'guard'
+  gem 'guard-test'
+  gem 'guard-shell'
 end
 
-group :test do
-  gem 'turn'
-end
+# Wah. Not compatible with guard-test
+# group :test do
+#   gem 'turn'
+# end
