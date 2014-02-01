@@ -422,14 +422,17 @@ function OrderCtrl($scope, $http) {
             calculateCartTotalPrice();
 
             $scope.cart.showCart = true;
+            $scope.justAddedToCart = true;
             window.scrollTo(0, 0);
         } else {
             console.warn('form is not valid');
         }
     };
 
+    // Navigate to "/" if they just added a product
+    // to the cart
     $scope.onContinueShoppingButtonClicked = function() {
-        if (window.location.pathname !== "/") {
+        if ($scope.justAddedToCart) {
             window.location = "/";
         } else {
             $scope.cart.showCart = false;
@@ -448,6 +451,10 @@ function OrderCtrl($scope, $http) {
         calculateCartTotalPrice();
         $scope.cart.showCart = true;
     };
+
+    $scope.onCartCloseBtnClicked = function() {
+        $scope.cart.showCart = false;
+    }
 
     // Removes the selected item from the cart
     //
