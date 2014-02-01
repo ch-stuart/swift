@@ -20,15 +20,22 @@ jQuery.fn.tooltip = function() {
         // - Prevents custom tooltip and browser tooltip from
         //   displaying at the same time.
         // - If no JS available, title attr is present
-        $el.data('title', $el.attr('title'));
-        $el.removeAttr('title');
+        if ($el.attr('title')) {
+            $el.data('title', $el.attr('title'));
+            $el.removeAttr('title');
+        }
 
         $el
             .mouseenter(function(e) {
+                if (!$el.data('title')) {
+                    $el.data('title', $el.attr('title'));
+                    $el.removeAttr('title');
+                }
+
                 setPosition(e);
 
                 $tooltip
-                    .text($(this).data('title'))
+                    .text($el.data('title'))
                     .show();
             })
             .mousemove(setPosition)

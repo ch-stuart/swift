@@ -5,9 +5,9 @@
         ng-show="part.selectedColor"
         class="color-picker--swatch color-picker--swatch-selected"
         style="background-color: {{ part.selectedColor.hex }}; border: 1px solid {{ part.selectedColor.hex }}"
-        title='{{ part.selectedColor.title }}  (${{ part.selectedColor.price }})'>
+        title='{{ part.selectedColor.title }}'>
         <span ng-show="part.selectedColor.price">
-            ${{ part.selectedColor.price }}
+            {{ part.selectedColor.price | currency }}
         </span>
     </div>
 
@@ -22,7 +22,7 @@
             style="background-color: {{ color.hex }}; border: 1px solid {{ color.hex }}"
             title='{{ color.title }}'>
             <span ng-show="color.price">
-                ${{ color.price }}
+                {{ color.price | currency }}
             </span>
         </div>
         <span ng-show="form.$error.validateColor">Pick a color!</span>
