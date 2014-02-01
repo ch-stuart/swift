@@ -1,13 +1,13 @@
+html, body {
+    height: 100%;
+    box-sizing: border-box;
+}
 .shoppin-cart {
     background-color: #fff;
     border-top: 20px solid $background_gray;
     box-sizing: border-box;
     padding: 10px;
-}
-.shoppin-cart__title {
-    font-family: Helvetica, sans-serif;
-    font-weight: bold;
-    text-align: center;
+    height: 100%;
 }
 .shoppin-cart__header {
     font-weight: bold;
@@ -25,8 +25,11 @@
 .shoppin-cart__fabric-charge-notice {
     margin-top: 30px;
 
-    h5, li {
+    h6, li {
         color: #444;
+    }
+    h6 {
+        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 }
 .shoppin-cart__fabric-charge-notice__ul {

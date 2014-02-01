@@ -1,7 +1,9 @@
 <div class="shoppin-cart" ng-show="cart.showCart">
-    <div class="grid wrap">
+    <div class="grid wrap shopping-cart__top-row">
         <div class="unit w-1-1">
-            <i class='entypo entypo-cart active'>&#59197;</i>
+            <i class='entypo entypo-cart active'>
+                &#59197;
+            </i>
         </div>
     </div>
     <div class="grid wrap hide-on-mobiles" ng-show="cart.products.length">
@@ -60,17 +62,18 @@
         </div>
     </div>
     <div class="grid wrap shoppin-cart__toolbar" ng-show="cart.products.length">
-        <button ng-click="onContinueShoppingButtonClicked()">
+        <button class="btn" ng-click="onContinueShoppingButtonClicked()">
             Continue Shopping
         </button>
-        <button ng-click="onCheckOutButtonClicked()">
+        &nbsp;
+        <button class="btn btn-primary" ng-click="onCheckOutButtonClicked()">
             Check Out
         </button>
     </div>
     <div class="grid wrap remove-bottom shoppin-cart__fabric-charge-notice" ng-show="cart.products.length">
-        <h5>
+        <h6>
             A Note About Our Fabric Charges
-        </h5>
+        </h6>
         <ul class="shoppin-cart__fabric-charge-notice__ul nice-list">
             <li>For each product, you will only be charged for your most expensive fabric choice.</li>
             <li>The charge is only applied once per bag.</li>
@@ -81,7 +84,7 @@
         <p>
             Nothing is in your cart.
         </p>
-        <button ng-click="onShopMoreButtonClicked()">
+        <button class="btn" ng-click="onShopMoreButtonClicked()">
             Continue Shopping
         </button>
     </div>

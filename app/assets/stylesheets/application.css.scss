@@ -1,9 +1,13 @@
-// Third-Party Base Grid
-@import 'skeleton/stylesheets/base';
-@import 'skeleton/stylesheets/skeleton';
-@import 'skeleton/stylesheets/layout';
+// Normalize
+@import 'bower_components/normalize-css/normalize';
 
-@import 'gridism/gridism';
+// Grid #1
+@import 'bower_components/skeleton/stylesheets/base';
+@import 'bower_components/skeleton/stylesheets/skeleton';
+@import 'bower_components/skeleton/stylesheets/layout';
+
+// Grid #2
+@import 'bower_components/gridism/gridism';
 
 // Includes
 // @import 'colors/colors';
@@ -13,6 +17,7 @@
 // Base
 @import 'base-entypo';
 @import 'base-type';
+@import 'base-list';
 
 // Modules
 @import 'module-blog';
