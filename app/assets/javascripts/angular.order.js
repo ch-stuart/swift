@@ -1,5 +1,5 @@
 /*jshint browser: true */
-/*global OrderCtrl console angular $ localStorage location document alert confirm window */
+/*global OrderCtrl console angular $ localStorage location document alert confirm window _*/
 
 function OrderCtrl($scope, $http) {
 
@@ -141,8 +141,8 @@ function OrderCtrl($scope, $http) {
 
     function setupPricesForWholesale() {
         // Adjust main price
-        $scope.product.price = $scope.product.wholesale_price
-        $scope.product.humane_price = $scope.product.wholesale_humane_price
+        $scope.product.price = $scope.product.wholesale_price;
+        $scope.product.humane_price = $scope.product.wholesale_humane_price;
 
         // Adjust size prices
         _.each($scope.product.sizes, function(size) {
@@ -454,7 +454,7 @@ function OrderCtrl($scope, $http) {
 
     $scope.onCartCloseBtnClicked = function() {
         $scope.cart.showCart = false;
-    }
+    };
 
     // Removes the selected item from the cart
     //
@@ -479,7 +479,7 @@ function OrderCtrl($scope, $http) {
     // the cart?
     //
     // @returns nothing
-    $scope.onEditFromCartButtonClicked = function(product, uniqueId) {
+    $scope.onEditFromCartButtonClicked = function(product) {
         $scope.cart.showCart = false;
 
         // Remove product from cart
@@ -493,10 +493,10 @@ function OrderCtrl($scope, $http) {
         saveCartToLocalStorage();
 
         // Save this puppy to localStorage
-        localStorage.setItem('update', JSON.stringify(product))
+        localStorage.setItem('update', JSON.stringify(product));
 
         // Redirect
-        window.location = '/products/' + product.id + '/order'
+        window.location = '/products/' + product.id + '/order';
 
         // Will check for "edit" item in LS on page load
         // and load form state if need be
@@ -512,3 +512,7 @@ function OrderCtrl($scope, $http) {
         calculateCartTotalPrice();
     };
 }
+
+// http://docs.angularjs.org/guide/di
+// $inject Annotation
+OrderCtrl.$inject = ['$scope', '$http'];
