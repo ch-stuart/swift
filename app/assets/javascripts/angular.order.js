@@ -1,8 +1,9 @@
 /*jshint browser: true */
-/*global OrderCtrl console angular $ localStorage location document alert confirm window _*/
+/*global console angular $ localStorage location document alert confirm window _*/
 
-function OrderCtrl($scope, $http) {
+var SwiftApp = angular.module('SwiftApp',[]);
 
+SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
     var IS_WHOLESALE_USER = window.__iswsu__;
 
     // Stupid hacky way to do this. Whatevers for now.
@@ -111,14 +112,16 @@ function OrderCtrl($scope, $http) {
     //
     // @returns nothing
     function setupSize() {
-        this.product.selectedSize = this.product.sizes[0];
+        if (this.product.sizes.length) {
+            this.product.selectedSize = this.product.sizes[0];
 
-        // Set this so we can use it later when setting the
-        // new title if the user picks a size
-        this.product.originalTitle = this.product.title;
-        this.product.originalPrice = this.product.price;
+            // Set this so we can use it later when setting the
+            // new title if the user picks a size
+            this.product.originalTitle = this.product.title;
+            this.product.originalPrice = this.product.price;
 
-        $scope.onSizeSelectChanged();
+            $scope.onSizeSelectChanged();
+        }
     }
 
     // Initialize values for Question & Answer fields
@@ -341,13 +344,13 @@ function OrderCtrl($scope, $http) {
         return calculateTotalPriceOfParts() + calculateTotalPriceOfFabrics() + parseFloat($scope.product.price);
     }
 
-    $scope.onSizeSelectChanged = function() {
+    $scope['onSizeSelectChanged'] = function() {
         this.product.title = this.product.originalTitle + ' (' + this.product.selectedSize.title + ')';
         this.product.price = parseFloat(this.product.selectedSize.price);
     };
 
     var isTooltipsInitialized;
-    $scope.onChooseColorButtonClicked = function() {
+    $scope['onChooseColorButtonClicked'] = function() {
         if (!isTooltipsInitialized) {
             $('.color-picker--swatch').tooltip();
             isTooltipsInitialized = true;
@@ -355,7 +358,7 @@ function OrderCtrl($scope, $http) {
         this.part.showColors = !this.part.showColors;
     };
 
-    $scope.onColorSwatchClicked = function() {
+    $scope['onColorSwatchClicked'] = function() {
 
         this.part.selectedColor = this.color;
         this.part.showColors = !this.part.showColors;
@@ -386,15 +389,15 @@ function OrderCtrl($scope, $http) {
         // because we're ... whatever
     };
 
-    $scope.onPartCheckboxClicked = function() {
+    $scope['onPartCheckboxClicked'] = function() {
         delete this.part.selectedColor;
     };
 
-    $scope.onUserAcknowledgedFabricChargeNotice = function() {
+    $scope['onUserAcknowledgedFabricChargeNotice'] = function() {
         $scope.product.userAcknowledgedFabricChargeNotice = true;
     };
 
-    $scope.onFormSubmit = function() {
+    $scope['onFormSubmit'] = function() {
         var isFormValid = validateForm();
 
         if (isFormValid) {
@@ -431,7 +434,7 @@ function OrderCtrl($scope, $http) {
 
     // Navigate to "/" if they just added a product
     // to the cart
-    $scope.onContinueShoppingButtonClicked = function() {
+    $scope['onContinueShoppingButtonClicked'] = function() {
         if ($scope.justAddedToCart) {
             window.location = "/";
         } else {
@@ -439,7 +442,7 @@ function OrderCtrl($scope, $http) {
         }
     };
 
-    $scope.onCheckOutButtonClicked = function() {
+    $scope['onCheckOutButtonClicked'] = function() {
         if (IS_WHOLESALE_USER && $scope.cart.totalPrice < 500) {
             return alert('Minimum $500 purchase required for wholesale purchasers.');
         }
@@ -447,12 +450,12 @@ function OrderCtrl($scope, $http) {
         alert('should check out now');
     };
 
-    $scope.onGlobalCartButtonClicked = function() {
+    $scope['onGlobalCartButtonClicked'] = function() {
         calculateCartTotalPrice();
         $scope.cart.showCart = true;
     };
 
-    $scope.onCartCloseBtnClicked = function() {
+    $scope['onCartCloseBtnClicked'] = function() {
         $scope.cart.showCart = false;
     };
 
@@ -461,7 +464,7 @@ function OrderCtrl($scope, $http) {
     // Updates $scope.cart and the cart stored in localStorage.
     //
     // @returns nothing
-    $scope.onRemoveFromCartButtonClicked = function(uniqueId) {
+    $scope['onRemoveFromCartButtonClicked'] = function(uniqueId) {
         var shouldRemove = confirm('Are you sure you want to remove this product from your cart? It cannot be undone.');
 
         if (shouldRemove) {
@@ -479,7 +482,7 @@ function OrderCtrl($scope, $http) {
     // the cart?
     //
     // @returns nothing
-    $scope.onEditFromCartButtonClicked = function(product) {
+    $scope['onEditFromCartButtonClicked'] = function(product) {
         $scope.cart.showCart = false;
 
         // Remove product from cart
@@ -502,7 +505,7 @@ function OrderCtrl($scope, $http) {
         // and load form state if need be
     };
 
-    $scope.onProductQuantityChanged = function() {
+    $scope['onProductQuantityChanged'] = function() {
         _.each($scope.cart.products, function(product) {
             if (!product.quantity) {
                 product.quantity = 1;
@@ -511,8 +514,8 @@ function OrderCtrl($scope, $http) {
 
         calculateCartTotalPrice();
     };
-}
+}]);
 
-// http://docs.angularjs.org/guide/di
-// $inject Annotation
-OrderCtrl.$inject = ['$scope', '$http'];
+
+
+
