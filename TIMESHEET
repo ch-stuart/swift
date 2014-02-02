@@ -85,3 +85,4 @@ date:        time (minutes):       comment:
 2014-01-30  10  Adjusting behavior of "continue shopping" button
 2014-02-01  80  Add staging environment and fix bugs with AngularJS and it's dislike of minification
 2014-02-01  15  Fixing bugs
+2014-02-01  15  Cache static assets for 1 year
