@@ -80,3 +80,6 @@ date:        time (minutes):       comment:
 2014-01-29  25  Display and use wholesale prices for products, sizes, parts and fabrics
 2014-01-29  30  Begining on polyfilling Array iteration methods for older browsers
 2014-01-30  70  Design work on cart
+2014-01-30  30  Design work on cart and buttons
+2014-01-30  20  Fixing bugs with color picker
+2014-01-30  10  Adjusting behavior of "continue shopping" button
