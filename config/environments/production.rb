@@ -20,6 +20,9 @@ SwiftSite::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Temporary fix for AngularJS dependency injection
+  config.assets.js_compressor = Uglifier.new(mangle: false)
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
