@@ -83,3 +83,5 @@ date:        time (minutes):       comment:
 2014-01-30  30  Design work on cart and buttons
 2014-01-30  20  Fixing bugs with color picker
 2014-01-30  10  Adjusting behavior of "continue shopping" button
+2014-02-01  80  Add staging environment and fix bugs with AngularJS and it's dislike of minification
+2014-02-01  15  Fixing bugs
