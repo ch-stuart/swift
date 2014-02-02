@@ -20,6 +20,9 @@ SwiftSite::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Cache static assets for 1 year
+  config.static_cache_control = "public, max-age=31536000"
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
