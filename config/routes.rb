@@ -1,5 +1,8 @@
 SwiftSite::Application.routes.draw do
 
+  resources :sales
+
+
   # http://blog.bignerdranch.com/1666-redirect-www-subdomain-to-your-apex-domain-using-the-rails-router/
   # Remove the www from the URL, e.g. don't allow that stupid subdomain.
   # Why? It causes issues with caching, namely clearing the action cache (memcache) while
