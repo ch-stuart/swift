@@ -349,12 +349,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         this.product.price = parseFloat(this.product.selectedSize.price);
     };
 
-    var isTooltipsInitialized;
     $scope['onChooseColorButtonClicked'] = function() {
-        if (!isTooltipsInitialized) {
-            $('.color-picker--swatch').tooltip();
-            isTooltipsInitialized = true;
-        }
         this.part.showColors = !this.part.showColors;
     };
 

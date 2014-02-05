@@ -13,7 +13,6 @@
 //= require jquery.color_picker
 //= require jquery.hero
 //= require jquery.lightbox_me
-//= require jquery.tooltip
 //= require jquery.tabs
 //= require ICanHaz
 //= require slideshow

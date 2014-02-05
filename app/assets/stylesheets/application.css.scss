@@ -1,3 +1,8 @@
+// box-sizing ftw
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 // Normalize
 @import 'bower_components/normalize-css/normalize';
 
@@ -27,7 +32,6 @@
 @import 'module-form';
 @import 'module-hero';
 @import 'module-jquery.impromptu';
-@import 'module-jquery.tooltip';
 @import 'module-jquery.tabs';
 @import 'module-nav';
 @import 'module-nojs';
