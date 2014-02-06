@@ -87,3 +87,7 @@ date:        time (minutes):       comment:
 2014-02-01  15  Fixing bugs
 2014-02-01  15  Cache static assets for 1 year
 2014-02-04  20  Adjust color picker UX so it does not require a tooltip
+2014-02-04  40  Start on integrating with Stripe
+2014-02-05  40  Complete basic integration with Stripe
+
+http://kenkeiter.com/skeuocard/

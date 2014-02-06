@@ -1,0 +1,83 @@
+<%= form_for @sale, html: { id: "checkout-form" } do |f| %>
+    <% if @sale.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+            <ul>
+                <% @sale.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <input type="hidden" name="price" value="100">
+    <input type="hidden" name="description" value="description goes here">
+
+    <%= f.label :email %>
+    <%= f.text_field :email, placeholder: "you@example.com", type: "email" %>
+
+    <label>Credit Card #</label>
+    <input
+        type="text"
+        size="20"
+        data-stripe="number"
+        placeholder="**** **** **** ****"
+        pattern="[\d ]*">
+
+    <label>CVC</label>
+    <input
+        style="width: 3em"
+        type="text"
+        size="3"
+        data-stripe="cvc"
+        placeholder="***"
+        pattern="\d*">
+
+    <label>Exp Month</label>
+    <input
+        style="width: 2em"
+        type="text"
+        size="2"
+        data-stripe="exp-month"
+        placeholder="MM"
+        pattern="\d*">
+
+    <label>Exp Year</label>
+    <input
+        style="width: 3em"
+        type="text"
+        size="4"
+        id="exp-year"
+        data-stripe="exp-year"
+        placeholder="YYYY"
+        pattern="\d*">
+
+    <%= f.submit 'Buy It', class: 'btn' %>
+<% end %>
+
+<% content_for :js do %>
+    <script>
+        $('#checkout-form').submit(function(event) {
+            console.log('form clicked');
+
+            var $form = $(this);
+            $form.find('button').prop('disabled', true);
+
+            Stripe.createToken($form, function stripeResponseHandler(status, response) {
+                console.log('stripe response handler');
+
+                if (response.error) {
+                    console.log('error');
+                    $form.find('.payment-errors').text(response.error.message);
+                    $form.find('button').prop('disabled', false);
+                } else {
+                    console.log('good response');
+                    var token = response.id;
+                    $form.append($('<input type="hidden" name="stripeToken">').val(token));
+                    $form.get(0).submit();
+                }
+            });
+            return false;
+        });
+    </script>
+<% end %>

@@ -1,4 +1,7 @@
 class SalesController < ApplicationController
+
+  before_filter :authenticate_admin, :except => [ :checkout, :create, :success ]
+
   # GET /sales
   # GET /sales.json
   def index
@@ -17,6 +20,34 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.json { render json: @sale }
+    end
+  end
+
+  # GET /sales/1234/success
+  # GET /sales/1234/success.json
+  def success
+    @sale = Sale.find_by_guid(params[:id])
+
+    @company = Company.first
+    @categories = Category.all
+    @products = Product.where(:status => 'Public', :kind => 'Product')
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @sale }
+    end
+  end
+
+  def checkout
+    @sale = Sale.new
+
+    @company = Company.first
+    @categories = Category.all
+    @products = Product.where(:status => 'Public', :kind => 'Product')
+
+    respond_to do |format|
+      format.html # new.html.erb
       format.json { render json: @sale }
     end
   end
@@ -40,17 +71,34 @@ class SalesController < ApplicationController
   # POST /sales
   # POST /sales.json
   def create
-    @sale = Sale.new(params[:sale])
-
-    respond_to do |format|
-      if @sale.save
-        format.html { redirect_to @sale, notice: 'Sale was successfully created.' }
-        format.json { render json: @sale, status: :created, location: @sale }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @sale.errors, status: :unprocessable_entity }
-      end
+    begin
+      charge = Stripe::Charge.create(
+        amount:      params[:price],
+        currency:    "usd",
+        card:        params[:stripeToken],
+        description: "#{params[:email]} purchasing #{params[:description]}"
+      )
+      @sale = Sale.create!(
+        email:       params[:email],
+        description: params[:description]
+      )
+      redirect_to success_sale_url(id: @sale.guid)
+    rescue Stripe::CardError => e
+      # The card has been declined or
+      # some other error has occured
+      @error = e
+      render :checkout
     end
+
+    # respond_to do |format|
+    #   if @sale.save
+    #     format.html { redirect_to @sale, notice: 'Sale was successfully created.' }
+    #     format.json { render json: @sale, status: :created, location: @sale }
+    #   else
+    #     format.html { render action: "new" }
+    #     format.json { render json: @sale.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PUT /sales/1

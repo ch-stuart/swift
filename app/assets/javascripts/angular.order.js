@@ -442,7 +442,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
             return alert('Minimum $500 purchase required for wholesale purchasers.');
         }
 
-        alert('should check out now');
+        window.location = '/sales/new/checkout';
     };
 
     $scope['onGlobalCartButtonClicked'] = function() {
