@@ -82,7 +82,7 @@ class SalesController < ApplicationController
         email:       params[:email],
         description: params[:description]
       )
-      redirect_to success_sale_url(id: @sale.guid)
+      redirect_to order_url(guid: @sale.guid)
     rescue Stripe::CardError => e
       # The card has been declined or
       # some other error has occured

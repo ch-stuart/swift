@@ -30,6 +30,20 @@ SwiftSite::Application.routes.draw do
     get 'checkout', on: :new
   end
 
+  # # view cart
+  # http://builtbyswift.com/cart
+  #
+  # # purchase what's in cart/checkout
+  # http://builtbyswift.com/cart/checkout
+  #
+  # # completed purchase
+  # http://builtbyswift.com/orders/7e59b9a5-4055-46eb-944c-185051f9ebf7
+
+  get 'cart', to: 'sales#cart'
+  get 'cart/checkout', to: 'sales#checkout'
+  get 'orders/:guid', to: 'sales#success', as: :order
+
+
   match 'logout', :to => 'application#logout'
   match 'login', :to => 'hub#index'
   match 'wholesale_login', :to => 'application#wholesale_login'
