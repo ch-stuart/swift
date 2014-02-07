@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+// Skeleton is not compatible with border-box
+.container {
+    box-sizing: content-box;
+}
+
 // Normalize
 @import 'bower_components/normalize-css/normalize';
 
@@ -10,6 +15,7 @@
 @import 'bower_components/skeleton/stylesheets/base--modified';
 @import 'bower_components/skeleton/stylesheets/skeleton';
 @import 'bower_components/skeleton/stylesheets/layout';
+
 
 // Grid #2
 @import 'bower_components/gridism/gridism';
