@@ -53,6 +53,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         // make the cart pink so we can tell there is stuff
         // in it. hooyah
         if (cartContents.products.length) {
+            calculateCartTotalPrice();
             $scope.cart.isNotEmpty = 'active';
         }
     }
@@ -419,9 +420,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
             saveCartToLocalStorage();
             calculateCartTotalPrice();
 
-            $scope.cart.showCart = true;
-            $scope.justAddedToCart = true;
-            window.scrollTo(0, 0);
+            window.location = '/cart'
         } else {
             console.warn('form is not valid');
         }
@@ -430,11 +429,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
     // Navigate to "/" if they just added a product
     // to the cart
     $scope['onContinueShoppingButtonClicked'] = function() {
-        if ($scope.justAddedToCart) {
-            window.location = "/";
-        } else {
-            $scope.cart.showCart = false;
-        }
+        window.location = "/";
     };
 
     $scope['onCheckOutButtonClicked'] = function() {
@@ -442,12 +437,12 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
             return alert('Minimum $500 purchase required for wholesale purchasers.');
         }
 
-        window.location = '/sales/new/checkout';
+        window.location = '/cart/checkout';
     };
 
     $scope['onGlobalCartButtonClicked'] = function() {
-        calculateCartTotalPrice();
-        $scope.cart.showCart = true;
+        // calculateCartTotalPrice();
+        window.location = '/cart';
     };
 
     $scope['onCartCloseBtnClicked'] = function() {

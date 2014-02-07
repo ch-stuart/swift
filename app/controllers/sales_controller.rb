@@ -1,11 +1,26 @@
 class SalesController < ApplicationController
 
-  before_filter :authenticate_admin, :except => [ :checkout, :create, :success ]
+  before_filter :authenticate_admin, :except => [ :checkout, :create, :success, :cart ]
 
   # GET /sales
   # GET /sales.json
   def index
     @sales = Sale.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @sales }
+    end
+  end
+
+  # GET /sales
+  # GET /sales.json
+  def cart
+    @sales = Sale.all
+
+    @company = Company.first
+    @categories = Category.all
+    @products = Product.where(:status => 'Public', :kind => 'Product')
 
     respond_to do |format|
       format.html # index.html.erb
