@@ -17,7 +17,6 @@
 //= require ICanHaz
 //= require slideshow
 //= require angular.order
-//= require angular.shopping_cart
 
 jQuery(document).ready(function($) {
 
