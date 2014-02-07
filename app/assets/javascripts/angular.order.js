@@ -231,6 +231,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
             cartTotalPrice = cartTotalPrice + (product.totalPrice * product.quantity);
         });
         $scope.cart.totalPrice = cartTotalPrice;
+        $scope.cart.totalPriceInCents = cartTotalPrice * 100;
     }
 
     // Validate the form

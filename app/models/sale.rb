@@ -1,6 +1,6 @@
 class Sale < ActiveRecord::Base
 
-  attr_accessible :description, :email, :guid
+  attr_accessible :description, :email, :guid, :amount
 
   before_create :populate_guid
 

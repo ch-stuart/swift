@@ -2,9 +2,9 @@
 
 <table>
   <tr>
-    <th>Email</th>
     <th>Guid</th>
-    <th>Description</th>
+    <th>Email</th>
+    <th>Amount</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +12,15 @@
 
 <% @sales.each do |sale| %>
   <tr>
+    <td>
+      <a href="/sales/<%= sale.guid %>">
+        <span style="font-family: monospace">
+          <%= sale.guid.truncate(4, omission: "") %>
+        </span>
+      </a>
+    </td>
     <td><%= sale.email %></td>
-    <td><%= sale.guid %></td>
-    <td><%= sale.description %></td>
+    <td><%= sale.amount %></td>
     <td><%= link_to 'Show', sale %></td>
     <td><%= link_to 'Edit', edit_sale_path(sale) %></td>
     <td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>

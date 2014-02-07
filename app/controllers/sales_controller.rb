@@ -7,10 +7,12 @@ class SalesController < ApplicationController
   def index
     @sales = Sale.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @sales }
-    end
+    render :layout => "hub"
+    #
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.json { render json: @sales }
+    # end
   end
 
   # GET /sales
@@ -31,18 +33,19 @@ class SalesController < ApplicationController
   # GET /sales/1
   # GET /sales/1.json
   def show
-    @sale = Sale.find(params[:id])
+    @sale = Sale.find_by_guid(params[:id])
+    render :layout => "hub"
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @sale }
-    end
+    # respond_to do |format|
+    #   format.html # show.html.erb
+    #   format.json { render json: @sale }
+    # end
   end
 
   # GET /sales/1234/success
   # GET /sales/1234/success.json
   def success
-    @sale = Sale.find_by_guid(params[:id])
+    @sale = Sale.find_by_guid(params[:guid])
 
     @company = Company.first
     @categories = Category.all
@@ -88,14 +91,15 @@ class SalesController < ApplicationController
   def create
     begin
       charge = Stripe::Charge.create(
-        amount:      params[:price],
+        amount:      params[:sale][:p],
         currency:    "usd",
         card:        params[:stripeToken],
-        description: "#{params[:email]} purchasing #{params[:description]}"
+        description: "#{params[:sale][:email]} purchasing #{params[:sale][:j]}"
       )
       @sale = Sale.create!(
-        email:       params[:email],
-        description: params[:description]
+        email:       params[:sale][:email],
+        description: params[:sale][:j],
+        amount:      params[:sale][:p]
       )
       redirect_to order_url(guid: @sale.guid)
     rescue Stripe::CardError => e

@@ -6,13 +6,13 @@
 </p>
 
 <p>
-  <b>Guid:</b>
-  <%= @sale.guid %>
+  <b>Amount:</b>
+  <%= @sale.amount %>
 </p>
 
 <p>
   <b>Description:</b>
-  <%= @sale.description %>
+  <pre><%= JSON.pretty_generate(JSON.parse(@sale.description)) %></pre>
 </p>
 
 

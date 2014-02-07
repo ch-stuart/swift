@@ -1,1 +1,22 @@
-what
+
+<p>
+    Email
+</p>
+<%= @sale[:email] %>
+
+<p>
+    Amount
+</p>
+<%= @sale[:amount] %>
+
+<p>
+    Description
+</p>
+<%= @sale[:description] %>
+
+<%= content_for :js do %>
+    <script>
+    console.log('good job');
+    // localStorage.removeItem('cart')
+    </script>
+<% end %>
