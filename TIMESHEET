@@ -89,5 +89,9 @@ date:        time (minutes):       comment:
 2014-02-04  20  Adjust color picker UX so it does not require a tooltip
 2014-02-04  40  Start on integrating with Stripe
 2014-02-05  40  Complete basic integration with Stripe
+2014-02-06  10  Tell old IE to update
+2014-02-06  60  Improving checkout flow and behavior
+2014-02-06  60  1. Send proper price to Stripe 2. Display list of sales on hub 3. Display detailed view of individual sales on hub 4. Display detailed view of individual sales for users 5. Store order description, amount and email on server
+
 
 http://kenkeiter.com/skeuocard/
