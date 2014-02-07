@@ -32,6 +32,16 @@ jQuery(document).ready(function($) {
         $root.addClass('is-safari');
     }
 
+    if ($.browser.msie && $.browser.version <= 10) {
+        $(document.body).prepend(
+            ['<p class=browsehappy>',
+            'You are using an <strong>outdated</strong> browser.',
+            'Please <a href=//browsehappy.com>upgrade your browser</a>',
+            'to improve your experience.</p>'].join('\n')
+        )
+        $("html").addClass("ie");
+    }
+
     $('#global-menu-btn').click(function() {
         $(this).toggleClass('active');
         $('#global-menu').slideToggle();
