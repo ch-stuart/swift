@@ -33,7 +33,7 @@ class SalesController < ApplicationController
   # GET /sales/1
   # GET /sales/1.json
   def show
-    @sale = Sale.find_by_guid(params[:id])
+    @sale = Sale.find(params[:id])
     render :layout => "hub"
 
     # respond_to do |format|
