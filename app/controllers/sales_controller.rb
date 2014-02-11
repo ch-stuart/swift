@@ -101,6 +101,8 @@ class SalesController < ApplicationController
         description: params[:sale][:j],
         amount:      params[:sale][:p]
       )
+      Contact.create(email: params[:sale][:email])
+
       redirect_to order_url(guid: @sale.guid)
     rescue Stripe::CardError => e
       # The card has been declined or
