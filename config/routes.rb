@@ -30,6 +30,10 @@ SwiftSite::Application.routes.draw do
     get 'checkout', on: :new
   end
 
+  resources :contacts do
+    get 'copy', on: :collection
+  end
+
   # # view cart
   # http://builtbyswift.com/cart
   #

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140207062208) do
+ActiveRecord::Schema.define(:version => 20140211034005) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(:version => 20140207062208) do
     t.text     "front_door_sign"
     t.boolean  "close_shop",         :default => false,                                                    :null => false
     t.text     "close_shop_message", :default => "The shop is currently closed. Please check back later."
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.text     "email"
+    t.boolean  "archived",   :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "homes", :force => true do |t|

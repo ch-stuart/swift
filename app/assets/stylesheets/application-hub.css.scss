@@ -6,6 +6,7 @@
 @import '../javascripts/farbtastic/farbtastic';
 
 @import 'module-form';
+@import 'module-buttons';
 
 body {
   padding-top: 40px;
@@ -86,4 +87,13 @@ a.action {
 code {
     font-family: menlo, monospace;
     font-size: 12px;
+}
+
+
+.is-archived--true {
+    color: #aaa;
+}
+
+.no-select {
+    user-select: none;
 }
