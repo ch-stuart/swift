@@ -1,13 +1,15 @@
-<h1>Listing sales</h1>
-
+<h1>Sales</h1>
+<p style="display:none">
+    <%# link_to 'New Sale', new_sale_path %>
+</p>
 <table>
   <tr>
     <th>Guid</th>
     <th>Email</th>
     <th>Amount</th>
     <th></th>
-    <th></th>
-    <th></th>
+    <th style="display:none"></th>
+    <th style="display:none"></th>
   </tr>
 
 <% @sales.each do |sale| %>
@@ -22,12 +24,8 @@
     <td><%= sale.email %></td>
     <td><%= sale.amount %></td>
     <td><%= link_to 'Show', sale %></td>
-    <td><%= link_to 'Edit', edit_sale_path(sale) %></td>
-    <td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td style="display:none"><%= link_to 'Edit', edit_sale_path(sale) %></td>
+    <td style="display:none"><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Sale', new_sale_path %>

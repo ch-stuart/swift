@@ -14,6 +14,13 @@
             </div>
         <% end %>
 
+        <p>
+            TODO:<br>
+            - collect shipping info<br>
+            - calculate shipping cost<br>
+            - calculate taxes
+        </p>
+
         <%= f.label :email %>
         <%= f.text_field :email, placeholder: "you@example.com", type: "email" %>
 
@@ -60,7 +67,6 @@
     <% content_for :js do %>
         <script>
             $('#checkout-form').submit(function(event) {
-                console.log('form clicked');
 
                 var $form = $(this);
                 $form.find('button').prop('disabled', true);
