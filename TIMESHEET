@@ -72,3 +72,4 @@ date:        time (minutes):       comment:
 2014-01-22  10  Do not allow quantity to be set lower than 1. User can remove. Also format currency.
 2014-01-23  05  Fix issue where an empty cart would cause the cart view to break.
 2014-01-23  05  Fix issue where accessory page did not load
+2014-01-24  60  Merge in wholesale branch
