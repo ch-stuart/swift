@@ -101,7 +101,11 @@ class SalesController < ApplicationController
         description: params[:sale][:j],
         amount:      params[:sale][:p]
       )
-      Contact.create(email: params[:sale][:email])
+
+      #
+      if params[:send_me_marketing_emails]
+        Contact.create(email: params[:sale][:email])
+      end
 
       redirect_to order_url(guid: @sale.guid)
     rescue Stripe::CardError => e
