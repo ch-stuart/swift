@@ -92,6 +92,12 @@ date:        time (minutes):       comment:
 2014-02-06  10  Tell old IE to update
 2014-02-06  60  Improving checkout flow and behavior
 2014-02-06  60  1. Send proper price to Stripe 2. Display list of sales on hub 3. Display detailed view of individual sales on hub 4. Display detailed view of individual sales for users 5. Store order description, amount and email on server
-
+2014-02-08  15  Improving display of sale detail on hub and public
+2014-02-09  15  Cleaning up TODOs/bugs in Basecamp
+2014-02-10  45  Creating contacts resource
+2014-02-10  30  Create UI for archiving contacts
+2014-02-10  10  Create UI for copy/pasting new contacts
+2014-02-10  15  Create new contact when creating new sale
+2014-02-12  15  Add option to sign up for marketing emails when ordering
 
 http://kenkeiter.com/skeuocard/
