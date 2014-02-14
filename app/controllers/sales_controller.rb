@@ -98,7 +98,7 @@ class SalesController < ApplicationController
       )
       @sale = Sale.create!(
         email:       params[:sale][:email],
-        description: params[:sale][:j],
+        description: ActiveSupport::Base64.decode64(params[:sale][:j]),
         amount:      params[:sale][:p]
       )
 
