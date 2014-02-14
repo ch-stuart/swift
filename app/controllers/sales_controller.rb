@@ -33,7 +33,7 @@ class SalesController < ApplicationController
   # GET /sales/1
   # GET /sales/1.json
   def show
-    @sale = Sale.find_by_guid(params[:id])
+    @sale = Sale.find(params[:id])
     render :layout => "hub"
 
     # respond_to do |format|
@@ -101,6 +101,12 @@ class SalesController < ApplicationController
         description: params[:sale][:j],
         amount:      params[:sale][:p]
       )
+
+      #
+      if params[:send_me_marketing_emails]
+        Contact.create(email: params[:sale][:email])
+      end
+
       redirect_to order_url(guid: @sale.guid)
     rescue Stripe::CardError => e
       # The card has been declined or

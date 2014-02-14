@@ -1,13 +1,31 @@
 <p id="notice"><%= notice %></p>
 
+<h2>
+    Order Details
+</h2>
+<p>
+  <b>
+    Date
+  </b>
+  <%= @sale.updated_at %>
+</p>
+<p>
+  <b>Customer URL:</b>
+  <a href="/orders/<%= @sale.guid %>">
+      /orders/<%= @sale.guid %>
+  </a>
+</p>
+
 <p>
   <b>Email:</b>
-  <%= @sale.email %>
+  <a href="mailto:<%= @sale.email %>">
+    <%= @sale.email %>
+  </a>
 </p>
 
 <p>
   <b>Amount:</b>
-  <%= @sale.amount %>
+  <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
 </p>
 
 <p>

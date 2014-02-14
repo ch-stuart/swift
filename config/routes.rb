@@ -25,9 +25,8 @@ SwiftSite::Application.routes.draw do
     get 'order', on: :member
   end
 
-  resources :sales do
-    get 'success', on: :member
-    get 'checkout', on: :new
+  resources :contacts do
+    get 'copy', on: :collection
   end
 
   # # view cart
@@ -39,17 +38,22 @@ SwiftSite::Application.routes.draw do
   # # completed purchase
   # http://builtbyswift.com/orders/7e59b9a5-4055-46eb-944c-185051f9ebf7
 
+  resources :sales do
+    get 'success', on: :member
+    get 'checkout', on: :new
+  end
+
   get 'cart', to: 'sales#cart'
   get 'cart/checkout', to: 'sales#checkout'
   get 'orders/:guid', to: 'sales#success', as: :order
 
+  get 'logout', :to => 'application#logout'
+  get 'login', :to => 'hub#index'
+  get 'wholesale_login', :to => 'application#wholesale_login'
 
-  match 'logout', :to => 'application#logout'
-  match 'login', :to => 'hub#index'
-  match 'wholesale_login', :to => 'application#wholesale_login'
+  get 'store', :to => 'homes#store'
+  get "accessories" => redirect("/store")
 
   root :to => 'homes#index'
-  match 'store', :to => 'homes#store'
-  match "accessories" => redirect("/store")
 
 end

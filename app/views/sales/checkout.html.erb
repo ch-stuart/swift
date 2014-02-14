@@ -14,8 +14,17 @@
             </div>
         <% end %>
 
+        <p>
+            TODO:<br>
+            - collect shipping info<br>
+            - calculate shipping cost<br>
+            - calculate taxes for WA customers
+        </p>
+
         <%= f.label :email %>
         <%= f.text_field :email, placeholder: "you@example.com", type: "email" %>
+
+        <label><input name="send_me_marketing_emails" type="checkbox"> Send me marketing emails</label>
 
         <label>Credit Card #</label>
         <input
@@ -60,7 +69,6 @@
     <% content_for :js do %>
         <script>
             $('#checkout-form').submit(function(event) {
-                console.log('form clicked');
 
                 var $form = $(this);
                 $form.find('button').prop('disabled', true);

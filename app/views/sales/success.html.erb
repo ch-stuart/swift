@@ -1,18 +1,22 @@
+<h2>
+    You purchased this thing. Good job
+</h2>
+<p>
+    Email<br>
+    <%= @sale[:email] %>
+</p>
 
 <p>
-    Email
+    Amount<br>
+    <%= number_to_currency(cents_to_dollars(@sale[:amount])) %>
 </p>
-<%= @sale[:email] %>
+
 
 <p>
-    Amount
+    Description<br>
+    <%= @sale[:description] %>
 </p>
-<%= @sale[:amount] %>
 
-<p>
-    Description
-</p>
-<%= @sale[:description] %>
 
 <%= content_for :js do %>
     <script>
