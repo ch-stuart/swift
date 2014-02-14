@@ -6,7 +6,6 @@
 //= require jquery.browser
 //= require jquery_ujs
 //= require angular
-//= require securehash/md5
 //= require tinycolor
 //= require jquery.fitvids
 //= require jquery.noisy
