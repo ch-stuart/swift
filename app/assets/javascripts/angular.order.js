@@ -1,26 +1,30 @@
-/*global OrderCtrl console angular $ localStorage location document alert confirm */
+/*jshint browser: true */
+/*global console angular $ localStorage location document alert confirm window _*/
 
-// iterate over localStorage
-// for (var i = 0; i < localStorage.length; i++){
-//     var key = localStorage.key(i);
-//     var value = localStorage[key];
-//
-//     console.log(key, value);
-// }
+var SwiftApp = angular.module('SwiftApp',[]);
 
-function OrderCtrl($scope, $http) {
+SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
+    var IS_WHOLESALE_USER = window.__iswsu__;
 
     // Stupid hacky way to do this. Whatevers for now.
     if (document.getElementById('page_products_order')) {
         var id = location.pathname.split('/')[2];
+        var productToUpdate = localStorage.getItem('update');
+
         $http
             .get('/products/'+ id +'.json')
             .success(function(json) {
                 $scope.product = json.product;
 
-                setupColors.call($scope);
+                if (IS_WHOLESALE_USER) {
+                    setupPricesForWholesale.call($scope);
+                }
                 setupSize.call($scope);
                 setupQA.call($scope);
+
+                if (productToUpdate) {
+                    setupUpdate.call($scope, productToUpdate);
+                }
             });
     }
 
@@ -49,6 +53,7 @@ function OrderCtrl($scope, $http) {
         // make the cart pink so we can tell there is stuff
         // in it. hooyah
         if (cartContents.products.length) {
+            calculateCartTotalPrice();
             $scope.cart.isNotEmpty = 'active';
         }
     }
@@ -58,29 +63,66 @@ function OrderCtrl($scope, $http) {
         $scope.cart.products = [];
     }
 
-    // Remove colors array if it's empty
-    //
-    // Why? because Angular thinks that part.colors is truthy
-    //
-    // @returns nothing
-    function setupColors() {
-        this.product.parts.forEach(function(part) {
-            if (part.colors.length === 0) {
-                delete part.colors;
-            }
-        });
+    function setupUpdate(update) {
+        // kill it so we don't get in a loop
+        localStorage.removeItem('update');
+
+        update = JSON.parse(update);
+
+        // Set this so that when (and if) they re-add it
+        // to the cart remove we the previous product.
+        this.product.uniqueId = update.uniqueId;
+
+        if (update.selectedAnswer) {
+            this.product.selectedAnswer = update.selectedAnswer;
+        }
+
+        if (update.selectedSize) {
+            this.product.selectedSize = this.product.sizes.filter(function(size) {
+                return size.id === update.selectedSize.id;
+            })[0];
+        }
+
+        if (update.parts) {
+            // Loop through all of the parts on the product
+            // we are updating
+            _.each(update.parts, function(updatePart) {
+
+                // match up the part from the update product
+                // with the current product
+                var matchingPart = _.filter(this.product.parts, function(part) {
+                    return part.id === updatePart.id;
+                })[0];
+
+                // If the part exists in the update, then it's selected
+                // if it has a price
+                if (matchingPart.price) {
+                    matchingPart.activated = true;
+                }
+                // And if it has a selectedColor, find it and set it
+                if (updatePart.selectedColor) {
+                    matchingPart.selectedColor = _.filter(matchingPart.colors, function(color) {
+                        return color.id === updatePart.selectedColor.id;
+                    })[0];
+                }
+            }, this);
+        }
     }
 
     // Initialize values for Sizes fields
     //
     // @returns nothing
     function setupSize() {
-        this.product.selectedSize = this.product.sizes[0];
+        if (this.product.sizes.length) {
+            this.product.selectedSize = this.product.sizes[0];
 
-        // Set this so we can use it later when setting the
-        // new title if the user picks a size
-        this.product.originalTitle = this.product.title;
-        this.product.originalPrice = this.product.price;
+            // Set this so we can use it later when setting the
+            // new title if the user picks a size
+            this.product.originalTitle = this.product.title;
+            this.product.originalPrice = this.product.price;
+
+            $scope.onSizeSelectChanged();
+        }
     }
 
     // Initialize values for Question & Answer fields
@@ -99,6 +141,33 @@ function OrderCtrl($scope, $http) {
             // Default
             this.product.selectedAnswer = this.product.answer[0];
         }
+    }
+
+    function setupPricesForWholesale() {
+        // Adjust main price
+        $scope.product.price = $scope.product.wholesale_price;
+        $scope.product.humane_price = $scope.product.wholesale_humane_price;
+
+        // Adjust size prices
+        _.each($scope.product.sizes, function(size) {
+            size.price = size.wholesale_price;
+        });
+        // Adjust part prices
+        _.each($scope.product.parts, function(part) {
+            if (part.price) {
+                part.price = part.wholesale_price;
+            }
+        });
+        // Adjust fabric prices
+        _.each($scope.product.parts, function(part) {
+            if (part.colors) {
+                _.each(part.colors, function(color) {
+                    if (color.price) {
+                        color.price = color.wholesale_price;
+                    }
+                });
+            }
+        });
     }
 
     // Save a product purchase. Grab the relevant
@@ -131,8 +200,8 @@ function OrderCtrl($scope, $http) {
             save.parts.push(newPart);
         }
 
-        ;['id', 'title', 'price', 'totalPrice', 'answer',
-          'question', 'selectedSize', 'mostExpensiveFabric'].forEach(saveIf);
+        _.each(['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer',
+          'question', 'selectedSize', 'mostExpensiveFabric'], saveIf);
 
         prod.parts
             .filter(function(part) {
@@ -142,7 +211,9 @@ function OrderCtrl($scope, $http) {
 
         delete prod.$$hashKey;
 
-        save.uniqueId = Date.now();
+        if (!save.uniqueId) {
+            save.uniqueId = Date.now();
+        }
         save.quantity = 1;
 
         return save;
@@ -156,12 +227,12 @@ function OrderCtrl($scope, $http) {
 
     function calculateCartTotalPrice() {
         var cartTotalPrice = 0;
-        $scope.cart.products.forEach(function(product) {
+        _.each($scope.cart.products, function(product) {
             cartTotalPrice = cartTotalPrice + (product.totalPrice * product.quantity);
         });
         $scope.cart.totalPrice = cartTotalPrice;
+        $scope.cart.totalPriceInCents = cartTotalPrice * 100;
     }
-
 
     // Validate the form
     //
@@ -170,10 +241,9 @@ function OrderCtrl($scope, $http) {
         var isValid = true;
 
         // Reset invalid state
-        $scope.product.parts
-            .forEach(function(part) {
-                delete part.inputIsInvalid;
-            });
+        _.each($scope.product.parts, function(part) {
+            delete part.inputIsInvalid;
+        });
 
         // Check for parts which have a price, where
         // the part is active yet there is no selected
@@ -276,21 +346,16 @@ function OrderCtrl($scope, $http) {
         return calculateTotalPriceOfParts() + calculateTotalPriceOfFabrics() + parseFloat($scope.product.price);
     }
 
-    $scope.onSizeSelectChanged = function() {
+    $scope['onSizeSelectChanged'] = function() {
         this.product.title = this.product.originalTitle + ' (' + this.product.selectedSize.title + ')';
-        this.product.price = this.product.selectedSize.price;
+        this.product.price = parseFloat(this.product.selectedSize.price);
     };
 
-    var isTooltipsInitialized;
-    $scope.onChooseColorButtonClicked = function() {
-        if (!isTooltipsInitialized) {
-            $('.color-picker--swatch').tooltip();
-            isTooltipsInitialized = true;
-        }
+    $scope['onChooseColorButtonClicked'] = function() {
         this.part.showColors = !this.part.showColors;
     };
 
-    $scope.onColorSwatchClicked = function() {
+    $scope['onColorSwatchClicked'] = function() {
 
         this.part.selectedColor = this.color;
         this.part.showColors = !this.part.showColors;
@@ -321,15 +386,15 @@ function OrderCtrl($scope, $http) {
         // because we're ... whatever
     };
 
-    $scope.onPartCheckboxClicked = function() {
+    $scope['onPartCheckboxClicked'] = function() {
         delete this.part.selectedColor;
     };
 
-    $scope.onUserAcknowledgedFabricChargeNotice = function() {
+    $scope['onUserAcknowledgedFabricChargeNotice'] = function() {
         $scope.product.userAcknowledgedFabricChargeNotice = true;
     };
 
-    $scope.onFormSubmit = function() {
+    $scope['onFormSubmit'] = function() {
         var isFormValid = validateForm();
 
         if (isFormValid) {
@@ -343,39 +408,54 @@ function OrderCtrl($scope, $http) {
             if (!$scope.cart.products) {
                 $scope.cart.products = [];
             }
+
+            // If this is a product that was already in the cart that
+            // we are editing, remove the old version from the cart before
+            // adding this one.
+            $scope.cart.products = _.filter($scope.cart.products, function(productInCart) {
+                return productInCart.uniqueId !== saved.uniqueId;
+            });
+
             $scope.cart.products.push(saved);
 
             saveCartToLocalStorage();
             calculateCartTotalPrice();
 
-            $scope.cart.showCart = true;
+            window.location = '/cart'
         } else {
             console.warn('form is not valid');
         }
     };
 
-    $scope.onShopMoreButtonClicked = function() {
+    // Navigate to "/" if they just added a product
+    // to the cart
+    $scope['onContinueShoppingButtonClicked'] = function() {
+        window.location = "/";
+    };
+
+    $scope['onCheckOutButtonClicked'] = function() {
+        if (IS_WHOLESALE_USER && $scope.cart.totalPrice < 500) {
+            return alert('Minimum $500 purchase required for wholesale purchasers.');
+        }
+
+        window.location = '/cart/checkout';
+    };
+
+    $scope['onGlobalCartButtonClicked'] = function() {
+        // calculateCartTotalPrice();
+        window.location = '/cart';
+    };
+
+    $scope['onCartCloseBtnClicked'] = function() {
         $scope.cart.showCart = false;
-    };
-
-    $scope.onCheckOutButtonClicked = function() {
-        alert('should check out now');
-    };
-
-    $scope.onGlobalCartButtonClicked = function() {
-        calculateCartTotalPrice();
-        $scope.cart.showCart = true;
     };
 
     // Removes the selected item from the cart
     //
     // Updates $scope.cart and the cart stored in localStorage.
     //
-    // TODO check if there are zero items left in the
-    // cart and react accordingly
-    //
     // @returns nothing
-    $scope.onRemoveFromCartButtonClicked = function(uniqueId) {
+    $scope['onRemoveFromCartButtonClicked'] = function(uniqueId) {
         var shouldRemove = confirm('Are you sure you want to remove this product from your cart? It cannot be undone.');
 
         if (shouldRemove) {
@@ -387,8 +467,37 @@ function OrderCtrl($scope, $http) {
         }
     };
 
-    $scope.onProductQuantityChanged = function($event) {
-        $scope.cart.products.forEach(function(product) {
+    // Edits the selected item from the cart
+    //
+    // Does this temporarily remove the item from
+    // the cart?
+    //
+    // @returns nothing
+    $scope['onEditFromCartButtonClicked'] = function(product) {
+        $scope.cart.showCart = false;
+
+        // Remove product from cart
+        // CHANGED no, don't remove it. If they don't resubmit it to the
+        // cart we want to keep this one here. Only remove when they're
+        // adding it back...
+        // $scope.cart.products = $scope.cart.products.filter(function(product) {
+        //     return product.uniqueId !== uniqueId;
+        // });
+
+        saveCartToLocalStorage();
+
+        // Save this puppy to localStorage
+        localStorage.setItem('update', JSON.stringify(product));
+
+        // Redirect
+        window.location = '/products/' + product.id + '/order';
+
+        // Will check for "edit" item in LS on page load
+        // and load form state if need be
+    };
+
+    $scope['onProductQuantityChanged'] = function() {
+        _.each($scope.cart.products, function(product) {
             if (!product.quantity) {
                 product.quantity = 1;
             }
@@ -396,4 +505,8 @@ function OrderCtrl($scope, $http) {
 
         calculateCartTotalPrice();
     };
-}
+}]);
+
+
+
+

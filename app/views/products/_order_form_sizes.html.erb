@@ -7,17 +7,6 @@
             <label class="label">
                 Choose your size!
             </label>
-
-
-            <!--
-              FIXME: need to adjust price for wholesale user
-              <%# @product.sizes.each do |size| %>
-              <option value="<%# @product.title %>, <%# size.title %>:<%# size.price_for(session[:is_wholesale_user]) %>">
-                <%# size.title %> ($<%# size.price_for(session[:is_wholesale_user]) %>)
-              </option>
-              <%# end %>
-            -->
-
             <select
                 ng-model="product.selectedSize"
                 ng-change="onSizeSelectChanged()"

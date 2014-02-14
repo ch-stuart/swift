@@ -1,15 +1,34 @@
-// Third-Party Base Grid
-@import 'skeleton/stylesheets/base';
-@import 'skeleton/stylesheets/skeleton';
-@import 'skeleton/stylesheets/layout';
+// box-sizing ftw
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+// Skeleton is not compatible with border-box
+.container {
+    box-sizing: content-box;
+}
+
+// Normalize
+@import 'bower_components/normalize-css/normalize';
+
+// Grid #1
+@import 'bower_components/skeleton/stylesheets/base--modified';
+@import 'bower_components/skeleton/stylesheets/skeleton';
+@import 'bower_components/skeleton/stylesheets/layout';
+
+
+// Grid #2
+@import 'bower_components/gridism/gridism';
 
 // Includes
+// @import 'colors/colors';
 @import 'include-color';
 @import 'include-media';
 
 // Base
 @import 'base-entypo';
 @import 'base-type';
+@import 'base-list';
 
 // Modules
 @import 'module-blog';
@@ -19,7 +38,6 @@
 @import 'module-form';
 @import 'module-hero';
 @import 'module-jquery.impromptu';
-@import 'module-jquery.tooltip';
 @import 'module-jquery.tabs';
 @import 'module-nav';
 @import 'module-nojs';
@@ -78,4 +96,12 @@ input.ng-invalid {
 
 .input--dirty {
     border: 1px solid red;
+}
+
+.browsehappy {
+    margin: 0;
+    text-align: center;
+    background-color: #ff3;
+    padding: 20px 0 25px;
+    line-height: 1;
 }

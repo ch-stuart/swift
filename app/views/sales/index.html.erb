@@ -1,0 +1,33 @@
+<h1>Listing sales</h1>
+
+<table>
+  <tr>
+    <th>Guid</th>
+    <th>Email</th>
+    <th>Amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sales.each do |sale| %>
+  <tr>
+    <td>
+      <a href="/sales/<%= sale.guid %>">
+        <span style="font-family: monospace">
+          <%= sale.guid.truncate(4, omission: "") %>
+        </span>
+      </a>
+    </td>
+    <td><%= sale.email %></td>
+    <td><%= sale.amount %></td>
+    <td><%= link_to 'Show', sale %></td>
+    <td><%= link_to 'Edit', edit_sale_path(sale) %></td>
+    <td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sale', new_sale_path %>

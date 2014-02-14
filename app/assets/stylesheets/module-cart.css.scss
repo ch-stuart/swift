@@ -1,56 +1,32 @@
+html, body {
+    height: 100%;
+}
 .shoppin-cart {
-    background-color: #ffe;
-    border-radius: 0;
-
-    box-sizing: border-box;
-    transform: translate(-50%, 0);
-
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    width: 90%;
-    z-index: 12;
-
-    box-shadow: 0 0 10px #555;
-
+    background-color: #fff;
     padding: 10px;
+    height: 100%;
 }
-@media only screen and (min-width: 768px) {
-    .shoppin-cart {
-        width: auto;
-        padding: 30px;
-        min-width: 95%;
-        max-width: 1000px;
-    }
-}
-
-.shoppin-cart__table {
-    width: 100%;
-
-    th {
-        text-align: left;
-        font-weight: bold;
-        font-family: georgia, serif;
-        border-bottom: 1px solid #bbb;
-        font-size: 120%;
-    }
-    td {
-        border-bottom: 1px solid #ddd;
-    }
-    th, td {
-        padding: 10px;
-    }
+.shoppin-cart__header {
+    font-weight: bold;
+    color: #333;
 }
 
 .shoppin-cart__quantity {
     width: 3em;
 }
 
+.shoppin-cart__cart-price-row {
+    border-top: 1px solid lighten($border_gray, 10%);
+    border-bottom: 1px solid lighten($border_gray, 10%);
+}
 .shoppin-cart__fabric-charge-notice {
     margin-top: 30px;
 
-    h5, li {
+    h6, li {
         color: #444;
+    }
+    h6 {
+        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 }
 .shoppin-cart__fabric-charge-notice__ul {
@@ -58,5 +34,19 @@
 }
 
 .shoppin-cart__toolbar {
+    margin-top: 20px !important;
     text-align: right;
+}
+
+.demph {
+    font-size: 90%;
+    color: #777;
+}
+
+.shoppin-cart__part-list {
+    margin-bottom: 0;
+
+    li:last-child {
+        margin-bottom: 0;
+    };
 }

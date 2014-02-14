@@ -73,3 +73,26 @@ date:        time (minutes):       comment:
 2014-01-23  05  Fix issue where an empty cart would cause the cart view to break.
 2014-01-23  05  Fix issue where accessory page did not load
 2014-01-24  60  Merge in wholesale branch
+2014-01-27  20  G+ meeting
+2014-01-28  15  Do not allow wholesale user check out until $500
+2014-01-28  90  Support for updating a product from the cart (editing a product already in the cart)
+2014-01-29  10  Fix issue where product price was not correct if user never touched the size drop down
+2014-01-29  20  Fix bugs when editing a product from the cart
+2014-01-29  25  Display and use wholesale prices for products, sizes, parts and fabrics
+2014-01-29  30  Begining on polyfilling Array iteration methods for older browsers
+2014-01-30  70  Design work on cart
+2014-01-30  30  Design work on cart and buttons
+2014-01-30  20  Fixing bugs with color picker
+2014-01-30  10  Adjusting behavior of "continue shopping" button
+2014-02-01  80  Add staging environment and fix bugs with AngularJS and it's dislike of minification
+2014-02-01  15  Fixing bugs
+2014-02-01  15  Cache static assets for 1 year
+2014-02-04  20  Adjust color picker UX so it does not require a tooltip
+2014-02-04  40  Start on integrating with Stripe
+2014-02-05  40  Complete basic integration with Stripe
+2014-02-06  10  Tell old IE to update
+2014-02-06  60  Improving checkout flow and behavior
+2014-02-06  60  1. Send proper price to Stripe 2. Display list of sales on hub 3. Display detailed view of individual sales on hub 4. Display detailed view of individual sales for users 5. Store order description, amount and email on server
+
+
+http://kenkeiter.com/skeuocard/

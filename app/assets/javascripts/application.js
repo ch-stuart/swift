@@ -1,6 +1,6 @@
 // ...
 //= require console
-//= require array.foreach
+//= require underscore
 //= require ua
 //= require jquery
 //= require jquery.browser
@@ -13,12 +13,10 @@
 //= require jquery.color_picker
 //= require jquery.hero
 //= require jquery.lightbox_me
-//= require jquery.tooltip
 //= require jquery.tabs
 //= require ICanHaz
 //= require slideshow
 //= require angular.order
-//= require angular.shopping_cart
 
 jQuery(document).ready(function($) {
 
@@ -31,6 +29,16 @@ jQuery(document).ready(function($) {
     }
     if (UA.isSafari()) {
         $root.addClass('is-safari');
+    }
+
+    if ($.browser.msie && $.browser.version <= 10) {
+        $(document.body).prepend(
+            ['<p class=browsehappy>',
+            'You are using an <strong>outdated</strong> browser.',
+            'Please <a href=//browsehappy.com>upgrade your browser</a>',
+            'to improve your experience.</p>'].join('\n')
+        )
+        $("html").addClass("ie");
     }
 
     $('#global-menu-btn').click(function() {

@@ -13,12 +13,14 @@ gem 'dalli' # memcachier
 gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
 gem 'figaro'
+gem 'stripe'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem "autoprefixer-rails"
+  gem "underscore-rails"
 end
 
 group :production do
@@ -28,8 +30,12 @@ end
 group :development do
   gem 'sqlite3'
   gem 'taps'
+  gem 'guard'
+  gem 'guard-test'
+  gem 'guard-shell'
 end
 
-group :test do
-  gem 'turn'
-end
+# Wah. Not compatible with guard-test
+# group :test do
+#   gem 'turn'
+# end
