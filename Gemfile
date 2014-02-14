@@ -21,6 +21,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem "autoprefixer-rails"
   gem "underscore-rails"
+  gem "javascript-securehash-rails"
 end
 
 group :production do
