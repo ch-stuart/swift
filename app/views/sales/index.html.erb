@@ -15,7 +15,7 @@
 <% @sales.each do |sale| %>
   <tr>
     <td>
-      <a href="/sales/<%= sale.guid %>">
+      <a href="/orders/<%= sale.guid %>">
         <span style="font-family: monospace">
           <%= sale.guid.truncate(4, omission: "") %>
         </span>
