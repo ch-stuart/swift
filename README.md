@@ -2,11 +2,9 @@
 
 The website for Swift Industries. Runs on Heroku.
 
-## Environments
+## Deploy
 
 ### Production
-
-#### Deploy
 
     $ git push heroku
     $ heroku run console
@@ -19,8 +17,6 @@ Clearing the cache will fix this issue.
 ### Staging
 
 Staging environment is at: https://fierce-island-8829.herokuapp.com/
-
-#### Deploy
 
     $ git push staging saveToCart:master
 
