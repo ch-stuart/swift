@@ -47,6 +47,8 @@ class SalesController < ApplicationController
   def success
     @sale = Sale.find_by_guid(params[:guid])
 
+    @description = JSON.parse(@sale.description)
+
     @company = Company.first
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')

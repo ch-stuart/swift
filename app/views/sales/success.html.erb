@@ -1,22 +1,96 @@
-<h2>
-    You purchased this thing. Good job
-</h2>
-<p>
-    Email<br>
-    <%= @sale[:email] %>
-</p>
-
-<p>
-    Amount<br>
-    <%= number_to_currency(cents_to_dollars(@sale[:amount])) %>
-</p>
-
-
-<p>
-    Description<br>
-    <%= @sale[:description] %>
-</p>
-
+<div class="twelve columns">
+    <h2>
+        Your Order
+    </h2>
+    <p>
+        Here is a summary of your order.
+    </p>
+    <h4>
+        Purchases
+    </h4>
+    <% @description["products"].each do |product| %>
+        <div class="row row--product-ordered">
+            <h5>
+                <%= product["title"] %>
+            </h5>
+            <ul>
+                <li>
+                    <b>Quantity</b>: <%= product["quantity"] %>
+                </li>
+                <li>
+                    <b>Price</b>: <%= number_to_currency product["totalPrice"] %>
+                </li>
+                <% if product["parts"].present? %>
+                    <li>
+                        <b>Parts</b>:
+                        <ul>
+                            <% product["parts"].each do |part| %>
+                                <li style="display: none">
+                                    <%= part.inspect %>
+                                </li>
+                                <li>
+                                    <%= part["title"] %>
+                                    <% if part["price"].present? %>
+                                        (<%= part["price"] %>)
+                                    <% end %>
+                                </li>
+                                <% if part["selectedColor"].present? %>
+                                    <li>
+                                        Fabric: <%= part["selectedColor"]["title"] %>
+                                        <% if part["selectedColor"]["price"].present? %>
+                                            (<%= part["selectedColor"]["price"] %>)
+                                        <% end %>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        </ul>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <h4>
+        Total Price
+    </h4>
+    <p>
+        <%= number_to_currency(cents_to_dollars(@sale[:amount])) %>
+    </p>
+    <h4>
+        Contact Info
+    </h4>
+    <p>
+        <%= @sale[:email] %>
+    </p>
+    <h4>
+        Order ID
+    </h4>
+    <p>
+        <%= @sale[:guid] %>
+    </p>
+</div>
+<div class="four columns">
+    <h4>
+        Questions?
+    </h4>
+    <p>
+        If you have any questions about your order, contact us:
+    </p>
+    <ul class="nice-list">
+        <li>
+            <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "nav-list--group-item-link" %>
+        </li>
+        <li>
+            <%= link_to @company.phone, @company.phone_link, :class => "nav-list--group-item-link" %>
+        </li>
+    </ul>
+    <h4>
+        Delivery Time
+    </h4>
+    <div class="handmade_label">handmade</div>
+    <p>
+        <%= @company.delivery_time %>
+    </p>
+</div>
 
 <%= content_for :js do %>
     <script>
