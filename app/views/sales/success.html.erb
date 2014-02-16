@@ -130,7 +130,7 @@
 <%= content_for :js do %>
     <script>
         (function() {
-            console.log('good job')
+            alert('Usually, your shopping cart would be emptied after reaching this page. For now, to make testing easier, everything is left in your cart.')
             // localStorage.removeItem('cart')
 
             var orderDate = $('#order_date').text().trim()
