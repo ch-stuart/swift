@@ -5,56 +5,62 @@
     <p>
         Here is a summary of your order.
     </p>
-    <h4>
-        Purchases
-    </h4>
+    <div class="grid wrap hide-on-mobiles" ng-show="cart.products.length">
+        <div class="shoppin-cart__header unit w-1-4">Product</div>
+        <div class="shoppin-cart__header unit w-1-4">Parts</div>
+        <div class="shoppin-cart__header unit w-1-4">Quantity</div>
+        <div class="shoppin-cart__header unit w-1-4">Total Price</div>
+    </div>
     <% @description["products"].each do |product| %>
-        <div class="row row--product-ordered">
-            <h5>
-                <%= product["title"] %>
-            </h5>
-            <ul>
-                <li>
-                    <b>Quantity</b>: <%= product["quantity"] %>
-                </li>
-                <li>
-                    <b>Price</b>: <%= number_to_currency product["totalPrice"] %>
-                </li>
+        <div class="grid wrap">
+            <div class="unit w-1-4">
+                <strong>
+                    <%= product["title"] %>
+                </strong>
+                <br>
+                <span class=demph>Base Price: <%= number_to_currency product["price"].to_i %></span>
+            </div>
+            <div class="unit w-1-4">
                 <% if product["parts"].present? %>
-                    <li>
-                        <b>Parts</b>:
-                        <ul>
-                            <% product["parts"].each do |part| %>
-                                <li style="display: none">
-                                    <%= part.inspect %>
-                                </li>
-                                <li>
-                                    <%= part["title"] %>
-                                    <% if part["price"].present? %>
-                                        (<%= part["price"] %>)
-                                    <% end %>
-                                </li>
-                                <% if part["selectedColor"].present? %>
-                                    <li>
-                                        Fabric: <%= part["selectedColor"]["title"] %>
-                                        <% if part["selectedColor"]["price"].present? %>
-                                            (<%= part["selectedColor"]["price"] %>)
-                                        <% end %>
-                                    </li>
+                    <ul class="shoppin-cart__part-list">
+                        <% product["parts"].each do |part| %>
+                            <li>
+                                <%= part["title"] %>
+                                <% if part["price"].present? %>
+                                    (<%= number_to_currency part["price"].to_i %>)
                                 <% end %>
-                            <% end %>
-                        </ul>
-                    </li>
+                                <% if part["selectedColor"].present? %>
+                                    <span class="demph">
+                                        <br>Fabric: <%= part["selectedColor"]["title"] %>
+                                        <% if part["selectedColor"]["price"].present? %>
+                                            (<%= number_to_currency part["selectedColor"]["price"].to_i %>)
+                                        <% end %>
+                                    </span>
+                                <% end %>
+                            </li>
+                        <% end %>
+                    </ul>
+                <% else %>
+                    ...
                 <% end %>
-            </ul>
+            </div>
+            <div class="unit w-1-4">
+                Qty: <%= product["quantity"] %>
+            </div>
+            <div class="unit w-1-4">
+                <strong>
+                    <%= number_to_currency product["totalPrice"].to_i %>
+                </strong>
+            </div>
         </div>
     <% end %>
-    <h4>
-        Total Price
-    </h4>
-    <p>
-        <%= number_to_currency(cents_to_dollars(@sale[:amount])) %>
-    </p>
+    <div class="grid wrap shoppin-cart__cart-price-row" ng-show="cart.products.length">
+        <div class="unit w-3-4 hide-on-mobiles"></div>
+        <div class="unit w-1-4">
+            <strong><%= number_to_currency(cents_to_dollars(@sale[:amount])) %></strong>
+        </div>
+    </div>
+
     <h4>
         Contact Info
     </h4>
