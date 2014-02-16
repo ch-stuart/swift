@@ -69,10 +69,16 @@
         <div class="grid">
             <div class="unit w-1-2">
                 <h4>
-                    Contact Info
+                    Email Address
                 </h4>
                 <p>
                     <%= @sale[:email] %>
+                </p>
+                <h4>
+                    Order Date
+                </h4>
+                <p id="order_date">
+                    <%= @sale[:created_at] %>
                 </p>
                 <h4>
                     Order ID
@@ -123,7 +129,12 @@
 
 <%= content_for :js do %>
     <script>
-    console.log('good job');
-    // localStorage.removeItem('cart')
+        (function() {
+            console.log('good job')
+            // localStorage.removeItem('cart')
+
+            var orderDate = $('#order_date').text().trim()
+            $('#order_date').text(strftime('%B %e, %Y', new Date(orderDate)))
+        })()
     </script>
 <% end %>

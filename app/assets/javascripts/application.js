@@ -1,5 +1,6 @@
 // ...
 //= require console
+//= require strftime
 //= require underscore
 //= require ua
 //= require jquery
