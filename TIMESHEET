@@ -105,5 +105,7 @@ date:        time (minutes):       comment:
 2014-02-16  25  Partially match the layout of the cart page with the order success page. this makes more sense
 2014-02-16  15  Cont. to improve layout and styles on order success page.
 2014-02-16  10  Update success page to include date in users's time zone and adjust shipping text
+2014-02-16  30  Send an email to the customer when the order is complete
+
 
 http://kenkeiter.com/skeuocard/
