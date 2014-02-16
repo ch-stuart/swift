@@ -92,22 +92,27 @@ class SalesController < ApplicationController
   # POST /sales.json
   def create
     begin
+      # Create the charge
       charge = Stripe::Charge.create(
         amount:      params[:sale][:p],
         currency:    "usd",
         card:        params[:stripeToken],
         description: "#{params[:sale][:email]} purchasing #{params[:sale][:j]}"
       )
+      # Create the sale
       @sale = Sale.create!(
         email:       params[:sale][:email],
         description: params[:sale][:j],
         amount:      params[:sale][:p]
       )
 
-      #
+      # Create the contact if they sign up for spam
       if params[:send_me_marketing_emails]
         Contact.create(email: params[:sale][:email])
       end
+
+      # Send an email
+      SalesMailer.success(params[:sale][:email], @sale.guid).deliver
 
       redirect_to order_url(guid: @sale.guid)
     rescue Stripe::CardError => e

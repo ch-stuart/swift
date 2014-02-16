@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Helvetica, Arial, san-serif;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Thank you for your order.
+    </p>
+    <p>
+        You can find the details of your order at:
+    </p>
+    <ul>
+        <li>
+            <a href="http://builtbyswift.com/orders/<%= @guid %>">
+                http://builtbyswift.com/orders/<%= @guid %>
+            </a>
+        </li>
+    </ul>
+    <p>
+        If you have any questions, contact us by replying to this email, or call us at:
+    </p>
+    <ul class="nice-list">
+        <li>
+            <%= link_to @company.phone, @company.phone_link %>
+        </li>
+    </ul>
+    <p>
+        Thanks,
+        <br>Martina and the rest of Swift Industries
+    </p>
+</body>
+</html>

@@ -14,6 +14,7 @@ gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
 gem 'figaro'
 gem 'stripe'
+gem 'mandrill-api'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '
