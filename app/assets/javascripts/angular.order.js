@@ -250,7 +250,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         // color and mark them as invalid.
         $scope.product.parts
             .filter(function(part) {
-                return part.activated && part.colors && !part.selectedColor;
+                return part.activated && part.colors.length && !part.selectedColor;
             })
             .forEach(function(part) {
                 isValid = false;
