@@ -1,102 +1,125 @@
-<div class="twelve columns">
-    <h2>
-        Your Order
-    </h2>
-    <p>
-        Here is a summary of your order.
-    </p>
-    <div class="grid wrap hide-on-mobiles" ng-show="cart.products.length">
-        <div class="shoppin-cart__header unit w-1-4">Product</div>
-        <div class="shoppin-cart__header unit w-1-4">Parts</div>
-        <div class="shoppin-cart__header unit w-1-4">Quantity</div>
-        <div class="shoppin-cart__header unit w-1-4">Total Price</div>
-    </div>
-    <% @description["products"].each do |product| %>
-        <div class="grid wrap">
-            <div class="unit w-1-4">
-                <strong>
-                    <%= product["title"] %>
-                </strong>
-                <br>
-                <span class=demph>Base Price: <%= number_to_currency product["price"].to_i %></span>
-            </div>
-            <div class="unit w-1-4">
-                <% if product["parts"].present? %>
-                    <ul class="shoppin-cart__part-list">
-                        <% product["parts"].each do |part| %>
-                            <li>
-                                <%= part["title"] %>
-                                <% if part["price"].present? %>
-                                    (<%= number_to_currency part["price"].to_i %>)
-                                <% end %>
-                                <% if part["selectedColor"].present? %>
-                                    <span class="demph">
-                                        <br>Fabric: <%= part["selectedColor"]["title"] %>
-                                        <% if part["selectedColor"]["price"].present? %>
-                                            (<%= number_to_currency part["selectedColor"]["price"].to_i %>)
-                                        <% end %>
-                                    </span>
-                                <% end %>
-                            </li>
-                        <% end %>
-                    </ul>
-                <% else %>
-                    ...
-                <% end %>
-            </div>
-            <div class="unit w-1-4">
-                Qty: <%= product["quantity"] %>
-            </div>
-            <div class="unit w-1-4">
-                <strong>
-                    <%= number_to_currency product["totalPrice"].to_i %>
-                </strong>
+<div class="grid">
+    <div class="unit w-3-4">
+        <div class="grid">
+            <div class="unit w-4-4">
+                <h2>
+                    Your Order
+                </h2>
             </div>
         </div>
-    <% end %>
-    <div class="grid wrap shoppin-cart__cart-price-row" ng-show="cart.products.length">
-        <div class="unit w-3-4 hide-on-mobiles"></div>
-        <div class="unit w-1-4">
-            <strong><%= number_to_currency(cents_to_dollars(@sale[:amount])) %></strong>
+        <div class="grid hide-on-mobiles" ng-show="cart.products.length">
+            <div class="shoppin-cart__header unit w-1-4">Product</div>
+            <div class="shoppin-cart__header unit w-1-4">Parts</div>
+            <div class="shoppin-cart__header unit w-1-4">Quantity</div>
+            <div class="shoppin-cart__header unit w-1-4">Total Price</div>
+        </div>
+        <% @description["products"].each do |product| %>
+            <div class="grid">
+                <div class="unit w-1-4">
+                    <strong>
+                        <%= product["title"] %>
+                    </strong>
+                    <br>
+                    <span class=demph>Base Price: <%= number_to_currency product["price"].to_i %></span>
+                    <br>
+                    <a href=/products/<%= product["id"] %> class="demph">
+                        View Product
+                    </a>
+                </div>
+                <div class="unit w-1-4">
+                    <% if product["parts"].present? %>
+                        <ul class="shoppin-cart__part-list">
+                            <% product["parts"].each do |part| %>
+                                <li>
+                                    <%= part["title"] %>
+                                    <% if part["price"].present? %>
+                                        (<%= number_to_currency part["price"].to_i %>)
+                                    <% end %>
+                                    <% if part["selectedColor"].present? %>
+                                        <span class="demph">
+                                            <br>Fabric: <%= part["selectedColor"]["title"] %>
+                                            <% if part["selectedColor"]["price"].present? %>
+                                                (<%= number_to_currency part["selectedColor"]["price"].to_i %>)
+                                            <% end %>
+                                        </span>
+                                    <% end %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    <% else %>
+                        ...
+                    <% end %>
+                </div>
+                <div class="unit w-1-4">
+                    Qty: <%= product["quantity"] %>
+                </div>
+                <div class="unit w-1-4">
+                    <strong>
+                        <%= number_to_currency product["totalPrice"].to_i %>
+                    </strong>
+                </div>
+            </div>
+        <% end %>
+        <div class="grid shoppin-cart__cart-price-row" ng-show="cart.products.length">
+            <div class="unit w-3-4 hide-on-mobiles"></div>
+            <div class="unit w-1-4">
+                <strong><%= number_to_currency(cents_to_dollars(@sale[:amount])) %></strong>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="unit w-1-2">
+                <h4>
+                    Contact Info
+                </h4>
+                <p>
+                    <%= @sale[:email] %>
+                </p>
+                <h4>
+                    Order ID
+                </h4>
+                <p>
+                    <%= @sale[:guid] %>
+                </p>
+            </div>
+            <div class="unit w-1-2">
+                <h4>
+                    Shipping Info
+                </h4>
+                <p>
+                    We will email you when your order has shipped.
+                </p>
+                <p>
+                    The shipping information will also appear on this page.
+                </p>
+            </div>
         </div>
     </div>
+    <div class="unit w-1-4">
+        <h4>
+            Questions?
+        </h4>
+        <p>
+            If you have any questions about your order, contact us:
+        </p>
+        <ul class="nice-list">
+            <li>
+                <%= mail_to @company.email, @company.email, encode: "hex", body: "\n\n--\nSale ID: #{@sale.guid}" %>
+            </li>
+            <li>
+                <%= link_to @company.phone, @company.phone_link %>
+            </li>
+        </ul>
+        <h4>
+            Delivery Time
+        </h4>
+        <div class="handmade_label">handmade</div>
+        <p>
+            <%= @company.delivery_time %>
+        </p>
+    </div>
+</div>
 
-    <h4>
-        Contact Info
-    </h4>
-    <p>
-        <%= @sale[:email] %>
-    </p>
-    <h4>
-        Order ID
-    </h4>
-    <p>
-        <%= @sale[:guid] %>
-    </p>
-</div>
-<div class="four columns">
-    <h4>
-        Questions?
-    </h4>
-    <p>
-        If you have any questions about your order, contact us:
-    </p>
-    <ul class="nice-list">
-        <li>
-            <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "nav-list--group-item-link" %>
-        </li>
-        <li>
-            <%= link_to @company.phone, @company.phone_link, :class => "nav-list--group-item-link" %>
-        </li>
-    </ul>
-    <h4>
-        Delivery Time
-    </h4>
-    <div class="handmade_label">handmade</div>
-    <p>
-        <%= @company.delivery_time %>
-    </p>
-</div>
+
 
 <%= content_for :js do %>
     <script>
