@@ -7,8 +7,8 @@
 //= require jquery_ujs
 //= require angular
 //= require tinycolor
+//= require jquery.checkout
 //= require jquery.fitvids
-//= require jquery.noisy
 //= require jquery.impromptu
 //= require jquery.color_picker
 //= require jquery.hero
