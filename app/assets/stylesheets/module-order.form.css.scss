@@ -21,6 +21,12 @@
         color: red;
     }
 }
+.label .input-checkbox {
+    transform: translateY(-1px);
+    display: inline-block;
+    margin-right: 2px;
+}
+
 // .input {
 //
 // }
@@ -83,3 +89,5 @@
 .nojs .order-form-does-not-work-without-javascript {
     display: block;
 }
+
+

@@ -96,8 +96,8 @@ input.ng-invalid {
 
 
 
-.input--dirty {
-    border: 1px solid red;
+.label.input--dirty {
+    color: red;
 }
 
 .browsehappy {
