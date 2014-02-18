@@ -104,6 +104,9 @@
         <ul ng-repeat="product in cart.products">
             <li>
                 {{ product.title }}
+                <span class="demph" title="Quantity: {{ product.quantity }}">
+                    ({{ product.quantity }})
+                </span>
             </li>
         </ul>
     </div>
