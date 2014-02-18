@@ -504,6 +504,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         });
 
         calculateCartTotalPrice();
+        saveCartToLocalStorage();
     };
 }]);
 
