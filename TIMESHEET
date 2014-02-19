@@ -111,5 +111,8 @@ date:        time (minutes):       comment:
 2014-02-17  10  Fix issue where quantity was not saved when changed on cart page
 2014-02-17  15  Other minor fixes
 2014-02-17  30  Meeting
+2014-02-18  10  Comments Change price of all prices in total price column when changing quantity
+2014-02-18  10  Cart: Fix "Continue Shopping" button and display "n/a" when a product has no parts
+2014-02-18  30  Finish conversion of native JavaScript iterators to Underscore
 
 http://kenkeiter.com/skeuocard/
