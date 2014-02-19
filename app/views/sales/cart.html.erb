@@ -52,7 +52,7 @@
                 value="{{ savedProduct.quantity }}">
         </div>
         <div class="unit w-1-4">
-            <strong>{{ savedProduct.totalPrice | currency }}</strong>
+            <strong>{{ (savedProduct.totalPrice * savedProduct.quantity) | currency }}</strong>
         </div>
     </div>
     <div class="grid wrap shoppin-cart__cart-price-row" ng-show="cart.products.length">
