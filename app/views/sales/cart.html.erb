@@ -39,6 +39,9 @@
                         </span>
                     </span>
                 </li>
+                <li ng-hide="savedProduct.parts.length">
+                    n/a
+                </li>
             </ul>
         </div>
         <div class="unit w-1-4">
@@ -74,7 +77,7 @@
         <p>
             Nothing is in your cart.
         </p>
-        <button class="btn" ng-click="onShopMoreButtonClicked()">
+        <button class="btn" ng-click="onContinueShoppingButtonClicked()">
             Continue Shopping
         </button>
     </div>
