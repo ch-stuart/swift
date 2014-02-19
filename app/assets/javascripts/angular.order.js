@@ -1,5 +1,5 @@
-/*jshint browser: true */
-/*global console angular $ localStorage location document alert confirm window _*/
+/*jshint browser: true, sub:true */
+/*global console angular localStorage location document alert confirm window _*/
 
 var SwiftApp = angular.module('SwiftApp',[]);
 
@@ -78,7 +78,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         }
 
         if (update.selectedSize) {
-            this.product.selectedSize = this.product.sizes.filter(function(size) {
+            this.product.selectedSize = _.filter(this.product.sizes, function(size) {
                 return size.id === update.selectedSize.id;
             })[0];
         }
@@ -203,11 +203,11 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         _.each(['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer',
           'question', 'selectedSize', 'mostExpensiveFabric'], saveIf);
 
-        prod.parts
+        _.chain(prod.parts)
             .filter(function(part) {
                 return part.price && part.activated || !part.price && part.selectedColor;
             })
-            .forEach(savePart);
+            .each(savePart);
 
         delete prod.$$hashKey;
 
@@ -248,22 +248,22 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         // Check for parts which have a price, where
         // the part is active yet there is no selected
         // color and mark them as invalid.
-        $scope.product.parts
+        _.chain($scope.product.parts)
             .filter(function(part) {
                 return part.activated && part.colors.length && !part.selectedColor;
             })
-            .forEach(function(part) {
+            .each(function(part) {
                 isValid = false;
                 part.inputIsInvalid = 'input--dirty';
             });
 
         // Check for parts that have no price, and no
         // selected color
-        $scope.product.parts
+        _.chain($scope.product.parts)
             .filter(function(part) {
                 return !part.price & !part.selectedColor;
             })
-            .forEach(function(part) {
+            .each(function(part) {
                 isValid = false;
                 part.inputIsInvalid = 'input--dirty';
             });
@@ -276,7 +276,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
     // @returns total price of active parts
     function calculateTotalPriceOfParts() {
         try {
-            return $scope.product.parts
+            return _.chain($scope.product.parts)
                 .filter(function(part) {
                     return part.activated;
                 })
@@ -285,7 +285,8 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
                 })
                 .reduce(function(prev, current) {
                     return prev + current;
-                });
+                })
+                .value();
         } catch (e) {
             // console.warn(e);
             return 0;
@@ -302,13 +303,14 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
     // @returns most expensive fabrice price (number)
     function calculateTotalPriceOfFabrics() {
         try {
-            var fabricPrices = $scope.product.parts
+            var fabricPrices = _.chain($scope.product.parts)
                 .filter(function(part) {
                     return part.selectedColor && part.selectedColor.price;
                 })
                 .map(function(part) {
                     return parseFloat(part.selectedColor.price);
-                });
+                })
+                .value();
 
                 // check for empty [], return 0 if empty
                 return fabricPrices.length ? Math.max.apply(null, fabricPrices) : 0;
@@ -320,19 +322,19 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
 
     // @returns part having most expensive fabric
     function getMostExpensiveFabric() {
-        try {
-            return $scope.product.parts
-                .filter(function(part) {
-                    return part.selectedColor && part.selectedColor.price;
-                })
-                .sort(function(a, b) {
-                    return parseFloat(b.selectedColor.price) - parseFloat(a.selectedColor.price);
-                })
-                .shift();
+        var maxPart = null;
 
-        } catch(e) {
-            return null;
+        var partsWithPrices = _.filter($scope.product.parts, function(part) {
+            return part.selectedColor && part.selectedColor.price;
+        });
+
+        if (partsWithPrices.length) {
+            maxPart = _.max(partsWithPrices, function(part) {
+                return parseFloat(part.selectedColor.price);
+            });
         }
+
+        return maxPart;
     }
 
     // @returns total price for product
@@ -362,6 +364,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
 
         if (getMostExpensiveFabric()) {
             var newPart = getMostExpensiveFabric();
+            console.log(newPart);
 
             if ($scope.product.mostExpensiveFabric) {
                 var oldPart = $scope.product.mostExpensiveFabric;
@@ -421,7 +424,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
             saveCartToLocalStorage();
             calculateCartTotalPrice();
 
-            window.location = '/cart'
+            window.location = '/cart';
         } else {
             console.warn('form is not valid');
         }
@@ -459,7 +462,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         var shouldRemove = confirm('Are you sure you want to remove this product from your cart? It cannot be undone.');
 
         if (shouldRemove) {
-            $scope.cart.products = $scope.cart.products.filter(function(product) {
+            $scope.cart.products = _.filter($scope.cart.products, function(product) {
                 return product.uniqueId !== uniqueId;
             });
             calculateCartTotalPrice();
@@ -480,7 +483,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         // CHANGED no, don't remove it. If they don't resubmit it to the
         // cart we want to keep this one here. Only remove when they're
         // adding it back...
-        // $scope.cart.products = $scope.cart.products.filter(function(product) {
+        // $scope.cart.products = _.filter($scope.cart.products, function(product) {
         //     return product.uniqueId !== uniqueId;
         // });
 
