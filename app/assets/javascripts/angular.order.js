@@ -14,6 +14,17 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         $http
             .get('/products/'+ id +'.json')
             .success(function(json) {
+                // Sort by whether or not a part has colors
+                if (json.product.parts) {
+                    var parts = json.product.parts;
+
+                    json.product.parts = _.filter(parts, function(part) {
+                        return part.colors.length;
+                    }).concat(_.filter(parts, function(part) {
+                        return !part.colors.length;
+                    }));
+                }
+
                 $scope.product = json.product;
 
                 if (IS_WHOLESALE_USER) {
