@@ -5,9 +5,9 @@
         <div id="error_explanation">
             <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
             <ul>
-            	<% @product.errors.full_messages.each do |msg| %>
-            		<li><%= msg %></li>
-            	<% end %>
+                <% @product.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
             </ul>
         </div>
     <% end %>
@@ -84,107 +84,107 @@
             ex: "$249 for a pair"
         </p>
     </div>
-  	<div class="field">
-		<%= f.label :specs %>
-		<%= f.text_area :specs %>
-		<%= render :partial => 'shared/markdown_hint' %>
-	</div>
-	<h3>
-		Placement
-	</h3>
-	<div class="field row">
-		<label for="product_featured_on_homepage">
-			<%= f.check_box :featured_on_homepage %>
-			Feature on homepage?
-		</label>
-	</div>
-	<h3>
-		Photos
-	</h3>
-	<div class="field">
-		<%= f.label :flickr_set %>
-		<%= f.text_field :flickr_set %>
-		<p class="hint">
-			The flickr set id. Used for the homepage hero.
-		</p>
-	</div>
-	<div class="field">
-		<%= f.label :flickr_tag %>
-		<%= f.text_field :flickr_tag %>
-		<p class="hint">
-			Enter a flickr tag to display a photo gallery. Leave blank for none.
-		</p>
-	</div>
-	<div class="field">
-		<%= f.label :flickr_photo %>
-		<%= f.text_field :flickr_photo %>
-		<p class="hint">
-			The flickr photo id [<a href="http://d.pr/Q7xE" target="_new">?</a>] is used for the featured photo on the Ready Made page.
-		</p>
-	</div>
-	<h3>
-		Ordering
-	</h3>
-	<div class="field">
-		<%= f.label "Custom order question" %>
-		<%= f.text_field :question %>
-		<p class="hint">
-			One additional question you can ask a customer during the order process.
-		</p>
-	</div>
-	<div class="field">
-		<%= f.label "Custom order answer" %>
-		<%= f.text_field :answer %>
-		<p class="hint">
-			If the question has a set amount of choices, enter them as a comma-separated list, ex: <code>dogs, chimps, beavers</code>. Otherwise, leave the field blank if the answer is freeform.
-		</p>
-	</div>
-	<div class="field row">
-		<label for="product_not_for_sale">
-			<%= f.check_box :not_for_sale %>
-			Turn the order form off?
-		</label>
-	</div>
-	<div class="field">
-		<%= f.label :not_for_sale_message %>
-		<%= f.text_area :not_for_sale_message %>
-	</div>
-	<h3>
-		Sizes
-	</h3>
-	<%= f.fields_for :sizes do |sizes_fields| %>
-		<%= render :partial => 'sizes_fields', :locals => { :f => sizes_fields } %>
-	<% end %>
-	<div class="field add">
-		<label>
-			<%= link_to_add_fields "Add Size", f, :sizes %>
-		</label>
-	</div>
-	<h3>
-		Parts
-	</h3>
-	<%= f.fields_for :parts do |parts_fields| %>
-		<%= render :partial => 'parts_fields', :locals => { :f => parts_fields } %>
-	<% end %>
-	<div class="field add">
-		<label>
-			<%= link_to_add_fields "Add Part", f, :parts %>
-		</label>
-	</div>
-	<h3>
-		Testimonials
-	</h3>
-	<%= f.fields_for :testimonials do |testimonials_fields| %>
-		<%= render :partial => 'testimonials_fields', :locals => { :f => testimonials_fields } %>
-	<% end %>
-	<div class="field add">
-		<label>
-			<%= link_to_add_fields "Add Testimonial", f, :testimonials %>
-		</label>
-	</div>
-	<div class="actions">
-		<%= f.submit %>
-	</div>
+    <div class="field">
+        <%= f.label :specs %>
+        <%= f.text_area :specs %>
+        <%= render :partial => 'shared/markdown_hint' %>
+    </div>
+    <h3>
+        Placement
+    </h3>
+    <div class="field row">
+        <label for="product_featured_on_homepage">
+            <%= f.check_box :featured_on_homepage %>
+            Feature on homepage?
+        </label>
+    </div>
+    <h3>
+        Photos
+    </h3>
+    <div class="field">
+        <%= f.label :flickr_set %>
+        <%= f.text_field :flickr_set %>
+        <p class="hint">
+            The flickr set id. Used for the homepage hero.
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label :flickr_tag %>
+        <%= f.text_field :flickr_tag %>
+        <p class="hint">
+            Enter a flickr tag to display a photo gallery. Leave blank for none.
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label :flickr_photo %>
+        <%= f.text_field :flickr_photo %>
+        <p class="hint">
+            The flickr photo id [<a href="http://d.pr/Q7xE" target="_new">?</a>] is used for the featured photo on the Ready Made page.
+        </p>
+    </div>
+    <h3>
+        Ordering
+    </h3>
+    <div class="field">
+        <%= f.label "Custom order question" %>
+        <%= f.text_field :question %>
+        <p class="hint">
+            One additional question you can ask a customer during the order process.
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label "Custom order answer" %>
+        <%= f.text_field :answer %>
+        <p class="hint">
+            If the question has a set amount of choices, enter them as a comma-separated list, ex: <code>dogs, chimps, beavers</code>. Otherwise, leave the field blank if the answer is freeform.
+        </p>
+    </div>
+    <div class="field row">
+        <label for="product_not_for_sale">
+            <%= f.check_box :not_for_sale %>
+            Turn the order form off?
+        </label>
+    </div>
+    <div class="field">
+        <%= f.label :not_for_sale_message %>
+        <%= f.text_area :not_for_sale_message %>
+    </div>
+    <h3>
+        Sizes
+    </h3>
+    <%= f.fields_for :sizes do |sizes_fields| %>
+        <%= render :partial => 'sizes_fields', :locals => { :f => sizes_fields } %>
+    <% end %>
+    <div class="field add">
+        <label>
+            <%= link_to_add_fields "Add Size", f, :sizes %>
+        </label>
+    </div>
+    <h3>
+        Parts
+    </h3>
+    <%= f.fields_for :parts do |parts_fields| %>
+        <%= render :partial => 'parts_fields', :locals => { :f => parts_fields } %>
+    <% end %>
+    <div class="field add">
+        <label>
+            <%= link_to_add_fields "Add Part", f, :parts %>
+        </label>
+    </div>
+    <h3>
+        Testimonials
+    </h3>
+    <%= f.fields_for :testimonials do |testimonials_fields| %>
+        <%= render :partial => 'testimonials_fields', :locals => { :f => testimonials_fields } %>
+    <% end %>
+    <div class="field add">
+        <label>
+            <%= link_to_add_fields "Add Testimonial", f, :testimonials %>
+        </label>
+    </div>
+    <div class="actions">
+        <%= f.submit %>
+    </div>
 <% end %>
 
 <%= content_for :js do %>
