@@ -48,6 +48,7 @@ SwiftSite::Application.routes.draw do
   get 'orders/:guid', to: 'sales#success', as: :order
 
   post 'postmaster/validate', to: 'postmaster#validate'
+  match 'postmaster/rates', to: 'postmaster#rates'
 
   get 'logout', :to => 'application#logout'
   get 'login', :to => 'hub#index'
@@ -55,7 +56,6 @@ SwiftSite::Application.routes.draw do
 
   get 'store', :to => 'homes#store'
   get "accessories" => redirect("/store")
-
 
   root :to => 'homes#index'
 

@@ -17,7 +17,28 @@ class PostmasterController < ApplicationController
     params.delete(:controller)
     params.delete(:action)
 
-    response = Postmaster::AddressValidation.validate(params)
+    response = Postmaster::AddressValidation.validate params
+
+    respond_to do |format|
+      format.html { render :text => response }
+      format.xml  { render :json => response }
+    end
+  end
+
+  # Ask for the cost to ship a package between
+  # two zip codes.
+  #
+  # params
+  #
+  # from_zip
+  # to_zip
+  # weight
+  # etc.
+  def rates
+    params.delete(:controller)
+    params.delete(:action)
+
+    response = Postmaster::Rates.get params
 
     respond_to do |format|
       format.html { render :text => response }
