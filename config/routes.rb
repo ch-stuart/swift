@@ -47,12 +47,15 @@ SwiftSite::Application.routes.draw do
   get 'cart/checkout', to: 'sales#checkout'
   get 'orders/:guid', to: 'sales#success', as: :order
 
+  post 'postmaster/validate', to: 'postmaster#validate'
+
   get 'logout', :to => 'application#logout'
   get 'login', :to => 'hub#index'
   get 'wholesale_login', :to => 'application#wholesale_login'
 
   get 'store', :to => 'homes#store'
   get "accessories" => redirect("/store")
+
 
   root :to => 'homes#index'
 
