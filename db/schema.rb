@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140211034005) do
+ActiveRecord::Schema.define(:version => 20140220060823) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -111,6 +111,10 @@ ActiveRecord::Schema.define(:version => 20140211034005) do
     t.text     "short_description"
     t.string   "wholesale_humane_price"
     t.string   "wholesale_price"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "length"
+    t.float    "weight"
   end
 
   create_table "sales", :force => true do |t|
@@ -120,6 +124,13 @@ ActiveRecord::Schema.define(:version => 20140211034005) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "amount"
+    t.string   "weight"
+    t.string   "line1"
+    t.string   "line2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "country"
   end
 
   create_table "sizes", :force => true do |t|
