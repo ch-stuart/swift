@@ -97,3 +97,9 @@ code {
 .no-select {
     user-select: none;
 }
+
+
+input.input--dim {
+    display: inline-block;
+    width: 4em;
+}

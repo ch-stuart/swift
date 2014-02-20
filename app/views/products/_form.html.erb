@@ -123,6 +123,25 @@
         </p>
     </div>
     <h3>
+        Shipping
+    </h3>
+    <div class="field">
+        <%= f.label "Width / Height / Length" %>
+        <%= f.text_field :width, class: 'input--dim', placeholder: 'W' %> /
+        <%= f.text_field :height, class: 'input--dim', placeholder: 'H' %> /
+        <%= f.text_field :length, class: 'input--dim', placeholder: 'L' %>
+        <p class="hint">
+            Measure in inches. Round up to the nearest integer and include space for packaging/padding.
+        </p>
+    </div>
+    <div class="field">
+        <%= f.label :weight %>
+        <%= f.text_field :weight %>
+        <p class="hint">
+            Measure in pounds. Ex: 1.25.
+        </p>
+    </div>
+    <h3>
         Ordering
     </h3>
     <div class="field">
