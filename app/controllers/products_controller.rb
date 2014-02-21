@@ -27,7 +27,12 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        product_attrs = [:id, :title, :status, :price, :wholesale_price, :kind, :short_title, :humane_price, :wholesale_humane_price, :question, :answer, :not_for_sale, :not_for_sale_message]
+        product_attrs = [
+                          :id, :title, :status, :price, :wholesale_price, :kind,
+                          :short_title, :humane_price, :wholesale_humane_price,
+                          :question, :answer, :not_for_sale, :not_for_sale_message,
+                          :width, :height, :length, :weight
+                        ]
         part_attrs    = [:id, :title, :price, :wholesale_price]
         color_attrs   = [:id, :title, :price, :wholesale_price, :hex]
         size_attrs    = [:id, :title, :price, :wholesale_price]

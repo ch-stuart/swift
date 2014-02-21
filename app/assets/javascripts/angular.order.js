@@ -212,7 +212,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', function($scope, $http) {
         }
 
         _.each(['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer',
-          'question', 'selectedSize', 'mostExpensiveFabric'], saveIf);
+          'question', 'selectedSize', 'mostExpensiveFabric', 'width', 'height', 'length', 'weight'], saveIf);
 
         _.chain(prod.parts)
             .filter(function(part) {
