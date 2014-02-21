@@ -7,7 +7,12 @@ class ProductsController < ApplicationController
   cache_sweeper ApplicationSweeper
 
   def index
-    @products = Product.all(:order => 'kind DESC')
+    @public_products = Product.where(status: 'Public', kind: 'Product').order('title ASC')
+    @private_products = Product.where(status: 'Private', kind: 'Product').order('title ASC')
+    @public_stock = Product.where(status: 'Public', kind: 'Stock').order('title ASC')
+    @private_stock = Product.where(status: 'Private', kind: 'Stock').order('title ASC')
+    @public_accessories = Product.where(status: 'Public', kind: 'Accessory').order('title ASC')
+    @private_accessories = Product.where(status: 'Private', kind: 'Accessory').order('title ASC')
     render :layout => "hub"
   end
 
