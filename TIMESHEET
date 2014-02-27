@@ -116,5 +116,15 @@ date:        time (minutes):       comment:
 2014-02-18  30  Finish conversion of native JavaScript iterators to Underscore
 2014-02-19  30  Chunk together parts with colors and parts with checkboxes
 2014-02-19  30  Studying up on Postmaster API
+2014-02-19  30  Working action to validate an address via Postmaster. No UI yet
+2014-02-19  10  HTML for collecting shipping information
+2014-02-19  10  Add action to get rates for a shipment
+2014-02-19  10  Update db to contain basic info for shipping
+2014-02-19  05  Fix bug where .live is no longer available in jQuery
+2014-02-19  10  Add shipping info (dimensions and weight) to product form
+2014-02-20  10  Improve usability of products page
+2014-02-20  25  Make product dimensions and weight available on checkout page
+2014-02-25  90  Refactoring of Angular JS code
+2014-02-25  60  Complete refactoring of Angular JS code
 
-http://kenkeiter.com/skeuocard/
+
