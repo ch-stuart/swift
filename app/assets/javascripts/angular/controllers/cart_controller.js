@@ -1,5 +1,5 @@
 /*jshint browser: true, sub:true */
-/*global SwiftApp window alert */
+/*global SwiftApp window alert confirm _ */
 
 SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope, $rootScope, Cart) {
 

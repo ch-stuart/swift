@@ -1,4 +1,4 @@
-/*global angular SwiftApp _ localStorage console */
+/*global angular SwiftApp _ localStorage */
 
 SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
 
