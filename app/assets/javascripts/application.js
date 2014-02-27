@@ -1,3 +1,4 @@
+/*global document jQuery UA*/
 // ...
 //= require console
 //= require strftime
@@ -17,7 +18,13 @@
 //= require jquery.tabs
 //= require ICanHaz
 //= require slideshow
-//= require angular.order
+//= require angular/application
+//= require angular/services/cart_service
+//= require angular/services/product_service
+//= require angular/controllers/order_controller
+//= require angular/controllers/cart_controller
+//= require angular/controllers/cart_status_controller
+//= require angular/controllers/checkout_controller
 
 jQuery(document).ready(function($) {
 
@@ -36,9 +43,9 @@ jQuery(document).ready(function($) {
         $(document.body).prepend(
             ['<p class=browsehappy>',
             'You are using an <strong>outdated</strong> browser.',
-            'Please <a href=//browsehappy.com>upgrade your browser</a>',
+            '<a href=//browsehappy.com>Upgrade your browser</a>',
             'to improve your experience.</p>'].join('\n')
-        )
+        );
         $("html").addClass("ie");
     }
 

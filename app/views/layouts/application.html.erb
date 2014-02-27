@@ -20,7 +20,7 @@
   <%= yield :css %>
   <%= csrf_meta_tag %>
 </head>
-<body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>" ng-controller="OrderCtrl">
+<body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
   <% if @company.front_door_sign.present? %>
     <h2 class="front_door_sign">
       <%= @company.front_door_sign %>
@@ -38,6 +38,7 @@
         <% cache 'fox_and_cart' do %>
           <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
           <span
+              ng-controller="CartStatusCtrl"
               ng-click="onGlobalCartButtonClicked()"
               title="View Your Cart {{ cart.message }}">
             <i class='entypo entypo-cart {{ cart.isNotEmpty }}'>&#59197;</i>
