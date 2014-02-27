@@ -119,6 +119,7 @@ class SalesController < ApplicationController
       # The card has been declined or
       # some other error has occured
       @error = e
+      logger.warn @error.inspect
       render :checkout
     end
 
