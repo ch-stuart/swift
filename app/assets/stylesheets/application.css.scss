@@ -107,3 +107,9 @@ input.ng-invalid {
     padding: 20px 0 25px;
     line-height: 1;
 }
+
+
+// This makes ng-cloak actuall work
+[ng-cloak] {
+  display: none !important;
+}

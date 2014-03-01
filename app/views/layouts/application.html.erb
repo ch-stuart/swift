@@ -39,6 +39,7 @@
           <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
           <span
               ng-controller="CartStatusCtrl"
+              ng-cloak
               ng-click="onGlobalCartButtonClicked()"
               title="View Your Cart {{ cart.message }}">
             <i class='entypo entypo-cart {{ cart.isNotEmpty }}'>&#59197;</i>
@@ -71,7 +72,7 @@
   <div class="container-footer-wrap">
     <div class="container container-footer">
       <%= render "shared/footer" %>
-      <%= render "shared/no_js" %>
+      <%# render "shared/no_js" %>
       <%= render "shared/humans" %>
     </div>
   </div>
