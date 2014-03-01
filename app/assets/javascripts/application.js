@@ -11,12 +11,10 @@
 //= require tinycolor
 //= require jquery.checkout
 //= require jquery.fitvids
-//= require jquery.impromptu
-//= require jquery.color_picker
 //= require jquery.hero
 //= require jquery.lightbox_me
 //= require jquery.tabs
-//= require slideshow
+//= require jquery.slideshow
 //= require angular/application
 //= require angular/services/cart_service
 //= require angular/services/product_service
