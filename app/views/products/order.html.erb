@@ -28,11 +28,6 @@
             </h3>
         <%# else, show the order form. %>
         <% else %>
-            <h3 class="order-form-does-not-work-without-javascript">
-                <span class="woah">
-                    The order form requires JavaScript. Please enable JavaScript in your browser.
-                </span>
-            </h3>
             <%= render "order_form" %>
         <% end %>
     </div>
