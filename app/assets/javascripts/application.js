@@ -16,7 +16,6 @@
 //= require jquery.hero
 //= require jquery.lightbox_me
 //= require jquery.tabs
-//= require ICanHaz
 //= require slideshow
 //= require angular/application
 //= require angular/services/cart_service
