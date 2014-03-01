@@ -126,5 +126,5 @@ date:        time (minutes):       comment:
 2014-02-20  25  Make product dimensions and weight available on checkout page
 2014-02-25  90  Refactoring of Angular JS code
 2014-02-25  60  Complete refactoring of Angular JS code
-
-
+2014-02-28  20  Updating staging env., fixing issues found
+2014-02-28  10  Cleanup/removal of no longer used js libs
