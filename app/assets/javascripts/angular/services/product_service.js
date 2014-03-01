@@ -1,6 +1,6 @@
 /*global SwiftApp localStorage console window _*/
 
-SwiftApp.service('Product', function($http) {
+SwiftApp.service('Product', ['$http', function($http) {
 
     var response;
 
@@ -155,4 +155,4 @@ SwiftApp.service('Product', function($http) {
             }
         }
     };
-});
+}]);
