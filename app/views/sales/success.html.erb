@@ -134,7 +134,9 @@
             // localStorage.removeItem('cart')
 
             var orderDate = $('#order_date').text().trim()
-            $('#order_date').text(strftime('%B %e, %Y', new Date(orderDate)))
+            if (orderDate) {
+                $('#order_date').text(strftime('%B %e, %Y', new Date(orderDate)))
+            }
         })()
     </script>
 <% end %>
