@@ -16,7 +16,7 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope
         var shouldRemove = confirm('Are you sure you want to remove this product from your cart? It cannot be undone.');
 
         if (shouldRemove) {
-            $scope.cart.products = Cart.remove(uniqueId);
+            Cart.remove(uniqueId);
         }
     };
 
