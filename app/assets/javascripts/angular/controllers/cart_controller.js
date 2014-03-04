@@ -62,12 +62,8 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope
         Cart.update($scope.cart.products);
     };
 
-    // Navigate to "/" if they just added a product
-    // to the cart
-    $scope['onContinueShoppingButtonClicked'] = function() {
-        window.location = "/";
-    };
-
+    // TODO prefer this element to just be a standard link
+    // preventDefault if they don't have enough $$$ in their cart
     $scope['onCheckOutButtonClicked'] = function() {
         if (window.__iswsu__ && $scope.cart.price < 500) {
             return alert('Minimum $500 purchase required for wholesale purchasers.');
