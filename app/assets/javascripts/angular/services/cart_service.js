@@ -16,6 +16,19 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
 
             $rootScope.$broadcast('cart:prices:update', this.price, this.priceInCents);
         },
+        getWeight: function() {
+            var weight = 0;
+            _.each(this.products, function(product) {
+                if (product.weight) {
+                    console.warn('CartService: Missing weight for product ', product.title);
+                    weight = weight + parseFloat(product.weight);
+                } else {
+                    weight = weight + 5.0;
+                }
+
+            });
+            return weight;
+        },
         update: function(updatedProducts) {
             this.products = updatedProducts;
             this.getPrice();

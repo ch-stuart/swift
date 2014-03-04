@@ -1,5 +1,7 @@
 class PostmasterController < ApplicationController
 
+  before_filter :authenticate_admin, :except => [ :validate, :rates ]
+
   # Validate and normalize an address. The address will be
   # normalized/corrected if possible. An approximate geocoded
   # location will also be returned.

@@ -103,7 +103,13 @@ class SalesController < ApplicationController
       @sale = Sale.create!(
         email:       params[:sale][:email],
         description: params[:sale][:j],
-        amount:      params[:sale][:p]
+        amount:      params[:sale][:p],
+        line1:       params[:sale][:line1],
+        # line2:       params[:sale][:line2],
+        city:        params[:sale][:city],
+        state:       params[:sale][:state],
+        zip_code:    params[:sale][:zip_code]
+        # country:     params[:sale][:country]
       )
 
       # Create the contact if they sign up for spam

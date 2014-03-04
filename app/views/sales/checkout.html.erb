@@ -3,131 +3,145 @@
         <h2>
             Checkout
         </h2>
-
         <h4>
             Shipping
         </h4>
         <div class="row row--order">
             <div class="label-input-pair">
                 <label class="label">
-                    <input type="checkbox"> Check if you will be picking your order
+                    <input type="checkbox" ng-model="pickup" ng-change="onPickupChanged()"> Check if you will be picking your order
                 </label>
             </div>
-            <div class="label-input-pair">
+            <div class="label-input-pair pickup-is-{{ pickup }}">
                 <label class="label">
                     Street
                 </label>
                 <input type="text" ng-model="line1">
             </div>
-            <div class="label-input-pair">
+            <div class="label-input-pair pickup-is-{{ pickup }}">
                 <label class="label">
                     City
                 </label>
                 <input type="text" ng-model="city">
             </div>
-            <div class="label-input-pair">
+            <div class="label-input-pair pickup-is-{{ pickup }}">
                 <label class="label">
                     State/Province
                 </label>
                 <input type="text" ng-model="state">
             </div>
-            <div class="label-input-pair">
+            <div class="label-input-pair pickup-is-{{ pickup }}">
                 <label class="label">
                     Zip/Postal Code
                 </label>
                 <input type="text" ng-model="zip_code">
             </div>
+            <div class="label-input-pair pickup-is-{{ pickup }}">
+                <button class="btn" ng-click="onCalculateShippingCostBtnClicked()">
+                    Calculate Shipping Cost
+                </button>
+            </div>
+            <p ng-show="isShippingReady">
+                We will ship your package to you with {{ shippingDetails.provider | uppercase }} via {{ shippingDetails.service }} at a cost of {{ shippingDetails.charge / 100 | currency }}.
+            </p>
         </div>
-        <%= form_for @sale, html: { id: "checkout-form" } do |f| %>
-            <% if @sale.errors.any? %>
-                <div id="error_explanation">
-                    <h2><%= pluralize(@sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
-                    <ul>
-                        <% @sale.errors.full_messages.each do |msg| %>
-                            <li><%= msg %></li>
-                        <% end %>
-                    </ul>
+        <div ng-show="isShippingReady || pickup">
+            <%= form_for @sale, html: { id: "checkout-form" } do |f| %>
+                <% if @sale.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= pluralize(@sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+                        <ul>
+                            <% @sale.errors.full_messages.each do |msg| %>
+                                <li><%= msg %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+                <h4>
+                    Contact info
+                </h4>
+                <div class="row row--order">
+                    <div class="label-input-pair">
+                        <%= f.label :email, class: "label" %>
+                        <%= f.text_field :email, placeholder: "you@example.com", type: "email" %>
+                    </div>
+                    <div class="label-input-pair">
+                        <label><input name="send_me_marketing_emails" type="checkbox"> Send me marketing emails</label>
+                    </div>
+                </div>
+                <h4>
+                    Payment info
+                </h4>
+                <div class="row row--order">
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Credit Card #
+                        </label>
+                        <input
+                            type="text"
+                            size="20"
+                            data-stripe="number"
+                            placeholder="**** **** **** ****"
+                            pattern="[\d ]*">
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            CVC
+                        </label>
+                        <input
+                            style="width: 3em"
+                            type="text"
+                            size="3"
+                            maxlength="3"
+                            data-stripe="cvc"
+                            placeholder="***"
+                            pattern="\d*">
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Exp Month/Year
+                        </label>
+                        <input
+                            style="width: 3em;"
+                            class="input--inline"
+                            type="text"
+                            size="2"
+                            maxlength="2"
+                            data-stripe="exp-month"
+                            placeholder="MM"
+                            pattern="\d*">
+                        <input
+                            style="width: 4em;"
+                            class="input--inline"
+                            type="text"
+                            size="4"
+                            maxlength="4"
+                            id="exp-year"
+                            data-stripe="exp-year"
+                            placeholder="YYYY"
+                            pattern="\d*">
+                    </div>
+                </div>
+
+                <input type="hidden" name="sale[p]" value="{{ cart.priceInCents }}">
+                <input id="j" type="hidden" name="sale[j]">
+                <input type="hidden" value="{{ line1 }}"    name="sale[line1]">
+                <input type="hidden" value="{{ line2 }}"    name="sale[line2]">
+                <input type="hidden" value="{{ city }}"     name="sale[city]">
+                <input type="hidden" value="{{ state }}"    name="sale[state]">
+                <input type="hidden" value="{{ zip_code }}" name="sale[zip_code]">
+                <input type="hidden" value="{{ country }}"  name="sale[country]">
+
+                <div class="row row--order">
+                    <%= f.submit 'Buy It', class: 'btn' %>
                 </div>
             <% end %>
-            <h4>
-                Contact info
-            </h4>
-            <div class="row row--order">
-                <div class="label-input-pair">
-                    <%= f.label :email, class: "label" %>
-                    <%= f.text_field :email, placeholder: "you@example.com", type: "email" %>
-                </div>
-                <div class="label-input-pair">
-                    <label><input name="send_me_marketing_emails" type="checkbox"> Send me marketing emails</label>
-                </div>
-            </div>
-            <h4>
-                Payment info
-            </h4>
-            <div class="row row--order">
-                <div class="label-input-pair">
-                    <label class="label">
-                        Credit Card #
-                    </label>
-                    <input
-                        type="text"
-                        size="20"
-                        data-stripe="number"
-                        placeholder="**** **** **** ****"
-                        pattern="[\d ]*">
-                </div>
-                <div class="label-input-pair">
-                    <label class="label">
-                        CVC
-                    </label>
-                    <input
-                        style="width: 3em"
-                        type="text"
-                        size="3"
-                        maxlength="3"
-                        data-stripe="cvc"
-                        placeholder="***"
-                        pattern="\d*">
-                </div>
-                <div class="label-input-pair">
-                    <label class="label">
-                        Exp Month/Year
-                    </label>
-                    <input
-                        style="width: 3em;"
-                        class="input--inline"
-                        type="text"
-                        size="2"
-                        maxlength="2"
-                        data-stripe="exp-month"
-                        placeholder="MM"
-                        pattern="\d*">
-                    <input
-                        style="width: 4em;"
-                        class="input--inline"
-                        type="text"
-                        size="4"
-                        maxlength="4"
-                        id="exp-year"
-                        data-stripe="exp-year"
-                        placeholder="YYYY"
-                        pattern="\d*">
-                </div>
-            </div>
-
-            <input type="hidden" name="sale[p]" value="{{ cart.totalPriceInCents }}">
-            <input id="j" type="hidden" name="sale[j]">
-
-            <div class="row row--order">
-                <%= f.submit 'Buy It', class: 'btn' %>
-            </div>
-        <% end %>
-
-        <% content_for :js do %>
-            <script>
-                checkout();
-            </script>
-        <% end %>
+            <% content_for :js do %>
+                <script>
+                    checkout();
+                </script>
+            <% end %>
+        </div>
     </div>
     <div class="four columns">
         <div class="row row--checkout-sidebar">
