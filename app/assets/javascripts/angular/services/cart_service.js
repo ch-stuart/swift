@@ -4,22 +4,24 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
 
     var service = {
         products: [],
-        totalPrice: null,
-        totalPriceInCents: null,
-        calculateTotalPrice: function() {
-            var cartTotalPrice = 0;
+        price: null,
+        priceInCents: null,
+        getPrice: function() {
+            var price = 0;
             _.each(this.products, function(product) {
-                cartTotalPrice = cartTotalPrice + (product.totalPrice * product.quantity);
+                price = price + (product.totalPrice * product.quantity);
             });
-            this.totalPrice = cartTotalPrice;
-            this.totalPriceInCents = cartTotalPrice * 100;
+            this.price = price;
+            this.priceInCents = price * 100;
 
-            $rootScope.$broadcast('cart:prices:update', [this.totalPrice, this.totalPriceInCents]);
+            $rootScope.$broadcast('cart:prices:update', this.price, this.priceInCents);
         },
         update: function(updatedProducts) {
             this.products = updatedProducts;
-            this.calculateTotalPrice();
+            this.getPrice();
             this.saveToLocalStorage();
+
+            $rootScope.$broadcast('cart:products:update', this.products);
         },
         // Save a product purchase. Grab the relevant
         // data to the purchase... Goal is to be able to
@@ -76,7 +78,7 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
 
             this.products.push(save);
 
-            this.calculateTotalPrice();
+            this.getPrice();
             this.saveToLocalStorage();
 
             $rootScope.$broadcast('cart:products:update', this.products);
@@ -89,7 +91,7 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
             this.products = _.filter(this.products, function(product) {
                 return product.uniqueId !== uniqueId;
             });
-            this.calculateTotalPrice();
+            this.getPrice();
             this.saveToLocalStorage();
 
             $rootScope.$broadcast('cart:products:update', this.products);
@@ -121,8 +123,8 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
         // was there previously.
         saveToLocalStorage: function() {
             localStorage.setItem('cart', JSON.stringify({
-                totalPrice: this.totalPrice,
-                totalPriceInCents: this.totalPriceInCents,
+                price: this.price,
+                priceInCents: this.priceInCents,
                 products: this.products
             }));
         }

@@ -47,9 +47,9 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope
         // and load form state if need be
     };
 
-    $scope.$on('cart:prices:update', function(e, prices) {
-        $scope.cart.totalPrice = prices[0];
-        $scope.cart.totalPriceInCents = prices[1];
+    $scope.$on('cart:prices:update', function(e, price, priceInCents) {
+        $scope.cart.price = price;
+        $scope.cart.priceInCents = priceInCents;
     });
 
     $scope['onProductQuantityChanged'] = function() {
@@ -69,7 +69,7 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope
     };
 
     $scope['onCheckOutButtonClicked'] = function() {
-        if (window.__iswsu__ && $scope.cart.totalPrice < 500) {
+        if (window.__iswsu__ && $scope.cart.price < 500) {
             return alert('Minimum $500 purchase required for wholesale purchasers.');
         }
 
