@@ -37,13 +37,13 @@
         <i id="global-menu-btn" class="entypo entypo-menu">&#9776;</i>
         <% cache 'fox_and_cart' do %>
           <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
-          <span
+          <a
+              href="/cart"
               ng-controller="CartStatusCtrl"
               ng-cloak
-              ng-click="onGlobalCartButtonClicked()"
               title="View Your Cart {{ cart.message }}">
-          </span>
             <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
+          </a>
         <% end %>
         <br class="clear">
       </div>
