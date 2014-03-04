@@ -37,23 +37,24 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
                                 function successCallback(data) {
                                     $scope.isShippingReady = true;
 
-                                    var data = data.data;
-                                    var best = data[data.best];
-
-                                    $scope.shippingDetails = {
-                                        charge: best.charge,
-                                        service: best.service,
-                                        provider: data.best
-                                    };
+                                    $scope.shipping = data.data;
+                                    // var data = data.data;
+                                    // var best = data[data.best];
+                                    //
+                                    // $scope.shipping = {
+                                    //     charge: best.charge,
+                                    //     service: best.service,
+                                    //     provider: data.best
+                                    // };
                                 },
                                 function errorCallback(data) {
-                                    console.warn('nay again', data);
+                                    console.warn('PostmasterService.rates => Error:', data);
                                 }
                             );
                     }
                 },
                 function errorCallback(data) {
-                    console.warn('wah', data);
+                    console.warn('PostmasterService.validate => Error:', data);
                 }
             );
     };

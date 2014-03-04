@@ -20,9 +20,9 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
             var weight = 0;
             _.each(this.products, function(product) {
                 if (product.weight) {
-                    console.warn('CartService: Missing weight for product ', product.title);
                     weight = weight + parseFloat(product.weight);
                 } else {
+                    console.warn('CartService: Missing weight for product ', product.title);
                     weight = weight + 5.0;
                 }
 
