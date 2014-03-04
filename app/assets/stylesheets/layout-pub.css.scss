@@ -32,7 +32,8 @@ body {
         display: block;
 
         &:hover,
-        &.active {
+        &.active,
+        &.cart-happy--true {
             color: $hotpink;
         }
     }

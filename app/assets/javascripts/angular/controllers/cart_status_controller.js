@@ -7,22 +7,19 @@ SwiftApp.controller('CartStatusCtrl', ['$scope', 'Cart', function($scope, Cart) 
 
     $scope.$on('cart:products:update', function (e, products) {
         $scope.cart.products = products;
+        setMessage();
     });
 
-    // display a stupid message
-    if ($scope.cart.products.length === 1) {
-        $scope.cart.message = "(You have " + $scope.cart.products.length + " products in your cart)";
-    } else if ($scope.cart.products.length > 1) {
-        $scope.cart.message = "(You have " + $scope.cart.products.length + " product in your cart)";
-    }
-    // make the cart pink so we can tell there is stuff
-    // in it. hooyah
-    if ($scope.cart.products.length) {
-        $scope.cart.isNotEmpty = 'active';
+    // Run on page load and when products update
+    function setMessage() {
+        // display a stupid message
+        if ($scope.cart.products.length === 1) {
+            $scope.cart.message = "(You have " + $scope.cart.products.length + " products in your cart)";
+        } else if ($scope.cart.products.length > 1) {
+            $scope.cart.message = "(You have " + $scope.cart.products.length + " product in your cart)";
+        }
     }
 
-    $scope['onGlobalCartButtonClicked'] = function() {
-        window.location = '/cart';
-    };
+    setMessage();
 
 }]);

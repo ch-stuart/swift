@@ -42,8 +42,8 @@
               ng-cloak
               ng-click="onGlobalCartButtonClicked()"
               title="View Your Cart {{ cart.message }}">
-            <i class='entypo entypo-cart {{ cart.isNotEmpty }}'>&#59197;</i>
           </span>
+            <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
         <% end %>
         <br class="clear">
       </div>
