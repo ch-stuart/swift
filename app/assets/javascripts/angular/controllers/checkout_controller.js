@@ -4,9 +4,7 @@
 SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($scope, Cart, Postmaster) {
 
     $scope.cart = Cart.loadFromLocalStorage();
-
     $scope.isShippingReady = false;
-
     $scope.busy = false;
 
     $scope['onPickupChanged'] = function() {
