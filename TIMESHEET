@@ -131,3 +131,4 @@ date:        time (minutes):       comment:
 2014-03-02  60  Work on shipping, getting rates, validating address, displaying results, etc.
 2014-03-03  30  Various fixes and refactoring
 2014-03-03  30  Cont. work on shipping
+2014-03-06  20  Inform user that we are getting shipping rates... progress indicators, etc
