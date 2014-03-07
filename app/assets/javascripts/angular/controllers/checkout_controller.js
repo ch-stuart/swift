@@ -45,14 +45,11 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
                                     $scope.busy = false;
                                     $scope.isShippingReady = true;
                                     $scope.shipping = data.data;
-                                    // var data = data.data;
-                                    // var best = data[data.best];
-                                    //
-                                    // $scope.shipping = {
-                                    //     charge: best.charge,
-                                    //     service: best.service,
-                                    //     provider: data.best
-                                    // };
+
+                                    var data = data.data;
+                                    var best = data[data.best];
+                                    $scope.shipping_service = best.service;
+                                    $scope.shipping_charge = best.charge;
                                 },
                                 function rateErrorCallback(data) {
                                     $scope.busy = false;

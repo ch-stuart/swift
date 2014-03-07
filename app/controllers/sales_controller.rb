@@ -108,8 +108,10 @@ class SalesController < ApplicationController
         # line2:       params[:sale][:line2],
         city:        params[:sale][:city],
         state:       params[:sale][:state],
-        zip_code:    params[:sale][:zip_code]
-        # country:     params[:sale][:country]
+        zip_code:    params[:sale][:zip_code],
+        # country:     params[:sale][:country],
+        shipping_charge:  params[:sale][:shipping_charge],
+        shipping_service: params[:sale][:shipping_service]
       )
 
       # Create the contact if they sign up for spam

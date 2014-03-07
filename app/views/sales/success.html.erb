@@ -75,13 +75,6 @@
                     <%= @sale[:email] %>
                 </p>
                 <h4>
-                    Shipping Address
-                </h4>
-                <p>
-                    <%= @sale[:line1] %><br>
-                    <%= @sale[:city] %>, <%= @sale[:state] %> <%= @sale[:zip_code] %>
-                </p>
-                <h4>
                     Order Date
                 </h4>
                 <p id="order_date">
@@ -96,13 +89,26 @@
             </div>
             <div class="unit w-1-2">
                 <h4>
-                    Shipping Info
+                    Shipment Tracking
                 </h4>
                 <p>
                     We will email you when your order has shipped.
                 </p>
                 <p>
                     The shipping information will also appear on this page.
+                </p>
+                <h4>
+                    Shipment Address
+                </h4>
+                <p>
+                    <%= @sale[:line1] %><br>
+                    <%= @sale[:city] %>, <%= @sale[:state] %> <%= @sale[:zip_code] %>
+                </p>
+                <h4>
+                    Shipment Charge
+                </h4>
+                <p>
+                    <%= number_to_currency(cents_to_dollars(@sale[:shipping_charge])) %> via <%= @sale[:shipping_service] %>
                 </p>
             </div>
         </div>

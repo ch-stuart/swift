@@ -146,6 +146,8 @@
                 <input type="hidden" value="{{ state }}"    name="sale[state]">
                 <input type="hidden" value="{{ zip_code }}" name="sale[zip_code]">
                 <input type="hidden" value="{{ country }}"  name="sale[country]">
+                <input type="hidden" value="{{ shipping_service }}"  name="sale[shipping_service]">
+                <input type="hidden" value="{{ shipping_charge }}"  name="sale[shipping_charge]">
 
                 <div class="row row--order">
                     <%= f.submit 'Buy It', class: 'btn' %>
