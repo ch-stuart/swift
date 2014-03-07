@@ -134,3 +134,4 @@ date:        time (minutes):       comment:
 2014-03-06  20  Inform user that we are getting shipping rates... progress indicators, etc
 2014-03-06  20  save shipping cost with order
 2014-03-06  20  handle errors with address validation and rate retrieval
+2014-03-06  10  Update staging host
