@@ -3,6 +3,9 @@
 
 SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($scope, Cart, Postmaster) {
 
+    var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
+    var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
+
     $scope.cart = Cart.loadFromLocalStorage();
     $scope.isShippingReady = false;
     $scope.busy = false;
@@ -30,7 +33,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
         Postmaster
             .validate(validateParams)
             .then(
-                function successCallback(data) {
+                function validateSuccessCallback(data) {
                     console.log(data.data);
 
                     if (data.data.status === 'OK') {
@@ -38,7 +41,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
                         Postmaster
                             .rates(rateParams)
                             .then(
-                                function successCallback(data) {
+                                function rateSuccessCallback(data) {
                                     $scope.busy = false;
                                     $scope.isShippingReady = true;
                                     $scope.shipping = data.data;
@@ -51,16 +54,18 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
                                     //     provider: data.best
                                     // };
                                 },
-                                function errorCallback(data) {
+                                function rateErrorCallback(data) {
                                     $scope.busy = false;
                                     console.warn('PostmasterService.rates => Error:', data);
+                                    alert(RATE_ERROR_MSG);
                                 }
                             );
                     }
                 },
-                function errorCallback(data) {
+                function validateErrorCallback(data) {
                     $scope.busy = false;
                     console.warn('PostmasterService.validate => Error:', data);
+                    alert(VALIDATE_ERROR_MSG);
                 }
             );
     };
