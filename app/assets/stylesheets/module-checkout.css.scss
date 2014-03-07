@@ -14,3 +14,12 @@ input.input--inline {
 .pickup-is-true {
     opacity: 0.4;
 }
+.btn--progress {
+    position: relative;
+}
+.btn--progress__spin {
+    position: absolute;
+    left: 50%;
+    margin-right: -8px;
+    width: 16px;
+}

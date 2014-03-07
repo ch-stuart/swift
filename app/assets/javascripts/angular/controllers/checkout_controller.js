@@ -7,12 +7,15 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
 
     $scope.isShippingReady = false;
 
+    $scope.busy = false;
+
     $scope['onPickupChanged'] = function() {
         console.log('what is pickup', $scope.pickup);
     };
 
     $scope['onCalculateShippingCostBtnClicked'] = function() {
-        console.log('on clicked');
+        $scope.busy = true;
+
         var validateParams = {
             line1: $scope.line1,
             city: $scope.city,
@@ -35,6 +38,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
                             .rates(rateParams)
                             .then(
                                 function successCallback(data) {
+                                    $scope.busy = false;
+
                                     $scope.isShippingReady = true;
 
                                     $scope.shipping = data.data;
@@ -48,12 +53,14 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
                                     // };
                                 },
                                 function errorCallback(data) {
+                                    $scope.busy = false;
                                     console.warn('PostmasterService.rates => Error:', data);
                                 }
                             );
                     }
                 },
                 function errorCallback(data) {
+                    $scope.busy = false;
                     console.warn('PostmasterService.validate => Error:', data);
                 }
             );
