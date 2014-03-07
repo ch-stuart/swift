@@ -31,15 +31,16 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
             .validate(validateParams)
             .then(
                 function successCallback(data) {
+                    console.log(data.data);
+
                     if (data.data.status === 'OK') {
+                        rateParams.commercial = !!data.data.commercial;
                         Postmaster
                             .rates(rateParams)
                             .then(
                                 function successCallback(data) {
                                     $scope.busy = false;
-
                                     $scope.isShippingReady = true;
-
                                     $scope.shipping = data.data;
                                     // var data = data.data;
                                     // var best = data[data.best];

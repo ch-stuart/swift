@@ -21,9 +21,17 @@ class PostmasterController < ApplicationController
 
     response = Postmaster::AddressValidation.validate params
 
+    # The response from Postmaster is shitty (does not follow docs)
+    # Walk the array and figure out if this is a commercial address
+    response.addresses[0].each do |thing|
+        if thing[0] == :commercial && thing[1] == true
+            response.commercial = true
+        end
+    end
+
     respond_to do |format|
       format.html { render :text => response }
-      format.xml  { render :json => response }
+      format.json  { render :json => response }
     end
   end
 
@@ -44,7 +52,7 @@ class PostmasterController < ApplicationController
 
     respond_to do |format|
       format.html { render :text => response }
-      format.xml  { render :json => response }
+      format.json  { render :json => response }
     end
   end
 
