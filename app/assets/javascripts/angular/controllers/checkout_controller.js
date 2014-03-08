@@ -1,7 +1,7 @@
 /*jshint browser: true, sub:true */
-/*global SwiftApp console */
+/*global SwiftApp console alert _ */
 
-SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($scope, Cart, Postmaster) {
+SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', function($scope, Cart, Postmaster, Country) {
 
     var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
@@ -9,9 +9,12 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
     $scope.cart = Cart.loadFromLocalStorage();
     $scope.isShippingReady = false;
     $scope.busy = false;
+    $scope.countryCodes = Country.get();
+
+    console.log($scope.countryCodes);
 
     $scope['onPickupChanged'] = function() {
-        console.log('what is pickup', $scope.pickup);
+        console.log('are we picking up?', $scope.pickup);
     };
 
     $scope['onCalculateShippingCostBtnClicked'] = function() {
@@ -33,6 +36,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
             weight: Cart.getWeight()
         };
 
+        console.log('country is', $scope.country);
+
         Postmaster
             .validate(validateParams)
             .then(
@@ -45,7 +50,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
                         if ($scope.country !== 'US') {
                             rateParams.carrier = 'usps';
                         }
-                        $scope.intl = !!rateParams.carrier
+                        $scope.intl = !!rateParams.carrier;
 
                         Postmaster
                             .rates(rateParams)
@@ -63,7 +68,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
                                             provider: 'USPS',
                                             charge: data.charge,
                                             service: data.service
-                                        })
+                                        });
                                     } else {
                                         _.each(['fedex', 'usps', 'ups'], function(provider) {
                                             if (data[provider]) {

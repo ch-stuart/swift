@@ -40,7 +40,11 @@
                 <label class="label">
                     Country
                 </label>
-                <input type="text" ng-model="country" value="US">
+                <select
+                    ng-model="country"
+                    ng-options="k as v for (k,v) in countryCodes"
+                    class="input">
+                </select>
             </div>
             <div class="label-input-pair pickup-is-{{ pickup }}">
                 <button class="btn btn--progress" ng-click="onCalculateShippingCostBtnClicked()" ng-disabled="pickup || busy">
