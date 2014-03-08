@@ -11,7 +11,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
     $scope.busy = false;
     $scope.countryCodes = Country.get();
 
-    console.log($scope.countryCodes);
+    // Default!
+    $scope.country = 'US';
 
     $scope['onPickupChanged'] = function() {
         console.log('are we picking up?', $scope.pickup);
@@ -35,8 +36,6 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
             to_country: $scope.country,
             weight: Cart.getWeight()
         };
-
-        console.log('country is', $scope.country);
 
         Postmaster
             .validate(validateParams)
