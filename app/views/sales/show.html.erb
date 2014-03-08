@@ -24,6 +24,13 @@
 </p>
 
 <p>
+  <b>Shipping:</b><br>
+    - <%= @sale.shipping_provider %><br>
+    - <%= @sale.shipping_service %><br>
+    - <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %>
+</p>
+
+<p>
   <b>Amount:</b>
   <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
 </p>

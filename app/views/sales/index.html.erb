@@ -5,6 +5,7 @@
 <table>
   <tr>
     <th>Guid</th>
+    <th>Date</th>
     <th>Email</th>
     <th>Amount</th>
     <th></th>
@@ -21,6 +22,7 @@
         </span>
       </a>
     </td>
+    <td><%= sale.created_at %></td>
     <td><%= sale.email %></td>
     <td><%= sale.amount %></td>
     <td><%= link_to 'Show', sale %></td>
