@@ -1,4 +1,4 @@
-/*global angular SwiftApp _ localStorage */
+/*global angular SwiftApp _ localStorage console */
 
 SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
 
@@ -129,6 +129,14 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
             }
 
             this.products = cartContents.products;
+
+            // This should have already been deleted
+            // But, whatever, for now just re-delete
+            // until we care to investigate why it
+            // didn't happen already
+            _.each(cartContents.products, function(product) {
+                delete product.$$hashKey;
+            });
 
             return cartContents;
         },
