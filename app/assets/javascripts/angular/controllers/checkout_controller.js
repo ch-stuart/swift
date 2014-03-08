@@ -21,12 +21,15 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
             line1: $scope.line1,
             city: $scope.city,
             state: $scope.state,
-            zip_code: $scope.zip_code
+            zip_code: $scope.zip_code,
+            country: $scope.country
         };
 
         var rateParams = {
             from_zip: '98107',
+            from_country: 'US',
             to_zip: $scope.zip_code,
+            to_country: $scope.country,
             weight: Cart.getWeight()
         };
 
@@ -38,18 +41,48 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', function($s
 
                     if (data.data.status === 'OK') {
                         rateParams.commercial = !!data.data.commercial;
+
+                        if ($scope.country !== 'US') {
+                            rateParams.carrier = 'usps';
+                        }
+                        $scope.intl = !!rateParams.carrier
+
                         Postmaster
                             .rates(rateParams)
                             .then(
-                                function rateSuccessCallback(data) {
+                                function rateSuccessCallback(response) {
+                                    console.log('rateSuccessCallback', response);
+                                    $scope.rates = [];
                                     $scope.busy = false;
                                     $scope.isShippingReady = true;
-                                    $scope.shipping = data.data;
 
-                                    var data = data.data;
-                                    var best = data[data.best];
-                                    $scope.shipping_service = best.service;
-                                    $scope.shipping_charge = best.charge;
+                                    var data = response.data;
+
+                                    if ($scope.intl) {
+                                        $scope.rates.push({
+                                            provider: 'USPS',
+                                            charge: data.charge,
+                                            service: data.service
+                                        })
+                                    } else {
+                                        _.each(['fedex', 'usps', 'ups'], function(provider) {
+                                            if (data[provider]) {
+                                                $scope.rates.push({
+                                                    best: (data.best === provider),
+                                                    provider: provider,
+                                                    charge: data[provider].charge,
+                                                    service: data[provider].service
+                                                });
+                                            }
+                                        });
+                                    }
+
+                                    // $scope.shipping = data.data;
+                                    //
+                                    // var data = data.data;
+                                    // var best = data[data.best];
+                                    // $scope.shipping_service = best.service;
+                                    // $scope.shipping_charge = best.charge;
                                 },
                                 function rateErrorCallback(data) {
                                     $scope.busy = false;

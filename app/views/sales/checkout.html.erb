@@ -37,6 +37,12 @@
                 <input type="text" ng-model="zip_code">
             </div>
             <div class="label-input-pair pickup-is-{{ pickup }}">
+                <label class="label">
+                    Country
+                </label>
+                <input type="text" ng-model="country" value="US">
+            </div>
+            <div class="label-input-pair pickup-is-{{ pickup }}">
                 <button class="btn btn--progress" ng-click="onCalculateShippingCostBtnClicked()" ng-disabled="pickup || busy">
                     <span sw-visible="!busy">
                         Calculate Shipping Cost
@@ -44,20 +50,9 @@
                     <img sw-visible="busy" src="/assets/spin.gif" class="btn--progress__spin">
                 </button>
             </div>
-            <p ng-show="isShippingReady" class="pickup-is-{{ pickup }}">
-                <!--
-                We will ship your package to you with {{ shipping.provider | uppercase }} via {{ shipping.service }} at a cost of {{ shipping.charge / 100 | currency }}.
-                -->
-                Shipping options:<br><br>
-                USPS:<br>
-                {{ shipping.usps.charge / 100 | currency }}<br>
-                {{ shipping.usps.service }}<br><br>
-                UPS:<br>
-                {{ shipping.ups.charge / 100 | currency }}<br>
-                {{ shipping.ups.service }}<br><br>
-                FedEx:<br>
-                {{ shipping.fedex.charge / 100 | currency }}<br>
-                {{ shipping.fedex.service }}<br>
+            <p ng-show="isShippingReady" class="pickup-is-{{ pickup }} best-price-{{ provider.best }}" ng-repeat="provider in rates">
+                We will ship your package to you with {{ provider.provider }} via
+                {{ provider.service }} at a cost of {{ provider.charge / 100 | currency }}.
             </p>
         </div>
         <div ng-show="isShippingReady || pickup">
