@@ -108,7 +108,7 @@
                     Shipment Charge
                 </h4>
                 <p>
-                    <%= number_to_currency(cents_to_dollars(@sale[:shipping_charge])) %> via <%= @sale[:shipping_service] %>
+                    <%= number_to_currency(cents_to_dollars(@sale[:shipping_charge])) %> via <%= @sale[:shipping_provider] %> <%= @sale[:shipping_service] %>.
                 </p>
             </div>
         </div>

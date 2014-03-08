@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140307043852) do
+ActiveRecord::Schema.define(:version => 20140308225828) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -121,8 +121,8 @@ ActiveRecord::Schema.define(:version => 20140307043852) do
     t.text     "email"
     t.string   "guid"
     t.text     "description"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "amount"
     t.string   "weight"
     t.string   "line1"
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20140307043852) do
     t.string   "country"
     t.string   "shipping_charge"
     t.string   "shipping_service"
+    t.string   "shipping_provider"
   end
 
   create_table "sizes", :force => true do |t|

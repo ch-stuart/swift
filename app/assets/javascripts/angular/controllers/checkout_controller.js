@@ -57,36 +57,44 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
                                 function rateSuccessCallback(response) {
                                     console.log('rateSuccessCallback', response);
                                     $scope.rates = [];
+                                    $scope.shipping = {};
                                     $scope.busy = false;
                                     $scope.isShippingReady = true;
 
                                     var data = response.data;
 
                                     if ($scope.intl) {
-                                        $scope.rates.push({
+                                        var shipping = {
                                             provider: 'USPS',
                                             charge: data.charge,
                                             service: data.service
-                                        });
+                                        };
+                                        $scope.rates.push(shipping);
+
+                                        // Save this so we can send it to the server
+                                        $scope.shipping = shipping;
                                     } else {
                                         _.each(['fedex', 'usps', 'ups'], function(provider) {
+                                            // And save it here too...
+                                            $scope.shipping = {
+                                                charge: data[data.best].charge,
+                                                provider: data.best,
+                                                service: data[data.best].service
+                                            };
+
+                                            // However, for now we want to show the options.
+                                            // We may or may not allow the customer to choose.
+                                            // I would guess that we will.
                                             if (data[provider]) {
                                                 $scope.rates.push({
                                                     best: (data.best === provider),
-                                                    provider: provider,
                                                     charge: data[provider].charge,
+                                                    provider: provider,
                                                     service: data[provider].service
                                                 });
                                             }
                                         });
                                     }
-
-                                    // $scope.shipping = data.data;
-                                    //
-                                    // var data = data.data;
-                                    // var best = data[data.best];
-                                    // $scope.shipping_service = best.service;
-                                    // $scope.shipping_charge = best.charge;
                                 },
                                 function rateErrorCallback(data) {
                                     $scope.busy = false;

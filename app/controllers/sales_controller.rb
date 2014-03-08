@@ -110,6 +110,7 @@ class SalesController < ApplicationController
         state:       params[:sale][:state],
         zip_code:    params[:sale][:zip_code],
         # country:     params[:sale][:country],
+        shipping_provider:  params[:sale][:shipping_provider],
         shipping_charge:  params[:sale][:shipping_charge],
         shipping_service: params[:sale][:shipping_service]
       )
