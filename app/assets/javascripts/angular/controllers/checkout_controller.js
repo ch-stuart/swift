@@ -40,11 +40,12 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
         Postmaster
             .validate(validateParams)
             .then(
-                function validateSuccessCallback(data) {
-                    console.log(data.data);
+                function validateSuccessCallback(response) {
+                    var data = response.data;
+                    console.log(data);
 
-                    if (data.data.status === 'OK') {
-                        rateParams.commercial = !!data.data.commercial;
+                    if (data.status === 'OK') {
+                        rateParams.commercial = !!data.commercial;
 
                         if ($scope.country !== 'US') {
                             rateParams.carrier = 'usps';
@@ -96,17 +97,17 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
                                         });
                                     }
                                 },
-                                function rateErrorCallback(data) {
+                                function rateErrorCallback(response) {
                                     $scope.busy = false;
-                                    console.warn('PostmasterService.rates => Error:', data);
+                                    console.warn('PostmasterService.rates => Error:', response);
                                     alert(RATE_ERROR_MSG);
                                 }
                             );
                     }
                 },
-                function validateErrorCallback(data) {
+                function validateErrorCallback(response) {
                     $scope.busy = false;
-                    console.warn('PostmasterService.validate => Error:', data);
+                    console.warn('PostmasterService.validate => Error:', response);
                     alert(VALIDATE_ERROR_MSG);
                 }
             );
