@@ -15,6 +15,18 @@
       /orders/<%= @sale.guid %>
   </a>
 </p>
+<p>
+  <b>Stripe ID:</b>
+  <% if Rails.env == "production" %>
+    <a href="https://manage.stripe.com/prod/payments/<%= @sale.stripe_id %>">
+      <%= @sale.stripe_id %>
+    </a>
+  <% else %>
+    <a href="https://manage.stripe.com/test/payments/<%= @sale.stripe_id %>">
+      <%= @sale.stripe_id %>
+    </a>
+  <% end %>
+</p>
 
 <p>
   <b>Email:</b>

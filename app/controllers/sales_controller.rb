@@ -92,18 +92,30 @@ class SalesController < ApplicationController
   # POST /sales.json
   def create
     begin
+      product_charge = params[:sale][:p]
+      shipping_charge = params[:sale][:shipping_charge]
+
+      # Calculate charge
+      if shipping_charge
+        charge = shipping_charge.to_i + product_charge.to_i
+      # Assuming they are picking up order (no shipping!)
+      else
+        charge = product_charge.to_i
+      end
+
       # Create the charge
-      charge = Stripe::Charge.create(
-        amount:      params[:sale][:p],
+      stripe_charge = Stripe::Charge.create(
+        amount:      charge,
         currency:    "usd",
         card:        params[:stripeToken],
         description: "#{params[:sale][:email]} purchasing #{params[:sale][:j]}"
       )
+
       # Create the sale
       @sale = Sale.create!(
         email:       params[:sale][:email],
         description: params[:sale][:j],
-        amount:      params[:sale][:p],
+        amount:      product_charge,
         line1:       params[:sale][:line1],
         # line2:       params[:sale][:line2],
         city:        params[:sale][:city],
@@ -111,8 +123,9 @@ class SalesController < ApplicationController
         zip_code:    params[:sale][:zip_code],
         # country:     params[:sale][:country],
         shipping_provider:  params[:sale][:shipping_provider],
-        shipping_charge:  params[:sale][:shipping_charge],
-        shipping_service: params[:sale][:shipping_service]
+        shipping_charge:  shipping_charge,
+        shipping_service: params[:sale][:shipping_service],
+        stripe_id: stripe_charge[:id]
       )
 
       # Create the contact if they sign up for spam
