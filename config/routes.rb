@@ -50,7 +50,7 @@ SwiftSite::Application.routes.draw do
   post 'postmaster/validate', to: 'postmaster#validate'
   post 'postmaster/rates', to: 'postmaster#rates'
 
-  match 'wa_state_tax_service/rate', to: 'wa_state_tax_service#rate'
+  match 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
 
   get 'logout', :to => 'application#logout'
   get 'login', :to => 'hub#index'

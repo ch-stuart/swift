@@ -19,7 +19,7 @@ SwiftApp.service('WaStateTaxService', ['$http', function($http) {
     return {
         rate: function(params) {
             console.log('WaStateTaxService.rate', params);
-            return $http.post('/wa_state_tax_service/rate', angular.extend(defaults, params));
+            return $http.post('/wa_state_taxes/rate', angular.extend(defaults, params));
         }
     };
 
