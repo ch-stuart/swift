@@ -6,6 +6,7 @@ APP_CONFIG = {
   flickr_user_id:       ENV['SWIFT_FLICKR_USER_ID'],
   flickr_api_key:       ENV['SWIFT_API_KEY'],
   flickr_shared_secret: ENV['SWIFT_FLICKR_SHARED_SECRET'],
+  wa_state_tax_url:     'http://dor.wa.gov/AddressRates.aspx',
   personal_blog_url:    'http://cycleswift.wordpress.com/',
   twitter_url:          'http://twitter.com/SwiftIndustries',
   facebook_url:         'http://www.facebook.com/pages/SwiftIndustries/319490293426',

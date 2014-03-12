@@ -48,7 +48,9 @@ SwiftSite::Application.routes.draw do
   get 'orders/:guid', to: 'sales#success', as: :order
 
   post 'postmaster/validate', to: 'postmaster#validate'
-  match 'postmaster/rates', to: 'postmaster#rates'
+  post 'postmaster/rates', to: 'postmaster#rates'
+
+  match 'wa_state_tax_service/rate', to: 'wa_state_tax_service#rate'
 
   get 'logout', :to => 'application#logout'
   get 'login', :to => 'hub#index'

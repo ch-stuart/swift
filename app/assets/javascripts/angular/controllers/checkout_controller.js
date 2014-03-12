@@ -1,7 +1,7 @@
 /*jshint browser: true, sub:true */
 /*global SwiftApp console alert _ */
 
-SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', function($scope, Cart, Postmaster, Country) {
+SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 'WaStateTaxService', function($scope, Cart, Postmaster, Country, WaStateTaxService) {
 
     var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
@@ -30,8 +30,6 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
         };
 
         var rateParams = {
-            from_zip: '98107',
-            from_country: 'US',
             to_zip: $scope.zip_code,
             to_country: $scope.country,
             weight: Cart.getWeight()
@@ -51,6 +49,23 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
                             rateParams.carrier = 'usps';
                         }
                         $scope.intl = !!rateParams.carrier;
+
+
+                        WaStateTaxService
+                            .rate({
+                                addr: $scope.line1,
+                                city: $scope.city,
+                                zip: $scope.zip_code
+                            })
+                            .then(
+                                function taxSuccessCallback(response) {
+                                    console.log(response);
+                                },
+                                function taxErrorCallback(response) {
+                                    console.log(response);
+                                }
+                            );
+
 
                         Postmaster
                             .rates(rateParams)

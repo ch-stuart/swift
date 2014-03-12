@@ -16,6 +16,7 @@ gem 'figaro'
 gem 'stripe'
 gem 'mandrill-api'
 gem 'postmaster'
+gem 'httpclient'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '

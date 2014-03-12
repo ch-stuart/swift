@@ -1,4 +1,4 @@
-/*global SwiftApp console*/
+/*global SwiftApp console angular */
 
 SwiftApp.service('Postmaster', ['$http', function($http) {
 
@@ -11,7 +11,13 @@ SwiftApp.service('Postmaster', ['$http', function($http) {
         // match 'postmaster/rates'
         rates: function(params) {
             console.log('PostmasterService.rates', params);
-            return $http.post('/postmaster/rates', params);
+
+            var defaults = {
+                from_zip: '98107',
+                from_country: 'US'
+            };
+
+            return $http.post('/postmaster/rates', angular.extend(defaults, params));
         }
     };
 
