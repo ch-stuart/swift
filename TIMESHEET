@@ -144,3 +144,6 @@ date:        time (minutes):       comment:
 2014-03-08  25  Reading up on TaxCloud integration
 2014-03-08  30  Basecamping
 2014-03-10  60  Meeting
+2014-03-10  20  Researching how to get tax rate for WA State
+2014-03-11  80  Implement proxy to fetch wa state tax rate
+2014-03-11  20  Only try and get wa state tax rate if zip code is in WA state
