@@ -64,7 +64,7 @@
           <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
               <div class="unit w-3-4 hide-on-mobiles"></div>
               <div class="unit w-1-4">
-                  Tax: <%= number_to_currency(@sale[:tax_amount]) %>
+                  Tax: <%= number_to_currency(cents_to_dollars(@sale[:tax_amount])) %>
               </div>
           </div>
         <% end %>

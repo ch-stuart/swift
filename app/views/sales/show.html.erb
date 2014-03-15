@@ -43,6 +43,12 @@
 </p>
 
 <p>
+  <b>Tax:</b><br>
+    - Tax Rate: <%= @sale.tax_rate %><br>
+    - Tax amount: <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %>
+</p>
+
+<p>
   <b>Amount:</b>
   <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
 </p>

@@ -47,9 +47,8 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope
         // and load form state if need be
     };
 
-    $scope.$on('cart:prices:update', function(e, price, priceInCents) {
+    $scope.$on('cart:prices:update', function(e, price) {
         $scope.cart.price = price;
-        $scope.cart.priceInCents = priceInCents;
     });
 
     $scope['onProductQuantityChanged'] = function() {

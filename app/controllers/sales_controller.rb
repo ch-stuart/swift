@@ -94,13 +94,16 @@ class SalesController < ApplicationController
     begin
       product_charge = params[:sale][:p]
       shipping_charge = params[:sale][:shipping_charge]
+      tax_amount = params[:sale][:ta]
 
-      # Calculate charge
+      charge = product_charge.to_i
+
       if shipping_charge
-        charge = shipping_charge.to_i + product_charge.to_i
-      # Assuming they are picking up order (no shipping!)
-      else
-        charge = product_charge.to_i
+        charge = charge + shipping_charge.to_i
+      end
+
+      if tax_amount
+        charge = charge + tax_amount.to_i
       end
 
       # Create the charge

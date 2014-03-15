@@ -59,10 +59,10 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
         Cart.setTaxRate(response.data.rate);
     }
 
-    $scope.$on('cart:prices:update', function(e, price, priceInCents, taxAmount) {
+    $scope.$on('cart:prices:update', function(e, price, taxAmount, taxRate) {
         $scope.cart.price = price;
-        $scope.cart.priceInCents = priceInCents;
         $scope.cart.taxAmount = taxAmount;
+        $scope.cart.taxRate = taxRate;
     });
 
     function taxErrorCallback(response) {

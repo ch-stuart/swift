@@ -61,7 +61,7 @@
     <div class="grid wrap shoppin-cart__cart-price-row" ng-show="cart.products.length">
         <div class="unit w-3-4 hide-on-mobiles"></div>
         <div class="unit w-1-4">
-            <strong>{{ cart.price | currency }}</strong>
+            <strong>{{ (cart.price / 100) | currency }}</strong>
         </div>
     </div>
     <div class="grid wrap shoppin-cart__toolbar" ng-show="cart.products.length">
