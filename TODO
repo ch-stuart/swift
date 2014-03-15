@@ -1,36 +1,3 @@
 ## TODO
 
-## Cart
-
-1. User can add items to a cart
-2. These items should be able to be removed, quantity changed, and updated
-3. Therefore we need to be able to link from the cart back to the product
-
-### Cart Views
-
-1. Show: User sees his/her cart with 0 or more products in it
-
-### How to edit a product
-
-1. User has product in cart
-2. User clicks "Update"
-3. Goes back to form
-
-lots of serializing and deserializing data
-
-componenents need to be able to initialize with state
-
-
-...
-
-or, keep shopping cart in page at all times.
-
-add to cart just takes the product state and displays it in different view (cart view), rather than order view
-
-could store on server, or in local storage. local storage seems nicer
-
-product order form gets JSON from server defining product and it's options.
-
-order is customized, this is saved to localStorage when user puts it in the cart. assigned a unique ID in the cart... this unique ID tracks updates.
-
-This I think avoids most issues with caching?
+Store cart price, cart price with shipping with tax and shipping, tax price and shipping price

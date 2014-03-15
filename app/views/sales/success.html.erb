@@ -7,7 +7,7 @@
                 </h2>
             </div>
         </div>
-        <div class="grid hide-on-mobiles" ng-show="cart.products.length">
+        <div class="grid hide-on-mobiles">
             <div class="shoppin-cart__header unit w-1-4">Product</div>
             <div class="shoppin-cart__header unit w-1-4">Parts</div>
             <div class="shoppin-cart__header unit w-1-4">Quantity</div>
@@ -60,10 +60,26 @@
                 </div>
             </div>
         <% end %>
-        <div class="grid shoppin-cart__cart-price-row" ng-show="cart.products.length">
+        <% if @sale[:tax_amount].present? %>
+          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="unit w-3-4 hide-on-mobiles"></div>
+              <div class="unit w-1-4">
+                  Tax: <%= number_to_currency(@sale[:tax_amount]) %>
+              </div>
+          </div>
+        <% end %>
+        <% if @sale[:shipping_charge].present? %>
+          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="unit w-3-4 hide-on-mobiles"></div>
+              <div class="unit w-1-4">
+                  Shipping Charge: <%= number_to_currency(cents_to_dollars(@sale[:shipping_charge])) %>
+              </div>
+          </div>
+        <% end %>
+        <div class="grid shoppin-cart__cart-price-row">
             <div class="unit w-3-4 hide-on-mobiles"></div>
             <div class="unit w-1-4">
-                <strong><%= number_to_currency(cents_to_dollars(@sale[:amount])) %></strong>
+                Total: <strong><%= number_to_currency(cents_to_dollars(@sale[:amount])) %></strong>
             </div>
         </div>
         <div class="grid">

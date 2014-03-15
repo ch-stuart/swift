@@ -14,6 +14,110 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
     // Default!
     $scope.country = 'US';
 
+    function postmasterValidateSuccessCallback(response) {
+        var data = response.data;
+        var rateParams = {
+            to_zip: $scope.zip_code,
+            to_country: $scope.country,
+            weight: Cart.getWeight()
+        };
+
+        console.log(data);
+
+        // Is status ever not OK? Assume that error callback
+        // is called if status is not OK.
+        if (data.status === 'OK') {
+            rateParams.commercial = !!data.commercial;
+
+            if ($scope.country !== 'US') {
+                rateParams.carrier = 'usps';
+            }
+            $scope.intl = !!rateParams.carrier;
+
+            WaStateTaxService
+                .rate({
+                    addr: $scope.line1,
+                    city: $scope.city,
+                    zip: $scope.zip_code
+                })
+                .then(taxSuccessCallback, taxErrorCallback);
+
+            Postmaster
+                .rates(rateParams)
+                .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
+        }
+    }
+
+    function postmasterValidateErrorCallback(response) {
+        $scope.busy = false;
+        console.warn('PostmasterService.validate => Error:', response);
+        alert(VALIDATE_ERROR_MSG);
+    }
+
+    function taxSuccessCallback(response) {
+        console.log('taxSuccessCallback', response);
+        Cart.setTaxRate(response.data.rate);
+    }
+
+    $scope.$on('cart:prices:update', function(e, price, priceInCents, taxAmount) {
+        $scope.cart.price = price;
+        $scope.cart.priceInCents = priceInCents;
+        $scope.cart.taxAmount = taxAmount;
+    });
+
+    function taxErrorCallback(response) {
+        console.log('taxErrorCallback', response);
+    }
+
+    function postmasterRateSuccessCallback(response) {
+        console.log('rateSuccessCallback', response);
+        $scope.rates = [];
+        $scope.shipping = {};
+        $scope.busy = false;
+        $scope.isShippingReady = true;
+
+        var data = response.data;
+
+        if ($scope.intl) {
+            var shipping = {
+                provider: 'USPS',
+                charge: data.charge,
+                service: data.service
+            };
+            $scope.rates.push(shipping);
+
+            // Save this so we can send it to the server
+            $scope.shipping = shipping;
+        } else {
+            _.each(['fedex', 'usps', 'ups'], function(provider) {
+                // And save it here too...
+                $scope.shipping = {
+                    charge: data[data.best].charge,
+                    provider: data.best,
+                    service: data[data.best].service
+                };
+
+                // However, for now we want to show the options.
+                // We may or may not allow the customer to choose.
+                // I would guess that we will.
+                if (data[provider]) {
+                    $scope.rates.push({
+                        best: (data.best === provider),
+                        charge: data[provider].charge,
+                        provider: provider,
+                        service: data[provider].service
+                    });
+                }
+            });
+        }
+    }
+
+    function postmasterRateErrorCallback(response) {
+        $scope.busy = false;
+        console.warn('PostmasterService.rates => Error:', response);
+        alert(RATE_ERROR_MSG);
+    }
+
     $scope['onPickupChanged'] = function() {
         console.log('are we picking up?', $scope.pickup);
     };
@@ -29,103 +133,9 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
             country: $scope.country
         };
 
-        var rateParams = {
-            to_zip: $scope.zip_code,
-            to_country: $scope.country,
-            weight: Cart.getWeight()
-        };
-
         Postmaster
             .validate(validateParams)
-            .then(
-                function validateSuccessCallback(response) {
-                    var data = response.data;
-                    console.log(data);
-
-                    if (data.status === 'OK') {
-                        rateParams.commercial = !!data.commercial;
-
-                        if ($scope.country !== 'US') {
-                            rateParams.carrier = 'usps';
-                        }
-                        $scope.intl = !!rateParams.carrier;
-
-
-                        WaStateTaxService
-                            .rate({
-                                addr: $scope.line1,
-                                city: $scope.city,
-                                zip: $scope.zip_code
-                            })
-                            .then(
-                                function taxSuccessCallback(response) {
-                                    console.log(response);
-                                },
-                                function taxErrorCallback(response) {
-                                    console.log(response);
-                                }
-                            );
-
-
-                        Postmaster
-                            .rates(rateParams)
-                            .then(
-                                function rateSuccessCallback(response) {
-                                    console.log('rateSuccessCallback', response);
-                                    $scope.rates = [];
-                                    $scope.shipping = {};
-                                    $scope.busy = false;
-                                    $scope.isShippingReady = true;
-
-                                    var data = response.data;
-
-                                    if ($scope.intl) {
-                                        var shipping = {
-                                            provider: 'USPS',
-                                            charge: data.charge,
-                                            service: data.service
-                                        };
-                                        $scope.rates.push(shipping);
-
-                                        // Save this so we can send it to the server
-                                        $scope.shipping = shipping;
-                                    } else {
-                                        _.each(['fedex', 'usps', 'ups'], function(provider) {
-                                            // And save it here too...
-                                            $scope.shipping = {
-                                                charge: data[data.best].charge,
-                                                provider: data.best,
-                                                service: data[data.best].service
-                                            };
-
-                                            // However, for now we want to show the options.
-                                            // We may or may not allow the customer to choose.
-                                            // I would guess that we will.
-                                            if (data[provider]) {
-                                                $scope.rates.push({
-                                                    best: (data.best === provider),
-                                                    charge: data[provider].charge,
-                                                    provider: provider,
-                                                    service: data[provider].service
-                                                });
-                                            }
-                                        });
-                                    }
-                                },
-                                function rateErrorCallback(response) {
-                                    $scope.busy = false;
-                                    console.warn('PostmasterService.rates => Error:', response);
-                                    alert(RATE_ERROR_MSG);
-                                }
-                            );
-                    }
-                },
-                function validateErrorCallback(response) {
-                    $scope.busy = false;
-                    console.warn('PostmasterService.validate => Error:', response);
-                    alert(VALIDATE_ERROR_MSG);
-                }
-            );
+            .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
     };
 
 }]);

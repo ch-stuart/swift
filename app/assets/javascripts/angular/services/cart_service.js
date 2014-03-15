@@ -5,16 +5,31 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
     var service = {
         products: [],
         price: null,
+        taxRate: null,
+        taxAmount: null,
         priceInCents: null,
         getPrice: function() {
             var price = 0;
             _.each(this.products, function(product) {
                 price = price + (product.totalPrice * product.quantity);
             });
-            this.price = price;
-            this.priceInCents = price * 100;
 
-            $rootScope.$broadcast('cart:prices:update', this.price, this.priceInCents);
+            this.price = price;
+
+            // Adjust price if there is a taxRate
+            if (this.taxRate) {
+                this.taxAmount = this.price * this.taxRate;
+                this.price = this.price + this.taxAmount;
+            }
+
+            this.priceInCents = this.price * 100;
+
+            $rootScope.$broadcast('cart:prices:update', this.price, this.priceInCents, this.taxAmount);
+        },
+        setTaxRate: function(rate) {
+            this.taxRate = parseFloat(rate);
+            this.getPrice();
+            this.saveToLocalStorage();
         },
         getWeight: function() {
             var weight = 0;

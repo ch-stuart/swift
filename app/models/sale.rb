@@ -1,6 +1,6 @@
 class Sale < ActiveRecord::Base
 
-  attr_accessible :description, :email, :guid, :amount, :weight, :line1, :line2, :city, :state, :zip_code, :country, :shipping_provider, :shipping_service, :shipping_charge, :stripe_id
+  attr_accessible :description, :email, :guid, :amount, :weight, :line1, :line2, :city, :state, :zip_code, :country, :shipping_provider, :shipping_service, :shipping_charge, :stripe_id, :tax_rate, :tax_amount
 
   before_create :populate_guid
 

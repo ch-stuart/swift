@@ -147,3 +147,7 @@ date:        time (minutes):       comment:
 2014-03-10  20  Researching how to get tax rate for WA State
 2014-03-11  80  Implement proxy to fetch wa state tax rate
 2014-03-11  20  Only try and get wa state tax rate if zip code is in WA state
+2014-03-13  30  Saving tax info with sale in db
+
+
+http://www.timer-tab.com
