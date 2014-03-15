@@ -138,6 +138,7 @@
                 </div>
 
                 <input type="hidden" name="sale[p]" value="{{ cart.price }}">
+                <input type="hidden" name="sale[t]" value="{{ cart.total }}">
                 <input type="hidden" value="{{ cart.taxRate }}" name="sale[tr]">
                 <input type="hidden" value="{{ cart.taxAmount }}" name="sale[ta]">
                 <input id="j" type="hidden" name="sale[j]">
@@ -180,12 +181,16 @@
             </ul>
         </div>
         <div class="row row--checkout-sidebar" ng-show="cart.taxAmount">
-            <b>WA State Tax Amount:</b>:
+            <b>WA State Tax Amount</b>:
             {{ (cart.taxAmount / 100) | currency }}
+        </div>
+        <div class="row row--checkout-sidebar" ng-show="cart.shippingCharge">
+            <b>Shipping</b>:
+            {{ (cart.shippingCharge / 100) | currency }}
         </div>
         <div class="row row--checkout-sidebar">
             <b>Total Price</b>:
-            {{ cart.getTotalPrice() | currency }}
+            {{ (cart.total / 100) | currency }}
         </div>
     </div>
 </div>

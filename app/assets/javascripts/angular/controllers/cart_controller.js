@@ -47,8 +47,9 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope
         // and load form state if need be
     };
 
-    $scope.$on('cart:prices:update', function(e, price) {
+    $scope.$on('cart:prices:update', function(e, price, total) {
         $scope.cart.price = price;
+        $scope.cart.total = total;
     });
 
     $scope['onProductQuantityChanged'] = function() {

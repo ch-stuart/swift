@@ -95,20 +95,21 @@ class SalesController < ApplicationController
       product_charge = params[:sale][:p]
       shipping_charge = params[:sale][:shipping_charge]
       tax_amount = params[:sale][:ta]
+      total = params[:sale][:t]
 
-      charge = product_charge.to_i
-
-      if shipping_charge
-        charge = charge + shipping_charge.to_i
-      end
-
-      if tax_amount
-        charge = charge + tax_amount.to_i
-      end
+      # total = product_charge.to_i
+      #
+      # if shipping_charge
+      #   total = total + shipping_charge.to_i
+      # end
+      #
+      # if tax_amount
+      #   total = total + tax_amount.to_i
+      # end
 
       # Create the charge
       stripe_charge = Stripe::Charge.create(
-        amount:      charge,
+        amount:      total,
         currency:    "usd",
         card:        params[:stripeToken],
         description: "#{params[:sale][:email]} purchasing #{params[:sale][:j]}"
@@ -119,6 +120,7 @@ class SalesController < ApplicationController
         email:       params[:sale][:email],
         description: params[:sale][:j],
         amount:      product_charge,
+        total:       total,
         tax_rate:    params[:sale][:tr],
         tax_amount:  params[:sale][:ta],
         line1:       params[:sale][:line1],

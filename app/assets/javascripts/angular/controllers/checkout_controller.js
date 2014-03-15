@@ -14,6 +14,15 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
     // Default!
     $scope.country = 'US';
 
+    $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge) {
+        $scope.cart.price          = price;
+        $scope.cart.total          = total;
+        $scope.cart.taxAmount      = taxAmount;
+        $scope.cart.taxRate        = taxRate;
+        $scope.cart.shippingCharge = shippingCharge;
+        console.log('CheckoutCtrl', $scope);
+    });
+
     function postmasterValidateSuccessCallback(response) {
         var data = response.data;
         var rateParams = {
@@ -59,12 +68,6 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
         Cart.setTaxRate(response.data.rate);
     }
 
-    $scope.$on('cart:prices:update', function(e, price, taxAmount, taxRate) {
-        $scope.cart.price = price;
-        $scope.cart.taxAmount = taxAmount;
-        $scope.cart.taxRate = taxRate;
-    });
-
     function taxErrorCallback(response) {
         console.log('taxErrorCallback', response);
     }
@@ -88,6 +91,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
 
             // Save this so we can send it to the server
             $scope.shipping = shipping;
+
+            Cart.setShippingCharge(data.charge);
         } else {
             _.each(['fedex', 'usps', 'ups'], function(provider) {
                 // And save it here too...
@@ -96,6 +101,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
                     provider: data.best,
                     service: data[data.best].service
                 };
+
+                Cart.setShippingCharge(data[data.best].charge);
 
                 // However, for now we want to show the options.
                 // We may or may not allow the customer to choose.

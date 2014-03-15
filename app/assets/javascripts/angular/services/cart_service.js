@@ -5,30 +5,39 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
     var service = {
         products: [],
         price: null,
+        shippingCharge: null,
         totalPrice: null,
         taxRate: null,
         taxAmount: null,
-        getTotalPrice: function() {
-            return 100;
-        },
+        // TODO rename
         getPrice: function() {
             var price = 0;
             _.each(this.products, function(product) {
                 price = price + ((product.totalPrice * 100) * product.quantity);
             });
 
-            this.price = price;
+            this.price = this.total = price;
 
             // Adjust price if there is a taxRate
             if (this.taxRate) {
-                this.taxAmount = this.price * this.taxRate;
-                // this.price = this.price + this.taxAmount;
+                this.taxAmount = this.total * this.taxRate;
+                this.total += this.taxAmount;
             }
 
-            $rootScope.$broadcast('cart:prices:update', this.price, this.taxAmount, this.taxRate);
+            // Adjust price if there is a shippingCharge
+            if (this.shippingCharge) {
+                this.total += this.shippingCharge;
+            }
+
+            $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge);
         },
         setTaxRate: function(rate) {
             this.taxRate = parseFloat(rate);
+            this.getPrice();
+            this.saveToLocalStorage();
+        },
+        setShippingCharge: function(charge) {
+            this.shippingCharge = parseFloat(charge);
             this.getPrice();
             this.saveToLocalStorage();
         },
@@ -161,6 +170,9 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
         saveToLocalStorage: function() {
             localStorage.setItem('cart', JSON.stringify({
                 price: this.price,
+                total: this.total,
+                shippingCharge: this.shippingCharge,
+                taxAmount: this.taxAmount,
                 products: this.products
             }));
         }

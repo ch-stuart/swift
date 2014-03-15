@@ -79,7 +79,7 @@
         <div class="grid shoppin-cart__cart-price-row">
             <div class="unit w-3-4 hide-on-mobiles"></div>
             <div class="unit w-1-4">
-                Total: <strong><%= number_to_currency(cents_to_dollars(@sale[:amount])) %></strong>
+                Total: <strong><%= number_to_currency(cents_to_dollars(@sale[:total])) %></strong>
             </div>
         </div>
         <div class="grid">
@@ -159,8 +159,7 @@
 <%= content_for :js do %>
     <script>
         (function() {
-            alert('Usually, your shopping cart would be emptied after reaching this page. For now, to make testing easier, everything is left in your cart.')
-            // localStorage.removeItem('cart')
+            localStorage.removeItem('cart');
 
             var orderDate = $('#order_date').text().trim()
             if (orderDate) {

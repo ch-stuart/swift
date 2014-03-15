@@ -35,23 +35,54 @@
   </a>
 </p>
 
-<p>
-  <b>Shipping:</b><br>
-    - <%= @sale.shipping_provider %><br>
-    - <%= @sale.shipping_service %><br>
-    - <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %>
-</p>
-
-<p>
-  <b>Tax:</b><br>
-    - Tax Rate: <%= @sale.tax_rate %><br>
-    - Tax amount: <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %>
-</p>
-
-<p>
-  <b>Amount:</b>
-  <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
-</p>
+<table>
+  <thead>
+    <tr>
+      <th>
+        Charge Type
+      </th>
+      <th>
+        Amount
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Base
+      </td>
+      <td>
+        <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Shipping
+      </td>
+      <td>
+        <%= @sale.shipping_provider %><br>
+        <%= @sale.shipping_service %><br>
+        <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Tax
+      </td>
+      <td>
+        <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %> (<%= @sale.tax_rate %>%)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total
+      </td>
+      <td>
+        <%= number_to_currency(cents_to_dollars(@sale.total)) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <p>
   <b>Description:</b>
