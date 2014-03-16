@@ -16,7 +16,7 @@
 
 <% @sales.each do |sale| %>
   <tr>
-    <td><%= sale.created_at %></td>
+    <td><%= sale.created_at.strftime("%b %-d") %></td>
     <td><%= sale.email %></td>
     <td><%= number_to_currency(cents_to_dollars(sale.amount)) %></td>
     <td>

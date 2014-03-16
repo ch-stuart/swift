@@ -7,7 +7,7 @@
   <b>
     Date
   </b>
-  <%= @sale.updated_at %>
+  <%= @sale.updated_at.strftime("%b %-d, %Y, %-l:%M%p") %>
 </p>
 <p>
   <b>Customer URL:</b>
@@ -29,7 +29,7 @@
 </p>
 
 <p>
-  <b>Email:</b>
+  <b>Customer Email:</b>
   <a href="mailto:<%= @sale.email %>">
     <%= @sale.email %>
   </a>
