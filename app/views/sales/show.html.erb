@@ -35,14 +35,20 @@
   </a>
 </p>
 
-<table>
+<p>
+  <b>Charges:</b>
+</p>
+<table style="min-width: 50%">
   <thead>
     <tr>
       <th>
-        Charge Type
+        Type
       </th>
       <th>
         Amount
+      </th>
+      <th>
+        Details
       </th>
     </tr>
   </thead>
@@ -54,15 +60,18 @@
       <td>
         <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
       </td>
+      <td></td>
     </tr>
     <tr>
       <td>
         Shipping
       </td>
       <td>
-        <%= @sale.shipping_provider %><br>
-        <%= @sale.shipping_service %><br>
         <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %>
+      </td>
+      <td>
+        <%= @sale.shipping_provider.upcase %><br>
+        <%= @sale.shipping_service %>
       </td>
     </tr>
     <tr>
@@ -70,20 +79,23 @@
         Tax
       </td>
       <td>
-        <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %> (<%= @sale.tax_rate %>%)
+        <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %>
+      </td>
+      <td>
+        <%= @sale.tax_rate %>%
       </td>
     </tr>
     <tr>
       <td>
-        Total
+        <strong>Total</strong>
       </td>
       <td>
-        <%= number_to_currency(cents_to_dollars(@sale.total)) %>
+        <strong><%= number_to_currency(cents_to_dollars(@sale.total)) %></strong>
       </td>
     </tr>
   </tbody>
 </table>
-
+<br>
 <p>
   <b>Description:</b>
   <pre><%= JSON.pretty_generate(JSON.parse(@sale.description)) %></pre>
