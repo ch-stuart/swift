@@ -6,7 +6,7 @@
         <h4>
             Shipping
         </h4>
-        <div class="row row--order">
+        <div class="row row--order" id="row-shipping">
             <div class="label-input-pair">
                 <label class="label">
                     <input type="checkbox" ng-model="pickup" ng-change="onPickupChanged()"> Check if you will be picking your order
@@ -59,7 +59,7 @@
                 {{ provider.service }} at a cost of {{ provider.charge / 100 | currency }}.
             </p>
         </div>
-        <div ng-show="isShippingReady || pickup">
+        <div ng-show="isShippingReady || pickup" id="row-contact">
             <%= form_for @sale, html: { id: "checkout-form" } do |f| %>
                 <% if @sale.errors.any? %>
                     <div id="error_explanation">
@@ -71,7 +71,7 @@
                         </ul>
                     </div>
                 <% end %>
-                <h4 id="contact-info">
+                <h4>
                     Contact info
                 </h4>
                 <div class="row row--order">

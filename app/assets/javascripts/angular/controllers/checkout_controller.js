@@ -129,7 +129,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
         if ($scope.pickup) {
             setTimeout(function () {
                 $('html, body').animate({
-                    scrollTop: $("#contact-info").offset().top
+                    scrollTop: $("#row-contact").offset().top
                 }, 1200);
             }, 100);
         }
@@ -145,6 +145,10 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
             zip_code: $scope.zip_code,
             country: $scope.country
         };
+
+        $('html, body').animate({
+            scrollTop: $("#row-shipping").offset().top
+        }, 600);
 
         Postmaster
             .validate(validateParams)
