@@ -30,6 +30,5 @@
   },
   "_source": "git://github.com/laurihy/angular-payments.git",
   "_target": "*",
-  "_originalSource": "angular-payments",
-  "_direct": true
+  "_originalSource": "angular-payments"
 }

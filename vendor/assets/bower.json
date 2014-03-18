@@ -1,0 +1,11 @@
+{
+  "name": "swift-assets",
+  "private": true,
+  "dependencies": {
+    "angular-payments": "*",
+    "angular-scroll": "~0.2.8",
+    "gridism": "~0.1.0",
+    "normalize-css": "~3.0.0",
+    "skeleton": "*"
+  }
+}

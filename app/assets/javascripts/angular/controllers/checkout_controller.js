@@ -1,5 +1,5 @@
 /*jshint browser: true, sub:true */
-/*global SwiftApp console alert _ */
+/*global SwiftApp console alert _ jQuery */
 
 SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 'WaStateTaxService', function($scope, Cart, Postmaster, Country, WaStateTaxService) {
 
@@ -126,7 +126,13 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
     }
 
     $scope['onPickupChanged'] = function() {
-        console.log('are we picking up?', $scope.pickup);
+        if ($scope.pickup) {
+            setTimeout(function () {
+                $('html, body').animate({
+                    scrollTop: $("#contact-info").offset().top
+                }, 1200);
+            }, 100);
+        }
     };
 
     $scope['onCalculateShippingCostBtnClicked'] = function() {

@@ -59,6 +59,9 @@ module SwiftSite
     # you can add them to the precompile array:
     config.assets.precompile += ['hub.css', 'hub.js']
 
+    # let rails know about bower components
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+
     ActionMailer::Base.smtp_settings = {
         port:           '587',
         address:        'smtp.mandrillapp.com',

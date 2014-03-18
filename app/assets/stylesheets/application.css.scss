@@ -1,3 +1,11 @@
+/*
+*= require normalize-css/normalize
+*= require skeleton-base-modified
+*= require skeleton/stylesheets/skeleton
+*= require skeleton/stylesheets/layout
+*= require gridism/gridism
+*/
+
 // box-sizing ftw
 *, *:before, *:after {
   box-sizing: border-box;
@@ -8,20 +16,7 @@
     box-sizing: content-box;
 }
 
-// Normalize
-@import 'bower_components/normalize-css/normalize';
-
-// Grid #1
-@import 'bower_components/skeleton/stylesheets/base--modified';
-@import 'bower_components/skeleton/stylesheets/skeleton';
-@import 'bower_components/skeleton/stylesheets/layout';
-
-
-// Grid #2
-@import 'bower_components/gridism/gridism';
-
 // Includes
-// @import 'colors/colors';
 @import 'include-color';
 @import 'include-media';
 
