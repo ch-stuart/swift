@@ -104,28 +104,37 @@
                 </p>
             </div>
             <div class="unit w-1-2">
-                <h4>
-                    Shipment Tracking
-                </h4>
-                <p>
-                    We will email you when your order has shipped.
-                </p>
-                <p>
-                    The shipping information will also appear on this page.
-                </p>
-                <h4>
-                    Shipment Address
-                </h4>
-                <p>
-                    <%= @sale[:line1] %><br>
-                    <%= @sale[:city] %>, <%= @sale[:state] %> <%= @sale[:zip_code] %>
-                </p>
-                <h4>
-                    Shipment Charge
-                </h4>
-                <p>
-                    <%= number_to_currency(cents_to_dollars(@sale[:shipping_charge])) %> via <%= @sale[:shipping_provider] %> <%= @sale[:shipping_service] %>.
-                </p>
+                <% if @sale[:pickup] %>
+                  <h4>
+                      Shipment Tracking
+                  </h4>
+                  <p>
+                    You will be picking up your order. We'll let you know by email when it's ready.
+                  </p>
+                <% else %>
+                  <h4>
+                      Shipment Tracking
+                  </h4>
+                  <p>
+                      We will email you when your order has shipped.
+                  </p>
+                  <p>
+                      The shipping information will also appear on this page.
+                  </p>
+                  <h4>
+                      Shipment Address
+                  </h4>
+                  <p>
+                      <%= @sale[:line1] %><br>
+                      <%= @sale[:city] %>, <%= @sale[:state] %> <%= @sale[:zip_code] %>
+                  </p>
+                  <h4>
+                      Shipment Charge
+                  </h4>
+                  <p>
+                      <%= number_to_currency(cents_to_dollars(@sale[:shipping_charge])) %> via <%= @sale[:shipping_provider] %> <%= @sale[:shipping_service] %>.
+                  </p>
+                <% end %>
             </div>
         </div>
     </div>

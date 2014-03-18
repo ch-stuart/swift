@@ -92,56 +92,49 @@ class SalesController < ApplicationController
   # POST /sales.json
   def create
     begin
-      product_charge = params[:sale][:p]
-      shipping_charge = params[:sale][:shipping_charge]
-      tax_amount = params[:sale][:ta]
-      total = params[:sale][:t]
+      sale_params = params[:sale]
 
-      # total = product_charge.to_i
-      #
-      # if shipping_charge
-      #   total = total + shipping_charge.to_i
-      # end
-      #
-      # if tax_amount
-      #   total = total + tax_amount.to_i
-      # end
+      product_charge  = sale_params[:p]
+      shipping_charge = sale_params[:shipping_charge]
+      tax_amount      = sale_params[:ta]
+      total           = sale_params[:t]
 
       # Create the charge
       stripe_charge = Stripe::Charge.create(
         amount:      total,
         currency:    "usd",
         card:        params[:stripeToken],
-        description: "#{params[:sale][:email]} purchasing #{params[:sale][:j]}"
+        description: "#{sale_params[:email]} purchasing #{sale_params[:j]}"
       )
 
       # Create the sale
       @sale = Sale.create!(
-        email:       params[:sale][:email],
-        description: params[:sale][:j],
+        email:       sale_params[:email],
+        description: sale_params[:j],
         amount:      product_charge,
         total:       total,
-        tax_rate:    params[:sale][:tr],
-        tax_amount:  params[:sale][:ta],
-        line1:       params[:sale][:line1],
-        # line2:       params[:sale][:line2],
-        city:        params[:sale][:city],
-        state:       params[:sale][:state],
-        zip_code:    params[:sale][:zip_code],
-        country:     params[:sale][:country],
-        shipping_provider:  params[:sale][:shipping_provider],
+        tax_rate:    sale_params[:tr],
+        tax_amount:  sale_params[:ta],
+        line1:       sale_params[:line1],
+        # line2:       sale_params[:line2],
+        city:        sale_params[:city],
+        state:       sale_params[:state],
+        zip_code:    sale_params[:zip_code],
+        country:     sale_params[:country],
+        pickup:      sale_params[:pickup],
+        shipping_provider:  sale_params[:shipping_provider],
         shipping_charge:  shipping_charge,
-        shipping_service: params[:sale][:shipping_service],
+        shipping_service: sale_params[:shipping_service],
         stripe_id: stripe_charge[:id]
       )
 
       # Create the contact if they sign up for spam
       if params[:send_me_marketing_emails]
-        Contact.create(email: params[:sale][:email])
+        Contact.create(email: sale_params[:email])
       end
 
       # Send an email
-      SalesMailer.success(params[:sale][:email], @sale.guid).deliver
+      SalesMailer.success(sale_params[:email], @sale.guid).deliver
 
       redirect_to order_url(guid: @sale.guid)
     rescue Stripe::CardError => e

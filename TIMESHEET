@@ -150,5 +150,6 @@ date:        time (minutes):       comment:
 2014-03-13  30  Saving tax info with sale in db
 2014-03-15  60  Cleanup. Store all $$$ in cents. Store all charges that are included in total seperately.
 2014-03-15  20  Sort sales index correctly, set correct time zone, etc.
+2014-03-17  20  Start on properly handling pickups
 
 http://www.timer-tab.com

@@ -137,20 +137,21 @@
                     </div>
                 </div>
 
-                <input type="hidden" name="sale[p]" value="{{ cart.price }}">
-                <input type="hidden" name="sale[t]" value="{{ cart.total }}">
-                <input type="hidden" value="{{ cart.taxRate }}" name="sale[tr]">
-                <input type="hidden" value="{{ cart.taxAmount }}" name="sale[ta]">
                 <input id="j" type="hidden" name="sale[j]">
-                <input type="hidden" value="{{ line1 }}"    name="sale[line1]">
-                <input type="hidden" value="{{ line2 }}"    name="sale[line2]">
-                <input type="hidden" value="{{ city }}"     name="sale[city]">
-                <input type="hidden" value="{{ state }}"    name="sale[state]">
-                <input type="hidden" value="{{ zip_code }}" name="sale[zip_code]">
-                <input type="hidden" value="{{ country }}"  name="sale[country]">
-                <input type="hidden" value="{{ shipping.provider }}" name="sale[shipping_provider]">
-                <input type="hidden" value="{{ shipping.service }}" name="sale[shipping_service]">
-                <input type="hidden" value="{{ shipping.charge }}" name="sale[shipping_charge]">
+                <input type="hidden" name="sale[p]"         value="{{ cart.price }}">
+                <input type="hidden" name="sale[t]"         value="{{ cart.total }}">
+                <input type="hidden" name="sale[tr]"        value="{{ cart.taxRate }}">
+                <input type="hidden" name="sale[ta]"        value="{{ cart.taxAmount }}">
+                <input type="hidden" name="sale[line1]"     value="{{ line1 }}">
+                <input type="hidden" name="sale[line2]"     value="{{ line2 }}">
+                <input type="hidden" name="sale[city]"      value="{{ city }}">
+                <input type="hidden" name="sale[state]"     value="{{ state }}">
+                <input type="hidden" name="sale[zip_code]"  value="{{ zip_code }}">
+                <input type="hidden" name="sale[country]"   value="{{ country }}">
+                <input type="hidden" name="sale[pickup]"    value="{{ pickup }}">
+                <input type="hidden" name="sale[shipping_provider]" value="{{ shipping.provider }}">
+                <input type="hidden" name="sale[shipping_service]"  value="{{ shipping.service }}">
+                <input type="hidden" name="sale[shipping_charge]"   value="{{ shipping.charge }}">
 
                 <div class="row row--order">
                     <%= f.submit 'Buy It', class: 'btn' %>
