@@ -1,0 +1,12 @@
+.container-menu-wrap,
+.container-logo,
+.container-footer-wrap,
+.no-print {
+    display: none;
+}
+.print-only {
+    display: block;
+}
+p,div,h1,h2,h3,h4,h5 {
+    margin: 0 0 6pt;
+}

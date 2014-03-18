@@ -18,6 +18,7 @@
   <![endif]-->
   <%= stylesheet_link_tag "application" %>
   <%= yield :css %>
+  <%= stylesheet_link_tag "print", media: "print" %>
   <%= csrf_meta_tag %>
 </head>
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">

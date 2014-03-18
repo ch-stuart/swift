@@ -16,6 +16,10 @@
     box-sizing: content-box;
 }
 
+.print-only {
+    display: none;
+}
+
 // Includes
 @import 'include-color';
 @import 'include-media';
