@@ -4,7 +4,7 @@
 //= require console
 //= require farbtastic/farbtastic
 
-/*global jQuery $ */
+/*global remove_fields add_fields $ */
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");
@@ -37,20 +37,19 @@ function createFlickrTagLink() {
     } else {
         $('.js-flickr_tag-link')
         .attr('href', '#')
-        .text('')
+        .text('');
     }
 }
 
 jQuery(function() {
-    $('.js-flickr_tag').each(function() {
-        createFlickrTagLink.call(this);
-    });
-
-    $('.js-flickr_tag').change(function() {
-        createFlickrTagLink.call(this);
-    });
-
-    $('.js-flickr_tag').keypress(function() {
-        createFlickrTagLink.call(this);
-    })
+    $('.js-flickr_tag')
+        .change(function() {
+            createFlickrTagLink.call(this);
+        })
+        .keypress(function() {
+            createFlickrTagLink.call(this);
+        })
+        .each(function() {
+            createFlickrTagLink.call(this);
+        });
 });
