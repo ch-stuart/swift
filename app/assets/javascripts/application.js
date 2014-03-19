@@ -40,6 +40,10 @@ jQuery(document).ready(function($) {
         $root.addClass('is-safari');
     }
 
+    if (UA.isIOS()) {
+        $root.addClass('is-iOS');
+    }
+
     if ($.browser.msie && $.browser.version <= 10) {
         $(document.body).prepend(
             ['<p class=browsehappy>',
