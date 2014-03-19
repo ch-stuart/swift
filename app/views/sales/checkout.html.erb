@@ -16,25 +16,25 @@
                 <label class="label">
                     Street
                 </label>
-                <input type="text" ng-model="line1">
+                <input type="text" ng-model="line1" ng-disabled="pickup">
             </div>
             <div class="label-input-pair pickup-is-{{ pickup }}">
                 <label class="label">
                     City
                 </label>
-                <input type="text" ng-model="city">
+                <input type="text" ng-model="city" ng-disabled="pickup">
             </div>
             <div class="label-input-pair pickup-is-{{ pickup }}">
                 <label class="label">
                     State/Province
                 </label>
-                <input type="text" ng-model="state">
+                <input type="text" ng-model="state" ng-disabled="pickup">
             </div>
             <div class="label-input-pair pickup-is-{{ pickup }}">
                 <label class="label">
                     Zip/Postal Code
                 </label>
-                <input type="text" ng-model="zip_code">
+                <input type="text" ng-model="zip_code" ng-disabled="pickup">
             </div>
             <div class="label-input-pair pickup-is-{{ pickup }}">
                 <label class="label">
@@ -43,6 +43,7 @@
                 <select
                     ng-model="country"
                     ng-options="k as v for (k,v) in countryCodes"
+                    ng-disabled="pickup"
                     class="input">
                 </select>
             </div>
