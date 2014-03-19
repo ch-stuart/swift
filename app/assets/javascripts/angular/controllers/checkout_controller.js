@@ -1,7 +1,7 @@
 /*jshint browser: true, sub:true */
 /*global SwiftApp console alert _ jQuery */
 
-SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 'WaStateTaxService', function($scope, Cart, Postmaster, Country, WaStateTaxService) {
+SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'WaStateTaxService', function($scope, Cart, Postmaster, Place, WaStateTaxService) {
 
     var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
@@ -9,10 +9,22 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
     $scope.cart = Cart.loadFromLocalStorage();
     $scope.isShippingReady = false;
     $scope.busy = false;
-    $scope.countryCodes = Country.get();
+    $scope.countryCodes = Place.countries();
+    $scope.states = Place.usStates();
 
     // Default!
     $scope.country = 'US';
+    $scope.state = 'MT';
+    isUnitedStatesOrCanada(true);
+
+    function isUnitedStatesOrCanada(bool) {
+        if (bool) {
+            $scope.countryIsUSCA = true;
+        } else {
+            $scope.countryIsUSCA = false;
+            $scope.state = '';
+        }
+    }
 
     $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge) {
         $scope.cart.price          = price;
@@ -132,6 +144,23 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Country', 
                     scrollTop: $("#row-contact").offset().top
                 }, 1200);
             }, 100);
+        }
+    };
+
+    $scope['onCountrySelectChanged'] = function() {
+        switch ($scope.country) {
+        case 'CA':
+            $scope.states = Place.caProvinces();
+            $scope.state = 'ON';
+            isUnitedStatesOrCanada(true);
+            break;
+        case 'US':
+            $scope.states = Place.usStates();
+            $scope.state = 'MT';
+            isUnitedStatesOrCanada(true);
+            break;
+        default:
+            isUnitedStatesOrCanada(false);
         }
     };
 
