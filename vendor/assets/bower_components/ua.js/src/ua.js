@@ -8,7 +8,7 @@
  * Apart from supporting detection of major browser vendors, the library also
  * supports detection of various devices.
  *
- * Copyright (c) 2012, Gopalarathnam Venkatesan
+ * Copyright (c) 2012-2013, Gopalarathnam Venkatesan
  * All rights reserved.
  *
  * @module UA
@@ -56,7 +56,8 @@ var UA = (function (window, navigator) {
          */
         isIE: function () {
             return navigator.appName === "Microsoft Internet Explorer";
-        },
+        } || detect(/\bTrident\b/),
+
 
         /**
          * Return true if the browser is running on Kindle.
@@ -70,7 +71,7 @@ var UA = (function (window, navigator) {
          *
          * @method isMobile
          */
-        isMobile: detect(/(iphone|ipod|(android.*?mobile)|blackberry|nokia)/i),
+        isMobile: detect(/(iphone|ipod|((?:android)?.*?mobile)|blackberry|nokia)/i),
 
         /**
          * Return true if we are running on Opera.
@@ -96,7 +97,7 @@ var UA = (function (window, navigator) {
          *
          * @method isTablet
          */
-        isTablet: detect(/(ipad|android(?!.*mobile))/i),
+        isTablet: detect(/(ipad|android(?!.*mobile)|tablet)/i),
 
         /**
          * Return true if the browser is running on a TV!

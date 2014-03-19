@@ -3,7 +3,7 @@
 //= require console
 //= require strftime
 //= require underscore
-//= require ua
+//= require ua.js/src/ua.js
 //= require jquery
 //= require jquery.browser
 //= require jquery_ujs
