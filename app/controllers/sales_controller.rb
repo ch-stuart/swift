@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
 
-  before_filter :authenticate_admin, :except => [ :checkout, :create, :success, :cart ]
+  before_filter :authenticate_admin, :except => [ :checkout, :create, :success, :cart, :charge ]
 
   # GET /sales
   # GET /sales.json
@@ -88,72 +88,69 @@ class SalesController < ApplicationController
     @sale = Sale.find(params[:id])
   end
 
-  # POST /sales
-  # POST /sales.json
-  def create
+  # POST /sales/charge.json
+  def charge
     begin
-      sale_params = params[:sale]
-
-      product_charge  = sale_params[:p]
-      shipping_charge = sale_params[:shipping_charge]
-      tax_amount      = sale_params[:ta]
-      total           = sale_params[:t]
-
       # Create the charge
       stripe_charge = Stripe::Charge.create(
-        amount:      total,
+        amount:      params[:total],
         currency:    "usd",
         card:        params[:stripeToken],
-        description: "#{sale_params[:email]} purchasing #{sale_params[:j]}"
+        description: "#{params[:email]}"
       )
 
-      # Create the sale
-      @sale = Sale.create!(
-        email:       sale_params[:email],
-        description: sale_params[:j],
-        amount:      product_charge,
-        total:       total,
-        tax_rate:    sale_params[:tr],
-        tax_amount:  sale_params[:ta],
-        line1:       sale_params[:line1],
-        # line2:       sale_params[:line2],
-        city:        sale_params[:city],
-        state:       sale_params[:state],
-        zip_code:    sale_params[:zip_code],
-        country:     sale_params[:country],
-        pickup:      sale_params[:pickup],
-        shipping_provider:  sale_params[:shipping_provider],
-        shipping_charge:  shipping_charge,
-        shipping_service: sale_params[:shipping_service],
-        stripe_id: stripe_charge[:id]
-      )
-
-      # Create the contact if they sign up for spam
-      if params[:send_me_marketing_emails]
-        Contact.create(email: sale_params[:email])
-      end
-
-      # Send an email
-      SalesMailer.success(sale_params[:email], @sale.guid).deliver
-
-      redirect_to order_url(guid: @sale.guid)
+      render json: { id: stripe_charge.id }.to_json
     rescue Stripe::CardError => e
       # The card has been declined or
       # some other error has occured
-      @error = e
-      logger.warn @error.inspect
-      render :checkout
+      logger.error e.inspect
+
+      render json: { error: e }.to_json, status: 500
+    end
+  end
+
+  # POST /sales
+  # POST /sales.json
+  def create
+    logger.info "***********"
+    logger.info params.inspect
+    logger.info "***********"
+
+    # Create the sale
+    @sale = Sale.create!(
+      email:             params[:email],
+      description:       params[:description],
+      amount:            params[:amount],
+      total:             params[:total],
+      tax_rate:          params[:tax_rate],
+      tax_amount:        params[:tax_amount],
+      line1:             params[:line1],
+      # line2:           params[:line2],
+      city:              params[:city],
+      state:             params[:state],
+      zip_code:          params[:zip_code],
+      country:           params[:country],
+      pickup:            params[:pickup],
+      shipping_provider: params[:shipping_provider],
+      shipping_charge:   params[:shipping_charge],
+      shipping_service:  params[:shipping_service],
+      stripe_id:         params[:stripe_id]
+    )
+
+    logger.info "**********"
+    logger.info @sale.inspect
+    logger.info "**********"
+
+    # Create the contact if they sign up for spam
+    if params[:send_me_marketing_emails]
+      Contact.create(email: params[:email])
     end
 
-    # respond_to do |format|
-    #   if @sale.save
-    #     format.html { redirect_to @sale, notice: 'Sale was successfully created.' }
-    #     format.json { render json: @sale, status: :created, location: @sale }
-    #   else
-    #     format.html { render action: "new" }
-    #     format.json { render json: @sale.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    # Send an email
+    # run this in the background or whatever
+    SalesMailer.success(params[:email], @sale.guid).deliver
+
+    render json: { guid: @sale.guid }.to_json
   end
 
   # PUT /sales/1

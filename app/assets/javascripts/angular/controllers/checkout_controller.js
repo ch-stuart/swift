@@ -1,14 +1,15 @@
 /*jshint browser: true, sub:true */
-/*global SwiftApp console alert _ jQuery */
+/*global SwiftApp console alert _ $$ $ Stripe */
 
-SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'WaStateTaxService', function($scope, Cart, Postmaster, Place, WaStateTaxService) {
+SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'WaStateTaxService', 'SaleService', function($scope, Cart, Postmaster, Place, WaStateTaxService, SaleService) {
 
     var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
 
     $scope.cart = Cart.loadFromLocalStorage();
     $scope.isShippingReady = false;
-    $scope.busy = false;
+    $scope.busyShipping = false;
+    $scope.busyBuying = false;
     $scope.countryCodes = Place.countries();
     $scope.states = Place.usStates();
 
@@ -70,7 +71,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'W
     }
 
     function postmasterValidateErrorCallback(response) {
-        $scope.busy = false;
+        $scope.busyShipping = false;
         console.warn('PostmasterService.validate => Error:', response);
         alert(VALIDATE_ERROR_MSG);
     }
@@ -88,7 +89,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'W
         console.log('rateSuccessCallback', response);
         $scope.rates = [];
         $scope.shipping = {};
-        $scope.busy = false;
+        $scope.busyShipping = false;
         $scope.isShippingReady = true;
 
         var data = response.data;
@@ -132,9 +133,61 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'W
     }
 
     function postmasterRateErrorCallback(response) {
-        $scope.busy = false;
+        $scope.busyShipping = false;
         console.warn('PostmasterService.rates => Error:', response);
         alert(RATE_ERROR_MSG);
+    }
+
+    function saleChargeSuccessCallback(response) {
+        console.log('saleChargeSuccessCallback', response);
+
+
+        if (!$scope.shipping) {
+            $scope.shipping = {
+                provider: null,
+                charge: null,
+                service: null
+            };
+        }
+
+        SaleService
+            .create({
+                email: $scope.email,
+                description: localStorage.getItem('cart'),
+                amount: $scope.cart.price,
+                total: $scope.cart.total,
+                tax_rate: $scope.cart.taxRate,
+                tax_amount: $scope.cart.taxAmount,
+                line1: $scope.line1,
+                city: $scope.city,
+                state: $scope.state,
+                zip_code: $scope.zip_code,
+                country: $scope.country,
+                pickup: $scope.pickup,
+                shipping_provider: $scope.shipping.provider,
+                shipping_charge: $scope.shipping.charge,
+                shipping_service: $scope.shipping.service,
+                stripe_id: response.data.id,
+                send_me_marketing_emails: $scope.send_me_marketing_emails
+            })
+            .then(saleCreateSuccessCallback, saleCreateErrorCallback);
+    }
+
+    function saleChargeErrorCallback(response) {
+        console.log('saleChargeErrorCallback', response);
+        $scope.busyBuying = false;
+    }
+
+    function saleCreateSuccessCallback(response) {
+        console.log('saleCreateSuccessCallback', response);
+        $scope.busyBuying = false;
+
+        window.location = "/orders/" + response.data.guid;
+    }
+
+    function saleCreateErrorCallback(response) {
+        console.log('saleCreateErrorCallback', response);
+        $scope.busyBuying = false;
     }
 
     $scope['onPickupChanged'] = function() {
@@ -165,7 +218,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'W
     };
 
     $scope['onCalculateShippingCostBtnClicked'] = function() {
-        $scope.busy = true;
+        $scope.busyShipping = true;
 
         var validateParams = {
             line1: $scope.line1,
@@ -182,6 +235,28 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'W
         Postmaster
             .validate(validateParams)
             .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
+    };
+
+    $scope['onBuyItButtonClicked'] = function() {
+        $scope.busyBuying = true;
+
+        Stripe.createToken($$('row-payment'), function stripeResponseHandler(status, response) {
+            if (response.error) {
+                console.error('Stripe.createToken response handler:', response.error.message);
+                alert(response.error.message);
+                $scope.busyBuying = false;
+            } else {
+                var token = response.id;
+
+                SaleService
+                    .charge({
+                        total: $scope.cart.total,
+                        stripeToken: token,
+                        email: $scope.email
+                    })
+                    .then(saleChargeSuccessCallback, saleChargeErrorCallback);
+            }
+        });
     };
 
 }]);

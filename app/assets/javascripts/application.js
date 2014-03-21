@@ -1,4 +1,4 @@
-/*global document jQuery UA*/
+/*global document jQuery UA window*/
 // ...
 //= require console
 //= require strftime
@@ -9,7 +9,6 @@
 //= require jquery_ujs
 //= require angular
 //= require tinycolor
-//= require jquery.checkout
 //= require jquery.fitvids
 //= require jquery.hero
 //= require jquery.lightbox_me
@@ -18,6 +17,7 @@
 //= require angular/application
 //= require angular/directives/visible_directive
 //= require angular/services/wa_state_tax_service
+//= require angular/services/sale_service
 //= require angular/services/place_service
 //= require angular/services/cart_service
 //= require angular/services/product_service
@@ -26,6 +26,10 @@
 //= require angular/controllers/cart_controller
 //= require angular/controllers/cart_status_controller
 //= require angular/controllers/checkout_controller
+
+window.$$ = function(id) {
+    return document.getElementById(id);
+};
 
 jQuery(document).ready(function($) {
 
