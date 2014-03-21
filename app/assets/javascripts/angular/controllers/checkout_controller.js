@@ -176,6 +176,9 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'W
     function saleChargeErrorCallback(response) {
         console.log('saleChargeErrorCallback', response);
         $scope.busyBuying = false;
+        if (response.data.error.message) {
+            alert(response.data.error.message);
+        }
     }
 
     function saleCreateSuccessCallback(response) {
@@ -186,7 +189,13 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'W
     }
 
     function saleCreateErrorCallback(response) {
-        console.log('saleCreateErrorCallback', response);
+        var errors = [];
+        _.each(response.data.error, function(value, key) {
+            _.each(value, function(element) {
+                errors.push(key + ' ' + element + '.');
+            });
+        });
+        alert(errors.join('\n'));
         $scope.busyBuying = false;
     }
 
@@ -242,9 +251,10 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'W
 
         Stripe.createToken($$('row-payment'), function stripeResponseHandler(status, response) {
             if (response.error) {
-                console.error('Stripe.createToken response handler:', response.error.message);
-                alert(response.error.message);
+                // FIXME the busy indicator is not going
+                // away for some reason.
                 $scope.busyBuying = false;
+                alert(response.error.message);
             } else {
                 var token = response.id;
 

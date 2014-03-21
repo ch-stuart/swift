@@ -4,6 +4,9 @@ class Sale < ActiveRecord::Base
 
   before_create :populate_guid
 
+  # validates_presence_of :email, :description
+  # validates :email, format: /@/
+
   private
 
   def populate_guid

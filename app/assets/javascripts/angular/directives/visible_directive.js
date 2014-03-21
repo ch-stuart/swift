@@ -3,9 +3,9 @@
 SwiftApp
     .directive('swVisible', function() {
         return function (scope, element, attrs) {
-            scope.$watch(attrs.swVisible, function (value) {
-                element.css('visibility', 'hidden');
+            element.css('visibility', 'hidden');
 
+            scope.$watch(attrs.swVisible, function (value) {
                 if (value) {
                     element.css('visibility', 'visible');
                 } else {

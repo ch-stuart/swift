@@ -112,12 +112,8 @@ class SalesController < ApplicationController
   # POST /sales
   # POST /sales.json
   def create
-    logger.info "***********"
-    logger.info params.inspect
-    logger.info "***********"
-
     # Create the sale
-    @sale = Sale.create!(
+    @sale = Sale.new(
       email:             params[:email],
       description:       params[:description],
       amount:            params[:amount],
@@ -137,20 +133,32 @@ class SalesController < ApplicationController
       stripe_id:         params[:stripe_id]
     )
 
-    logger.info "**********"
-    logger.info @sale.inspect
-    logger.info "**********"
-
     # Create the contact if they sign up for spam
     if params[:send_me_marketing_emails]
-      Contact.create(email: params[:email])
+      # TODO don't want to fail order if this fails
+      # but it'd be nice to know if it's happening
+      begin
+        Contact.create(email: params[:email])
+      rescue Exception => e
+        logger.error e
+      end
     end
 
     # Send an email
-    # run this in the background or whatever
-    SalesMailer.success(params[:email], @sale.guid).deliver
+    # TODO run this in the background or whatever
+    # TODO don't want to fail order if this fails
+    # but it'd be nice to know if it's happening
+    begin
+      SalesMailer.success(params[:email], @sale.guid).deliver
+    rescue Exception => e
+      logger.info e
+    end
 
-    render json: { guid: @sale.guid }.to_json
+    if @sale.save
+      render json: { guid: @sale.guid }.to_json
+    else
+      render json: { error: @sale.errors }, :status => :unprocessable_entity
+    end
   end
 
   # PUT /sales/1
