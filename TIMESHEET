@@ -154,5 +154,6 @@ date:        time (minutes):       comment:
 2014-03-18  20  Various fixes, for example: disable shipping form inputs if customer is picking up
 2014-03-18  40  Provide drop down for states and provinces for US and CA. Provide free input for everywhere else
 2014-03-18  05  Fix issue where success page always said customer would pickup
+2014-03-20  45  Separate creation of charge from creation of sale
 
 http://www.timer-tab.com
