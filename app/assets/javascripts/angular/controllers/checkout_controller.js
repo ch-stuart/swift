@@ -55,13 +55,15 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             }
             $scope.intl = !!rateParams.carrier;
 
-            WaStateTaxService
-                .rate({
-                    addr: $scope.line1,
-                    city: $scope.city,
-                    zip: $scope.zip_code
-                })
-                .then(taxSuccessCallback, taxErrorCallback);
+            if ($scope.state === 'WA') {
+                WaStateTaxService
+                    .rate({
+                        addr: $scope.line1,
+                        city: $scope.city,
+                        zip: $scope.zip_code
+                    })
+                    .then(taxSuccessCallback, taxErrorCallback);
+            }
 
             Postmaster
                 .rates(rateParams)

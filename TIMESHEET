@@ -156,5 +156,7 @@ date:        time (minutes):       comment:
 2014-03-18  05  Fix issue where success page always said customer would pickup
 2014-03-20  45  Separate creation of charge from creation of sale
 2014-03-20  40  Handling errors. Still more to do
+2014-03-22  35  Reset tax and shipping info if user has already filled out shipping info and then decides to pickup
+2014-03-22  10  Don't call rails server if customer is not in WA
 
 http://www.timer-tab.com
