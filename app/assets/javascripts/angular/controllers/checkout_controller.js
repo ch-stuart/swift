@@ -13,7 +13,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
     $scope.countryCodes = Place.countries();
     $scope.states = Place.usStates();
 
-    // Default!
+    // Defaults!
     $scope.country = 'US';
     $scope.state = 'MT';
     isUnitedStatesOrCanada(true);
@@ -33,7 +33,6 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
         $scope.cart.taxAmount      = taxAmount;
         $scope.cart.taxRate        = taxRate;
         $scope.cart.shippingCharge = shippingCharge;
-        console.log('CheckoutCtrl', $scope);
     });
 
     function postmasterValidateSuccessCallback(response) {
@@ -44,7 +43,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             weight: Cart.getWeight()
         };
 
-        console.log(data);
+        console.log('postmasterValidateSuccessCallback', data);
 
         // Is status ever not OK? Assume that error callback
         // is called if status is not OK.
@@ -140,7 +139,6 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
 
     function saleChargeSuccessCallback(response) {
         console.log('saleChargeSuccessCallback', response);
-
 
         if (!$scope.shipping) {
             $scope.shipping = {
