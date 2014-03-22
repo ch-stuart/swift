@@ -72,6 +72,21 @@
                 {{ provider.service }} at a cost of {{ provider.charge / 100 | currency }}.
             </p>
         </div>
+        <div ng-show="pickup" id="row-wa-tax-check">
+            <h4>
+                Do you live in the state of Washington?
+            </h4>
+            <p>
+                We ask in order to charge taxes appropriately.
+            </p>
+            <div class="row row--order">
+                <div class="label-input-pair">
+                    <label class="label">
+                        <input type="checkbox" ng-model="waStateResident" ng-change="waStateResidentChanged()">
+                    </label>
+                </div>
+            </div>
+        </div>
         <div ng-show="isShippingReady || pickup" id="row-contact">
             <h4>
                 Contact info

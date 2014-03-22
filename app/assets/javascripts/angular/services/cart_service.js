@@ -22,6 +22,8 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
             if (this.taxRate) {
                 this.taxAmount = this.total * this.taxRate;
                 this.total += this.taxAmount;
+            } else {
+                this.taxAmount = null;
             }
 
             // Adjust price if there is a shippingCharge
@@ -31,13 +33,21 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
 
             $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge);
         },
-        setTaxRate: function(rate) {
-            this.taxRate = parseFloat(rate);
+        setTaxRate: function(rate, waStateResident) {
+            if (rate) {
+                this.taxRate = parseFloat(rate);
+            } else {
+                this.taxRate = null;
+            }
             this.getPrice();
             this.saveToLocalStorage();
         },
         setShippingCharge: function(charge) {
-            this.shippingCharge = parseFloat(charge);
+            if (charge) {
+                this.shippingCharge = parseFloat(charge);
+            } else {
+                this.shippingCharge = null;
+            }
             this.getPrice();
             this.saveToLocalStorage();
         },

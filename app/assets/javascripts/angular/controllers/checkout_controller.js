@@ -1,7 +1,7 @@
 /*jshint browser: true, sub:true */
 /*global SwiftApp console alert _ $$ $ Stripe */
 
-SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'WaStateTaxService', 'SaleService', function($scope, Cart, Postmaster, Place, WaStateTaxService, SaleService) {
+SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', 'Place', 'WaStateTaxService', 'SaleService', function($scope, Config, Cart, Postmaster, Place, WaStateTaxService, SaleService) {
 
     var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
@@ -200,12 +200,37 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Cart', 'Postmaster', 'Place', 'W
     }
 
     $scope['onPickupChanged'] = function() {
+        // Customer is picking up
         if ($scope.pickup) {
             setTimeout(function () {
                 $('html, body').animate({
-                    scrollTop: $("#row-contact").offset().top
+                    scrollTop: $("#row-wa-tax-check").offset().top
                 }, 1200);
             }, 100);
+            // Unset shipping data
+            Cart.setShippingCharge(null);
+            $scope.shipping = $scope.rates = $scope.line1 = $scope.city = $scope.zip_code = null;
+
+        // Customer is shipping
+        } else {
+            // They might be a WA state resident, however, we
+            // no longer use the checkbox to figure it out...
+            // Instead we'll use their shipping address
+            $scope.waStateResident = null;
+            // This turns off the WA taxes, since we'll grab
+            // them again using the customer's shipping
+            // address, assuming they live in WA.
+            $scope['waStateResidentChanged']();
+        }
+    };
+
+    $scope['waStateResidentChanged'] = function() {
+        if ($scope.waStateResident) {
+            WaStateTaxService
+                .rate(Config.get('swiftAddress'))
+                .then(taxSuccessCallback, taxErrorCallback);
+        } else {
+            Cart.setTaxRate(null);
         }
     };
 
