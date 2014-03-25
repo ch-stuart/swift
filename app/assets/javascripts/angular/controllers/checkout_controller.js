@@ -13,6 +13,9 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
     $scope.countryCodes = Place.countries();
     $scope.states = Place.usStates();
 
+    $scope.pickup = $scope.cart.pickup;
+    $scope.waStateResident = $scope.cart.waStateResident;
+
     // Defaults!
     $scope.country = 'US';
     $scope.state = 'MT';
@@ -222,6 +225,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             // address, assuming they live in WA.
             $scope['waStateResidentChanged']();
         }
+        Cart.set('pickup', !!$scope.pickup);
     };
 
     $scope['waStateResidentChanged'] = function() {
@@ -232,6 +236,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
         } else {
             Cart.setTaxRate(null);
         }
+        Cart.set('waStateResident', !!$scope.waStateResident);
     };
 
     $scope['onCountrySelectChanged'] = function() {

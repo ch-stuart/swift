@@ -1,5 +1,8 @@
 /*global angular SwiftApp _ localStorage console */
 
+// TODO clean up this API
+// it's messy!
+
 SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
 
     var service = {
@@ -33,7 +36,7 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
 
             $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge);
         },
-        setTaxRate: function(rate, waStateResident) {
+        setTaxRate: function(rate) {
             if (rate) {
                 this.taxRate = parseFloat(rate);
             } else {
@@ -144,6 +147,11 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
 
             $rootScope.$broadcast('cart:products:update', this.products);
         },
+        // Set a generic property in the cart.
+        set: function(prop, value) {
+            this[prop] = value;
+            this.saveToLocalStorage();
+        },
         loadFromLocalStorage: function() {
             // Check if we have products stored in a cart
             // in localStorage
@@ -173,18 +181,25 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
                 delete product.$$hashKey;
             });
 
+            console.log('loading cart', cartContents);
             return cartContents;
         },
         // Saves the cart array to localStorage, overwriting whatever
         // was there previously.
         saveToLocalStorage: function() {
-            localStorage.setItem('cart', JSON.stringify({
+            var serialized = JSON.stringify({
                 price: this.price,
                 total: this.total,
                 shippingCharge: this.shippingCharge,
                 taxAmount: this.taxAmount,
-                products: this.products
-            }));
+                products: this.products,
+                pickup: this.pickup,
+                waStateResident: this.waStateResident
+            });
+
+            console.log('saving cart', serialized);
+
+            localStorage.setItem('cart', serialized);
         }
     };
     return service;
