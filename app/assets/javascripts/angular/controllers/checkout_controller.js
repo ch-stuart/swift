@@ -281,9 +281,11 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
 
         Stripe.createToken($$('row-payment'), function stripeResponseHandler(status, response) {
             if (response.error) {
-                // FIXME the busy indicator is not going
-                // away for some reason.
                 $scope.busyBuying = false;
+                // FIXED the busy indicator is not going
+                // away for some reason, unless you force
+                // it to re-evaluate.
+                $scope.$digest();
                 alert(response.error.message);
             } else {
                 var token = response.id;
