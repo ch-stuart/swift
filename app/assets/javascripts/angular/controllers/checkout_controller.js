@@ -57,8 +57,14 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             rateParams.commercial = !!data.commercial;
 
             if ($scope.country !== 'US') {
+                // This tells postmaster that we
+                // only want rates from USPS
                 rateParams.carrier = 'usps';
             }
+            // If we set the carrier to USPS,
+            // we are shipping international
+            // (because we only offer USPS when
+            // shipping internationally)
             $scope.intl = !!rateParams.carrier;
 
             if ($scope.state === 'WA') {
@@ -101,7 +107,13 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
 
         var data = response.data;
 
+        // Handle international shipping
         if ($scope.intl) {
+            // While below we have to handle errors
+            // on a per provider basis... We don't
+            // have to do that here because a) there's
+            // only on provider, and b) the errorCallback
+            // is called in this case.
             var shipping = {
                 provider: 'USPS',
                 charge: data.charge,
@@ -113,6 +125,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             $scope.shipping = shipping;
 
             Cart.setShippingCharge(data.charge);
+        // Handle domestic shipping
         } else {
             _.each(['fedex', 'usps', 'ups'], function(provider) {
                 // And save it here too...
@@ -128,12 +141,16 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
                 // We may or may not allow the customer to choose.
                 // I would guess that we will.
                 if (data[provider]) {
+                if (data[provider] && !data[provider].error) {
                     $scope.rates.push({
                         best: (data.best === provider),
                         charge: data[provider].charge,
                         provider: provider,
                         service: data[provider].service
                     });
+                } else if (data[provider].error) {
+                    alert('We are currently unable to provide shipping rates for ' + provider.toUpperCase() + '.');
+                    console.warn(data[provider].error.message);
                 }
             });
         }
