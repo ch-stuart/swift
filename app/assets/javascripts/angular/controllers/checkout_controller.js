@@ -17,6 +17,9 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
     $scope.waStateResident = $scope.cart.waStateResident;
 
     // Defaults!
+    // $scope.line1 = "425 E Sussex AVE";
+    // $scope.city = "Missoula";
+    // $scope.zip_code = "59801";
     $scope.country = 'US';
     $scope.state = 'MT';
     isUnitedStatesOrCanada(true);
