@@ -105,6 +105,7 @@ class SalesController < ApplicationController
       # some other error has occured
       logger.error e.inspect
 
+      # FIXME appears to not actually be responding with JSON. :(
       render json: { error: e }.to_json, status: 500
     end
   end
