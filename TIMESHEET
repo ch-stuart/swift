@@ -158,5 +158,10 @@ date:        time (minutes):       comment:
 2014-03-20  40  Handling errors. Still more to do
 2014-03-22  35  Reset tax and shipping info if user has already filled out shipping info and then decides to pickup
 2014-03-22  10  Don't call rails server if customer is not in WA
+2014-03-24  25  Set up email addresses
+2014-03-24  15  Store pickup status, etc. in cart so user can refresh
+2014-03-24  15  Fix issue where busy indicator on button does not go away when there is an error returned from Stripe
+2014-03-25  40  Start on allow customer to choose shipping provider and service
+2014-03-25  60  Complete on allow customer to choose shipping provider and service for GROUND services
 
 http://www.timer-tab.com
