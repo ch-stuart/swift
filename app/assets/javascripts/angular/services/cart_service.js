@@ -189,9 +189,13 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
         saveToLocalStorage: function() {
             var serialized = JSON.stringify({
                 price: this.price,
-                total: this.total,
-                shippingCharge: this.shippingCharge,
-                taxAmount: this.taxAmount,
+                // Do not want to persist these in localStorage
+                // because if the users refreshes, the form
+                // state does not indicate these have been
+                // completed.
+                // total: this.total,
+                // shippingCharge: this.shippingCharge,
+                // taxAmount: this.taxAmount,
                 products: this.products,
                 pickup: this.pickup,
                 waStateResident: this.waStateResident
