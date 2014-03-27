@@ -28,7 +28,7 @@ GEM
     activesupport (3.2.14)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    angularjs-rails (1.2.6)
+    angularjs-rails (1.2.15)
     arel (3.0.2)
     autoprefixer-rails (1.0.20140110)
       execjs
@@ -182,7 +182,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  angularjs-rails (~> 1.2.6)
+  angularjs-rails (~> 1.2.15)
   autoprefixer-rails
   coffee-rails (~> 3.2.1)
   dalli
