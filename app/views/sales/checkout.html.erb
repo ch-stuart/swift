@@ -67,10 +67,23 @@
                     <img sw-visible="busyShipping" src="/assets/spin.gif" class="btn--progress__spin">
                 </button>
             </div>
-            <p ng-show="isShippingReady" class="pickup-is-{{ pickup }} best-price-{{ provider.best }}" ng-repeat="provider in rates">
-                We will ship your package to you with {{ provider.provider }} via
-                {{ provider.service }} at a cost of {{ provider.charge / 100 | currency }}.
-            </p>
+            <div ng-show="isShippingReady">
+                <h5>
+                    Shipping Options
+                </h5>
+                <p class="pickup-is-{{ pickup }} best-price-{{ provider.best }}" ng-repeat="provider in rates">
+                    <label>
+                        <input
+                            type="radio"
+                            ng-checked="provider.best"
+                            name="shippingRadio"
+                            ng-model="selectedRate"
+                            value="{{ provider.provider }}:{{ provider.service }}:{{ provider.charge }}"
+                            ng-change="onRatesRadioChanged(provider)">
+                        {{ provider.provider | uppercase }} via {{ provider.service }} at a cost of {{ provider.charge / 100 | currency }}.
+                    </label>
+                </p>
+            </div>
         </div>
         <div ng-show="pickup" id="row-wa-tax-check">
             <h4>

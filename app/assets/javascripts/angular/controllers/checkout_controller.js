@@ -41,6 +41,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
         $scope.cart.shippingCharge = shippingCharge;
     });
 
+    Cart.getPrice();
+
     function postmasterValidateSuccessCallback(response) {
         var data = response.data;
         var rateParams = {
@@ -117,7 +119,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             var shipping = {
                 provider: 'USPS',
                 charge: data.charge,
-                service: data.service
+                service: data.service,
+                best: true
             };
             $scope.rates.push(shipping);
 
@@ -128,20 +131,17 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
         // Handle domestic shipping
         } else {
             _.each(['fedex', 'usps', 'ups'], function(provider) {
-                // And save it here too...
-                $scope.shipping = {
-                    charge: data[data.best].charge,
-                    provider: data.best,
-                    service: data[data.best].service
-                };
-
-                Cart.setShippingCharge(data[data.best].charge);
-
-                // However, for now we want to show the options.
-                // We may or may not allow the customer to choose.
-                // I would guess that we will.
-                if (data[provider]) {
                 if (data[provider] && !data[provider].error) {
+                    if (data.best === provider) {
+                        console.log('Setting least expensive shipping option as default', provider);
+                        Cart.setShippingCharge(data[provider].charge);
+
+                        $scope.shipping = {
+                            charge: data[provider].charge,
+                            provider: data[provider].provider,
+                            service: data[provider].service
+                        };
+                    }
                     $scope.rates.push({
                         best: (data.best === provider),
                         charge: data[provider].charge,
@@ -199,7 +199,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
     function saleChargeErrorCallback(response) {
         console.log('saleChargeErrorCallback', response);
         $scope.busyBuying = false;
-        if (response.data.error.message) {
+        if (response.data && response.data.error && response.data.error.message) {
             alert(response.data.error.message);
         }
     }
@@ -294,6 +294,21 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
         Postmaster
             .validate(validateParams)
             .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
+    };
+
+    // TODO Update the shipping cost
+    // TODO send it to the server when the form is submitted
+    // TODO persist in db...
+    $scope['onRatesRadioChanged'] = function(provider) {
+        console.log('onRatesRadioChanged', provider);
+
+        $scope.shipping = {
+            charge: provider.charge,
+            provider: provider.provider,
+            service: provider.service
+        };
+
+        Cart.setShippingCharge(provider.charge);
     };
 
     $scope['onBuyItButtonClicked'] = function() {
