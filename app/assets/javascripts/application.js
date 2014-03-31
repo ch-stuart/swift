@@ -14,7 +14,7 @@
 //= require jquery.lightbox_me
 //= require jquery.tabs
 //= require jquery.slideshow
-//= require angular/application
+//= require angular/app
 //= require angular/directives/visible_directive
 //= require angular/services/config_service
 //= require angular/services/wa_state_tax_service
