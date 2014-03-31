@@ -57,7 +57,7 @@ module SwiftSite
 
     # If you have other manifests or individual stylesheets and JavaScript files to include,
     # you can add them to the precompile array:
-    config.assets.precompile += ['hub.css', 'hub.js']
+    config.assets.precompile += ['hub.css', 'hub.js', 'print.css']
 
     # let rails know about bower components
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
