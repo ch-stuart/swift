@@ -133,14 +133,14 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             _.each(['fedex', 'usps', 'ups'], function(provider) {
                 if (data[provider] && !data[provider].error) {
                     if (data.best === provider) {
-                        console.log('Setting least expensive shipping option as default', provider);
                         Cart.setShippingCharge(data[provider].charge);
 
                         $scope.shipping = {
                             charge: data[provider].charge,
-                            provider: data[provider].provider,
+                            provider: provider,
                             service: data[provider].service
                         };
+                        console.log('Setting least expensive shipping option as default', $scope.shipping);
                     }
                     $scope.rates.push({
                         best: (data.best === provider),
@@ -307,6 +307,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             provider: provider.provider,
             service: provider.service
         };
+
+        console.log('onRatesRadioChanged', $scope.shipping);
 
         Cart.setShippingCharge(provider.charge);
     };
