@@ -5,7 +5,8 @@ class SalesController < ApplicationController
   # GET /sales
   # GET /sales.json
   def index
-    @sales = Sale.all.reverse
+    @sales_not_shipped = Sale.where(status: 'Not Shipped').reverse
+    @sales_shipped = Sale.where(status: 'Shipped').reverse
 
     render :layout => "hub"
     #
@@ -131,7 +132,8 @@ class SalesController < ApplicationController
       shipping_provider: params[:shipping_provider],
       shipping_charge:   params[:shipping_charge],
       shipping_service:  params[:shipping_service],
-      stripe_id:         params[:stripe_id]
+      stripe_id:         params[:stripe_id],
+      status:            "Not Shipped"
     )
 
     # Create the contact if they sign up for spam

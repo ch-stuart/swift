@@ -1,0 +1,33 @@
+<h3>
+    <%= title %>
+</h3>
+<table>
+  <tr>
+    <th>Order Date</th>
+    <th>Customer Email</th>
+    <th>Amount</th>
+    <th>Customer URL</th>
+    <th>Hub URL</th>
+    <th></th>
+    <th style="display:none"></th>
+    <th style="display:none"></th>
+  </tr>
+
+<% sales.each do |sale| %>
+  <tr>
+    <td><%= sale.created_at.strftime("%b %-d") %></td>
+    <td><%= sale.email %></td>
+    <td><%= number_to_currency(cents_to_dollars(sale.amount)) %></td>
+    <td>
+      <a href="/orders/<%= sale.guid %>">
+        <span style="font-family: monospace">
+          <%= sale.guid.truncate(4, omission: "") %>
+        </span>
+      </a>
+    </td>
+    <td><%= link_to "/sales/#{sale.id}", sale %></td>
+    <td style="display:none"><%= link_to 'Edit', edit_sale_path(sale) %></td>
+    <td style="display:none"><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>

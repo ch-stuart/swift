@@ -4,11 +4,14 @@
     Order Details
 </h2>
 <p>
-  <b>
-    Date
-  </b>
+  <b>Date:</b>
   <%= @sale.updated_at.strftime("%b %-d, %Y, %-l:%M%p") %>
 </p>
+<p>
+  <b>Status:</b>
+  <%= @sale.status %>
+</p>
+
 <p>
   <b>Customer URL:</b>
   <a href="/orders/<%= @sale.guid %>">
