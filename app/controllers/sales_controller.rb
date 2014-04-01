@@ -94,7 +94,7 @@ class SalesController < ApplicationController
     begin
       # Create the charge
       stripe_charge = Stripe::Charge.create(
-        amount:      params[:total],
+        amount:      params[:total].to_i,
         currency:    "usd",
         card:        params[:stripeToken],
         description: "#{params[:email]}"

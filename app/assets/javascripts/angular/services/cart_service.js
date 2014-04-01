@@ -24,7 +24,11 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
             // Adjust price if there is a taxRate
             if (this.taxRate) {
                 this.taxAmount = this.total * this.taxRate;
-                this.total += this.taxAmount;
+                // Needs to be an integer because otherwise
+                // Stripe barfs. Can sometimes be a float b/c
+                // we're multipying by the tax rate, which
+                // may be 0.1283058 or whatever.
+                this.total += parseInt(this.taxAmount, 10);
             } else {
                 this.taxAmount = null;
             }
