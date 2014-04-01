@@ -42,10 +42,12 @@ Or, use [pow](//pow.cx).
 ### Migrate on production
 
     $ heroku run rake db:migrate --remote heroku
+    $ heroku restart --remote heroku
 
 ### Migrate on staging
 
     $ heroku run rake db:migrate --remote staging
+    $ heroku restart --remote staging
 
 ## Environmental Variables
 
@@ -59,7 +61,3 @@ Yes, do this. Also, use xip.io to get to swift.dev if you're using pow.
 
 Yes.
 
-## Database migrations
-
-    $ heroku run rake db:migrate
-    $ heroku restart
