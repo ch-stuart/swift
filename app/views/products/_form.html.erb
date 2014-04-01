@@ -47,7 +47,7 @@
     <div class="field">
         <%= f.label :description %>
         <%= f.text_area :description %>
-        <%= render :partial => 'shared/markdown_hint' %>
+        <%= render 'shared/markdown_hint' %>
     </div>
     <div class="field">
         <%= f.label :short_description %>
@@ -87,7 +87,7 @@
     <div class="field">
         <%= f.label :specs %>
         <%= f.text_area :specs %>
-        <%= render :partial => 'shared/markdown_hint' %>
+        <%= render 'shared/markdown_hint' %>
     </div>
     <h3>
         Placement
