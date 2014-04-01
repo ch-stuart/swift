@@ -43,7 +43,6 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
                 this.taxRate = null;
             }
             this.getPrice();
-            this.saveToLocalStorage();
         },
         setShippingCharge: function(charge) {
             if (charge) {
@@ -52,7 +51,6 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
                 this.shippingCharge = null;
             }
             this.getPrice();
-            this.saveToLocalStorage();
         },
         getWeight: function() {
             var weight = 0;
@@ -189,16 +187,8 @@ SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
         saveToLocalStorage: function() {
             var serialized = JSON.stringify({
                 price: this.price,
-                // Do not want to persist these in localStorage
-                // because if the users refreshes, the form
-                // state does not indicate these have been
-                // completed.
-                // total: this.total,
-                // shippingCharge: this.shippingCharge,
-                // taxAmount: this.taxAmount,
-                products: this.products,
-                pickup: this.pickup,
-                waStateResident: this.waStateResident
+                total: this.total,
+                products: this.products
             });
 
             console.log('saving cart', serialized);

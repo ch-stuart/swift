@@ -13,9 +13,6 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
     $scope.countryCodes = Place.countries();
     $scope.states = Place.usStates();
 
-    $scope.pickup = $scope.cart.pickup;
-    $scope.waStateResident = $scope.cart.waStateResident;
-
     // Defaults!
     // $scope.line1 = "425 E Sussex AVE";
     // $scope.city = "Missoula";
@@ -40,8 +37,6 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
         $scope.cart.taxRate        = taxRate;
         $scope.cart.shippingCharge = shippingCharge;
     });
-
-    Cart.getPrice();
 
     function postmasterValidateSuccessCallback(response) {
         var data = response.data;
