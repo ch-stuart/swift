@@ -40,6 +40,7 @@ SwiftSite::Application.routes.draw do
 
   resources :sales do
     get 'success', on: :member
+    get 'ship', on: :member
     get 'checkout', on: :new
     post 'charge', on: :collection
   end

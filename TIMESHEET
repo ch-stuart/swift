@@ -171,5 +171,6 @@ date:        time (minutes):       comment:
 2014-03-31  10  Always send an integer to Stripe to prevent exceptions
 2014-03-31  10  Update order email text
 2014-04-01  35  Allow customer to choose shipping service level
+2014-04-01  60  WIP: Allow Martina to add shipping info to order when it's ready to ship
 
 http://www.timer-tab.com

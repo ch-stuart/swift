@@ -43,6 +43,38 @@ class SalesController < ApplicationController
     # end
   end
 
+  def ship
+    @sale = Sale.find params[:id]
+
+    shipping_params = {
+      to: {
+        contact: "Acme Inc.",
+        company: "Joe Smith",
+        line1: @sale.line1,
+        city: @sale.city,
+        state: @sale.state,
+        zip_code: @sale.zip_code,
+        phone_no: "406-219-1062"
+      },
+      carrier: @sale.shipping_provider,
+      service: @sale.shipping_service,
+      package: {
+        weight: @sale.weight,
+        length: 10,
+        width: 6,
+        height: 8
+      }
+    }
+
+    logger.info "Creating shipment for:"
+    logger.info shipping_params.inspect
+    @response = Postmaster::Shipment.create shipping_params
+
+    logger.info @reponse
+
+    render :layout => "hub"
+  end
+
   # GET /sales/1234/success
   # GET /sales/1234/success.json
   def success
@@ -128,6 +160,7 @@ class SalesController < ApplicationController
       state:             params[:state],
       zip_code:          params[:zip_code],
       country:           params[:country],
+      weight:            params[:weight],
       pickup:            params[:pickup],
       shipping_provider: params[:shipping_provider],
       shipping_charge:   params[:shipping_charge],

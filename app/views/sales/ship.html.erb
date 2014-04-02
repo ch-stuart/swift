@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+    Order Shipping Details
+</h2>
+
+<p>
+    <b>Postmaster ID</b><br>
+    <%= @response[:id] %>
+</p>
+<p>
+    <b>Status</b><br>
+    <%= @response[:status] %>
+</p>
+<p>
+    <b>Tracking</b><br>
+    <%= @response[:tracking][0] %>
+</p>
+<p>
+    <b>Shipping Cost</b><br>
+    <%= @response[:cost] %> (customer was charged <%= @sale.shipping_charge %> for shipping)
+</p>
+<p>
+    <b>Carrier</b><br>
+    <%= @response[:carrier] %>
+</p>
+<% @response[:packages].each_with_index do |package, index| %>
+    <h3>
+        Package <%= index + 1 %>
+    </h3>
+    <p>
+        <b>Dimensions (WxHxL)</b><br>
+        <%= package[:width] %>x<%= package[:height] %>x<%= package[:length] %> (<%= package[:dimension_units] %>)
+    </p>
+    <p>
+        <b>Weight</b><br>
+        <%= package[:weight] %> (<%= package[:weight_units] %>)
+    </p>
+    <p>
+        <a class="btn" href="//postmaster.io/<%= package[:label_url] %>">
+            Show Shipping Label
+        </a>
+    </p>
+<% end %>
