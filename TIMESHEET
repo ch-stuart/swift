@@ -163,5 +163,13 @@ date:        time (minutes):       comment:
 2014-03-24  15  Fix issue where busy indicator on button does not go away when there is an error returned from Stripe
 2014-03-25  40  Start on allow customer to choose shipping provider and service
 2014-03-25  60  Complete on allow customer to choose shipping provider and service for GROUND services
+2014-03-30  05  Precompile print.css
+2014-03-30  10  Fix issue where shipping provider was not saved
+2014-03-30  10  Add status to sales. ("Shipped" and "Not Shipped")
+2014-03-30  10  Add status to sales. ("Shipped" and "Not Shipped")
+2014-03-31  10  Do not persist tax amount, pickup, or other checkout form values in local storage
+2014-03-31  10  Always send an integer to Stripe to prevent exceptions
+2014-03-31  10  Update order email text
+2014-04-01  35  Allow customer to choose shipping service level
 
 http://www.timer-tab.com

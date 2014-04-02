@@ -6,7 +6,12 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
     var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
 
+    var rateParams;
+
     $scope.cart = Cart.loadFromLocalStorage();
+    $scope.domesticServiceLevels = Postmaster.getDomesticServiceLevels();
+    $scope.intlServiceLevels = Postmaster.getIntlServiceLevels();
+
     $scope.isShippingReady = false;
     $scope.busyShipping = false;
     $scope.busyBuying = false;
@@ -19,6 +24,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
     // $scope.zip_code = "59801";
     $scope.country = 'US';
     $scope.state = 'MT';
+    $scope.shippingServiceLevel = 'GROUND';
     isUnitedStatesOrCanada(true);
 
     function isUnitedStatesOrCanada(bool) {
@@ -40,7 +46,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
 
     function postmasterValidateSuccessCallback(response) {
         var data = response.data;
-        var rateParams = {
+
+        rateParams = {
             to_zip: $scope.zip_code,
             to_country: $scope.country,
             weight: Cart.getWeight()
@@ -289,6 +296,15 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
         Postmaster
             .validate(validateParams)
             .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
+    };
+
+    $scope['onShippingServiceLevelChange'] = function() {
+        var localRateParams = rateParams;
+        localRateParams.service = $scope.shippingServiceLevel;
+
+        Postmaster
+            .rates(localRateParams)
+            .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
     };
 
     // TODO Update the shipping cost

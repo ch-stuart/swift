@@ -71,6 +71,21 @@
                 <h5>
                     Shipping Options
                 </h5>
+                <select
+                    ng-show="country == 'US'"
+                    ng-options="k as v for (k,v) in domesticServiceLevels"
+                    ng-model="shippingServiceLevel"
+                    ng-change="onShippingServiceLevelChange()"
+                    class="input">
+                </select>
+                <select
+                    ng-hide="country == 'US'"
+                    ng-options="k as v for (k,v) in intlServiceLevels"
+                    ng-model="shippingServiceLevel"
+                    ng-change="onShippingServiceLevelChange()"
+                    class="input">
+                </select>
+                </select>
                 <p class="pickup-is-{{ pickup }} best-price-{{ provider.best }}" ng-repeat="provider in rates">
                     <label>
                         <input
