@@ -1,11 +1,11 @@
 /*jshint browser: true, sub:true */
 /*global SwiftApp alert location window _ console */
 
-SwiftApp.controller('OrderCtrl', ['$scope', '$http', 'Cart', 'Product', function($scope, $http, Cart, Product) {
+SwiftApp.controller('OrderCtrl', ['$scope', '$http', 'CartService', 'ProductService', function($scope, $http, CartService, ProductService) {
 
-    $scope.cart = Cart.loadFromLocalStorage();
+    $scope.cart = CartService.loadFromLocalStorage();
 
-    Product
+    ProductService
         .get(location.pathname.split('/')[2])
         .then(successCallback, errorCallback);
 
@@ -14,7 +14,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', 'Cart', 'Product', function
 
         // Updates the form so we can edit a product from
         // the cart
-        Product.setupUpdate.call($scope);
+        ProductService.setupUpdate.call($scope);
     }
 
     function errorCallback(data) {
@@ -192,7 +192,7 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', 'Cart', 'Product', function
         if (validateForm()) {
             $scope.product.totalPrice = calculateTotalPrice();
 
-            Cart.add($scope.product);
+            CartService.add($scope.product);
 
             window.location = '/cart';
         }

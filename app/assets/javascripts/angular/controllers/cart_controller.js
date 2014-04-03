@@ -1,9 +1,9 @@
 /*jshint browser: true, sub:true */
 /*global SwiftApp window alert confirm _ */
 
-SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope, $rootScope, Cart) {
+SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'CartService', function($scope, $rootScope, CartService) {
 
-    $scope.cart = Cart.loadFromLocalStorage();
+    $scope.cart = CartService.loadFromLocalStorage();
 
     $scope.$on('cart:products:update', function(e, products) {
         $scope.cart.products = products;
@@ -16,7 +16,7 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope
         var shouldRemove = confirm('Are you sure you want to remove this product from your cart? It cannot be undone.');
 
         if (shouldRemove) {
-            Cart.remove(uniqueId);
+            CartService.remove(uniqueId);
         }
     };
 
@@ -35,7 +35,7 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope
         //     return product.uniqueId !== uniqueId;
         // });
 
-        Cart.saveToLocalStorage();
+        CartService.saveToLocalStorage();
 
         // Save this puppy to localStorage
         localStorage.setItem('update', JSON.stringify(product));
@@ -59,7 +59,7 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'Cart', function($scope
             }
         });
 
-        Cart.update($scope.cart.products);
+        CartService.update($scope.cart.products);
     };
 
     // TODO prefer this element to just be a standard link

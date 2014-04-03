@@ -1,6 +1,6 @@
 /*global SwiftApp localStorage console window _*/
 
-SwiftApp.service('Product', ['$http', function($http) {
+SwiftApp.service('ProductService', ['$http', function($http) {
 
     var response;
 

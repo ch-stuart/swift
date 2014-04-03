@@ -1,22 +1,22 @@
 /*jshint browser: true, sub:true */
 /*global SwiftApp console alert _ $$ $ Stripe */
 
-SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', 'Place', 'WaStateTaxService', 'SaleService', function($scope, Config, Cart, Postmaster, Place, WaStateTaxService, SaleService) {
+SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', 'PostmasterService', 'PlaceService', 'WaStateTaxService', 'SaleService', 'ExceptionService', function($scope, ConfigService, CartService, PostmasterService, PlaceService, WaStateTaxService, SaleService, ExceptionService) {
 
     var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
 
     var rateParams;
 
-    $scope.cart = Cart.loadFromLocalStorage();
-    $scope.domesticServiceLevels = Postmaster.getDomesticServiceLevels();
-    $scope.intlServiceLevels = Postmaster.getIntlServiceLevels();
+    $scope.cart = CartService.loadFromLocalStorage();
+    $scope.domesticServiceLevels = PostmasterService.getDomesticServiceLevels();
+    $scope.intlServiceLevels = PostmasterService.getIntlServiceLevels();
 
     $scope.isShippingReady = false;
     $scope.busyShipping = false;
     $scope.busyBuying = false;
-    $scope.countryCodes = Place.countries();
-    $scope.states = Place.usStates();
+    $scope.countryCodes = PlaceService.countries();
+    $scope.states = PlaceService.usStates();
 
     // Defaults!
     // $scope.line1 = "425 E Sussex AVE";
@@ -48,9 +48,9 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
         var data = response.data;
 
         rateParams = {
-            to_zip: $scope.zip_code,
+            to_zip: $scope.zipCode,
             to_country: $scope.country,
-            weight: Cart.getWeight()
+            weight: CartService.getWeight()
         };
 
         console.log('postmasterValidateSuccessCallback', data);
@@ -76,12 +76,12 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
                     .rate({
                         addr: $scope.line1,
                         city: $scope.city,
-                        zip: $scope.zip_code
+                        zip: $scope.zipCode
                     })
                     .then(taxSuccessCallback, taxErrorCallback);
             }
 
-            Postmaster
+            PostmasterService
                 .rates(rateParams)
                 .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
         }
@@ -95,7 +95,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
 
     function taxSuccessCallback(response) {
         console.log('taxSuccessCallback', response);
-        Cart.setTaxRate(response.data.rate);
+        CartService.setTaxRate(response.data.rate);
     }
 
     function taxErrorCallback(response) {
@@ -129,13 +129,13 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             // Save this so we can send it to the server
             $scope.shipping = shipping;
 
-            Cart.setShippingCharge(data.charge);
+            CartService.setShippingCharge(data.charge);
         // Handle domestic shipping
         } else {
             _.each(['fedex', 'usps', 'ups'], function(provider) {
                 if (data[provider] && !data[provider].error) {
                     if (data.best === provider) {
-                        Cart.setShippingCharge(data[provider].charge);
+                        CartService.setShippingCharge(data[provider].charge);
 
                         $scope.shipping = {
                             charge: data[provider].charge,
@@ -186,7 +186,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
                 line1: $scope.line1,
                 city: $scope.city,
                 state: $scope.state,
-                zip_code: $scope.zip_code,
+                zip_code: $scope.zipCode,
                 country: $scope.country,
                 pickup: $scope.pickup,
                 shipping_provider: $scope.shipping.provider,
@@ -233,8 +233,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
                 }, 1200);
             }, 100);
             // Unset shipping data
-            Cart.setShippingCharge(null);
-            $scope.shipping = $scope.rates = $scope.line1 = $scope.city = $scope.zip_code = null;
+            CartService.setShippingCharge(null);
+            $scope.isShippingReady = $scope.shipping = $scope.rates = $scope.line1 = $scope.city = $scope.zipCode = $scope.phoneNo = null;
 
         // Customer is shipping
         } else {
@@ -247,29 +247,29 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             // address, assuming they live in WA.
             $scope['waStateResidentChanged']();
         }
-        Cart.set('pickup', !!$scope.pickup);
+        CartService.set('pickup', !!$scope.pickup);
     };
 
     $scope['waStateResidentChanged'] = function() {
         if ($scope.waStateResident) {
             WaStateTaxService
-                .rate(Config.get('swiftAddress'))
+                .rate(ConfigService.get('swiftAddress'))
                 .then(taxSuccessCallback, taxErrorCallback);
         } else {
-            Cart.setTaxRate(null);
+            CartService.setTaxRate(null);
         }
-        Cart.set('waStateResident', !!$scope.waStateResident);
+        CartService.set('waStateResident', !!$scope.waStateResident);
     };
 
     $scope['onCountrySelectChanged'] = function() {
         switch ($scope.country) {
         case 'CA':
-            $scope.states = Place.caProvinces();
+            $scope.states = PlaceService.caProvinces();
             $scope.state = 'ON';
             isUnitedStatesOrCanada(true);
             break;
         case 'US':
-            $scope.states = Place.usStates();
+            $scope.states = PlaceService.usStates();
             $scope.state = 'MT';
             isUnitedStatesOrCanada(true);
             break;
@@ -285,7 +285,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             line1: $scope.line1,
             city: $scope.city,
             state: $scope.state,
-            zip_code: $scope.zip_code,
+            zip_code: $scope.zipCode,
             country: $scope.country
         };
 
@@ -293,7 +293,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
             scrollTop: $("#row-shipping").offset().top
         }, 600);
 
-        Postmaster
+        PostmasterService
             .validate(validateParams)
             .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
     };
@@ -302,7 +302,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
         var localRateParams = rateParams;
         localRateParams.service = $scope.shippingServiceLevel;
 
-        Postmaster
+
+        PostmasterService
             .rates(localRateParams)
             .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
     };
@@ -321,7 +322,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'Config', 'Cart', 'Postmaster', '
 
         console.log('onRatesRadioChanged', $scope.shipping);
 
-        Cart.setShippingCharge(provider.charge);
+        CartService.setShippingCharge(provider.charge);
     };
 
     $scope['onBuyItButtonClicked'] = function() {

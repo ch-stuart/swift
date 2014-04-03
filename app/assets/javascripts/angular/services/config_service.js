@@ -1,4 +1,4 @@
-SwiftApp.service('Config', function() {
+SwiftApp.service('ConfigService', function() {
 
     var config = {
         swiftAddress: {

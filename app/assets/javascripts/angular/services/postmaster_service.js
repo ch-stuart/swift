@@ -1,6 +1,6 @@
 /*global SwiftApp console angular */
 
-SwiftApp.service('Postmaster', ['$http', 'Config', function($http, Config) {
+SwiftApp.service('PostmasterService', ['$http', 'ConfigService', function($http, ConfigService) {
 
     return {
         // post 'postmaster/validate'
@@ -13,7 +13,7 @@ SwiftApp.service('Postmaster', ['$http', 'Config', function($http, Config) {
             console.log('PostmasterService.rates', params);
 
             var defaults = {
-                from_zip: Config.get('swiftAddress').zip,
+                from_zip: ConfigService.get('swiftAddress').zip,
                 from_country: 'US'
             };
 

@@ -3,7 +3,7 @@
 // TODO clean up this API
 // it's messy!
 
-SwiftApp.service('Cart', ['$rootScope', function($rootScope) {
+SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
 
     var service = {
         products: [],

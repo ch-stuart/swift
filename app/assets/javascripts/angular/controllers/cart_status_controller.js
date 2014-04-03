@@ -1,9 +1,9 @@
 /*jshint browser: true, sub:true */
 /*global SwiftApp */
 
-SwiftApp.controller('CartStatusCtrl', ['$scope', 'Cart', function($scope, Cart) {
+SwiftApp.controller('CartStatusCtrl', ['$scope', 'CartService', function($scope, CartService) {
 
-    $scope.cart = Cart.loadFromLocalStorage();
+    $scope.cart = CartService.loadFromLocalStorage();
 
     $scope.$on('cart:products:update', function (e, products) {
         $scope.cart.products = products;

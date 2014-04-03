@@ -1,6 +1,6 @@
 /*global SwiftApp */
 
-SwiftApp.service('Place', function() {
+SwiftApp.service('PlaceService', function() {
 
     var usStates = {
         'AL': 'Alabama',
