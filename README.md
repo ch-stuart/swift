@@ -60,4 +60,3 @@ Yes, do this. Also, use xip.io to get to swift.dev if you're using pow.
 ## Do tests work?
 
 Yes.
-
