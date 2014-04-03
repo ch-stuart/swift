@@ -40,7 +40,6 @@ SwiftSite::Application.routes.draw do
 
   resources :sales do
     get 'success', on: :member
-    get 'ship', on: :member
     get 'checkout', on: :new
     post 'charge', on: :collection
   end
@@ -51,6 +50,7 @@ SwiftSite::Application.routes.draw do
 
   post 'postmaster/validate', to: 'postmaster#validate'
   post 'postmaster/rates', to: 'postmaster#rates'
+  get 'postmaster/create_shipment', to: 'postmaster#create_shipment'
 
   match 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
 

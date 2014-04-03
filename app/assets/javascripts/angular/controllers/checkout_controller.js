@@ -58,7 +58,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
         // Is status ever not OK? Assume that error callback
         // is called if status is not OK.
         if (data.status === 'OK') {
-            rateParams.commercial = !!data.commercial;
+            $scope.commercial = rateParams.commercial = !!data.commercial;
 
             if ($scope.country !== 'US') {
                 // This tells postmaster that we
@@ -177,6 +177,8 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
 
         SaleService
             .create({
+                contact: $scope.contact,
+                company: $scope.company,
                 email: $scope.email,
                 description: localStorage.getItem('cart'),
                 amount: $scope.cart.price,
@@ -188,6 +190,9 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
                 state: $scope.state,
                 zip_code: $scope.zipCode,
                 country: $scope.country,
+                phone_no: $scope.phoneNo,
+                commercial: $scope.commercial,
+                weight: CartService.getWeight(),
                 pickup: $scope.pickup,
                 shipping_provider: $scope.shipping.provider,
                 shipping_charge: $scope.shipping.charge,
@@ -302,6 +307,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
         var localRateParams = rateParams;
         localRateParams.service = $scope.shippingServiceLevel;
 
+        $scope.busyShipping = true;
 
         PostmasterService
             .rates(localRateParams)

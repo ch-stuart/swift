@@ -43,38 +43,6 @@ class SalesController < ApplicationController
     # end
   end
 
-  def ship
-    @sale = Sale.find params[:id]
-
-    shipping_params = {
-      to: {
-        contact: "Acme Inc.",
-        company: "Joe Smith",
-        line1: @sale.line1,
-        city: @sale.city,
-        state: @sale.state,
-        zip_code: @sale.zip_code,
-        phone_no: "406-219-1062"
-      },
-      carrier: @sale.shipping_provider,
-      service: @sale.shipping_service,
-      package: {
-        weight: @sale.weight,
-        length: 10,
-        width: 6,
-        height: 8
-      }
-    }
-
-    logger.info "Creating shipment for:"
-    logger.info shipping_params.inspect
-    @response = Postmaster::Shipment.create shipping_params
-
-    logger.info @reponse
-
-    render :layout => "hub"
-  end
-
   # GET /sales/1234/success
   # GET /sales/1234/success.json
   def success
@@ -148,6 +116,8 @@ class SalesController < ApplicationController
   def create
     # Create the sale
     @sale = Sale.new(
+      contact:           params[:contact],
+      company:           params[:company],
       email:             params[:email],
       description:       params[:description],
       amount:            params[:amount],
@@ -155,11 +125,13 @@ class SalesController < ApplicationController
       tax_rate:          params[:tax_rate],
       tax_amount:        params[:tax_amount],
       line1:             params[:line1],
-      # line2:           params[:line2],
+      # line2:             params[:line2],
       city:              params[:city],
       state:             params[:state],
       zip_code:          params[:zip_code],
       country:           params[:country],
+      phone_no:          params[:phone_no],
+      commercial:        params[:commercial],
       weight:            params[:weight],
       pickup:            params[:pickup],
       shipping_provider: params[:shipping_provider],
@@ -193,6 +165,7 @@ class SalesController < ApplicationController
     if @sale.save
       render json: { guid: @sale.guid }.to_json
     else
+      logger.info "DO YOU GET HERE?"
       render json: { error: @sale.errors }, :status => :unprocessable_entity
     end
   end

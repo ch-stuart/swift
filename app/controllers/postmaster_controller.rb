@@ -56,4 +56,43 @@ class PostmasterController < ApplicationController
     end
   end
 
+  def create_shipment
+    @sale = Sale.find params[:id]
+
+    shipping_params = {
+      to: {
+        contact: "Acme Inc.",
+        company: "Joe Smith",
+        line1: @sale.line1,
+        city: @sale.city,
+        state: @sale.state,
+        zip_code: @sale.zip_code,
+        phone_no: @sale.phone_no
+      },
+      carrier: @sale.shipping_provider,
+      service: @sale.shipping_service,
+      package: {
+        weight: @sale.weight,
+        length: 10,
+        width: 6,
+        height: 8
+      }
+    }
+
+    logger.info "=> Creating shipment for: #{shipping_params.inspect}"
+
+    begin
+      @response = Postmaster::Shipment.create shipping_params
+
+      @response[:packages].each do |package|
+        logger.info "=> PACKAGE: #{package.inspect}"
+      end
+
+      redirect_to(@sale, :notice => 'Shipment was successfully created.')
+    rescue Exception => e
+      render text: e
+    end
+
+  end
+
 end

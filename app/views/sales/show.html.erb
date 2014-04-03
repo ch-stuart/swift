@@ -9,7 +9,7 @@
 </p>
 <p>
   <b>Status:</b>
-  <%= @sale.status %> (<%= link_to 'Ship it', ship_sale_path(@sale) %>)
+  <%= @sale.status %> (<%= link_to 'Ship it', controller: "postmaster", action: "create_shipment", id: @sale %>)
 </p>
 
 <p>
@@ -103,6 +103,10 @@
   <b>Description:</b>
   <pre><%= JSON.pretty_generate(JSON.parse(@sale.description)) %></pre>
 </p>
+
+<h2>
+    Shipment Details
+</h2>
 
 <%= link_to 'Edit', edit_sale_path(@sale) %> |
 <%= link_to 'Back', sales_path %>
