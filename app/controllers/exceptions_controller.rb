@@ -1,8 +1,9 @@
 class ExceptionsController < ApplicationController
 
+  before_filter :authenticate_admin, :except => [ :report ]
+
   def report
-    ExceptionNotifier.notify_exception('Exception',
-      :env => request.env, :data => {:message => params[:msg]})
+    JavascriptExceptionMailer.success(params[:msg]).deliver
 
     render text: 'Exception reported'
   end
