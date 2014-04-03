@@ -85,8 +85,11 @@ class PostmasterController < ApplicationController
       @response = Postmaster::Shipment.create shipping_params
 
       @response[:packages].each do |package|
+        # TODO persist this data to the db
         logger.info "=> PACKAGE: #{package.inspect}"
       end
+
+      # TODO redirect to sale, and show updated data
 
       redirect_to(@sale, :notice => 'Shipment was successfully created.')
     rescue Exception => e
