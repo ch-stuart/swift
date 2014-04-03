@@ -151,7 +151,9 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
                         service: data[provider].service
                     });
                 } else if (data[provider].error) {
-                    alert('We are currently unable to provide shipping rates for ' + provider.toUpperCase() + '.');
+                    var msg = 'We are currently unable to provide shipping rates for ' + provider.toUpperCase() + '.';
+                    ExceptionService.report(msg);
+                    alert(msg);
                     console.warn(data[provider].error.message);
                 }
             });
@@ -161,6 +163,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
     function postmasterRateErrorCallback(response) {
         $scope.busyShipping = false;
         console.warn('PostmasterService.rates => Error:', response);
+        ExceptionService.report(JSON.stringify(response));
         alert(RATE_ERROR_MSG);
     }
 
@@ -207,6 +210,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
         console.log('saleChargeErrorCallback', response);
         $scope.busyBuying = false;
         if (response.data && response.data.error && response.data.error.message) {
+            ExceptionService.report(JSON.stringify(response));
             alert(response.data.error.message);
         }
     }
@@ -219,13 +223,18 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
     }
 
     function saleCreateErrorCallback(response) {
-        var errors = [];
-        _.each(response.data.error, function(value, key) {
-            _.each(value, function(element) {
-                errors.push(key + ' ' + element + '.');
+        if (response.data && response.data.error) {
+            var errors = [];
+            _.each(response.data.error, function(value, key) {
+                _.each(value, function(element) {
+                    errors.push(key + ' ' + element + '.');
+                });
             });
-        });
-        alert(errors.join('\n'));
+            alert(errors.join('\n'));
+        } else {
+            ExceptionService.report(response);
+            alert('A server error occurred.');
+        }
         $scope.busyBuying = false;
     }
 
