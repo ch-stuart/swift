@@ -68,3 +68,10 @@ SwiftSite::Application.configure do
   config.assets.precompile += %w( application-hub.css  )
 
 end
+
+Swift::Application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[Exception at builtbyswift.com] ",
+    :sender_address => %{"notifier" <cs@enure.net>},
+    :exception_recipients => %w{charles.stuart@gmail.com}
+  }

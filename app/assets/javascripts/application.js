@@ -16,6 +16,7 @@
 //= require jquery.slideshow
 //= require angular/app
 //= require angular/directives/visible_directive
+//= require angular/services/exception_service
 //= require angular/services/config_service
 //= require angular/services/wa_state_tax_service
 //= require angular/services/sale_service

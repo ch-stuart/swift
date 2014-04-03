@@ -17,6 +17,7 @@ gem 'stripe'
 gem 'mandrill-api'
 gem 'postmaster'
 gem 'httpclient'
+gem 'exception_notification'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '

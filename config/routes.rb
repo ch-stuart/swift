@@ -61,6 +61,8 @@ SwiftSite::Application.routes.draw do
   get 'store', :to => 'homes#store'
   get "accessories" => redirect("/store")
 
+  post 'exceptions/report', to: 'exceptions#report'
+
   root :to => 'homes#index'
 
 end
