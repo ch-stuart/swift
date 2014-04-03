@@ -4,7 +4,7 @@ class JavascriptExceptionMailer < ActionMailer::Base
 
   def report(msg)
     mail(
-      to: email,
+      to: "charles.stuart@gmail.com",
       subject: "JavaScript Exception at builtbyswift.com",
       body: msg,
       content_type: "text/plain"
