@@ -67,11 +67,12 @@ SwiftSite::Application.configure do
   # fix for heroku
   config.assets.precompile += %w( application-hub.css  )
 
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Exception at builtbyswift.com] ",
+      :sender_address => %{"notifier" <cs@enure.net>},
+      :exception_recipients => %w{charles.stuart@gmail.com}
+    }
+
 end
 
-Swift::Application.config.middleware.use ExceptionNotification::Rack,
-  :email => {
-    :email_prefix => "[Exception at builtbyswift.com] ",
-    :sender_address => %{"notifier" <cs@enure.net>},
-    :exception_recipients => %w{charles.stuart@gmail.com}
-  }
