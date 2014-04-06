@@ -1,15 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <h2>
-    Order Details
+    Shipment Details
 </h2>
+
+<% if @sale.status == "Not Shipped" %>
+  <p>
+    <span style="background-color: #FF851B; display: inline-block; color: #FFF;">Sale has not yet been shipped.</span>
+    <%= link_to 'Ship it', controller: "postmaster", action: "create_shipment", id: @sale %>.
+  </p>
+<% else %>
+  <p>
+    <span style="background-color: #F012BE; display: inline-block; color: #FFF;">This sale has been shipped.</span> View details at
+    <a href="https://www.postmaster.io/dashboard/shipments/id/<%= @sale.postmaster_id %>">
+      postmaster.io</a>.
+  </p>
+<% end %>
+
+<h2>
+  Sale Details
+</h2>
+
 <p>
   <b>Date:</b>
   <%= @sale.updated_at.strftime("%b %-d, %Y, %-l:%M%p") %>
-</p>
-<p>
-  <b>Status:</b>
-  <%= @sale.status %> (<%= link_to 'Ship it', controller: "postmaster", action: "create_shipment", id: @sale %>)
 </p>
 
 <p>
@@ -103,10 +117,6 @@
   <b>Description:</b>
   <pre><%= JSON.pretty_generate(JSON.parse(@sale.description)) %></pre>
 </p>
-
-<h2>
-    Shipment Details
-</h2>
 
 <%= link_to 'Edit', edit_sale_path(@sale) %> |
 <%= link_to 'Back', sales_path %>

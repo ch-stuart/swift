@@ -17,12 +17,10 @@
   <tr>
     <td><%= sale.created_at.strftime("%b %-d") %></td>
     <td><%= sale.email %></td>
-    <td><%= number_to_currency(cents_to_dollars(sale.amount)) %></td>
+    <td><%= number_to_currency(cents_to_dollars(sale.total)) %></td>
     <td>
       <a href="/orders/<%= sale.guid %>">
-        <span style="font-family: monospace">
-          <%= sale.guid.truncate(4, omission: "") %>
-        </span>
+        /orders/<%= sale.guid %>
       </a>
     </td>
     <td><%= link_to "/sales/#{sale.id}", sale %></td>

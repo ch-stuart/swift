@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140403040311) do
+ActiveRecord::Schema.define(:version => 20140406161340) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20140403040311) do
     t.string   "contact"
     t.string   "company"
     t.string   "commercial"
+    t.string   "postmaster_id"
   end
 
   create_table "sizes", :force => true do |t|
