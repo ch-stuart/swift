@@ -2,6 +2,8 @@ class PostmasterController < ApplicationController
 
   before_filter :authenticate_admin, :except => [ :validate, :rates ]
 
+  layout "hub"
+
   # Validate and normalize an address. The address will be
   # normalized/corrected if possible. An approximate geocoded
   # location will also be returned.
@@ -101,6 +103,26 @@ class PostmasterController < ApplicationController
       render text: e
     end
 
+  end
+
+  def create_box
+    logger.info "=> WxHxL: #{params[:w]}x#{params[:h]}x#{params[:l]}"
+    @response = Postmaster::Package.create(
+        width: params[:w],
+        height: params[:h],
+        length: params[:l],
+        name: "#{params[:w]}x#{params[:h]}x#{params[:l]}"
+    )
+    redirect_to postmaster_boxes_path, :notice => "Box was successfully created"
+  end
+
+  def boxes
+    begin
+      @response = Postmaster::Package.all(limit: 66)
+      logger.info "=> BOXES: #{@response}"
+    rescue Exception => e
+      @error = "Getting boxes failed. Perhaps you don't have any boxes set up?"
+    end
   end
 
 end

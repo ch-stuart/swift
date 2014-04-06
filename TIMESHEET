@@ -178,5 +178,7 @@ date:        time (minutes):       comment:
 2014-04-06  30  Save shipment details to sale. Adjust sale detail page to display said details
 2014-04-06  05  Adjust UI for displaying whether a sale has been shipped yet or not
 2014-04-06  10  Email customer when shipment is ready
+2014-04-06  20  Store tracking # of shipment for customer email
+2014-04-06  20  Add ability to add and list shipping boxes
 
 http://www.timer-tab.com

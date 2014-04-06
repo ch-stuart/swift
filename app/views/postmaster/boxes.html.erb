@@ -1,0 +1,38 @@
+<h2>Boxes</h2>
+
+<% if @error %>
+  <%= @error %>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Width</th>
+        <th>Height</th>
+        <th>Length</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @response.each do |package| %>
+          <tr>
+            <td><%= package[:name] %></td>
+            <td><%= package[:width] %></td>
+            <td><%= package[:height] %></td>
+            <td><%= package[:length] %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<h3>
+  Add Box
+</h3>
+<form action="create_box" method="post">
+  <p>
+    <input style="width: 3em" name="w" placeholder="W">
+    <input style="width: 3em" name="h" placeholder="H">
+    <input style="width: 3em" name="l" placeholder="L">
+  </p>
+  <p><input type="submit" class="btn" value="Submit"></p>
+</form>
