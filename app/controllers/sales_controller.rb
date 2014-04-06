@@ -165,7 +165,6 @@ class SalesController < ApplicationController
     if @sale.save
       render json: { guid: @sale.guid }.to_json
     else
-      logger.info "DO YOU GET HERE?"
       render json: { error: @sale.errors }, :status => :unprocessable_entity
     end
   end
