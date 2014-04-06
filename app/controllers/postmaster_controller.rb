@@ -63,8 +63,8 @@ class PostmasterController < ApplicationController
 
     shipping_params = {
       to: {
-        contact: "Acme Inc.",
-        company: "Joe Smith",
+        contact: @sale.contact,
+        company: @sale.company,
         line1: @sale.line1,
         city: @sale.city,
         state: @sale.state,
