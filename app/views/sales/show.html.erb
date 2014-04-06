@@ -15,7 +15,15 @@
   <p>
     <span class="hey--yay">This sale has been shipped.</span>
   </p>
-  <p>View details:
+  <p>
+    <b>Postmaster ID:</b>
+    <%= @sale.postmaster_id %>
+  </p>
+  <p>
+    <b>Tracking Number:</b>
+    <%= @sale.shipping_tracking_number %>
+  </p>
+  <p>View details (including the shipping label):
     <a href="https://www.postmaster.io/dashboard/shipments/id/<%= @sale.postmaster_id %>">
       postmaster.io</a>.
   </p>

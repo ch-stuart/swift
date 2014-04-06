@@ -1,7 +1,7 @@
-Your order has shipped.
+Your order has shipped via <%= @sale.shipping_provider.upcase %> and has a tracking number of <%= @sale.shipping_tracking_number %>.
 
-You can find the shipping details at:
+You can find all of your order details at:
 
-- http://builtbyswift.com/orders/<%= @guid %>
+- http://builtbyswift.com/orders/<%= @sale.guid %>
 
 Thanks for choosing Swift Industries

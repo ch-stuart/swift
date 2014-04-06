@@ -8,7 +8,7 @@ class SalesMailer < ActionMailer::Base
   end
 
   def shipped sale
-    @guid = sale.guid
+    @sale = sale
     mail(to: sale.email, subject: "Your order from Swift Industries has shipped")
   end
 

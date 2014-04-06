@@ -86,15 +86,16 @@ class PostmasterController < ApplicationController
 
       logger.info "=> SHIPMENT: #{@response.inspect}"
 
-      params = {}
-      params[:status] = "Shipped"
-      params[:postmaster_id] = @response[:id]
+      sale_params = {}
+      sale_params[:status] = "Shipped"
+      sale_params[:postmaster_id] = @response[:id]
+      sale_params[:shipping_tracking_number] = @response[:tracking].first
 
-      if @sale.update_attributes params
+      if @sale.update_attributes sale_params
         SalesMailer.shipped(@sale).deliver
         redirect_to(@sale, :notice => 'Shipment was successfully created.')
       else
-        render text: "wah"
+        render text: "Updating the sale failed. Contact cs@enure.net."
       end
     rescue Exception => e
       render text: e
