@@ -58,6 +58,7 @@ class PostmasterController < ApplicationController
     end
   end
 
+  # Create a shipment
   def create_shipment
     @sale = Sale.find params[:id]
 
@@ -75,9 +76,10 @@ class PostmasterController < ApplicationController
       service: @sale.shipping_service,
       package: {
         weight: @sale.weight,
-        length: 10,
+        # FIXME send the correct WxHxL
         width: 6,
-        height: 8
+        height: 8,
+        length: 10
       }
     }
 
@@ -105,6 +107,7 @@ class PostmasterController < ApplicationController
 
   end
 
+  # Create a box
   def create_box
     logger.info "=> WxHxL: #{params[:w]}x#{params[:h]}x#{params[:l]}"
     @response = Postmaster::Package.create(
@@ -116,6 +119,7 @@ class PostmasterController < ApplicationController
     redirect_to postmaster_boxes_path, :notice => "Box was successfully created"
   end
 
+  # List available boxes
   def boxes
     begin
       @response = Postmaster::Package.all(limit: 66)
