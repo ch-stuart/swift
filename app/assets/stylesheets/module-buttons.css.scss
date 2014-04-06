@@ -66,6 +66,9 @@ a.btn,
 a.btn:visited {
     color: #666;
 }
+a.btn:hover {
+    border: 0;
+}
 .btn-primary {
     background-color: #E328BB;
     color: #fff;
