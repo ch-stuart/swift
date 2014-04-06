@@ -6,12 +6,16 @@
 
 <% if @sale.status == "Not Shipped" %>
   <p>
-    <span style="background-color: #FF851B; display: inline-block; color: #FFF;">Sale has not yet been shipped.</span>
-    <%= link_to 'Ship it', controller: "postmaster", action: "create_shipment", id: @sale %>.
+    <span class="hey--wah">Sale has not yet been shipped.</span>
+  </p>
+  <p>
+    <%= link_to 'Ship it', { controller: "postmaster", action: "create_shipment", id: @sale }, class: 'btn' %>
   </p>
 <% else %>
   <p>
-    <span style="background-color: #F012BE; display: inline-block; color: #FFF;">This sale has been shipped.</span> View details at
+    <span class="hey--yay">This sale has been shipped.</span>
+  </p>
+  <p>View details:
     <a href="https://www.postmaster.io/dashboard/shipments/id/<%= @sale.postmaster_id %>">
       postmaster.io</a>.
   </p>

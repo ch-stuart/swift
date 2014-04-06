@@ -18,6 +18,20 @@ a {
 a:hover {
   border-bottom:1px solid magenta;
 }
+.hey {
+    display: inline-block;
+    padding: 1px;
+    color: #FFF;
+}
+.hey--wah {
+    @extend .hey;
+    background-color: #FF851B;
+}
+.hey--yay {
+    @extend .hey;
+    background-color: #F012BE;
+}
+
 .hint {
     margin-top: -20px;
     color: #888;
