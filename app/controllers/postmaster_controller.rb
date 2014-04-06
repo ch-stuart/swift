@@ -121,7 +121,7 @@ class PostmasterController < ApplicationController
       @response = Postmaster::Package.all(limit: 66)
       logger.info "=> BOXES: #{@response}"
     rescue Exception => e
-      @error = "Getting boxes failed. Perhaps you don't have any boxes set up?"
+      @error = e
     end
   end
 
