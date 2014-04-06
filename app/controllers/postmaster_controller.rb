@@ -91,6 +91,7 @@ class PostmasterController < ApplicationController
       params[:postmaster_id] = @response[:id]
 
       if @sale.update_attributes params
+        SalesMailer.shipped(@sale).deliver
         redirect_to(@sale, :notice => 'Shipment was successfully created.')
       else
         render text: "wah"
