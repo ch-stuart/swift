@@ -6,7 +6,7 @@ SwiftApp.service('ConfigService', function() {
             city: 'Seattle',
             zip: '98107'
         }
-    }
+    };
 
     return {
         get: function(key) {
