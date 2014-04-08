@@ -7,3 +7,4 @@ log/*.log
 # Ignore application configuration
 /config/application.yml
 .powenv
+node_modules/
