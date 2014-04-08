@@ -1,0 +1,12 @@
+{
+  "name": "swift",
+  "version": "0.0.0",
+  "main": "Gruntfile.js",
+  "private": true,
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-notify": "^0.2.20"
+  }
+}
