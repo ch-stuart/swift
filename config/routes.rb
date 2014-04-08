@@ -50,6 +50,7 @@ SwiftSite::Application.routes.draw do
 
   post 'postmaster/validate', to: 'postmaster#validate'
   post 'postmaster/rates', to: 'postmaster#rates'
+  post 'postmaster/fit', to: 'postmaster#fit'
   get 'postmaster/create_shipment', to: 'postmaster#create_shipment'
   get 'postmaster/boxes', to: 'postmaster#boxes'
   post 'postmaster/create_box', to: 'postmaster#create_box'

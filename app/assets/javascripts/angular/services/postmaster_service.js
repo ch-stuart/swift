@@ -8,7 +8,7 @@ SwiftApp.service('PostmasterService', ['$http', 'ConfigService', function($http,
             console.log('PostmasterService.validate', params);
             return $http.post('/postmaster/validate', params);
         },
-        // match 'postmaster/rates'
+        // post 'postmaster/rates'
         rates: function(params) {
             console.log('PostmasterService.rates', params);
 
@@ -18,6 +18,11 @@ SwiftApp.service('PostmasterService', ['$http', 'ConfigService', function($http,
             };
 
             return $http.post('/postmaster/rates', angular.extend(defaults, params));
+        },
+        fit: function(params) {
+            console.log('PostmasterService.fit', params);
+
+            return $http.post('/postmaster/fit', params);
         },
         getDomesticServiceLevels: function() {
             return {

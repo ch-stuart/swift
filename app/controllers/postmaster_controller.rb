@@ -1,6 +1,6 @@
 class PostmasterController < ApplicationController
 
-  before_filter :authenticate_admin, :except => [ :validate, :rates ]
+  before_filter :authenticate_admin, :except => [ :validate, :rates, :fit ]
 
   layout "hub"
 
@@ -32,7 +32,7 @@ class PostmasterController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render :text => response }
+      format.html  { render :text => response }
       format.json  { render :json => response }
     end
   end
@@ -53,9 +53,24 @@ class PostmasterController < ApplicationController
     response = Postmaster::Rates.get params
 
     respond_to do |format|
-      format.html { render :text => response }
+      format.html  { render :text => response }
       format.json  { render :json => response }
     end
+  end
+
+  # Fit packages in the best box
+  #
+  # params
+  #
+  # ?
+  def fit
+    params.delete :controller
+    params.delete :action
+
+    response = Postmaster::Package.fit params
+
+    logger.info "FIT #{response.inspect}"
+    render json: response
   end
 
   # Create a shipment
