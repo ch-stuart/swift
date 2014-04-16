@@ -19,11 +19,12 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
     $scope.states = PlaceService.usStates();
 
     // Defaults!
-    // $scope.line1 = "425 E Sussex AVE";
-    // $scope.city = "Missoula";
-    // $scope.zip_code = "59801";
+    $scope.line1 = "425 E Sussex AVE";
+    $scope.city = "Missoula";
+    $scope.zipCode = "59801";
     $scope.country = 'US';
     $scope.state = 'MT';
+    $scope.phoneNo = "989 433 0325";
     $scope.shippingServiceLevel = 'GROUND';
     isUnitedStatesOrCanada(true);
 
@@ -150,7 +151,7 @@ SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', '
                         provider: provider,
                         service: data[provider].service
                     });
-                } else if (data[provider].error) {
+                } else if (data[provider] && data[provider].error) {
                     var msg = 'We are currently unable to provide shipping rates for ' + provider.toUpperCase() + '.';
                     ExceptionService.report(msg);
                     alert(msg);
