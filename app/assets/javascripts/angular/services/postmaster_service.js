@@ -19,6 +19,7 @@ SwiftApp.service('PostmasterService', ['$http', 'ConfigService', function($http,
 
             return $http.post('/postmaster/rates', angular.extend(defaults, params));
         },
+        // Worthless endpoint. Bad postmaster.
         fit: function(params) {
             console.log('PostmasterService.fit', params);
 

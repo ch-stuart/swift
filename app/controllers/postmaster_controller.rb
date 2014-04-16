@@ -50,6 +50,8 @@ class PostmasterController < ApplicationController
     params.delete(:controller)
     params.delete(:action)
 
+    logger.info "params for rates: #{params}"
+
     response = Postmaster::Rates.get params
 
     respond_to do |format|
@@ -62,14 +64,24 @@ class PostmasterController < ApplicationController
   #
   # params
   #
-  # ?
+  # This endpoint sucks. It will either
+  # succeed pretty quickly, or it will
+  # take 60s and timeout and return a
+  # worthless response
   def fit
     params.delete :controller
     params.delete :action
 
-    response = Postmaster::Package.fit params
+    # Disabling this as it might improve speed,
+    # and we don't require it
+    params[:generating_img] = false;
 
-    logger.info "FIT #{response.inspect}"
+    boxes = Postmaster::Package.all
+    logger.info "[Postmaster::Package.all] response: #{boxes}"
+    logger.info "[Postmaster::Package.fit] request params: #{params.inspect}"
+    response = Postmaster::Package.fit params
+    logger.info "[Postmaster::Package.fit] response: #{response.inspect}"
+
     render json: response
   end
 
@@ -137,7 +149,7 @@ class PostmasterController < ApplicationController
   # List available boxes
   def boxes
     begin
-      @response = Postmaster::Package.all(limit: 66)
+      @response = Postmaster::Package.all
       logger.info "=> BOXES: #{@response}"
     rescue Exception => e
       @error = e

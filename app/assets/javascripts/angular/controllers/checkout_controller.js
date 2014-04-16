@@ -1,7 +1,43 @@
 /*jshint browser: true, sub:true */
 /*global SwiftApp console alert _ $$ $ Stripe */
 
-SwiftApp.controller('CheckoutCtrl', ['$scope', 'ConfigService', 'CartService', 'PostmasterService', 'PlaceService', 'WaStateTaxService', 'SaleService', 'ExceptionService', function($scope, ConfigService, CartService, PostmasterService, PlaceService, WaStateTaxService, SaleService, ExceptionService) {
+SwiftApp.controller('CheckoutCtrl', [
+    '$scope',
+    'ConfigService',
+    'CartService',
+    'PostmasterService',
+    'PlaceService',
+    'WaStateTaxService',
+    'SaleService',
+    'ExceptionService',
+    'PackagingService',
+    function(
+        $scope,
+        ConfigService,
+        CartService,
+        PostmasterService,
+        PlaceService,
+        WaStateTaxService,
+        SaleService,
+        ExceptionService,
+        PackagingService) {
+
+    var packages = PackagingService.fit();
+
+    _.each(packages, function(p) {
+        console.log(p);
+
+        PostmasterService
+            .rates({
+                "to_zip": '59801',
+                "to_country": 'US',
+                "weight": p.weight,
+                "width": p.width,
+                "height": p.height,
+                "length": p.length
+            })
+            .then(function(r) { console.log(r.data) }, function(r) { console.log(r.data) })
+    });
 
     var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
