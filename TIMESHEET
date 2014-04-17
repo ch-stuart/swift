@@ -145,7 +145,7 @@ date:        time (minutes):       comment:
 2014-03-08  30  Basecamping
 2014-03-10  60  Meeting
 2014-03-10  20  Researching how to get tax rate for WA State
-2014-03-11  80  Implement proxy to fetch wa state tax rate
+2014-03-11  40  Implement proxy to fetch wa state tax rate
 2014-03-11  20  Only try and get wa state tax rate if zip code is in WA state
 2014-03-13  30  Saving tax info with sale in db
 2014-03-15  60  Cleanup. Store all $$$ in cents. Store all charges that are included in total seperately.
@@ -166,7 +166,6 @@ date:        time (minutes):       comment:
 2014-03-30  05  Precompile print.css
 2014-03-30  10  Fix issue where shipping provider was not saved
 2014-03-30  10  Add status to sales. ("Shipped" and "Not Shipped")
-2014-03-30  10  Add status to sales. ("Shipped" and "Not Shipped")
 2014-03-31  10  Do not persist tax amount, pickup, or other checkout form values in local storage
 2014-03-31  10  Always send an integer to Stripe to prevent exceptions
 2014-03-31  10  Update order email text
@@ -180,5 +179,12 @@ date:        time (minutes):       comment:
 2014-04-06  10  Email customer when shipment is ready
 2014-04-06  20  Store tracking # of shipment for customer email
 2014-04-06  20  Add ability to add and list shipping boxes
+2014-04-07  60  Working on implementing ability to ship multiple boxes
+
+3185 / 60 = 53
+
+// sort of invoiced... did not provide an actual invoice yet
+
+2014-04-16  30  Start on basic packaging service
 
 http://www.timer-tab.com

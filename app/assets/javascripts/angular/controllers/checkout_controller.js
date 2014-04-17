@@ -22,25 +22,13 @@ SwiftApp.controller('CheckoutCtrl', [
         ExceptionService,
         PackagingService) {
 
-    var packages = PackagingService.fit();
-
-    _.each(packages, function(p) {
-        console.log(p);
-
-        PostmasterService
-            .rates({
-                "to_zip": '59801',
-                "to_country": 'US',
-                "weight": p.weight,
-                "width": p.width,
-                "height": p.height,
-                "length": p.length
-            })
-            .then(function(r) { console.log(r.data) }, function(r) { console.log(r.data) })
-    });
+    var package_count = 1;
+    var rates_response_count = 0;
 
     var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
+
+    var SHIPPING_PROVIDERS = ['fedex', 'usps', 'ups'];
 
     var rateParams;
 
@@ -84,10 +72,16 @@ SwiftApp.controller('CheckoutCtrl', [
     function postmasterValidateSuccessCallback(response) {
         var data = response.data;
 
+        var packages = PackagingService.fit();
+        package_count = packages.length;
+
         rateParams = {
             to_zip: $scope.zipCode,
             to_country: $scope.country,
-            weight: CartService.getWeight()
+            weight: packages[0].weight,
+            width: packages[0].width,
+            height: packages[0].height,
+            length: packages[0].length
         };
 
         console.log('postmasterValidateSuccessCallback', data);
@@ -118,9 +112,11 @@ SwiftApp.controller('CheckoutCtrl', [
                     .then(taxSuccessCallback, taxErrorCallback);
             }
 
-            PostmasterService
-                .rates(rateParams)
-                .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
+            _.each(packages, function() {
+                PostmasterService
+                    .rates(rateParams)
+                    .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
+            });
         }
     }
 
@@ -139,13 +135,60 @@ SwiftApp.controller('CheckoutCtrl', [
         console.log('taxErrorCallback', response);
     }
 
+    var rateResponses = [];
     function postmasterRateSuccessCallback(response) {
-        console.log('rateSuccessCallback', response);
+        // Cannot proceed until we have received all of the callbacks
+        rates_response_count++;
+
+        rateResponses.push(response);
+
+        if (rates_response_count < package_count) {
+            return console.log('I havent heard enough');
+        }
+
+        var combinedResponse = {};
+
+        // If we only got one provider back...
+        if ($scope.intl || 'service' in response.data) {
+            console.log('INTLINTLINTLINTL');
+        } else {
+            console.log('GO USA! GO USA! GO USA! GO USA!');
+
+            // If any of the providers failed to respond to
+            // any of the rates requests remove them from the
+            // SHIPPING_PROVIDERS array
+            _.each(rateResponses, function(response) {
+                if (!response.data.hasOwnProperty('ups')) {
+                    SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'ups');
+                }
+                if (!response.data.hasOwnProperty('fedex')) {
+                    SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'fedex');
+                }
+                if (!response.data.hasOwnProperty('usps')) {
+                    SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'usps');
+                }
+            });
+
+            _.each(SHIPPING_PROVIDERS, function(provider) {
+                combinedResponse[provider] = {};
+                combinedResponse[provider].charge = 0;
+
+                _.each(rateResponses, function(response) {
+                    console.log(response, provider, response.data[provider].charge);
+                    combinedResponse[provider].charge += response.data[provider].charge;
+                });
+                console.log('charge for', provider, 'should be', combinedResponse[provider].charge);
+            });
+        }
+
         $scope.rates = [];
         $scope.shipping = {};
         $scope.busyShipping = false;
         $scope.isShippingReady = true;
 
+
+        // Use the most recent response data
+        // for some things
         var data = response.data;
 
         // Handle international shipping
@@ -157,7 +200,7 @@ SwiftApp.controller('CheckoutCtrl', [
             // is called in this case.
             var shipping = {
                 provider: 'USPS',
-                charge: data.charge,
+                charge: charge,
                 service: data.service,
                 best: true
             };
@@ -169,11 +212,12 @@ SwiftApp.controller('CheckoutCtrl', [
             CartService.setShippingCharge(data.charge);
         // Handle domestic shipping
         } else {
-            _.each(['fedex', 'usps', 'ups'], function(provider) {
+            _.each(SHIPPING_PROVIDERS, function(provider) {
                 if (data[provider] && !data[provider].error) {
                     if (data.best === provider) {
                         CartService.setShippingCharge(data[provider].charge);
 
+                        // Set best as the default on the scope
                         $scope.shipping = {
                             charge: data[provider].charge,
                             provider: provider,
@@ -181,9 +225,10 @@ SwiftApp.controller('CheckoutCtrl', [
                         };
                         console.log('Setting least expensive shipping option as default', $scope.shipping);
                     }
+                    // Push all rates into an array
                     $scope.rates.push({
                         best: (data.best === provider),
-                        charge: data[provider].charge,
+                        charge: combinedResponse[provider].charge,
                         provider: provider,
                         service: data[provider].service
                     });
@@ -355,6 +400,8 @@ SwiftApp.controller('CheckoutCtrl', [
 
         $scope.busyShipping = true;
 
+        // TODO need to either fit again, or save the rate params
+        // the latter seems better, duh
         PostmasterService
             .rates(localRateParams)
             .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);

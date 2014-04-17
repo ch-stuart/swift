@@ -56,19 +56,19 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
             }
             this.getPrice();
         },
-        getWeight: function() {
-            var weight = 0;
-            _.each(this.products, function(product) {
-                if (product.weight) {
-                    weight = weight + parseFloat(product.weight);
-                } else {
-                    console.warn('CartService: Missing weight for product ', product.title);
-                    weight = weight + 5.0;
-                }
-
-            });
-            return weight;
-        },
+        // getWeight: function() {
+        //     var weight = 0;
+        //     _.each(this.products, function(product) {
+        //         if (product.weight) {
+        //             weight = weight + parseFloat(product.weight);
+        //         } else {
+        //             console.warn('CartService: Missing weight for product ', product.title);
+        //             weight = weight + 5.0;
+        //         }
+        //
+        //     });
+        //     return weight;
+        // },
         update: function(updatedProducts) {
             this.products = updatedProducts;
             this.getPrice();

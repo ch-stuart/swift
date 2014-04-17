@@ -10,6 +10,7 @@
         <th>Width</th>
         <th>Height</th>
         <th>Length</th>
+        <th>Volume <span class="demph">(cubic inches)</span></th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
             <td><%= package[:width] %></td>
             <td><%= package[:height] %></td>
             <td><%= package[:length] %></td>
+            <td><%= package[:width] * package[:height] * package[:length] %></td>
           </tr>
       <% end %>
     </tbody>
