@@ -12,6 +12,8 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
         totalPrice: null,
         taxRate: null,
         taxAmount: null,
+        // Calculates base price, tax amount, shipping charge
+        // Broadcasts updates
         // TODO rename
         getPrice: function() {
             var price = 0;
@@ -86,41 +88,58 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
         //
         // @returns Object savedPurchase
         add: function(newProduct) {
+            // Copy the newProduct so that we don't
+            // affect the product in the controller/view.
+            // We will copy properties from `prod` obj on to
+            // `save` obj (rather than removing properties we
+            // don't want)
             var prod = angular.copy(newProduct);
             var save = {};
                 save.parts = [];
 
+            // Save a property if it is present
             function saveIf(prop) {
-                if (prod[prop]) {
+                if (prop in prod) {
                     save[prop] = prod[prop];
                 }
             }
 
+            // Save a part on to the product
             function savePart(part) {
                 var newPart = {};
                 newPart.id = part.id;
-                newPart.price = part.price;
+                newPart.price = parseFloat(part.price);
                 newPart.selectedColor = part.selectedColor;
                 newPart.title = part.title;
 
                 save.parts.push(newPart);
             }
 
+            // Save each of these properties on the product
             _.each(['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer',
               'question', 'selectedSize', 'mostExpensiveFabric', 'width', 'height', 'length', 'weight'], saveIf);
 
+            // Save parts on the product
             _.chain(prod.parts)
                 .filter(function(part) {
+                    // Only save parts that:
+                    // 1. have a price and are activated
+                    // 1. don't have a price but do have a color
                     return part.price && part.activated || !part.price && part.selectedColor;
                 })
                 .each(savePart);
 
             delete prod.$$hashKey;
 
+            // The user has not had a chance yet to adjust
+            // the quantity. Set the default...
+            save.quantity = 1;
+
+            // Set a uniqueId so that we can track if the product
+            // was already in the cart and the user is editing it
             if (!save.uniqueId) {
                 save.uniqueId = Date.now();
             }
-            save.quantity = 1;
 
             // If this is a product that was already in the cart that
             // we are editing, remove the old version from the cart before
