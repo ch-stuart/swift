@@ -1,7 +1,16 @@
 /*jshint browser: true, sub:true */
 /*global SwiftApp alert location window _ console */
 
-SwiftApp.controller('OrderCtrl', ['$scope', '$http', 'CartService', 'ProductService', function($scope, $http, CartService, ProductService) {
+SwiftApp.controller('OrderCtrl', [
+    '$scope',
+    '$http',
+    'CartService',
+    'ProductService',
+    function(
+        $scope,
+        $http,
+        CartService,
+        ProductService) {
 
     $scope.cart = CartService.loadFromLocalStorage();
 
@@ -11,6 +20,9 @@ SwiftApp.controller('OrderCtrl', ['$scope', '$http', 'CartService', 'ProductServ
 
     function successCallback(response) {
         $scope.product = response.data.product;
+
+        // Change currency strings into floats
+        ProductService.setTypes.call($scope.product);
 
         // Updates the form so we can edit a product from
         // the cart

@@ -29,7 +29,7 @@
                         data-price="{{ part.price }}">
                     {{ part.title }}
                     <span ng-show="part.price">
-                        ${{ part.price }}
+                        {{ part.price | currency }}
                     </span>
                 </label>
                 <%= render 'order_form_color_picker' %>

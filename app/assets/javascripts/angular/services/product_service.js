@@ -5,7 +5,7 @@ SwiftApp.service('ProductService', ['$http', function($http) {
     var response;
 
     function sortParts() {
-        console.log('Product.sortParts');
+        console.log('Product#sortParts');
         // Sort by whether or not a part has colors
         if (response.product.parts) {
             var parts = response.product.parts;
@@ -22,7 +22,7 @@ SwiftApp.service('ProductService', ['$http', function($http) {
     //
     // @returns nothing
     function setupSizes() {
-        console.log('Product.setupSizes');
+        console.log('Product#setupSizes');
         if (response.product.sizes.length) {
             response.product.selectedSize = response.product.sizes[0];
 
@@ -40,7 +40,7 @@ SwiftApp.service('ProductService', ['$http', function($http) {
     //
     // @returns nothing
     function setupQA() {
-        console.log('Product.setupQA');
+        console.log('Product#setupQA');
         // Set this so we can hide/show the input/select
         // based on whether or not it's
         response.product.originalAnswer = response.product.answer;
@@ -58,7 +58,7 @@ SwiftApp.service('ProductService', ['$http', function($http) {
     function setupPricesForWholesale() {
         if (!window.__iswsu__) return;
 
-        console.log('Product.setupPricesForWholesale');
+        console.log('Product#setupPricesForWholesale');
 
         // TODO only do this if they are a wholesaler!
         // Adjust main price
@@ -106,6 +106,37 @@ SwiftApp.service('ProductService', ['$http', function($http) {
                 .error(function(data) {
                     return data;
                 });
+        },
+        setTypes: function() {
+            var product_floats = ['price', 'wholesale_price', 'width', 'height', 'length', 'weight'];
+            _.each(product_floats, function(f) {
+                if (this[f]) {
+                    this[f] = parseFloat(this[f]);
+                } else {
+                    console.warn('ProductService#setTypes: Product missing reqd attr', f, this);
+                }
+            }, this);
+
+            var part_floats = ['price', 'wholesale_price'];
+            _.each(this.parts, function(part) {
+                _.each(part_floats, function(f) {
+                    if (part[f]) {
+                        part[f] = parseFloat(part[f]);
+                    } else {
+                        console.warn('ProductService#setTypes: Part missing reqd attr', f, part);
+                    }
+                }, this);
+
+                // _.each(part.colors, function(color) {
+                //     _.each(part_floats, function(f) {
+                //         if (color[f]) {
+                //             color[f] = parseFloat(color[f]);
+                //         } else {
+                //             console.warn('ProductService#setTypes: Color missing reqd attr', f, color);
+                //         }
+                //     });
+                // });
+            }, this);
         },
         setupUpdate: function() {
             if (!localStorage.getItem('update')) return;
