@@ -63,7 +63,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
 
         // If our volume exceeds that of our largest box...
         if (volume > LARGEST_PACKAGE_VOLUME) {
-            console.log('PackagingService#getPackages: volume exceeds largest box');
+            console.log('PackagingService#getPackages: volume exceeds largest box', volume, '>', LARGEST_PACKAGE_VOLUME);
             // Figure out how many of the largest boxes we need
             package_count = Math.ceil(volume / LARGEST_PACKAGE_VOLUME);
 
@@ -83,7 +83,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
             });
             package_count--;
         }
-        console.log('PackagingService#getPackages', packages);
+        console.log('PackagingService#getPackages', packages.length, packages);
         return packages;
     }
 

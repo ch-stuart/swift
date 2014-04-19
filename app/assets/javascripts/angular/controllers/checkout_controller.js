@@ -143,17 +143,15 @@ SwiftApp.controller('CheckoutCtrl', [
         rateResponses.push(response);
 
         if (rates_response_count < package_count) {
-            return console.log('I havent heard enough');
+            return; // console.log('I havent heard enough');
         }
 
         var combinedResponse = {};
 
         // If we only got one provider back...
         if ($scope.intl || 'service' in response.data) {
-            console.log('INTLINTLINTLINTL');
+            // FIXME handle multiple packages with INTL shipping
         } else {
-            console.log('GO USA! GO USA! GO USA! GO USA!');
-
             // If any of the providers failed to respond to
             // any of the rates requests remove them from the
             // SHIPPING_PROVIDERS array
