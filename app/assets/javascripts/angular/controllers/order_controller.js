@@ -6,7 +6,7 @@ SwiftApp.controller('OrderCtrl', [
     '$http',
     'CartService',
     'ProductService',
-    'ExceptionService'
+    'ExceptionService',
     function(
         $scope,
         $http,
