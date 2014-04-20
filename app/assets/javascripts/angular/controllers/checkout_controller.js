@@ -30,8 +30,6 @@ SwiftApp.controller('CheckoutCtrl', [
 
     var SHIPPING_PROVIDERS = ['fedex', 'usps', 'ups'];
 
-    var rateParams;
-
     $scope.cart = CartService.loadFromLocalStorage();
     $scope.domesticServiceLevels = PostmasterService.getDomesticServiceLevels();
     $scope.intlServiceLevels = PostmasterService.getIntlServiceLevels();
@@ -42,12 +40,19 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.countryCodes = PlaceService.countries();
     $scope.states = PlaceService.usStates();
 
+    $scope.rateParams = {};
+
     // Defaults!
     $scope.line1 = "425 E Sussex AVE";
     $scope.city = "Missoula";
     $scope.zipCode = "59801";
     $scope.country = 'US';
     $scope.state = 'MT';
+    // $scope.line1 = "70 CHARLOTTE ST";
+    // $scope.city = "London";
+    // $scope.zipCode = "W1T 4QG";
+    // $scope.country = 'GB';
+    // $scope.state = '';
     $scope.phoneNo = "989 433 0325";
     $scope.shippingServiceLevel = 'GROUND';
     isUnitedStatesOrCanada(true);
@@ -72,16 +77,20 @@ SwiftApp.controller('CheckoutCtrl', [
     function postmasterValidateSuccessCallback(response) {
         var data = response.data;
 
+        // Calculate how many boxes we need to
+        // ship the package
         var packages = PackagingService.fit();
         package_count = packages.length;
 
-        rateParams = {
+        // Set rate params
+        $scope.rateParams = {
             to_zip: $scope.zipCode,
             to_country: $scope.country,
             weight: packages[0].weight,
             width: packages[0].width,
             height: packages[0].height,
-            length: packages[0].length
+            length: packages[0].length,
+            service: $scope.shippingServiceLevel
         };
 
         console.log('postmasterValidateSuccessCallback', data);
@@ -89,18 +98,18 @@ SwiftApp.controller('CheckoutCtrl', [
         // Is status ever not OK? Assume that error callback
         // is called if status is not OK.
         if (data.status === 'OK') {
-            $scope.commercial = rateParams.commercial = !!data.commercial;
+            $scope.commercial = $scope.rateParams.commercial = !!data.commercial;
 
             if ($scope.country !== 'US') {
                 // This tells postmaster that we
                 // only want rates from USPS
-                rateParams.carrier = 'usps';
+                $scope.rateParams.carrier = 'usps';
             }
             // If we set the carrier to USPS,
             // we are shipping international
             // (because we only offer USPS when
             // shipping internationally)
-            $scope.intl = !!rateParams.carrier;
+            $scope.intl = !!$scope.rateParams.carrier;
 
             if ($scope.state === 'WA') {
                 WaStateTaxService
@@ -114,7 +123,7 @@ SwiftApp.controller('CheckoutCtrl', [
 
             _.each(packages, function() {
                 PostmasterService
-                    .rates(rateParams)
+                    .rates($scope.rateParams)
                     .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
             });
         }
@@ -142,8 +151,9 @@ SwiftApp.controller('CheckoutCtrl', [
 
         rateResponses.push(response);
 
+        console.log('postmasterRateSuccessCallback: Received callback ' + rates_response_count + ' of ' + package_count);
         if (rates_response_count < package_count) {
-            return; // console.log('I havent heard enough');
+            return;
         }
 
         var combinedResponse = {};
@@ -151,6 +161,12 @@ SwiftApp.controller('CheckoutCtrl', [
         // If we only got one provider back...
         if ($scope.intl || 'service' in response.data) {
             // FIXME handle multiple packages with INTL shipping
+            combinedResponse['usps'] = {};
+            combinedResponse['usps'].charge = 0;
+
+            _.each(rateResponses, function(response) {
+                combinedResponse['usps'].charge += response.data.charge;
+            });
         } else {
             // If any of the providers failed to respond to
             // any of the rates requests remove them from the
@@ -172,7 +188,6 @@ SwiftApp.controller('CheckoutCtrl', [
                 combinedResponse[provider].charge = 0;
 
                 _.each(rateResponses, function(response) {
-                    console.log(response, provider, response.data[provider].charge);
                     combinedResponse[provider].charge += response.data[provider].charge;
                 });
                 console.log('charge for', provider, 'should be', combinedResponse[provider].charge);
@@ -183,7 +198,6 @@ SwiftApp.controller('CheckoutCtrl', [
         $scope.shipping = {};
         $scope.busyShipping = false;
         $scope.isShippingReady = true;
-
 
         // Use the most recent response data
         // for some things
@@ -198,16 +212,17 @@ SwiftApp.controller('CheckoutCtrl', [
             // is called in this case.
             var shipping = {
                 provider: 'USPS',
-                charge: charge,
+                charge: combinedResponse['usps'].charge,
                 service: data.service,
                 best: true
             };
+            $scope.shippingServiceLevel = data.service;
             $scope.rates.push(shipping);
 
             // Save this so we can send it to the server
             $scope.shipping = shipping;
 
-            CartService.setShippingCharge(data.charge);
+            CartService.setShippingCharge(combinedResponse['usps'].charge);
         // Handle domestic shipping
         } else {
             _.each(SHIPPING_PROVIDERS, function(provider) {
@@ -318,6 +333,14 @@ SwiftApp.controller('CheckoutCtrl', [
         $scope.busyBuying = false;
     }
 
+    // Reset this data, because we're going to
+    // validate and get rates again (assuming the
+    // customer has already hit the button once)
+    function resetRateResponsesAndCounters() {
+        rateResponses.splice(0, rateResponses.length);
+        rates_response_count = 0;
+    }
+
     $scope['onPickupChanged'] = function() {
         // Customer is picking up
         if ($scope.pickup) {
@@ -373,9 +396,11 @@ SwiftApp.controller('CheckoutCtrl', [
     };
 
     $scope['onCalculateShippingCostBtnClicked'] = function() {
+        resetRateResponsesAndCounters();
+
         $scope.busyShipping = true;
 
-        var validateParams = {
+        $scope.validateParams = {
             line1: $scope.line1,
             city: $scope.city,
             state: $scope.state,
@@ -388,21 +413,19 @@ SwiftApp.controller('CheckoutCtrl', [
         }, 600);
 
         PostmasterService
-            .validate(validateParams)
+            .validate($scope.validateParams)
             .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
     };
 
     $scope['onShippingServiceLevelChange'] = function() {
-        var localRateParams = rateParams;
-        localRateParams.service = $scope.shippingServiceLevel;
+        resetRateResponsesAndCounters();
 
+        $scope.rateParams.service = $scope.shippingServiceLevel;
         $scope.busyShipping = true;
 
-        // TODO need to either fit again, or save the rate params
-        // the latter seems better, duh
         PostmasterService
-            .rates(localRateParams)
-            .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
+            .validate($scope.validateParams)
+            .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
     };
 
     // TODO Update the shipping cost

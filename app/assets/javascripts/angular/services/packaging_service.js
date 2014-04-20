@@ -44,13 +44,16 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         });
 
         return {
-            weight: weight,
+            weight: roundFloat(weight),
             volume: volume,
             side: addPadding(roundFloat(cbrt(volume)))
         };
     }
 
     function getPackages() {
+        // Empty the array
+        packages.splice(0, packages.length);
+
         // Initially we assume we have one package
         var package_count = 1;
         // Get the volume, weight and one side
@@ -68,8 +71,8 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
             package_count = Math.ceil(volume / LARGEST_PACKAGE_VOLUME);
 
             // Adjust weight, volume and side based on this box count
-            weight = weight / package_count;
-            volume = volume / package_count;
+            weight = roundFloat(weight / package_count);
+            volume = roundFloat(volume / package_count);
             side = roundFloat(cbrt(volume));
         }
 
