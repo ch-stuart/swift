@@ -6,11 +6,13 @@ SwiftApp.controller('OrderCtrl', [
     '$http',
     'CartService',
     'ProductService',
+    'ExceptionService'
     function(
         $scope,
         $http,
         CartService,
-        ProductService) {
+        ProductService,
+        ExceptionService) {
 
     $scope.cart = CartService.loadFromLocalStorage();
 
@@ -30,7 +32,7 @@ SwiftApp.controller('OrderCtrl', [
     }
 
     function errorCallback(data) {
-        console.error(data);
+        ExceptionService.report('OrderCtrl#errorCallback', JSON.stringify(data));
         alert('An error occurred. Try reloading page.');
     }
 
@@ -92,7 +94,7 @@ SwiftApp.controller('OrderCtrl', [
                 })
                 .value();
         } catch (e) {
-            // console.warn(e);
+            console.warn(e);
             return 0;
         }
     }
@@ -203,6 +205,10 @@ SwiftApp.controller('OrderCtrl', [
     $scope['onFormSubmit'] = function() {
         if (validateForm()) {
             $scope.product.totalPrice = calculateTotalPrice();
+
+            if (!$scope.product.totalPrice) {
+                ExceptionService.report('OrderCtrl#onFormSubmit: Could not get total price', JSON.stringify($scope.product));
+            }
 
             CartService.add($scope.product);
 
