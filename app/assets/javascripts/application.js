@@ -1,13 +1,14 @@
 /*global document jQuery UA window*/
 // ...
+//= require jquery
+//= require angular
+//= require global_exception_service
 //= require console
 //= require strftime
 //= require underscore
 //= require ua.js/src/ua.js
-//= require jquery
 //= require jquery.browser
 //= require jquery_ujs
-//= require angular
 //= require tinycolor
 //= require jquery.fitvids
 //= require jquery.hero
@@ -15,8 +16,8 @@
 //= require jquery.tabs
 //= require jquery.slideshow
 //= require angular/app
-//= require angular/directives/visible_directive
 //= require angular/services/exception_service
+//= require angular/directives/visible_directive
 //= require angular/services/config_service
 //= require angular/services/wa_state_tax_service
 //= require angular/services/sale_service
@@ -29,6 +30,8 @@
 //= require angular/controllers/cart_controller
 //= require angular/controllers/cart_status_controller
 //= require angular/controllers/checkout_controller
+
+func()
 
 window.$$ = function(id) {
     return document.getElementById(id);

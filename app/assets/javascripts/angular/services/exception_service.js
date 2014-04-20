@@ -15,14 +15,6 @@ SwiftApp.service('ExceptionService', ['$http', function($http) {
             );
     }
 
-    window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
-        report(JSON.stringify({
-            'msg': errorMsg,
-            'url': url,
-            'lineNumber': lineNumber
-        }));
-    };
-
     return { report: report };
 
 }]);
