@@ -25,7 +25,7 @@
     </p>
     <p>
       <b>Tracking Number:</b>
-      <%= shipment.tracking_number %>
+      <%= render 'tracking_link', carrier: shipment.carrier, num: shipment.tracking_number %>
     </p>
     <p>
       <b>Weight:</b>
