@@ -186,5 +186,6 @@ date:        time (minutes):       comment:
 // sort of invoiced... did not provide an actual invoice yet
 
 2014-04-16  30  Start on basic packaging service
+2014-04-20  180 Supporting ability to ship multiple packages for one order, etc. Generally improving the shipping behavior/experience
 
 http://www.timer-tab.com

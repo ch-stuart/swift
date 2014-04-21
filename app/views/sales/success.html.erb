@@ -125,11 +125,16 @@
                         The shipping information will also appear on this page.
                       </p>
                     <% else %>
-                      <% @shipments.each_with_index do |shipment, index| %>
-                        <% if index > 0 %>
-                          <hr>
-                        <% end %>
+                      <% if @shipments.length > 1 %>
                         <p>
+                          Your order shipped in multiple packages.
+                        </p>
+                      <% end %>
+                      <% @shipments.each_with_index do |shipment, index| %>
+                        <p>
+                          <% if @shipments.length > 1 %>
+                            <b>Package <%= index + 1 %></b><br>
+                          <% end %>
                           Carrier: <%= shipment.carrier.upcase %>
                           <br>Tracking Number: <%= render 'tracking_link', carrier: shipment.carrier, num: shipment.tracking_number %>
                         </p>
