@@ -1,5 +1,6 @@
 /*global document jQuery UA window*/
 // ...
+//= require dollardollar
 //= require jquery
 //= require angular
 //= require global_exception_service
@@ -30,12 +31,6 @@
 //= require angular/controllers/cart_controller
 //= require angular/controllers/cart_status_controller
 //= require angular/controllers/checkout_controller
-
-func()
-
-window.$$ = function(id) {
-    return document.getElementById(id);
-};
 
 jQuery(document).ready(function($) {
 
