@@ -428,9 +428,6 @@ SwiftApp.controller('CheckoutCtrl', [
             .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
     };
 
-    // TODO Update the shipping cost
-    // TODO send it to the server when the form is submitted
-    // TODO persist in db...
     $scope['onRatesRadioChanged'] = function(provider) {
         console.log('onRatesRadioChanged', provider);
 
