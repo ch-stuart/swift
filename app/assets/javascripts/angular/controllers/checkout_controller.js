@@ -160,7 +160,6 @@ SwiftApp.controller('CheckoutCtrl', [
 
         // If we only got one provider back...
         if ($scope.intl || 'service' in response.data) {
-            // FIXME handle multiple packages with INTL shipping
             combinedResponse['usps'] = {};
             combinedResponse['usps'].charge = 0;
 
