@@ -1,6 +1,6 @@
 class PostmasterController < ApplicationController
 
-  before_filter :authenticate_admin, :except => [ :validate, :rates, :fit ]
+  before_filter :authenticate_admin, except: [ :validate, :rates, :fit ]
 
   layout "hub"
 
@@ -85,46 +85,60 @@ class PostmasterController < ApplicationController
     render json: response
   end
 
+  def edit_shipment
+    @sale = Sale.find params[:id]
+
+  end
+
   # Create a shipment
   def create_shipment
     @sale = Sale.find params[:id]
+    shipment_params = params[:shipment]
 
-    shipping_params = {
+    postmaster_params = {
       to: {
-        contact: @sale.contact,
-        company: @sale.company,
-        line1: @sale.line1,
-        city: @sale.city,
-        state: @sale.state,
-        zip_code: @sale.zip_code,
-        phone_no: @sale.phone_no
+        contact: shipment_params[:contact],
+        company: shipment_params[:company],
+        line1: shipment_params[:line1],
+        city: shipment_params[:city],
+        state: shipment_params[:state],
+        zip_code: shipment_params[:zip_code],
+        phone_no: shipment_params[:phone_no]
       },
-      carrier: @sale.shipping_provider,
-      service: @sale.shipping_service,
+      carrier: shipment_params[:shipping_provider],
+      service: shipment_params[:shipping_service],
       package: {
-        weight: @sale.weight,
-        # FIXME send the correct WxHxL
-        width: 6,
-        height: 8,
-        length: 10
+        weight: shipment_params[:weight],
+        width: shipment_params[:weight],
+        height: shipment_params[:height],
+        length: shipment_params[:length]
       }
     }
 
-    logger.info "=> Creating shipment for: #{shipping_params.inspect}"
+    logger.info "=> Creating shipment for: #{postmaster_params.inspect}"
 
     begin
-      @response = Postmaster::Shipment.create shipping_params
+      @response = Postmaster::Shipment.create postmaster_params
 
-      logger.info "=> SHIPMENT: #{@response.inspect}"
+      logger.info "=> Postmaster::Shipment.create response: #{@response.inspect}"
 
-      sale_params = {}
-      sale_params[:status] = "Shipped"
-      sale_params[:postmaster_id] = @response[:id]
-      sale_params[:shipping_tracking_number] = @response[:tracking].first
 
-      if @sale.update_attributes sale_params
-        SalesMailer.shipped(@sale).deliver
-        redirect_to(@sale, :notice => 'Shipment was successfully created.')
+      @shipment = Shipment.new({
+        postmaster_id: @response[:id],
+        tracking_number: @response[:tracking].first,
+        carrier: shipment_params[:shipping_provider],
+        weight: shipment_params[:weight],
+        width: shipment_params[:width],
+        height: shipment_params[:height],
+        length: shipment_params[:length],
+        sale_id: @sale.id
+      })
+
+      @sale.update_attributes({ status: "Shipped" })
+
+      if @shipment.save
+        SalesMailer.shipped(@sale, @shipment).deliver
+        redirect_to(@sale, notice: 'Shipment was successfully created.')
       else
         render text: "Updating the sale failed. Contact cs@enure.net."
       end

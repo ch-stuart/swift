@@ -4,33 +4,49 @@
     Shipment Details
 </h2>
 
-<% if @sale.status == "Not Shipped" %>
+<% if @shipments.blank? %>
   <p>
-    <span class="hey--wah">Sale has not yet been shipped.</span>
+    <span class="hey--wah">Order has not yet been shipped.</span>
   </p>
   <p>
-    <%= link_to 'Ship it', { controller: "postmaster", action: "create_shipment", id: @sale }, class: 'btn' %>
+    <%= link_to 'Ship it', { controller: "postmaster", action: "edit_shipment", id: @sale }, class: 'btn' %>
   </p>
 <% else %>
   <p>
-    <span class="hey--yay">This sale has been shipped.</span>
+    <span class="hey--yay">This order has been shipped.</span>
   </p>
+  <% @shipments.each_with_index do |shipment, index| %>
+    <% if index > 0 %>
+      <hr>
+    <% end %>
+    <p>
+      <b>Postmaster ID:</b>
+      <%= shipment.postmaster_id %>
+    </p>
+    <p>
+      <b>Tracking Number:</b>
+      <%= shipment.tracking_number %>
+    </p>
+    <p>
+      <b>Weight:</b>
+      <%= shipment.weight %>
+    </p>
+    <p>
+      <b>Dimensions (W &#215; H &#215; L):</b>
+      <%= shipment.width %> &#215; <%= shipment.height %> &#215; <%= shipment.length %>
+    </p>
+    <p>View details (including the shipping label):<br>
+      <a href="https://www.postmaster.io/dashboard/shipments/id/<%= shipment.postmaster_id %>">
+        https://www.postmaster.io/dashboard/shipments/id/<%= shipment.postmaster_id %></a>.
+    </p>
+  <% end %>
   <p>
-    <b>Postmaster ID:</b>
-    <%= @sale.postmaster_id %>
-  </p>
-  <p>
-    <b>Tracking Number:</b>
-    <%= @sale.shipping_tracking_number %>
-  </p>
-  <p>View details (including the shipping label):
-    <a href="https://www.postmaster.io/dashboard/shipments/id/<%= @sale.postmaster_id %>">
-      postmaster.io</a>.
+    <%= link_to 'Ship another box', { controller: "postmaster", action: "edit_shipment", id: @sale }, class: 'btn' %>
   </p>
 <% end %>
 
 <h2>
-  Sale Details
+  Order Details
 </h2>
 
 <p>

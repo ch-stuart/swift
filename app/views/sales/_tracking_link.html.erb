@@ -1,0 +1,15 @@
+<% if carrier == 'usps' %>
+  <a href="https://tools.usps.com/go/TrackConfirmAction.action?tLabels=<%= num %>">
+    <%= num %>
+  </a>
+<% elsif carrier == 'ups' %>
+  <a href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=<%= num %>">
+    <%= num %>
+  </a>
+<% elsif carrier == 'fedex' %>
+  <a href="http://www.fedex.com/Tracking?action=track&tracknumbers=<%= num %>">
+    <%= num %>
+  </a>
+<% else %>
+  <%= num %>
+<% end %>

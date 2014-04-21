@@ -35,6 +35,7 @@ class SalesController < ApplicationController
   # GET /sales/1.json
   def show
     @sale = Sale.find(params[:id])
+    @shipments = @sale.shipments
     render :layout => "hub"
 
     # respond_to do |format|
@@ -47,7 +48,7 @@ class SalesController < ApplicationController
   # GET /sales/1234/success.json
   def success
     @sale = Sale.find_by_guid(params[:guid])
-
+    @shipments = @sale.shipments
     @description = JSON.parse(@sale.description)
 
     @company = Company.first

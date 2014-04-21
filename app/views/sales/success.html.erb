@@ -117,12 +117,24 @@
                   <h4>
                       Shipment Tracking
                   </h4>
-                  <p>
-                      We will email you when your order has shipped.
-                  </p>
-                  <p>
-                      The shipping information will also appear on this page.
-                  </p>
+                    <% if @shipments.blank? %>
+                      <p>
+                        We will email you when your order has shipped.
+                      </p>
+                      <p>
+                        The shipping information will also appear on this page.
+                      </p>
+                    <% else %>
+                      <% @shipments.each_with_index do |shipment, index| %>
+                        <% if index > 0 %>
+                          <hr>
+                        <% end %>
+                        <p>
+                          Carrier: <%= shipment.carrier.upcase %>
+                          <br>Tracking Number: <%= render 'tracking_link', carrier: shipment.carrier, num: shipment.tracking_number %>
+                        </p>
+                      <% end %>
+                    <% end %>
                   <h4>
                       Shipment Address
                   </h4>

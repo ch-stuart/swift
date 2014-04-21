@@ -10,8 +10,8 @@
 </head>
 <body>
     <p>
-        <strong>Your order has shipped via <%= @sale.shipping_provider.upcase %> and
-        has a tracking number of <%= @sale.shipping_tracking_number %>.</strong>
+        <strong>Your order has shipped via <%= @shipment.carrier.upcase %> and
+        has a tracking number of <%= @shipment.tracking_number %>.</strong>
     </p>
     <p>
         You can find all of your order details at:

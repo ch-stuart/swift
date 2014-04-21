@@ -1,0 +1,53 @@
+<p>
+  Complete this form once for each box associated with this sale.
+</p>
+<form action="create_shipment" method="post">
+  <input type="hidden" name="id" value="<%= @sale.id %>">
+  <div class="eight columns">
+    <h3>To</h3>
+    <label>Contact</label>
+    <input type="text" value="<%= @sale.contact %>" name="shipment[contact]">
+    <label>Company (optional)</label>
+    <input type="text" value="<%= @sale.company %>" name="shipment[company]">
+    <label>Line 1</label>
+    <input type="text" value="<%= @sale.line1 %>" name="shipment[line1]">
+    <label>City</label>
+    <input type="text" value="<%= @sale.city %>" name="shipment[city]">
+    <label>State/Province</label>
+    <input type="text" value="<%= @sale.state %>" name="shipment[state]">
+    <label>Zip Code</label>
+    <input type="text" value="<%= @sale.zip_code %>" name="shipment[zip_code]">
+    <label>Phone No</label>
+    <input type="text" value="<%= @sale.phone_no %>" name="shipment[phone_no]">
+  </div>
+
+  <div class="eight columns">
+    <h3>Carrier and Service Level</h3>
+    <label>Carrier</label>
+    <input type="text" value="<%= @sale.shipping_provider %>" name="shipment[shipping_provider]">
+    <p class="hint">
+      Options are "ups", "usps" or "fedex". Use lower case.
+    </p>
+    <label>Service Level</label>
+    <input type="text" value="<%= @sale.shipping_service %>" name="shipment[shipping_service]">
+    <p class="hint">
+      View available <a href="https://www.postmaster.io/docs/api#services">service levels</a>.
+      The service level the customer selected is pre-populated.
+    </p>
+
+    <h3>Box</h3>
+    <label>Weight (in lbs)</label>
+    <input class="input--dim" type="text" name="shipment[weight]">
+    <p class="hint">Ex: 3.24, 3.2 or 3 (can include tenths or hundredths of a pound)</p>
+    <label>W &#215; H &#215; L (in inches)</label>
+    <input class="input--dim" type="text" name="shipment[width]"> &#215;
+    <input class="input--dim" type="text" name="shipment[height]"> &#215;
+    <input class="input--dim" type="text" name="shipment[length]">
+    <p class="hint">Ex: 3 or 6 (round up to the nearest integer)</p>
+  </div>
+
+  <br class="clear">
+  <p style="margin-top: 60px">
+    <input type="submit" value="Ship it" class="btn">
+  </p>
+</form>
