@@ -93,6 +93,9 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
     return {
         fit: function() {
             return getPackages();
+        },
+        getWeight: function() {
+            return getVolumeAndWeight().weight;
         }
     };
 

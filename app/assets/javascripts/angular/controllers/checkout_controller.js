@@ -290,7 +290,7 @@ SwiftApp.controller('CheckoutCtrl', [
                 country: $scope.country,
                 phone_no: $scope.phoneNo,
                 commercial: $scope.commercial,
-                weight: CartService.getWeight(),
+                weight: PackagingService.getWeight(),
                 pickup: $scope.pickup,
                 shipping_provider: $scope.shipping.provider,
                 shipping_charge: $scope.shipping.charge,
