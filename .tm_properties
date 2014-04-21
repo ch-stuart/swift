@@ -3,7 +3,7 @@
 projectDirectory  = "$CWD"
 tabSize           = 2
 softTabs          = true
-exclude           = "{$exclude,*.log,tmp/*,*.sqlite*}"
+exclude           = "{$exclude,*.log,tmp/*,*.sqlite*,node_modules/*,bower_components/*}"
 
 [ *.rb, *.html.erb ]
 tabSize           = 2
