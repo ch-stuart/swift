@@ -65,7 +65,7 @@
           <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
               <div class="unit w-3-4 hide-on-mobiles"></div>
               <div class="unit w-1-4">
-                  Tax: <%= number_to_currency(cents_to_dollars(@sale[:tax_amount])) %>
+                  Tax: <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %>
               </div>
           </div>
         <% end %>
@@ -73,14 +73,14 @@
           <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
               <div class="unit w-3-4 hide-on-mobiles"></div>
               <div class="unit w-1-4">
-                  Shipping Charge: <%= number_to_currency(cents_to_dollars(@sale[:shipping_charge])) %>
+                  Shipping Charge: <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %>
               </div>
           </div>
         <% end %>
         <div class="grid shoppin-cart__cart-price-row">
             <div class="unit w-3-4 hide-on-mobiles"></div>
             <div class="unit w-1-4">
-                Total: <strong><%= number_to_currency(cents_to_dollars(@sale[:total])) %></strong>
+                Total: <strong><%= number_to_currency(cents_to_dollars(@sale.total)) %></strong>
             </div>
         </div>
         <hr class="print-only">
@@ -90,23 +90,23 @@
                     Email Address
                 </h4>
                 <p>
-                    <%= @sale[:email] %>
+                    <%= @sale.email %>
                 </p>
                 <h4>
                     Order Date
                 </h4>
                 <p id="order_date">
-                    <%= @sale[:created_at] %>
+                    <%= @sale.created_at %>
                 </p>
                 <h4>
                     Order ID
                 </h4>
                 <p>
-                    <%= @sale[:guid] %>
+                    <%= @sale.guid %>
                 </p>
             </div>
             <div class="unit w-1-2">
-                <% if @sale[:pickup] == 'true' %>
+                <% if @sale.pickup %>
                   <h4>
                       Shipment Tracking
                   </h4>
@@ -144,14 +144,14 @@
                       Shipment Address
                   </h4>
                   <p>
-                      <%= @sale[:line1] %><br>
-                      <%= @sale[:city] %>, <%= @sale[:state] %> <%= @sale[:zip_code] %>
+                      <%= @sale.line1 %><br>
+                      <%= @sale.city %>, <%= @sale.state %> <%= @sale.zip_code %>
                   </p>
                   <h4>
                       Shipment Charge
                   </h4>
                   <p>
-                      <%= number_to_currency(cents_to_dollars(@sale[:shipping_charge])) %> via <%= @sale[:shipping_provider] %> <%= @sale[:shipping_service] %>.
+                      <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %> via <%= @sale.shipping_provider %> <%= @sale.shipping_service %>.
                   </p>
                 <% end %>
             </div>
