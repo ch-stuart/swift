@@ -61,6 +61,13 @@ class SalesController < ApplicationController
     end
   end
 
+  def ready_for_pickup
+    @sale = Sale.find params[:id]
+    @sale.update_attributes({ status: "Shipped" })
+    SalesMailer.ready_for_pickup(@sale).deliver
+    redirect_to(@sale, notice: 'Email successfully sent to customer.')
+  end
+
   def checkout
     @sale = Sale.new
 

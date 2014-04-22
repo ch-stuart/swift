@@ -13,4 +13,9 @@ class SalesMailer < ActionMailer::Base
     mail(to: sale.email, subject: "Your order from Swift Industries has shipped")
   end
 
+  def ready_for_pickup sale
+    @sale = sale
+    mail(to: sale.email, subject: "Your order from Swift Industries is read for pickup")
+  end
+
 end
