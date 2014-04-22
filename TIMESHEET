@@ -187,5 +187,6 @@ date:        time (minutes):       comment:
 
 2014-04-16  30  Start on basic packaging service
 2014-04-20  180 Supporting ability to ship multiple packages for one order, etc. Generally improving the shipping behavior/experience
-
+2014-04-22  10 Improve display of sales index page
+2014-04-22  20 Email customer when order is ready for pickup
 http://www.timer-tab.com
