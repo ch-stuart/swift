@@ -87,7 +87,7 @@ class PostmasterController < ApplicationController
 
   def edit_shipment
     @sale = Sale.find params[:id]
-
+    @boxes = Postmaster::Package.all({ limit: 66 })
   end
 
   # Create a shipment
@@ -109,11 +109,18 @@ class PostmasterController < ApplicationController
       service: shipment_params[:shipping_service],
       package: {
         weight: shipment_params[:weight],
-        width: shipment_params[:weight],
+        width: shipment_params[:width],
         height: shipment_params[:height],
         length: shipment_params[:length]
       }
     }
+
+    if shipment_params[:envelope]
+      postmaster_params[:package].delete(:width)
+      postmaster_params[:package].delete(:height)
+      postmaster_params[:package].delete(:length)
+      postmaster_params[:package][:type] = shipment_params[:envelope]
+    end
 
     logger.info "=> Creating shipment for: #{postmaster_params.inspect}"
 
@@ -122,7 +129,7 @@ class PostmasterController < ApplicationController
 
       logger.info "=> Postmaster::Shipment.create response: #{@response.inspect}"
 
-      @shipment = Shipment.new({
+      new_shipment_params = {
         postmaster_id: @response[:id],
         cost: @response[:cost],
         tracking_number: @response[:tracking].first,
@@ -131,14 +138,19 @@ class PostmasterController < ApplicationController
         width: shipment_params[:width],
         height: shipment_params[:height],
         length: shipment_params[:length],
+        envelope: shipment_params[:envelope],
         sale_id: @sale.id
-      })
+      }
 
-      if @shipment.save && @sale.update_attributes({ status: "Shipped" })
+      @shipment = Shipment.new new_shipment_params
+
+      @sale.update_attributes({ status: "Shipped" })
+
+      if @shipment.save
         SalesMailer.shipped(@sale, @shipment).deliver
         redirect_to(@sale, notice: 'Shipment was successfully created.')
       else
-        render text: "Updating the sale failed. Contact cs@enure.net."
+        render text: @shipment.save!
       end
     rescue Exception => e
       render text: e
@@ -161,7 +173,7 @@ class PostmasterController < ApplicationController
   # List available boxes
   def boxes
     begin
-      @response = Postmaster::Package.all
+      @response = Postmaster::Package.all({ limit: 66 })
       logger.info "=> BOXES: #{@response}"
     rescue Exception => e
       @error = e

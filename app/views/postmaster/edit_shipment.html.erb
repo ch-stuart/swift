@@ -35,15 +35,40 @@
       The service level the customer selected is pre-populated.
     </p>
 
-    <h3>Box</h3>
+    <h3>Packaging</h3>
+    <p>
+      Input the weight, and then choose if you want to ship this order in a box or an envelope.
+    </p>
     <label>Weight (in lbs)</label>
     <input class="input--dim" type="text" name="shipment[weight]">
     <p class="hint">Ex: 3.24, 3.2 or 3 (can include tenths or hundredths of a pound)</p>
-    <label>W &#215; H &#215; L (in inches)</label>
-    <input class="input--dim" type="text" name="shipment[width]"> &#215;
-    <input class="input--dim" type="text" name="shipment[height]"> &#215;
-    <input class="input--dim" type="text" name="shipment[length]">
+    <h4>
+      Ship in a box
+    </h4>
+    <select id="box_select">
+      <% @boxes.each do |box| %>
+        <option value="<%= box[:width].to_i %>:<%= box[:height].to_i %>:<%= box[:length].to_i %>">
+          <%= box[:width].to_i %> &#215; <%= box[:height].to_i %> &#215; <%= box[:length].to_i %> (<%= box[:name] %>)
+        </option>
+      <% end %>
+    </select>
+    <input id="w_input" placeholder="W" class="input--dim" type="text" name="shipment[width]"> &#215;
+    <input id="h_input" placeholder="H" class="input--dim" type="text" name="shipment[height]"> &#215;
+    <input id="l_input" placeholder="L" class="input--dim" type="text" name="shipment[length]">
     <p class="hint">Ex: 3 or 6 (round up to the nearest integer)</p>
+
+    <h4>
+      Ship in an envelope
+    </h4>
+    <select name="shipment[envelope]">
+      <option></option>
+      <option value="TUBE">TUBE</option>
+      <option value="LETTER">LETTER</option>
+      <option value="PAK">PAK</option>
+    </select>
+    <p class="hint">
+      View postmaster <a href="https://www.postmaster.io/docs/api#packages">packaging reference</a>.
+    </p>
   </div>
 
   <br class="clear">
@@ -51,3 +76,19 @@
     <input type="submit" value="Ship it" class="btn">
   </p>
 </form>
+
+<%= content_for :js do %>
+  <script>
+    var box_slct = document.getElementById('box_select')
+    var dim_w = document.getElementById('w_input')
+    var dim_h = document.getElementById('h_input')
+    var dim_l = document.getElementById('l_input')
+
+    box_slct.onchange = function(e) {
+      var vals = box_slct.value.split(':');
+      dim_w.value = vals[0]
+      dim_h.value = vals[1]
+      dim_l.value = vals[2]
+    }
+  </script>
+<% end %>

@@ -43,10 +43,17 @@
         <b>Weight:</b>
         <%= shipment.weight %>
       </p>
-      <p>
-        <b>Dimensions (W &#215; H &#215; L):</b>
-        <%= shipment.width %> &#215; <%= shipment.height %> &#215; <%= shipment.length %>
-      </p>
+      <% if shipment.envelope %>
+        <p>
+          <b>Envelope:</b>
+          <%= shipment.envelope %>
+        </p>
+      <% else %>
+        <p>
+          <b>Dimensions (W &#215; H &#215; L):</b>
+          <%= shipment.width %> &#215; <%= shipment.height %> &#215; <%= shipment.length %>
+        </p>
+      <% end %>
       <p>View details (including the shipping label):<br>
         <a href="https://www.postmaster.io/dashboard/shipments/id/<%= shipment.postmaster_id %>">
           https://www.postmaster.io/dashboard/shipments/id/<%= shipment.postmaster_id %></a>.
