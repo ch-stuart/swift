@@ -122,9 +122,9 @@ class PostmasterController < ApplicationController
 
       logger.info "=> Postmaster::Shipment.create response: #{@response.inspect}"
 
-
       @shipment = Shipment.new({
         postmaster_id: @response[:id],
+        cost: @response[:cost],
         tracking_number: @response[:tracking].first,
         carrier: shipment_params[:shipping_provider],
         weight: shipment_params[:weight],
@@ -134,9 +134,7 @@ class PostmasterController < ApplicationController
         sale_id: @sale.id
       })
 
-      @sale.update_attributes({ status: "Shipped" })
-
-      if @shipment.save
+      if @shipment.save && @sale.update_attributes({ status: "Shipped" })
         SalesMailer.shipped(@sale, @shipment).deliver
         redirect_to(@sale, notice: 'Shipment was successfully created.')
       else
