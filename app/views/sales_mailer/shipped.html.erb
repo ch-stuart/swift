@@ -13,7 +13,7 @@
         <strong>
           Your order has shipped via <%= @shipment.carrier.upcase %> and
           has a tracking number of
-          <%= render '/sales/tracking_link', , carrier: @shipment.carrier, num: @shipment.tracking_number %>.
+          <%= render '/sales/tracking_link', carrier: @shipment.carrier, num: @shipment.tracking_number %>.
         </strong>
     </p>
     <p>
