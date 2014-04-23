@@ -36,6 +36,7 @@ class SalesController < ApplicationController
   def show
     @sale = Sale.find(params[:id])
     @shipments = @sale.shipments
+
     render :layout => "hub"
 
     # respond_to do |format|
