@@ -10,7 +10,6 @@ module.exports = function(grunt) {
         jshint: {
             all: [
                 "app/assets/javascripts/**/*.js",
-                "!app/assets/javascripts/strftime.js",
                 "!app/assets/javascripts/jquery.lightbox_me.js",
                 "!app/assets/javascripts/jquery.fitvids.js",
                 "!app/assets/javascripts/farbtastic/farbtastic.js",

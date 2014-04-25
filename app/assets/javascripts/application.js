@@ -5,7 +5,6 @@
 //= require angular
 //= require global_exception_service
 //= require console
-//= require strftime
 //= require underscore
 //= require ua.js/src/ua.js
 //= require jquery.browser
