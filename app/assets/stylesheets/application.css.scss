@@ -29,6 +29,15 @@
 @import 'base-type';
 @import 'base-list';
 
+// Layouts
+@import 'layout-pub';
+@import 'layout-footer';
+@import 'layout-humans';
+
+// Pages
+@import 'glob-homes';
+@import 'glob-page';
+
 // Modules
 @import 'module-blog';
 @import 'module-buttons';
@@ -47,17 +56,7 @@
 @import 'module-success';
 @import 'module-testimonials';
 @import 'module-video';
-
-// Layouts
-@import 'layout-pub';
-@import 'layout-footer';
-@import 'layout-humans';
-
-// Pages
-@import 'glob-homes';
-@import 'glob-page';
-
-
+@import 'module-dialog';
 
 // Override the base style set by Skeleton
 a, a:visited {

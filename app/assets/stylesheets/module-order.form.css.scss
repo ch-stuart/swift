@@ -27,41 +27,6 @@
     margin-right: 2px;
 }
 
-// .input {
-//
-// }
-// .input-checkbox {
-//
-// }
-// .input-color {
-//
-// }
-
-.row--fabric-notice {
-    background-color: #ffb;
-    border-radius: 0;
-
-    box-sizing: border-box;
-    transform: translate(-50%, 0);
-
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    width: 90%;
-    z-index: 12;
-
-    box-shadow: 0 0 20px #555;
-}
-@media only screen and (min-width: 768px) {
-    .row--fabric-notice {
-        width: auto;
-    }
-}
-
-.row--fabric-notice__btn {
-    margin-bottom: 0;
-}
-
 .handmade_label {
     display: block;
     background: transparent image-url('scissors.png') no-repeat;
