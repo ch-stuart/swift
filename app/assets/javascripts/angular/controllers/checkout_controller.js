@@ -415,9 +415,15 @@ SwiftApp.controller('CheckoutCtrl', [
             country: $scope.country
         };
 
-        $('html, body').animate({
-            scrollTop: $("#row-shipping").offset().top
-        }, 600);
+        if ($(window).width() > 767) {
+            $('html, body').animate({
+                scrollTop: $("#row-shipping").offset().top
+            }, 600);
+        } else {
+            $('html, body').animate({
+                scrollTop: $("#rates-submit").offset().top - 100
+            }, 600);
+        }
 
         PostmasterService
             .validate($scope.validateParams)
