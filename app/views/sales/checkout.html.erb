@@ -7,72 +7,96 @@
             Shipping
         </h4>
         <div class="row row--order" id="row-shipping">
-            <div class="label-input-pair">
-                <label class="label">
-                    <input type="checkbox" ng-model="pickup" ng-change="onPickupChanged()"> Check if you will be picking your order
-                </label>
-            </div>
-            <div class="label-input-pair pickup-is-{{ pickup }}">
-                <label class="label">
-                    Country
-                </label>
-                <select
-                    ng-change="onCountrySelectChanged()"
-                    ng-model="country"
-                    ng-options="k as v for (k,v) in countryCodes"
-                    ng-disabled="pickup"
-                    class="input">
-                </select>
-            </div>
-            <div class="label-input-pair pickup-is-{{ pickup }}">
-                <label class="label">
-                    Street
-                </label>
-                <input type="text" ng-model="line1" ng-disabled="pickup">
-            </div>
-            <div class="label-input-pair pickup-is-{{ pickup }}">
-                <label class="label">
-                    City
-                </label>
-                <input type="text" ng-model="city" ng-disabled="pickup">
-            </div>
-            <div class="label-input-pair pickup-is-{{ pickup }}">
-                <label class="label">
-                    State/Province
-                </label>
-                <input
-                    type="text"
-                    ng-model="state"
-                    ng-hide="countryIsUSCA"
-                    ng-disabled="pickup">
-                <select
-                    ng-model="state"
-                    ng-show="countryIsUSCA"
-                    ng-options="k as v for (k,v) in states"
-                    ng-disabled="pickup"
-                    class="input">
-                </select>
-            </div>
-            <div class="label-input-pair pickup-is-{{ pickup }}">
-                <label class="label">
-                    Zip/Postal Code
-                </label>
-                <input type="text" ng-model="zipCode" ng-disabled="pickup">
-            </div>
-            <div class="label-input-pair pickup-is-{{ pickup }}">
-                <label class="label">
-                    Phone
-                </label>
-                <input type="text" ng-model="phoneNo" ng-disabled="pickup">
-            </div>
-            <div class="label-input-pair pickup-is-{{ pickup }}">
-                <button class="btn btn--progress" ng-click="onCalculateShippingCostBtnClicked()" ng-disabled="pickup || busyShipping">
-                    <span sw-visible="!busyShipping">
-                        Calculate Shipping Cost
-                    </span>
-                    <img sw-visible="busyShipping" src="/assets/spin.gif" class="btn--progress__spin">
-                </button>
-            </div>
+            <form name="shippingForm" ng-submit="onCalculateShippingCostBtnClicked(shippingForm.$valid)" novalidate>
+                <div class="label-input-pair">
+                    <label class="label">
+                        <input
+                            type="checkbox"
+                            ng-model="pickup"
+                            ng-change="onPickupChanged()"> Check if you will be picking your order
+                    </label>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        Country
+                    </label>
+                    <select
+                        ng-change="onCountrySelectChanged()"
+                        ng-model="country"
+                        ng-options="k as v for (k,v) in countryCodes"
+                        ng-disabled="pickup"
+                        required
+                        class="input">
+                    </select>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        Street
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="line1"
+                        ng-disabled="pickup"
+                        required>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        City
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="city"
+                        ng-disabled="pickup"
+                        required>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        State/Province
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="state"
+                        ng-hide="countryIsUSCA"
+                        ng-disabled="pickup"
+                        required>
+                    <select
+                        ng-model="state"
+                        ng-show="countryIsUSCA"
+                        ng-options="k as v for (k,v) in states"
+                        ng-disabled="pickup"
+                        required
+                        class="input">
+                    </select>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        Zip/Postal Code
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="zipCode"
+                        ng-disabled="pickup"
+                        required>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        Phone
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="phoneNo"
+                        ng-disabled="pickup"
+                        required>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <button type="submit" class="btn btn--progress" ng-disabled="pickup || busyShipping">
+                        <span sw-visible="!busyShipping">
+                            Calculate Shipping Cost
+                        </span>
+                        <img sw-visible="busyShipping" src="/assets/spin.gif" class="btn--progress__spin">
+                    </button>
+                </div>
+            </form>
             <div ng-show="isShippingReady">
                 <h5>
                     Shipping Options

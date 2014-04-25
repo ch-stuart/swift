@@ -43,9 +43,9 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.rateParams = {};
 
     // Defaults!
-    $scope.line1 = "425 E Sussex AVE";
-    $scope.city = "Missoula";
-    $scope.zipCode = "59801";
+    // $scope.line1 = "425 E Sussex AVE";
+    // $scope.city = "Missoula";
+    // $scope.zipCode = "59801";
     $scope.country = 'US';
     $scope.state = 'MT';
     // $scope.line1 = "70 CHARLOTTE ST";
@@ -53,7 +53,7 @@ SwiftApp.controller('CheckoutCtrl', [
     // $scope.zipCode = "W1T 4QG";
     // $scope.country = 'GB';
     // $scope.state = '';
-    $scope.phoneNo = "989 433 0325";
+    // $scope.phoneNo = "989 433 0325";
     $scope.shippingServiceLevel = 'GROUND';
     isUnitedStatesOrCanada(true);
 
@@ -350,7 +350,11 @@ SwiftApp.controller('CheckoutCtrl', [
             }, 100);
             // Unset shipping data
             CartService.setShippingCharge(null);
-            $scope.isShippingReady = $scope.shipping = $scope.rates = $scope.line1 = $scope.city = $scope.zipCode = $scope.phoneNo = null;
+            $scope.isShippingReady = $scope.shipping = $scope.rates = null;
+            $scope.line1 = $scope.city = $scope.zipCode = $scope.phoneNo = '';
+
+            // Set form state to pristine
+            $scope.shippingForm.$setPristine(true);
 
         // Customer is shipping
         } else {
@@ -394,7 +398,11 @@ SwiftApp.controller('CheckoutCtrl', [
         }
     };
 
-    $scope['onCalculateShippingCostBtnClicked'] = function() {
+    $scope['onCalculateShippingCostBtnClicked'] = function(isValid) {
+        if (!isValid) {
+            return alert('The information you entered is incomplete. Fill in all fields and try again.');
+        }
+
         resetRateResponsesAndCounters();
 
         $scope.busyShipping = true;

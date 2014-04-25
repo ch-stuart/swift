@@ -87,9 +87,14 @@ img.center-in-grid {
 
 
 select.ng-invalid.ng-dirty,
-input.ng-invalid {
+input.ng-invalid.ng-dirty {
   border: 1px solid red;
 }
+//select.ng-pristine,
+//input.ng-pristine {
+//    border: 1px solid #ccc !important;
+//}
+
 
 
 
