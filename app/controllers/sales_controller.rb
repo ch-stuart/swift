@@ -150,28 +150,24 @@ class SalesController < ApplicationController
       status:            "Not Shipped"
     )
 
-    # Create the contact if they sign up for spam
-    if params[:send_me_marketing_emails]
+    if @sale.save
+      # Send an email
+      # TODO run this in the background or whatever
       # TODO don't want to fail order if this fails
       # but it'd be nice to know if it's happening
       begin
-        Contact.create(email: params[:email])
+        SalesMailer.success(params[:email], @sale.guid).deliver
+        SalesMailer.notify_swift(@sale).deliver
+
+        # Create the contact if they sign up for spam
+        if params[:send_me_marketing_emails]
+          Contact.create(email: params[:email])
+        end
       rescue Exception => e
-        logger.error e
+        # FIXME email about this
+        logger.info e
       end
-    end
 
-    # Send an email
-    # TODO run this in the background or whatever
-    # TODO don't want to fail order if this fails
-    # but it'd be nice to know if it's happening
-    begin
-      SalesMailer.success(params[:email], @sale.guid).deliver
-    rescue Exception => e
-      logger.info e
-    end
-
-    if @sale.save
       render json: { guid: @sale.guid }.to_json
     else
       render json: { error: @sale.errors }, :status => :unprocessable_entity

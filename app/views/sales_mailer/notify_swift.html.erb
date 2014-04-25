@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Helvetica, Arial, san-serif;
+        }
+    </style>
+</head>
+<body>
+Contact: <%= @sale.contact %>
+<br>Company: <%= @sale.company %>
+<br>Email: <%= @sale.email %>
+<br>Phone: <%= @sale.phone_no %>
+<br>
+<br>Hub URL: http://builtbyswift.com/orders/<%= @sale.guid %>
+<br>Customer URL: http://builtbyswift.com/sales/<%= @sale.id %>
+<br>Stripe URL: https://manage.stripe.com/prod/payments/<%= @sale.stripe_id %>
+<br>
+<% if @sale.pickup %>
+  <br>Customer will pick up order.
+<% else %>
+  <br>Shipping Charge: <%= @sale.shipping_charge %>
+  <br>Shipping Service: <%= @sale.shipping_service %>
+  <br>Shipping Provider: <%= @sale.shipping_provider %>
+<% end %>
+</body>
+</html>
