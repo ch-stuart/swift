@@ -449,7 +449,12 @@ SwiftApp.controller('CheckoutCtrl', [
         CartService.setShippingCharge(provider.charge);
     };
 
-    $scope['onBuyItButtonClicked'] = function() {
+    $scope['onBuyItButtonClicked'] = function(isValid) {
+        console.log('isValid', isValid);
+        if (!isValid) {
+            return alert('The information you entered is incomplete. Fill in all fields and try again.');
+        }
+
         $scope.busyBuying = true;
 
         Stripe.createToken($$('row-payment'), function stripeResponseHandler(status, response) {

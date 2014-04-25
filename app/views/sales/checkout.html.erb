@@ -145,103 +145,109 @@
                 </div>
             </div>
         </div>
-        <div ng-show="isShippingReady || pickup" id="row-contact">
-            <h4>
-                Contact info
-            </h4>
-            <div class="row row--order">
-                <div class="label-input-pair">
-                    <label class="label">
-                        Name
-                    </label>
-                    <input type="text" ng-model="contact">
-                </div>
-                <div class="label-input-pair">
-                    <label class="label">
-                        Company <span class="demph">(optional)</span>
-                    </label>
-                    <input type="text" ng-model="company" ng-disabled="pickup">
-                </div>
-                <div class="label-input-pair">
-                    <label class="label">
-                        Email Address
-                    </label>
-                    <input type="email" placeholder="you@example.com" ng-model="email">
-                    <p class="label-input-pair__hint">
-                        We will email you at this address when you're product is ready to pickup or ship.
-                    </p>
-                </div>
-                <div class="label-input-pair">
-                    <label><input name="send_me_marketing_emails" type="checkbox"> Send me marketing emails</label>
-                </div>
-            </div>
-        </div>
-        <div ng-show="isShippingReady || pickup" id="row-payment">
-            <h4>
-                Payment info
-            </h4>
-            <p>
-                We accept Visa, MasterCard, American Express, JCB, Discover, and Diners Club.
-            </p>
-            <div class="row row--order">
-                <div class="label-input-pair">
-                    <label class="label">
-                        Credit Card #
-                    </label>
-                    <input
-                        type="text"
-                        size="20"
-                        data-stripe="number"
-                        placeholder="**** **** **** ****"
-                        pattern="[\d ]*">
-                </div>
-                <div class="label-input-pair">
-                    <label class="label">
-                        CVC
-                    </label>
-                    <input
-                        style="width: 3em"
-                        type="text"
-                        size="3"
-                        maxlength="3"
-                        data-stripe="cvc"
-                        placeholder="***"
-                        pattern="\d*">
-                </div>
-                <div class="label-input-pair">
-                    <label class="label">
-                        Exp Month/Year
-                    </label>
-                    <input
-                        style="width: 3em;"
-                        class="input--inline"
-                        type="text"
-                        size="2"
-                        maxlength="2"
-                        data-stripe="exp-month"
-                        placeholder="MM"
-                        pattern="\d*">
-                    <input
-                        style="width: 4em;"
-                        class="input--inline"
-                        type="text"
-                        size="4"
-                        maxlength="4"
-                        id="exp-year"
-                        data-stripe="exp-year"
-                        placeholder="YYYY"
-                        pattern="\d*">
+        <form name="contactAndPaymentForm" ng-submit="onBuyItButtonClicked(contactAndPaymentForm.$valid)" novalidate>
+            <div ng-show="isShippingReady || pickup" id="row-contact">
+                <h4>
+                    Contact info
+                </h4>
+                <div class="row row--order">
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Name
+                        </label>
+                        <input type="text" ng-model="contact" required>
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Company <span class="demph">(optional)</span>
+                        </label>
+                        <input type="text" ng-model="company">
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Email Address
+                        </label>
+                        <input type="email" placeholder="you@example.com" ng-model="email" required>
+                        <p class="label-input-pair__hint">
+                            We will email you at this address when you're product is ready to pickup or ship.
+                        </p>
+                    </div>
+                    <div class="label-input-pair">
+                        <label><input name="send_me_marketing_emails" type="checkbox"> Send me marketing emails</label>
+                    </div>
                 </div>
             </div>
-            <div class="row row--order">
-                <button class="btn btn--progress" ng-click="onBuyItButtonClicked()" ng-disabled="busyBuying">
-                    <span sw-visible="!busyBuying">
-                        Buy It
-                    </span>
-                    <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
-                </button>
+            <div ng-show="isShippingReady || pickup" id="row-payment">
+                <h4>
+                    Payment info
+                </h4>
+                <p>
+                    We accept Visa, MasterCard, American Express, JCB, Discover, and Diners Club.
+                </p>
+                <div class="row row--order">
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Credit Card #
+                        </label>
+                        <input
+                            type="text"
+                            size="20"
+                            data-stripe="number"
+                            placeholder="**** **** **** ****"
+                            ng-pattern="[\d ]*"
+                            required>
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            CVC
+                        </label>
+                        <input
+                            style="width: 3em"
+                            type="text"
+                            size="3"
+                            ng-maxlength="3"
+                            data-stripe="cvc"
+                            placeholder="***"
+                            ng-pattern="\d*"
+                            required>
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Exp Month/Year
+                        </label>
+                        <input
+                            style="width: 3em;"
+                            class="input--inline"
+                            type="text"
+                            size="2"
+                            ng-maxlength="2"
+                            data-stripe="exp-month"
+                            placeholder="MM"
+                            ng-pattern="\d*"
+                            required>
+                        <input
+                            style="width: 4em;"
+                            class="input--inline"
+                            type="text"
+                            size="4"
+                            ng-maxlength="4"
+                            id="exp-year"
+                            data-stripe="exp-year"
+                            placeholder="YYYY"
+                            ng-pattern="\d*"
+                            required>
+                    </div>
+                </div>
+                <div class="row row--order">
+                    <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
+                        <span sw-visible="!busyBuying">
+                            Buy It
+                        </span>
+                        <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="four columns">
         <div class="row row--checkout-sidebar">
