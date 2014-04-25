@@ -185,8 +185,15 @@ date:        time (minutes):       comment:
 
 // sort of invoiced... did not provide an actual invoice yet
 
-2014-04-16  30  Start on basic packaging service
-2014-04-20  180 Supporting ability to ship multiple packages for one order, etc. Generally improving the shipping behavior/experience
-2014-04-22  10 Improve display of sales index page
-2014-04-22  20 Email customer when order is ready for pickup
+2014-04-16 30 Start on basic packaging service
+2014-04-20 180 Supporting ability to ship multiple packages for one order, etc. Generally improving the shipping behavior/experience
+2014-04-22 10 Improve display of sales index page
+2014-04-22 20 Email customer when order is ready for pickup
+2014-04-22 20 Allow shipment to be created using an envelope
+2014-04-22 20 Include link to track package in email to customer
+2014-04-22 20 Save cost of shipment to db and display on hub page
+2014-04-24 20 Email swift when order is ready
+2014-04-24 30 Validate shipping form input (require phone no, etc.)
+2014-04-24 20 Validate rest of checkout form input
+
 http://www.timer-tab.com
