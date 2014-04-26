@@ -399,6 +399,8 @@ SwiftApp.controller('CheckoutCtrl', [
     };
 
     $scope['onCalculateShippingCostBtnClicked'] = function(isValid) {
+        var $scrollToElem;
+
         if (!isValid) {
             return alert('The information you entered is incomplete. Fill in all fields and try again.');
         }
@@ -416,14 +418,13 @@ SwiftApp.controller('CheckoutCtrl', [
         };
 
         if ($(window).width() > 767) {
-            $('html, body').animate({
-                scrollTop: $("#row-shipping").offset().top
-            }, 600);
+            $scrollToElem = $("#row-shipping");
         } else {
-            $('html, body').animate({
-                scrollTop: $("#rates-submit").offset().top - 100
-            }, 600);
+            $scrollToElem = $("#rates-submit");
         }
+        $('html, body').animate({
+            scrollTop: $scrollToElem.offset().top
+        }, 600);
 
         PostmasterService
             .validate($scope.validateParams)
