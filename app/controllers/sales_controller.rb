@@ -23,8 +23,6 @@ class SalesController < ApplicationController
   # GET /sales
   # GET /sales.json
   def cart
-    @sales = Sale.all
-
     @company = Company.first
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
@@ -74,8 +72,6 @@ class SalesController < ApplicationController
   end
 
   def checkout
-    @sale = Sale.new
-
     @company = Company.first
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
