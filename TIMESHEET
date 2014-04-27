@@ -195,5 +195,18 @@ date:        time (minutes):       comment:
 2014-04-24 20 Email swift when order is ready
 2014-04-24 30 Validate shipping form input (require phone no, etc.)
 2014-04-24 20 Validate rest of checkout form input
+2014-04-25 10 Fix date format issues on success page
+2014-04-25 10 Fix auto-scrolling on mobile
+2014-04-25 15 Improve dialog styles (fabric with charge)
+2014-04-26 05 Remove sprockets from logging in development
+2014-04-26 30 Fixing action caching
+2014-04-26 05 Do not show checkout page if cart is empty
+2014-04-26 05 Use Martina's Stripe account
+2014-04-27 40 Add script to update shipping attrs
+2014-04-27 10 Adjust products table info
+
+
+
+
 
 http://www.timer-tab.com
