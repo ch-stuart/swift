@@ -9,7 +9,9 @@ task :add_shipping_attrs => :environment do
       width: attrs['width'],
       height: attrs['height'],
       length: attrs['depth'],
-      weight: attrs['weight']
+      weight: attrs['weight'],
+      wholesale_price: "999.00",
+      wholesale_humane_price: "999.00"
     })
 
     product.save!
