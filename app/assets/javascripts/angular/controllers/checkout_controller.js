@@ -31,6 +31,12 @@ SwiftApp.controller('CheckoutCtrl', [
     var SHIPPING_PROVIDERS = ['fedex', 'usps', 'ups'];
 
     $scope.cart = CartService.loadFromLocalStorage();
+
+    // Don't show checkout if cart is empty
+    if (!$scope.cart.products.length) {
+        window.location = '/cart';
+    }
+
     $scope.domesticServiceLevels = PostmasterService.getDomesticServiceLevels();
     $scope.intlServiceLevels = PostmasterService.getIntlServiceLevels();
 
