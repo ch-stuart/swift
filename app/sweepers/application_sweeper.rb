@@ -25,9 +25,8 @@ class ApplicationSweeper < ActionController::Caching::Sweeper
             expire_action :controller => 'products', :action => 'show', :id => product.id, :user_type => 'STANDARD'
             expire_action :controller => 'products', :action => 'order', :id => product.id, :user_type => 'WS'
             expire_action :controller => 'products', :action => 'order', :id => product.id, :user_type => 'STANDARD'
-            # FIXME appears this is not working. :(
-            expire_action :controller => 'products', :action => 'order', :id => product.id, :user_type => 'WS', :format => 'json'
-            expire_action :controller => 'products', :action => 'order', :id => product.id, :user_type => 'STANDARD', :format => 'json'
+            expire_action :controller => 'products', :action => 'show', :id => product.id, :user_type => 'WS', :format => 'json'
+            expire_action :controller => 'products', :action => 'show', :id => product.id, :user_type => 'STANDARD', :format => 'json'
         end
         Page.all.each do |page|
             expire_action :controller => 'pages', :action => 'show', :id => page.id, :user_type => 'WS'
