@@ -11,6 +11,7 @@
     <th>Humane Price</th>
     <th>WS Price</th>
     <th>WS Humane Price</th>
+    <th>Shipping</th>
     <th></th>
   </tr>
 <% products.each do |product| %>
@@ -38,9 +39,15 @@
         <% if product.wholesale_humane_price.present? %>
             <%= product.wholesale_humane_price %>
         <% else %>
-            <span style="color:red; font-size: 120%;">
-              ✗
-            </span>
+            <span style="color:red; font-size: 120%;">✗</span>
+        <% end %>
+    </td>
+    <td>
+        <% if product.weight.present? && product.width.present? && product.height.present? && product.length.present? %>
+            <%= product.width %>&#215;<%= product.height %>&#215;<%= product.length %><br>
+            <%= product.weight %>lbs
+        <% else %>
+            <span style="color:red; font-size: 120%;">✗</span>
         <% end %>
     </td>
     <td>
