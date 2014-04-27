@@ -1,6 +1,10 @@
 class SalesController < ApplicationController
 
   before_filter :authenticate_admin, :except => [ :checkout, :create, :success, :cart, :charge ]
+  caches_action :cart, :checkout, :cache_path => Proc.new { |c|
+      { 'user_type' => session[:is_wholesale_user] ? "WS" : "STANDARD" }
+  }
+  cache_sweeper ApplicationSweeper
 
   # GET /sales
   # GET /sales.json
