@@ -7,15 +7,10 @@
     <th>Status</th>
     <th></th>
     <th>Title</th>
-    <th>Short Title</th>
-    <th>Description</th>
     <th>Price</th>
     <th>Humane Price</th>
-    <th>Wholesale Price</th>
-    <th>Wholesale Humane Price</th>
-    <th>Flickr Tag</th>
-    <th>Featured Photo</th>
-    <th>Specs</th>
+    <th>WS Price</th>
+    <th>WS Humane Price</th>
     <th></th>
   </tr>
 <% products.each do |product| %>
@@ -28,17 +23,28 @@
     <td>
       <%= link_to product.title, product %>
     </td>
-    <td><%= product.short_title %></td>
-    <td><%= truncate(product.description, :length => 10) %></td>
     <td><%= product.price %></td>
     <td><%= product.humane_price %></td>
-    <td><%= product.wholesale_price %></td>
-    <td><%= product.wholesale_humane_price %></td>
-    <td><%= product.flickr_tag %></td>
-    <td><%= product.flickr_photo %></td>
-    <td><%= truncate(product.specs, :length => 10) %></td>
     <td>
-        <%= link_to image_tag("destroy.png"), product, :confirm => 'Are you sure?', :method => :delete %>
+        <% if product.wholesale_price.present? %>
+            <%= product.wholesale_price %>
+        <% else %>
+            <span style="color:red; font-size: 120%;">
+              ✗
+            </span>
+        <% end %>
+    </td>
+    <td>
+        <% if product.wholesale_humane_price.present? %>
+            <%= product.wholesale_humane_price %>
+        <% else %>
+            <span style="color:red; font-size: 120%;">
+              ✗
+            </span>
+        <% end %>
+    </td>
+    <td>
+        <%= link_to image_tag("destroy.png"), product, :confirm => 'Are you sure you want to delete this product?', :method => :delete %>
     </td>
   </tr>
 <% end %>

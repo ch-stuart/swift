@@ -1,6 +1,11 @@
-<h1>Products</h1>
+<h1>
+    Products
+</h1>
 <p>
-    <%= link_to 'New Product', new_product_path, class: "button" %>
+    <%= link_to 'Create New Product', new_product_path, class: "btn" %>
+</p>
+<p>
+    Click the table headings to hide/show the table.
 </p>
 <%= render 'products_table', products: @public_products, title: 'Public Products' %>
 <%= render 'products_table', products: @private_products, title: 'Private Products' %>
