@@ -78,7 +78,7 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @sale }
+      # format.json { render json: @sale }
     end
   end
 
