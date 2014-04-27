@@ -202,7 +202,7 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
                 delete product.$$hashKey;
             });
 
-            console.log('loading cart', cartContents);
+            console.log('CartService#loadFromLocalStorage', cartContents);
             return cartContents;
         },
         // Saves the cart array to localStorage, overwriting whatever
@@ -214,7 +214,7 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
                 products: this.products
             });
 
-            console.log('saving cart', serialized);
+            console.log('CartService#saveToLocalStorage', serialized);
 
             localStorage.setItem('cart', serialized);
         }
