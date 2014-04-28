@@ -285,7 +285,7 @@
     <script>
         var key = '<%= Rails.configuration.stripe[:publishable_key] %>';
         if (!key.length) {
-            throw new Error('Stripe#setPublishableKey: Missing publishable key.');
+            throw new Error('Stripe#setPublishableKey: Missing publishable key. Shopping cart is broken!');
         }
         Stripe.setPublishableKey(key);
     </script>
