@@ -81,10 +81,6 @@
   <script>window.__iswsu__=true</script>
   <% end %>
   <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
-  <script src="https://js.stripe.com/v2/"></script>
-  <script>
-      Stripe.setPublishableKey('<%= Rails.configuration.stripe[:publishable_key] %>');
-  </script>
   <%= javascript_include_tag "application" %>
   <%= yield :js %>
   <%= render "shared/analytics" unless Rails.env == "development" %>
