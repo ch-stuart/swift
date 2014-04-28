@@ -280,3 +280,13 @@
         </div>
     </div>
 </div>
+<%= content_for :js do %>
+    <script src="https://js.stripe.com/v2/"></script>
+    <script>
+        var key = '<%= Rails.configuration.stripe[:publishable_key] %>';
+        if (!key.length) {
+            throw new Error('Stripe#setPublishableKey: Missing publishable key.');
+        }
+        Stripe.setPublishableKey(key);
+    </script>
+<% end %>
