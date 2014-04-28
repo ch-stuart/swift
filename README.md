@@ -53,6 +53,8 @@ Or, use [pow](//pow.cx).
 
     $ heroku config:add VAR=value --remote=<staging/heroku>
 
+You may need to clear the cache after this.
+
 ## Test on IE via Virtual Box
 
 Yes, do this. Also, use xip.io to get to swift.dev if you're using pow.
