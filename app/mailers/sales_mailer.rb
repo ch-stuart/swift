@@ -12,7 +12,7 @@ class SalesMailer < ActionMailer::Base
   def notify_swift sale
     @sale = sale
     if Rails.env == "production"
-      mail(to: "orders@builtbyswift.com", subject: "New order from #{sale.email} (sale.guid)")
+      mail(to: "orders@builtbyswift.com", subject: "New order from #{sale.email} (#{sale.guid})")
     else
       mail(to: "orders@builtbyswift.com", cc: "charles.stuart@gmail.com", subject: "New order from #{sale.email} (sale.guid)")
     end
