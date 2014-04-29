@@ -28,11 +28,11 @@ class Product < ActiveRecord::Base
   validates_presence_of :category_id, :if => :is_product?
 
   validates_uniqueness_of :title, :short_title
-  validates_format_of :flickr_tag, :with => /^\A[A-Za-z0-9_\-]+\z$/, :if => :flickr_tag?
+  validates_format_of :flickr_tag, :with => /\A[A-Za-z0-9_\-]+\z/, :if => :flickr_tag?
   validates_format_of :flickr_photo, :with => FLICKR_ID_MATCH, :message => "is 10 digits long, all numbers.", :if => :flickr_photo?
   validates_format_of :flickr_set, :with => FLICKR_SET_MATCH, :message => "is 17 digits long, all numbers.", :if => :flickr_set?
 
-  PRICE_MATCH = /^\d{0,10}\.\d{2}$/
+  PRICE_MATCH = /\A\d{0,10}\.\d{2}\z/
   PRICE_MESSAGE = "must be in the following format: 12.00"
   validates_format_of :price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :price?
   validates_format_of :wholesale_price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :wholesale_price?
