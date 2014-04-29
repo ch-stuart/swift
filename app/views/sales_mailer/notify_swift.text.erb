@@ -3,8 +3,8 @@ Company: <%= @sale.company %>
 Email: <%= @sale.email %>
 Phone: <%= @sale.phone_no %>
 
-Hub URL: http://builtbyswift.com/orders/<%= @sale.guid %>
-Customer URL: http://builtbyswift.com/sales/<%= @sale.id %>
+Hub URL: http://builtbyswift.com/sales/<%= @sale.id %>
+Customer URL: http://builtbyswift.com/orders/<%= @sale.guid %>
 Stripe URL: https://manage.stripe.com/prod/payments/<%= @sale.stripe_id %>
 
 <% if @sale.pickup %>
