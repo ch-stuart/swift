@@ -37,6 +37,7 @@ group :development do
   gem 'guard'
   gem 'guard-test'
   gem 'guard-shell'
+  gem 'brakeman'
 end
 
 # Wah. Not compatible with guard-test
