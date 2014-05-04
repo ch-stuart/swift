@@ -63,6 +63,21 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.shippingServiceLevel = 'GROUND';
     isUnitedStatesOrCanada(true);
 
+    isIntl(false);
+
+    // Set default shipping service based
+    // on whether we are shipping domestic
+    // or intl
+    function isIntl(bool) {
+        if (bool) {
+            $scope.shippingServiceLevel = 'INTL_SURFACE';
+        } else {
+            $scope.shippingServiceLevel = 'GROUND';
+        }
+    }
+
+    // If we are in US or CA, we can
+    // show a list of states of provinces.
     function isUnitedStatesOrCanada(bool) {
         if (bool) {
             $scope.countryIsUSCA = true;
@@ -110,7 +125,6 @@ SwiftApp.controller('CheckoutCtrl', [
                 // This tells postmaster that we
                 // only want rates from USPS
                 $scope.rateParams.carrier = 'usps';
-                $scope.rateParams.service = 'INTL_SURFACE';
             }
             // If we set the carrier to USPS,
             // we are shipping international
@@ -389,6 +403,8 @@ SwiftApp.controller('CheckoutCtrl', [
     };
 
     $scope['onCountrySelectChanged'] = function() {
+        isIntl($scope.country !== 'US');
+
         switch ($scope.country) {
         case 'CA':
             $scope.states = PlaceService.caProvinces();
