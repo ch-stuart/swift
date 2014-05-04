@@ -110,6 +110,7 @@ SwiftApp.controller('CheckoutCtrl', [
                 // This tells postmaster that we
                 // only want rates from USPS
                 $scope.rateParams.carrier = 'usps';
+                $scope.rateParams.service = 'INTL_SURFACE';
             }
             // If we set the carrier to USPS,
             // we are shipping international
