@@ -78,6 +78,7 @@ SwiftApp.controller('CheckoutCtrl', [
 
     // If we are in US or CA, we can
     // show a list of states of provinces.
+    // Otherwise, we just show an empty input.
     function isUnitedStatesOrCanada(bool) {
         if (bool) {
             $scope.countryIsUSCA = true;
@@ -457,6 +458,7 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope['onShippingServiceLevelChange'] = function() {
         resetRateResponsesAndCounters();
 
+        console.log('=> shippingServiceLevel', $scope.shippingServiceLevel);
         $scope.rateParams.service = $scope.shippingServiceLevel;
         $scope.busyShipping = true;
 
