@@ -98,9 +98,12 @@
                 </div>
             </form>
             <div ng-show="isShippingReady">
-                <h5>
+                <h4>
                     Shipping Options
-                </h5>
+                </h4>
+                <p ng-show="$scope.country !== 'US'">
+                    For international shipping, we offer USPS. UPS and Fedex are not available.
+                </p>
                 <select
                     ng-show="country == 'US'"
                     ng-options="k as v for (k,v) in domesticServiceLevels"
