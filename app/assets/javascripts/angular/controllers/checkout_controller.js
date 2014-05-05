@@ -168,6 +168,7 @@ SwiftApp.controller('CheckoutCtrl', [
 
     var rateResponses = [];
     function postmasterRateSuccessCallback(response) {
+        console.log('postmasterRateSuccessCallback: response', response);
         // Cannot proceed until we have received all of the callbacks
         rates_response_count++;
 
@@ -248,6 +249,7 @@ SwiftApp.controller('CheckoutCtrl', [
         } else {
             _.each(SHIPPING_PROVIDERS, function(provider) {
                 if (data[provider] && !data[provider].error) {
+
                     if (data.best === provider) {
                         CartService.setShippingCharge(data[provider].charge);
 

@@ -124,7 +124,7 @@
                             ng-model="selectedRate"
                             value="{{ provider.provider }}:{{ provider.service }}:{{ provider.charge }}"
                             ng-change="onRatesRadioChanged(provider)">
-                        {{ provider.provider | uppercase }} via {{ provider.service }} at a cost of {{ provider.charge / 100 | currency }}.
+                        {{ provider.provider | uppercase }}: {{ provider.charge / 100 | currency }}
                     </label>
                 </p>
             </div>
