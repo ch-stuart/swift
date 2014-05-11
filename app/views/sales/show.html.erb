@@ -104,6 +104,16 @@
 </p>
 
 <p>
+  <b>Customer Name:</b>
+  <%= @sale.contact %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%= @sale.company.present? ? @sale.company : "n/a" %>
+</p>
+
+<p>
   <b>Charges:</b>
 </p>
 <table style="min-width: 50%">

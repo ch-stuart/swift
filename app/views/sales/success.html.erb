@@ -2,19 +2,22 @@
     <div class="unit w-3-4">
         <div class="grid">
             <div class="unit w-4-4">
-                <h2>
+                <h2 class="pr--none">
                     Your Order
                 </h2>
             </div>
         </div>
-        <div class="grid hide-on-mobiles no-print">
+        <div class="grid hide-on-mobiles pr--none">
             <div class="shoppin-cart__header unit w-1-4">Product</div>
             <div class="shoppin-cart__header unit w-1-4">Parts</div>
             <div class="shoppin-cart__header unit w-1-4">Quantity</div>
             <div class="shoppin-cart__header unit w-1-4">Total Price</div>
         </div>
-        <% @description["products"].each do |product| %>
-            <div class="grid">
+        <% @description["products"].each_with_index do |product, idx| %>
+            <% if idx % 2 == 0 %>
+                <br class="pr--clear">
+            <% end %>
+            <div class="grid pr--float">
                 <div class="unit w-1-4">
                     <strong>
                         <%= product["title"] %>
@@ -22,7 +25,7 @@
                     <br>
                     <span class=demph>Base Price: <%= number_to_currency product["price"].to_i %></span>
                     <br>
-                    <a href=/products/<%= product["id"] %> class="demph no-print">
+                    <a href=/products/<%= product["id"] %> class="demph pr--none">
                         View Product
                     </a>
                 </div>
@@ -31,13 +34,14 @@
                         <ul class="shoppin-cart__part-list">
                             <% product["parts"].each do |part| %>
                                 <li>
-                                    <%= part["title"] %>
+                                    <span class="pr--bold"><%= part["title"] %></span>
                                     <% if part["price"].present? %>
                                         (<%= number_to_currency part["price"].to_i %>)
                                     <% end %>
                                     <% if part["selectedColor"].present? %>
                                         <span class="demph">
-                                            <br>Fabric: <%= part["selectedColor"]["title"] %>
+                                            <br class="pr--none">
+                                            <span class="pr--none">Fabric:</span> <span class="pr--inline">[</span><%= part["selectedColor"]["title"] %><span class="pr--inline">]</span>
                                             <% if part["selectedColor"]["price"].present? %>
                                                 (<%= number_to_currency part["selectedColor"]["price"].to_i %>)
                                             <% end %>
@@ -60,7 +64,7 @@
                 </div>
             </div>
         <% end %>
-        <hr class="print-only">
+        <hr class="pr--block pr--clear">
         <% if @sale[:tax_amount].present? %>
           <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
               <div class="unit w-3-4 hide-on-mobiles"></div>
@@ -83,7 +87,7 @@
                 Total: <strong><%= number_to_currency(cents_to_dollars(@sale.total)) %></strong>
             </div>
         </div>
-        <hr class="print-only">
+        <hr class="pr--block">
         <div class="grid">
             <div class="unit w-1-2">
                 <h4>
@@ -105,7 +109,7 @@
                     <%= @sale.guid %>
                 </p>
             </div>
-            <div class="unit w-1-2">
+            <div class="unit w-1-2 pr--none">
                 <% if @sale.pickup %>
                   <h4>
                       Shipment Tracking
@@ -122,7 +126,7 @@
                         We will email you when your order has shipped.
                       </p>
                       <p>
-                        The shipping information will also appear on this page.
+                        The shipping information will also appear on this page when your order has shipped.
                       </p>
                     <% else %>
                       <% if @shipments.length > 1 %>
@@ -157,7 +161,7 @@
             </div>
         </div>
     </div>
-    <div class="unit w-1-4 no-print">
+    <div class="unit w-1-4 pr--none">
         <h4>
             Questions?
         </h4>

@@ -16,7 +16,8 @@
     box-sizing: content-box;
 }
 
-.print-only {
+.pr--block,
+.pr--inline {
     display: none;
 }
 

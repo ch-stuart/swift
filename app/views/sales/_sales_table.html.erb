@@ -6,7 +6,8 @@
     <th>Order Date</th>
     <th>Customer URL</th>
     <th>Hub URL</th>
-    <th>Customer Email</th>
+    <th>Email</th>
+    <th>Last Name</th>
     <th>Amount</th>
     <th>Pickup?</th>
     <th>Boxes</th>
@@ -26,6 +27,7 @@
     </td>
     <td><%= link_to "/sales/#{sale.id}", sale %></td>
     <td><%= mail_to sale.email, nil, subject: "Your Swift Industries Order [#{sale.guid}]" %></td>
+    <td><%= last_name(sale) %></td>
     <td><%= number_to_currency(cents_to_dollars(sale.total)) %></td>
     <td>
       <% if sale.pickup %>
