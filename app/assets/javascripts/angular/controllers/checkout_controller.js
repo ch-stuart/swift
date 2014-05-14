@@ -70,7 +70,7 @@ SwiftApp.controller('CheckoutCtrl', [
     // or intl
     function isIntl(bool) {
         if (bool) {
-            $scope.shippingServiceLevel = 'INTL_SURFACE';
+            $scope.shippingServiceLevel = 'INTL_PRIORITY';
         } else {
             $scope.shippingServiceLevel = 'GROUND';
         }
