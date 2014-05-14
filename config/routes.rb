@@ -5,11 +5,14 @@ SwiftSite::Application.routes.draw do
   # Why? It causes issues with caching, namely clearing the action cache (memcache) while
   # on builtbyswift.com does NOT clear the action cache for www.builtybyswift.com. This causes
   # the two "sites" to be out of sync and nobody likes that. cstuart 2013-02-13
-  constraints(host: /^www\./i) do
-    match '(*any)' => redirect { |params, request|
-      URI.parse(request.url).tap { |uri| uri.host.sub!(/^www\./i, '') }.to_s
-    }
-  end
+  # CHANGED this is disabled because we are now going to use rack rewrite to force WWW rather
+  # than the bare domain. this is because heroku sounds like it does not play nicely when you
+  # set up SSL to point at the bare domain (builtbyswift.com with no www)
+  # constraints(host: /^www\./i) do
+  #   match '(*any)' => redirect { |params, request|
+  #     URI.parse(request.url).tap { |uri| uri.host.sub!(/^www\./i, '') }.to_s
+  #   }
+  # end
 
   get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
