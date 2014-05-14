@@ -14,9 +14,9 @@ SwiftApp.controller('CartStatusCtrl', ['$scope', 'CartService', function($scope,
     function setMessage() {
         // display a stupid message
         if ($scope.cart.products.length === 1) {
-            $scope.cart.message = "(You have " + $scope.cart.products.length + " products in your cart)";
-        } else if ($scope.cart.products.length > 1) {
             $scope.cart.message = "(You have " + $scope.cart.products.length + " product in your cart)";
+        } else if ($scope.cart.products.length > 1) {
+            $scope.cart.message = "(You have " + $scope.cart.products.length + " products in your cart)";
         }
     }
 
