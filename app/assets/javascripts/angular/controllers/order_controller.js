@@ -87,13 +87,20 @@ SwiftApp.controller('OrderCtrl', [
                     return part.activated;
                 })
                 .map(function(part) {
-                    return parseFloat(part.price);
+                    var val = parseFloat(part.price);
+                    if (isNaN(val)) {
+                        ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price. Using 0.', JSON.stringify($scope.product) + JSON.stringify(part));
+                        return 0;
+                    } else {
+                        return val;
+                    }
                 })
                 .reduce(function(prev, current) {
                     return prev + current;
                 })
                 .value();
         } catch (e) {
+            ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price.', e);
             console.warn(e);
             return 0;
         }
@@ -114,14 +121,21 @@ SwiftApp.controller('OrderCtrl', [
                     return part.selectedColor && part.selectedColor.price;
                 })
                 .map(function(part) {
-                    return parseFloat(part.selectedColor.price);
+                    var val = parseFloat(part.selectedColor.price)
+                    if (isNaN(val)) {
+                        ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get fabric price. Using 0.', JSON.stringify($scope.product) + JSON.stringify(fabric));
+                        return 0;
+                    } else {
+                        return val;
+                    }
                 })
                 .value();
 
                 // check for empty [], return 0 if empty
                 return fabricPrices.length ? Math.max.apply(null, fabricPrices) : 0;
         } catch(e) {
-            // console.warn(e);
+            ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price.', e);
+            console.warn(e);
             return 0;
         }
     }
@@ -207,12 +221,14 @@ SwiftApp.controller('OrderCtrl', [
             $scope.product.totalPrice = calculateTotalPrice();
 
             if (!$scope.product.totalPrice) {
+                alert('Could not calculate price. Try submitting again.');
                 ExceptionService.report('OrderCtrl#onFormSubmit: Could not get total price', JSON.stringify($scope.product));
+            } else {
+                CartService.add($scope.product);
+
+                window.location = '/cart';
             }
 
-            CartService.add($scope.product);
-
-            window.location = '/cart';
         }
     };
 
