@@ -60,7 +60,6 @@ SwiftApp.service('ProductService', ['$http', function($http) {
 
         console.log('Product#setupPricesForWholesale');
 
-        // TODO only do this if they are a wholesaler!
         // Adjust main price
         response.product.price = response.product.wholesale_price;
         response.product.humane_price = response.product.wholesale_humane_price;
