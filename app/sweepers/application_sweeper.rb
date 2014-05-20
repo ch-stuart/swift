@@ -3,17 +3,17 @@ class ApplicationSweeper < ActionController::Caching::Sweeper
     observe Color, Company, Page, Product, Size, Testimonial, Category
 
     def after_create record
-        logger.info "ApplicationSweeper#after_create"
+        Rails.logger.info "ApplicationSweeper#after_create"
         expire_cache
     end
 
     def after_update record
-        logger.info "ApplicationSweeper#after_update"
+        Rails.logger.info "ApplicationSweeper#after_update"
         expire_cache
     end
 
     def after_destroy record
-        logger.info "ApplicationSweeper#after_destroy"
+        Rails.logger.info "ApplicationSweeper#after_destroy"
         expire_cache
     end
 
