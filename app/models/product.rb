@@ -2,6 +2,11 @@ class Product < ActiveRecord::Base
 
   extend Flickr
 
+  attr_accessible :title, :description, :flickr_tag, :specs, :status, :price, :kind,
+  :short_title, :humane_price, :flickr_photo, :question, :answer, :not_for_sale,
+  :not_for_sale_message, :featured_on_homepage, :flickr_set, :short_description,
+  :wholesale_humane_price, :wholesale_price, :width, :height, :length, :weight, :category_id
+
   has_many :parts, :dependent => :destroy
   has_many :testimonials, :dependent => :destroy
   has_many :sizes, :dependent => :destroy
