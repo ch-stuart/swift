@@ -1,7 +1,7 @@
 <div id="hero" class="sixteen columns hero">
   <div id="hero-scroll">
     <% @photos.each do |photo| %>
-      <img src=<%= photo[:url] %> class="hero-img">
+      <img src=<%= photo[:url].gsub("http:", "") %> class="hero-img">
     <% end %>
   </div>
   <div class="hero-text">
