@@ -4,7 +4,7 @@
             <strong class="nav-list--group-heading"><%= category.title %></strong>
             <ul class="nav-list--group">
                 <% category.products.each do |product| %>
-    				<% next unless product.public? %>
+                    <% next unless product.public? %>
                     <li class="nav-list--group-item">
                         <%= link_to product.short_title, product, :class => "nav-list--group-item-link" %>
                     </li>
