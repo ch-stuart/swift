@@ -100,7 +100,7 @@ module Flickr
 
     Rails.cache.write(id, photo.source)
 
-    photo.source
+    photo.source.gsub("http:", "")
   end
 
   def get_photos_by_set id
