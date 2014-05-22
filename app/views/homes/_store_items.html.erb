@@ -1,6 +1,6 @@
 <% endcap = (index + 1).modulo(3) == 0 ? true : false %>
 <div class="one-third column store-item">
-    <% photo_url = Product.get_photo_by_id(item.flickr_photo, "Small") %>
+    <% photo_url = Product.get_photo_by_id(item.flickr_photo, "Small").gsub("http:", "") %>
 
     <%= link_to(image_tag(photo_url, :class => "store-item--image"), item) %>
     <h3 class="store-item--heading">

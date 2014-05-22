@@ -36,7 +36,7 @@ module Flickr
       photo[:id]          = photo_info['id']
       photo[:description] = photo_info['description']
       photo[:title]       = photo_info['title']
-      photo[:flickr_url]  = photo_info['urls'][0]['_content']
+      photo[:flickr_url]  = photo_info['urls'][0]['_content'].gsub("http:", "")
       # Get photo sizes
       photo_sizes         = flickr.photos.getSizes :photo_id => photo_info['id']
 
@@ -50,18 +50,18 @@ module Flickr
       end
 
       # Save medium size photo info
-      photo[:url]         = medium_photo.source
+      photo[:url]         = medium_photo.source.gsub("http:", "")
       photo[:height]      = medium_photo.height
 
       # Get large size photo
       large_photo = photo_sizes.find {|s| s.label == 'Large' }
 
       if large_photo.present?
-        photo[:large_url]    = large_photo.source
+        photo[:large_url]    = large_photo.source.gsub("http:", "")
         photo[:large_height] = large_photo.height
       else
         Rails.logger.warn "Could not get large photo. Using medium photo instead."
-        photo[:large_url]    = medium_photo.source
+        photo[:large_url]    = medium_photo.source.gsub("http:", "")
         photo[:large_height] = medium_photo.height
       end
 
@@ -100,7 +100,7 @@ module Flickr
 
     Rails.cache.write(id, photo.source)
 
-    photo.source
+    photo.source.gsub("http:", "")
   end
 
   def get_photos_by_set id

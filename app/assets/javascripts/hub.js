@@ -27,7 +27,7 @@ $.toggleColors = function() {
 // Preview the flickr tag...
 // Assumes there is only one flickr tag per page
 function createFlickrTagLink() {
-    var FLICKR_BASE_URL = 'http://www.flickr.com/photos/swiftpanniers/tags/';
+    var FLICKR_BASE_URL = '//www.flickr.com/photos/swiftpanniers/tags/';
 
     if ($(this).val()) {
         $('.js-flickr_tag-link')
