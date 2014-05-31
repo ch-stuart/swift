@@ -24,11 +24,11 @@ SwiftSite::Application.routes.draw do
 
   resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials, :categories
 
-  # resources :products do
-  #   member do
-  #     get 'order'
-  #   end
-  # end
+  resources :products do
+    member do
+      get 'order'
+    end
+  end
 
   match 'logout', :to => 'application#logout'
   match 'login', :to => 'hub#index'
