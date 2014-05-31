@@ -1,4 +1,4 @@
-/*global SwiftApp console window */
+/*global SwiftApp console window _ */
 
 SwiftApp.service('ExceptionService', ['$http', function($http) {
 
@@ -23,8 +23,11 @@ SwiftApp.service('ExceptionService', ['$http', function($http) {
 
     function report(msg, objs) {
         if (objs) {
-            msg = msg + stringify(objs);
+            msg += stringify(objs);
         }
+
+        // Include UA
+        msg += ' :: ' + window.navigator.userAgent;
 
         $http
             .post('/exceptions/report', { msg: msg })
