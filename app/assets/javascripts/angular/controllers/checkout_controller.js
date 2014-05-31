@@ -281,7 +281,7 @@ SwiftApp.controller('CheckoutCtrl', [
     function postmasterRateErrorCallback(response) {
         $scope.busyShipping = false;
         console.warn('PostmasterService.rates => Error:', response);
-        ExceptionService.report(JSON.stringify(response));
+        ExceptionService.report('CheckoutCtrl#postmasterRateErrorCallback ' + JSON.stringify(response));
         alert(RATE_ERROR_MSG);
     }
 
@@ -328,7 +328,7 @@ SwiftApp.controller('CheckoutCtrl', [
         console.log('saleChargeErrorCallback', response);
         $scope.busyBuying = false;
         if (response.data && response.data.error && response.data.error.message) {
-            ExceptionService.report(JSON.stringify(response));
+            ExceptionService.report('CheckoutCtrl#saleChargeErrorCallback ' + JSON.stringify(response));
             alert(response.data.error.message);
         }
     }
@@ -350,7 +350,7 @@ SwiftApp.controller('CheckoutCtrl', [
             });
             alert(errors.join('\n'));
         } else {
-            ExceptionService.report(response);
+            ExceptionService.report('CheckoutCtrl#saleCreateErrorCallback ' + JSON.stringify(response));
             alert('A server error occurred.');
         }
         $scope.busyBuying = false;

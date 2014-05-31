@@ -32,7 +32,7 @@ SwiftApp.controller('OrderCtrl', [
     }
 
     function errorCallback(data) {
-        ExceptionService.report('OrderCtrl#errorCallback', JSON.stringify(data));
+        ExceptionService.report('OrderCtrl#errorCallback ' + JSON.stringify(data));
         alert('An error occurred. Try reloading page.');
     }
 
@@ -89,7 +89,7 @@ SwiftApp.controller('OrderCtrl', [
                 .map(function(part) {
                     var val = parseFloat(part.price);
                     if (isNaN(val)) {
-                        ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price. Using 0.', JSON.stringify($scope.product) + JSON.stringify(part));
+                        ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price. Using 0. ' + JSON.stringify($scope.product) + JSON.stringify(part));
                         return 0;
                     } else {
                         return val;
@@ -100,7 +100,7 @@ SwiftApp.controller('OrderCtrl', [
                 })
                 .value();
         } catch (e) {
-            ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price.', e);
+            ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price. ' + JSON.stringify($scope.product) + e);
             console.warn(e);
             return 0;
         }
@@ -121,9 +121,9 @@ SwiftApp.controller('OrderCtrl', [
                     return part.selectedColor && part.selectedColor.price;
                 })
                 .map(function(part) {
-                    var val = parseFloat(part.selectedColor.price)
+                    var val = parseFloat(part.selectedColor.price);
                     if (isNaN(val)) {
-                        ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get fabric price. Using 0.', JSON.stringify($scope.product) + JSON.stringify(fabric));
+                        ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get fabric price. Using 0. ' + JSON.stringify($scope.product) + JSON.stringify(part));
                         return 0;
                     } else {
                         return val;
@@ -134,7 +134,7 @@ SwiftApp.controller('OrderCtrl', [
                 // check for empty [], return 0 if empty
                 return fabricPrices.length ? Math.max.apply(null, fabricPrices) : 0;
         } catch(e) {
-            ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price.', e);
+            ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price. ' + JSON.stringify($scope.product) +  e);
             console.warn(e);
             return 0;
         }
@@ -222,7 +222,7 @@ SwiftApp.controller('OrderCtrl', [
 
             if (!$scope.product.totalPrice) {
                 alert('Could not calculate price. Try submitting again.');
-                ExceptionService.report('OrderCtrl#onFormSubmit: Could not get total price', JSON.stringify($scope.product));
+                ExceptionService.report('OrderCtrl#onFormSubmit: Could not get total price ' + JSON.stringify($scope.product));
             } else {
                 CartService.add($scope.product);
 
