@@ -2,7 +2,7 @@
 
 window.onerror = function(errorMsg, url, lineNumber) {
     // Don't bother if there isn't a errorMsg
-    if (!errorMsg) return;
+    if (!errorMsg || errorMsg === 'Script error.') return;
 
     var string = JSON.stringify({
         'msg': errorMsg,
