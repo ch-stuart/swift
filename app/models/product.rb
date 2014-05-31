@@ -5,7 +5,8 @@ class Product < ActiveRecord::Base
   attr_accessible :title, :description, :flickr_tag, :specs, :status, :price, :kind,
   :short_title, :humane_price, :flickr_photo, :question, :answer, :not_for_sale,
   :not_for_sale_message, :featured_on_homepage, :flickr_set, :short_description,
-  :wholesale_humane_price, :wholesale_price, :width, :height, :length, :weight, :category_id
+  :wholesale_humane_price, :wholesale_price, :width, :height, :length, :weight,
+  :package_type, :sizes_attributes, :parts_attributes, :category_id
 
   has_many :parts, :dependent => :destroy
   has_many :testimonials, :dependent => :destroy
@@ -22,6 +23,10 @@ class Product < ActiveRecord::Base
   KINDS = ["Product", "Accessory", "Stock"]
   attr_reader :KINDS
   validates :kind, :inclusion => { :in => KINDS, :message => "%{value} is not a valid type" }
+
+  PACKAGE_TYPE = ["CUSTOM", "LETTER", "PAK"]
+  attr_reader :PACKAGE_TYPE
+  validates :package_type, :inclusion => { :in => PACKAGE_TYPE, :message => "%{value} is not a valid type" }
 
   STATUSES = ["Public", "Private"]
   attr_reader :STATUSES
