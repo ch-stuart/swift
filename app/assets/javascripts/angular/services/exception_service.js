@@ -29,6 +29,9 @@ SwiftApp.service('ExceptionService', ['$http', function($http) {
         // Include UA
         msg += ' :: ' + window.navigator.userAgent;
 
+        // Include URL
+        msg += ' :: ' + window.location.href;
+
         $http
             .post('/exceptions/report', { msg: msg })
             .then(
