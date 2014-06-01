@@ -5,6 +5,25 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
     var packages = [];
     var LARGEST_PACKAGE_VOLUME = 4488;
 
+    // Find out if all products in cart fit in a LETTER
+    // @returns Boolean
+    function allFitLetter() {
+        var productsThatDontFitInLetter = _.filter(CartService.products, function(product) {
+            return product.package_type !== 'LETTER';
+        });
+        return productsThatDontFitInLetter.length === 0;
+    }
+
+    // NOTE USPS does not support PAK :(
+    // // Find out if all products in cart fit in a PAK
+    // // @returns Boolean
+    // function allFitPak() {
+    //     var productsThatDontFitInPak = _.filter(CartService.products, function(product) {
+    //         return product.package_type !== 'PAK'
+    //     });
+    //     return productsThatDontFitInPak.length === 0;
+    // }
+
     function getProp(p, prop) {
         if (!p[prop]) {
             console.log('PackagingService#getSide: Missing "' + prop + '" for ' + p.title);
