@@ -101,18 +101,18 @@
                 <h4>
                     Shipping Options
                 </h4>
-                <p ng-show="$scope.country !== 'US'">
+                <p ng-hide="isShippingDomestic">
                     For international shipping, we offer USPS. UPS and Fedex are not available.
                 </p>
                 <select
-                    ng-show="country == 'US'"
+                    ng-show="isShippingDomestic"
                     ng-options="k as v for (k,v) in domesticServiceLevels"
                     ng-model="shippingServiceLevel"
                     ng-change="onShippingServiceLevelChange()"
                     class="input">
                 </select>
                 <select
-                    ng-hide="country == 'US'"
+                    ng-hide="isShippingDomestic"
                     ng-options="k as v for (k,v) in intlServiceLevels"
                     ng-model="shippingServiceLevel"
                     ng-change="onShippingServiceLevelChange()"

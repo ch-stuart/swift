@@ -39,6 +39,7 @@ SwiftApp.controller('CheckoutCtrl', [
 
     $scope.domesticServiceLevels = PostmasterService.getDomesticServiceLevels();
     $scope.intlServiceLevels = PostmasterService.getIntlServiceLevels();
+    $scope.isShippingDomestic = true;
 
     $scope.isShippingReady = false;
     $scope.busyShipping = false;
@@ -61,32 +62,6 @@ SwiftApp.controller('CheckoutCtrl', [
     // $scope.state = '';
     // $scope.phoneNo = "989 433 0325";
     $scope.shippingServiceLevel = 'GROUND';
-    isUnitedStatesOrCanada(true);
-
-    isIntl(false);
-
-    // Set default shipping service based
-    // on whether we are shipping domestic
-    // or intl
-    function isIntl(bool) {
-        if (bool) {
-            $scope.shippingServiceLevel = 'INTL_PRIORITY';
-        } else {
-            $scope.shippingServiceLevel = 'GROUND';
-        }
-    }
-
-    // If we are in US or CA, we can
-    // show a list of states of provinces.
-    // Otherwise, we just show an empty input.
-    function isUnitedStatesOrCanada(bool) {
-        if (bool) {
-            $scope.countryIsUSCA = true;
-        } else {
-            $scope.countryIsUSCA = false;
-            $scope.state = '';
-        }
-    }
 
     $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge) {
         $scope.cart.price          = price;
@@ -122,16 +97,11 @@ SwiftApp.controller('CheckoutCtrl', [
         if (data.status === 'OK') {
             $scope.commercial = $scope.rateParams.commercial = !!data.commercial;
 
-            if ($scope.country !== 'US') {
+            if (!$scope.isShippingDomestic) {
                 // This tells postmaster that we
                 // only want rates from USPS
                 $scope.rateParams.carrier = 'usps';
             }
-            // If we set the carrier to USPS,
-            // we are shipping international
-            // (because we only offer USPS when
-            // shipping internationally)
-            $scope.intl = !!$scope.rateParams.carrier;
 
             if ($scope.state === 'WA') {
                 WaStateTaxService
@@ -184,7 +154,7 @@ SwiftApp.controller('CheckoutCtrl', [
         var combinedResponse = {};
 
         // If we only got one provider back...
-        if ($scope.intl || 'service' in response.data) {
+        if (!$scope.isShippingDomestic || 'service' in response.data) {
             combinedResponse['usps'] = {};
             combinedResponse['usps'].charge = 0;
 
@@ -228,7 +198,7 @@ SwiftApp.controller('CheckoutCtrl', [
         var data = response.data;
 
         // Handle international shipping
-        if ($scope.intl) {
+        if (!$scope.isShippingDomestic) {
             // While below we have to handle errors
             // on a per provider basis... We don't
             // have to do that here because a) there's
@@ -408,21 +378,26 @@ SwiftApp.controller('CheckoutCtrl', [
     };
 
     $scope['onCountrySelectChanged'] = function() {
-        isIntl($scope.country !== 'US');
+
+        $scope.isShippingDomestic = $scope.country == 'US' ? true : false;
 
         switch ($scope.country) {
         case 'CA':
+            $scope.shippingServiceLevel = 'INTL_PRIORITY';
             $scope.states = PlaceService.caProvinces();
             $scope.state = 'ON';
-            isUnitedStatesOrCanada(true);
+            $scope.countryIsUSCA = true;
             break;
         case 'US':
+            $scope.shippingServiceLevel = 'GROUND'
             $scope.states = PlaceService.usStates();
             $scope.state = 'MT';
-            isUnitedStatesOrCanada(true);
+            $scope.countryIsUSCA = true;
             break;
         default:
-            isUnitedStatesOrCanada(false);
+            $scope.shippingServiceLevel = 'INTL_PRIORITY';
+            $scope.countryIsUSCA = false;
+            $scope.state = '';
         }
     };
 
