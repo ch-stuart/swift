@@ -1,7 +1,25 @@
-// Third-Party Base Grid
-@import 'skeleton/stylesheets/base';
-@import 'skeleton/stylesheets/skeleton';
-@import 'skeleton/stylesheets/layout';
+/*
+*= require normalize-css/normalize
+*= require skeleton-base-modified
+*= require skeleton/stylesheets/skeleton
+*= require skeleton/stylesheets/layout
+*= require gridism/gridism
+*/
+
+// box-sizing ftw
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+// Skeleton is not compatible with border-box
+.container {
+    box-sizing: content-box;
+}
+
+.pr--block,
+.pr--inline {
+    display: none;
+}
 
 // Includes
 @import 'include-color';
@@ -10,24 +28,7 @@
 // Base
 @import 'base-entypo';
 @import 'base-type';
-
-// Modules
-@import 'module-blog';
-@import 'module-buttons';
-@import 'module-color.picker';
-@import 'module-form';
-@import 'module-hero';
-@import 'module-jquery.impromptu';
-@import 'module-jquery.tooltip';
-@import 'module-jquery.tabs';
-@import 'module-nav';
-@import 'module-nojs';
-@import 'module-order.form';
-@import 'module-private';
-@import 'module-slideshow';
-@import 'module-store';
-@import 'module-testimonials';
-@import 'module-video';
+@import 'base-list';
 
 // Layouts
 @import 'layout-pub';
@@ -38,7 +39,25 @@
 @import 'glob-homes';
 @import 'glob-page';
 
-
+// Modules
+@import 'module-blog';
+@import 'module-buttons';
+@import 'module-cart';
+@import 'module-checkout';
+@import 'module-color.picker';
+@import 'module-form';
+@import 'module-hero';
+@import 'module-jquery.tabs';
+@import 'module-nav';
+@import 'module-nojs';
+@import 'module-order.form';
+@import 'module-private';
+@import 'module-slideshow';
+@import 'module-store';
+@import 'module-success';
+@import 'module-testimonials';
+@import 'module-video';
+@import 'module-dialog';
 
 // Override the base style set by Skeleton
 a, a:visited {
@@ -54,3 +73,40 @@ a:hover, a:focus {
 img.center-in-grid {
     display: block;
     margin: 0 auto; }
+
+
+.nice-list {
+    list-style-type: square;
+    margin-left: 14px;
+    margin-top: 15px;
+    li {
+        margin-bottom: 4px;
+    }
+}
+
+
+
+select.ng-invalid.ng-dirty,
+input.ng-invalid.ng-dirty {
+  border: 1px solid red;
+}
+
+
+
+.label.input--dirty {
+    color: red;
+}
+
+.browsehappy {
+    margin: 0;
+    text-align: center;
+    background-color: #ff3;
+    padding: 20px 0 25px;
+    line-height: 1;
+}
+
+
+// This makes ng-cloak actually work
+[ng-cloak] {
+  display: none !important;
+}

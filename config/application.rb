@@ -29,7 +29,7 @@ module SwiftSite
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'Pacific Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
@@ -57,6 +57,23 @@ module SwiftSite
 
     # If you have other manifests or individual stylesheets and JavaScript files to include,
     # you can add them to the precompile array:
-    config.assets.precompile += ['hub.css', 'hub.js']
+    config.assets.precompile += ['hub.css', 'hub.js', 'print.css']
+
+    # let rails know about bower components
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+
+    ActionMailer::Base.smtp_settings = {
+        port:           '587',
+        address:        'smtp.mandrillapp.com',
+        user_name:      ENV['MANDRILL_STAGING_USERNAME'],
+        password:       ENV['MANDRILL_STAGING_APIKEY'],
+        domain:         'heroku.com',
+        authentication: :plain
+    }
+    ActionMailer::Base.delivery_method = :smtp
+    config.action_mailer.default_url_options = {
+      :host => 'fierce-island-8829.herokuapp.com'
+    }
+
   end
 end

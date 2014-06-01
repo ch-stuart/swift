@@ -1,22 +1,35 @@
+/*global document jQuery UA window*/
 // ...
-//= require array.foreach
-//= require ua
+//= require dollardollar
 //= require jquery
+//= require angular
+//= require global_exception_service
+//= require console
+//= require underscore
+//= require ua.js/src/ua.js
 //= require jquery.browser
 //= require jquery_ujs
 //= require tinycolor
-//= require console
 //= require jquery.fitvids
-//= require jquery.noisy
-//= require jquery.impromptu
-//= require jquery.color_picker
 //= require jquery.hero
 //= require jquery.lightbox_me
-//= require jquery.tooltip
 //= require jquery.tabs
-//= require ICanHaz
-//= require slideshow
-//= require product_order
+//= require jquery.slideshow
+//= require angular/app
+//= require angular/services/exception_service
+//= require angular/directives/visible_directive
+//= require angular/services/config_service
+//= require angular/services/wa_state_tax_service
+//= require angular/services/sale_service
+//= require angular/services/packaging_service
+//= require angular/services/place_service
+//= require angular/services/cart_service
+//= require angular/services/product_service
+//= require angular/services/postmaster_service
+//= require angular/controllers/order_controller
+//= require angular/controllers/cart_controller
+//= require angular/controllers/cart_status_controller
+//= require angular/controllers/checkout_controller
 
 jQuery(document).ready(function($) {
 
@@ -31,19 +44,24 @@ jQuery(document).ready(function($) {
         $root.addClass('is-safari');
     }
 
+    if (UA.isIOS()) {
+        $root.addClass('is-iOS');
+    }
+
+    if ($.browser.msie && $.browser.version <= 10) {
+        $(document.body).prepend(
+            ['<p class=browsehappy>',
+            'You are using an <strong>outdated</strong> browser.',
+            '<a href=//browsehappy.com>Upgrade your browser</a>',
+            'to improve your experience.</p>'].join('\n')
+        );
+        $("html").addClass("ie");
+    }
+
     $('#global-menu-btn').click(function() {
         $(this).toggleClass('active');
-    	$('#global-menu').slideToggle();
+        $('#global-menu').slideToggle();
     });
-
-    if (document.location.hostname !== "swift.dev") {
-        $(document.body).noisy({
-            intensity: 0.9,
-            size: 200,
-            opacity: 0.035,
-            monochrome: false
-        });
-    }
 
     // $(window).on('resize', function() {
     //     $('#width').text( $(document.body).css('width') );

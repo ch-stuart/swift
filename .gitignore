@@ -1,4 +1,3 @@
-*.sqlite3
 .bundle
 tmp/cache
 tmp/pids
@@ -7,4 +6,5 @@ log/*.log
 # Ignore application configuration
 /config/application.yml
 .powenv
+node_modules/
 ssl/

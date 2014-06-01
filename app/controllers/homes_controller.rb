@@ -2,8 +2,10 @@ class HomesController < ApplicationController
 
     require "open-uri"
 
-    before_filter :authenticate, :except => [ :index, :store ]
-    caches_action :index, :store
+    before_filter :authenticate_admin, :except => [ :index, :store ]
+    caches_action :index, :store, :cache_path => Proc.new { |c|
+        { 'user_type' => session[:is_wholesale_user] ? "WS" : "STANDARD" }
+    }
 
     def index
         @pages = Page.find_all_by_status("Public")
@@ -41,14 +43,18 @@ class HomesController < ApplicationController
     def get_latest_blog_post
         @blog = {}
 
-        xml = open("http://cycleswift.wordpress.com/feed/")
-        doc = Nokogiri::XML(xml)
+        begin
+          xml = open("http://cycleswift.wordpress.com/feed/")
+          doc = Nokogiri::XML(xml)
 
-        @blog["title"] = doc.at_css("rss channel item title").text
-        @blog["link"] = doc.at_css("rss channel item link").text
-        @blog["description"] = doc.at_css("rss channel item description").text.gsub("http:", "")
-        img = doc.css("media|content")[1]
-        @blog["img"] = img["url"].gsub("http:", "")
+          @blog["title"] = doc.at_css("rss channel item title").text
+          @blog["link"] = doc.at_css("rss channel item link").text
+          @blog["description"] = doc.at_css("rss channel item description").text.gsub("http:", "")
+          img = doc.css("media|content")[1]
+          @blog["img"] = img["url"].gsub("http:", "")
+        rescue Exception => e
+          logger.error e
+        end
 
         @blog
     end

@@ -1,0 +1,12 @@
+<%= content_for :css do %>
+<style>
+pre {
+  font-family: monaco, monospace;
+  font-size: 24px;
+  line-height: 1.8;
+}
+</style>
+<% end %>
+
+<pre><% @contacts.each do |contact| %>
+<%= contact.email %><% end %></pre>

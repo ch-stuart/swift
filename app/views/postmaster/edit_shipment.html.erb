@@ -1,0 +1,94 @@
+<p>
+  Complete this form once for each box associated with this sale.
+</p>
+<form action="create_shipment" method="post">
+  <input type="hidden" name="id" value="<%= @sale.id %>">
+  <div class="eight columns">
+    <h3>To</h3>
+    <label>Contact</label>
+    <input type="text" value="<%= @sale.contact %>" name="shipment[contact]">
+    <label>Company (optional)</label>
+    <input type="text" value="<%= @sale.company %>" name="shipment[company]">
+    <label>Line 1</label>
+    <input type="text" value="<%= @sale.line1 %>" name="shipment[line1]">
+    <label>City</label>
+    <input type="text" value="<%= @sale.city %>" name="shipment[city]">
+    <label>State/Province</label>
+    <input type="text" value="<%= @sale.state %>" name="shipment[state]">
+    <label>Zip Code</label>
+    <input type="text" value="<%= @sale.zip_code %>" name="shipment[zip_code]">
+    <label>Phone No</label>
+    <input type="text" value="<%= @sale.phone_no %>" name="shipment[phone_no]">
+  </div>
+
+  <div class="eight columns">
+    <h3>Carrier and Service Level</h3>
+    <label>Carrier</label>
+    <input type="text" value="<%= @sale.shipping_provider %>" name="shipment[shipping_provider]">
+    <p class="hint">
+      Options are "ups", "usps" or "fedex". Use lower case.
+    </p>
+    <label>Service Level</label>
+    <input type="text" value="<%= @sale.shipping_service %>" name="shipment[shipping_service]">
+    <p class="hint">
+      View available <a href="https://www.postmaster.io/docs/api#services">service levels</a>.
+      The service level the customer selected is pre-populated.
+    </p>
+
+    <h3>Packaging</h3>
+    <p>
+      Input the weight, and then choose if you want to ship this order in a box or an envelope.
+    </p>
+    <label>Weight (in lbs)</label>
+    <input class="input--dim" type="text" name="shipment[weight]">
+    <p class="hint">Ex: 3.24, 3.2 or 3 (can include tenths or hundredths of a pound)</p>
+    <h4>
+      Ship in a box
+    </h4>
+    <select id="box_select">
+      <% @boxes.each do |box| %>
+        <option value="<%= box[:width].to_i %>:<%= box[:height].to_i %>:<%= box[:length].to_i %>">
+          <%= box[:width].to_i %> &#215; <%= box[:height].to_i %> &#215; <%= box[:length].to_i %> (<%= box[:name] %>)
+        </option>
+      <% end %>
+    </select>
+    <input id="w_input" placeholder="W" class="input--dim" type="text" name="shipment[width]"> &#215;
+    <input id="h_input" placeholder="H" class="input--dim" type="text" name="shipment[height]"> &#215;
+    <input id="l_input" placeholder="L" class="input--dim" type="text" name="shipment[length]">
+    <p class="hint">Ex: 3 or 6 (round up to the nearest integer)</p>
+
+    <h4>
+      Ship in an envelope
+    </h4>
+    <select name="shipment[envelope]">
+      <option></option>
+      <option value="TUBE">TUBE</option>
+      <option value="LETTER">LETTER</option>
+      <option value="PAK">PAK</option>
+    </select>
+    <p class="hint">
+      View postmaster <a href="https://www.postmaster.io/docs/api#packages">packaging reference</a>.
+    </p>
+  </div>
+
+  <br class="clear">
+  <p style="margin-top: 60px">
+    <input type="submit" value="Ship it" class="btn">
+  </p>
+</form>
+
+<%= content_for :js do %>
+  <script>
+    var box_slct = document.getElementById('box_select')
+    var dim_w = document.getElementById('w_input')
+    var dim_h = document.getElementById('h_input')
+    var dim_l = document.getElementById('l_input')
+
+    box_slct.onchange = function(e) {
+      var vals = box_slct.value.split(':');
+      dim_w.value = vals[0]
+      dim_h.value = vals[1]
+      dim_l.value = vals[2]
+    }
+  </script>
+<% end %>

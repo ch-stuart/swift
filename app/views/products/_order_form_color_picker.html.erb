@@ -1,0 +1,40 @@
+<div
+    ng-hide="!part.colors.length || part.price && !part.activated"
+    class="color-picker--wrapper">
+    <div
+        ng-show="part.selectedColor"
+        class="color-picker--swatch color-picker--swatch-selected"
+        style="background-color: {{ part.selectedColor.hex }}; border: 1px solid {{ part.selectedColor.hex }}">
+        {{ part.selectedColor.title }}
+        <span ng-show="part.selectedColor.price">
+            {{ part.selectedColor.price | currency }}
+        </span>
+    </div>
+
+    <div class="color-picker--swatches" ng-show="part.colors.length && part.showColors">
+        <div
+            ng-repeat="color in part.colors"
+            ng-click="onColorSwatchClicked()"
+            ng-show="part.colors"
+            ng-model="part.selectedColor"
+            for="part_{{ part.id }}__color_{{ color.id }}"
+            class="color-picker--swatch"
+            style="background-color: {{ color.hex }}; border: 1px solid {{ color.hex }}">
+            {{ color.title }}
+            <span ng-show="color.price">
+                {{ color.price | currency }}
+            </span>
+        </div>
+        <span ng-show="form.$error.validateColor">Pick a color!</span>
+    </div>
+
+    <div
+        class="color-picker--change btn remove-bottom {{ part.inputIsInvalid }}"
+        ng-click="onChooseColorButtonClicked()"
+        ng-show="part.colors.length && !part.showColors">
+        Choose Color
+    </div>
+
+    <br class="clear">
+
+</div>

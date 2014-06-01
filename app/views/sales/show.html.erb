@@ -1,0 +1,185 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+    Shipment Details
+</h2>
+
+<% if @sale.pickup && @sale.status == "Not Shipped" %>
+  <p>
+    Customer will pick up their order.
+  </p>
+  <p>
+    <%= link_to 'Email customer and let them know their order is ready for pickup', { controller: "sales", action: "ready_for_pickup", id: @sale }, class: 'btn' %>
+  </p>
+<% elsif @sale.pickup && @sale.status == "Shipped" %>
+  <p>
+    <span class="hey--wah">Order is ready for pickup and customer has been emailed.</span>
+  </p>
+<% else %>
+  <% if @shipments.blank? %>
+    <p>
+      <span class="hey--wah">Order has not yet been shipped.</span>
+    </p>
+    <p>
+      <%= link_to 'Ship it', { controller: "postmaster", action: "edit_shipment", id: @sale }, class: 'btn' %>
+    </p>
+  <% else %>
+    <p>
+      <span class="hey--yay">This order has been shipped.</span>
+    </p>
+    <% @shipments.each_with_index do |shipment, index| %>
+      <% if index > 0 %>
+        <hr>
+      <% end %>
+      <p>
+        <b>Postmaster ID:</b>
+        <%= shipment.postmaster_id %>
+      </p>
+      <p>
+        <b>Tracking Number:</b>
+        <%= render 'tracking_link', carrier: shipment.carrier, num: shipment.tracking_number %>
+      </p>
+      <p>
+        <b>Weight:</b>
+        <%= shipment.weight %>
+      </p>
+      <% if shipment.envelope %>
+        <p>
+          <b>Envelope:</b>
+          <%= shipment.envelope %>
+        </p>
+      <% else %>
+        <p>
+          <b>Dimensions (W &#215; H &#215; L):</b>
+          <%= shipment.width %> &#215; <%= shipment.height %> &#215; <%= shipment.length %>
+        </p>
+      <% end %>
+      <p>View details (including the shipping label):<br>
+        <a href="https://www.postmaster.io/dashboard/shipments/id/<%= shipment.postmaster_id %>">
+          https://www.postmaster.io/dashboard/shipments/id/<%= shipment.postmaster_id %></a>.
+      </p>
+      <P>
+        <b>Cost:</b>
+        <%= number_to_currency(cents_to_dollars(shipment.cost)) %>
+    <% end %>
+    <p>
+      <%= link_to 'Ship another box', { controller: "postmaster", action: "edit_shipment", id: @sale }, class: 'btn' %>
+    </p>
+  <% end %>
+<% end %>
+
+<h2>
+  Order Details
+</h2>
+
+<p>
+  <b>Date:</b>
+  <%= @sale.updated_at.strftime("%b %-d, %Y, %-l:%M%p") %>
+</p>
+
+<p>
+  <b>Customer URL:</b>
+  <a href="/orders/<%= @sale.guid %>">
+      /orders/<%= @sale.guid %>
+  </a>
+</p>
+<p>
+  <b>Stripe ID:</b>
+  <% if Rails.env == "production" %>
+    <a href="https://manage.stripe.com/prod/payments/<%= @sale.stripe_id %>">
+      <%= @sale.stripe_id %>
+    </a>
+  <% else %>
+    <a href="https://manage.stripe.com/test/payments/<%= @sale.stripe_id %>">
+      <%= @sale.stripe_id %>
+    </a>
+  <% end %>
+</p>
+
+<p>
+  <b>Customer Email:</b>
+  <a href="mailto:<%= @sale.email %>">
+    <%= @sale.email %>
+  </a>
+</p>
+
+<p>
+  <b>Customer Name:</b>
+  <%= @sale.contact %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%= @sale.company.present? ? @sale.company : "n/a" %>
+</p>
+
+<p>
+  <b>Charges:</b>
+</p>
+<table style="min-width: 50%">
+  <thead>
+    <tr>
+      <th>
+        Type
+      </th>
+      <th>
+        Amount
+      </th>
+      <th>
+        Details
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Base
+      </td>
+      <td>
+        <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
+      </td>
+      <td></td>
+    </tr>
+    <% unless @sale.pickup %>
+      <tr>
+        <td>
+          Shipping
+        </td>
+        <td>
+          <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %>
+        </td>
+        <td>
+          <%= @sale.shipping_provider.upcase %><br>
+          <%= @sale.shipping_service %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>
+        Tax
+      </td>
+      <td>
+        <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %>
+      </td>
+      <td>
+        <%= @sale.tax_rate %>%
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Total</strong>
+      </td>
+      <td colspan=2>
+        <strong><%= number_to_currency(cents_to_dollars(@sale.total)) %></strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p>
+  <b>Description:</b>
+  <pre><%= JSON.pretty_generate(JSON.parse(@sale.description)) %></pre>
+</p>
+
+<%= link_to 'Edit', edit_sale_path(@sale) %> |
+<%= link_to 'Back', sales_path %>

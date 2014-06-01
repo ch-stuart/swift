@@ -1,86 +1,55 @@
-<div class="eleven columns">
-
-    <div class="row">
-        <% if @product.sizes.present? %>
-            <h2 class="product-title">
-                <%= @product.title %>
-            </h2>
-            <h4>
-                <% @product.sizes.each do |size| %>
-                    <%= size.title %>: $<%= size.price %>
-                <% end %>
-            </h4>
-        <% else %>
-            <h2 class="product-title">
-                <%= @product.title %> (<%= @product.humane_price %>)
-            </h2>
-        <% end %>
-    </div>
-    <%# if the shop is closed, don't show the order form. %>
-    <% if @company.close_shop? %>
-        <h3>
-            <span class="woah"><%= @company.close_shop_message %></span>
-        </h3>
-    <%# if the product is not for sale, don't show the order form. %>
-    <% elsif @product.is_not_for_sale? %>
-        <h3>
-            <span class="woah"><%= @product.not_for_sale_message %></span>
-        </h3>
-    <%# else, show the order form. %>
-    <% else %>
-        <h3 class="order-form-does-not-work-without-javascript">
-            <span class="woah">
-            	The order form requires JavaScript. Please enable JavaScript in your browser.
-            </span>
-        </h3>
-        <%= render 'order_form' %>
-    <% end %>
-
-</div>
-
-<div class="five columns">
-    <%= render :partial => 'shared/slideshow' %>
-    <% if @product.is_product? %>
-        <h3>
-            Delivery Time
-        </h3>
-        <div class="handmade_label">handmade</div>
-    	<p>
-    		<%= @company.delivery_time %>
-    	</p>
-    <% end %>
-    <h3>
-        Specifications
-    </h3>
-    <p>
-        <%= raw md @product.specs %>
-    </p>
-</div>
-
-<div id="buffer" style="display: none;"></div>
-<%= content_for :js do %>
-    <script type="text/html" id="product_tmpl">
-        <div id="part_{{ hash }}" data-color-hash="{{ color_hash }}" {{#is_color}}class="color_part"{{/is_color}}>
-            <% %w{product price qty}.each do |attr| %>
-                <input type="hidden" name="<%= attr %>{{ count }}" class="part_<%= attr %>" value="{{ <%= attr %> }}">
+<div ng-controller="OrderCtrl" ng-cloak>
+    <div class="eleven columns">
+        <div class="row">
+            <% if @product.sizes.present? %>
+                <h2 class="product-title">
+                    <%= @product.title %>
+                </h2>
+                <h4>
+                    <% @product.sizes.each do |size| %>
+                        <%= size.title %>: $<%= size.price_for(session[:is_wholesale_user]) %>
+                    <% end %>
+                </h4>
+            <% else %>
+                <h2 class="product-title">
+                    <%= @product.title %> (<%= @product.humane_price_for(session[:is_wholesale_user]) %>)
+                </h2>
             <% end %>
         </div>
-    </script>
-    <script type="text/html" id="prompt_tmpl">
-        <div>
-            <b>Including &ldquo;{{product}}&rdquo; adds a charge of ${{price}} to this bag.</b>
-        </div>
-        <ul>
-            <li>You will only be charged for your most expensive fabric choice.</li>
-            <li>The charge is only applied once per bag.</li>
-            <li>Use it as many times as you&rsquo;d like!</li>
-        </ul>
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#order_form').orderFormManager();
-            $('.color-picker--wrapper').color_picker();
-            $('.color-picker--swatch').tooltip();
-        });
-    </script>
-<% end %>
+        <%# if the shop is closed, don't show the order form. %>
+        <% if @company.close_shop? %>
+            <h3>
+                <span class="woah"><%= @company.close_shop_message %></span>
+            </h3>
+        <%# if the product is not for sale, don't show the order form. %>
+        <% elsif @product.is_not_for_sale? %>
+            <h3>
+                <span class="woah"><%= @product.not_for_sale_message %></span>
+            </h3>
+        <%# else, show the order form. %>
+        <% else %>
+            <%= render "order_form" %>
+        <% end %>
+    </div>
+
+    <div class="five columns">
+        <%= render :partial => 'shared/slideshow' %>
+        <% if @product.is_product? %>
+            <h3>
+                Delivery Time
+            </h3>
+            <div class="handmade_label">handmade</div>
+            <p>
+                <%= @company.delivery_time %>
+            </p>
+        <% end %>
+        <h3>
+            Specifications
+        </h3>
+        <p>
+            <%= raw md @product.specs %>
+        </p>
+    </div>
+
+    <div id="buffer" style="display: none;"></div>
+</div>

@@ -1,0 +1,59 @@
+<h3>
+    <%= title %>
+</h3>
+<table>
+  <tr>
+    <th>Order Date</th>
+    <th>Customer URL</th>
+    <th>Hub URL</th>
+    <th>Email</th>
+    <th>Last Name</th>
+    <th>Amount</th>
+    <th>Pickup?</th>
+    <th>Boxes</th>
+    <th>Tracking URL(s)</th>
+    <th></th>
+    <th style="display:none"></th>
+    <th style="display:none"></th>
+  </tr>
+
+<% sales.each do |sale| %>
+  <tr>
+    <td><%= sale.created_at.strftime("%b %-d") %></td>
+    <td>
+      <a href="/orders/<%= sale.guid %>">
+        /orders/<%= sale.guid %>
+      </a>
+    </td>
+    <td><%= link_to "/sales/#{sale.id}", sale %></td>
+    <td><%= mail_to sale.email, nil, subject: "Your Swift Industries Order [#{sale.guid}]" %></td>
+    <td><%= last_name(sale) %></td>
+    <td><%= number_to_currency(cents_to_dollars(sale.total)) %></td>
+    <td>
+      <% if sale.pickup %>
+        <span style="color:green; font-size: 120%;">
+          ✓
+        </span>
+      <% else %>
+        <span style="color:red; font-size: 120%;">
+          ✗
+        </span>
+      <% end %>
+    </td>
+    <td>
+      <% if sale.shipments.present? %>
+        <%= sale.shipments.length %>
+      <% end %>
+    </td>
+    <td>
+      <% if sale.shipments.present? %>
+        <% sale.shipments.each do |shipment| %>
+          <%= render 'tracking_link', carrier: shipment.carrier, num: shipment.tracking_number %>
+        <% end %>
+      <% end %>
+    </td>
+    <td style="display:none"><%= link_to 'Edit', edit_sale_path(sale) %></td>
+    <td style="display:none"><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>

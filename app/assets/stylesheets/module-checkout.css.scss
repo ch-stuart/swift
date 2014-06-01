@@ -1,0 +1,30 @@
+input.input--inline {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.checkout-summary-item {
+    margin-bottom: 20px;
+}
+
+.row--checkout-sidebar {
+    margin-bottom: 10px;
+}
+
+.pickup-is-true {
+    opacity: 0.4;
+}
+// .best-price-true {
+//     text-decoration: underline;
+// }
+
+.btn--progress {
+    position: relative;
+}
+.btn--progress__spin {
+    position: absolute;
+    left: 50%;
+    margin-left: -8px;
+    width: 16px;
+}
+

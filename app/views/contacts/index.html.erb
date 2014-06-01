@@ -1,0 +1,95 @@
+<h1>Contacts</h1>
+<p>
+  <%= link_to 'New Contact', new_contact_path %>
+</p>
+
+<table>
+  <tr>
+    <td>
+      <button class="btn" id="all">
+        Select All
+      </button>
+    </td>
+    <td>
+      <button class="btn" id="none">
+        Select None
+      </button>
+    </td>
+    <td>
+      <button class="btn" id="archive">
+        Archive
+      </button>
+    </td>
+    <td>
+      <%= link_to 'Copy New Contacts', copy_contacts_path, class: 'btn' %>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th style="display:none"></th>
+  </tr>
+
+  <% @contacts.each do |contact| %>
+    <tr>
+      <td class="is-archived--<%= contact.archived %>">
+        <input type="checkbox" name="archive" class="cbox no-select" value="<%= contact.id %>" data-email="<%= contact.email %>">
+        <%= contact.email %>
+      </td>
+      <td class="no-select"><%= link_to 'Show', contact %></td>
+      <td class="no-select"><%= link_to 'Edit', edit_contact_path(contact) %></td>
+      <td style="display:none"><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+<%= content_for :js do %>
+<script>
+  var $cboxes = $('.cbox')
+
+  $('#all').click(function() {
+    $cboxes.prop('checked', true)
+  })
+
+  $('#none').click(function() {
+    $cboxes.prop('checked', false)
+  })
+
+  $('#showCopy').click(function() {
+    $('#copy').show()
+  })
+
+  $('#archive').click(function() {
+    $cboxes.each(function() {
+      var cbox = this;
+
+      if ($(cbox).prop('checked') && $(cbox).parent('td').hasClass('is-archived--false')) {
+        $.ajax({
+          url: '/contacts/' + cbox.value + '.json',
+          type: 'PUT',
+          dataType: 'json',
+          data: {
+            "contact[id]": cbox.value,
+            "contact[archived]": true,
+            "contact[email]": $(cbox).data('email')
+          },
+          success: function(data) {
+            $(cbox)
+              .prop('checked', false)
+              .parent('td')
+              .addClass('is-archived--true')
+          },
+          error: function(error) {
+            alert('Error: ' + error);
+          }
+        })
+      }
+    })
+  })
+</script>
+<% end %>

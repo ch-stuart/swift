@@ -25,16 +25,52 @@ SwiftSite::Application.routes.draw do
   resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials, :categories
 
   resources :products do
-    member do
-      get 'order'
-    end
+    get 'order', on: :member
   end
 
-  match 'logout', :to => 'application#logout'
-  match 'login', :to => 'hub#index'
+  resources :contacts do
+    get 'copy', on: :collection
+  end
+
+  # # view cart
+  # http://builtbyswift.com/cart
+  #
+  # # purchase what's in cart/checkout
+  # http://builtbyswift.com/cart/checkout
+  #
+  # # completed purchase
+  # http://builtbyswift.com/orders/7e59b9a5-4055-46eb-944c-185051f9ebf7
+
+  resources :sales do
+    get 'success', on: :member
+    get 'ready_for_pickup', on: :member
+    get 'checkout', on: :new
+    post 'charge', on: :collection
+  end
+
+  get 'cart', to: 'sales#cart'
+  get 'cart/checkout', to: 'sales#checkout'
+  get 'orders/:guid', to: 'sales#success', as: :order
+
+  post 'postmaster/validate', to: 'postmaster#validate'
+  post 'postmaster/rates', to: 'postmaster#rates'
+  post 'postmaster/fit', to: 'postmaster#fit'
+  get  'postmaster/edit_shipment', to: 'postmaster#edit_shipment'
+  post 'postmaster/create_shipment', to: 'postmaster#create_shipment'
+  # get  'postmaster/boxes', to: 'postmaster#boxes'
+  # post 'postmaster/create_box', to: 'postmaster#create_box'
+
+  match 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
+
+  get 'logout', :to => 'application#logout'
+  get 'login', :to => 'hub#index'
+  get 'wholesale_login', :to => 'application#wholesale_login'
+
+  get 'store', :to => 'homes#store'
+  get "accessories" => redirect("/store")
+
+  post 'exceptions/report', to: 'exceptions#report'
 
   root :to => 'homes#index'
-  match 'store', :to => 'homes#store'
-  match "accessories" => redirect("/store")
 
 end

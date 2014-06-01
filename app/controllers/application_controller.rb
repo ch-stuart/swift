@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
 
   layout :resolve_layout
 
-  before_filter :authenticate, :except => [ :logout ]
+  before_filter :authenticate_admin, :except => [ :logout, :wholesale_login ]
+  before_filter :authenticate_wholesale, :only => [ :wholesale_login ]
   before_filter :title, :except => [ :expire_cache ]
 
   helper_method :title
@@ -17,6 +18,14 @@ class ApplicationController < ActionController::Base
   #   render :text => "expired"
   # end
 
+  def logout
+    render :text => "Quit your browser to logout."
+  end
+
+  def wholesale_login
+    redirect_to "/"
+  end
+
   protected
 
   def render_404
@@ -27,16 +36,19 @@ class ApplicationController < ActionController::Base
     @title = Company.first.title
   end
 
-  def logout
-    render :text => "Quit your browser to logout."
-  end
-
-  def authenticate
+  def authenticate_admin
     @hub = true
     login = authenticate_or_request_with_http_basic do |username, password|
-      username == APP_CONFIG[:user] && password == APP_CONFIG[:pass]
+      username == APP_CONFIG[:admin_user] && password == APP_CONFIG[:admin_pass]
     end
-    session[:login] = login
+    session[:is_admin_user] = login
+  end
+
+  def authenticate_wholesale
+    login = authenticate_or_request_with_http_basic do |username, password|
+      username == APP_CONFIG[:wholesale_user] && password == APP_CONFIG[:wholesale_pass]
+    end
+    session[:is_wholesale_user] = login
   end
 
   def resolve_layout

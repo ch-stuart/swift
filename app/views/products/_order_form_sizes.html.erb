@@ -1,22 +1,18 @@
-<% if @product.sizes.present? %>
+<div ng-show="product.sizes">
     <h4 class="order-section-heading">
         Sizing
     </h4>
-    <div class="row row-sizes">
+    <div class="row row--order row--sizes">
         <div class="label-input-pair">
-            <label for="productpr1" class="label">
+            <label class="label">
                 Choose your size!
             </label>
-            <select id="productpr1" name="productpr1" class="select-size">
-                <option value="invalid">
-                    Choose One
-                </option>
-                <% @product.sizes.each do |size| %>
-                    <option value="<%= @product.title %>, <%= size.title %>:<%= size.price %>">
-                        <%= size.title %> ($<%= size.price %>)
-                    </option>
-                <% end %>
+            <select
+                ng-model="product.selectedSize"
+                ng-change="onSizeSelectChanged()"
+                ng-options="s.title + ' ($' + s.price + ')' for s in product.sizes"
+                required>
             </select>
         </div>
     </div>
-<% end %>
+</div>

@@ -1,0 +1,197 @@
+<div class="grid">
+    <div class="unit w-3-4">
+        <div class="grid">
+            <div class="unit w-4-4">
+                <h2 class="pr--none">
+                    Your Order
+                </h2>
+            </div>
+        </div>
+        <div class="grid hide-on-mobiles pr--none">
+            <div class="shoppin-cart__header unit w-1-4">Product</div>
+            <div class="shoppin-cart__header unit w-1-4">Parts</div>
+            <div class="shoppin-cart__header unit w-1-4">Quantity</div>
+            <div class="shoppin-cart__header unit w-1-4">Total Price</div>
+        </div>
+        <% @description["products"].each_with_index do |product, idx| %>
+            <% if idx % 2 == 0 %>
+                <br class="pr--clear">
+            <% end %>
+            <div class="grid pr--float">
+                <div class="unit w-1-4">
+                    <strong>
+                        <%= product["title"] %>
+                    </strong>
+                    <br>
+                    <span class=demph>Base Price: <%= number_to_currency product["price"].to_i %></span>
+                    <br>
+                    <a href=/products/<%= product["id"] %> class="demph pr--none">
+                        View Product
+                    </a>
+                </div>
+                <div class="unit w-1-4">
+                    <% if product["parts"].present? %>
+                        <ul class="shoppin-cart__part-list">
+                            <% product["parts"].each do |part| %>
+                                <li>
+                                    <span class="pr--bold"><%= part["title"] %></span>
+                                    <% if part["price"].present? %>
+                                        (<%= number_to_currency part["price"].to_i %>)
+                                    <% end %>
+                                    <% if part["selectedColor"].present? %>
+                                        <span class="demph">
+                                            <br class="pr--none">
+                                            <span class="pr--none">Fabric:</span> <span class="pr--inline">[</span><%= part["selectedColor"]["title"] %><span class="pr--inline">]</span>
+                                            <% if part["selectedColor"]["price"].present? %>
+                                                (<%= number_to_currency part["selectedColor"]["price"].to_i %>)
+                                            <% end %>
+                                        </span>
+                                    <% end %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    <% else %>
+                        n/a
+                    <% end %>
+                </div>
+                <div class="unit w-1-4">
+                    Qty: <%= product["quantity"] %>
+                </div>
+                <div class="unit w-1-4">
+                    <strong>
+                        <%= number_to_currency product["totalPrice"].to_i %>
+                    </strong>
+                </div>
+            </div>
+        <% end %>
+        <hr class="pr--block pr--clear">
+        <% if @sale[:tax_amount].present? %>
+          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="unit w-3-4 hide-on-mobiles"></div>
+              <div class="unit w-1-4">
+                  Tax: <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %>
+              </div>
+          </div>
+        <% end %>
+        <% if @sale[:shipping_charge].present? %>
+          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="unit w-3-4 hide-on-mobiles"></div>
+              <div class="unit w-1-4">
+                  Shipping Charge: <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %>
+              </div>
+          </div>
+        <% end %>
+        <div class="grid shoppin-cart__cart-price-row">
+            <div class="unit w-3-4 hide-on-mobiles"></div>
+            <div class="unit w-1-4">
+                Total: <strong><%= number_to_currency(cents_to_dollars(@sale.total)) %></strong>
+            </div>
+        </div>
+        <hr class="pr--block">
+        <div class="grid">
+            <div class="unit w-1-2">
+                <h4>
+                    Email Address
+                </h4>
+                <p>
+                    <%= @sale.email %>
+                </p>
+                <h4>
+                    Order Date
+                </h4>
+                <p id="order_date">
+                    <%= @sale.created_at.strftime("%B %e, %Y") %>
+                </p>
+                <h4>
+                    Order ID
+                </h4>
+                <p>
+                    <%= @sale.guid %>
+                </p>
+            </div>
+            <div class="unit w-1-2 pr--none">
+                <% if @sale.pickup %>
+                  <h4>
+                      Shipment Tracking
+                  </h4>
+                  <p>
+                    You will be picking up your order. We'll let you know by email when it's ready.
+                  </p>
+                <% else %>
+                  <h4>
+                      Shipment Tracking
+                  </h4>
+                    <% if @shipments.blank? %>
+                      <p>
+                        We will email you when your order has shipped.
+                      </p>
+                      <p>
+                        The shipping information will also appear on this page when your order has shipped.
+                      </p>
+                    <% else %>
+                      <% if @shipments.length > 1 %>
+                        <p>
+                          Your order shipped in multiple packages.
+                        </p>
+                      <% end %>
+                      <% @shipments.each_with_index do |shipment, index| %>
+                        <p>
+                          <% if @shipments.length > 1 %>
+                            <b>Package <%= index + 1 %></b><br>
+                          <% end %>
+                          Carrier: <%= shipment.carrier.upcase %>
+                          <br>Tracking Number: <%= render 'tracking_link', carrier: shipment.carrier, num: shipment.tracking_number %>
+                        </p>
+                      <% end %>
+                    <% end %>
+                  <h4>
+                      Shipment Address
+                  </h4>
+                  <p>
+                      <%= @sale.line1 %><br>
+                      <%= @sale.city %>, <%= @sale.state %> <%= @sale.zip_code %>
+                  </p>
+                  <h4>
+                      Shipment Charge
+                  </h4>
+                  <p>
+                      <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %> via <%= @sale.shipping_provider.upcase %> <%= @sale.shipping_service %>.
+                  </p>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="unit w-1-4 pr--none">
+        <h4>
+            Questions?
+        </h4>
+        <p>
+            If you have any questions about your order, contact us:
+        </p>
+        <ul class="nice-list">
+            <li>
+                <%= mail_to @company.email, @company.email, encode: "hex", body: "\n\n--\nSale ID: #{@sale.guid}" %>
+            </li>
+            <li>
+                <%= link_to @company.phone, @company.phone_link %>
+            </li>
+        </ul>
+        <h4>
+            Delivery Time
+        </h4>
+        <div class="handmade_label">handmade</div>
+        <p>
+            <%= @company.delivery_time %>
+        </p>
+    </div>
+</div>
+
+<%= content_for :js do %>
+    <script>
+        (function() {
+            // Now that the items have been purchased,
+            // remove them from the cart
+            localStorage.removeItem('cart')
+        })()
+    </script>
+<% end %>

@@ -1,0 +1,519 @@
+/*jshint browser: true, sub:true */
+/*global SwiftApp console alert _ $$ $ Stripe */
+
+SwiftApp.controller('CheckoutCtrl', [
+    '$scope',
+    'ConfigService',
+    'CartService',
+    'PostmasterService',
+    'PlaceService',
+    'WaStateTaxService',
+    'SaleService',
+    'ExceptionService',
+    'PackagingService',
+    function(
+        $scope,
+        ConfigService,
+        CartService,
+        PostmasterService,
+        PlaceService,
+        WaStateTaxService,
+        SaleService,
+        ExceptionService,
+        PackagingService) {
+
+    var package_count = 1;
+    var rates_response_count = 0;
+
+    var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
+    var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
+
+    var SHIPPING_PROVIDERS = ['fedex', 'usps', 'ups'];
+
+    $scope.cart = CartService.loadFromLocalStorage();
+
+    // Don't show checkout if cart is empty
+    if (!$scope.cart.products.length) {
+        window.location = '/cart';
+    }
+
+    $scope.domesticServiceLevels = PostmasterService.getDomesticServiceLevels();
+    $scope.intlServiceLevels = PostmasterService.getIntlServiceLevels();
+
+    $scope.isShippingReady = false;
+    $scope.busyShipping = false;
+    $scope.busyBuying = false;
+    $scope.countryCodes = PlaceService.countries();
+    $scope.states = PlaceService.usStates();
+
+    $scope.rateParams = {};
+
+    // Defaults!
+    // $scope.line1 = "425 E Sussex AVE";
+    // $scope.city = "Missoula";
+    // $scope.zipCode = "59801";
+    $scope.country = 'US';
+    $scope.state = 'MT';
+    // $scope.line1 = "70 CHARLOTTE ST";
+    // $scope.city = "London";
+    // $scope.zipCode = "W1T 4QG";
+    // $scope.country = 'GB';
+    // $scope.state = '';
+    // $scope.phoneNo = "989 433 0325";
+    $scope.shippingServiceLevel = 'GROUND';
+    isUnitedStatesOrCanada(true);
+
+    isIntl(false);
+
+    // Set default shipping service based
+    // on whether we are shipping domestic
+    // or intl
+    function isIntl(bool) {
+        if (bool) {
+            $scope.shippingServiceLevel = 'INTL_PRIORITY';
+        } else {
+            $scope.shippingServiceLevel = 'GROUND';
+        }
+    }
+
+    // If we are in US or CA, we can
+    // show a list of states of provinces.
+    // Otherwise, we just show an empty input.
+    function isUnitedStatesOrCanada(bool) {
+        if (bool) {
+            $scope.countryIsUSCA = true;
+        } else {
+            $scope.countryIsUSCA = false;
+            $scope.state = '';
+        }
+    }
+
+    $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge) {
+        $scope.cart.price          = price;
+        $scope.cart.total          = total;
+        $scope.cart.taxAmount      = taxAmount;
+        $scope.cart.taxRate        = taxRate;
+        $scope.cart.shippingCharge = shippingCharge;
+    });
+
+    function postmasterValidateSuccessCallback(response) {
+        var data = response.data;
+
+        // Calculate how many boxes we need to
+        // ship the package
+        var packages = PackagingService.fit();
+        package_count = packages.length;
+
+        // Set rate params
+        $scope.rateParams = {
+            to_zip: $scope.zipCode,
+            to_country: $scope.country,
+            weight: packages[0].weight,
+            width: packages[0].width,
+            height: packages[0].height,
+            length: packages[0].length,
+            service: $scope.shippingServiceLevel
+        };
+
+        console.log('postmasterValidateSuccessCallback', data);
+
+        // Is status ever not OK? Assume that error callback
+        // is called if status is not OK.
+        if (data.status === 'OK') {
+            $scope.commercial = $scope.rateParams.commercial = !!data.commercial;
+
+            if ($scope.country !== 'US') {
+                // This tells postmaster that we
+                // only want rates from USPS
+                $scope.rateParams.carrier = 'usps';
+            }
+            // If we set the carrier to USPS,
+            // we are shipping international
+            // (because we only offer USPS when
+            // shipping internationally)
+            $scope.intl = !!$scope.rateParams.carrier;
+
+            if ($scope.state === 'WA') {
+                WaStateTaxService
+                    .rate({
+                        addr: $scope.line1,
+                        city: $scope.city,
+                        zip: $scope.zipCode
+                    })
+                    .then(taxSuccessCallback, taxErrorCallback);
+            }
+
+            _.each(packages, function() {
+                PostmasterService
+                    .rates($scope.rateParams)
+                    .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
+            });
+        } else {
+            ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: data.status not "OK"', [data]);
+        }
+    }
+
+    function postmasterValidateErrorCallback(response) {
+        $scope.busyShipping = false;
+        console.warn('PostmasterService.validate => Error:', response);
+        alert(VALIDATE_ERROR_MSG);
+    }
+
+    function taxSuccessCallback(response) {
+        console.log('taxSuccessCallback', response);
+        CartService.setTaxRate(response.data.rate);
+    }
+
+    function taxErrorCallback(response) {
+        console.log('taxErrorCallback', response);
+    }
+
+    var rateResponses = [];
+    function postmasterRateSuccessCallback(response) {
+        console.log('postmasterRateSuccessCallback: response', response);
+        // Cannot proceed until we have received all of the callbacks
+        rates_response_count++;
+
+        rateResponses.push(response);
+
+        console.log('postmasterRateSuccessCallback: Received callback ' + rates_response_count + ' of ' + package_count);
+        if (rates_response_count < package_count) {
+            return;
+        }
+
+        var combinedResponse = {};
+
+        // If we only got one provider back...
+        if ($scope.intl || 'service' in response.data) {
+            combinedResponse['usps'] = {};
+            combinedResponse['usps'].charge = 0;
+
+            _.each(rateResponses, function(response) {
+                combinedResponse['usps'].charge += response.data.charge;
+            });
+        } else {
+            // If any of the providers failed to respond to
+            // any of the rates requests remove them from the
+            // SHIPPING_PROVIDERS array
+            _.each(rateResponses, function(response) {
+                if (!response.data.hasOwnProperty('ups')) {
+                    SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'ups');
+                }
+                if (!response.data.hasOwnProperty('fedex')) {
+                    SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'fedex');
+                }
+                if (!response.data.hasOwnProperty('usps')) {
+                    SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'usps');
+                }
+            });
+
+            _.each(SHIPPING_PROVIDERS, function(provider) {
+                combinedResponse[provider] = {};
+                combinedResponse[provider].charge = 0;
+
+                _.each(rateResponses, function(response) {
+                    combinedResponse[provider].charge += response.data[provider].charge;
+                });
+                console.log('charge for', provider, 'should be', combinedResponse[provider].charge);
+            });
+        }
+
+        $scope.rates = [];
+        $scope.shipping = {};
+        $scope.busyShipping = false;
+        $scope.isShippingReady = true;
+
+        // Use the most recent response data
+        // for some things
+        var data = response.data;
+
+        // Handle international shipping
+        if ($scope.intl) {
+            // While below we have to handle errors
+            // on a per provider basis... We don't
+            // have to do that here because a) there's
+            // only on provider, and b) the errorCallback
+            // is called in this case.
+            var shipping = {
+                provider: 'USPS',
+                charge: combinedResponse['usps'].charge,
+                service: data.service,
+                best: true
+            };
+            $scope.shippingServiceLevel = data.service;
+            $scope.rates.push(shipping);
+
+            // Save this so we can send it to the server
+            $scope.shipping = shipping;
+
+            CartService.setShippingCharge(combinedResponse['usps'].charge);
+        // Handle domestic shipping
+        } else {
+            _.each(SHIPPING_PROVIDERS, function(provider) {
+                if (data[provider] && !data[provider].error) {
+
+                    if (data.best === provider) {
+                        CartService.setShippingCharge(data[provider].charge);
+
+                        // Set best as the default on the scope
+                        $scope.shipping = {
+                            charge: data[provider].charge,
+                            provider: provider,
+                            service: data[provider].service
+                        };
+                        console.log('Setting least expensive shipping option as default', $scope.shipping);
+                    }
+                    // Push all rates into an array
+                    $scope.rates.push({
+                        best: (data.best === provider),
+                        charge: combinedResponse[provider].charge,
+                        provider: provider,
+                        service: data[provider].service
+                    });
+                } else if (data[provider] && data[provider].error) {
+                    var msg = 'We are currently unable to provide shipping rates for ' + provider.toUpperCase() + '.';
+                    ExceptionService.report(msg);
+                    alert(msg);
+                    console.warn(data[provider].error.message);
+                }
+            });
+        }
+    }
+
+    function postmasterRateErrorCallback(response) {
+        $scope.busyShipping = false;
+        console.warn('PostmasterService.rates => Error:', response);
+        ExceptionService.report('CheckoutCtrl#postmasterRateErrorCallback ' + JSON.stringify(response));
+        alert(RATE_ERROR_MSG);
+    }
+
+    function saleChargeSuccessCallback(response) {
+        console.log('saleChargeSuccessCallback', response);
+
+        if (!$scope.shipping) {
+            $scope.shipping = {
+                provider: null,
+                charge: null,
+                service: null
+            };
+        }
+
+        SaleService
+            .create({
+                contact: $scope.contact,
+                company: $scope.company,
+                email: $scope.email,
+                description: localStorage.getItem('cart'),
+                amount: $scope.cart.price,
+                total: $scope.cart.total,
+                tax_rate: $scope.cart.taxRate,
+                tax_amount: $scope.cart.taxAmount,
+                line1: $scope.line1,
+                city: $scope.city,
+                state: $scope.state,
+                zip_code: $scope.zipCode,
+                country: $scope.country,
+                phone_no: $scope.phoneNo,
+                commercial: $scope.commercial,
+                weight: PackagingService.getWeight(),
+                pickup: $scope.pickup,
+                shipping_provider: $scope.shipping.provider,
+                shipping_charge: $scope.shipping.charge,
+                shipping_service: $scope.shipping.service,
+                stripe_id: response.data.id,
+                send_me_marketing_emails: $scope.send_me_marketing_emails
+            })
+            .then(saleCreateSuccessCallback, saleCreateErrorCallback);
+    }
+
+    function saleChargeErrorCallback(response) {
+        console.log('saleChargeErrorCallback', response);
+        $scope.busyBuying = false;
+        if (response.data && response.data.error && response.data.error.message) {
+            ExceptionService.report('CheckoutCtrl#saleChargeErrorCallback ' + JSON.stringify(response));
+            alert(response.data.error.message);
+        }
+    }
+
+    function saleCreateSuccessCallback(response) {
+        console.log('saleCreateSuccessCallback', response);
+        $scope.busyBuying = false;
+
+        window.location = "/orders/" + response.data.guid;
+    }
+
+    function saleCreateErrorCallback(response) {
+        if (response.data && response.data.error) {
+            var errors = [];
+            _.each(response.data.error, function(value, key) {
+                _.each(value, function(element) {
+                    errors.push(key + ' ' + element + '.');
+                });
+            });
+            alert(errors.join('\n'));
+        } else {
+            ExceptionService.report('CheckoutCtrl#saleCreateErrorCallback ' + JSON.stringify(response));
+            alert('A server error occurred.');
+        }
+        $scope.busyBuying = false;
+    }
+
+    // Reset this data, because we're going to
+    // validate and get rates again (assuming the
+    // customer has already hit the button once)
+    function resetRateResponsesAndCounters() {
+        rateResponses.splice(0, rateResponses.length);
+        rates_response_count = 0;
+    }
+
+    $scope['onPickupChanged'] = function() {
+        // Customer is picking up
+        if ($scope.pickup) {
+            setTimeout(function () {
+                $('html, body').animate({
+                    scrollTop: $("#row-wa-tax-check").offset().top
+                }, 1200);
+            }, 100);
+            // Unset shipping data
+            CartService.setShippingCharge(null);
+            $scope.isShippingReady = $scope.shipping = $scope.rates = null;
+            $scope.line1 = $scope.city = $scope.zipCode = $scope.phoneNo = '';
+
+            // Set form state to pristine
+            $scope.shippingForm.$setPristine(true);
+
+        // Customer is shipping
+        } else {
+            // They might be a WA state resident, however, we
+            // no longer use the checkbox to figure it out...
+            // Instead we'll use their shipping address
+            $scope.waStateResident = null;
+            // This turns off the WA taxes, since we'll grab
+            // them again using the customer's shipping
+            // address, assuming they live in WA.
+            $scope['waStateResidentChanged']();
+        }
+        CartService.set('pickup', !!$scope.pickup);
+    };
+
+    $scope['waStateResidentChanged'] = function() {
+        if ($scope.waStateResident) {
+            WaStateTaxService
+                .rate(ConfigService.get('swiftAddress'))
+                .then(taxSuccessCallback, taxErrorCallback);
+        } else {
+            CartService.setTaxRate(null);
+        }
+        CartService.set('waStateResident', !!$scope.waStateResident);
+    };
+
+    $scope['onCountrySelectChanged'] = function() {
+        isIntl($scope.country !== 'US');
+
+        switch ($scope.country) {
+        case 'CA':
+            $scope.states = PlaceService.caProvinces();
+            $scope.state = 'ON';
+            isUnitedStatesOrCanada(true);
+            break;
+        case 'US':
+            $scope.states = PlaceService.usStates();
+            $scope.state = 'MT';
+            isUnitedStatesOrCanada(true);
+            break;
+        default:
+            isUnitedStatesOrCanada(false);
+        }
+    };
+
+    $scope['onCalculateShippingCostBtnClicked'] = function(isValid) {
+        var $scrollToElem;
+
+        if (!isValid) {
+            return alert('The information you entered is incomplete. Fill in all fields and try again.');
+        }
+
+        resetRateResponsesAndCounters();
+
+        $scope.busyShipping = true;
+
+        $scope.validateParams = {
+            line1: $scope.line1,
+            city: $scope.city,
+            state: $scope.state,
+            zip_code: $scope.zipCode,
+            country: $scope.country
+        };
+
+        if ($(window).width() > 767) {
+            $scrollToElem = $("#row-shipping");
+        } else {
+            $scrollToElem = $("#rates-submit");
+        }
+        $('html, body').animate({
+            scrollTop: $scrollToElem.offset().top
+        }, 600);
+
+        PostmasterService
+            .validate($scope.validateParams)
+            .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
+    };
+
+    $scope['onShippingServiceLevelChange'] = function() {
+        resetRateResponsesAndCounters();
+
+        console.log('=> shippingServiceLevel', $scope.shippingServiceLevel);
+        $scope.rateParams.service = $scope.shippingServiceLevel;
+        $scope.busyShipping = true;
+
+        PostmasterService
+            .validate($scope.validateParams)
+            .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
+    };
+
+    $scope['onRatesRadioChanged'] = function(provider) {
+        console.log('onRatesRadioChanged', provider);
+
+        $scope.shipping = {
+            charge: provider.charge,
+            provider: provider.provider,
+            service: provider.service
+        };
+
+        console.log('onRatesRadioChanged', $scope.shipping);
+
+        CartService.setShippingCharge(provider.charge);
+    };
+
+    $scope['onBuyItButtonClicked'] = function(isValid) {
+        console.log('isValid', isValid);
+        if (!isValid) {
+            return alert('The information you entered is incomplete. Fill in all fields and try again.');
+        }
+
+        $scope.busyBuying = true;
+
+        Stripe.createToken($$('row-payment'), function stripeResponseHandler(status, response) {
+            if (response.error) {
+                $scope.busyBuying = false;
+                // FIXED the busy indicator is not going
+                // away for some reason, unless you force
+                // it to re-evaluate.
+                $scope.$digest();
+                alert(response.error.message);
+            } else {
+                var token = response.id;
+
+                SaleService
+                    .charge({
+                        total: $scope.cart.total,
+                        stripeToken: token,
+                        email: $scope.email
+                    })
+                    .then(saleChargeSuccessCallback, saleChargeErrorCallback);
+            }
+        });
+    };
+
+}]);
+

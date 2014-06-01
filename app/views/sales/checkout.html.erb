@@ -1,0 +1,295 @@
+<div ng-controller="CheckoutCtrl" ng-cloak>
+    <div class="twelve columns">
+        <h2>
+            Checkout
+        </h2>
+        <h4>
+            Shipping
+        </h4>
+        <div class="row row--order" id="row-shipping">
+            <form name="shippingForm" ng-submit="onCalculateShippingCostBtnClicked(shippingForm.$valid)" novalidate>
+                <div class="label-input-pair">
+                    <label class="label">
+                        <input
+                            type="checkbox"
+                            ng-model="pickup"
+                            ng-change="onPickupChanged()"> Check if you will be picking up your order
+                    </label>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        Country
+                    </label>
+                    <select
+                        ng-change="onCountrySelectChanged()"
+                        ng-model="country"
+                        ng-options="k as v for (k,v) in countryCodes"
+                        ng-disabled="pickup"
+                        required
+                        class="input">
+                    </select>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        Street
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="line1"
+                        ng-disabled="pickup"
+                        required>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        City
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="city"
+                        ng-disabled="pickup"
+                        required>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        State/Province
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="state"
+                        ng-hide="countryIsUSCA"
+                        ng-disabled="pickup"
+                        required>
+                    <select
+                        ng-model="state"
+                        ng-show="countryIsUSCA"
+                        ng-options="k as v for (k,v) in states"
+                        ng-disabled="pickup"
+                        required
+                        class="input">
+                    </select>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        Zip/Postal Code
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="zipCode"
+                        ng-disabled="pickup"
+                        required>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        Phone
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="phoneNo"
+                        ng-disabled="pickup"
+                        required>
+                </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <button id="rates-submit" type="submit" class="btn btn--progress" ng-disabled="pickup || busyShipping">
+                        <span sw-visible="!busyShipping">
+                            Calculate Shipping Cost
+                        </span>
+                        <img sw-visible="busyShipping" src="/assets/spin.gif" class="btn--progress__spin">
+                    </button>
+                </div>
+            </form>
+            <div ng-show="isShippingReady">
+                <h4>
+                    Shipping Options
+                </h4>
+                <p ng-show="$scope.country !== 'US'">
+                    For international shipping, we offer USPS. UPS and Fedex are not available.
+                </p>
+                <select
+                    ng-show="country == 'US'"
+                    ng-options="k as v for (k,v) in domesticServiceLevels"
+                    ng-model="shippingServiceLevel"
+                    ng-change="onShippingServiceLevelChange()"
+                    class="input">
+                </select>
+                <select
+                    ng-hide="country == 'US'"
+                    ng-options="k as v for (k,v) in intlServiceLevels"
+                    ng-model="shippingServiceLevel"
+                    ng-change="onShippingServiceLevelChange()"
+                    class="input">
+                </select>
+                <p class="pickup-is-{{ pickup }} best-price-{{ provider.best }}" ng-repeat="provider in rates">
+                    <label>
+                        <input
+                            type="radio"
+                            ng-checked="provider.best"
+                            name="shippingRadio"
+                            ng-model="selectedRate"
+                            value="{{ provider.provider }}:{{ provider.service }}:{{ provider.charge }}"
+                            ng-change="onRatesRadioChanged(provider)">
+                        {{ provider.provider | uppercase }}: {{ provider.charge / 100 | currency }}
+                    </label>
+                </p>
+            </div>
+        </div>
+        <div ng-show="pickup" id="row-wa-tax-check">
+            <h4>
+                Do you live in the state of Washington?
+            </h4>
+            <p>
+                We ask in order to charge taxes appropriately.
+            </p>
+            <div class="row row--order">
+                <div class="label-input-pair">
+                    <label class="label">
+                        <input type="checkbox" ng-model="waStateResident" ng-change="waStateResidentChanged()">
+                        Washington state resident?
+                    </label>
+                </div>
+            </div>
+        </div>
+        <form name="contactAndPaymentForm" ng-submit="onBuyItButtonClicked(contactAndPaymentForm.$valid)" novalidate>
+            <div ng-show="isShippingReady || pickup" id="row-contact">
+                <h4>
+                    Contact info
+                </h4>
+                <div class="row row--order">
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Name
+                        </label>
+                        <input type="text" ng-model="contact" required>
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Company <span class="demph">(optional)</span>
+                        </label>
+                        <input type="text" ng-model="company">
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Email Address
+                        </label>
+                        <input type="email" placeholder="you@example.com" ng-model="email" required>
+                        <p class="label-input-pair__hint">
+                            We will email you at this address when you're product is ready to pickup or ship.
+                        </p>
+                    </div>
+                    <div class="label-input-pair">
+                        <label><input name="send_me_marketing_emails" type="checkbox"> Send me product, promo, and event updates!</label>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="isShippingReady || pickup" id="row-payment">
+                <h4>
+                    Payment info
+                </h4>
+                <p>
+                    We accept Visa, MasterCard, American Express, JCB, Discover, and Diners Club.
+                </p>
+                <div class="row row--order">
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Credit Card #
+                        </label>
+                        <input
+                            type="text"
+                            size="20"
+                            data-stripe="number"
+                            placeholder="**** **** **** ****"
+                            ng-pattern="[\d ]*"
+                            required>
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            CVC
+                        </label>
+                        <input
+                            style="width: 3em"
+                            type="text"
+                            size="3"
+                            ng-maxlength="3"
+                            data-stripe="cvc"
+                            placeholder="***"
+                            ng-pattern="\d*"
+                            required>
+                    </div>
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Exp Month/Year
+                        </label>
+                        <input
+                            style="width: 3em;"
+                            class="input--inline"
+                            type="text"
+                            size="2"
+                            ng-maxlength="2"
+                            data-stripe="exp-month"
+                            placeholder="MM"
+                            ng-pattern="\d*"
+                            required>
+                        <input
+                            style="width: 4em;"
+                            class="input--inline"
+                            type="text"
+                            size="4"
+                            ng-maxlength="4"
+                            id="exp-year"
+                            data-stripe="exp-year"
+                            placeholder="YYYY"
+                            ng-pattern="\d*"
+                            required>
+                    </div>
+                </div>
+                <div class="row row--order">
+                    <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
+                        <span sw-visible="!busyBuying">
+                            Buy It
+                        </span>
+                        <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="four columns">
+        <div class="row row--checkout-sidebar">
+            <h4>
+                Your Order
+            </h4>
+        </div>
+        <div class="row row--checkout-sidebar">
+            <b>Items in Cart</b>:
+            <ul ng-repeat="product in cart.products">
+                <li>
+                    {{ product.title }}
+                    <span class="demph" title="Quantity: {{ product.quantity }}">
+                        ({{ product.quantity }})
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="row row--checkout-sidebar" ng-show="cart.taxAmount">
+            <b>WA State Tax Amount</b>:
+            {{ (cart.taxAmount / 100) | currency }}
+        </div>
+        <div class="row row--checkout-sidebar" ng-show="cart.shippingCharge">
+            <b>Shipping</b>:
+            {{ (cart.shippingCharge / 100) | currency }}
+        </div>
+        <div class="row row--checkout-sidebar">
+            <b>Total Price</b>:
+            {{ (cart.total / 100) | currency }}
+        </div>
+    </div>
+</div>
+<%= content_for :js do %>
+    <script src="https://js.stripe.com/v2/"></script>
+    <script>
+        var key = '<%= Rails.configuration.stripe[:publishable_key] %>';
+        if (!key.length) {
+            throw new Error('Stripe#setPublishableKey: Missing publishable key. Shopping cart is broken!');
+        }
+        Stripe.setPublishableKey(key);
+    </script>
+<% end %>

@@ -29,7 +29,14 @@
     <%= f.label :price %>
     <%= f.text_field :price %>
     <p class="hint">
-        ex: 150.00
+        ex: 15.00
+    </p>
+  </div>
+  <div class="field">
+    <%= f.label :wholesale_price %>
+    <%= f.text_field :wholesale_price %>
+    <p class="hint">
+        ex: 12.00
     </p>
   </div>
   <div class="field color_fields">
@@ -54,6 +61,9 @@
             <%= color.title %>
             <% unless color.price.blank? %>
               $<%= color.price %>
+            <% end %>
+            <% unless color.wholesale_price.blank? %>
+              <span style="color: #999">[$<%= color.wholesale_price %> (wholesale)]</span>
             <% end %>
           </label>
         <% end %>

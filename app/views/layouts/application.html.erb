@@ -1,19 +1,11 @@
 <!DOCTYPE html>
-<%# paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -%>
-<!--[if lt IE 7 ]> <html class="nojs ie ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="nojs ie ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="nojs ie ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="nojs ie ie9"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html class="nojs"> <!--<![endif]-->
+<html ng-app="SwiftApp" class="nojs">
 <head>
   <meta charset="utf-8">
   <%# Always force latest IE rendering engine (even in intranet) & Chrome Frame
       Remove this if you use the .htaccess %>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>
-    document.documentElement.className = document.documentElement.className.replace('nojs', ' ');
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title>
     <%= "#{@subtitle} from " if @subtitle.present? %><%= @title %> | handmade bicycle panniers and accessories
   </title>
@@ -26,17 +18,32 @@
   <![endif]-->
   <%= stylesheet_link_tag "application" %>
   <%= yield :css %>
+  <%= stylesheet_link_tag "print", media: "print" %>
   <%= csrf_meta_tag %>
 </head>
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
+  <% if @company.front_door_sign.present? %>
+    <h2 class="front_door_sign">
+      <%= @company.front_door_sign %>
+    </h2>
+  <% end %>
+  <% if session[:is_wholesale_user] %>
+    <h2 class="front_door_sign">
+      You are signed in as a wholesaler. Prices are adjusted (lowered). Minimum $500 purchase required.
+    </h2>
+  <% end %>
   <div class="container-menu-wrap">
     <div class="container container-menu">
       <div class="sixteen columns menu--row-btns">
         <i id="global-menu-btn" class="entypo entypo-menu">&#9776;</i>
         <% cache 'fox_and_cart' do %>
           <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
-          <a href="<%=APP_CONFIG[:store_host]%><%=APP_CONFIG[:review_cart_path]%><%=APP_CONFIG[:store_userid]%>" title="View Your Cart or Checkout">
-            <i class='entypo entypo-cart'>&#59197;</i>
+          <a
+              href="/cart"
+              ng-controller="CartStatusCtrl"
+              ng-cloak
+              title="View Your Cart {{ cart.message }}">
+            <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
           </a>
         <% end %>
         <br class="clear">
@@ -44,11 +51,6 @@
       <%= render 'shared/global_nav' %>
     </div>
   </div>
-  <% if @company.front_door_sign.present? %>
-    <h2 class="front_door_sign">
-      <%= @company.front_door_sign %>
-    </h2>
-  <% end %>
   <%= yield :flash %>
   <%# render "shared/checkout" %>
   <div class="container container-logo">
@@ -71,13 +73,16 @@
   <div class="container-footer-wrap">
     <div class="container container-footer">
       <%= render "shared/footer" %>
-      <%= render "shared/no_js" %>
+      <%# render "shared/no_js" %>
       <%= render "shared/humans" %>
     </div>
   </div>
+  <% if session[:is_wholesale_user] %>
+  <script>window.__iswsu__=true</script>
+  <% end %>
+  <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
   <%= javascript_include_tag "application" %>
   <%= yield :js %>
   <%= render "shared/analytics" unless Rails.env == "development" %>
-  <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
 </body>
 </html>

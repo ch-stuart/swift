@@ -20,6 +20,9 @@ SwiftSite::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Cache static assets for 1 year
+  config.static_cache_control = "public, max-age=31536000"
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
@@ -77,4 +80,12 @@ SwiftSite::Application.configure do
   #   )
   # end
 
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Exception at builtbyswift.com] ",
+      :sender_address => %{"notifier" <cs@enure.net>},
+      :exception_recipients => %w{charles.stuart@gmail.com}
+    }
+
 end
+

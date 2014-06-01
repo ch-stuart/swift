@@ -10,39 +10,39 @@ body {
 // TODO: there should be a global nav css,
 //       and this should be in it
 .container-menu-wrap {
-    background-color: #eee;
+    background-color: rgba(245,245,245,0.7);
     border-bottom: 1px solid #dadada;
-    margin-bottom: 50px;
 }
 .container-menu {
     padding: 8px;
     position: relative;
 
     .menu-fox {
-    	display: block;
+        display: block;
     }
     .menu-fox {
-    	position: absolute;
-    	left: 50%;
-    	margin-left: -22px;
-    	top: 8px;
+        position: absolute;
+        left: 50%;
+        margin-left: -22px;
+        top: 8px;
     }
 
     .entypo {
         cursor: pointer;
-    	display: block;
+        display: block;
 
         &:hover,
-        &.active {
+        &.active,
+        &.cart-happy--true {
             color: $hotpink;
         }
     }
     .entypo-menu {
-    	float: left;
+        float: left;
     }
     .entypo-cart {
-    	float: right;
-    	font-size: 48px;
+        float: right;
+        font-size: 48px;
     }
 
     .menu--row-nav {

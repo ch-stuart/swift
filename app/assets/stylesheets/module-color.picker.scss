@@ -2,16 +2,15 @@
     margin-bottom: 5px;
 }
 .color-picker--swatch {
-    width: 60px;
-    height: 30px;
+    padding: 4px;
+    width: 50%;
+    height: 55px;
     float: left;
     color: #fff;
-    font-weight: bold;
-    font-family: verdana, tahoma, sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     cursor: pointer;
-
-    display: none;
+    font-family: Lucida Grande, Calibri, sans-serif;
+    font-weight: bold;
 }
 
 .color-picker--change {
@@ -21,10 +20,16 @@
     margin-right: 15px;
     float: left;
 }
-
-.color-picker--swatch-blank {
-    // Checkerboard pattern
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEXr6+v///+HIERrAAAAFElEQVQIW2NksN/ISAz+f9CBGAwAxtEddZlnB4IAAAAASUVORK5CYII=);
-    background-repeat: repeat;
-    border: 1px solid #ccc;
+.color-picker--swatch-selected {
+    margin-right: 15px;
+    width: 40%;
+    line-height: 1.1;
+    height: 70px;
+}
+@media only screen and (min-width: 768px) {
+    .color-picker--swatch-selected {
+        width: 50%;
+        line-height: 1.2;
+        height: 55px;
+    }
 }

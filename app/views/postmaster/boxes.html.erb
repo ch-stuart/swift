@@ -1,0 +1,40 @@
+<h2>Boxes</h2>
+
+<% if @error %>
+  <%= @error %>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Width</th>
+        <th>Height</th>
+        <th>Length</th>
+        <th>Volume <span class="demph">(cubic inches)</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @response.each do |package| %>
+          <tr>
+            <td><%= package[:name] %></td>
+            <td><%= package[:width] %></td>
+            <td><%= package[:height] %></td>
+            <td><%= package[:length] %></td>
+            <td><%= package[:width] * package[:height] * package[:length] %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<h3>
+  Add Box
+</h3>
+<form action="create_box" method="post">
+  <p>
+    <input class="input--dim" name="w" placeholder="W"> &#215;
+    <input class="input--dim" name="h" placeholder="H"> &#215;
+    <input class="input--dim" name="l" placeholder="L">
+  </p>
+  <p><input type="submit" class="btn" value="Submit"></p>
+</form>

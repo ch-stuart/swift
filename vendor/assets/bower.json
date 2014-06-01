@@ -1,0 +1,11 @@
+{
+  "name": "swift-assets",
+  "private": true,
+  "dependencies": {
+    "angular-payments": "*",
+    "gridism": "~0.1.0",
+    "normalize-css": "~3.0.0",
+    "skeleton": "*",
+    "ua.js": "git@github.com:g13n/ua.js.git"
+  }
+}

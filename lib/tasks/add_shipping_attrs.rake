@@ -1,0 +1,21 @@
+task :add_shipping_attrs => :environment do
+  shipping_attrs = YAML.load_file(File.join(Rails.root, "lib", "shipping_attrs.yml"))
+
+  shipping_attrs.each do |attrs|
+    puts "==== #{attrs['name']}"
+
+    attrs["ids"].each do |id|
+      product = Product.find id
+      product.update_attributes({
+        width: attrs['width'],
+        height: attrs['height'],
+        length: attrs['depth'],
+        weight: attrs['weight'],
+        wholesale_price: "999.00",
+        wholesale_humane_price: "999.00"
+      })
+
+      product.save!
+    end
+  end
+end

@@ -5,9 +5,11 @@ one:
   specs: specs
   status: Public
   price: 0.99
+  humane_price: $2.99 for pair
+  wholesale_price: 0.99
+  wholesale_humane_price: $2.99 for pair
   kind: Product
   short_title: Prod1Short
-  humane_price: $2.99 for pair
   flickr_photo: 3993933993
   # question: What is your question?
   # answer: This is your answer
@@ -25,9 +27,11 @@ two:
   specs: specs
   status: Public
   price: 0.99
+  humane_price: $2.99 for pair
+  wholesale_price: 0.99
+  wholesale_humane_price: $2.99 for pair
   kind: Product
   short_title: Prod2Short
-  humane_price: $2.99 for pair
   flickr_photo: 3993933993
   # question: What is your question?
   # answer: This is your answer
@@ -45,9 +49,11 @@ three:
   specs: specs
   status: Public
   price: 0.99
+  humane_price: $2.99 for pair
+  wholesale_price: 0.99
+  wholesale_humane_price: $2.99 for pair
   kind: Product
   short_title: Prod3Short
-  humane_price: $2.99 for pair
   flickr_photo: 3993933993
   # question: What is your question?
   # answer: This is your answer

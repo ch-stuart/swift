@@ -1,0 +1,84 @@
+<div class="shoppin-cart" ng-controller="CartCtrl" ng-cloak>
+    <div class="grid wrap shopping-cart__top-row">
+        <div class="unit w-1-1">
+            <i class='entypo entypo-cart active'>
+                &#59197;
+            </i>
+        </div>
+    </div>
+    <div class="grid wrap hide-on-mobiles" ng-show="cart.products.length">
+        <div class="shoppin-cart__header unit w-1-4">Product</div>
+        <div class="shoppin-cart__header unit w-1-4">Parts</div>
+        <div class="shoppin-cart__header unit w-1-4">Quantity</div>
+        <div class="shoppin-cart__header unit w-1-4">Total Price</div>
+    </div>
+    <div class="grid wrap" ng-repeat="savedProduct in cart.products" ng-show="cart.products.length">
+        <div class="unit w-1-4">
+            <strong>{{ savedProduct.title }}</strong>
+            <br>
+            <span class=demph>Base Price: {{ savedProduct.price | currency }}</span>
+            <br>
+            <a href class=demph ng-click="onEditFromCartButtonClicked(savedProduct, savedProduct.uniqueId)">
+                Edit
+            </a>
+            &nbsp;&nbsp;
+            <a href class=demph ng-click="onRemoveFromCartButtonClicked(savedProduct.uniqueId)">
+                Remove
+            </a>
+        </div>
+        <div class="unit w-1-4">
+            <ul class="shoppin-cart__part-list">
+                <li ng-repeat="part in savedProduct.parts">
+                    {{ part.title }}
+                    <span ng-show="part.price">({{ part.price | currency }})</span>
+
+                    <span ng-show="part.selectedColor" class="demph">
+                        <br>Fabric: {{ part.selectedColor.title }}
+                        <span ng-show="part.selectedColor.price">
+                            ({{ part.selectedColor.price | currency }})
+                        </span>
+                    </span>
+                </li>
+                <li ng-hide="savedProduct.parts.length">
+                    n/a
+                </li>
+            </ul>
+        </div>
+        <div class="unit w-1-4">
+            <input
+                type=number
+                min=1
+                max=999
+                class=shoppin-cart__quantity
+                ng-model=savedProduct.quantity
+                ng-change="onProductQuantityChanged()"
+                value="{{ savedProduct.quantity }}">
+        </div>
+        <div class="unit w-1-4">
+            <strong>{{ (savedProduct.totalPrice * savedProduct.quantity) | currency }}</strong>
+        </div>
+    </div>
+    <div class="grid wrap shoppin-cart__cart-price-row" ng-show="cart.products.length">
+        <div class="unit w-3-4 hide-on-mobiles"></div>
+        <div class="unit w-1-4">
+            <strong>{{ (cart.total / 100) | currency }}</strong>
+        </div>
+    </div>
+    <div class="grid wrap shoppin-cart__toolbar" ng-show="cart.products.length">
+        <a href="/" class="btn">
+            Continue Shopping
+        </a>
+        &nbsp;
+        <button class="btn btn-primary" ng-click="onCheckOutButtonClicked()">
+            Check Out
+        </button>
+    </div>
+    <div class="grid wrap shoppin-cart__empty" ng-hide="cart.products.length">
+        <p>
+            Nothing is in your cart.
+        </p>
+        <a href="/" class="btn">
+            Continue Shopping
+        </a>
+    </div>
+</div>

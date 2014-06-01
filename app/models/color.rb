@@ -1,9 +1,19 @@
 class Color < ActiveRecord::Base
 
+    attr_accessible :title, :hex, :price, :wholesale_price
+
     has_and_belongs_to_many :part
     validates_uniqueness_of :title, :hex
     validates_presence_of :title, :hex
     validates :hex, :hex_color => true
-    validates_format_of :price, :with => /^\d{0,10}\.\d{2}$/, :message => "must be include dollars and cents, ex: 35.00", :if => :price?
+
+    PRICE_MATCH = /^\d{0,10}\.\d{2}$/
+    PRICE_MESSAGE = "must be in the following format: 12.00"
+    validates_format_of :price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :price?
+    validates_format_of :wholesale_price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :wholesale_price?
+
+    def price_for is_wholesale_user
+        is_wholesale_user ? self.wholesale_price : self.price
+    end
 
 end

@@ -1,43 +1,30 @@
-.product-title {
-
-}
-
-.form-order .row {
-    padding: 20px 20px 20px 20px;
-    background-color: #f5f5f5;
-    border: 1px solid #dcdcdc;
-    border-radius: 3px;
+.row--order {
+    padding: 20px;
+    background-color: #fbfbfb;
+    border: 1px solid #eee;
     margin: 0 0 20px;
 }
 .order-section-heading {
     margin-top: 40px;
 }
 .label-input-pair {
-    margin: 0 0 20px 0;
+    margin: 0 0 20px;
 }
 .input-color-with-optional-part {
     margin-top: 10px;
     margin-left: 20px;
 }
 .label {
-    margin-bottom: 5px;
+    margin-bottom: 0;
 
     &.error {
         color: red;
     }
 }
-.input {
-
-}
-.input-checkbox {
-
-}
-.input-color {
-
-}
-
-.row-submit {
-    margin-top: 40px;
+.label .input-checkbox {
+    transform: translateY(-1px);
+    display: inline-block;
+    margin-right: 2px;
 }
 
 .handmade_label {
@@ -57,9 +44,5 @@
     background-color: #ff9;
     line-height: 1.4;
 }
-.order-form-does-not-work-without-javascript {
-    display: none;
-}
-.nojs .order-form-does-not-work-without-javascript {
-    display: block;
-}
+
+

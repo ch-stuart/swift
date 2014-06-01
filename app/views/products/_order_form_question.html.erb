@@ -1,24 +1,22 @@
-<% if @product.question.present? %>
+<div ng-show="product.question">
     <h4 class="order-section-heading">
         Your Details
     </h4>
-    <div class="row row-question">
+    <div class="row row--order row--question">
         <label for="product-answer" class="label">
-            <%= @product.question %>
+            {{ product.question }}
         </label>
-        <% if @product.answer.blank? %>
-            <input id="product-answer" name="product1[]" type="text" class="input">
-        <% else %>
-            <select id="product-answer" name="product1[]" class="input">
-                <option value="invalid">
-                    Choose One
-                </option>
-                <% @product.answer.split(',').each do |option| %>
-                    <option>
-                        <%= option %>
-                    </option>
-                <% end %>
-            </select>
-        <% end %>
+        <input
+            ng-hide="product.originalAnswer"
+            ng-model="product.selectedAnswer"
+            type="text"
+            class="input">
+        <select
+            ng-show="product.originalAnswer"
+            ng-model="product.selectedAnswer"
+            ng-options="answer for answer in product.answer"
+            class="input"
+            required>
+        </select>
     </div>
-<% end %>
+</div>

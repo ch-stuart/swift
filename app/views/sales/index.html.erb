@@ -1,0 +1,18 @@
+<h1>Sales</h1>
+<p style="display:none">
+    <%# link_to 'New Sale', new_sale_path %>
+</p>
+
+<%= render 'sales_table', sales: @sales_not_shipped, title: 'Not Shipped' %>
+<%= render 'sales_table', sales: @sales_shipped, title: 'Shipped' %>
+
+<%= content_for :js do %>
+<script>
+    $('h3')
+        .css('cursor', 'pointer')
+        .on('click', function() {
+            $(this).next('table').toggle()
+        })
+</script>
+<% end %>
+

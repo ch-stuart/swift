@@ -1,0 +1,21 @@
+{
+  "name": "stylesheets",
+  "version": "0.0.0",
+  "authors": [
+    "Charles Stuart <charles.stuart@bodybuilding.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gridism": "~0.1.0",
+    "normalize-css": "~3.0.0",
+    "skeleton": "*"
+  }
+}

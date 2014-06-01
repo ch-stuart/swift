@@ -39,7 +39,7 @@ var Runner = function(ms) {
     };
     this.run = function() {
         var ms = 0;
-        this.steps.forEach(function(step) {
+        _.each(this.steps, function(step) {
             ms += step.ms;
             setTimeout(function() {
                 step.func();
@@ -60,55 +60,55 @@ jQuery.fn.hero = function() {
     return this.each(function() {
         var $hero = $(this);
         var $heroScroller = $hero.find('#hero-scroll');
-    	var $imgs = $heroScroller.find('img');
+        var $imgs = $heroScroller.find('img');
 
-    	imgCount = $imgs.size();
+        imgCount = $imgs.size();
 
-    	function init() {
-    		$imgs.each(function() {
-    			var imgWidth = $(this).width();
-    			totalWidth += imgWidth;
-    			widths.push(imgWidth);
-    		});
+        function init() {
+            $imgs.each(function() {
+                var imgWidth = $(this).width();
+                totalWidth += imgWidth;
+                widths.push(imgWidth);
+            });
 
-    		$heroScroller
-    			.css('width', totalWidth + 'px');
+            $heroScroller
+                .css('width', totalWidth + 'px');
 
-    		widths.forEach(function(dist) {
-    			r.add(function() {
-    				var currentScrollDist = Math.abs(parseInt($heroScroller.css('margin-left'), 10));
-    				var animDist = currentScrollDist + dist;
+            _.each(widths, function(dist) {
+                r.add(function() {
+                    var currentScrollDist = Math.abs(parseInt($heroScroller.css('margin-left'), 10));
+                    var animDist = currentScrollDist + dist;
 
-    				// console.log(animDist);
+                    // console.log(animDist);
 
-    				if (animDist < (totalWidth - $hero.width()) ) {
-    					$heroScroller.animate({
-    						'margin-left': -(animDist) + 'px'
-    					}, {
-    						duration: 'slow'
-    					});
-    				}
-    			});
-    		});
-    		r.run();
-    	}
+                    if (animDist < (totalWidth - $hero.width()) ) {
+                        $heroScroller.animate({
+                            'margin-left': -(animDist) + 'px'
+                        }, {
+                            duration: 'slow'
+                        });
+                    }
+                });
+            });
+            r.run();
+        }
 
-    	$hero.find('.hero-close,.hero-open').click(function() {
-    		$hero
-    			.find('.hero-paras').slideToggle().end()
-    			.find('.hero-close').toggle().end()
-    			.find('.hero-open').toggle();
-    	});
+        $hero.find('.hero-close,.hero-open').click(function() {
+            $hero
+                .find('.hero-paras').slideToggle().end()
+                .find('.hero-close').toggle().end()
+                .find('.hero-open').toggle();
+        });
 
-    	$hero.find('.hero-open').show();
+        $hero.find('.hero-open').show();
 
-    	link = $hero.find('.hero-heading a').attr('href');
-    	linkHtml = ' (<a id=hero-link>read more</a>)';
+        link = $hero.find('.hero-heading a').attr('href');
+        linkHtml = ' (<a id=hero-link>read more</a>)';
 
-    	$hero.find('.hero-paras p:last-child').append(linkHtml);
-    	$('#hero-link').attr('href', link);
+        $hero.find('.hero-paras p:last-child').append(linkHtml);
+        $('#hero-link').attr('href', link);
 
 
-    	$(window).load(init);
+        $(window).load(init);
     });
 };

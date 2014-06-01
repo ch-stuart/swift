@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Helvetica, Arial, san-serif;
+        }
+    </style>
+</head>
+<body>
+    <p><b>Your order is ready for pickup.</b></p>
+
+    <p><b>We are located on the mezzanine at:</b></p>
+
+    <p><b>1415 NW 49th ST<br>
+    Seattle WA 98107</b></p>
+
+    <p>View your e-receipt and order details here:</p>
+
+    <p><a href="http://builtbyswift.com/orders/<%= @sale.guid %>">
+      http://builtbyswift.com/orders/<%= @sale.guid %></a>
+    </p>
+
+    <p>Thanks for choosing Swift Industries</p>
+</body>
+</html>

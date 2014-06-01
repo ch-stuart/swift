@@ -1,0 +1,16 @@
+Contact: <%= @sale.contact %>
+Company: <%= @sale.company %>
+Email: <%= @sale.email %>
+Phone: <%= @sale.phone_no %>
+
+Hub URL: http://builtbyswift.com/sales/<%= @sale.id %>
+Customer URL: http://builtbyswift.com/orders/<%= @sale.guid %>
+Stripe URL: https://manage.stripe.com/prod/payments/<%= @sale.stripe_id %>
+
+<% if @sale.pickup %>
+  Customer will pick up order.
+<% else %>
+  Shipping Charge: <%= @sale.shipping_charge %>
+  Shipping Service: <%= @sale.shipping_service %>
+  Shipping Provider: <%= @sale.shipping_provider %>
+<% end %>

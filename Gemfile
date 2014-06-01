@@ -1,23 +1,31 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.14'
-gem 'pg'
+gem 'rails', '3.2.17'
+gem 'pg', '0.17.1'
 gem "thin"
 gem 'flickraw', '0.9.7'
 gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails', '~> 2.2.1'
+gem 'angularjs-rails', '~> 1.2.16'
 gem 'dalli' # memcachier
 gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
 gem 'figaro'
+gem 'stripe'
+gem 'mandrill-api'
+gem 'postmaster'
+gem 'httpclient'
+gem 'exception_notification'
 gem 'rack-rewrite'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem "autoprefixer-rails"
+  gem "underscore-rails"
 end
 
 group :production do
@@ -27,8 +35,13 @@ end
 group :development do
   gem 'sqlite3'
   gem 'taps'
+  gem 'guard'
+  gem 'guard-test'
+  gem 'guard-shell'
+  gem 'brakeman'
 end
 
-group :test do
-  gem 'turn'
-end
+# Wah. Not compatible with guard-test
+# group :test do
+#   gem 'turn'
+# end
