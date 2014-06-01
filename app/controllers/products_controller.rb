@@ -28,10 +28,10 @@ class ProductsController < ApplicationController
       format.html
       format.json do
         product_attrs = [
-                          :id, :title, :status, :price, :wholesale_price, :kind,
-                          :short_title, :humane_price, :wholesale_humane_price,
-                          :question, :answer, :not_for_sale, :not_for_sale_message,
-                          :width, :height, :length, :weight
+                          :id, :title, :price, :wholesale_price,
+                          :humane_price, :wholesale_humane_price,
+                          :question, :answer, :width, :height,
+                          :length, :weight, :package_type
                         ]
         part_attrs    = [:id, :title, :price, :wholesale_price]
         color_attrs   = [:id, :title, :price, :wholesale_price, :hex]
