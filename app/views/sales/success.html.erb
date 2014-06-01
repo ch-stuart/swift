@@ -123,10 +123,8 @@
                   </h4>
                     <% if @shipments.blank? %>
                       <p>
-                        We will email you when your order has shipped.
-                      </p>
-                      <p>
-                        The shipping information will also appear on this page when your order has shipped.
+                        When your order has shipped we will email you the shipping information.
+                        As well, the shipping information will appear on this page.
                       </p>
                     <% else %>
                       <% if @shipments.length > 1 %>
@@ -145,14 +143,14 @@
                       <% end %>
                     <% end %>
                   <h4>
-                      Shipment Address
+                      Shipping Address
                   </h4>
                   <p>
                       <%= @sale.line1 %><br>
                       <%= @sale.city %>, <%= @sale.state %> <%= @sale.zip_code %>
                   </p>
                   <h4>
-                      Shipment Charge
+                      Shipping Charge
                   </h4>
                   <p>
                       <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %> via <%= @sale.shipping_provider.upcase %> <%= @sale.shipping_service %>.
