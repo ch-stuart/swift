@@ -97,7 +97,7 @@ SwiftApp.controller('OrderCtrl', [
                 })
                 .reduce(function(prev, current) {
                     return prev + current;
-                })
+                }, 0)
                 .value();
         } catch (e) {
             ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price.', [$scope.product, e]);
