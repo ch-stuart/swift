@@ -148,6 +148,8 @@ SwiftApp.controller('CheckoutCtrl', [
                     .rates($scope.rateParams)
                     .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
             });
+        } else {
+            ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: data.status not "OK"', [data]);
         }
     }
 
