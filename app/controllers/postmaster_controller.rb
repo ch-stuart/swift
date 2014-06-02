@@ -159,29 +159,25 @@ class PostmasterController < ApplicationController
   end
 
   # Create a box
-  # NOTE Not used. Postmaster's fit endpoint is insanely slow,
-  # and fails much of the time.
-  # def create_box
-  #   logger.info "=> WxHxL: #{params[:w]}x#{params[:h]}x#{params[:l]}"
-  #   @response = Postmaster::Package.create(
-  #       width: params[:w],
-  #       height: params[:h],
-  #       length: params[:l],
-  #       name: "#{params[:w]}x#{params[:h]}x#{params[:l]}"
-  #   )
-  #   redirect_to postmaster_boxes_path, :notice => "Box was successfully created"
-  # end
+  def create_box
+    logger.info "=> WxHxL: #{params[:w]}x#{params[:h]}x#{params[:l]}"
+    @response = Postmaster::Package.create(
+        width: params[:w],
+        height: params[:h],
+        length: params[:l],
+        name: "#{params[:w]}x#{params[:h]}x#{params[:l]}"
+    )
+    redirect_to postmaster_boxes_path, :notice => "Box was successfully created"
+  end
 
   # List available boxes
-  # NOTE Not used. Postmaster's fit endpoint is insanely slow,
-  # and fails much of the time.
-  # def boxes
-  #   begin
-  #     @response = Postmaster::Package.all({ limit: 66 })
-  #     logger.info "=> BOXES: #{@response}"
-  #   rescue Exception => e
-  #     @error = e
-  #   end
-  # end
+  def boxes
+    begin
+      @response = Postmaster::Package.all({ limit: 66 })
+      logger.info "=> BOXES: #{@response}"
+    rescue Exception => e
+      @error = e
+    end
+  end
 
 end

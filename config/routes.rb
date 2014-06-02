@@ -57,8 +57,8 @@ SwiftSite::Application.routes.draw do
   post 'postmaster/fit', to: 'postmaster#fit'
   get  'postmaster/edit_shipment', to: 'postmaster#edit_shipment'
   post 'postmaster/create_shipment', to: 'postmaster#create_shipment'
-  # get  'postmaster/boxes', to: 'postmaster#boxes'
-  # post 'postmaster/create_box', to: 'postmaster#create_box'
+  get  'postmaster/boxes', to: 'postmaster#boxes'
+  post 'postmaster/create_box', to: 'postmaster#create_box'
 
   match 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
 
