@@ -81,13 +81,14 @@ SwiftApp.controller('CheckoutCtrl', [
 
         // Set rate params
         $scope.rateParams = {
-            to_zip: $scope.zipCode,
+            to_zip:     $scope.zipCode,
             to_country: $scope.country,
-            weight: packages[0].weight,
-            width: packages[0].width,
-            height: packages[0].height,
-            length: packages[0].length,
-            service: $scope.shippingServiceLevel
+            weight:     packages[0].weight,
+            width:      packages[0].width,
+            height:     packages[0].height,
+            length:     packages[0].length,
+            service:    $scope.shippingServiceLevel,
+            carrier:    $scope.shippingCarrier
         };
 
         console.log('postmasterValidateSuccessCallback', data);
@@ -96,12 +97,6 @@ SwiftApp.controller('CheckoutCtrl', [
         // is called if status is not OK.
         if (data.status === 'OK') {
             $scope.commercial = $scope.rateParams.commercial = !!data.commercial;
-
-            if (!$scope.isShippingDomestic) {
-                // This tells postmaster that we
-                // only want rates from USPS
-                $scope.rateParams.carrier = 'usps';
-            }
 
             if ($scope.state === 'WA') {
                 WaStateTaxService
@@ -382,21 +377,38 @@ SwiftApp.controller('CheckoutCtrl', [
         $scope.isShippingDomestic = $scope.country == 'US' ? true : false;
 
         switch ($scope.country) {
-        case 'CA':
-            $scope.shippingServiceLevel = 'INTL_PRIORITY';
-            $scope.states = PlaceService.caProvinces();
-            $scope.state = 'ON';
-            $scope.countryIsUSCA = true;
-            break;
         case 'US':
-            $scope.shippingServiceLevel = 'GROUND'
+            // Set default domestic shipping service level
+            $scope.shippingServiceLevel = 'GROUND';
+            // Display list of US States
             $scope.states = PlaceService.usStates();
+            // Default to MT
             $scope.state = 'MT';
+            // Show the <select>
             $scope.countryIsUSCA = true;
+            // Don't choose one carrier (use UPS, USPS and Fedex)
+            $scope.shippingCarrier = null;
+            break;
+        case 'CA':
+            // Set default INTL shipping service level
+            $scope.shippingServiceLevel = 'INTL_PRIORITY';
+            // Show list of CA provinces
+            $scope.states = PlaceService.caProvinces();
+            // Default to ON(tario)
+            $scope.state = 'ON';
+            // Show the <select> for choosing province
+            $scope.countryIsUSCA = true;
+            // Only use USPS for INTL shipping
+            $scope.shippingCarrier = 'usps';
             break;
         default:
+            // Set default INTL shipping service level
             $scope.shippingServiceLevel = 'INTL_PRIORITY';
+            // Don't show dropdown
             $scope.countryIsUSCA = false;
+            // Only use USPS for INTL shipping
+            $scope.shippingCarrier = 'usps';
+            // Unset the state field
             $scope.state = '';
         }
     };
@@ -437,8 +449,7 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope['onShippingServiceLevelChange'] = function() {
         resetRateResponsesAndCounters();
 
-        console.log('=> shippingServiceLevel', $scope.shippingServiceLevel);
-        $scope.rateParams.service = $scope.shippingServiceLevel;
+        console.log('CheckoutCtrl#onShippingServiceLevelChange', $scope.shippingServiceLevel);
         $scope.busyShipping = true;
 
         PostmasterService
@@ -447,15 +458,13 @@ SwiftApp.controller('CheckoutCtrl', [
     };
 
     $scope['onRatesRadioChanged'] = function(provider) {
-        console.log('onRatesRadioChanged', provider);
+        console.log('CheckoutCtrl#onRatesRadioChanged', provider);
 
         $scope.shipping = {
             charge: provider.charge,
             provider: provider.provider,
             service: provider.service
         };
-
-        console.log('onRatesRadioChanged', $scope.shipping);
 
         CartService.setShippingCharge(provider.charge);
     };
