@@ -207,6 +207,11 @@ date:        time (minutes):       comment:
 2014-05-13 90 SSL
 2014-05-13 30 Adjustments based on feedback from Swift
 2014-05-21 60 SSL
+2014-05-31 60 Deploy
+2014-05-31 30 Fix JavaScript exception reported by exception reporter
+2014-05-31 60 WIP Support quoting shipping rates for LETTER
+2014-05-31 15 Improve info logged by JS exception reporter
+
 
 
 
