@@ -50,18 +50,11 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.rateParams = {};
 
     // Defaults!
-    // $scope.line1 = "425 E Sussex AVE";
-    // $scope.city = "Missoula";
-    // $scope.zipCode = "59801";
     $scope.country = 'US';
     $scope.state = 'MT';
-    // $scope.line1 = "70 CHARLOTTE ST";
-    // $scope.city = "London";
-    // $scope.zipCode = "W1T 4QG";
-    // $scope.country = 'GB';
-    // $scope.state = '';
-    // $scope.phoneNo = "989 433 0325";
+
     $scope.shippingServiceLevel = 'GROUND';
+    $scope.countryIsUSCA = true;
 
     $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge) {
         $scope.cart.price          = price;
