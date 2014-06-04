@@ -214,7 +214,7 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
                 products: this.products
             });
 
-            console.log('CartService#saveToLocalStorage', serialized);
+            console.log('CartService#saveToLocalStorage');
 
             localStorage.setItem('cart', serialized);
         }
