@@ -211,7 +211,9 @@ date:        time (minutes):       comment:
 2014-05-31 30 Fix JavaScript exception reported by exception reporter
 2014-05-31 60 WIP Support quoting shipping rates for LETTER
 2014-05-31 15 Improve info logged by JS exception reporter
-
+2014-06-03 40 Answering questions on basecamp, figuring out why USPS shipping rates are not correct
+2014-06-03 10 Add customer name to order print page
+2014-06-03 10 Blocking JS exception reporter from reporting some errors
 
 
 
