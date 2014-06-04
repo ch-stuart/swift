@@ -27,10 +27,7 @@
                         ng-model="part.activated"
                         ng-click="onPartCheckboxClicked()"
                         type="checkbox"
-                        class="input input-checkbox"
-                        data-hash="TODO"
-                        data-product="{{ part.title }}"
-                        data-price="{{ part.price }}">
+                        class="input input-checkbox">
                     {{ part.title }}
                     <span ng-show="part.price">
                         {{ part.price | currency }}
