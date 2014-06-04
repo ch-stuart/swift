@@ -41,9 +41,9 @@
       </p>
       <p>
         <b>Weight:</b>
-        <%= shipment.weight %>
+        <%= shipment.weight %>lbs.
       </p>
-      <% if shipment.envelope %>
+      <% if shipment.envelope.present? %>
         <p>
           <b>Envelope:</b>
           <%= shipment.envelope %>
@@ -150,7 +150,8 @@
         </td>
         <td>
           <%= @sale.shipping_provider.upcase %><br>
-          <%= @sale.shipping_service %>
+          <%= @sale.shipping_service %><br>
+          <%= @sale.weight %>lbs.
         </td>
       </tr>
     <% end %>
