@@ -87,9 +87,19 @@ SwiftApp.controller('OrderCtrl', [
                     return part.activated;
                 })
                 .map(function(part) {
+                    // If it's an empty string or null,
+                    // it's probably not a programming issue.
+                    if (part.price === '')   return 0;
+                    if (part.price === null) return 0;
+
+                    // If we have some value, but can't
+                    // parseFloat it, that is an issue.
                     var val = parseFloat(part.price);
-                    if (isNaN(val)) {
-                        ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get part price. Using 0.', [$scope.product, part]);
+                    if (!val || isNaN(val)) {
+                        ExceptionService.report(
+                            'OrderCtrl#calculateTotalPriceOfParts: Could not get part price. Using 0.',
+                            [$scope.product, part, val, parseFloat(part.price)]
+                        );
                         return 0;
                     } else {
                         return val;
@@ -123,7 +133,10 @@ SwiftApp.controller('OrderCtrl', [
                 .map(function(part) {
                     var val = parseFloat(part.selectedColor.price);
                     if (isNaN(val)) {
-                        ExceptionService.report('OrderCtrl#calculateTotalPriceOfParts: Could not get fabric price. Using 0.', [$scope.product, part]);
+                        ExceptionService.report(
+                            'OrderCtrl#calculateTotalPriceOfParts: Could not get fabric price. Using 0.',
+                            [$scope.product, part, val]
+                        );
                         return 0;
                     } else {
                         return val;
