@@ -90,6 +90,14 @@
         <hr class="pr--block">
         <div class="grid">
             <div class="unit w-1-2">
+                <h4 class="pr--block">
+                    Name
+                </h4>
+                <p class="pr--block">
+                    <% if @sale.contact.present? %>
+                        <%= @sale.contact %>
+                    <% end %>
+                </p>
                 <h4>
                     Email Address
                 </h4>
