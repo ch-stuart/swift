@@ -4,6 +4,7 @@
     var msgBlockList = [
         'Script error.',
         // ReferenceError: Can\'t find ...
+        // Assuming these are browser extensions behaving badly
         'variable: cafe',
         'variable: dataKeys',
         'variable: contentSizeInPopover',
@@ -12,7 +13,9 @@
     ];
 
     var scriptUrlBlockList = [
-        'assets.pinterest.com/js/pinit.js'
+        'assets.pinterest.com/js/pinit.js',
+        'ssl.google-analytics.com/ga.js',
+        'newrelic.com'
     ];
 
     window.onerror = function(msg, url, lineNumber) {
