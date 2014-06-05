@@ -1,6 +1,6 @@
 /*global SwiftApp console angular */
 
-SwiftApp.service('PostmasterService', ['$http', 'ConfigService', function($http, ConfigService) {
+SwiftApp.service('PostmasterService', ['$http', 'ConfigService', 'PackagingService', function($http, ConfigService, PackagingService) {
 
     return {
         // post 'postmaster/validate'
@@ -34,11 +34,21 @@ SwiftApp.service('PostmasterService', ['$http', 'ConfigService', function($http,
             };
         },
         getIntlServiceLevels: function() {
-            return {
+            var levels = {
                 'INTL_SURFACE': '1st Class International',
                 'INTL_PRIORITY': 'Priority International',
                 'INTL_EXPRESS': 'Express International'
             };
+
+            // INTL_SURFACE is not valid >= 4 pounds
+            if (PackagingService.getShippingWeight() >= 4) {
+                console.log('PostmasterService: removing INTL_SURFACE b/c weight is greater than 4 pounds');
+                delete levels.INTL_SURFACE;
+                return levels;
+            } else {
+                console.log('PostmasterService: keeping INTL_SURFACE');
+                return levels;
+            }
         }
     };
 

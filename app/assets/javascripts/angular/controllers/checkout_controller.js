@@ -273,6 +273,8 @@ SwiftApp.controller('CheckoutCtrl', [
                 country: $scope.country,
                 phone_no: $scope.phoneNo,
                 commercial: $scope.commercial,
+                // FIXME this should actually get the weight
+                // for one package?
                 weight: PackagingService.getWeight(),
                 pickup: $scope.pickup,
                 shipping_provider: $scope.shipping.provider,

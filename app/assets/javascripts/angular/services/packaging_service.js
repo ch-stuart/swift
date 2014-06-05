@@ -115,6 +115,12 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         },
         getWeight: function() {
             return getVolumeAndWeight().weight;
+        },
+        // Do not use this everywhere until it takes in to account:
+        // 1. if the order fits in a letter (therefore adding 1 pound is not fair)
+        // 2. Or, if the order is shipping in multiple packages
+        getShippingWeight: function() {
+            return getVolumeAndWeight().weight + 1;
         }
     };
 
