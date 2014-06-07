@@ -10,6 +10,6 @@ task :deploy, [:remote, :branch, :should_clear_cache] do |t, args|
     system "git push #{args[:remote]} #{args[:branch]}"
 
     if args[:should_clear_cache]
-        system "heroku run rake clear_cache --remote #{args[:remote]}"
+        system "heroku run rails runner Rails.cache.clear --remote #{args[:remote]}"
     end
 end
