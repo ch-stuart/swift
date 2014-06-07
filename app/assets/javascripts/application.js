@@ -6,7 +6,7 @@
 //= require global_exception_service
 //= require console
 //= require underscore
-//= require ua.js/src/ua.js
+//= require ua.js/src/ua
 //= require jquery.browser
 //= require jquery_ujs
 //= require tinycolor
