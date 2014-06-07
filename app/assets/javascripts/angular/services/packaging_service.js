@@ -49,6 +49,17 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         return volume * 1.2;
     }
 
+    function addPackagingWeight(weight) {
+        if (allFitLetter()) {
+            console.log('PackagingService#addPackagingWeight: Add .2lb for packaging weight (LETTER)', weight, weight + 0.2);
+            weight += 0.2;
+        } else {
+            console.log('PackagingService#addPackagingWeight: Add 1lb for packaging weight (CUSTOM)', weight, weight + 1);
+            weight += 1;
+        }
+        return weight;
+    }
+
     function roundFloat(x) {
         return Math.ceil(x * 100) / 100;
     }
@@ -66,7 +77,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         return {
             weight: roundFloat(weight),
             volume: volume,
-            side: addPadding(roundFloat(cbrt(volume)))
+            side: roundFloat(addPadding(cbrt(volume)))
         };
     }
 
@@ -108,7 +119,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
 
         while (package_count > 0) {
             packages.push({
-                weight: weight,
+                weight: addPackagingWeight(weight),
                 width: side,
                 height: side,
                 length: side,
@@ -125,14 +136,12 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         fit: function() {
             return getPackages();
         },
-        getWeight: function() {
-            return getVolumeAndWeight().weight;
-        },
-        // Do not use this everywhere until it takes in to account:
-        // 1. if the order fits in a letter (therefore adding 1 pound is not fair)
-        // 2. Or, if the order is shipping in multiple packages
+        // FIXME so this is only used to report the weight
+        // used when getting rates back to Swift. Currently
+        // does not take in to account if PackagingService
+        // thought it would require multiple boxes
         getShippingWeight: function() {
-            return getVolumeAndWeight().weight + 1;
+            return addPackagingWeight(getVolumeAndWeight().weight);
         }
     };
 

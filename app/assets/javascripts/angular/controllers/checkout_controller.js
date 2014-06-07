@@ -302,7 +302,7 @@ SwiftApp.controller('CheckoutCtrl', [
                 commercial: $scope.commercial,
                 // FIXME this should actually get the weight
                 // for one package?
-                weight: PackagingService.getWeight(),
+                weight: PackagingService.getShippingWeight(),
                 pickup: $scope.pickup,
                 shipping_provider: $scope.shipping.provider,
                 shipping_charge: $scope.shipping.charge,
