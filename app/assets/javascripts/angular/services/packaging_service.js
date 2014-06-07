@@ -57,7 +57,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
             console.log('PackagingService#addPackagingWeight: Add 1lb for packaging weight (CUSTOM)', weight, weight + 1);
             weight += 1;
         }
-        return weight;
+        return roundFloat(weight);
     }
 
     function roundFloat(x) {
@@ -141,7 +141,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         // does not take in to account if PackagingService
         // thought it would require multiple boxes
         getShippingWeight: function() {
-            return roundFloat(addPackagingWeight(getVolumeAndWeight().weight));
+            return addPackagingWeight(getVolumeAndWeight().weight);
         }
     };
 
