@@ -28,18 +28,24 @@
             if (msg.indexOf(msgBlockList[m]) !== -1) return;
         }
 
-        for (var s = scriptUrlBlockList.length - 1; s >= 0; s--) {
-            if (url.indexOf(scriptUrlBlockList[s]) !== -1) return;
+        if (url) {
+            for (var s = scriptUrlBlockList.length - 1; s >= 0; s--) {
+                if (url.indexOf(scriptUrlBlockList[s]) !== -1) return;
+            }
         }
 
         string += '== Error\n';
         string += msg + '\n\n';
 
-        string += '== Script URL\n';
-        string += url + '\n\n';
+        if (url) {
+            string += '== Script URL\n';
+            string += url + '\n\n';
+        }
 
-        string += '== lineNumber\n';
-        string += lineNumber + '\n\n';
+        if (lineNumber) {
+            string += '== lineNumber\n';
+            string += lineNumber + '\n\n';
+        }
 
         string += '== userAgent\n';
         string += window.navigator.userAgent + '\n\n';
