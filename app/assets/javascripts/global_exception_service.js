@@ -53,6 +53,12 @@
         string += '== URL\n';
         string += window.location.href + '\n\n';
 
-        jQuery.post("/exceptions/report", { msg: string });
+
+        if (window.location.href.indexOf("swift.dev") !== -1) {
+            console.error(string);
+        } else {
+            jQuery.post("/exceptions/report", { msg: string });
+        }
+
     };
 })(window, jQuery);

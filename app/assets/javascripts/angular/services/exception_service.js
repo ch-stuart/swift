@@ -32,16 +32,20 @@ SwiftApp.service('ExceptionService', ['$http', function($http) {
         // Include URL
         msg += ' :: ' + window.location.href;
 
-        $http
-            .post('/exceptions/report', { msg: msg })
-            .then(
-                function() {
-                    console.log('Exception reported', msg);
-                },
-                function() {
-                    console.error('Exception *not* reported', msg);
-                }
-            );
+        if (window.location.href.indexOf("swift.dev") !== -1) {
+            console.error(msg);
+        } else {
+            $http
+                .post('/exceptions/report', { msg: msg })
+                .then(
+                    function() {
+                        console.log('Exception reported', msg);
+                    },
+                    function() {
+                        console.error('Exception *not* reported', msg);
+                    }
+                );
+        }
     }
 
     return { report: report };
