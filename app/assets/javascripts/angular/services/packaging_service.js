@@ -8,6 +8,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
     // Find out if all products in cart fit in a LETTER
     // @returns Boolean
     function allFitLetter() {
+        console.log('PackagingService#allFitLetter');
         var productsThatDontFitInLetter = _.filter(CartService.products, function(product) {
             return product.package_type !== 'LETTER';
         });
@@ -83,6 +84,16 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         var side   = volumeAndWeight.side;
         var volume = volumeAndWeight.volume;
 
+        // Waiting on Postmaster to respond to support request
+        // if (allFitLetter()) {
+        //     packages.push({
+        //         weight: weight,
+        //         packaging: 'LETTER'
+        //     });
+        //     console.log('PackagingService#getPackages: All items fit in letter.');
+        //     return packages;
+        // }
+
         // If our volume exceeds that of our largest box...
         if (volume > LARGEST_PACKAGE_VOLUME) {
             console.log('PackagingService#getPackages: volume exceeds largest box', volume, '>', LARGEST_PACKAGE_VOLUME);
@@ -101,7 +112,8 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
                 width: side,
                 height: side,
                 length: side,
-                volume: volume
+                volume: volume,
+                packaging: 'CUSTOM'
             });
             package_count--;
         }

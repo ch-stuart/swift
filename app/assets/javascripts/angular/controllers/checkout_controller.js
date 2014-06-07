@@ -79,9 +79,17 @@ SwiftApp.controller('CheckoutCtrl', [
             width:      packages[0].width,
             height:     packages[0].height,
             length:     packages[0].length,
+            // packaging:  packages[0].packaging,
             service:    $scope.shippingServiceLevel,
             carrier:    $scope.shippingCarrier
         };
+
+        // Don't include these guys if shipping via LETTER
+        // if ($scope.rateParams.packaging === 'LETTER') {
+        //     delete $scope.rateParams.width;
+        //     delete $scope.rateParams.height;
+        //     delete $scope.rateParams.length;
+        // }
 
         console.log('postmasterValidateSuccessCallback', data);
 
