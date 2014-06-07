@@ -25,8 +25,7 @@ SwiftApp.controller('CheckoutCtrl', [
     var package_count = 1;
     var rates_response_count = 0;
 
-    var VALIDATE_ERROR_MSG = "The address you entered appears to be invalid. Please correct it. Contact info@builtbyswift.com if you are unable to resolve this issue.";
-    var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Try again. If this issue continues to occur contact info@builtbyswift.com.";
+    var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Verify that you have entered your country and zip code correctly. If this issue continues to occur contact info@builtbyswift.com.";
 
     var SHIPPING_PROVIDERS = ['fedex', 'usps', 'ups'];
 
@@ -107,14 +106,34 @@ SwiftApp.controller('CheckoutCtrl', [
                     .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
             });
         } else {
-            ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: data.status not "OK"', [data]);
+            ExceptionService.report('CheckoutCtrl#postmasterValidateSuccessCallback: data.status not "OK"', [data]);
         }
     }
 
     function postmasterValidateErrorCallback(response) {
         $scope.busyShipping = false;
-        console.warn('PostmasterService.validate => Error:', response);
-        alert(VALIDATE_ERROR_MSG);
+        $scope.customerNeedsToVerifyAddress = true;
+
+        ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: Address validation failed.', [response]);
+
+        // Postmaster's address validation is flaky. Doesn't seem
+        // to be super reliable for European customers.
+        // Because of this, we allow the customer to bypass the
+        // check, so long as they tick a box saying they looked
+        // at it and it's good
+        if ($scope.customerVerifiedAddress) {
+            ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: Customer verified address is AOK.', [response]);
+            // Fake out the validate success callback
+            // response obj
+            postmasterValidateSuccessCallback({
+                data: {
+                    status: 'OK',
+                    commercial: false,
+                    validated: false,
+                    validateResponse: response
+                }
+            });
+        }
     }
 
     function taxSuccessCallback(response) {

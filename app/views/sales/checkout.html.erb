@@ -88,6 +88,19 @@
                         ng-disabled="pickup"
                         required>
                 </div>
+                <div ng-show="customerNeedsToVerifyAddress" class="label-input-pair pickup-is-{{ pickup }}">
+                    <p class="woah">
+                        It appears your address may be entered incorrectly.
+                        Please double-check it and make any necessary corrections.
+                        If it looks all good, tick the checkbox below.
+                    </p>
+                    <label class="label">
+                    <input
+                        type="checkbox"
+                        ng-model="customerVerifiedAddress"
+                        ng-disabled="pickup"> My address is entered correctly!
+                    </label>
+                </div>
                 <div class="label-input-pair pickup-is-{{ pickup }}">
                     <button id="rates-submit" type="submit" class="btn btn--progress" ng-disabled="pickup || busyShipping">
                         <span sw-visible="!busyShipping">
