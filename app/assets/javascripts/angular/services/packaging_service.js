@@ -141,7 +141,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         // does not take in to account if PackagingService
         // thought it would require multiple boxes
         getShippingWeight: function() {
-            return addPackagingWeight(getVolumeAndWeight().weight);
+            return roundFloat(addPackagingWeight(getVolumeAndWeight().weight));
         }
     };
 
