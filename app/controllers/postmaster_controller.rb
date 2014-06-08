@@ -21,19 +21,25 @@ class PostmasterController < ApplicationController
     params.delete(:controller)
     params.delete(:action)
 
-    response = Postmaster::AddressValidation.validate params
+    begin
+      response = Postmaster::AddressValidation.validate params
 
-    # The response from Postmaster is shitty (does not follow docs)
-    # Walk the array and figure out if this is a commercial address
-    response.addresses[0].each do |thing|
+      # The response from Postmaster is shitty (does not follow docs)
+      # Walk the array and figure out if this is a commercial address
+      response.addresses[0].each do |thing|
         if thing[0] == :commercial && thing[1] == true
-            response.commercial = true
+          response.commercial = true
         end
-    end
+      end
 
-    respond_to do |format|
-      format.html  { render :text => response }
-      format.json  { render :json => response }
+      respond_to do |format|
+        format.html  { render :text => response }
+        format.json  { render :json => response }
+      end
+
+    rescue Exception => e
+      logger.info e
+      render json: e, status: :bad_request
     end
   end
 
@@ -52,12 +58,17 @@ class PostmasterController < ApplicationController
 
     logger.info "params for rates: #{params}"
 
-    response = Postmaster::Rates.get params
+    begin
+      response = Postmaster::Rates.get params
 
-    respond_to do |format|
-      format.html  { render :text => response }
-      format.json  { render :json => response }
+      respond_to do |format|
+        format.html  { render :text => response }
+        format.json  { render :json => response }
+      end
+    rescue Exception => e
+      render json: e, status: :bad_request
     end
+
   end
 
   # Fit packages in the best box
@@ -68,22 +79,22 @@ class PostmasterController < ApplicationController
   # succeed pretty quickly, or it will
   # take 60s and timeout and return a
   # worthless response
-  def fit
-    params.delete :controller
-    params.delete :action
-
-    # Disabling this as it might improve speed,
-    # and we don't require it
-    params[:generating_img] = false;
-
-    boxes = Postmaster::Package.all
-    logger.info "[Postmaster::Package.all] response: #{boxes}"
-    logger.info "[Postmaster::Package.fit] request params: #{params.inspect}"
-    response = Postmaster::Package.fit params
-    logger.info "[Postmaster::Package.fit] response: #{response.inspect}"
-
-    render json: response
-  end
+  # def fit
+  #   params.delete :controller
+  #   params.delete :action
+  #
+  #   # Disabling this as it might improve speed,
+  #   # and we don't require it
+  #   params[:generating_img] = false;
+  #
+  #   boxes = Postmaster::Package.all
+  #   logger.info "[Postmaster::Package.all] response: #{boxes}"
+  #   logger.info "[Postmaster::Package.fit] request params: #{params.inspect}"
+  #   response = Postmaster::Package.fit params
+  #   logger.info "[Postmaster::Package.fit] response: #{response.inspect}"
+  #
+  #   render json: response
+  # end
 
   def edit_shipment
     @sale = Sale.find params[:id]
