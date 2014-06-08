@@ -7,12 +7,12 @@ SwiftApp.service('ExceptionService', ['$http', function($http) {
 
         _.each(objs, function(obj) {
             try {
-                stringified += ' :: ' + JSON.stringify(obj);
+                stringified += '\n\n' + JSON.stringify(obj);
             } catch (e) {
                 if (e.message) {
-                    stringified += ' :: ' + e.message;
+                    stringified += '\n\n' + e.message;
                 } else {
-                    stringified += ' :: ' + 'Could not stringify :(';
+                    stringified += '\n\n' + 'Could not stringify :(';
                 }
 
             }
@@ -27,10 +27,10 @@ SwiftApp.service('ExceptionService', ['$http', function($http) {
         }
 
         // Include UA
-        msg += ' :: ' + window.navigator.userAgent;
+        msg += '\n\n' + window.navigator.userAgent;
 
         // Include URL
-        msg += ' :: ' + window.location.href;
+        msg += '\n\n' + window.location.href;
 
         if (window.location.href.indexOf("swift.dev") !== -1) {
             console.error(msg);
