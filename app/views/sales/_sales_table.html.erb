@@ -27,7 +27,11 @@
     </td>
     <td><%= link_to "/sales/#{sale.id}", sale %></td>
     <td><%= mail_to sale.email, nil, subject: "Your Swift Industries Order [#{sale.guid}]" %></td>
-    <td><%= last_name(sale) %></td>
+    <td>
+      <nobr>
+        <%= image_tag "flags/#{sale.country.downcase}.png" %> <%= last_name(sale) %>
+      </nobr>
+    </td>
     <td><%= number_to_currency(cents_to_dollars(sale.total)) %></td>
     <td>
       <% if sale.pickup %>
