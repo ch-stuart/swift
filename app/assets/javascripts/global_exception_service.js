@@ -15,7 +15,8 @@
     var scriptUrlBlockList = [
         'assets.pinterest.com/js/pinit.js',
         'ssl.google-analytics.com/ga.js',
-        'newrelic.com'
+        'newrelic.com',
+        'blockpage.cgi'
     ];
 
     window.onerror = function(msg, url, lineNumber) {
