@@ -9,7 +9,7 @@ class Sale < ActiveRecord::Base
   # validates_presence_of :email, :description
   # validates :email, format: /@/
 
-  STATUSES = ["Not Shipped", "Shipped"]
+  STATUSES = ["Not Shipped", "Printed", "Shipped"]
   attr_reader :STATUSES
   validates :status, :inclusion => { :in => STATUSES, :message => "%{value} is not a valid status" }
 

@@ -1,9 +1,13 @@
 <h1>Sales</h1>
+<p>
+  Click the table header ("Not Shipped", "Printed", "Shipped") to hide/show.
+</p>
 <p style="display:none">
     <%# link_to 'New Sale', new_sale_path %>
 </p>
 
 <%= render 'sales_table', sales: @sales_not_shipped, title: 'Not Shipped' %>
+<%= render 'sales_table', sales: @sales_printed, title: 'Printed' %>
 <%= render 'sales_table', sales: @sales_shipped, title: 'Shipped' %>
 
 <%= content_for :js do %>

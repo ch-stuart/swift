@@ -10,6 +10,7 @@ class SalesController < ApplicationController
   # GET /sales.json
   def index
     @sales_not_shipped = Sale.where(status: 'Not Shipped').reverse
+    @sales_printed = Sale.where(status: 'Printed').reverse
     @sales_shipped = Sale.where(status: 'Shipped').reverse
 
     render :layout => "hub"
