@@ -210,7 +210,10 @@ date:        time (minutes):       comment:
 <tr><td><nobr>2014-06-03</nobr></td><td>10 </td><td>Add customer name to order print page</td></tr>
 <tr><td><nobr>2014-06-03</nobr></td><td>10 </td><td>Blocking JS exception reporter from reporting some errors</td></tr>
 
+//// invoice on laptop //
 
+2014-06-09 10 Add flags to sales table
+2014-06-10 35 Add ability to mark sale as printed
 
 
 http://www.timer-tab.com

@@ -4,12 +4,14 @@
 @import 'skeleton/stylesheets/layout';
 
 @import '../javascripts/farbtastic/farbtastic';
+@import 'module-jquery.tabs';
 
 @import 'module-form';
 @import 'module-buttons';
 
 body {
   padding-top: 40px;
+  background-color: #fff;
 }
 a {
   text-decoration: none;
@@ -120,4 +122,10 @@ input.input--dim {
 
 .hub-nav {
     padding-left: 0;
+}
+
+
+
+.card {
+  padding: 20px;
 }

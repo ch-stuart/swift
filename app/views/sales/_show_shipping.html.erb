@@ -1,0 +1,67 @@
+<% if @sale.pickup && @sale.status == "Not Shipped" %>
+  <p>
+    Customer will pick up their order.
+  </p>
+  <p>
+    <%= link_to 'Email customer and let them know their order is ready for pickup', { controller: "sales", action: "ready_for_pickup", id: @sale }, class: 'btn' %>
+  </p>
+<% elsif @sale.pickup && @sale.status == "Shipped" %>
+  <p>
+    <span class="hey--wah">
+      Order is ready for pickup and customer has been emailed.
+    </span>
+  </p>
+<% else %>
+  <% if @shipments.blank? %>
+    <p>
+      <span class="hey--wah">Order has not yet been shipped.</span>
+    </p>
+    <p>
+      <%= link_to 'Ship it', { controller: "postmaster", action: "edit_shipment", id: @sale }, class: 'btn' %>
+    </p>
+  <% else %>
+    <p>
+      <span class="hey--yay">
+        This order has been shipped.
+      </span>
+    </p>
+    <% @shipments.each_with_index do |shipment, index| %>
+      <% if index > 0 %>
+        <hr>
+      <% end %>
+      <p>
+        <b>Postmaster ID:</b>
+        <%= shipment.postmaster_id %>
+      </p>
+      <p>
+        <b>Tracking Number:</b>
+        <%= render 'tracking_link', carrier: shipment.carrier, num: shipment.tracking_number %>
+      </p>
+      <p>
+        <b>Weight:</b>
+        <%= shipment.weight %>lbs.
+      </p>
+      <% if shipment.envelope.present? %>
+        <p>
+          <b>Envelope:</b>
+          <%= shipment.envelope %>
+        </p>
+      <% else %>
+        <p>
+          <b>Dimensions (W &#215; H &#215; L):</b>
+          <%= shipment.width %> &#215; <%= shipment.height %> &#215; <%= shipment.length %>
+        </p>
+      <% end %>
+      <p>View details (including the shipping label):<br>
+        <a href="https://www.postmaster.io/dashboard/shipments/id/<%= shipment.postmaster_id %>">
+          https://www.postmaster.io/dashboard/shipments/id/<%= shipment.postmaster_id %></a>.
+      </p>
+      <P>
+        <b>Cost:</b>
+        <%= number_to_currency(cents_to_dollars(shipment.cost)) %>
+    <% end %>
+    <p>
+      <%= link_to 'Ship another box', { controller: "postmaster", action: "edit_shipment", id: @sale }, class: 'btn' %>
+    </p>
+  <% end %>
+<% end %>

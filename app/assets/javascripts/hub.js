@@ -3,6 +3,7 @@
 //= require jquery_ujs
 //= require console
 //= require farbtastic/farbtastic
+//= require jquery.tabs
 
 /*global remove_fields add_fields $ */
 

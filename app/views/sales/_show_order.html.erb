@@ -1,0 +1,67 @@
+<p>
+  <b>Company:</b>
+  <%= @sale.company.present? ? @sale.company : "n/a" %>
+</p>
+
+<table style="min-width: 50%">
+  <thead>
+    <tr>
+      <th>
+        Charge Type
+      </th>
+      <th>
+        Amount
+      </th>
+      <th>
+        Details
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Product
+      </td>
+      <td>
+        <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
+      </td>
+      <td></td>
+    </tr>
+    <% unless @sale.pickup %>
+      <tr>
+        <td>
+          Shipping
+        </td>
+        <td>
+          <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %>
+        </td>
+        <td>
+          <%= @sale.shipping_provider.upcase %><br>
+          <%= @sale.shipping_service %><br>
+          <%= @sale.weight %>lbs.
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>
+        Tax
+      </td>
+      <td>
+        <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %>
+      </td>
+      <td>
+        <% if @sale.tax_rate.present? %>
+          <%= @sale.tax_rate %>%
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan=2>
+        <strong><%= number_to_currency(cents_to_dollars(@sale.total)) %></strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
