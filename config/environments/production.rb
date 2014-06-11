@@ -84,7 +84,7 @@ SwiftSite::Application.configure do
     :email => {
       :email_prefix => "[Exception at builtbyswift.com] ",
       :sender_address => %{"notifier" <cs@enure.net>},
-      :exception_recipients => %w{charles.stuart@gmail.com}
+      :exception_recipients => %w{app.logging@builtbyswift.com}
     }
 
 end
