@@ -13,7 +13,9 @@
   </p>
 <% elsif @sale.pickup && @sale.status == "Shipped" %>
   <p>
-    <span class="hey--wah">Order is ready for pickup and customer has been emailed.</span>
+    <span class="hey--wah">
+      Order is ready for pickup and customer has been emailed.
+    </span>
   </p>
 <% else %>
   <% if @shipments.blank? %>
@@ -25,7 +27,9 @@
     </p>
   <% else %>
     <p>
-      <span class="hey--yay">This order has been shipped.</span>
+      <span class="hey--yay">
+        This order has been shipped.
+      </span>
     </p>
     <% @shipments.each_with_index do |shipment, index| %>
       <% if index > 0 %>
