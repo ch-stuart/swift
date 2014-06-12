@@ -45,7 +45,11 @@
     <h4>
       Ship in a box
     </h4>
+    <p>
+      Choose a box from the drop down or input the W&#215;H&#215;L manually.
+    </p>
     <select id="box_select">
+      <option></option>
       <% @boxes.each do |box| %>
         <option value="<%= box[:width].to_i %>:<%= box[:height].to_i %>:<%= box[:length].to_i %>">
           <%= box[:width].to_i %> &#215; <%= box[:height].to_i %> &#215; <%= box[:length].to_i %> (<%= box[:name] %>)
@@ -60,14 +64,14 @@
     <h4>
       Ship in an "TUBE", "LETTER" or "PAK"
     </h4>
-    <select name="shipment[envelope]">
+    <select id="package_select" name="shipment[envelope]">
       <option></option>
-      <option value="TUBE">TUBE</option>
+      <!-- <option value="TUBE">TUBE</option> -->
       <option value="LETTER">LETTER</option>
-      <option value="PAK">PAK</option>
+      <!-- <option value="PAK">PAK</option> -->
     </select>
     <p class="hint">
-      Note: USPS only supports "LETTER"; everything else should be considered "Ship in box". View postmaster <a href="https://www.postmaster.io/docs/api#packages">packaging reference</a>.
+      Note: USPS supports "LETTER" for 3DAY or faster. Everything else should be considered "Ship in box". View postmaster <a href="https://www.postmaster.io/docs/api#packages">packaging reference</a>.
     </p>
   </div>
 
@@ -79,16 +83,31 @@
 
 <%= content_for :js do %>
   <script>
-    var box_slct = document.getElementById('box_select')
-    var dim_w = document.getElementById('w_input')
-    var dim_h = document.getElementById('h_input')
-    var dim_l = document.getElementById('l_input')
+    function $$(id) {
+      return document.getElementById(id);
+    }
 
-    box_slct.onchange = function(e) {
+    var box_slct = $$('box_select')
+    var dim_w = $$('w_input')
+    var dim_h = $$('h_input')
+    var dim_l = $$('l_input')
+
+    function setBoxVals() {
       var vals = box_slct.value.split(':');
-      dim_w.value = vals[0]
-      dim_h.value = vals[1]
-      dim_l.value = vals[2]
+      if (vals[0] && vals[1] && vals[2]) {
+        dim_w.value = vals[0]
+        dim_h.value = vals[1]
+        dim_l.value = vals[2]
+      } else {
+        dim_w.value = dim_h.value = dim_l.value = '';
+      }
+    }
+    box_slct.onchange = setBoxVals;
+    setBoxVals();
+
+    var package_select = $$('package_select');
+    package_select.onchange = function() {
+      dim_w.value = dim_h.value = dim_l.value = '';
     }
   </script>
 <% end %>
