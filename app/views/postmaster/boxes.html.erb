@@ -1,7 +1,7 @@
 <h2>Boxes</h2>
 
 <% if @error %>
-  <%= @error %>
+  <code style=color:red><%= @error %></code>
 <% else %>
   <table>
     <thead>
@@ -14,6 +14,7 @@
       </tr>
     </thead>
     <tbody>
+
       <% @response.each do |package| %>
           <tr>
             <td><%= package[:name] %></td>
