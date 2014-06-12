@@ -97,8 +97,16 @@ class PostmasterController < ApplicationController
   # end
 
   def edit_shipment
-    @sale = Sale.find params[:id]
-    @boxes = Postmaster::Package.all({ limit: 66 })
+    begin
+      @sale = Sale.find params[:id]
+      @boxes = Postmaster::Package.all({ limit: 66 })
+    rescue Exception => e
+      ExceptionNotifier.notify_exception(
+        e,
+        :env => request.env,
+        :data => {:message => "Showing the 'edit shipment' view failed"}
+      )
+    end
   end
 
   # Create a shipment
@@ -164,6 +172,11 @@ class PostmasterController < ApplicationController
         render text: @shipment.save!
       end
     rescue Exception => e
+      ExceptionNotifier.notify_exception(
+        e,
+        :env => request.env,
+        :data => {:message => "Creating a shipment failed"}
+      )
       render text: e
     end
 
@@ -172,13 +185,22 @@ class PostmasterController < ApplicationController
   # Create a box
   def create_box
     logger.info "=> WxHxL: #{params[:w]}x#{params[:h]}x#{params[:l]}"
-    @response = Postmaster::Package.create(
-        width: params[:w],
-        height: params[:h],
-        length: params[:l],
-        name: "#{params[:w]}x#{params[:h]}x#{params[:l]}"
-    )
-    redirect_to postmaster_boxes_path, :notice => "Box was successfully created"
+
+    begin
+      @response = Postmaster::Package.create(
+          width: params[:w],
+          height: params[:h],
+          length: params[:l],
+          name: "#{params[:w]}x#{params[:h]}x#{params[:l]}"
+      )
+      redirect_to postmaster_boxes_path, :notice => "Box was successfully created"
+    rescue Exception => e
+      ExceptionNotifier.notify_exception(
+        e,
+        :env => request.env,
+        :data => {:message => "Creating a box failed"}
+      )
+    end
   end
 
   # List available boxes
@@ -187,6 +209,11 @@ class PostmasterController < ApplicationController
       @response = Postmaster::Package.all({ limit: 66 })
       logger.info "=> BOXES: #{@response}"
     rescue Exception => e
+      ExceptionNotifier.notify_exception(
+        e,
+        :env => request.env,
+        :data => {:message => "Listing boxes failed"}
+      )
       @error = e
     end
   end
