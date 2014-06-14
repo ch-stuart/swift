@@ -1,14 +1,37 @@
 <h1>Sales</h1>
-<p>
-  Click the table header ("Not Shipped", "Printed", "Shipped") to hide/show.
-</p>
 <p style="display:none">
     <%# link_to 'New Sale', new_sale_path %>
 </p>
 
-<%= render 'sales_table', sales: @sales_not_shipped, title: 'Not Shipped' %>
-<%= render 'sales_table', sales: @sales_printed, title: 'Printed' %>
-<%= render 'sales_table', sales: @sales_shipped, title: 'Shipped' %>
+<div class="tabs">
+  <div class="tab">
+    New <span class="demph"><%= @sales_not_shipped.length %></span>
+  </div>
+  <div class="tab">
+    Printed <span class="demph"><%= @sales_printed.length %></span>
+  </div>
+  <div class="tab">
+    Shipped <span class="demph"><%= @sales_shipped.length %></span>
+  </div>
+  <div class="tab">
+    All
+  </div>
+  <div class="tab-divider"></div>
+  <div class="card">
+    <%= render 'sales_table', sales: @sales_not_shipped, title: 'Not Shipped' %>
+  </div>
+  <div class="card">
+    <%= render 'sales_table', sales: @sales_printed, title: 'Printed' %>
+  </div>
+  <div class="card">
+    <%= render 'sales_table', sales: @sales_shipped, title: 'Shipped' %>
+  </div>
+  <div class="card">
+    <%= render 'sales_table', sales: @sales_not_shipped, title: 'Not Shipped' %>
+    <%= render 'sales_table', sales: @sales_printed, title: 'Printed' %>
+    <%= render 'sales_table', sales: @sales_shipped, title: 'Shipped' %>
+  </div>
+</div>
 
 <%= content_for :js do %>
 <script>
@@ -17,6 +40,11 @@
         .on('click', function() {
             $(this).next('table').toggle()
         })
+</script>
+<script>
+  $(document).ready(function(){
+    $('.tabs').tabs();
+  });
 </script>
 <% end %>
 

@@ -127,5 +127,29 @@ input.input--dim {
 
 
 .card {
-  padding: 20px;
+  padding: 10px;
+}
+
+.tab {
+    border: 1px solid #aaa;
+    border-bottom: 0;
+    margin: 0;
+    background-color: #fff;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.tab-divider {
+    border-top: 1px solid #aaa;
+    position: relative;
+    top: -1px;
+    z-index: -1;
+}
+
+
+.demph {
+    color: #bbb;
+}
+.tab .demph {
+    display: inline-block;
+    margin-left: .2em;
 }
