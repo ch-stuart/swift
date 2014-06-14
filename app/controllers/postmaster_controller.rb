@@ -134,7 +134,7 @@ class PostmasterController < ApplicationController
       }
     }
 
-    if shipment_params[:envelope]
+    if shipment_params[:envelope].present?
       postmaster_params[:package].delete(:width)
       postmaster_params[:package].delete(:height)
       postmaster_params[:package].delete(:length)
