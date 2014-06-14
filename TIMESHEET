@@ -216,6 +216,7 @@ date:        time (minutes):       comment:
 2014-06-10 35 Add ability to mark sale as printed
 2014-06-11 20 Improve logging of exceptions when creating a shipment
 2014-06-11 20 Improve form behavior and help text when creating a shipment
-2014-06-11 10 Fix bug where WxHxL were being discarded when creating a shipment
+2014-06-11 30 Fix bug where WxHxL were being discarded when creating a shipment
+2014-06-14 10 Update to flick raw 0.9.8 to ensure Flickr API compatibility when they switch to SSL-only
 
 http://www.timer-tab.com
