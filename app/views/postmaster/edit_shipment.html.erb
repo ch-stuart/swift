@@ -40,7 +40,13 @@
       Input the weight, and then choose if you want to ship this order in a box or an envelope.
     </p>
     <label>Weight (in lbs)</label>
-    <input class="input--dim" type="text" name="shipment[weight]">
+    <input
+      id="inputWeight"
+      class="input--dim"
+      type="number"
+      step="0.01"
+      min="0"
+      name="shipment[weight]">
     <p class="hint">Ex: 3.24, 3.2 or 3 (can include tenths or hundredths of a pound)</p>
     <h4>
       Ship in a box
@@ -48,7 +54,7 @@
     <p>
       Choose a box from the drop down or input the W&#215;H&#215;L manually.
     </p>
-    <select id="box_select">
+    <select id="selectBox">
       <option></option>
       <% @boxes.each do |box| %>
         <option value="<%= box[:width].to_i %>:<%= box[:height].to_i %>:<%= box[:length].to_i %>">
@@ -56,15 +62,33 @@
         </option>
       <% end %>
     </select>
-    <input id="w_input" placeholder="W" class="input--dim" type="text" name="shipment[width]"> &#215;
-    <input id="h_input" placeholder="H" class="input--dim" type="text" name="shipment[height]"> &#215;
-    <input id="l_input" placeholder="L" class="input--dim" type="text" name="shipment[length]">
+    <input
+      id="inputWidth"
+      placeholder="W"
+      class="input--dim"
+      type="number"
+      min="0"
+      name="shipment[width]"> &#215;
+    <input
+      id="inputHeight"
+      placeholder="H"
+      class="input--dim"
+      type="number"
+      min="0"
+      name="shipment[height]"> &#215;
+    <input
+      id="inputLength"
+      placeholder="L"
+      class="input--dim"
+      type="number"
+      min="0"
+      name="shipment[length]">
     <p class="hint">Ex: 3 or 6 (round up to the nearest integer)</p>
 
     <h4>
-      Ship in an "TUBE", "LETTER" or "PAK"
+      Ship in a "<a href="https://www.postmaster.io/docs/api#packages">LETTER</a>"
     </h4>
-    <select id="package_select" name="shipment[envelope]">
+    <select id="selectPackage" name="shipment[envelope]">
       <option></option>
       <!-- <option value="TUBE">TUBE</option> -->
       <option value="LETTER">LETTER</option>
@@ -76,38 +100,121 @@
   </div>
 
   <br class="clear">
-  <p style="margin-top: 60px">
-    <input type="submit" value="Ship it" class="btn">
-  </p>
+  <div class="eight columns">
+    &nbsp;
+  </div>
+  <div class="eight columns" style="margin-top: 60px; margin-bottom: 60px">
+    <input id="btnSubmit" type="submit" value="Ship it" class="btn">
+  </div>
+  <br class="clear">
 </form>
 
 <%= content_for :js do %>
   <script>
+    function isFloat(n) {
+        n = parseFloat(n);
+        return n === +n && n !== (n|0);
+    }
+    function isInteger(n) {
+        n = parseFloat(n);
+        return n === +n && n === (n|0);
+    }
+    function pF(val) {
+      return parseFloat(val);
+    }
+    function isValidWeight(val) {
+      var decimels = '';
+      if (val.indexOf('.') !== -1) {
+        decimels = val.split('.')[1];
+      }
+      return val && (isFloat(val) || isInteger(val)) && pF(val) > 0 && decimels.length < 3;
+    }
+    function isValidDimension(val) {
+      return val && isInteger(val) && pF(val) > 0;
+    }
     function $$(id) {
-      return document.getElementById(id);
+      return document.getElementById(id)
     }
 
-    var box_slct = $$('box_select')
-    var dim_w = $$('w_input')
-    var dim_h = $$('h_input')
-    var dim_l = $$('l_input')
+    var btnSubmit     = $$('btnSubmit'),
+        selectBox     = $$('selectBox'),
+        selectPackage = $$('selectPackage'),
+        inputWeight   = $$('inputWeight'),
+        inputWidth    = $$('inputWidth'),
+        inputHeight   = $$('inputHeight'),
+        inputLength   = $$('inputLength')
 
+    function clearDims() {
+      inputWidth.value = inputHeight.value = inputLength.value = ''
+    }
+    function getSelectVal(select) {
+      return select.options[select.selectedIndex].value
+    }
+    function errInput(input) {
+      input.style.border = '1px solid red'
+    }
+    function cleanInput(input) {
+      input.removeAttribute('style')
+    }
     function setBoxVals() {
-      var vals = box_slct.value.split(':');
+      var vals = selectBox.value.split(':')
       if (vals[0] && vals[1] && vals[2]) {
-        dim_w.value = vals[0]
-        dim_h.value = vals[1]
-        dim_l.value = vals[2]
+        inputWidth.value  = vals[0]
+        inputHeight.value = vals[1]
+        inputLength.value = vals[2]
       } else {
-        dim_w.value = dim_h.value = dim_l.value = '';
+        clearDims()
       }
     }
-    box_slct.onchange = setBoxVals;
-    setBoxVals();
 
-    var package_select = $$('package_select');
-    package_select.onchange = function() {
-      dim_w.value = dim_h.value = dim_l.value = '';
+    selectBox.onchange = setBoxVals
+    setBoxVals()
+
+    selectPackage.onchange = function() {
+      clearDims()
+    }
+
+    inputWeight.onkeyup = function() {
+      console.log(this.value);
+      if (isValidWeight(this.value)) {
+        cleanInput(this)
+      } else {
+        errInput(this)
+      }
+    }
+
+    inputWidth.onkeyup = inputHeight.onkeyup = inputLength.onkeyup = function() {
+      if (isValidDimension(this.value)) {
+        cleanInput(this)
+      } else {
+        errInput(this)
+      }
+    }
+
+    btnSubmit.onclick = function(e) {
+      if (isValidWeight(inputWeight.value)) {
+        cleanInput(inputWeight)
+      } else {
+        alert('A weight is required. The value should be a number with up to two decimel places, e.g. 2.05.')
+        errInput(inputWeight)
+        e.preventDefault()
+      }
+
+      // If they are not shipping with LETTER, validate WxHxL
+      if (!getSelectVal(selectPackage)) {
+        if (isValidDimension(inputWidth.value) && isValidDimension(inputHeight.value) && isValidDimension(inputLength.value)) {
+          cleanInput(inputWidth)
+          cleanInput(inputHeight)
+          cleanInput(inputLength)
+        } else {
+          alert('You must input width, height and length if this is not a LETTER. The values must be integers.')
+          errInput(inputWidth)
+          errInput(inputHeight)
+          errInput(inputLength)
+
+          e.preventDefault()
+        }
+      }
     }
   </script>
 <% end %>
