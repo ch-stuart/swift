@@ -15,6 +15,8 @@ module Flickr
         Rails.logger.info "Flickr#get_photos_by_tag: Using cached result"
         Rails.logger.info "#{Rails.cache.read(tag)}"
         return Rails.cache.read(tag)
+      else
+        Rails.logger.info "Flickr#get_photos_by_tag: No cached result available"
       end
     end
 
@@ -28,7 +30,7 @@ module Flickr
     # ... 5 more to get the medium size photos
     # boo
     flickr.photos.search(:user_id => APP_CONFIG[:flickr_user_id], :tags => URI.escape(tag)).each do |p|
-      # Rails.logger.info "Getting photo: #{p.inspect}"
+      Rails.logger.info "Flickr#get_photos_by_tag: Photo returned: #{p.inspect}"
 
       # Get photo info
       photo_info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
