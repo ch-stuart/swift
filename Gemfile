@@ -4,7 +4,7 @@ ruby '1.9.3'
 gem 'rails', '3.2.17'
 gem 'pg', '0.17.1'
 gem "thin"
-gem 'flickraw', '0.9.7'
+gem 'flickraw', '0.9.8'
 gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails', '~> 2.2.1'
