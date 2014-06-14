@@ -135,6 +135,7 @@ class PostmasterController < ApplicationController
     }
 
     if shipment_params[:envelope].present?
+      logger.info "Deleting width, height and length b/c we have an envelope"
       postmaster_params[:package].delete(:width)
       postmaster_params[:package].delete(:height)
       postmaster_params[:package].delete(:length)
