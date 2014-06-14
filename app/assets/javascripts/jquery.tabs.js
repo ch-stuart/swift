@@ -6,6 +6,11 @@ jQuery.fn.tabs = function(params) {
         'cards': '.card',
         'index': '0'
     };
+
+    if (location.hash.indexOf('tab')) {
+        defaults.index = location.hash.replace('#tab', '');
+    }
+
     params = $.extend(defaults, params);
 
     return this.each(function() {
@@ -23,6 +28,8 @@ jQuery.fn.tabs = function(params) {
                 .removeClass('active')
                 .eq(idx)
                 .addClass('active');
+
+            location.hash = '#tab'+idx;
         };
 
         set(params.index);
