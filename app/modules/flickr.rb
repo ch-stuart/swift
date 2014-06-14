@@ -3,15 +3,17 @@ module Flickr
   flickr_photo_sizes = %w{Large Medium Small Thumbnail}
 
   def get_photos_by_tag tag
-    Rails.logger.info "Flickr.get_photos_by_tag #{tag}"
+    Rails.logger.info "Flickr#get_photos_by_tag: #{tag}"
 
     # return [] if not tag
     if tag.blank?
-      Rails.logger.warn "Tag is blank. Returning empty array"
+      Rails.logger.warn "Flickr#get_photos_by_tag: Tag is blank. Returning empty array"
       return []
     else
       # check for photos in cache if tag is present
-      if Rails.cache.exist?(tag)
+      if Rails.cache.exist?(tag) && Rails.cache.read(tag).present?
+        Rails.logger.info "Flickr#get_photos_by_tag: Using cached result"
+        Rails.logger.info "#{Rails.cache.read(tag)}"
         return Rails.cache.read(tag)
       end
     end
@@ -74,10 +76,12 @@ module Flickr
   end
 
   def get_photo_by_id(id, size=nil)
+    Rails.logger.info "Flickr#get_photos_by_id #{id}"
+
     if id.blank?
       return ""
     else
-      if Rails.cache.exist?(id)
+      if Rails.cache.exist?(id) && Rails.cache.read(id).present?
         return Rails.cache.read(id)
       end
     end
@@ -104,10 +108,12 @@ module Flickr
   end
 
   def get_photos_by_set id
+    Rails.logger.info "Flickr#get_photos_by_set #{id}"
+
     if id.blank?
       return []
     else
-      if Rails.cache.exist?(id)
+      if Rails.cache.exist?(id) && Rails.cache.read(id).present?
         return Rails.cache.read(id)
       end
     end
