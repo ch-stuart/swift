@@ -1,6 +1,3 @@
-<h3>
-    <%= title %>
-</h3>
 <table>
   <tr>
     <th>Order Date</th>
@@ -19,14 +16,18 @@
 
 <% sales.each do |sale| %>
   <tr>
-    <td><%= sale.created_at.strftime("%b %-d") %></td>
+    <td>
+      <nobr><%= sale.created_at.strftime("%b %-d") %></nobr>
+    </td>
     <td>
       <a href="/orders/<%= sale.guid %>">
         /orders/<%= sale.guid %>
       </a>
     </td>
     <td><%= link_to "/sales/#{sale.id}", sale %></td>
-    <td><%= mail_to sale.email, nil, subject: "Your Swift Industries Order [#{sale.guid}]" %></td>
+    <td>
+      <%= mail_to sale.email, truncate(sale.email, length: 20), subject: "Your Swift Industries Order [#{sale.guid}]", body: "Hi #{sale.contact}, \n\nThanks,\nSwift Industries\n\nhttps://www.builtbyswift.com/orders/#{sale.guid}" %>
+    </td>
     <td>
       <nobr>
         <%= image_tag "flags/#{sale.country.downcase}.png" %> <%= last_name(sale) %>
