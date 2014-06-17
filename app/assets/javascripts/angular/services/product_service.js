@@ -29,10 +29,14 @@ SwiftApp.service('ProductService', ['$http', function($http) {
             // Set this so we can use it later when setting the
             // new title if the user picks a size
             response.product.originalTitle = response.product.title;
-            response.product.originalPrice = response.product.price;
+            // Not used
+            // response.product.originalPrice = response.product.price;
 
-            // TODO fire an event?
-            // $scope.onSizeSelectChanged();
+            // Set the price on page load
+            response.product.price = response.product.selectedSize.price;
+            response.product.wholesale_price = response.product.selectedSize.wholesale_price;
+
+            console.log('ProductService#setupSizes: We have sizes', response.product.price);
         }
     }
 

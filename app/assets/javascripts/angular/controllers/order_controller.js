@@ -184,6 +184,7 @@ SwiftApp.controller('OrderCtrl', [
     $scope['onSizeSelectChanged'] = function() {
         this.product.title = this.product.originalTitle + ' (' + this.product.selectedSize.title + ')';
         this.product.price = parseFloat(this.product.selectedSize.price);
+        console.log('OrderCtrl#onSizeSelectChanged: Price is now', this.product.price);
     };
 
     $scope['onChooseColorButtonClicked'] = function() {
