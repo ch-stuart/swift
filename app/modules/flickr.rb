@@ -72,6 +72,15 @@ module Flickr
       photos.push photo
     end
 
+    if photos.empty?
+      # Test this
+      # ExceptionNotifier.notify_exception(
+      #   { :tag => tag },
+      #   :env => request.env,
+      #   :data => { :message => "Flickr#get_photos_by_tag returned no results" }
+      # )
+    end
+
     Rails.cache.write(tag, photos)
 
     photos
