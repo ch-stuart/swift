@@ -219,5 +219,6 @@ date:        time (minutes):       comment:
 2014-06-11 30 Fix bug where WxHxL were being discarded when creating a shipment
 2014-06-14 10 Update to flick raw 0.9.8 to ensure Flickr API compatibility when they switch to SSL-only
 2014-06-14 15 UI improvements to sales page
+2014-06-15 20 Research on authentication libraries
 
 http://www.timer-tab.com
