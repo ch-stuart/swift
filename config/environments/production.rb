@@ -83,9 +83,23 @@ SwiftSite::Application.configure do
   config.middleware.use ExceptionNotification::Rack,
     :email => {
       :email_prefix => "[Exception at builtbyswift.com] ",
-      :sender_address => %{"notifier" <cs@enure.net>},
+      :sender_address => %{"notifier" <admin@builtbyswift.com>},
       :exception_recipients => %w{app.logging@builtbyswift.com}
     }
+
+  ActionMailer::Base.smtp_settings = {
+      port:           '587',
+      address:        'smtp.mandrillapp.com',
+      user_name:      ENV['MANDRILL_PRODUCTION_USERNAME'],
+      password:       ENV['MANDRILL_PRODUCTION_APIKEY'],
+      domain:         'heroku.com',
+      authentication: :plain
+  }
+  ActionMailer::Base.delivery_method = :smtp
+  config.action_mailer.default_url_options = {
+    :host => 'www.builtbyswift.com'
+  }
+
 
 end
 
