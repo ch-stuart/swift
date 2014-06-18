@@ -220,5 +220,7 @@ date:        time (minutes):       comment:
 2014-06-14 10 Update to flick raw 0.9.8 to ensure Flickr API compatibility when they switch to SSL-only
 2014-06-14 15 UI improvements to sales page
 2014-06-15 20 Research on authentication libraries
+2014-06-17 10 Show notice if photos cannot be retrieved from Flickr
+2014-06-17 20 Move sales that have been shipped without postmaster (also create "Trash" category)
 
 http://www.timer-tab.com
