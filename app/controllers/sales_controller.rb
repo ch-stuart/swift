@@ -12,6 +12,7 @@ class SalesController < ApplicationController
     @sales_not_shipped = Sale.where(status: 'Not Shipped').reverse
     @sales_printed = Sale.where(status: 'Printed').reverse
     @sales_shipped = Sale.where(status: 'Shipped').reverse
+    @sales_deleted = Sale.where(status: 'Deleted').reverse
 
     render :layout => "hub"
     #

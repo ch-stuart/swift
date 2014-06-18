@@ -11,19 +11,28 @@
 
 <p>
   <%= link_to raw('&larr; Sales'), sales_path, class: "btn" %>
-  <% if @sale.status != "Printed" && @sale.status != "Shipped" %>
+  <% if @sale.status != "Printed" && @sale.status != "Shipped" && @sale.status != "Deleted" %>
     <a href="/orders/<%= @sale.guid %>" class="btn">
         View Printable Page
     </a>
     <%= link_to "Mark as 'Printed'", sale_path(id: @sale.id, sale: { status: "Printed" }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsPrinted', class: 'btn' %>
-    <%= render 'show_stripe_link' %>
+    <%= render "show_stripe_link" %>
   <% else %>
     <a href="/orders/<%= @sale.guid %>" class="btn">
       View Customer URL
     </a>
-    <%= render 'show_stripe_link' %>
+    <%= render "show_stripe_link" %>
+  <% end %>
+  <% if @sale.status != "Deleted" %>
+    <%= link_to "Delete", sale_path(id: @sale.id, sale: { status: "Deleted" }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsDeleted', class: 'btn' %>
   <% end %>
 </p>
+<% if @sale.status == "Deleted" %>
+  <p>
+    <i>This sale is in the trash!</i>
+  </p>
+<% end %>
+
 
 <div class="tabs">
   <div class="tab">
@@ -35,6 +44,7 @@
   <div class="tab">
     Data
   </div>
+  <div class="tab-divider"></div>
   <div class="card">
     <%= render 'show_order' %>
   </div>
@@ -58,6 +68,17 @@
       });
   });
   $('#markAsPrinted').on('ajax:error', function(event) {
+    alert('An error occurred. Try again.');
+  });
+
+  $('#markAsDeleted').on('ajax:success', function(event) {
+    $('#markAsDeleted')
+      .text('Wah!')
+      .fadeOut(function() {
+        location.reload()
+      });
+  });
+  $('#markAsDeleted').on('ajax:error', function(event) {
     alert('An error occurred. Try again.');
   });
 

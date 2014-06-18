@@ -14,6 +14,9 @@
     Shipped <span class="demph"><%= @sales_shipped.length %></span>
   </div>
   <div class="tab">
+    Trash <span class="demph"><%= @sales_deleted.length %></span>
+  </div>
+  <div class="tab">
     All
   </div>
   <div class="tab-divider"></div>
@@ -25,6 +28,9 @@
   </div>
   <div class="card">
     <%= render 'sales_table', sales: @sales_shipped, title: 'Shipped' %>
+  </div>
+  <div class="card">
+    <%= render 'sales_table', sales: @sales_deleted, title: 'Deleted' %>
   </div>
   <div class="card">
     <%= render 'sales_table', sales: @sales_not_shipped, title: 'Not Shipped' %>
