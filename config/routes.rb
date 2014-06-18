@@ -33,13 +33,13 @@ SwiftSite::Application.routes.draw do
   end
 
   # # view cart
-  # http://builtbyswift.com/cart
+  # https://www.builtbyswift.com/cart
   #
   # # purchase what's in cart/checkout
-  # http://builtbyswift.com/cart/checkout
+  # https://www.builtbyswift.com/cart/checkout
   #
   # # completed purchase
-  # http://builtbyswift.com/orders/7e59b9a5-4055-46eb-944c-185051f9ebf7
+  # https://www.builtbyswift.com/orders/7e59b9a5-4055-46eb-944c-185051f9ebf7
 
   resources :sales do
     get 'success', on: :member
