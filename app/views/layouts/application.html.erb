@@ -32,12 +32,16 @@
       You are signed in as a wholesaler. Prices are adjusted (lowered). Minimum $500 purchase required.
     </h2>
   <% end %>
-  <div class="app-notice">
-    <%= notice %>
-  </div>
-  <div class="app-alert">
-    <%= alert %>
-  </div>
+  <% if notice.present? %>
+    <h2 class="app-notice">
+      <%= notice %>
+    </h2>
+  <% end %>
+  <% if alert.present? %>
+    <h2 class="app-alert">
+      <%= alert %>
+    </h2>
+  <% end %>
   <div class="container-menu-wrap">
     <div class="container container-menu">
       <div class="sixteen columns menu--row-btns">
