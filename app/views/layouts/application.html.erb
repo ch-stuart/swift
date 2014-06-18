@@ -48,6 +48,11 @@
             <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
           </a>
         <% end %>
+        <% if user_signed_in? %>
+          <%= link_to(raw('<i class="entypo entypo-signout">&#59201;</i>'), destroy_user_session_path, :method => :delete, :title => "Sign Out") %>
+        <% else %>
+          <%= link_to(raw('<i class="entypo entypo-signin">&#59200;</i>'), new_user_session_path, :title => "Wholesale Sign In") %>
+        <% end %>
         <br class="clear">
       </div>
       <%= render 'shared/global_nav' %>
