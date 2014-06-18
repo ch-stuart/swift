@@ -212,15 +212,19 @@ date:        time (minutes):       comment:
 
 //// invoice on laptop //
 
-2014-06-09 10 Add flags to sales table
-2014-06-10 35 Add ability to mark sale as printed
-2014-06-11 20 Improve logging of exceptions when creating a shipment
-2014-06-11 20 Improve form behavior and help text when creating a shipment
-2014-06-11 30 Fix bug where WxHxL were being discarded when creating a shipment
-2014-06-14 10 Update to flick raw 0.9.8 to ensure Flickr API compatibility when they switch to SSL-only
-2014-06-14 15 UI improvements to sales page
-2014-06-15 20 Research on authentication libraries
-2014-06-17 10 Show notice if photos cannot be retrieved from Flickr
-2014-06-17 20 Move sales that have been shipped without postmaster (also create "Trash" category)
+2014-06-09 10  Add flags to sales table
+2014-06-10 35  Add ability to mark sale as printed
+2014-06-11 20  Improve logging of exceptions when creating a shipment
+2014-06-11 20  Improve form behavior and help text when creating a shipment
+2014-06-11 30  Fix bug where WxHxL were being discarded when creating a shipment
+2014-06-14 10  Update to flick raw 0.9.8 to ensure Flickr API compatibility when they switch to SSL-only
+2014-06-14 15  UI improvements to sales page
+2014-06-15 20  Research on authentication libraries
+2014-06-17 10  Show notice if photos cannot be retrieved from Flickr
+2014-06-17 20  Move sales that have been shipped without postmaster (also create "Trash" category)
+2014-06-17 20  Add production email configuration (this was forgotten previously)
+2014-06-17 130 WIP devise
+
+
 
 http://www.timer-tab.com
