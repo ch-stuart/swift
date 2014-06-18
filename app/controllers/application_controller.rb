@@ -55,11 +55,16 @@ class ApplicationController < ActionController::Base
   end
 
   def resolve_layout
-    case action_name
-    when "new", "edit", "create", "update", "destroy"
-      "hub"
+    Rails.logger.info controller_name
+    if controller_name == "sessions"
+      "devise"
     else
-      "application"
+      case action_name
+      when "new", "edit", "create", "update", "destroy"
+        "hub"
+      else
+        "application"
+      end
     end
   end
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="SwiftApp" class="nojs">
+<head>
+  <meta charset="utf-8">
+  <%# Always force latest IE rendering engine (even in intranet) & Chrome Frame
+      Remove this if you use the .htaccess %>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>
+    <%= "#{@subtitle} from " if @subtitle.present? %><%= @title %> | handmade bicycle panniers and accessories
+  </title>
+  <link type="text/plain" rel="author" href="//builtbyswift.com/humans.txt">
+  <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <%= stylesheet_link_tag "application" %>
+  <%= yield :css %>
+  <%= stylesheet_link_tag "print", media: "print" %>
+  <%= csrf_meta_tag %>
+</head>
+<body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
+  <h2 id="js_app-notice" class="app-notice" style="display:none"></h2>
+  <h2 id="js_app-alert" class="app-alert" style="display:none"></h2>
+  <div class="container-menu-wrap">
+    <div class="container container-menu">
+      <div class="sixteen columns menu--row-btns">
+        <% cache 'fox_and_cart' do %>
+          <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
+          <a
+              href="/cart"
+              ng-controller="CartStatusCtrl"
+              ng-cloak
+              title="View Your Cart {{ cart.message }}">
+            <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
+          </a>
+        <% end %>
+        <% if user_signed_in? %>
+          <%= link_to(raw('<i class="entypo entypo-signout">&#59201;</i>'), destroy_user_session_path, :method => :delete, :title => "Sign Out") %>
+        <% else %>
+          <%= link_to(raw('<i class="entypo entypo-signin">&#59200;</i>'), new_user_session_path, :title => "Wholesale Sign In") %>
+        <% end %>
+        <br class="clear">
+      </div>
+    </div>
+  </div>
+  <div class="container container-logo">
+    <div class="sixteen columns clearfix row-header" style="text-align: center">
+      <h1 class="row-header--logo-wrap">
+        <a href="/" class="row-header--link" title="Go Home">
+          <%= image_tag "logo.png", :class => "row-header--logo", :alt => "Swift Industries" %>
+        </a>
+      </h1>
+      <h2 class="row-header--description">
+        <% cache 'company_description' do %>
+          <%= Company.first.description if Company.first.description.present? %>
+        <% end %>
+      </h2>
+    </div>
+  </div>
+  <div class="container container-main container-w-padding">
+    <%= yield %>
+  </div>
+  <% if session[:is_wholesale_user] %>
+  <script>window.__iswsu__=true</script>
+  <% end %>
+  <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
+  <%= javascript_include_tag "application" %>
+  <%= yield :js %>
+  <%= render "shared/analytics" unless Rails.env == "development" %>
+</body>
+</html>
