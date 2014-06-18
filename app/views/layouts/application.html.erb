@@ -55,38 +55,44 @@
         <% end %>
         <br class="clear">
       </div>
-      <%= render 'shared/global_nav' %>
+      <% cache 'global_nav' do %>
+        <%= render 'shared/global_nav' %>
+      <% end %>
     </div>
   </div>
-  <div class="container container-logo">
-    <div class="sixteen columns clearfix row-header" style="text-align: center">
-      <h1 class="row-header--logo-wrap">
-        <a href="/" class="row-header--link" title="Go Home">
-          <%= image_tag "logo.png", :class => "row-header--logo", :alt => "Swift Industries" %>
-        </a>
-      </h1>
-      <h2 class="row-header--description">
-        <% cache 'company_description' do %>
+  <% cache 'company_description_etc' do %>
+    <div class="container container-logo">
+      <div class="sixteen columns clearfix row-header" style="text-align: center">
+        <h1 class="row-header--logo-wrap">
+          <a href="/" class="row-header--link" title="Go Home">
+            <%= image_tag "logo.png", :class => "row-header--logo", :alt => "Swift Industries" %>
+          </a>
+        </h1>
+        <h2 class="row-header--description">
           <%= Company.first.description if Company.first.description.present? %>
-        <% end %>
-      </h2>
+        </h2>
+      </div>
     </div>
-  </div>
+  <% end %>
   <div class="container container-main container-w-padding">
     <%= yield %>
   </div>
-  <div class="container-footer-wrap">
-    <div class="container container-footer">
-      <%= render "shared/footer" %>
-      <%# render "shared/no_js" %>
-      <%= render "shared/humans" %>
+  <% cache 'footer' do %>
+    <div class="container-footer-wrap">
+      <div class="container container-footer">
+        <%= render "shared/footer" %>
+        <%# render "shared/no_js" %>
+        <%= render "shared/humans" %>
+      </div>
     </div>
-  </div>
+  <% end %>
   <% if session[:is_wholesale_user] %>
   <script>window.__iswsu__=true</script>
   <% end %>
-  <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
-  <%= javascript_include_tag "application" %>
+  <% cache 'javascript' do %>
+    <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
+    <%= javascript_include_tag "application" %>
+  <% end %>
   <%= yield :js %>
   <%= render "shared/analytics" unless Rails.env == "development" %>
 </body>

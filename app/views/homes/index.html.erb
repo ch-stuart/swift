@@ -1,70 +1,72 @@
-<div class="row">
-  <%= render 'hero' %>
-</div>
-<div class="row">
-  <%= render "products_nav" %>
-</div>
-<div class="row">
-  <div class="sixteen columns">
-    <p>
-      Also take a look at our <%= link_to "Ready Made", store_path, :class => "hl-link" %> store.
-    </p>
+<% cache 'homes_index' do %>
+  <div class="row">
+    <%= render 'hero' %>
   </div>
-</div>
-<div class="row">
-  <div class="eight columns">
-    <% @featured_pages.each do |featured_page| %>
-      <article class="featured-page">
-        <% unless featured_page.hide_title_on_homepage %>
-          <h3>
-            <%= featured_page.title %>
-          </h3>
-        <% end %>
-        <% if featured_page.show_video_on_homepage %>
-          <div class="featured-page__video-wrap">
-            <%= raw featured_page.video_html %>
-          </div>
-        <% end %>
-        <% if featured_page.show_photo_on_homepage %>
-          <div class="featured-page__photo-wrap">
-            <% photo_url = Page.get_photo_by_id(featured_page.flickr_photo, "Medium") %>
-            <%= link_to(image_tag(photo_url, :class => "scale-with-grid"), featured_page) %>
-          </div>
-        <% end %>
-        <% if featured_page.summary.present? %>
-          <p class="featured-page__summary">
-            <%= featured_page.summary %>
-          </p>
-        <% end %>
-        <% unless featured_page.hide_read_more_link_on_homepage %>
-          <p>
-            <%= link_to raw("read more &rarr;"), featured_page, :class => "hl-link" %>
-          </p>
-        <% end %>
+  <div class="row">
+    <%= render "products_nav" %>
+  </div>
+  <div class="row">
+    <div class="sixteen columns">
+      <p>
+        Also take a look at our <%= link_to "Ready Made", store_path, :class => "hl-link" %> store.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="eight columns">
+      <% @featured_pages.each do |featured_page| %>
+        <article class="featured-page">
+          <% unless featured_page.hide_title_on_homepage %>
+            <h3>
+              <%= featured_page.title %>
+            </h3>
+          <% end %>
+          <% if featured_page.show_video_on_homepage %>
+            <div class="featured-page__video-wrap">
+              <%= raw featured_page.video_html %>
+            </div>
+          <% end %>
+          <% if featured_page.show_photo_on_homepage %>
+            <div class="featured-page__photo-wrap">
+              <% photo_url = Page.get_photo_by_id(featured_page.flickr_photo, "Medium") %>
+              <%= link_to(image_tag(photo_url, :class => "scale-with-grid"), featured_page) %>
+            </div>
+          <% end %>
+          <% if featured_page.summary.present? %>
+            <p class="featured-page__summary">
+              <%= featured_page.summary %>
+            </p>
+          <% end %>
+          <% unless featured_page.hide_read_more_link_on_homepage %>
+            <p>
+              <%= link_to raw("read more &rarr;"), featured_page, :class => "hl-link" %>
+            </p>
+          <% end %>
+        </article>
+      <% end %>
+    </div>
+    <div class="eight columns">
+      <article class="blog">
+        <h3>
+          <%= @blog['title'] %>
+        </h3>
+        <p>
+          <%= image_tag @blog['img'], :class => "blog_img" %>
+          <%= raw @blog['description'] %>
+        </p>
+        <p>
+          <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'], :class => "hl-link" %>
+        </p>
       </article>
-    <% end %>
+    </div>
   </div>
-  <div class="eight columns">
-    <article class="blog">
-      <h3>
-        <%= @blog['title'] %>
-      </h3>
-      <p>
-        <%= image_tag @blog['img'], :class => "blog_img" %>
-        <%= raw @blog['description'] %>
-      </p>
-      <p>
-        <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'], :class => "hl-link" %>
-      </p>
-    </article>
-  </div>
-</div>
 
-<% content_for :js do %>
-<script>
-  $(document).ready(function() {
-    $('#hero').hero();
-    $('.featured-page__video-wrap').fitVids();
-  });
-</script>
+  <% content_for :js do %>
+  <script>
+    $(document).ready(function() {
+      $('#hero').hero();
+      $('.featured-page__video-wrap').fitVids();
+    });
+  </script>
+  <% end %>
 <% end %>
