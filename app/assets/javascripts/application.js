@@ -2,6 +2,8 @@
 // ...
 //= require dollardollar
 //= require jquery
+//= require flash
+//= require jquery.cookie
 //= require angular
 //= require global_exception_service
 //= require console
@@ -66,4 +68,9 @@ jQuery(document).ready(function($) {
     // $(window).on('resize', function() {
     //     $('#width').text( $(document.body).css('width') );
     // });
+
+    // https://github.com/pivotal/cacheable-flash
+    Flash.transferFromCookies();
+    Flash.writeDataTo('alert', $('#js_app-alert'));
+    Flash.writeDataTo('notice', $('#js_app-notice'));
 });

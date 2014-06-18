@@ -20,6 +20,7 @@ gem 'httpclient'
 gem 'exception_notification'
 gem 'rack-rewrite'
 gem 'devise'
+gem 'cacheable_flash'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '

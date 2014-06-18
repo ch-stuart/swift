@@ -22,3 +22,20 @@
     line-height: 1.2;
     margin: -4px 0 0 0;
 }
+.app-notice,
+.app-alert {
+    text-transform: none;
+    text-align: center;
+    color: #fff;
+    font-weight: normal;
+    font-size: 20px;
+    padding: 10px;
+    line-height: 1.2;
+    margin: -4px 0 0 0;
+}
+.app-alert {
+    background-color: #FF851B;
+}
+.app-notice {
+    background-color: #39CCCC;
+}
