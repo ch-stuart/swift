@@ -69,8 +69,8 @@ SwiftSite::Application.configure do
 
   config.middleware.use ExceptionNotification::Rack,
     :email => {
-      :email_prefix => "[Exception at builtbyswift.com] ",
-      :sender_address => %{"notifier" <cs@enure.net>},
+      :email_prefix => "[Exception at builtbyswift.com (STAGING)] ",
+      :sender_address => %{"notifier" <admin@builtbyswift.com>},
       :exception_recipients => %w{app.logging@builtbyswift.com}
     }
 
