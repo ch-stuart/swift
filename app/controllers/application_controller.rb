@@ -1,13 +1,9 @@
 class ApplicationController < ActionController::Base
 
   include CacheableFlash
-
   protect_from_forgery
-
   layout :resolve_layout
-
   before_filter :title
-
   helper_method :title
 
   protected
