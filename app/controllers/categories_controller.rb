@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
 
-    before_filter :authenticate_admin
-    cache_sweeper ApplicationSweeper
-    layout "hub"
+  before_filter :verify_is_admin
+  cache_sweeper ApplicationSweeper
+  layout "hub"
 
   # GET /categories
   # GET /categories.json

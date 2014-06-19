@@ -1,10 +1,7 @@
 class ProductsController < ApplicationController
 
-  before_filter :authenticate_admin, :except => [ :show, :order ]
-  # caches_action :show, :order, :layout => false, :cache_path => Proc.new { |c|
-  #     { 'user_type' => session[:is_wholesale_user] ? "WS" : "STANDARD" }
-  # }
-  # cache_sweeper ApplicationSweeper
+  before_filter :verify_is_admin, :except => [ :show, :order ]
+  cache_sweeper ApplicationSweeper
 
   def index
     @public_products = Product.where(status: 'Public', kind: 'Product').order('title ASC')

@@ -1,6 +1,6 @@
 class SizesController < ApplicationController
 
-  before_filter :authenticate_admin
+  before_filter :verify_is_admin
   cache_sweeper ApplicationSweeper
   layout 'hub'
 

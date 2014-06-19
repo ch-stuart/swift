@@ -22,8 +22,6 @@ SwiftSite::Application.routes.draw do
   get 'hub/expire_home' => 'hub#expire_home'
   get 'hub/expire_flickr' => 'hub#expire_flickr'
 
-  # match 'deploy_hook/expire_cache' => 'application#expire_cache'
-
   resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials, :categories
 
   resources :products do
@@ -63,10 +61,6 @@ SwiftSite::Application.routes.draw do
   post 'postmaster/create_box', to: 'postmaster#create_box'
 
   match 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
-
-  get 'logout', :to => 'application#logout'
-  get 'login', :to => 'hub#index'
-  get 'wholesale_login', :to => 'application#wholesale_login'
 
   get 'store', :to => 'homes#store'
   get "accessories" => redirect("/store")
