@@ -60,9 +60,6 @@
   <div class="container container-main container-w-padding">
     <%= yield %>
   </div>
-  <% if session[:is_wholesale_user] %>
-  <script>window.__iswsu__=true</script>
-  <% end %>
   <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
   <%= javascript_include_tag "application" %>
   <%= yield :js %>
