@@ -27,9 +27,9 @@
       <%= @company.front_door_sign %>
     </h2>
   <% end %>
-  <% if session[:is_wholesale_user] %>
+  <% if current_user.try(:wholesale?) %>
     <h2 class="front_door_sign">
-      You are signed in as a wholesaler. Prices are adjusted (lowered). Minimum $500 purchase required.
+      Minimum $500 purchase required for wholesale purchases.
     </h2>
   <% end %>
   <h2 id="js_app-notice" class="app-notice" style="display:none"></h2>
@@ -86,7 +86,7 @@
       </div>
     </div>
   <% end %>
-  <% if session[:is_wholesale_user] %>
+  <% if current_user.try(:wholesale?) %>
   <script>window.__iswsu__=true</script>
   <% end %>
   <% cache 'javascript' do %>
