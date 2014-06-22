@@ -223,7 +223,9 @@ date:        time (minutes):       comment:
 2014-06-17 10  Show notice if photos cannot be retrieved from Flickr
 2014-06-17 20  Move sales that have been shipped without postmaster (also create "Trash" category)
 2014-06-17 20  Add production email configuration (this was forgotten previously)
-2014-06-17 130 WIP devise
+2014-06-17 130 WIP devise: initial set up
+2014-06-17 30  WIP devise: migrating from action caching to fragment caching
+2014-06-22 20  WIP Dealer Sign Up: adjusting verbiage, etc.
 
 
 
