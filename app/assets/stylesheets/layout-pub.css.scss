@@ -37,17 +37,25 @@ body {
             color: $hotpink;
         }
     }
-    .entypo-menu {
+    .entypo-menu,
+    .entypo-home {
         float: left;
     }
-    .entypo-cart,
-    .entypo-signout,
-    .entypo-signin {
+    .entypo-cart {
         float: right;
         font-size: 48px;
         margin-left: 18px;
     }
+    .dealer-sign-in-link,
+    .dealer-sign-out-link {
+        float: right;
+        color: lighten($text_lightgray, 20%);
+        font-size: 13px;
 
+        &:hover {
+            color: $hotpink;
+        }
+    }
     .menu--row-nav {
         padding: 30px 0;
     }

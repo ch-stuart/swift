@@ -49,9 +49,9 @@
           </a>
         <% end %>
         <% if user_signed_in? %>
-          <%= link_to(raw('<i class="entypo entypo-signout">&#59201;</i>'), destroy_user_session_path, :method => :delete, :title => "Sign Out") %>
+          <%= link_to("Sign Out", destroy_user_session_path, :method => :delete, :class => "dealer-sign-out-link") %>
         <% else %>
-          <%= link_to(raw('<i class="entypo entypo-signin">&#59200;</i>'), new_user_session_path, :title => "Wholesale Sign In") %>
+          <%= link_to("Dealer Sign In", new_user_session_path, :class => "dealer-sign-out-link") %>
         <% end %>
         <br class="clear">
       </div>

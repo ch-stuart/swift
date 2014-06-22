@@ -1,9 +1,10 @@
 <div class="sixteen columns col-session">
   <h2>
-    Sign In
+    Dealer Sign In
   </h2>
   <p>
-    Sign in to your wholesale account.
+    To become a Swift Industries dealer, you must apply by emailing
+    <%= mail_to Company.first.email, Company.first.email, encode: "hex", subject: "Dealer Sign Up" %>.
   </p>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="label-input-pair">
