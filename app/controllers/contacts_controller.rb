@@ -1,7 +1,6 @@
 class ContactsController < ApplicationController
 
   before_filter :verify_is_admin
-
   layout 'hub'
 
   # GET /contacts

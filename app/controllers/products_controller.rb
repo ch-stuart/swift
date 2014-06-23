@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
 
   before_filter :verify_is_admin, :except => [ :show, :order ]
+  caches_action :show, :order, :cache_path => Proc.new { |c|
+    { 'user_type' => current_user.try(:wholesale?) ? "WS" : "STANDARD" }
+  }
   cache_sweeper ApplicationSweeper
 
   def index

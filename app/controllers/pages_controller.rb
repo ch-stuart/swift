@@ -1,7 +1,12 @@
 class PagesController < ApplicationController
 
   before_filter :verify_is_admin, :except => [ :show ]
-  # cache_sweeper ApplicationSweeper
+
+  caches_action :show, :cache_path => Proc.new { |c|
+    { 'user_type' => current_user.try(:wholesale?) ? "WS" : "STANDARD" }
+  }
+
+  cache_sweeper ApplicationSweeper
 
   def index
     @pages = Page.all

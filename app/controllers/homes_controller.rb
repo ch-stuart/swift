@@ -2,6 +2,12 @@ class HomesController < ApplicationController
 
     require "open-uri"
 
+    before_filter :verify_is_admin, :except => [ :index, :store ]
+
+    caches_action :index, :store, :cache_path => Proc.new { |c|
+      { 'user_type' => current_user.try(:wholesale?) ? "WS" : "STANDARD" }
+    }
+
     def index
         @pages = Page.find_all_by_status("Public")
         @featured_pages = Page.where(:featured => "Featured").reverse

@@ -89,10 +89,8 @@
   <% if current_user.try(:wholesale?) %>
   <script>window.__iswsu__=true</script>
   <% end %>
-  <% cache 'javascript' do %>
-    <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
-    <%= javascript_include_tag "application" %>
-  <% end %>
+  <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
+  <%= javascript_include_tag "application" %>
   <%= yield :js %>
   <%= render "shared/analytics" unless Rails.env == "development" %>
 </body>

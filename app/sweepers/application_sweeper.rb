@@ -48,7 +48,15 @@ class ApplicationSweeper < ActionController::Caching::Sweeper
         #     expire_action :controller => 'sales', :action => 'success', :guid => sale.guid, :user_type => 'WS'
         # end
 
+        # this is a bit of a mess
+        expire_fragment 'homes_index'
+        expire_fragment 'meta_description'
+        expire_fragment 'fox_and_cart'
+        expire_fragment 'company_description_etc'
+        expire_fragment 'company_description'
+        expire_fragment 'analytics'
         expire_fragment 'footer'
+        expire_fragment 'no_js'
         expire_fragment 'global_nav'
         expire_fragment 'meta_description'
         expire_fragment 'company_description'
