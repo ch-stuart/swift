@@ -226,7 +226,8 @@ date:        time (minutes):       comment:
 2014-06-17 130 WIP devise: initial set up
 2014-06-17 30  WIP devise: migrating from action caching to fragment caching
 2014-06-22 20  WIP Dealer Sign Up: adjusting verbiage, etc.
-
-
+2014-06-25 300 WIP dealer sign up
+2014-06-25 15  Fix user being signed out on ajax post
+2014-06-25 15  Show user hint about password length and fix up error styles
 
 http://www.timer-tab.com
