@@ -4,14 +4,16 @@
     </div>
     <div class="clearfix row">
         <ul class="nav-list">
-            <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
-              <strong class="nav-list--group-heading">Your Account</strong>
-              <ul class="nav-list--group">
-                  <li class="nav-list--group-item">
-                      <%= link_to "Order History", orders_path, :class => "nav-list--group-item-link" %>
-                  </li>
-              </ul>
-            </li>
+            <% if current_user.try(:wholesale?) %>
+                <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+                  <strong class="nav-list--group-heading">Your Account</strong>
+                  <ul class="nav-list--group">
+                      <li class="nav-list--group-item">
+                          <%= link_to "Order History", orders_path, :class => "nav-list--group-item-link" %>
+                      </li>
+                  </ul>
+                </li>
+            <% end %>
             <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
                 <strong class="nav-list--group-heading">About Us</strong>
                 <ul class="nav-list--group">
