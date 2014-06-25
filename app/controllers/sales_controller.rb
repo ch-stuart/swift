@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
 
-  before_filter :verify_is_admin, :except => [ :checkout, :create, :success, :cart, :charge ]
+  before_filter :verify_is_admin, :except => [ :checkout, :create, :success, :cart, :charge, :history ]
   # cache_sweeper ApplicationSweeper
 
   # GET /sales
@@ -78,6 +78,18 @@ class SalesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       # format.json { render json: @sale }
+    end
+  end
+
+  def history
+    @company = Company.first
+    @categories = Category.all
+    @products = Product.where(:status => 'Public', :kind => 'Product')
+
+    if user_signed_in?
+      @sales = Sale.where(email: current_user.email)
+    else
+      @sales = []
     end
   end
 

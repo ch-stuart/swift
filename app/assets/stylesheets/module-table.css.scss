@@ -1,0 +1,26 @@
+.table {
+    width: 100%;
+    max-width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    thead th {
+        vertical-align: bottom;
+        font-weight: bold;
+        border-top: none !important;
+        text-align: left;
+    }
+
+    thead th,
+    tbody td {
+        padding: 8px;
+        line-height: 20px;
+        text-align: left;
+        vertical-align: top;
+        border-top: 1px solid #ddd;
+    }
+    tbody tr:last-child td {
+        border-bottom: 1px solid #ddd;
+    }
+}

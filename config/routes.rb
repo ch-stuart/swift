@@ -1,12 +1,5 @@
 SwiftSite::Application.routes.draw do
 
-  resources :pre_approved_dealers
-
-
-  devise_for :users
-
-  resources :users, only: [:index, :edit, :update, :destroy]
-
   # http://blog.bignerdranch.com/1666-redirect-www-subdomain-to-your-apex-domain-using-the-rails-router/
   # Remove the www from the URL, e.g. don't allow that stupid subdomain.
   # Why? It causes issues with caching, namely clearing the action cache (memcache) while
@@ -21,14 +14,16 @@ SwiftSite::Application.routes.draw do
   #   }
   # end
 
+  devise_for :users
+  resources :users, only: [:index, :edit, :update, :destroy]
+
   get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
 
   get 'hub/expire_home' => 'hub#expire_home'
   get 'hub/expire_flickr' => 'hub#expire_flickr'
 
-  resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials, :categories
-
+  resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials, :categories, :pre_approved_dealers
   resources :products do
     get 'order', on: :member
   end
@@ -55,6 +50,7 @@ SwiftSite::Application.routes.draw do
 
   get 'cart', to: 'sales#cart'
   get 'cart/checkout', to: 'sales#checkout'
+  get 'orders', to: 'sales#history'
   get 'orders/:guid', to: 'sales#success', as: :order
 
   post 'postmaster/validate', to: 'postmaster#validate'
