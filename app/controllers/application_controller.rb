@@ -38,4 +38,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def get_user_type
+    return 'ADMIN'              if current_user.try(:admin?)
+    return 'WHOLESALE'          if current_user.try(:wholesale?)
+    return 'USER_SIGNED_IN'     if user_signed_in?
+    return 'USER_NOT_SIGNED_IN'
+  end
 end

@@ -4,8 +4,9 @@ class HomesController < ApplicationController
 
     before_filter :verify_is_admin, :except => [ :index, :store ]
 
-    caches_action :index, :store, :cache_path => Proc.new { |c|
-      { 'user_type' => current_user.try(:wholesale?) ? "WS" : "STANDARD" }
+    caches_action :index, :store, :cache_path => Proc.new { |c| {
+        'user_type' => get_user_type
+      }
     }
 
     def index

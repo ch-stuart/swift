@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_filter :verify_is_admin, :except => [ :show ]
 
   caches_action :show, :cache_path => Proc.new { |c|
-    { 'user_type' => current_user.try(:wholesale?) ? "WS" : "STANDARD" }
+    { 'user_type' => get_user_type }
   }
 
   cache_sweeper ApplicationSweeper
