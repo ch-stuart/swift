@@ -1,0 +1,23 @@
+<h1>Listing pre_approved_dealers</h1>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pre_approved_dealers.each do |pre_approved_dealer| %>
+  <tr>
+    <td><%= pre_approved_dealer.email %></td>
+    <td><%= link_to 'Show', pre_approved_dealer %></td>
+    <td><%= link_to 'Edit', edit_pre_approved_dealer_path(pre_approved_dealer) %></td>
+    <td><%= link_to 'Destroy', pre_approved_dealer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pre approved dealer', new_pre_approved_dealer_path %>

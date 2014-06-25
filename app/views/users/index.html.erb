@@ -1,0 +1,57 @@
+<h1>
+  Users
+</h1>
+<table>
+  <thead>
+    <tr>
+      <th>
+        Email
+      </th>
+      <th>
+        Admin
+      </th>
+      <th>
+        Dealer
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <% if user.admin %>
+            <span style="color:green; font-size: 120%;">
+              ✓
+            </span>
+          <% else %>
+            <span style="color:red; font-size: 120%;">
+              ✗
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <% if user.wholesale %>
+            <span style="color:green; font-size: 120%;">
+              ✓
+            </span>
+          <% else %>
+            <span style="color:red; font-size: 120%;">
+              ✗
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to "Edit", edit_user_path(user), class: "btn" %>
+        </td>
+        <td>
+          <%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete, class: 'btn' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

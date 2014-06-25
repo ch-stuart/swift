@@ -1,0 +1,21 @@
+<%= form_for(@pre_approved_dealer) do |f| %>
+  <% if @pre_approved_dealer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pre_approved_dealer.errors.count, "error") %> prohibited this pre_approved_dealer from being saved:</h2>
+
+      <ul>
+      <% @pre_approved_dealer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

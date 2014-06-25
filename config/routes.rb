@@ -1,6 +1,11 @@
 SwiftSite::Application.routes.draw do
 
+  resources :pre_approved_dealers
+
+
   devise_for :users
+
+  resources :users, only: [:index, :edit, :update, :destroy]
 
   # http://blog.bignerdranch.com/1666-redirect-www-subdomain-to-your-apex-domain-using-the-rails-router/
   # Remove the www from the URL, e.g. don't allow that stupid subdomain.
