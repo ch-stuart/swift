@@ -3,7 +3,7 @@
     Order History
   </h2>
   <% if @sales.present? %>
-    <table>
+    <table class="table">
       <thead>
         <th>
           Sale ID
@@ -19,7 +19,7 @@
             <a href="/orders/<%= sale.guid %>"><%= sale.guid %></a>
           </td>
           <td>
-            <%= sale.created_at.strftime("%B %e, %Y") %>)
+            <%= sale.created_at.strftime("%B %e, %Y") %>
           </td>
         </tr>
       <% end %>
