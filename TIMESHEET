@@ -229,5 +229,8 @@ date:        time (minutes):       comment:
 2014-06-25 300 WIP dealer sign up
 2014-06-25 15  Fix user being signed out on ajax post
 2014-06-25 15  Show user hint about password length and fix up error styles
+2014-06-25 15  Don't show "You signed up successfully" message
+2014-06-25 30  Deploy it
+
 
 http://www.timer-tab.com
