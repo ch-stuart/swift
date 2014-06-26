@@ -78,6 +78,9 @@ jQuery(document).ready(function($) {
         if (Flash.data.notice === "Signed+in+successfully.") {
             delete Flash.data.notice;
         }
+        if (Flash.data.notice === "Welcome!+You+have+signed+up+successfully.") {
+            delete Flash.data.notice;
+        }
     } catch (e) {}
 
     Flash.writeDataTo('alert', $('#js_app-alert'));
