@@ -41,6 +41,7 @@ group :development do
   gem 'guard-test'
   gem 'guard-shell'
   gem 'brakeman'
+  gem 'table_print'
 end
 
 # Wah. Not compatible with guard-test

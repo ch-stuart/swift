@@ -196,6 +196,7 @@ GEM
       mime-types (~> 1.25)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
+    table_print (1.5.2)
     taps (0.3.24)
       rack (>= 1.0.1)
       rest-client (>= 1.4.0, < 1.7.0)
@@ -255,6 +256,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sqlite3
   stripe
+  table_print
   taps
   thin
   uglifier (>= 1.0.3)
