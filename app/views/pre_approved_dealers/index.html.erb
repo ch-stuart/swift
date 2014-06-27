@@ -1,4 +1,9 @@
-<h1>Listing pre_approved_dealers</h1>
+<h1>Pre-approved Dealer Email Addresses</h1>
+<p>
+  A list of email addresses which are pre-approved. If a new dealer
+  signs up with one of these email addresses, they will automatically
+  receive wholesale pricing.
+</p>
 
 <table>
   <tr>
@@ -11,13 +16,12 @@
 <% @pre_approved_dealers.each do |pre_approved_dealer| %>
   <tr>
     <td><%= pre_approved_dealer.email %></td>
-    <td><%= link_to 'Show', pre_approved_dealer %></td>
-    <td><%= link_to 'Edit', edit_pre_approved_dealer_path(pre_approved_dealer) %></td>
-    <td><%= link_to 'Destroy', pre_approved_dealer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', pre_approved_dealer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Pre approved dealer', new_pre_approved_dealer_path %>
+<%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
+<%= link_to 'New pre-approved dealer', new_pre_approved_dealer_path, class: "btn" %>
