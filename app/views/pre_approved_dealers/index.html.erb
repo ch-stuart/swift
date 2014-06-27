@@ -4,7 +4,10 @@
   signs up with one of these email addresses, they will automatically
   receive wholesale pricing.
 </p>
-
+<p>
+  <%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
+  <%= link_to 'New pre-approved dealer', new_pre_approved_dealer_path, class: "btn" %>
+</p>
 <table>
   <tr>
     <th>Email</th>
@@ -21,7 +24,3 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
-<%= link_to 'New pre-approved dealer', new_pre_approved_dealer_path, class: "btn" %>
