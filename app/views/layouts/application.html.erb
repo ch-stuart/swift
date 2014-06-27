@@ -31,7 +31,7 @@
     <h2 class="front_door_sign">
       Minimum $500 purchase required for wholesale purchases.
     </h2>
-  <% elsif user_signed_in? %>
+  <% elsif user_signed_in? && !current_user.try(:admin?) %>
     <h2 class="front_door_sign">
       Your account is pending approval. If you have submitted your dealer application: sit
       tight, we'll have you cleared within 24 hours. You will receive an email you when
