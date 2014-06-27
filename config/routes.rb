@@ -14,16 +14,16 @@ SwiftSite::Application.routes.draw do
   #   }
   # end
 
+  devise_for :users
+  resources :users, only: [:index, :edit, :update, :destroy]
+
   get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
 
   get 'hub/expire_home' => 'hub#expire_home'
   get 'hub/expire_flickr' => 'hub#expire_flickr'
 
-  # match 'deploy_hook/expire_cache' => 'application#expire_cache'
-
-  resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials, :categories
-
+  resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials, :categories, :pre_approved_dealers
   resources :products do
     get 'order', on: :member
   end
@@ -50,6 +50,7 @@ SwiftSite::Application.routes.draw do
 
   get 'cart', to: 'sales#cart'
   get 'cart/checkout', to: 'sales#checkout'
+  get 'orders', to: 'sales#history'
   get 'orders/:guid', to: 'sales#success', as: :order
 
   post 'postmaster/validate', to: 'postmaster#validate'
@@ -61,10 +62,6 @@ SwiftSite::Application.routes.draw do
   post 'postmaster/create_box', to: 'postmaster#create_box'
 
   match 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
-
-  get 'logout', :to => 'application#logout'
-  get 'login', :to => 'hub#index'
-  get 'wholesale_login', :to => 'application#wholesale_login'
 
   get 'store', :to => 'homes#store'
   get "accessories" => redirect("/store")

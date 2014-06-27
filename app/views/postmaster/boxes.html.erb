@@ -1,9 +1,11 @@
 <h2>Boxes</h2>
-
+<p>
+  <%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
+</p>
 <% if @error %>
   <code style=color:red><%= @error %></code>
 <% else %>
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>Name</th>

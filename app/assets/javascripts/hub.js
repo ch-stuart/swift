@@ -1,6 +1,8 @@
 // ...
 //= require jquery
 //= require jquery_ujs
+//= require flash
+//= require jquery.cookie
 //= require console
 //= require farbtastic/farbtastic
 //= require jquery.tabs
@@ -54,3 +56,9 @@ jQuery(function() {
             createFlickrTagLink.call(this);
         });
 });
+
+
+// https://github.com/pivotal/cacheable-flash
+Flash.transferFromCookies();
+Flash.writeDataTo('alert', $('#js_app-alert'));
+Flash.writeDataTo('notice', $('#js_app-notice'));

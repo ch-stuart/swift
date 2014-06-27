@@ -4,7 +4,7 @@
 
     <%= link_to(image_tag(photo_url, :class => "store-item--image"), item) %>
     <h3 class="store-item--heading">
-        <%= link_to item.title, item, :class => "store-item--heading-link" %> (<%= item.humane_price_for(session[:is_wholesale_user]) %>)
+        <%= link_to item.title, item, :class => "store-item--heading-link" %> (<%= item.humane_price_for(current_user) %>)
     </h3>
 </div>
 <% if endcap %>

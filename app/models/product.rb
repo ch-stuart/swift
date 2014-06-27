@@ -67,12 +67,13 @@ class Product < ActiveRecord::Base
     self.not_for_sale == true
   end
 
-  def price_for is_wholesale_user
-      is_wholesale_user ? self.wholesale_price : self.price
-  end
+  # Not used
+  # def price_for is_wholesale_user
+  #     is_wholesale_user ? self.wholesale_price : self.price
+  # end
 
-  def humane_price_for is_wholesale_user
-      is_wholesale_user ? self.wholesale_humane_price : self.humane_price
+  def humane_price_for current_user
+    current_user.try(:wholesale?) ? self.wholesale_humane_price : self.humane_price
   end
 
 end

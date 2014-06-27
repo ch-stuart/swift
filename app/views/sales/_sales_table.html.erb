@@ -1,4 +1,5 @@
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Order Date</th>
     <th>Customer URL</th>
@@ -13,6 +14,8 @@
     <th style="display:none"></th>
     <th style="display:none"></th>
   </tr>
+  </thead>
+  <tbody>
 
 <% sales.each do |sale| %>
   <tr>
@@ -61,4 +64,5 @@
     <td style="display:none"><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+</tbody>
 </table>

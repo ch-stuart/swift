@@ -2,10 +2,12 @@
     Colors
 </h1>
 <p>
-    <%= link_to 'New Color', new_color_path, class: "button" %>
+  <%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
+  <%= link_to 'New Color', new_color_path, class: "btn" %>
 </p>
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th></th>
     <th>Title</th>
@@ -13,10 +15,9 @@
     <th>Wholesale Price</th>
     <th>Hex</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
-
+  </thead>
+  <tbody>
 <% @colors.each do |color| %>
   <tr>
     <td>
@@ -26,8 +27,11 @@
     <td><%= "$" if color.price.present? %><%= color.price %></td>
     <td><%= "$" if color.wholesale_price.present? %><%= color.wholesale_price %></td>
     <td><%= color.hex %></td>
-    <td><%= link_to 'Edit', edit_color_path(color) %></td>
-    <td><%= link_to 'Destroy', color, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      <%= link_to 'Edit', edit_color_path(color), class: "btn btn--table" %>
+      <%= link_to 'Destroy', color, :confirm => 'Are you sure?', :method => :delete, class: "btn btn--table" %>
+    </td>
   </tr>
 <% end %>
+</tbody>
 </table>

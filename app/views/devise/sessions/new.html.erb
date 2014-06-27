@@ -1,0 +1,35 @@
+<div class="sixteen columns col-session">
+  <h2>
+    Dealer Sign In
+  </h2>
+  <p>
+    To become a Swift Industries dealer, you must apply by emailing
+    <%= mail_to Company.first.email, Company.first.email, encode: "hex", subject: "Dealer Sign Up" %>.
+  </p>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="label-input-pair">
+      <%= f.label :email, class: "label" %>
+      <%= f.email_field :email, autofocus: true, class: "input" %>
+    </div>
+
+    <div class="label-input-pair">
+      <%= f.label :password, class: "label" %>
+      <%= f.password_field :password, autocomplete: "off", class: "input" %>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class="label-input-pair">
+        <label for="user_remember_me" class="label">
+          <%= f.check_box :remember_me, class: "input input-checkbox" %>
+          Remember Me
+        </label>
+      </div>
+    <% end -%>
+
+    <div class="submit-wrap">
+      <%= f.submit "Sign in", class: "btn" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

@@ -1,0 +1,36 @@
+<h1>
+  Users
+</h1>
+<p>
+  <%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
+</p>
+
+<div class="tabs">
+  <div class="tab">
+    Dealers
+  </div>
+  <div class="tab">
+    Users
+  </div>
+  <div class="tab">
+    Admins
+  </div>
+  <div class="tab-divider"></div>
+  <div class="card">
+    <%= render 'users_table', users: @dealers %>
+  </div>
+  <div class="card">
+    <%= render 'users_table', users: @users %>
+  </div>
+  <div class="card">
+    <%= render 'users_table', users: @admins %>
+  </div>
+</div>
+
+<%= content_for :js do %>
+<script>
+  $(document).ready(function(){
+    $('.tabs').tabs();
+  });
+</script>
+<% end %>

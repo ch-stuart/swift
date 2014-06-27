@@ -32,7 +32,9 @@ Or, use [pow](//pow.cx).
 
 ### Pull from production to local
 
-    $ heroku pg:pull HEROKU_POSTGRESQL_ORANGE swift-dev
+    $ # quit postgres app to kill db connections
+    $ dropdb swift-dev
+    $ heroku pg:pull HEROKU_POSTGRESQL_ORANGE swift-dev --remote heroku
 
 ### Push from local to staging
 

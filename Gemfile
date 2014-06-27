@@ -19,6 +19,8 @@ gem 'postmaster'
 gem 'httpclient'
 gem 'exception_notification'
 gem 'rack-rewrite'
+gem 'devise'
+gem 'cacheable_flash'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '
@@ -39,6 +41,7 @@ group :development do
   gem 'guard-test'
   gem 'guard-shell'
   gem 'brakeman'
+  gem 'table_print'
 end
 
 # Wah. Not compatible with guard-test

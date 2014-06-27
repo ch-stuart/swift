@@ -1,6 +1,6 @@
 class HubController < ApplicationController
 
-  before_filter :authenticate_admin
+  before_filter :verify_is_admin
   layout "hub"
 
   def index

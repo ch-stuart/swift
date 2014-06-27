@@ -2,9 +2,11 @@ class HomesController < ApplicationController
 
     require "open-uri"
 
-    before_filter :authenticate_admin, :except => [ :index, :store ]
-    caches_action :index, :store, :cache_path => Proc.new { |c|
-        { 'user_type' => session[:is_wholesale_user] ? "WS" : "STANDARD" }
+    before_filter :verify_is_admin, :except => [ :index, :store ]
+
+    caches_action :index, :store, :cache_path => Proc.new { |c| {
+        'user_type' => get_user_type
+      }
     }
 
     def index

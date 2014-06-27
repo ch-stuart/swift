@@ -2,9 +2,11 @@
   <%= @subtitle %>
 </h1>
 <p>
-  <%= link_to 'New Page', new_page_path, class: "button" %>
+  <%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
+  <%= link_to 'New Page', new_page_path, class: "btn" %>
 </p>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Status</th>
     <th>Title</th>
@@ -14,7 +16,8 @@
     <th>Featured?</th>
     <th></th>
   </tr>
-
+</thead>
+<tbody>
 <% @pages.each do |page| %>
   <tr>
     <td><%= image_tag "#{page.status}.png" %></td>
@@ -31,4 +34,5 @@
     </td>
   </tr>
 <% end %>
+</tbody>
 </table>

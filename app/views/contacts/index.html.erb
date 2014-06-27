@@ -1,50 +1,56 @@
 <h1>Contacts</h1>
 <p>
-  <%= link_to 'New Contact', new_contact_path %>
+  These kiddos signed up for marketing emails.
+</p>
+<p>
+  <%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
+  <%= link_to 'New Contact', new_contact_path, class: "btn" %>
 </p>
 
-<table>
+<table class="table" style="width: auto">
   <tr>
     <td>
-      <button class="btn" id="all">
+      <button class="btn btn--table" id="all">
         Select All
       </button>
     </td>
     <td>
-      <button class="btn" id="none">
+      <button class="btn btn--table" id="none">
         Select None
       </button>
     </td>
     <td>
-      <button class="btn" id="archive">
+      <button class="btn btn--table" id="archive">
         Archive
       </button>
     </td>
     <td>
-      <%= link_to 'Copy New Contacts', copy_contacts_path, class: 'btn' %>
+      <%= link_to 'Copy New Contacts', copy_contacts_path, class: 'btn btn--table' %>
     </td>
   </tr>
 </table>
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Email</th>
     <th></th>
     <th></th>
     <th style="display:none"></th>
   </tr>
-
+</thead>
+<tbody>
   <% @contacts.each do |contact| %>
     <tr>
       <td class="is-archived--<%= contact.archived %>">
         <input type="checkbox" name="archive" class="cbox no-select" value="<%= contact.id %>" data-email="<%= contact.email %>">
         <%= contact.email %>
       </td>
-      <td class="no-select"><%= link_to 'Show', contact %></td>
-      <td class="no-select"><%= link_to 'Edit', edit_contact_path(contact) %></td>
+      <td class="no-select"><%= link_to 'Edit', edit_contact_path(contact), class: "btn btn--table" %></td>
       <td style="display:none"><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
 
 

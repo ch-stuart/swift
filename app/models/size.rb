@@ -10,8 +10,9 @@ class Size < ActiveRecord::Base
 
     attr_accessible :title, :price, :product_id, :wholesale_price
 
-    def price_for is_wholesale_user
-        is_wholesale_user ? self.wholesale_price : self.price
-    end
+    # Not used
+    # def price_for is_wholesale_user
+    #     is_wholesale_user ? self.wholesale_price : self.price
+    # end
 
 end

@@ -1,0 +1,29 @@
+.field_with_errors input {
+    border-color: red;
+}
+#error_explanation {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px 15px 5px;
+    margin: 15px 0;
+}
+#error_explanation * {
+    font-family: helvetica neue, arial, sans-serif;
+    font-weight: bold;
+    line-height: 1.3;
+}
+#error_explanation h2 {
+    font-size: 16px;
+    color: #D30005;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+#error_explanation ul {
+    list-style-type: square;
+    padding-left: 15px;
+    margin: 0;
+}
+#error_explanation ul li {
+    font-size: 13px;
+    font-weight: bold;
+}

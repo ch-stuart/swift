@@ -1,0 +1,37 @@
+<div class="twelve columns" style="min-height: 300px">
+  <h2>
+    Order History
+  </h2>
+  <% if @sales.present? %>
+    <table class="table">
+      <thead>
+        <th>
+          Sale ID
+        </th>
+        <th>
+          Date
+        </th>
+      </thead>
+      <tbody>
+      <% @sales.each do |sale| %>
+        <tr>
+          <td>
+            <a href="/orders/<%= sale.guid %>"><%= sale.guid %></a>
+          </td>
+          <td>
+            <%= sale.created_at.strftime("%B %e, %Y") %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% elsif user_signed_in? %>
+    <p>
+      You have no orders.
+    </p>
+  <% else %>
+    <p>
+      You are not signed in. If you have a dealer account, <%= link_to "sign in", new_user_session_path %> to view your order history.
+    </p>
+  <% end %>
+</div>

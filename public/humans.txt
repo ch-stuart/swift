@@ -3,15 +3,15 @@
 ## v2
 
 Developer & Designer: Charles Stuart
-Site: http://enure.net
+Site: //enure.net
 Location: Missoula, MT
 
 ## v1
 
 Developer: Charles Stuart
-Site: http://enure.net
+Site: //enure.net
 Location: Missoula, MT
 
 Designer: Dylan McConnell
-Site: http://tinylittlehammers.com
-Location: PDX, OR
+Site: //tinylittlehammers.com
+Location: Portland, OR

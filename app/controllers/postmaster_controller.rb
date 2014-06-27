@@ -1,6 +1,6 @@
 class PostmasterController < ApplicationController
 
-  before_filter :authenticate_admin, except: [ :validate, :rates, :fit ]
+  before_filter :verify_is_admin, except: [ :validate, :rates, :fit ]
 
   layout "hub"
 

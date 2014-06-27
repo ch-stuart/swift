@@ -12,8 +12,9 @@ class Color < ActiveRecord::Base
     validates_format_of :price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :price?
     validates_format_of :wholesale_price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :wholesale_price?
 
-    def price_for is_wholesale_user
-        is_wholesale_user ? self.wholesale_price : self.price
-    end
+    # Not used
+    # def price_for is_wholesale_user
+    #     is_wholesale_user ? self.wholesale_price : self.price
+    # end
 
 end

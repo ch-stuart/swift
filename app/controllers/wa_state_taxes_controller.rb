@@ -1,7 +1,5 @@
 class WaStateTaxesController < ApplicationController
 
-  before_filter :authenticate_admin, :except => [ :rate ]
-
   # Get tax rate for a WA state address
   #
   # params:

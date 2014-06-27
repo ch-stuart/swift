@@ -5,6 +5,7 @@
 
 @import '../javascripts/farbtastic/farbtastic';
 @import 'module-jquery.tabs';
+@import 'module-table';
 
 @import 'module-form';
 @import 'module-buttons';
@@ -42,17 +43,17 @@ a:hover {
 .hint--for-checkbox {
   margin-top: 0;
 }
-th {
-  text-align: left;
-  border-bottom: 1px solid #ccc;
-  font-weight: bold
-}
-th,td {
-  padding: 8px 10px;
-}
-tr:nth-child(odd) td {
-  background-color: #fafafa;
-}
+//th {
+//  text-align: left;
+//  border-bottom: 1px solid #ccc;
+//  font-weight: bold
+//}
+//th,td {
+//  padding: 8px 10px;
+//}
+//tr:nth-child(odd) td {
+//  background-color: #fafafa;
+//}
 .indent {
     background-color: rgba(255,255,255,.50);
     padding: 20px 20px 0 20px;
@@ -152,4 +153,15 @@ input.input--dim {
 .tab .demph {
     display: inline-block;
     margin-left: .2em;
+}
+
+.app-notice,
+.app-alert {
+    font-size: 13px;
+}
+.app-notice {
+    color: green;
+}
+.app-alert {
+    color: red;
 }

@@ -1,30 +1,10 @@
 class ApplicationController < ActionController::Base
+
+  include CacheableFlash
   protect_from_forgery
-
   layout :resolve_layout
-
-  before_filter :authenticate_admin, :except => [ :logout, :wholesale_login ]
-  before_filter :authenticate_wholesale, :only => [ :wholesale_login ]
-  before_filter :title, :except => [ :expire_cache ]
-
+  before_filter :title
   helper_method :title
-
-  # heroku post deploy hook
-  # does not work. can't get sweeper to work
-  # can't call expire_action without there being a
-  # request
-  # def expire_cache
-  #   ApplicationSweeper.instance.expire_cache
-  #   render :text => "expired"
-  # end
-
-  def logout
-    render :text => "Quit your browser to logout."
-  end
-
-  def wholesale_login
-    redirect_to "/"
-  end
 
   protected
 
@@ -36,28 +16,32 @@ class ApplicationController < ActionController::Base
     @title = Company.first.title
   end
 
-  def authenticate_admin
-    @hub = true
-    login = authenticate_or_request_with_http_basic do |username, password|
-      username == APP_CONFIG[:admin_user] && password == APP_CONFIG[:admin_pass]
+  def verify_is_admin
+    if current_user.try(:admin?)
+      return
+    else
+      redirect_to root_url
     end
-    session[:is_admin_user] = login
-  end
-
-  def authenticate_wholesale
-    login = authenticate_or_request_with_http_basic do |username, password|
-      username == APP_CONFIG[:wholesale_user] && password == APP_CONFIG[:wholesale_pass]
-    end
-    session[:is_wholesale_user] = login
   end
 
   def resolve_layout
-    case action_name
-    when "new", "edit", "create", "update", "destroy"
-      "hub"
+    Rails.logger.info controller_name
+    if controller_name == "sessions"
+      "devise"
     else
-      "application"
+      case action_name
+      when "new", "edit", "create", "update", "destroy"
+        "hub"
+      else
+        "application"
+      end
     end
   end
 
+  def get_user_type
+    return 'ADMIN'              if current_user.try(:admin?)
+    return 'WHOLESALE'          if current_user.try(:wholesale?)
+    return 'USER_SIGNED_IN'     if user_signed_in?
+    return 'USER_NOT_SIGNED_IN'
+  end
 end

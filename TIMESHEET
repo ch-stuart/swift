@@ -222,6 +222,16 @@ date:        time (minutes):       comment:
 2014-06-15 20 Research on authentication libraries
 2014-06-17 10 Show notice if photos cannot be retrieved from Flickr
 2014-06-17 20 Move sales that have been shipped without postmaster (also create "Trash" category)
+2014-06-17 20  Add production email configuration (this was forgotten previously)
+2014-06-17 130 WIP devise: initial set up
+2014-06-17 30  WIP devise: migrating from action caching to fragment caching
 2014-06-18 15 Update locations where bare domain was still being referenced
+2014-06-22 20  WIP Dealer Sign Up: adjusting verbiage, etc.
+2014-06-25 300 WIP dealer sign up
+2014-06-25 15  Fix user being signed out on ajax post
+2014-06-25 15  Show user hint about password length and fix up error styles
+2014-06-25 15  Don't show "You signed up successfully" message
+2014-06-25 30  Deploy it
+
 
 http://www.timer-tab.com

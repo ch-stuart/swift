@@ -1,10 +1,7 @@
 class SalesController < ApplicationController
 
-  before_filter :authenticate_admin, :except => [ :checkout, :create, :success, :cart, :charge ]
-  caches_action :cart, :checkout, :cache_path => Proc.new { |c|
-      { 'user_type' => session[:is_wholesale_user] ? "WS" : "STANDARD" }
-  }
-  cache_sweeper ApplicationSweeper
+  before_filter :verify_is_admin, :except => [ :checkout, :create, :success, :cart, :charge, :history ]
+  # cache_sweeper ApplicationSweeper
 
   # GET /sales
   # GET /sales.json
@@ -81,6 +78,18 @@ class SalesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       # format.json { render json: @sale }
+    end
+  end
+
+  def history
+    @company = Company.first
+    @categories = Category.all
+    @products = Product.where(:status => 'Public', :kind => 'Product')
+
+    if user_signed_in?
+      @sales = Sale.where(email: current_user.email)
+    else
+      @sales = []
     end
   end
 

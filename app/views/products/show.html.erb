@@ -25,7 +25,7 @@
         <% end %>
     </p>
     <p>
-        <%= @product.humane_price_for(session[:is_wholesale_user]) %>
+        <%= @product.humane_price_for(current_user) %>
     </p>
     <%= render 'testimonials' %>
 </div>
