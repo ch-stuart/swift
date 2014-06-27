@@ -232,6 +232,11 @@ date:        time (minutes):       comment:
 2014-06-25 15  Show user hint about password length and fix up error styles
 2014-06-25 15  Don't show "You signed up successfully" message
 2014-06-25 30  Deploy it
+2014-06-26 30  Improve hub nav and styles
+2014-06-26 20  Fix layout issue on homepage
+2014-06-26 20  Fix cache sweeping
+2014-06-26 10  Fix cache sweeping from homepage
+2014-06-26 10  Don't show dealer approval pending msg to admins
 
 
 http://www.timer-tab.com
