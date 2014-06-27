@@ -14,6 +14,7 @@ class HubController < ApplicationController
   def expire_home
       begin
         expire_action :controller => "homes", :action => "index"
+        expire_fragment 'homes_index'
         render :text => "cache cleared"
       rescue => e
         render :text => "cache NOT cleared"
