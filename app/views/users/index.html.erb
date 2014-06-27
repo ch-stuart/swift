@@ -5,57 +5,32 @@
   <%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
 </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>
-        Email
-      </th>
-      <th>
-        Admin
-      </th>
-      <th>
-        Dealer
-      </th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td>
-          <%= user.email %>
-        </td>
-        <td>
-          <% if user.admin %>
-            <span style="color:green; font-size: 120%;">
-              ✓
-            </span>
-          <% else %>
-            <span style="color:red; font-size: 120%;">
-              ✗
-            </span>
-          <% end %>
-        </td>
-        <td>
-          <% if user.wholesale %>
-            <span style="color:green; font-size: 120%;">
-              ✓
-            </span>
-          <% else %>
-            <span style="color:red; font-size: 120%;">
-              ✗
-            </span>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to "Edit", edit_user_path(user), class: "btn" %>
-        </td>
-        <td>
-          <%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete, class: 'btn' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="tabs">
+  <div class="tab">
+    Dealers
+  </div>
+  <div class="tab">
+    Users
+  </div>
+  <div class="tab">
+    Admins
+  </div>
+  <div class="tab-divider"></div>
+  <div class="card">
+    <%= render 'users_table', users: @dealers %>
+  </div>
+  <div class="card">
+    <%= render 'users_table', users: @users %>
+  </div>
+  <div class="card">
+    <%= render 'users_table', users: @admins %>
+  </div>
+</div>
+
+<%= content_for :js do %>
+<script>
+  $(document).ready(function(){
+    $('.tabs').tabs();
+  });
+</script>
+<% end %>

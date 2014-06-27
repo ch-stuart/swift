@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   layout "hub"
 
   def index
-    @users = User.all
+    @dealers = User.where(wholesale: true)
+    @admins = User.where(admin: true)
+    @users = User.where(admin: false, wholesale: false)
   end
 
   def edit

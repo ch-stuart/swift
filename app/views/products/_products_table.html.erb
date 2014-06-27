@@ -1,7 +1,8 @@
 <h3>
     <%= title %>
 </h3>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Type</th>
     <th>Status</th>
@@ -14,6 +15,8 @@
     <th>Shipping</th>
     <th></th>
   </tr>
+  </thead>
+  <tbody>
 <% products.each do |product| %>
   <tr>
     <td><%= image_tag "#{product.kind}.png" %></td>
@@ -55,4 +58,5 @@
     </td>
   </tr>
 <% end %>
+</tbody>
 </table>

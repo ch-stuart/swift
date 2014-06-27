@@ -1,6 +1,7 @@
 <h1>Listing testimonials</h1>
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Body</th>
     <th>Author</th>
@@ -9,7 +10,8 @@
     <th></th>
     <th></th>
   </tr>
-
+  </thead>
+  <tbody>
 <% @testimonials.each do |testimonial| %>
   <tr>
     <td><%= testimonial.body %></td>
@@ -20,6 +22,7 @@
     <td><%= link_to 'Destroy', testimonial, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />

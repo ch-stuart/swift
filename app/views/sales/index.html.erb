@@ -1,8 +1,7 @@
 <h1>Sales</h1>
-<p style="display:none">
-    <%# link_to 'New Sale', new_sale_path %>
+<p>
+  <%= link_to raw('&larr; Hub'), hub_index_path, class: "btn" %>
 </p>
-
 <div class="tabs">
   <div class="tab">
     New <span class="demph"><%= @sales_not_shipped.length %></span>
