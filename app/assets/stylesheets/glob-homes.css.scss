@@ -1,4 +1,9 @@
 .featured-page__photos-wrap,
 .featured-page__video-wrap {
     margin-bottom: 10px;
+
+    iframe,
+    img {
+        max-width: 100%;
+    }
 }
