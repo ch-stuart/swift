@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :failed_attempts, :unlock_token, :locked_at, :wholesale
 
-  before_save :add_wholesale_if_user_is_preapproved
+  before_create :add_wholesale_if_user_is_preapproved
 
   private
 
