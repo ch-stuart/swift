@@ -9,6 +9,9 @@
                   <strong class="nav-list--group-heading">Your Account</strong>
                   <ul class="nav-list--group">
                       <li class="nav-list--group-item">
+                        <%= link_to "My Info", my_info_path(id: current_user), :class => "nav-list--group-item-link" %>
+                      </li>
+                      <li class="nav-list--group-item">
                           <%= link_to "Order History", orders_path, :class => "nav-list--group-item-link" %>
                       </li>
                   </ul>
