@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
 
-    @user = User.find params[:id]
+    @user = current_user
   end
 
   def edit_my_info
@@ -26,11 +26,11 @@ class UsersController < ApplicationController
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
 
-    @user = User.find params[:id]
+    @user = current_user
   end
 
   def update
-    @user = User.find params[:id]
+    @user = current_user
 
     # Don't allow dealer to update anything that they're
     # not supposed to.
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
         if current_user.try(:admin?)
           format.html { redirect_to users_url, :notice => 'User was successfully updated.' }
         else
-          format.html { redirect_to my_info_path(@user), :notice => '"My Info" was successfully updated.' }
+          format.html { redirect_to my_info_path, :notice => '"My Info" was successfully updated.' }
         end
         format.json { head :ok }
       else
