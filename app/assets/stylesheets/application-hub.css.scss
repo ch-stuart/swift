@@ -165,3 +165,17 @@ input.input--dim {
 .app-alert {
     color: red;
 }
+
+.ship-diff {
+    color: black;
+    font-family: menlo, monospace;
+    font-size: 13px;
+}
+.ship-diff__arr {
+    font-size: 120%;
+    font-weight: bold;
+    font-family: helvetica, sans-serif;
+}
+.ship-diff__perc {
+    font-size: 90%;
+}

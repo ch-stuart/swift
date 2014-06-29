@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140628182708) do
+ActiveRecord::Schema.define(:version => 20140629185159) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(:version => 20140628182708) do
     t.string   "state"
     t.string   "zip_code"
     t.string   "country"
-    t.string   "shipping_charge"
+    t.integer  "shipping_charge"
     t.string   "shipping_service"
     t.string   "shipping_provider"
     t.string   "stripe_id"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20140628182708) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "sale_id"
-    t.string   "cost"
+    t.integer  "cost"
     t.string   "envelope"
   end
 

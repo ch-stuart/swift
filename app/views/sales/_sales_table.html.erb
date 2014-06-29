@@ -65,14 +65,14 @@
       <% if sale.shipments.present? %>
         <nobr>
           <% if sale.get_shipping_price_diff[0] == "+" %>
-            <span style="color: black; font-family: menlo,monospace; font-size: 13px;">
-              <span style="font-size: 120%; font-weight: bold; font-family: helvetica, sans-serif;">&uarr;</span>
+            <span class="ship-diff">
+              <span class="ship-diff__arr">&uarr;</span>
           <% else %>
-            <span style="color: red;  font-family: menlo,monospace; font-size: 13px;">
-              <span style="font-size: 120%; font-weight: bold; font-family: helvetica, sans-serif;">&darr;</span>
+            <span class="ship-diff" style="color: red;">
+              <span class="ship-diff__arr">&darr;</span>
           <% end %>
           <%= number_to_currency(cents_to_dollars(sale.get_shipping_price_diff[1])) %>
-          <span style="font-size: 90%">(<%= sale.get_shipping_price_diff[2] %>%)</span>
+          <span class="ship-diff__perc">(<%= sale.get_shipping_price_diff[2] %>%)</span>
           </span>
         </nobr>
       <% end %>
