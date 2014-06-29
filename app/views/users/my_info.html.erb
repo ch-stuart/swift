@@ -15,7 +15,11 @@
         Company
       </label>
       <p>
-        <%= @user.company %>
+        <% if @user.company.present? %>
+          <%= @user.company %>
+        <% else %>
+          &hellip;
+        <% end %>
       </p>
     </div>
     <div class="label-input-pair">
@@ -23,7 +27,11 @@
         Company Contact
       </label>
       <p>
-        <%= @user.contact %>
+        <% if @user.contact.present? %>
+          <%= @user.contact %>
+        <% else %>
+          &hellip;
+        <% end %>
       </p>
     </div>
     <div class="label-input-pair">
@@ -31,7 +39,11 @@
         Website URL
       </label>
       <p>
-        <%= @user.company_url %>
+        <% if @user.company_url.present? %>
+          <%= @user.company_url %>
+        <% else %>
+          &hellip;
+        <% end %>
       </p>
     </div>
     <div class="label-input-pair">
@@ -39,7 +51,11 @@
         Phone Number
       </label>
       <p>
-        <%= @user.phone_no %>
+        <% if @user.phone_no.present? %>
+          <%= @user.phone_no %>
+        <% else %>
+          &hellip;
+        <% end %>
       </p>
     </div>
   </div>
@@ -52,11 +68,15 @@
         Address
       </label>
       <p>
-        <%= @user.line1 %><br>
-        <%= @user.city %>
-        <%= @user.state %>
-        <%= @user.zip_code %>
-        <%= @user.country %>
+        <% if @user.line1.present? %>
+          <%= @user.line1 %><br>
+          <%= @user.city %>
+          <%= @user.state %>
+          <%= @user.zip_code %>
+          <%= @user.country %>
+        <% else %>
+          &hellip;
+        <% end %>
       </p>
     </div>
   </div>
