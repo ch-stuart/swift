@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  before_filter :verify_is_admin, except: [:my_info, :update]
-  layout "hub", except: [:my_info]
+  before_filter :verify_is_admin, except: [:my_info, :edit_my_info, :update]
+  layout "hub", except: [:my_info, :edit_my_info]
 
   def index
     @dealers = User.where(wholesale: true)
@@ -14,6 +14,14 @@ class UsersController < ApplicationController
   end
 
   def my_info
+    @company = Company.first
+    @categories = Category.all
+    @products = Product.where(:status => 'Public', :kind => 'Product')
+
+    @user = User.find params[:id]
+  end
+
+  def edit_my_info
     @company = Company.first
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
@@ -47,7 +55,7 @@ class UsersController < ApplicationController
         if current_user.try(:admin?)
           format.html { redirect_to users_url, :notice => 'User was successfully updated.' }
         else
-          format.html { redirect_to my_info_path(@user), :notice => 'User was successfully updated.' }
+          format.html { redirect_to my_info_path(@user), :notice => '"My Info" was successfully updated.' }
         end
         format.json { head :ok }
       else

@@ -17,6 +17,7 @@ SwiftSite::Application.routes.draw do
   devise_for :users
   resources :users, only: [:index, :edit, :update, :destroy]
   get '/users/my_info/:id', to: 'users#my_info', as: 'my_info'
+  get '/users/edit_my_info/:id', to: 'users#edit_my_info', as: 'edit_my_info'
 
   get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
