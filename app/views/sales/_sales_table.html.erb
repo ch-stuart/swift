@@ -10,6 +10,7 @@
     <th>Pickup?</th>
     <th>Boxes</th>
     <th>Tracking URL(s)</th>
+    <th>Shipping $ +/-</th>
     <th></th>
     <th style="display:none"></th>
     <th style="display:none"></th>
@@ -58,6 +59,22 @@
         <% sale.shipments.each do |shipment| %>
           <%= render 'tracking_link', carrier: shipment.carrier, num: shipment.tracking_number %>
         <% end %>
+      <% end %>
+    </td>
+    <td>
+      <% if sale.shipments.present? %>
+        <nobr>
+          <% if sale.get_shipping_price_diff[0] == "+" %>
+            <span style="color: black; font-family: menlo,monospace; font-size: 13px;">
+              <span style="font-size: 120%; font-weight: bold; font-family: helvetica, sans-serif;">&uarr;</span>
+          <% else %>
+            <span style="color: red;  font-family: menlo,monospace; font-size: 13px;">
+              <span style="font-size: 120%; font-weight: bold; font-family: helvetica, sans-serif;">&darr;</span>
+          <% end %>
+          <%= number_to_currency(cents_to_dollars(sale.get_shipping_price_diff[1])) %>
+          <span style="font-size: 90%">(<%= sale.get_shipping_price_diff[2] %>%)</span>
+          </span>
+        </nobr>
       <% end %>
     </td>
     <td style="display:none"><%= link_to 'Edit', edit_sale_path(sale) %></td>
