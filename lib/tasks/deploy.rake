@@ -15,7 +15,7 @@ task :deploy, [:remote, :branch, :should_clear_cache, :should_db_migrate] do |t,
   end
 
   if yesno == "yes"
-    system "heroku maintenance:on"
+    system "heroku maintenance:on --remote #{args[:remote]}"
 
     puts "git push #{args[:remote]} #{args[:branch]}:master --force"
     system "git push #{args[:remote]} #{args[:branch]}:master --force"
@@ -31,7 +31,7 @@ task :deploy, [:remote, :branch, :should_clear_cache, :should_db_migrate] do |t,
       system "heroku restart --remote #{args[:remote]}"
     end
 
-    system "heroku maintenance:off"
+    system "heroku maintenance:off --remote #{args[:remote]}"
   else
     puts ""
     puts "ok, nevermind."
