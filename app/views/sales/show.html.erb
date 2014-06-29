@@ -52,9 +52,9 @@
     <%= render 'show_shipping' %>
   </div>
   <div class="card">
-    <p>
-      <pre><%= JSON.pretty_generate(JSON.parse(@sale.description)) %></pre>
-    </p>
+    <div style="background-color: #F5EED7; padding: 5px;">
+      <%= raw(ap(@sale)) %>
+    </div>
   </div>
 </div>
 

@@ -21,6 +21,7 @@ gem 'exception_notification'
 gem 'rack-rewrite'
 gem 'devise'
 gem 'cacheable_flash'
+gem 'awesome_print'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '

@@ -36,6 +36,7 @@ class SalesController < ApplicationController
   # GET /sales/1.json
   def show
     @sale = Sale.find(params[:id])
+    @sale.description = JSON.parse(@sale.description)
     @shipments = @sale.shipments
 
     render :layout => "hub"

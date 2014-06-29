@@ -32,6 +32,7 @@ GEM
     arel (3.0.3)
     autoprefixer-rails (1.0.20140110)
       execjs
+    awesome_print (1.2.0)
     bcrypt (3.1.7)
     brakeman (2.4.3)
       erubis (~> 2.6)
@@ -230,6 +231,7 @@ PLATFORMS
 DEPENDENCIES
   angularjs-rails (~> 1.2.16)
   autoprefixer-rails
+  awesome_print
   brakeman
   cacheable_flash
   coffee-rails (~> 3.2.1)
