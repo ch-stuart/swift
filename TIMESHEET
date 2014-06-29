@@ -237,6 +237,7 @@ date:        time (minutes):       comment:
 2014-06-26 20  Fix cache sweeping
 2014-06-26 10  Fix cache sweeping from homepage
 2014-06-26 10  Don't show dealer approval pending msg to admins
+2014-06-29 90  Add address, URL, etc. to user
 
 
 http://www.timer-tab.com
