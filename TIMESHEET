@@ -239,6 +239,8 @@ date:        time (minutes):       comment:
 2014-06-26 10  Don't show dealer approval pending msg to admins
 2014-06-29 90  Add address, URL, etc. to user
 2014-06-29 30  Show price diff for shipping
+2014-06-29 15  Show all sale data on hub sale detail page
+2014-06-29 30  Investigate why shipping cost is off
 
 
 http://www.timer-tab.com
