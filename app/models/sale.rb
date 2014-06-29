@@ -15,6 +15,26 @@ class Sale < ActiveRecord::Base
 
   validates_presence_of :email, :amount, :total, :stripe_id
 
+  # This needs to exclude instances where the product hasn't
+  # shipped, and isntances where it shipped, but was not shipped
+  # with Postmaster
+  # def self.get_all_shipping_price_diff
+  #   total_actual   = Shipment.sum(:cost)
+  #   total_expected = Sale.sum(:shipping_charge)
+  #
+  #   if (total_expected > total_actual)
+  #     diff = total_expected - total_actual
+  #     perc = ((diff.to_f / total_expected.to_f) * 100).to_s.split(".")[0]
+  #
+  #     return ['+', diff, perc]
+  #   else
+  #     diff = total_actual - total_expected
+  #     perc = ((diff.to_f / total_expected.to_f) * 100).to_s.split(".")[0]
+  #
+  #     return ['-', diff, perc]
+  #   end
+  # end
+
   def get_shipping_price_diff
     # expected is what we charged the customer
     # actual is what we paid to ship
