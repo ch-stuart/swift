@@ -4,11 +4,11 @@
     </div>
     <div class="clearfix row">
         <ul class="nav-list">
-            <% if current_user.try(:wholesale?) %>
+            <%= if current_user.try(:wholesale?) %>
                 <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
                   <strong class="nav-list--group-heading">Your Account</strong>
                   <ul class="nav-list--group">
-                      <li class="nav-list--group-item">
+                      <li class="nav-list--group-item" style="display:none">
                         <%= link_to "My Info", my_info_path(id: current_user), :class => "nav-list--group-item-link" %>
                       </li>
                       <li class="nav-list--group-item">
