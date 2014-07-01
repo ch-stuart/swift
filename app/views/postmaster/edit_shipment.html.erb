@@ -2,33 +2,36 @@
   Complete this form once for each box associated with this sale.
 </p>
 <form action="create_shipment" method="post">
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
   <input type="hidden" name="id" value="<%= @sale.id %>">
   <div class="eight columns">
     <h3>To</h3>
-    <label>Contact</label>
+    <label class="label">Contact</label>
     <input type="text" value="<%= @sale.contact %>" name="shipment[contact]">
-    <label>Company (optional)</label>
+    <label class="label">Company (optional)</label>
     <input type="text" value="<%= @sale.company %>" name="shipment[company]">
-    <label>Line 1</label>
+    <label class="label">Line 1</label>
     <input type="text" value="<%= @sale.line1 %>" name="shipment[line1]">
-    <label>City</label>
+    <label class="label">City</label>
     <input type="text" value="<%= @sale.city %>" name="shipment[city]">
-    <label>State/Province</label>
+    <label class="label">State/Province</label>
     <input type="text" value="<%= @sale.state %>" name="shipment[state]">
-    <label>Zip Code</label>
+    <label class="label">Zip Code</label>
     <input type="text" value="<%= @sale.zip_code %>" name="shipment[zip_code]">
-    <label>Phone No</label>
+    <label class="label">Country</label>
+    <input type="text" value="<%= @sale.country %>" name="shipment[country]">
+    <label class="label">Phone No</label>
     <input type="text" value="<%= @sale.phone_no %>" name="shipment[phone_no]">
   </div>
 
   <div class="eight columns">
     <h3>Carrier and Service Level</h3>
-    <label>Carrier</label>
+    <label class="label">Carrier</label>
     <input type="text" value="<%= @sale.shipping_provider %>" name="shipment[shipping_provider]">
     <p class="hint">
       Options are "ups", "usps" or "fedex". Use lower case.
     </p>
-    <label>Service Level</label>
+    <label class="label">Service Level</label>
     <input type="text" value="<%= @sale.shipping_service %>" name="shipment[shipping_service]">
     <p class="hint">
       View available <a href="https://www.postmaster.io/docs/api#services">service levels</a>.
@@ -39,7 +42,7 @@
     <p>
       Input the weight, and then choose if you want to ship this order in a box or an envelope.
     </p>
-    <label>Weight (in lbs)</label>
+    <label class="label">Weight (in lbs)</label>
     <input
       id="inputWeight"
       class="input--dim"
@@ -97,8 +100,74 @@
     <p class="hint">
       Note: USPS supports "LETTER" for 3DAY or faster. Everything else should be considered "Ship in box". View postmaster <a href="https://www.postmaster.io/docs/api#packages">packaging reference</a>.
     </p>
-  </div>
 
+    <% if @sale.country != "US" %>
+      <h3>
+        Customs
+      </h3>
+      <p>
+        See <a target="_new" href="https://www.postmaster.io/docs/api#international">Postmaster docs</a>.
+      </p>
+      <label class="label">
+        Type *
+      </label>
+      <select name="shipment[customs][type]">
+        <option>Commercial Sample</option>
+        <option>Gift</option>
+        <option>Document</option>
+        <option>Returned Goods</option>
+        <option selected>Other</option>
+      </select>
+      <p class="hint">
+        The type of shipment this is.
+      </p>
+
+      <label class="label">
+        Comments
+      </label>
+      <input type="text" name="shipment[customs][comments]">
+      <p class="hint">
+        Any comments that should be displayed on the commercial invoice.
+      </p>
+
+      <label class="label">
+        Invoice Number
+      </label>
+      <input type="text" value="<%= @sale.guid %>" name="shipment[customs][invoice_number]">
+      <p class="hint">
+        An invoice # to associate with this shipment. Automatically populated with the sale guid.
+      </p>
+
+      <h4>
+        Contents
+      </h4>
+      <p>
+        A list of the items within each package. Items marked with an asterik are required.
+      </p>
+      <div id="customsItems">
+        <fieldset class="customsItem">
+          <legend>Item 1</legend>
+          <label class="label">Description *</label>
+          <input type="text" name="shipment[contents][][description]">
+          <label class="label">Country of origin *</label>
+          <input type="text" name="shipment[contents][][country_of_origin]" value="US">
+          <label class="label">Quantity *</label>
+          <input type="number" name="shipment[contents][][quantity]">
+          <label class="label">Value *</label>
+          <input type="text" name="shipment[contents][][value]">
+          <label class="number">Weight *</label>
+          <input type="text" name="shipment[contents][][weight]">
+          <label class="label">Weight Units</label>
+          <input type="text" name="shipment[contents][][weight_units]" value="LB">
+          <label class="label">Harmonized system tariff number</label>
+          <input type="text" name="shipment[contents][][hs_tariff_number]">
+        </fieldset>
+      </div>
+      <button class="btn" id="addCustomsItemBtn">
+        Add another item to this package
+      </button>
+    <% end %>
+  </div>
   <br class="clear">
   <div class="eight columns">
     &nbsp;
@@ -132,17 +201,22 @@
     function isValidDimension(val) {
       return val && isInteger(val) && pF(val) > 0;
     }
-    function $$(id) {
-      return document.getElementById(id)
+    function $$(selector) {
+      return document.querySelector(selector);
     }
 
-    var btnSubmit     = $$('btnSubmit'),
-        selectBox     = $$('selectBox'),
-        selectPackage = $$('selectPackage'),
-        inputWeight   = $$('inputWeight'),
-        inputWidth    = $$('inputWidth'),
-        inputHeight   = $$('inputHeight'),
-        inputLength   = $$('inputLength')
+    var btnSubmit         = $$('#btnSubmit'),
+        selectBox         = $$('#selectBox'),
+        selectPackage     = $$('#selectPackage'),
+        inputWeight       = $$('#inputWeight'),
+        inputWidth        = $$('#inputWidth'),
+        inputHeight       = $$('#inputHeight'),
+        inputLength       = $$('#inputLength'),
+        customsItem       = $$('.customsItem'),
+        customsItems      = $$('#customsItems'),
+        addCustomsItemBtn = $$('#addCustomsItemBtn'),
+        customsItemTemplate,
+        customsItemCount = 1;
 
     function clearDims() {
       inputWidth.value = inputHeight.value = inputLength.value = ''
@@ -189,6 +263,23 @@
       } else {
         errInput(this)
       }
+    }
+
+    if (customsItem) {
+      // Templating for customs contents
+      //
+      // Clone the "template":
+      customsItemTemplate = customsItem.cloneNode(true);
+
+      addCustomsItemBtn.onclick = function(e) {
+        // Don't submit the form
+        e.preventDefault()
+
+        customsItemCount++
+
+        var appended = customsItems.appendChild(customsItemTemplate.cloneNode(true))
+        appended.querySelector('legend').innerHTML = "Item " + customsItemCount;
+      };
     }
 
     btnSubmit.onclick = function(e) {

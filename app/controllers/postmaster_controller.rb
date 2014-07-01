@@ -122,6 +122,7 @@ class PostmasterController < ApplicationController
         city: shipment_params[:city],
         state: shipment_params[:state],
         zip_code: shipment_params[:zip_code],
+        country: shipment_params[:country],
         phone_no: shipment_params[:phone_no]
       },
       carrier: shipment_params[:shipping_provider],
@@ -133,6 +134,28 @@ class PostmasterController < ApplicationController
         length: shipment_params[:length]
       }
     }
+
+    # Add customs data if we're shipping INTL
+    if @sale.country != "US"
+      postmaster_params[:package][:customs] = {
+        type: shipment_params[:customs][:type],
+        comments: shipment_params[:customs][:comments],
+        invoice_number: shipment_params[:customs][:invoice_number],
+        contents: []
+      }
+
+      shipment_params[:contents].each do |content|
+        postmaster_params[:package][:customs][:contents].push({
+          description: content[:description],
+          country_of_origin: content[:country_of_origin],
+          quantity: content[:quantity],
+          value: content[:value],
+          weight: content[:weight],
+          weight_units: content[:weight_units],
+          hs_tariff_number: content[:hs_tariff_number]
+        })
+      end
+    end
 
     if shipment_params[:envelope].present?
       logger.info "Deleting width, height and length b/c we have an envelope"
