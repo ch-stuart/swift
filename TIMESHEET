@@ -242,5 +242,8 @@ date:        time (minutes):       comment:
 2014-06-29 15  Show all sale data on hub sale detail page
 2014-06-29 30  Investigate why shipping cost is off
 2014-06-29 30  Reading docs for "Add ability to redeem coupon codes at checkout"
+2014-06-30 170 Support including customs data when shipping INTL
+2014-07-01 5   Fix eric day's email
+2014-07-01 5   Stop reporting validation issues
 
 http://www.timer-tab.com
