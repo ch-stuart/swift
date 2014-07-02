@@ -122,15 +122,17 @@ SwiftApp.controller('CheckoutCtrl', [
         $scope.busyShipping = false;
         $scope.customerNeedsToVerifyAddress = true;
 
-        ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: Address validation failed.', [response]);
+        // Commenting this out. TMI
+        // ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: Address validation failed.', [response]);
 
         // Postmaster's address validation is flaky. Doesn't seem
-        // to be super reliable for European customers.
+        // to work at all for international customers.
         // Because of this, we allow the customer to bypass the
         // check, so long as they tick a box saying they looked
         // at it and it's good
         if ($scope.customerVerifiedAddress) {
-            ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: Customer verified address is AOK.', [response]);
+            // Commenting this out. TMI
+            // ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: Customer verified address is AOK.', [response]);
             // Fake out the validate success callback
             // response obj
             postmasterValidateSuccessCallback({
