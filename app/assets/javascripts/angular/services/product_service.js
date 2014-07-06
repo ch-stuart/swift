@@ -70,12 +70,18 @@ SwiftApp.service('ProductService', ['$http', 'ConfigService', function($http, Co
 
         // Adjust size prices
         _.each(response.product.sizes, function(size) {
-            size.price = size.wholesale_price;
+            if (size.wholesale_price) {
+                size.price = size.wholesale_price;
+            } else {
+                console.log('ProductService#setupPricesForWholesale: No wholesale price available for size', size);
+            }
         });
         // Adjust part prices
         _.each(response.product.parts, function(part) {
             if (part.price) {
                 part.price = part.wholesale_price;
+            } else {
+                console.log('ProductService#setupPricesForWholesale: No wholesale price available for part', part);
             }
         });
         // Adjust fabric prices
@@ -84,6 +90,8 @@ SwiftApp.service('ProductService', ['$http', 'ConfigService', function($http, Co
                 _.each(part.colors, function(color) {
                     if (color.price) {
                         color.price = color.wholesale_price;
+                    } else {
+                        console.log('ProductService#setupPricesForWholesale: No wholesale price available for color', color);
                     }
                 });
             }
