@@ -15,6 +15,13 @@ class Sale < ActiveRecord::Base
 
   validates_presence_of :email, :amount, :total, :stripe_id
 
+  scope :sort_by_created_at, order("created_at DESC")
+
+  scope :not_shipped, where(status: 'Not Shipped').sort_by_created_at
+  scope :printed,     where(status: 'Printed').sort_by_created_at
+  scope :shipped,     where(status: 'Shipped').sort_by_created_at
+  scope :deleted,     where(status: 'Deleted').sort_by_created_at
+
   # This needs to exclude instances where the product hasn't
   # shipped, and isntances where it shipped, but was not shipped
   # with Postmaster
