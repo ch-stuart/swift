@@ -1,27 +1,35 @@
-<h1>Listing sizes</h1>
+<h1>Sizes</h1>
 
 <table class="table">
+  <thead>
   <tr>
     <th>Title</th>
     <th>Price</th>
     <th>Wholesale Price</th>
+    <th style="display:none"></th>
     <th></th>
-    <th></th>
-    <th></th>
+    <th style="display:none"></th>
   </tr>
-
+  </thead>
+  <tbody>
 <% @sizes.each do |size| %>
   <tr>
     <td><%= size.title %></td>
     <td><%= size.price %></td>
-    <td><%= size.wholesale_price %></td>
-    <td><%= link_to 'Show', size %></td>
+    <td>
+      <% if size.wholesale_price.present? %>
+          <%= size.wholesale_price %>
+      <% else %>
+          <span style="color:red; font-size: 120%;">
+            ✗
+          </span>
+      <% end %>
+    </td>
+    <td style="display:none"><%= link_to 'Show', size %></td>
     <td><%= link_to 'Edit', edit_size_path(size) %></td>
-    <td><%= link_to 'Destroy', size, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td style="display:none"><%= link_to 'Destroy', size, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Size', new_size_path %>

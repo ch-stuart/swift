@@ -1,7 +1,7 @@
 class Size < ActiveRecord::Base
 
     belongs_to :product
-    validates_presence_of :title
+    validates_presence_of :title, :price, :wholesale_price
 
     PRICE_MATCH = /^\d{0,10}\.\d{2}$/
     PRICE_MESSAGE = "must be in the following format: 12.00"
