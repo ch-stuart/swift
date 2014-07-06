@@ -1,6 +1,13 @@
-/*global SwiftApp localStorage console window _*/
+/*global SwiftApp localStorage console _*/
 
-SwiftApp.service('ProductService', ['$http', 'ConfigService', function($http, ConfigService) {
+SwiftApp.service('ProductService', [
+    '$http',
+    'ConfigService',
+    'ExceptionService',
+    function(
+        $http,
+        ConfigService,
+        ExceptionService) {
 
     var response;
 
@@ -33,8 +40,18 @@ SwiftApp.service('ProductService', ['$http', 'ConfigService', function($http, Co
             // response.product.originalPrice = response.product.price;
 
             // Set the price on page load
-            response.product.price = response.product.selectedSize.price;
-            response.product.wholesale_price = response.product.selectedSize.wholesale_price;
+            if (response.product.selectedSize.price) {
+                response.product.price = response.product.selectedSize.price;
+            } else {
+                ExceptionService.report('ProductService#setupSizes: Missing price for default size.', [response.product]);
+            }
+
+            // Must not set wholesale_price to empty string. That will break things.
+            if (response.product.selectedSize.wholesale_price) {
+                response.product.wholesale_price = response.product.selectedSize.wholesale_price;
+            } else {
+                ExceptionService.report('ProductService#setupSizes: Missing wholesale price for default size.', [response.product]);
+            }
 
             console.log('ProductService#setupSizes: We have sizes', response.product.price);
         }
