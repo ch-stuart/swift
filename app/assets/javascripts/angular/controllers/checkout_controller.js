@@ -357,11 +357,14 @@ SwiftApp.controller('CheckoutCtrl', [
     }
 
     $scope['onPickupChanged'] = function() {
+        var scrollToThisId = ConfigService.get('WS') ? '#row-contact' : "#row-wa-tax-check";
+
         // Customer is picking up
         if ($scope.pickup) {
+
             setTimeout(function () {
                 $('html, body').animate({
-                    scrollTop: $("#row-wa-tax-check").offset().top
+                    scrollTop: $(scrollToThisId).offset().top
                 }, 1200);
             }, 100);
             // Unset shipping data
