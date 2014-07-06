@@ -1,4 +1,4 @@
-/*global window jQuery */
+/*global window jQuery console */
 
 ;(function(window, jQuery) {
     var msgBlockList = [
@@ -9,14 +9,19 @@
         'variable: dataKeys',
         'variable: contentSizeInPopover',
         'variable: pageDidLoad',
-        'variable: pixelmagsDidLoad'
+        'variable: pixelmagsDidLoad',
+        'inappbrowser',
+        'variable: sCapGloRef',
+        'variable: admwl',
+        'variable: gcdemodata'
     ];
 
     var scriptUrlBlockList = [
         'assets.pinterest.com/js/pinit.js',
         'ssl.google-analytics.com/ga.js',
         'newrelic.com',
-        'blockpage.cgi'
+        'blockpage.cgi',
+        'widgets.pinterest.com'
     ];
 
     window.onerror = function(msg, url, lineNumber) {
