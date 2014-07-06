@@ -30,6 +30,7 @@ SwiftApp.controller('CheckoutCtrl', [
     var SHIPPING_PROVIDERS = ['fedex', 'usps', 'ups'];
 
     $scope.cart = CartService.loadFromLocalStorage();
+    $scope.WS = ConfigService.get('WS');
 
     // Don't show checkout if cart is empty
     if (!$scope.cart.products.length) {
@@ -98,7 +99,7 @@ SwiftApp.controller('CheckoutCtrl', [
         if (data.status === 'OK') {
             $scope.commercial = $scope.rateParams.commercial = !!data.commercial;
 
-            if ($scope.state === 'WA') {
+            if ($scope.state === 'WA' && !$scope.WS) {
                 WaStateTaxService
                     .rate({
                         addr: $scope.line1,
