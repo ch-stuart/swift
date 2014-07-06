@@ -1,3 +1,5 @@
+/*global window SwiftApp */
+
 SwiftApp.service('ConfigService', function() {
 
     var config = {
@@ -5,7 +7,8 @@ SwiftApp.service('ConfigService', function() {
             addr: '1415 NW 49th Street',
             city: 'Seattle',
             zip: '98107'
-        }
+        },
+        WS: window.__iswsu__
     };
 
     return {
