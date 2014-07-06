@@ -1,6 +1,6 @@
 /*global SwiftApp localStorage console window _*/
 
-SwiftApp.service('ProductService', ['$http', function($http) {
+SwiftApp.service('ProductService', ['$http', 'ConfigService', function($http, ConfigService) {
 
     var response;
 
@@ -60,7 +60,7 @@ SwiftApp.service('ProductService', ['$http', function($http) {
     }
 
     function setupPricesForWholesale() {
-        if (!window.__iswsu__) return;
+        if (!ConfigService.get('WS')) return;
 
         console.log('Product#setupPricesForWholesale');
 
