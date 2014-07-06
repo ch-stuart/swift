@@ -30,7 +30,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
+    # Get the correct user
+    if current_user.try(:admin?)
+      @user = User.find params[:id]
+    else
+      @user = current_user
+    end
 
     # Don't allow dealer to update anything that they're
     # not supposed to.
