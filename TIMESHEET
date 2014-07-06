@@ -246,5 +246,8 @@ date:        time (minutes):       comment:
 2014-07-01 5   Fix eric day's email
 2014-07-01 5   Stop reporting validation issues
 2014-07-06 10  Always order sales by created_at
+2014-07-06 50  Fix issue where dealers could be charged WA state sales tax
+2014-07-06 30  Fix issue where purchasing would fail if product with sizes was missing wholesale prices on the sizes
+2014-07-06 20  Update sizes to require price and wholesale_price. Highlight sizes missing wholesale_price
 
 http://www.timer-tab.com
