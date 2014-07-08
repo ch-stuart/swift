@@ -249,5 +249,6 @@ date:        time (minutes):       comment:
 2014-07-06 50  Fix issue where dealers could be charged WA state sales tax
 2014-07-06 30  Fix issue where purchasing would fail if product with sizes was missing wholesale prices on the sizes
 2014-07-06 20  Update sizes to require price and wholesale_price. Highlight sizes missing wholesale_price
-
+2014-07-06 10  Update block list for global exception reporter
+2014-07-06 5   Fix issue where sale guid wasn't displayed in notification email subject line
 http://www.timer-tab.com
