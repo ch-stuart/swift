@@ -1,6 +1,6 @@
 class Part < ActiveRecord::Base
 
-    attr_accessible :title, :price, :product_id, :wholesale_price
+    attr_accessible :title, :price, :product_id, :wholesale_price, :color_ids
 
     belongs_to :product
     has_and_belongs_to_many :colors

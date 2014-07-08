@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   :short_title, :humane_price, :flickr_photo, :question, :answer, :not_for_sale,
   :not_for_sale_message, :featured_on_homepage, :flickr_set, :short_description,
   :wholesale_humane_price, :wholesale_price, :width, :height, :length, :weight,
-  :package_type, :sizes_attributes, :parts_attributes, :category_id
+  :package_type, :sizes_attributes, :parts_attributes, :category_id, :testimonials_attributes
 
   has_many :parts, :dependent => :destroy
   has_many :testimonials, :dependent => :destroy
