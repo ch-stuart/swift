@@ -55,10 +55,12 @@ jQuery(function() {
         .each(function() {
             createFlickrTagLink.call(this);
         });
+
+    // https://github.com/pivotal/cacheable-flash
+    Flash.transferFromCookies();
+    Flash.writeDataTo('alert', $('#js_app-alert'));
+    Flash.writeDataTo('notice', $('#js_app-notice'));
+
 });
 
 
-// https://github.com/pivotal/cacheable-flash
-Flash.transferFromCookies();
-Flash.writeDataTo('alert', $('#js_app-alert'));
-Flash.writeDataTo('notice', $('#js_app-notice'));

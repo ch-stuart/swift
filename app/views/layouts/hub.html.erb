@@ -10,7 +10,6 @@
   <%= csrf_meta_tag %>
   <!-- Inline js requires that this be up here in the <head> -->
   <%= javascript_include_tag "hub" %>
-  <%= yield :js %>
 </head>
 <body class="hub" id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
   <div id="box" class="container">
@@ -18,5 +17,6 @@
     <p id="js_app-alert" class="app-alert" style="display:none"></p>
     <%= yield %>
   </div>
+  <%= yield :js %>
 </body>
 </html>
