@@ -251,4 +251,8 @@ date:        time (minutes):       comment:
 2014-07-06 20  Update sizes to require price and wholesale_price. Highlight sizes missing wholesale_price
 2014-07-06 10  Update block list for global exception reporter
 2014-07-06 5   Fix issue where sale guid wasn't displayed in notification email subject line
+2014-07-07 45  Fix issue where mass-assigment was blocking updating colors and testimonials on products
+2014-07-07 10  Fix issue where inline js didn't work b/c dependency was at end of <body>
+2014-07-20 5   Fix issue where expiring the home page cache did not work
+
 http://www.timer-tab.com
