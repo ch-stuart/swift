@@ -13,7 +13,10 @@ class HubController < ApplicationController
 
   def expire_home
       begin
-        expire_action :controller => "homes", :action => "index"
+        expire_action :controller => 'homes', :action => 'index', :user_type => 'WHOLESALE'
+        expire_action :controller => 'homes', :action => 'index', :user_type => 'ADMIN'
+        expire_action :controller => 'homes', :action => 'index', :user_type => 'USER_SIGNED_IN'
+        expire_action :controller => 'homes', :action => 'index', :user_type => 'USER_NOT_SIGNED_IN'
         expire_fragment 'homes_index'
         render :text => "cache cleared"
       rescue => e
