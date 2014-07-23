@@ -3,7 +3,7 @@
 <table class="table">
   <thead>
   <tr>
-    <th>Guid</th>
+    <th>Guid (Redemption Code)</th>
     <th>Sale</th>
     <th>Amount</th>
     <th>Remaining Amount</th>
@@ -20,7 +20,11 @@
       </code>
     </td>
     <td>
-      <%= link_to gift_certificate.sale_id, "/sales/#{gift_certificate.sale_id}" %>
+      <% if gift_certificate.sale_id.present? %>
+        <%= link_to gift_certificate.sale_id, "/sales/#{gift_certificate.sale_id}" %>
+      <% else %>
+        n/a
+      <% end %>
     </td>
     <td>
       <%= number_to_currency(cents_to_dollars(gift_certificate.amount)) %>
