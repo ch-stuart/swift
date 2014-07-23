@@ -20,7 +20,7 @@ class Product < ActiveRecord::Base
   FLICKR_ID_MATCH = /^\d{10,11}$/
   FLICKR_SET_MATCH = /^\d{17}$/
 
-  KINDS = ["Product", "Accessory", "Stock"]
+  KINDS = ["Product", "Accessory", "Stock", "Gift Certificate"]
   attr_reader :KINDS
   validates :kind, :inclusion => { :in => KINDS, :message => "%{value} is not a valid type" }
 
