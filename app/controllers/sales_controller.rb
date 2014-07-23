@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
 
-  before_filter :verify_is_admin, :except => [ :checkout, :create, :success, :cart, :charge, :history ]
+  before_filter :verify_is_admin, :except => [ :checkout, :create, :success, :cart, :charge, :history, :coupon ]
   # cache_sweeper ApplicationSweeper
 
   # GET /sales
@@ -128,7 +128,36 @@ class SalesController < ApplicationController
       logger.error e.inspect
 
       # FIXME appears to not actually be responding with JSON. :(
-      render json: { error: e }.to_json, status: 500
+      render json: { error: e }.to_json, status: :internal_server_error
+    end
+  end
+
+  # POST /sales/coupon
+  # POST /sales/coupon.json
+  def coupon
+    begin
+      coupon = Stripe::Coupon.create(
+        amount_off: params[:amount_off], # pennies bro
+        currency: "usd",
+        duration: "forever",
+        max_redemptions: 1,
+        metadata: {
+          email: params[:email]
+        }
+      )
+
+      respond_to do |format|
+        format.html { render text: coupon }
+        format.json { render json: coupon, status: 200 }
+      end
+
+    rescue Exception => e
+      logger.error e.inspect
+
+      respond_to do |format|
+        format.html { render text: "We're sorry, but something went wrong. We've been notified about this issue and we'll take a look at it shortly." }
+        format.json { render json: e, status: :internal_server_error }
+      end
     end
   end
 
@@ -213,4 +242,7 @@ class SalesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
 end
