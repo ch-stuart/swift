@@ -132,35 +132,6 @@ class SalesController < ApplicationController
     end
   end
 
-  # POST /sales/coupon
-  # POST /sales/coupon.json
-  def coupon
-    begin
-      coupon = Stripe::Coupon.create(
-        amount_off: params[:amount_off], # pennies bro
-        currency: "usd",
-        duration: "forever",
-        max_redemptions: 1,
-        metadata: {
-          email: params[:email]
-        }
-      )
-
-      respond_to do |format|
-        format.html { render text: coupon }
-        format.json { render json: coupon, status: 200 }
-      end
-
-    rescue Exception => e
-      logger.error e.inspect
-
-      respond_to do |format|
-        format.html { render text: "We're sorry, but something went wrong. We've been notified about this issue and we'll take a look at it shortly." }
-        format.json { render json: e, status: :internal_server_error }
-      end
-    end
-  end
-
   # POST /sales
   # POST /sales.json
   def create
