@@ -1,0 +1,29 @@
+<%= form_for(@gift_certificate) do |f| %>
+  <% if @gift_certificate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gift_certificate.errors.count, "error") %> prohibited this gift_certificate from being saved:</h2>
+
+      <ul>
+      <% @gift_certificate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sale_id %><br />
+    <%= f.number_field :sale_id %>
+  </div>
+  <div class="field">
+    <%= f.label :amount %><br />
+    <%= f.number_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :guid %><br />
+    <%= f.text_field :guid %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

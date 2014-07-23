@@ -1,5 +1,8 @@
 SwiftSite::Application.routes.draw do
 
+  resources :gift_certificates
+
+
   # http://blog.bignerdranch.com/1666-redirect-www-subdomain-to-your-apex-domain-using-the-rails-router/
   # Remove the www from the URL, e.g. don't allow that stupid subdomain.
   # Why? It causes issues with caching, namely clearing the action cache (memcache) while
@@ -48,6 +51,7 @@ SwiftSite::Application.routes.draw do
     get 'ready_for_pickup', on: :member
     get 'checkout', on: :new
     post 'charge', on: :collection
+    post 'coupon', on: :collection
   end
 
   get 'cart', to: 'sales#cart'

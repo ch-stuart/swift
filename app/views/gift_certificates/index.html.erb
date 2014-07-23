@@ -1,0 +1,27 @@
+<h1>Listing gift_certificates</h1>
+
+<table>
+  <tr>
+    <th>Sale</th>
+    <th>Amount</th>
+    <th>Guid</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gift_certificates.each do |gift_certificate| %>
+  <tr>
+    <td><%= gift_certificate.sale_id %></td>
+    <td><%= gift_certificate.amount %></td>
+    <td><%= gift_certificate.guid %></td>
+    <td><%= link_to 'Show', gift_certificate %></td>
+    <td><%= link_to 'Edit', edit_gift_certificate_path(gift_certificate) %></td>
+    <td><%= link_to 'Destroy', gift_certificate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gift certificate', new_gift_certificate_path %>

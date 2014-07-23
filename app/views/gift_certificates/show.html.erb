@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sale:</b>
+  <%= @gift_certificate.sale_id %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @gift_certificate.amount %>
+</p>
+
+<p>
+  <b>Guid:</b>
+  <%= @gift_certificate.guid %>
+</p>
+
+
+<%= link_to 'Edit', edit_gift_certificate_path(@gift_certificate) %> |
+<%= link_to 'Back', gift_certificates_path %>

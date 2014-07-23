@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140629185159) do
+ActiveRecord::Schema.define(:version => 20140723030859) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(:version => 20140629185159) do
     t.boolean  "archived",   :default => false, :null => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "gift_certificates", :force => true do |t|
+    t.integer  "sale_id"
+    t.integer  "amount"
+    t.string   "guid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "homes", :force => true do |t|
