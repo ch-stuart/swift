@@ -2,19 +2,25 @@
 
 <p>
   <b>Sale:</b>
-  <%= @gift_certificate.sale_id %>
+  <%= link_to @gift_certificate.sale_id, "/sales/#{@gift_certificate.sale_id}" %>
 </p>
 
 <p>
   <b>Amount:</b>
-  <%= @gift_certificate.amount %>
+  <%= number_to_currency(cents_to_dollars(@gift_certificate.amount)) %>
+</p>
+
+<p>
+  <b>Remaining Amount:</b>
+  <%= number_to_currency(cents_to_dollars(@gift_certificate.remaining_amount)) %>
 </p>
 
 <p>
   <b>Guid:</b>
-  <%= @gift_certificate.guid %>
+  <code style="font-size: 110%">
+    <%= @gift_certificate.guid %>
+  </code>
 </p>
-
 
 <%= link_to 'Edit', edit_gift_certificate_path(@gift_certificate) %> |
 <%= link_to 'Back', gift_certificates_path %>

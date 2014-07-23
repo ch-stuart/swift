@@ -168,6 +168,8 @@ class SalesController < ApplicationController
       # TODO don't want to fail order if this fails
       # but it'd be nice to know if it's happening
       begin
+        create_gift_certificates @sale
+
         SalesMailer.success(params[:email], @sale.guid).deliver
         SalesMailer.notify_swift(@sale).deliver
 
@@ -175,9 +177,15 @@ class SalesController < ApplicationController
         if params[:send_me_marketing_emails]
           Contact.create(email: params[:email])
         end
+
       rescue Exception => e
-        # FIXME email about this
-        logger.info e
+        logger.error e
+
+        ExceptionNotifier.notify_exception(
+          e,
+          env: request.env,
+          data: { message: "Post sale task failed." }
+        )
       end
 
       render json: { guid: @sale.guid }.to_json
@@ -214,6 +222,30 @@ class SalesController < ApplicationController
     end
   end
 
+  protected
 
+  def create_gift_certificates sale
+    description = JSON.parse(sale.description)
+
+    description["products"].each do |product|
+      if product["kind"] == "Gift Certificate"
+        price_in_cents = product["price"].to_i * 100
+        gift_certificate = GiftCertificate.new(sale_id: sale.id, amount: price_in_cents)
+
+        if gift_certificate.save
+          logger.info "YAY I MADE A GIFT CERTIFICATE"
+        else
+          ExceptionNotifier.notify_exception(
+            e,
+            env: request.env,
+            data: { message: "Failed to create Gift Certificate" }
+          )
+        end
+
+      else
+        logger.info "SalesController#create_gift_certificates: Product is not a gift certificate. #{product["kind"]}"
+      end
+    end
+  end
 
 end

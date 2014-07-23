@@ -1,27 +1,43 @@
 <h1>Listing gift_certificates</h1>
 
-<table>
+<table class="table">
+  <thead>
   <tr>
+    <th>Guid</th>
     <th>Sale</th>
     <th>Amount</th>
-    <th>Guid</th>
-    <th></th>
+    <th>Remaining Amount</th>
     <th></th>
     <th></th>
   </tr>
-
+  </thead>
+  <tbody>
 <% @gift_certificates.each do |gift_certificate| %>
   <tr>
-    <td><%= gift_certificate.sale_id %></td>
-    <td><%= gift_certificate.amount %></td>
-    <td><%= gift_certificate.guid %></td>
-    <td><%= link_to 'Show', gift_certificate %></td>
-    <td><%= link_to 'Edit', edit_gift_certificate_path(gift_certificate) %></td>
-    <td><%= link_to 'Destroy', gift_certificate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <code style="font-size: 110%">
+        <%= link_to gift_certificate.guid, gift_certificate %>
+      </code>
+    </td>
+    <td>
+      <%= link_to gift_certificate.sale_id, "/sales/#{gift_certificate.sale_id}" %>
+    </td>
+    <td>
+      <%= number_to_currency(cents_to_dollars(gift_certificate.amount)) %>
+    </td>
+    <td>
+      <%= number_to_currency(cents_to_dollars(gift_certificate.remaining_amount)) %>
+    </td>
+    <td>
+      <%= link_to 'Show', gift_certificate_path(gift_certificate), class: "btn btn--table" %>
+      <%= link_to 'Edit', edit_gift_certificate_path(gift_certificate), class: "btn btn--table" %>
+      <%= link_to 'Destroy', gift_certificate, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn--table" %>
+    </td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Gift certificate', new_gift_certificate_path %>
+<%= link_to 'New Gift certificate', new_gift_certificate_path, class: "btn" %>

@@ -1,4 +1,9 @@
 class GiftCertificatesController < ApplicationController
+
+  before_filter :verify_is_admin, :except => []
+
+  layout "hub"
+
   # GET /gift_certificates
   # GET /gift_certificates.json
   def index

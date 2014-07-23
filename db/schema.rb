@@ -60,8 +60,9 @@ ActiveRecord::Schema.define(:version => 20140723030859) do
     t.integer  "sale_id"
     t.integer  "amount"
     t.string   "guid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "remaining_amount"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "homes", :force => true do |t|

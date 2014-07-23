@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
                           :id, :title, :price, :wholesale_price,
                           :humane_price, :wholesale_humane_price,
                           :question, :answer, :width, :height,
-                          :length, :weight, :package_type
+                          :length, :weight, :package_type, :kind
                         ]
         part_attrs    = [:id, :title, :price, :wholesale_price]
         color_attrs   = [:id, :title, :price, :wholesale_price, :hex]
