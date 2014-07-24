@@ -1,6 +1,6 @@
 class GiftCertificatesController < ApplicationController
 
-  before_filter :verify_is_admin, :except => []
+  before_filter :verify_is_admin, :except => [:show]
 
   layout "hub"
 
@@ -18,11 +18,17 @@ class GiftCertificatesController < ApplicationController
   # GET /gift_certificates/1
   # GET /gift_certificates/1.json
   def show
-    @gift_certificate = GiftCertificate.find(params[:id])
+    if params[:guid].present?
+      @gift_certificate = GiftCertificate.where(guid: params[:guid]).first
+    elsif current_user.try(:admin)
+      @gift_certificate = GiftCertificate.find(params[:id])
+    else
+      render_404
+    end
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @gift_certificate }
+      format.json { render json: @gift_certificate.to_json(except: [:id, :updated_at, :sale_id]) }
     end
   end
 
