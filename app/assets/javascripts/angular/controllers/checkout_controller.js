@@ -497,6 +497,31 @@ SwiftApp.controller('CheckoutCtrl', [
         CartService.setShippingCharge(provider.charge);
     };
 
+    $scope['onGiftCertificateRedemptionCodeChanged'] = function() {
+        var guid = $scope.giftCertificateRedemptionCode;
+
+        if (!guid) {
+            $scope.giftCertificateError = null;
+            $scope.giftCertificateRemainingAmount = null;
+        } else if (guid.length === 8) {
+            CartService
+                .getGiftCertificateValue(guid)
+                .success(function(response) {
+                    $scope.giftCertificateError = null;
+                    $scope.giftCertificateRemainingAmount = response.gift_certificate.remaining_amount;
+                    console.log($scope.giftCertificate);
+                })
+                .error(function() {
+                    $scope.giftCertificateRemainingAmount = null;
+                    $scope.giftCertificateError = "Could not find gift certificate.";
+                });
+        } else {
+            // There is text entered, but it is not the correct length,
+            // therefore there is no remaining amount
+            $scope.giftCertificateRemainingAmount = null;
+        }
+    };
+
     $scope['onBuyItButtonClicked'] = function(isValid) {
         console.log('isValid', isValid);
         if (!isValid) {

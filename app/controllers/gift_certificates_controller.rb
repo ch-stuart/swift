@@ -19,7 +19,7 @@ class GiftCertificatesController < ApplicationController
   # GET /gift_certificates/1.json
   def show
     if params[:guid].present?
-      @gift_certificate = GiftCertificate.where(guid: params[:guid]).first
+      @gift_certificate = GiftCertificate.where(guid: params[:guid]).first!
     elsif current_user.try(:admin)
       @gift_certificate = GiftCertificate.find(params[:id])
     else

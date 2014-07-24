@@ -3,7 +3,7 @@
 // TODO clean up this API
 // it's messy!
 
-SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
+SwiftApp.service('CartService', ['$rootScope', '$http', function($rootScope, $http) {
 
     var service = {
         products: [],
@@ -204,6 +204,10 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
             console.log('CartService#saveToLocalStorage');
 
             localStorage.setItem('cart', serialized);
+        },
+        // Retrieve gift certificate value
+        getGiftCertificateValue: function(guid) {
+            return $http.get('/gift_certificates/show?format=json&guid=' + guid)
         }
     };
     return service;
