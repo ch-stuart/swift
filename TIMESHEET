@@ -254,5 +254,7 @@ date:        time (minutes):       comment:
 2014-07-07 45  Fix issue where mass-assigment was blocking updating colors and testimonials on products
 2014-07-07 10  Fix issue where inline js didn't work b/c dependency was at end of <body>
 2014-07-20 5   Fix issue where expiring the home page cache did not work
+2014-07-23 180 WIP Gift Certificate: API endpoint for getting gift certificate data
+2014-07-23 50  WIP Gift Certificate: Allow customer to input gift cert redemption code to retrieve remaining amount
 
 http://www.timer-tab.com
