@@ -503,22 +503,35 @@ SwiftApp.controller('CheckoutCtrl', [
         if (!guid) {
             $scope.giftCertificateError = null;
             $scope.giftCertificateRemainingAmount = null;
+            CartService.nullGiftCertificateValue();
         } else if (guid.length === 8) {
             CartService
                 .getGiftCertificateValue(guid)
-                .success(function(response) {
-                    $scope.giftCertificateError = null;
-                    $scope.giftCertificateRemainingAmount = response.gift_certificate.remaining_amount;
-                    console.log($scope.giftCertificate);
-                })
-                .error(function() {
-                    $scope.giftCertificateRemainingAmount = null;
-                    $scope.giftCertificateError = "Could not find gift certificate.";
-                });
+                .then(
+                    function success(response) {
+                        $scope.giftCertificateError = null;
+                        $scope.giftCertificateRemainingAmount = response.remainingAmount;
+                    },
+                    function error() {
+                        $scope.giftCertificateRemainingAmount = null;
+                        $scope.giftCertificateError = "Could not find gift certificate.";
+                    }
+                );
         } else {
             // There is text entered, but it is not the correct length,
             // therefore there is no remaining amount
             $scope.giftCertificateRemainingAmount = null;
+            CartService.nullGiftCertificateValue();
+        }
+    };
+
+    $scope['onGiftCertificateRedemptionCodeBlur'] = function() {
+        var guid = $scope.giftCertificateRedemptionCode;
+
+        if (guid && guid.length !== 8) {
+            $scope.giftCertificateRemainingAmount = null;
+            $scope.giftCertificateError = "Could not find gift certificate.";
+            CartService.nullGiftCertificateValue();
         }
     };
 

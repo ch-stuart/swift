@@ -3,7 +3,7 @@
 // TODO clean up this API
 // it's messy!
 
-SwiftApp.service('CartService', ['$rootScope', '$http', function($rootScope, $http) {
+SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScope, $http, $q) {
 
     var service = {
         products: [],
@@ -40,7 +40,17 @@ SwiftApp.service('CartService', ['$rootScope', '$http', function($rootScope, $ht
                 this.total += this.shippingCharge;
             }
 
-            $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge);
+            if (this.giftCertRemain) {
+                console.log('Adjusting gift cert price', this.total);
+                if (this.giftCertRemain >= this.total) {
+                    this.total = 0;
+                } else {
+                    this.total -= this.giftCertRemain;
+                }
+                console.log('Adjusting gift cert price', this.total);
+            }
+
+            $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge, this.giftCertRemain);
         },
         setTaxRate: function(rate) {
             if (rate) {
@@ -207,7 +217,29 @@ SwiftApp.service('CartService', ['$rootScope', '$http', function($rootScope, $ht
         },
         // Retrieve gift certificate value
         getGiftCertificateValue: function(guid) {
-            return $http.get('/gift_certificates/show?format=json&guid=' + guid)
+            var request = $q.defer(),
+                that = this;
+
+            $http
+                .get('/gift_certificates/show?format=json&guid=' + guid)
+                .success(function(response) {
+                    that.giftCertRemain = parseFloat(response.gift_certificate.remaining_amount);
+                    that.getPrice();
+
+                    request.resolve({
+                        remainingAmount: that.giftCertRemain
+                    });
+                })
+                .error(function() {
+                    request.reject();
+                });
+
+            return request.promise;
+        },
+        // Null gift certificate value
+        nullGiftCertificateValue: function() {
+            this.giftCertRemain = null;
+            this.getPrice();
         }
     };
     return service;
