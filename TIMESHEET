@@ -63,169 +63,169 @@ date:        time (minutes):       comment:
 
 ///// INVOICED /////
 
-<tr><td><nobr>2014-01-20</nobr></td><td>10 </td><td>Refactor</td></tr>
-<tr><td><nobr>2014-01-20</nobr></td><td>40 </td><td>Wire up basic functionality to shopping cart buttons</td></tr>
-<tr><td><nobr>2014-01-20</nobr></td><td>40 </td><td>Make shopping cart button in global toolbar functional</td></tr>
-<tr><td><nobr>2014-01-21</nobr></td><td>20 </td><td>Allow user to remove products from cart</td></tr>
-<tr><td><nobr>2014-01-21</nobr></td><td>30 </td><td>Display total price for cart. Recalculate as needed. Empty message if cart is empty</td></tr>
-<tr><td><nobr>2014-01-22</nobr></td><td>30 </td><td>Allow user to set quantity for a product in the cart</td></tr>
-<tr><td><nobr>2014-01-22</nobr></td><td>10 </td><td>Do not allow quantity to be set lower than 1. User can remove. Also format currency.</td></tr>
-<tr><td><nobr>2014-01-23</nobr></td><td>05 </td><td>Fix issue where an empty cart would cause the cart view to break.</td></tr>
-<tr><td><nobr>2014-01-23</nobr></td><td>05 </td><td>Fix issue where accessory page did not load</td></tr>
-<tr><td><nobr>2014-01-24</nobr></td><td>60 </td><td>Merge in wholesale branch</td></tr>
-<tr><td><nobr>2014-01-27</nobr></td><td>20 </td><td>G+ meeting</td></tr>
-<tr><td><nobr>2014-01-28</nobr></td><td>15 </td><td>Do not allow wholesale user check out until $500</td></tr>
-<tr><td><nobr>2014-01-28</nobr></td><td>90 </td><td>Support for updating a product from the cart (editing a product already in the cart)</td></tr>
-<tr><td><nobr>2014-01-29</nobr></td><td>10 </td><td>Fix issue where product price was not correct if user never touched the size drop down</td></tr>
-<tr><td><nobr>2014-01-29</nobr></td><td>20 </td><td>Fix bugs when editing a product from the cart</td></tr>
-<tr><td><nobr>2014-01-29</nobr></td><td>25 </td><td>Display and use wholesale prices for products, sizes, parts and fabrics</td></tr>
-<tr><td><nobr>2014-01-29</nobr></td><td>30 </td><td>Begining on polyfilling Array iteration methods for older browsers</td></tr>
-<tr><td><nobr>2014-01-30</nobr></td><td>70 </td><td>Design work on cart</td></tr>
-<tr><td><nobr>2014-01-30</nobr></td><td>30 </td><td>Design work on cart and buttons</td></tr>
-<tr><td><nobr>2014-01-30</nobr></td><td>20 </td><td>Fixing bugs with color picker</td></tr>
-<tr><td><nobr>2014-01-30</nobr></td><td>10 </td><td>Adjusting behavior of "continue shopping" button</td></tr>
-<tr><td><nobr>2014-02-01</nobr></td><td>80 </td><td>Add staging environment and fix bugs with AngularJS and it's dislike of minification</td></tr>
-<tr><td><nobr>2014-02-01</nobr></td><td>15 </td><td>Fixing bugs</td></tr>
-<tr><td><nobr>2014-02-01</nobr></td><td>15 </td><td>Cache static assets for 1 year</td></tr>
-<tr><td><nobr>2014-02-04</nobr></td><td>20 </td><td>Adjust color picker UX so it does not require a tooltip</td></tr>
-<tr><td><nobr>2014-02-04</nobr></td><td>40 </td><td>Start on integrating with Stripe</td></tr>
-<tr><td><nobr>2014-02-05</nobr></td><td>40 </td><td>Complete basic integration with Stripe</td></tr>
-<tr><td><nobr>2014-02-06</nobr></td><td>10 </td><td>Tell old IE to update</td></tr>
-<tr><td><nobr>2014-02-06</nobr></td><td>60 </td><td>Improving checkout flow and behavior</td></tr>
-<tr><td><nobr>2014-02-06</nobr></td><td>60 </td><td>1. Send proper price to Stripe 2. Display list of sales on hub 3. Display detailed view of individual sales on hub 4. Display detailed view of individual sales for users 5. Store order description, amount and email on server</td></tr>
-<tr><td><nobr>2014-02-08</nobr></td><td>15 </td><td>Improving display of sale detail on hub and public</td></tr>
-<tr><td><nobr>2014-02-09</nobr></td><td>15 </td><td>Cleaning up TODOs/bugs in Basecamp</td></tr>
-<tr><td><nobr>2014-02-10</nobr></td><td>45 </td><td>Creating contacts resource</td></tr>
-<tr><td><nobr>2014-02-10</nobr></td><td>30 </td><td>Create UI for archiving contacts</td></tr>
-<tr><td><nobr>2014-02-10</nobr></td><td>10 </td><td>Create UI for copy/pasting new contacts</td></tr>
-<tr><td><nobr>2014-02-10</nobr></td><td>15 </td><td>Create new contact when creating new sale</td></tr>
-<tr><td><nobr>2014-02-12</nobr></td><td>15 </td><td>Add option to sign up for marketing emails when ordering</td></tr>
-<tr><td><nobr>2014-02-15</nobr></td><td>30 </td><td>Improve layout of checkout page</td></tr>
-<tr><td><nobr>2014-02-15</nobr></td><td>45 </td><td>Improve styles and displayed info for order success page</td></tr>
-<tr><td><nobr>2014-02-16</nobr></td><td>25 </td><td>Partially match the layout of the cart page with the order success page. this makes more sense</td></tr>
-<tr><td><nobr>2014-02-16</nobr></td><td>15 </td><td>Cont. to improve layout and styles on order success page.</td></tr>
-<tr><td><nobr>2014-02-16</nobr></td><td>10 </td><td>Update success page to include date in users's time zone and adjust shipping text</td></tr>
-<tr><td><nobr>2014-02-16</nobr></td><td>30 </td><td>Send an email to the customer when the order is complete</td></tr>
-<tr><td><nobr>2014-02-16</nobr></td><td>05 </td><td>Fix issue where parts trigger invalid form</td></tr>
-<tr><td><nobr>2014-02-16</nobr></td><td>10 </td><td>Improve styles for invalid form inputs on order form</td></tr>
-<tr><td><nobr>2014-02-17</nobr></td><td>10 </td><td>Fix issue where quantity was not saved when changed on cart page</td></tr>
-<tr><td><nobr>2014-02-17</nobr></td><td>15 </td><td>Other minor fixes</td></tr>
-<tr><td><nobr>2014-02-17</nobr></td><td>30 </td><td>Meeting</td></tr>
-<tr><td><nobr>2014-02-18</nobr></td><td>10 </td><td>Comments Change price of all prices in total price column when changing quantity</td></tr>
-<tr><td><nobr>2014-02-18</nobr></td><td>10 </td><td>Cart: Fix "Continue Shopping" button and display "n/a" when a product has no parts</td></tr>
-<tr><td><nobr>2014-02-18</nobr></td><td>30 </td><td>Finish conversion of native JavaScript iterators to Underscore</td></tr>
-<tr><td><nobr>2014-02-19</nobr></td><td>30 </td><td>Chunk together parts with colors and parts with checkboxes</td></tr>
-<tr><td><nobr>2014-02-19</nobr></td><td>30 </td><td>Studying up on Postmaster API</td></tr>
-<tr><td><nobr>2014-02-19</nobr></td><td>30 </td><td>Working action to validate an address via Postmaster. No UI yet</td></tr>
-<tr><td><nobr>2014-02-19</nobr></td><td>10 </td><td>HTML for collecting shipping information</td></tr>
-<tr><td><nobr>2014-02-19</nobr></td><td>10 </td><td>Add action to get rates for a shipment</td></tr>
-<tr><td><nobr>2014-02-19</nobr></td><td>10 </td><td>Update db to contain basic info for shipping</td></tr>
-<tr><td><nobr>2014-02-19</nobr></td><td>05 </td><td>Fix bug where .live is no longer available in jQuery</td></tr>
-<tr><td><nobr>2014-02-19</nobr></td><td>10 </td><td>Add shipping info (dimensions and weight) to product form</td></tr>
-<tr><td><nobr>2014-02-20</nobr></td><td>10 </td><td>Improve usability of products page</td></tr>
-<tr><td><nobr>2014-02-20</nobr></td><td>25 </td><td>Make product dimensions and weight available on checkout page</td></tr>
-<tr><td><nobr>2014-02-25</nobr></td><td>90 </td><td>Refactoring of Angular JS code</td></tr>
-<tr><td><nobr>2014-02-25</nobr></td><td>60 </td><td>Complete refactoring of Angular JS code</td></tr>
-<tr><td><nobr>2014-02-28</nobr></td><td>20 </td><td>Updating staging env., fixing issues found</td></tr>
-<tr><td><nobr>2014-02-28</nobr></td><td>10 </td><td>Cleanup/removal of no longer used js libs</td></tr>
-<tr><td><nobr>2014-03-02</nobr></td><td>60 </td><td>Work on shipping, getting rates, validating address, displaying results, etc.</td></tr>
-<tr><td><nobr>2014-03-03</nobr></td><td>30 </td><td>Various fixes and refactoring</td></tr>
-<tr><td><nobr>2014-03-03</nobr></td><td>30 </td><td>Cont. work on shipping</td></tr>
-<tr><td><nobr>2014-03-06</nobr></td><td>20 </td><td>Inform user that we are getting shipping rates... progress indicators, etc</td></tr>
-<tr><td><nobr>2014-03-06</nobr></td><td>20 </td><td>save shipping cost with order</td></tr>
-<tr><td><nobr>2014-03-06</nobr></td><td>20 </td><td>handle errors with address validation and rate retrieval</td></tr>
-<tr><td><nobr>2014-03-06</nobr></td><td>10 </td><td>Update staging host</td></tr>
-<tr><td><nobr>2014-03-07</nobr></td><td>10 </td><td>Fix bug that I don't care to describe</td></tr>
-<tr><td><nobr>2014-03-07</nobr></td><td>60 </td><td>International shipping</td></tr>
-<tr><td><nobr>2014-03-08</nobr></td><td>30 </td><td>Intl shipping dropdown</td></tr>
-<tr><td><nobr>2014-03-08</nobr></td><td>25 </td><td>Save shipping provider with sale</td></tr>
-<tr><td><nobr>2014-03-08</nobr></td><td>20 </td><td>Add ability to cross-reference sale data on our side with data at Stripe</td></tr>
-<tr><td><nobr>2014-03-08</nobr></td><td>30 </td><td>Add shipping cost to order cost</td></tr>
-<tr><td><nobr>2014-03-08</nobr></td><td>25 </td><td>Reading up on TaxCloud integration</td></tr>
-<tr><td><nobr>2014-03-08</nobr></td><td>30 </td><td>Basecamping</td></tr>
-<tr><td><nobr>2014-03-10</nobr></td><td>60 </td><td>Meeting</td></tr>
-<tr><td><nobr>2014-03-10</nobr></td><td>20 </td><td>Researching how to get tax rate for WA State</td></tr>
-<tr><td><nobr>2014-03-11</nobr></td><td>40 </td><td>Implement proxy to fetch wa state tax rate</td></tr>
-<tr><td><nobr>2014-03-11</nobr></td><td>20 </td><td>Only try and get wa state tax rate if zip code is in WA state</td></tr>
-<tr><td><nobr>2014-03-13</nobr></td><td>30 </td><td>Saving tax info with sale in db</td></tr>
-<tr><td><nobr>2014-03-15</nobr></td><td>60 </td><td>Cleanup. Store all $$$ in cents. Store all charges that are included in total seperately.</td></tr>
-<tr><td><nobr>2014-03-15</nobr></td><td>20 </td><td>Sort sales index correctly, set correct time zone, etc.</td></tr>
-<tr><td><nobr>2014-03-17</nobr></td><td>20 </td><td>Start on properly handling pickups</td></tr>
-<tr><td><nobr>2014-03-18</nobr></td><td>20 </td><td>Various fixes, for example: disable shipping form inputs if customer is picking up</td></tr>
-<tr><td><nobr>2014-03-18</nobr></td><td>40 </td><td>Provide drop down for states and provinces for US and CA. Provide free input for everywhere else</td></tr>
-<tr><td><nobr>2014-03-18</nobr></td><td>05 </td><td>Fix issue where success page always said customer would pickup</td></tr>
-<tr><td><nobr>2014-03-20</nobr></td><td>45 </td><td>Separate creation of charge from creation of sale</td></tr>
-<tr><td><nobr>2014-03-20</nobr></td><td>40 </td><td>Handling errors. Still more to do</td></tr>
-<tr><td><nobr>2014-03-22</nobr></td><td>35 </td><td>Reset tax and shipping info if user has already filled out shipping info and then decides to pickup</td></tr>
-<tr><td><nobr>2014-03-22</nobr></td><td>10 </td><td>Don't call rails server if customer is not in WA</td></tr>
-<tr><td><nobr>2014-03-24</nobr></td><td>25 </td><td>Set up email addresses</td></tr>
-<tr><td><nobr>2014-03-24</nobr></td><td>15 </td><td>Store pickup status, etc. in cart so user can refresh</td></tr>
-<tr><td><nobr>2014-03-24</nobr></td><td>15 </td><td>Fix issue where busy indicator on button does not go away when there is an error returned from Stripe</td></tr>
-<tr><td><nobr>2014-03-25</nobr></td><td>40 </td><td>Start on allow customer to choose shipping provider and service</td></tr>
-<tr><td><nobr>2014-03-25</nobr></td><td>60 </td><td>Complete on allow customer to choose shipping provider and service for GROUND services</td></tr>
-<tr><td><nobr>2014-03-30</nobr></td><td>05 </td><td>Precompile print.css</td></tr>
-<tr><td><nobr>2014-03-30</nobr></td><td>10 </td><td>Fix issue where shipping provider was not saved</td></tr>
-<tr><td><nobr>2014-03-30</nobr></td><td>10 </td><td>Add status to sales. ("Shipped" and "Not Shipped")</td></tr>
-<tr><td><nobr>2014-03-31</nobr></td><td>10 </td><td>Do not persist tax amount, pickup, or other checkout form values in local storage</td></tr>
-<tr><td><nobr>2014-03-31</nobr></td><td>10 </td><td>Always send an integer to Stripe to prevent exceptions</td></tr>
-<tr><td><nobr>2014-03-31</nobr></td><td>10 </td><td>Update order email text</td></tr>
-<tr><td><nobr>2014-04-01</nobr></td><td>35 </td><td>Allow customer to choose shipping service level</td></tr>
-<tr><td><nobr>2014-04-01</nobr></td><td>60 </td><td>WIP: Allow Martina to add shipping info to order when it's ready to ship</td></tr>
-<tr><td><nobr>2014-04-03</nobr></td><td>30 </td><td>WIP: Allow Martina to add shipping info to order when it's ready to ship</td></tr>
-<tr><td><nobr>2014-04-03</nobr></td><td>60 </td><td>JavaScript and Ruby exception handling</td></tr>
-<tr><td><nobr>2014-04-03</nobr></td><td>60 </td><td>Further improvements to order form, adjusting info collected as req'd by shipping providers (UPS, etc.)</td></tr>
-<tr><td><nobr>2014-04-06</nobr></td><td>30 </td><td>Save shipment details to sale. Adjust sale detail page to display said details</td></tr>
-<tr><td><nobr>2014-04-06</nobr></td><td>05 </td><td>Adjust UI for displaying whether a sale has been shipped yet or not</td></tr>
-<tr><td><nobr>2014-04-06</nobr></td><td>10 </td><td>Email customer when shipment is ready</td></tr>
-<tr><td><nobr>2014-04-06</nobr></td><td>20 </td><td>Store tracking # of shipment for customer email</td></tr>
-<tr><td><nobr>2014-04-06</nobr></td><td>20 </td><td>Add ability to add and list shipping boxes</td></tr>
-<tr><td><nobr>2014-04-07</nobr></td><td>60 </td><td>Working on implementing ability to ship multiple boxes</td></tr>
-<tr><td><nobr>2014-04-16</nobr></td><td>30 </td><td>Start on basic packaging service</td></tr>
-<tr><td><nobr>2014-04-20</nobr></td><td>180</td><td>Supporting ability to ship multiple packages for one order, etc. Generally improving the shipping behavior/experience</td></tr>
-<tr><td><nobr>2014-04-22</nobr></td><td>10 </td><td>Improve display of sales index page</td></tr>
-<tr><td><nobr>2014-04-22</nobr></td><td>20 </td><td>Email customer when order is ready for pickup</td></tr>
-<tr><td><nobr>2014-04-22</nobr></td><td>20 </td><td>Allow shipment to be created using an envelope</td></tr>
-<tr><td><nobr>2014-04-22</nobr></td><td>20 </td><td>Include link to track package in email to customer</td></tr>
-<tr><td><nobr>2014-04-22</nobr></td><td>20 </td><td>Save cost of shipment to db and display on hub page</td></tr>
-<tr><td><nobr>2014-04-24</nobr></td><td>20 </td><td>Email swift when order is ready</td></tr>
-<tr><td><nobr>2014-04-24</nobr></td><td>30 </td><td>Validate shipping form input (require phone no, etc.)</td></tr>
-<tr><td><nobr>2014-04-24</nobr></td><td>20 </td><td>Validate rest of checkout form input</td></tr>
-<tr><td><nobr>2014-04-25</nobr></td><td>10 </td><td>Fix date format issues on success page</td></tr>
-<tr><td><nobr>2014-04-25</nobr></td><td>10 </td><td>Fix auto-scrolling on mobile</td></tr>
-<tr><td><nobr>2014-04-25</nobr></td><td>15 </td><td>Improve dialog styles (fabric with charge)</td></tr>
-<tr><td><nobr>2014-04-26</nobr></td><td>05 </td><td>Remove sprockets from logging in development</td></tr>
-<tr><td><nobr>2014-04-26</nobr></td><td>30 </td><td>Fixing action caching</td></tr>
-<tr><td><nobr>2014-04-26</nobr></td><td>05 </td><td>Do not show checkout page if cart is empty</td></tr>
-<tr><td><nobr>2014-04-26</nobr></td><td>05 </td><td>Use Martina's Stripe account</td></tr>
-<tr><td><nobr>2014-04-27</nobr></td><td>40 </td><td>Add script to update shipping attrs</td></tr>
-<tr><td><nobr>2014-04-27</nobr></td><td>10 </td><td>Adjust products table info</td></tr>
-<tr><td><nobr>2014-05-13</nobr></td><td>90 </td><td>SSL</td></tr>
-<tr><td><nobr>2014-05-13</nobr></td><td>30 </td><td>Adjustments based on feedback from Swift</td></tr>
-<tr><td><nobr>2014-05-21</nobr></td><td>60 </td><td>SSL</td></tr>
-<tr><td><nobr>2014-05-31</nobr></td><td>60 </td><td>Deploy</td></tr>
-<tr><td><nobr>2014-05-31</nobr></td><td>30 </td><td>Fix JavaScript exception reported by exception reporter</td></tr>
-<tr><td><nobr>2014-05-31</nobr></td><td>60 </td><td>WIP Support quoting shipping rates for LETTER</td></tr>
-<tr><td><nobr>2014-05-31</nobr></td><td>15 </td><td>Improve info logged by JS exception reporter</td></tr>
-<tr><td><nobr>2014-06-03</nobr></td><td>40 </td><td>Answering questions on basecamp, figuring out why USPS shipping rates are not correct</td></tr>
-<tr><td><nobr>2014-06-03</nobr></td><td>10 </td><td>Add customer name to order print page</td></tr>
-<tr><td><nobr>2014-06-03</nobr></td><td>10 </td><td>Blocking JS exception reporter from reporting some errors</td></tr>
+2014-01-20 10 Refactor
+2014-01-20 40 Wire up basic functionality to shopping cart buttons
+2014-01-20 40 Make shopping cart button in global toolbar functional
+2014-01-21 20 Allow user to remove products from cart
+2014-01-21 30 Display total price for cart. Recalculate as needed. Empty message if cart is empty
+2014-01-22 30 Allow user to set quantity for a product in the cart
+2014-01-22 10 Do not allow quantity to be set lower than 1. User can remove. Also format currency.
+2014-01-23 05 Fix issue where an empty cart would cause the cart view to break.
+2014-01-23 05 Fix issue where accessory page did not load
+2014-01-24 60 Merge in wholesale branch
+2014-01-27 20 G+ meeting
+2014-01-28 15 Do not allow wholesale user check out until $500
+2014-01-28 90 Support for updating a product from the cart (editing a product already in the cart)
+2014-01-29 10 Fix issue where product price was not correct if user never touched the size drop down
+2014-01-29 20 Fix bugs when editing a product from the cart
+2014-01-29 25 Display and use wholesale prices for products, sizes, parts and fabrics
+2014-01-29 30 Begining on polyfilling Array iteration methods for older browsers
+2014-01-30 70 Design work on cart
+2014-01-30 30 Design work on cart and buttons
+2014-01-30 20 Fixing bugs with color picker
+2014-01-30 10 Adjusting behavior of "continue shopping" button
+2014-02-01 80 Add staging environment and fix bugs with AngularJS and it's dislike of minification
+2014-02-01 15 Fixing bugs
+2014-02-01 15 Cache static assets for 1 year
+2014-02-04 20 Adjust color picker UX so it does not require a tooltip
+2014-02-04 40 Start on integrating with Stripe
+2014-02-05 40 Complete basic integration with Stripe
+2014-02-06 10 Tell old IE to update
+2014-02-06 60 Improving checkout flow and behavior
+2014-02-06 60 1. Send proper price to Stripe 2. Display list of sales on hub 3. Display detailed view of individual sales on hub 4. Display detailed view of individual sales for users 5. Store order description, amount and email on server
+2014-02-08 15 Improving display of sale detail on hub and public
+2014-02-09 15 Cleaning up TODOs/bugs in Basecamp
+2014-02-10 45 Creating contacts resource
+2014-02-10 30 Create UI for archiving contacts
+2014-02-10 10 Create UI for copy/pasting new contacts
+2014-02-10 15 Create new contact when creating new sale
+2014-02-12 15 Add option to sign up for marketing emails when ordering
+2014-02-15 30 Improve layout of checkout page
+2014-02-15 45 Improve styles and displayed info for order success page
+2014-02-16 25 Partially match the layout of the cart page with the order success page. this makes more sense
+2014-02-16 15 Cont. to improve layout and styles on order success page.
+2014-02-16 10 Update success page to include date in users's time zone and adjust shipping text
+2014-02-16 30 Send an email to the customer when the order is complete
+2014-02-16 05 Fix issue where parts trigger invalid form
+2014-02-16 10 Improve styles for invalid form inputs on order form
+2014-02-17 10 Fix issue where quantity was not saved when changed on cart page
+2014-02-17 15 Other minor fixes
+2014-02-17 30 Meeting
+2014-02-18 10 Comments Change price of all prices in total price column when changing quantity
+2014-02-18 10 Cart: Fix "Continue Shopping" button and display "n/a" when a product has no parts
+2014-02-18 30 Finish conversion of native JavaScript iterators to Underscore
+2014-02-19 30 Chunk together parts with colors and parts with checkboxes
+2014-02-19 30 Studying up on Postmaster API
+2014-02-19 30 Working action to validate an address via Postmaster. No UI yet
+2014-02-19 10 HTML for collecting shipping information
+2014-02-19 10 Add action to get rates for a shipment
+2014-02-19 10 Update db to contain basic info for shipping
+2014-02-19 05 Fix bug where .live is no longer available in jQuery
+2014-02-19 10 Add shipping info (dimensions and weight) to product form
+2014-02-20 10 Improve usability of products page
+2014-02-20 25 Make product dimensions and weight available on checkout page
+2014-02-25 90 Refactoring of Angular JS code
+2014-02-25 60 Complete refactoring of Angular JS code
+2014-02-28 20 Updating staging env., fixing issues found
+2014-02-28 10 Cleanup/removal of no longer used js libs
+2014-03-02 60 Work on shipping, getting rates, validating address, displaying results, etc.
+2014-03-03 30 Various fixes and refactoring
+2014-03-03 30 Cont. work on shipping
+2014-03-06 20 Inform user that we are getting shipping rates... progress indicators, etc
+2014-03-06 20 save shipping cost with order
+2014-03-06 20 handle errors with address validation and rate retrieval
+2014-03-06 10 Update staging host
+2014-03-07 10 Fix bug that I don't care to describe
+2014-03-07 60 International shipping
+2014-03-08 30 Intl shipping dropdown
+2014-03-08 25 Save shipping provider with sale
+2014-03-08 20 Add ability to cross-reference sale data on our side with data at Stripe
+2014-03-08 30 Add shipping cost to order cost
+2014-03-08 25 Reading up on TaxCloud integration
+2014-03-08 30 Basecamping
+2014-03-10 60 Meeting
+2014-03-10 20 Researching how to get tax rate for WA State
+2014-03-11 40 Implement proxy to fetch wa state tax rate
+2014-03-11 20 Only try and get wa state tax rate if zip code is in WA state
+2014-03-13 30 Saving tax info with sale in db
+2014-03-15 60 Cleanup. Store all $$$ in cents. Store all charges that are included in total seperately.
+2014-03-15 20 Sort sales index correctly, set correct time zone, etc.
+2014-03-17 20 Start on properly handling pickups
+2014-03-18 20 Various fixes, for example: disable shipping form inputs if customer is picking up
+2014-03-18 40 Provide drop down for states and provinces for US and CA. Provide free input for everywhere else
+2014-03-18 05 Fix issue where success page always said customer would pickup
+2014-03-20 45 Separate creation of charge from creation of sale
+2014-03-20 40 Handling errors. Still more to do
+2014-03-22 35 Reset tax and shipping info if user has already filled out shipping info and then decides to pickup
+2014-03-22 10 Don't call rails server if customer is not in WA
+2014-03-24 25 Set up email addresses
+2014-03-24 15 Store pickup status, etc. in cart so user can refresh
+2014-03-24 15 Fix issue where busy indicator on button does not go away when there is an error returned from Stripe
+2014-03-25 40 Start on allow customer to choose shipping provider and service
+2014-03-25 60 Complete on allow customer to choose shipping provider and service for GROUND services
+2014-03-30 05 Precompile print.css
+2014-03-30 10 Fix issue where shipping provider was not saved
+2014-03-30 10 Add status to sales. ("Shipped" and "Not Shipped")
+2014-03-31 10 Do not persist tax amount, pickup, or other checkout form values in local storage
+2014-03-31 10 Always send an integer to Stripe to prevent exceptions
+2014-03-31 10 Update order email text
+2014-04-01 35 Allow customer to choose shipping service level
+2014-04-01 60 WIP: Allow Martina to add shipping info to order when it's ready to ship
+2014-04-03 30 WIP: Allow Martina to add shipping info to order when it's ready to ship
+2014-04-03 60 JavaScript and Ruby exception handling
+2014-04-03 60 Further improvements to order form, adjusting info collected as req'd by shipping providers (UPS, etc.)
+2014-04-06 30 Save shipment details to sale. Adjust sale detail page to display said details
+2014-04-06 05 Adjust UI for displaying whether a sale has been shipped yet or not
+2014-04-06 10 Email customer when shipment is ready
+2014-04-06 20 Store tracking # of shipment for customer email
+2014-04-06 20 Add ability to add and list shipping boxes
+2014-04-07 60 Working on implementing ability to ship multiple boxes
+2014-04-16 30 Start on basic packaging service
+2014-04-20 180</td><td>Supporting ability to ship multiple packages for one order, etc. Generally improving the shipping behavior/experience
+2014-04-22 10 Improve display of sales index page
+2014-04-22 20 Email customer when order is ready for pickup
+2014-04-22 20 Allow shipment to be created using an envelope
+2014-04-22 20 Include link to track package in email to customer
+2014-04-22 20 Save cost of shipment to db and display on hub page
+2014-04-24 20 Email swift when order is ready
+2014-04-24 30 Validate shipping form input (require phone no, etc.)
+2014-04-24 20 Validate rest of checkout form input
+2014-04-25 10 Fix date format issues on success page
+2014-04-25 10 Fix auto-scrolling on mobile
+2014-04-25 15 Improve dialog styles (fabric with charge)
+2014-04-26 05 Remove sprockets from logging in development
+2014-04-26 30 Fixing action caching
+2014-04-26 05 Do not show checkout page if cart is empty
+2014-04-26 05 Use Martina's Stripe account
+2014-04-27 40 Add script to update shipping attrs
+2014-04-27 10 Adjust products table info
+2014-05-13 90 SSL
+2014-05-13 30 Adjustments based on feedback from Swift
+2014-05-21 60 SSL
+2014-05-31 60 Deploy
+2014-05-31 30 Fix JavaScript exception reported by exception reporter
+2014-05-31 60 WIP Support quoting shipping rates for LETTER
+2014-05-31 15 Improve info logged by JS exception reporter
+2014-06-03 40 Answering questions on basecamp, figuring out why USPS shipping rates are not correct
+2014-06-03 10 Add customer name to order print page
+2014-06-03 10 Blocking JS exception reporter from reporting some errors
 
 //// invoice on laptop //
 
-2014-06-09 10 Add flags to sales table
-2014-06-10 35 Add ability to mark sale as printed
-2014-06-11 20 Improve logging of exceptions when creating a shipment
-2014-06-11 20 Improve form behavior and help text when creating a shipment
-2014-06-11 30 Fix bug where WxHxL were being discarded when creating a shipment
-2014-06-14 10 Update to flick raw 0.9.8 to ensure Flickr API compatibility when they switch to SSL-only
-2014-06-14 15 UI improvements to sales page
-2014-06-15 20 Research on authentication libraries
-2014-06-17 10 Show notice if photos cannot be retrieved from Flickr
-2014-06-17 20 Move sales that have been shipped without postmaster (also create "Trash" category)
+2014-06-09 10  Add flags to sales table
+2014-06-10 35  Add ability to mark sale as printed
+2014-06-11 20  Improve logging of exceptions when creating a shipment
+2014-06-11 20  Improve form behavior and help text when creating a shipment
+2014-06-11 30  Fix bug where WxHxL were being discarded when creating a shipment
+2014-06-14 10  Update to flick raw 0.9.8 to ensure Flickr API compatibility when they switch to SSL-only
+2014-06-14 15  UI improvements to sales page
+2014-06-15 20  Research on authentication libraries
+2014-06-17 10  Show notice if photos cannot be retrieved from Flickr
+2014-06-17 20  Move sales that have been shipped without postmaster (also create "Trash" category)
 2014-06-17 20  Add production email configuration (this was forgotten previously)
 2014-06-17 130 WIP devise: initial set up
 2014-06-17 30  WIP devise: migrating from action caching to fragment caching
-2014-06-18 15 Update locations where bare domain was still being referenced
+2014-06-18 15  Update locations where bare domain was still being referenced
 2014-06-22 20  WIP Dealer Sign Up: adjusting verbiage, etc.
 2014-06-25 300 WIP dealer sign up
 2014-06-25 15  Fix user being signed out on ajax post
@@ -256,5 +256,9 @@ date:        time (minutes):       comment:
 2014-07-20 5   Fix issue where expiring the home page cache did not work
 2014-07-23 180 WIP Gift Certificate: API endpoint for getting gift certificate data
 2014-07-23 50  WIP Gift Certificate: Allow customer to input gift cert redemption code to retrieve remaining amount
+
+
+/// INVOICED
+
 
 http://www.timer-tab.com
