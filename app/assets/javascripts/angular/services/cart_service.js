@@ -7,9 +7,11 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
 
     var service = {
         products: [],
+		// Cost of products without shipping, tax, etc.
         price: null,
+		// Cost of everything. What we charge the customer.
+        total: null,
         shippingCharge: null,
-        totalPrice: null,
         taxRate: null,
         taxAmount: null,
         giftCertRemain: null,
