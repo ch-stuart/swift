@@ -6,19 +6,26 @@ The website for Swift Industries. Runs on Heroku.
 
 ### Production
 
-    $ git push heroku
-    $ heroku run console
-    >> Rails.cache.clear
-    >> exit
+Deploy without clearing cache or migrating db.
+
+    $ rake deploy[heroku,master]
 
 If the assets get updated, the CSS and JS will 404.
 Clearing the cache will fix this issue.
+
+Deploy with clearing cache, but not migrating db.
+
+    $ rake deploy[heroku,master,true]
+
+Deploy with clearing cache or migrating db.
+
+    $ rake deploy[heroku,master,true,true]
 
 ### Staging
 
 Staging environment is at: https://fierce-island-8829.herokuapp.com/
 
-    $ git push staging saveToCart:master
+    $ rake deploy[staging,master]
 
 ## Start for development
 
