@@ -56,7 +56,7 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.shippingServiceLevel = 'GROUND';
     $scope.countryIsUSCA = true;
 
-    $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge, giftCertRemain, giftCertApplied) {
+    $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge, giftCertRemain, giftCertApplied, totalWithGiftCert) {
         $scope.cart.price           = price;
         $scope.cart.total           = total;
         $scope.cart.taxAmount       = taxAmount;
@@ -64,6 +64,7 @@ SwiftApp.controller('CheckoutCtrl', [
         $scope.cart.shippingCharge  = shippingCharge;
         $scope.cart.giftCertRemain  = giftCertRemain;
         $scope.cart.giftCertApplied = giftCertApplied;
+        $scope.cart.totalWithGiftCert = totalWithGiftCert;
     });
 
     function postmasterValidateSuccessCallback(response) {

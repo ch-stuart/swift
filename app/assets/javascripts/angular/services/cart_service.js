@@ -7,10 +7,12 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
 
     var service = {
         products: [],
-		// Cost of products without shipping, tax, etc.
+        // Cost of products without shipping, tax, etc.
         price: null,
-		// Cost of everything. What we charge the customer.
+        // Cost of everything. What we charge the customer.
         total: null,
+        totalWithGiftCert: null,
+        totalWithGiftCert: null,
         shippingCharge: null,
         taxRate: null,
         taxAmount: null,
@@ -27,7 +29,7 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
 
             this.price = this.total = price;
 
-            // Adjust price if there is a taxRate
+            // Adjust total if there is a Tax Rate
             if (this.taxRate) {
                 this.taxAmount = this.total * this.taxRate;
                 // Needs to be an integer because otherwise
@@ -39,27 +41,27 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
                 this.taxAmount = null;
             }
 
-            // Adjust price if there is a shippingCharge
+            // Adjust total if there is a Shipping Charge
             if (this.shippingCharge) {
                 this.total += this.shippingCharge;
             }
 
-            // If money is on gift certificate...
+            // Adjust total if customer has Gift Certificate
             if (this.giftCertRemain) {
                 // If available gift certificate is greater
                 // than total... zero out total
                 if (this.giftCertRemain >= this.total) {
                     this.giftCertApplied = this.total;
-                    this.total = 0;
+                    this.totalWithGiftCert = 0;
                 // If available gift certificate is less
                 // than total... use as much as possible
                 } else {
-                    this.total -= this.giftCertRemain;
+                    this.totalWithGiftCert = this.total - this.giftCertRemain;
                     this.giftCertApplied = this.giftCertRemain;
                 }
             }
 
-            $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge, this.giftCertRemain, this.giftCertApplied);
+            $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge, this.giftCertRemain, this.giftCertApplied, this.totalWithGiftCert);
         },
         setTaxRate: function(rate) {
             if (rate) {
