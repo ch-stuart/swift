@@ -28,3 +28,21 @@ input.input--inline {
     width: 16px;
 }
 
+
+//
+// This element is position: fixed,
+// therefore we need to set a width on it so
+// it doesn't break out of it's container.
+// It is only sticky when min-width: 768px,
+// hence the media queries.
+//
+@media (min-width: 768px) {
+	.sticky-order-column {
+		max-width: 172px;
+	}
+}
+@media (min-width: 960px) {
+	.sticky-order-column {
+		max-width: 220px;
+	}
+}

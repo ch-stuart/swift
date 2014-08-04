@@ -12,6 +12,8 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
         totalPrice: null,
         taxRate: null,
         taxAmount: null,
+        giftCertRemain: null,
+        giftCertApplied: null,
         // Calculates base price, tax amount, shipping charge
         // Broadcasts updates
         // TODO rename
@@ -40,17 +42,22 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
                 this.total += this.shippingCharge;
             }
 
+            // If money is on gift certificate...
             if (this.giftCertRemain) {
-                console.log('Adjusting gift cert price', this.total);
+                // If available gift certificate is greater
+                // than total... zero out total
                 if (this.giftCertRemain >= this.total) {
+                    this.giftCertApplied = this.total;
                     this.total = 0;
+                // If available gift certificate is less
+                // than total... use as much as possible
                 } else {
                     this.total -= this.giftCertRemain;
+                    this.giftCertApplied = this.giftCertRemain;
                 }
-                console.log('Adjusting gift cert price', this.total);
             }
 
-            $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge, this.giftCertRemain);
+            $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge, this.giftCertRemain, this.giftCertApplied);
         },
         setTaxRate: function(rate) {
             if (rate) {

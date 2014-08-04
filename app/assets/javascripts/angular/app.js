@@ -1,5 +1,5 @@
 /*global angular $ */
-var SwiftApp = angular.module('SwiftApp', []);
+var SwiftApp = angular.module('SwiftApp', ['sticky']);
 
 SwiftApp.config([
   "$httpProvider", function($httpProvider) {
