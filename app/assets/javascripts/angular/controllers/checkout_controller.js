@@ -538,7 +538,6 @@ SwiftApp.controller('CheckoutCtrl', [
     };
 
     $scope['onBuyItButtonClicked'] = function(isValid) {
-        console.log('isValid', isValid);
         if (!isValid) {
             return alert('The information you entered is incomplete. Fill in all fields and try again.');
         }
