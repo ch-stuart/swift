@@ -4,7 +4,7 @@ projectDirectory  = "$CWD"
 tabSize           = 2
 softTabs          = true
 exclude           = "{$exclude,*.log,tmp/*,*.sqlite*}"
-include           = "{$include,.gitignore}"
+include           = "{$include,.gitignore,.bower.json}"
 
 [ *.rb, *.html.erb ]
 tabSize           = 2
