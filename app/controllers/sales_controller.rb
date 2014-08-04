@@ -159,7 +159,11 @@ class SalesController < ApplicationController
       shipping_charge:   params[:shipping_charge],
       shipping_service:  params[:shipping_service],
       stripe_id:         params[:stripe_id],
-      status:            "Not Shipped"
+      status:            "Not Shipped",
+      gift_certificate_guid: params[:gift_certificate_guid],
+      gift_cert_remain:      params[:gift_cert_remain],
+      gift_cert_applied:     params[:gift_cert_applied],
+      total_with_gift_cert:  params[:total_with_gift_cert]
     )
 
     if @sale.save
@@ -169,6 +173,7 @@ class SalesController < ApplicationController
       # but it'd be nice to know if it's happening
       begin
         create_gift_certificates @sale
+        update_gift_certificates @sale
 
         SalesMailer.success(params[:email], @sale.guid).deliver
         SalesMailer.notify_swift(@sale).deliver
@@ -248,4 +253,19 @@ class SalesController < ApplicationController
     end
   end
 
+  def update_gift_certificates sale
+    gift = GiftCertificate.find_by_guid sale.gift_certificate_guid
+    logger.info "Updating Gift Certificate #{sale.gift_certificate_guid}. Subtracting #{sale.gift_cert_applied} from #{gift.remaining_amount}."
+
+    begin
+      gift.remaining_amount = gift.remaining_amount - sale.gift_cert_applied
+      gift.save!
+    rescue Exception => e
+      ExceptionNotifier.notify_exception(
+        e,
+        env: request.env,
+        data: { message: "Failed to update Gift Certificate" }
+      )
+    end
+  end
 end

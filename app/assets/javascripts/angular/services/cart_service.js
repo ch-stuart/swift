@@ -12,7 +12,6 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
         // Cost of everything. What we charge the customer.
         total: null,
         totalWithGiftCert: null,
-        totalWithGiftCert: null,
         shippingCharge: null,
         taxRate: null,
         taxAmount: null,
@@ -59,6 +58,9 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
                     this.totalWithGiftCert = this.total - this.giftCertRemain;
                     this.giftCertApplied = this.giftCertRemain;
                 }
+            // Otherwise, reset so the view can update
+            } else {
+                this.giftCertApplied = this.giftCertRemain = this.totalWithGiftCert = null;
             }
 
             $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge, this.giftCertRemain, this.giftCertApplied, this.totalWithGiftCert);
@@ -235,11 +237,12 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
                 .get('/gift_certificates/show?format=json&guid=' + guid)
                 .success(function(response) {
                     that.giftCertRemain = parseFloat(response.gift_certificate.remaining_amount);
-                    that.getPrice();
 
                     request.resolve({
                         remainingAmount: that.giftCertRemain
                     });
+
+                    that.getPrice();
                 })
                 .error(function() {
                     request.reject();

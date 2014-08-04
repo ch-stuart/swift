@@ -55,6 +55,30 @@
         <% end %>
       </td>
     </tr>
+    <% if @sale.gift_certificate_guid.present? %>
+      <tr>
+        <td>
+          Gift Certificate
+        </td>
+        <td>
+            <%= number_to_currency(cents_to_dollars(@sale.gift_cert_applied)) %>
+        </td>
+        <td>
+          <ul style="margin: 0; padding: 0;">
+            <li>
+              <a href="/gift_certificates/show?guid=<%= @sale.gift_certificate_guid %>">
+                <%= @sale.gift_certificate_guid %>
+              </a>
+            </li>
+            <li>
+              Remaining after this sale: <%= number_to_currency(cents_to_dollars(@sale.gift_cert_remain)) %>
+            </li>
+            <li>
+              Total charged to customer: <%= number_to_currency(cents_to_dollars(@sale.total_with_gift_cert)) %>
+            </li>
+          </ul>
+        </td>
+    <% end %>
     <tr>
       <td></td>
       <td colspan=2>

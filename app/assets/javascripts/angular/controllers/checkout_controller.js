@@ -57,13 +57,13 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.countryIsUSCA = true;
 
     $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge, giftCertRemain, giftCertApplied, totalWithGiftCert) {
-        $scope.cart.price           = price;
-        $scope.cart.total           = total;
-        $scope.cart.taxAmount       = taxAmount;
-        $scope.cart.taxRate         = taxRate;
-        $scope.cart.shippingCharge  = shippingCharge;
-        $scope.cart.giftCertRemain  = giftCertRemain;
-        $scope.cart.giftCertApplied = giftCertApplied;
+        $scope.cart.price             = price;
+        $scope.cart.total             = total;
+        $scope.cart.taxAmount         = taxAmount;
+        $scope.cart.taxRate           = taxRate;
+        $scope.cart.shippingCharge    = shippingCharge;
+        $scope.cart.giftCertRemain    = giftCertRemain;
+        $scope.cart.giftCertApplied   = giftCertApplied;
         $scope.cart.totalWithGiftCert = totalWithGiftCert;
     });
 
@@ -297,6 +297,10 @@ SwiftApp.controller('CheckoutCtrl', [
                 description: localStorage.getItem('cart'),
                 amount: $scope.cart.price,
                 total: $scope.cart.total,
+                gift_certificate_guid: $scope.giftCertificateRedemptionCode,
+                gift_cert_remain: $scope.cart.giftCertRemain,
+                gift_cert_applied: $scope.cart.giftCertApplied,
+                total_with_gift_cert: $scope.cart.totalWithGiftCert,
                 tax_rate: $scope.cart.taxRate,
                 tax_amount: $scope.cart.taxAmount,
                 line1: $scope.line1,
@@ -313,7 +317,7 @@ SwiftApp.controller('CheckoutCtrl', [
                 shipping_provider: $scope.shipping.provider,
                 shipping_charge: $scope.shipping.charge,
                 shipping_service: $scope.shipping.service,
-                stripe_id: response.data.id,
+                stripe_id: response.data ? response.data.id : null,
                 send_me_marketing_emails: $scope.send_me_marketing_emails
             })
             .then(saleCreateSuccessCallback, saleCreateErrorCallback);
@@ -505,7 +509,6 @@ SwiftApp.controller('CheckoutCtrl', [
 
         if (!guid) {
             $scope.giftCertificateError = null;
-            $scope.giftCertificateRemainingAmount = null;
             CartService.nullGiftCertificateValue();
         } else if (guid.length === 8) {
             CartService
@@ -513,18 +516,20 @@ SwiftApp.controller('CheckoutCtrl', [
                 .then(
                     function success(response) {
                         $scope.giftCertificateError = null;
-                        $scope.giftCertificateRemainingAmount = response.remainingAmount;
+
+                        if (response.remainingAmount === 0) {
+                            $scope.giftCertificateError = "No credit is left on this gift certificate.";
+                        }
                     },
                     function error() {
-                        $scope.giftCertificateRemainingAmount = null;
                         $scope.giftCertificateError = "Could not find gift certificate.";
                     }
                 );
         } else {
             // There is text entered, but it is not the correct length,
             // therefore there is no remaining amount
-            $scope.giftCertificateRemainingAmount = null;
             CartService.nullGiftCertificateValue();
+            $scope.giftCertificateError = "Could not find gift certificate.";
         }
     };
 
@@ -532,7 +537,6 @@ SwiftApp.controller('CheckoutCtrl', [
         var guid = $scope.giftCertificateRedemptionCode;
 
         if (guid && guid.length !== 8) {
-            $scope.giftCertificateRemainingAmount = null;
             $scope.giftCertificateError = "Could not find gift certificate.";
             CartService.nullGiftCertificateValue();
         }
@@ -545,26 +549,30 @@ SwiftApp.controller('CheckoutCtrl', [
 
         $scope.busyBuying = true;
 
-        Stripe.createToken($$('row-payment'), function stripeResponseHandler(status, response) {
-            if (response.error) {
-                $scope.busyBuying = false;
-                // FIXED the busy indicator is not going
-                // away for some reason, unless you force
-                // it to re-evaluate.
-                $scope.$digest();
-                alert(response.error.message);
-            } else {
-                var token = response.id;
+        if ($scope.cart.totalWithGiftCert === 0) {
+            saleChargeSuccessCallback({});
+        } else {
+            Stripe.createToken($$('row-payment'), function stripeResponseHandler(status, response) {
+                if (response.error) {
+                    $scope.busyBuying = false;
+                    // FIXED the busy indicator is not going
+                    // away for some reason, unless you force
+                    // it to re-evaluate.
+                    $scope.$digest();
+                    alert(response.error.message);
+                } else {
+                    var token = response.id;
 
-                SaleService
-                    .charge({
-                        total: $scope.cart.total,
-                        stripeToken: token,
-                        email: $scope.email
-                    })
-                    .then(saleChargeSuccessCallback, saleChargeErrorCallback);
-            }
-        });
+                    SaleService
+                        .charge({
+                            total: $scope.cart.totalWithGiftCert || $scope.cart.total,
+                            stripeToken: token,
+                            email: $scope.email
+                        })
+                        .then(saleChargeSuccessCallback, saleChargeErrorCallback);
+                }
+            });
+        }
     };
 
 }]);
