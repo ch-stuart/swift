@@ -8,23 +8,23 @@
  * Apart from supporting detection of major browser vendors, the library also
  * supports detection of various devices.
  *
- * Copyright (c) 2012-2013, Gopalarathnam Venkatesan
+ * Copyright (c) 2012-2014, Gopalarathnam Venkatesan
  * All rights reserved.
  *
  * @module UA
  */
-var UA = (function (window, navigator) {
+(function (window, navigator) {
     "use strict";
 
-    var ua = (window.navigator && navigator.userAgent) || "";
+    var userAgent = (window.navigator && navigator.userAgent) || "";
 
     function detect(pattern) {
         return function () {
-            return (pattern).test(ua);
+            return (pattern).test(userAgent);
         };
     }
 
-    return {
+    var UA =  {
         /**
          * Return true if the browser is Chrome or compatible.
          *
@@ -154,7 +154,21 @@ var UA = (function (window, navigator) {
          * @method whoami
          */
         whoami: function () {
-            return ua;
+            return userAgent;
         }
     };
+
+    if ( typeof define === 'function' && define.amd ) {
+        // AMD
+        define( [], function() {
+            return UA;
+        } );
+    } else if (typeof module !== 'undefined' && module.exports) {
+        module.exports = UA.attach;
+        module.exports.UA = UA;
+    } else {
+        // browser global
+        window.UA = UA;
+    }
+
 }(window, navigator));
