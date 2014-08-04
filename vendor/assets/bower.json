@@ -6,6 +6,7 @@
     "gridism": "~0.1.0",
     "normalize-css": "~3.0.0",
     "skeleton": "*",
-    "ua.js": "git@github.com:g13n/ua.js.git"
+    "ua.js": "git@github.com:g13n/ua.js.git",
+    "ngSticky": "enure/angular-sticky"
   }
 }
