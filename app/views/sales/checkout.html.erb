@@ -220,7 +220,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="isShippingReady || pickup" id="row-payment">
+            <div ng-show="isShippingReady || pickup && cart.total > 0" id="row-payment">
                 <h4>
                     Payment info
                 </h4>
@@ -293,33 +293,43 @@
         </form>
     </div>
     <div class="four columns">
-        <div class="row row--checkout-sidebar">
-            <h4>
-                Your Order
-            </h4>
-        </div>
-        <div class="row row--checkout-sidebar">
-            <b>Items in Cart</b>:
-            <ul ng-repeat="product in cart.products">
-                <li>
-                    {{ product.title }}
-                    <span class="demph" title="Quantity: {{ product.quantity }}">
-                        ({{ product.quantity }})
-                    </span>
-                </li>
-            </ul>
-        </div>
-        <div class="row row--checkout-sidebar" ng-show="cart.taxAmount">
-            <b>WA State Tax Amount</b>:
-            {{ (cart.taxAmount / 100) | currency }}
-        </div>
-        <div class="row row--checkout-sidebar" ng-show="cart.shippingCharge">
-            <b>Shipping</b>:
-            {{ (cart.shippingCharge / 100) | currency }}
-        </div>
-        <div class="row row--checkout-sidebar">
-            <b>Total Price</b>:
-            {{ (cart.total / 100) | currency }}
+        <div sticky offset="5" min-width="768">
+            <div class="row row--checkout-sidebar">
+                <h4>
+                    Your Order
+                </h4>
+            </div>
+            <div class="row row--checkout-sidebar">
+                <b>Items in Cart</b>:
+                <ul ng-repeat="product in cart.products">
+                    <li>
+                        {{ product.title }}
+                        <span class="demph" title="Quantity: {{ product.quantity }}">
+                            ({{ product.quantity }})
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="row row--checkout-sidebar" ng-show="cart.taxAmount">
+                <b>WA State Tax Amount</b>:
+                {{ (cart.taxAmount / 100) | currency }}
+            </div>
+            <div class="row row--checkout-sidebar" ng-show="cart.shippingCharge">
+                <b>Shipping</b>:
+                {{ (cart.shippingCharge / 100) | currency }}
+            </div>
+            <div class="row row--checkout-sidebar" ng-show="giftCertificateRemainingAmount">
+                <b>Gift Certificate</b>:
+                {{ cart.giftCertApplied / 100 | currency }} applied to this order.
+                <br>
+                <span class="demph">
+                  ({{ (cart.giftCertRemain / 100) | currency }} available currently.)
+                </span>
+            </div>
+            <div class="row row--checkout-sidebar">
+                <b>Total Price</b>:
+                {{ (cart.total / 100) | currency }}
+            </div>
         </div>
     </div>
 </div>
