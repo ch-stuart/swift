@@ -254,6 +254,8 @@ class SalesController < ApplicationController
   end
 
   def update_gift_certificates sale
+    return unless sale.gift_certificate_guid.present?
+
     gift = GiftCertificate.find_by_guid sale.gift_certificate_guid
     logger.info "Updating Gift Certificate #{sale.gift_certificate_guid}. Subtracting #{sale.gift_cert_applied} from #{gift.remaining_amount}."
 
