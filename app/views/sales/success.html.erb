@@ -81,6 +81,14 @@
               </div>
           </div>
         <% end %>
+        <% if @sale[:gift_certificate_guid].present? %>
+          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="unit w-3-4 hide-on-mobiles"></div>
+              <div class="unit w-1-4">
+                  Gift Certificate: <%= number_to_currency(cents_to_dollars(@sale[:gift_cert_applied])) %>
+              </div>
+          </div>
+        <% end %>
         <div class="grid shoppin-cart__cart-price-row">
             <div class="unit w-3-4 hide-on-mobiles"></div>
             <div class="unit w-1-4">
