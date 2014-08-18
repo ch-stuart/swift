@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140804040113) do
+ActiveRecord::Schema.define(:version => 20140818004742) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20140804040113) do
     t.string   "flickr_photo"
     t.boolean  "hide_title_on_homepage",          :default => false, :null => false
     t.boolean  "hide_read_more_link_on_homepage", :default => false, :null => false
+    t.boolean  "include_in_about_us_navigation",  :default => false, :null => false
   end
 
   create_table "parts", :force => true do |t|

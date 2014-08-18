@@ -20,9 +20,11 @@
             <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
                 <strong class="nav-list--group-heading">About Us</strong>
                 <ul class="nav-list--group">
-                    <li class="nav-list--group-item">
-                        <%= link_to "About Us", Page.find_by_path('about_us'), :class => "nav-list--group-item-link" %>
-                    </li>
+                    <% Page.where(:include_in_about_us_navigation => true).each do |page| %>
+                        <li class="nav-list--group-item">
+                            <%= link_to page.title, page, :class => "nav-list--group-item-link" %>
+                        </li>
+                    <% end %>
                     <li>
                         <%= link_to "Cycle Swift Blog", APP_CONFIG[:personal_blog_url], :class => "nav-list--group-item-link" %>
                     </li>
