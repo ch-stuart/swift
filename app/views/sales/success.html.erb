@@ -13,56 +13,62 @@
             <div class="shoppin-cart__header unit w-1-4">Quantity</div>
             <div class="shoppin-cart__header unit w-1-4">Total Price</div>
         </div>
-        <% @description["products"].each_with_index do |product, idx| %>
-            <% if idx % 2 == 0 %>
-                <br class="pr--clear">
+        <% if @description.present? %>
+            <% @description["products"].each_with_index do |product, idx| %>
+                <% if idx % 2 == 0 %>
+                    <br class="pr--clear">
+                <% end %>
+                <div class="grid pr--float">
+                    <div class="unit w-1-4">
+                        <strong>
+                            <%= product["title"] %>
+                        </strong>
+                        <br>
+                        <span class=demph>Base Price: <%= number_to_currency product["price"].to_i %></span>
+                        <br>
+                        <a href=/products/<%= product["id"] %> class="demph pr--none">
+                            View Product
+                        </a>
+                    </div>
+                    <div class="unit w-1-4">
+                        <% if product["parts"].present? %>
+                            <ul class="shoppin-cart__part-list">
+                                <% product["parts"].each do |part| %>
+                                    <li>
+                                        <span class="pr--bold"><%= part["title"] %></span>
+                                        <% if part["price"].present? %>
+                                            (<%= number_to_currency part["price"].to_i %>)
+                                        <% end %>
+                                        <% if part["selectedColor"].present? %>
+                                            <span class="demph">
+                                                <br class="pr--none">
+                                                <span class="pr--none">Fabric:</span> <span class="pr--inline">[</span><%= part["selectedColor"]["title"] %><span class="pr--inline">]</span>
+                                                <% if part["selectedColor"]["price"].present? %>
+                                                    (<%= number_to_currency part["selectedColor"]["price"].to_i %>)
+                                                <% end %>
+                                            </span>
+                                        <% end %>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        <% else %>
+                            n/a
+                        <% end %>
+                    </div>
+                    <div class="unit w-1-4">
+                        Qty: <%= product["quantity"] %>
+                    </div>
+                    <div class="unit w-1-4">
+                        <strong>
+                            <%= number_to_currency product["totalPrice"].to_i %>
+                        </strong>
+                    </div>
+                </div>
             <% end %>
-            <div class="grid pr--float">
-                <div class="unit w-1-4">
-                    <strong>
-                        <%= product["title"] %>
-                    </strong>
-                    <br>
-                    <span class=demph>Base Price: <%= number_to_currency product["price"].to_i %></span>
-                    <br>
-                    <a href=/products/<%= product["id"] %> class="demph pr--none">
-                        View Product
-                    </a>
-                </div>
-                <div class="unit w-1-4">
-                    <% if product["parts"].present? %>
-                        <ul class="shoppin-cart__part-list">
-                            <% product["parts"].each do |part| %>
-                                <li>
-                                    <span class="pr--bold"><%= part["title"] %></span>
-                                    <% if part["price"].present? %>
-                                        (<%= number_to_currency part["price"].to_i %>)
-                                    <% end %>
-                                    <% if part["selectedColor"].present? %>
-                                        <span class="demph">
-                                            <br class="pr--none">
-                                            <span class="pr--none">Fabric:</span> <span class="pr--inline">[</span><%= part["selectedColor"]["title"] %><span class="pr--inline">]</span>
-                                            <% if part["selectedColor"]["price"].present? %>
-                                                (<%= number_to_currency part["selectedColor"]["price"].to_i %>)
-                                            <% end %>
-                                        </span>
-                                    <% end %>
-                                </li>
-                            <% end %>
-                        </ul>
-                    <% else %>
-                        n/a
-                    <% end %>
-                </div>
-                <div class="unit w-1-4">
-                    Qty: <%= product["quantity"] %>
-                </div>
-                <div class="unit w-1-4">
-                    <strong>
-                        <%= number_to_currency product["totalPrice"].to_i %>
-                    </strong>
-                </div>
-            </div>
+        <% else %>
+            <p>
+                No order description is available. We have been notified about this issue.
+            </p>
         <% end %>
         <hr class="pr--block pr--clear">
         <% if @sale[:tax_amount].present? %>

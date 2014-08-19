@@ -36,15 +36,9 @@ class SalesController < ApplicationController
   # GET /sales/1.json
   def show
     @sale = Sale.find(params[:id])
-    @sale.description = JSON.parse(@sale.description)
     @shipments = @sale.shipments
 
     render :layout => "hub"
-
-    # respond_to do |format|
-    #   format.html # show.html.erb
-    #   format.json { render json: @sale }
-    # end
   end
 
   # GET /sales/1234/success
@@ -52,7 +46,13 @@ class SalesController < ApplicationController
   def success
     @sale = Sale.find_by_guid(params[:guid])
     @shipments = @sale.shipments
-    @description = JSON.parse(@sale.description)
+
+    # This is bad if this happens
+    if @sale.description.present?
+      @description = JSON.parse(@sale.description)
+    else
+      @description = nil
+    end
 
     @company = Company.first
     @categories = Category.all
@@ -254,18 +254,22 @@ class SalesController < ApplicationController
   end
 
   def update_gift_certificates sale
-    gift = GiftCertificate.find_by_guid sale.gift_certificate_guid
-    logger.info "Updating Gift Certificate #{sale.gift_certificate_guid}. Subtracting #{sale.gift_cert_applied} from #{gift.remaining_amount}."
+    if sale.gift_certificate_guid.present?
+      gift = GiftCertificate.find_by_guid sale.gift_certificate_guid
 
-    begin
-      gift.remaining_amount = gift.remaining_amount - sale.gift_cert_applied
-      gift.save!
-    rescue Exception => e
-      ExceptionNotifier.notify_exception(
-        e,
-        env: request.env,
-        data: { message: "Failed to update Gift Certificate" }
-      )
+      begin
+        # logger.info "Updating Gift Certificate #{sale.gift_certificate_guid}. Subtracting #{sale.gift_cert_applied} from #{gift.remaining_amount}."
+        gift.remaining_amount = gift.remaining_amount - sale.gift_cert_applied
+        gift.save!
+      rescue Exception => e
+        ExceptionNotifier.notify_exception(
+          e,
+          env: request.env,
+          data: { message: "Failed to update Gift Certificate" }
+        )
+      end
+    else
+      logger.info "SalesController#update_gift_certificates: Sale has no gift certificate"
     end
   end
 end
