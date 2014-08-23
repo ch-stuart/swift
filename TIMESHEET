@@ -262,5 +262,7 @@ date:        time (minutes):       comment:
 
 2014-08-03 180 WIP Gift Certificate: Allow customer to redeem gift certificate
 2014-08-16 30  Show amount from Gift Certificate applied to order
+2014-08-17 30  Allow pages to be included in "About Us" navigation
+2014-08-22 20  Fix issue where product size was available, but not displayed
 
 http://www.timer-tab.com
