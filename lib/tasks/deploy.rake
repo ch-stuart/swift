@@ -1,10 +1,10 @@
 task :deploy, [:remote, :branch, :should_clear_cache, :should_db_migrate] do |t, args|
   if args[:remote].blank?
-    puts "Missing remote arg"
+    abort "Missing remote arg"
   end
 
   if args[:branch].blank?
-    puts "Missing branch arg"
+    abort "Missing branch arg"
   end
 
   if args[:remote] == "heroku"
