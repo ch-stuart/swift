@@ -24,6 +24,10 @@
                             <%= product["title"] %>
                         </strong>
                         <br>
+                        <% if product["selectedSize"].present? %>
+                            <span class=demph>Size: <%= product["selectedSize"]["title"] %></span>
+                            <br>
+                        <% end %>
                         <span class=demph>Base Price: <%= number_to_currency product["price"].to_i %></span>
                         <br>
                         <a href=/products/<%= product["id"] %> class="demph pr--none">
