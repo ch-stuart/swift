@@ -135,7 +135,7 @@
                     <code><%= @sale.guid %></code>
                 </p>
             </div>
-            <div class="unit w-1-2 pr--none">
+            <div class="unit w-1-2">
                 <% if @sale.pickup %>
                   <h4>
                       Shipment Tracking
@@ -144,11 +144,11 @@
                     You will be picking up your order. We'll let you know by email when it's ready.
                   </p>
                 <% else %>
-                  <h4>
+                  <h4 class="pr--none">
                       Shipment Tracking
                   </h4>
                     <% if @shipments.blank? %>
-                      <p>
+                      <p class="pr--none">
                         When your order has shipped we will email you the shipping information.
                         As well, the shipping information will appear on this page.
                       </p>
