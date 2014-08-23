@@ -9,6 +9,7 @@
   <tr>
     <th>Guid (Redemption Code)</th>
     <th>Sale</th>
+    <th>Owner</th>
     <th>Amount</th>
     <th>Remaining Amount</th>
     <th></th>
@@ -26,6 +27,13 @@
     <td>
       <% if gift_certificate.sale_id.present? %>
         <%= link_to gift_certificate.sale_id, "/sales/#{gift_certificate.sale_id}" %>
+      <% else %>
+        n/a
+      <% end %>
+    </td>
+    <td>
+      <% if gift_certificate.sale_id.present? %>
+        <%= gift_certificate.sale.contact %>
       <% else %>
         n/a
       <% end %>
