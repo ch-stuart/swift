@@ -265,5 +265,7 @@ date:        time (minutes):       comment:
 2014-08-17 30  Allow pages to be included in "About Us" navigation
 2014-08-22 20  Fix issue where product size was available, but not displayed
 2014-08-22 05  Show customer shipping carrier and service selection
+2014-08-22 10  Fix issue where you couldn't mark a printed pickup order as shipped
+
 
 http://www.timer-tab.com
