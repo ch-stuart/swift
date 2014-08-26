@@ -136,7 +136,9 @@ module Flickr
     results["photo"].each do |photo|
       sizes = flickr.photos.getSizes :photo_id => photo["id"]
       medium = sizes.find {|size| size.label == "Medium" }
-      photos.push({ :id => photo["id"], :url => medium.source })
+      if medium.present?
+        photos.push({ :id => photo["id"], :url => medium.source })
+      end
     end
 
     if photos.length > 10
