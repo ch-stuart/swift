@@ -13,7 +13,8 @@
         'inappbrowser',
         'variable: sCapGloRef',
         'variable: admwl',
-        'variable: gcdemodata'
+        'variable: gcdemodata',
+        'variable: atomicFindClose'
     ];
 
     var scriptUrlBlockList = [
