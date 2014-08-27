@@ -1,11 +1,11 @@
-<% if @sale.pickup && @sale.status == "Printed" %>
+<% if @sale.pickup? && @sale.status == "Printed" %>
   <p>
     Customer will pick up their order.
   </p>
   <p>
     <%= link_to 'Email customer and let them know their order is ready for pickup', { controller: "sales", action: "ready_for_pickup", id: @sale }, class: 'btn' %>
   </p>
-<% elsif @sale.pickup && @sale.status == "Shipped" %>
+<% elsif @sale.pickup? && @sale.status == "Shipped" %>
   <p>
     <span class="hey--wah">
       Order is ready for pickup and customer has been emailed.

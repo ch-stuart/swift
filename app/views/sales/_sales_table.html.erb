@@ -39,7 +39,7 @@
     </td>
     <td><%= number_to_currency(cents_to_dollars(sale.total)) %></td>
     <td>
-      <% if sale.pickup %>
+      <% if sale.pickup? %>
         <span style="color:green; font-size: 120%;">
           ✓
         </span>

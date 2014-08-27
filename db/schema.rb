@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140818004742) do
+ActiveRecord::Schema.define(:version => 20140827041549) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -138,8 +138,8 @@ ActiveRecord::Schema.define(:version => 20140818004742) do
     t.text     "email"
     t.string   "guid"
     t.text     "description"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "amount"
     t.string   "weight"
     t.string   "line1"
@@ -155,16 +155,16 @@ ActiveRecord::Schema.define(:version => 20140818004742) do
     t.string   "tax_rate"
     t.string   "tax_amount"
     t.string   "total"
-    t.string   "pickup"
     t.string   "status"
     t.string   "phone_no"
     t.string   "contact"
     t.string   "company"
-    t.string   "commercial"
     t.string   "gift_certificate_guid"
     t.integer  "gift_cert_remain"
     t.integer  "gift_cert_applied"
     t.integer  "total_with_gift_cert"
+    t.boolean  "pickup",                :default => false, :null => false
+    t.boolean  "commercial",            :default => false, :null => false
   end
 
   create_table "shipments", :force => true do |t|

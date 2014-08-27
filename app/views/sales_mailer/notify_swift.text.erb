@@ -7,7 +7,7 @@ Hub URL: https://www.builtbyswift.com/sales/<%= @sale.id %>
 Customer URL: https://www.builtbyswift.com/orders/<%= @sale.guid %>
 Stripe URL: https://manage.stripe.com/prod/payments/<%= @sale.stripe_id %>
 
-<% if @sale.pickup %>
+<% if @sale.pickup? %>
   Customer will pick up order.
 <% else %>
   Shipping Charge: <%= @sale.shipping_charge %>

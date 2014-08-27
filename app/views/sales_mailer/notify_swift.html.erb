@@ -18,7 +18,7 @@ Contact: <%= @sale.contact %>
 <br>Customer URL: https://www.builtbyswift.com/orders/<%= @sale.guid %>
 <br>Stripe URL: https://manage.stripe.com/prod/payments/<%= @sale.stripe_id %>
 <br>
-<% if @sale.pickup %>
+<% if @sale.pickup? %>
   <br>Customer will pick up order.
 <% else %>
   <br>Shipping Charge: <%= @sale.shipping_charge %>
