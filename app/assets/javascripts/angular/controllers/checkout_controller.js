@@ -244,11 +244,11 @@ SwiftApp.controller('CheckoutCtrl', [
                 if (data[provider] && !data[provider].error) {
 
                     if (data.best === provider) {
-                        CartService.setShippingCharge(data[provider].charge);
+                        CartService.setShippingCharge(combinedResponse[provider].charge);
 
                         // Set best as the default on the scope
                         $scope.shipping = {
-                            charge: data[provider].charge,
+                            charge: combinedResponse[provider].charge,
                             provider: provider,
                             service: data[provider].service
                         };
