@@ -217,7 +217,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row row--order" ng-show="isShippingReady || pickup && cart.totalWithGiftCert == 0">
+                <div class="row row--order" ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
                     <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
                         <span sw-visible="!busyBuying">
                             Buy It
@@ -226,7 +226,7 @@
                     </button>
                 </div>
             </div>
-            <div ng-show="isShippingReady || pickup && cart.totalWithGiftCert != 0" id="row-payment">
+            <div ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert != 0" id="row-payment">
                 <h4>
                     Payment info
                 </h4>
