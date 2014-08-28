@@ -1,4 +1,5 @@
 // ...
+//= require vue/dist/vue
 //= require jquery
 //= require jquery_ujs
 //= require flash
@@ -27,35 +28,7 @@ $.toggleColors = function() {
     });
 };
 
-// Preview the flickr tag...
-// Assumes there is only one flickr tag per page
-function createFlickrTagLink() {
-    var FLICKR_BASE_URL = '//www.flickr.com/photos/swiftpanniers/tags/';
-
-    if ($(this).val()) {
-        $('.js-flickr_tag-link')
-            .attr('href', FLICKR_BASE_URL + $(this).val())
-            .attr('target', '_new')
-            .text('View on Flickr');
-    } else {
-        $('.js-flickr_tag-link')
-        .attr('href', '#')
-        .text('');
-    }
-}
-
 jQuery(function() {
-    $('.js-flickr_tag')
-        .change(function() {
-            createFlickrTagLink.call(this);
-        })
-        .keypress(function() {
-            createFlickrTagLink.call(this);
-        })
-        .each(function() {
-            createFlickrTagLink.call(this);
-        });
-
     // https://github.com/pivotal/cacheable-flash
     Flash.transferFromCookies();
     Flash.writeDataTo('alert', $('#js_app-alert'));

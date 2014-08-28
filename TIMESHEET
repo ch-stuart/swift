@@ -266,6 +266,10 @@ date:        time (minutes):       comment:
 2014-08-22 20  Fix issue where product size was available, but not displayed
 2014-08-22 05  Show customer shipping carrier and service selection
 2014-08-22 10  Fix issue where you couldn't mark a printed pickup order as shipped
-
+2014-08-26 60  Fix issue where wrong price was charged for multi-shipment sale
+2014-08-26 50  Convert Sale pickup and commercial columns to booleans to fix issue where sales would incorrect appear as pickup orders
+2014-08-26 30  Don't blow up homepage if flickr photos cannot be found
+2014-08-26 20  Fix issue where two “Buy It” buttons could appear on checkout page
+2014-08-26 15  Link to flickr sets, tags and photos in product form
 
 http://www.timer-tab.com

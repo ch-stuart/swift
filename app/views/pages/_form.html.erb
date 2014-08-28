@@ -50,19 +50,25 @@
       Show video on homepage?
     </label>
   </div>
-  <div class="field">
-    <%= f.label :flickr_tag %>
-    <%= f.text_field :flickr_tag, class: "js-flickr_tag" %>
-    <p class="hint">
-      Enter a flickr tag to display a photo gallery. Leave blank for none. <a href="#" class="js-flickr_tag-link"></a>
-    </p>
-  </div>
-  <div class="field">
-    <%= f.label :flickr_photo %>
-    <%= f.text_field :flickr_photo, class: 'js-flickr_id' %>
-    <p class="hint">
-      Enter a flickr id [<a href="http://d.pr/Q7xE" target="_new">?</a>] to display a photo on the homepage. Leave blank for none.
-    </p>
+  <div id="js-flickr">
+    <div class="field">
+      <%= f.label :flickr_tag %>
+      <%= f.text_field :flickr_tag, :'v-model' => "flickrTag" %>
+      <p class="hint">
+        Enter a flickr tag to display a photo gallery. Leave blank for none.
+        <a target="_new" v-show="flickrTag" href="//flickr.com/photos/<%= APP_CONFIG[:flickr_user_id] %>/tags/{{ flickrTag }}">
+          View tag photos</a>.
+      </p>
+    </div>
+    <div class="field">
+      <%= f.label :flickr_photo %>
+      <%= f.text_field :flickr_photo, :'v-model' => "flickrPhoto"%>
+      <p class="hint">
+        Enter a flickr id [<a href="http://d.pr/Q7xE" target="_new">?</a>] to display a photo on the homepage. Leave blank for none.
+        <a target="_new" v-show="flickrPhoto" href="//flickr.com/photos/<%= APP_CONFIG[:flickr_user_id] %>/{{ flickrPhoto }}">
+          View photo</a>.
+      </p>
+    </div>
   </div>
   <div class="field row">
     <label for="page_show_photo_on_homepage">
@@ -102,4 +108,10 @@
   <div class="actions">
     <%= f.submit nil, class: "btn" %>
   </div>
+<% end %>
+
+<%= content_for :js do %>
+    <script>
+        new Vue({ el: '#js-flickr' });
+    </script>
 <% end %>

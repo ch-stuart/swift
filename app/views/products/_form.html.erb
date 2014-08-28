@@ -101,26 +101,34 @@
     <h3>
         Photos
     </h3>
-    <div class="field">
-        <%= f.label :flickr_set %>
-        <%= f.text_field :flickr_set %>
-        <p class="hint">
-            The flickr set id. Used for the homepage hero.
-        </p>
-    </div>
-    <div class="field">
-        <%= f.label :flickr_tag %>
-        <%= f.text_field :flickr_tag %>
-        <p class="hint">
-            Enter a flickr tag to display a photo gallery. Leave blank for none.
-        </p>
-    </div>
-    <div class="field">
-        <%= f.label :flickr_photo %>
-        <%= f.text_field :flickr_photo %>
-        <p class="hint">
-            The flickr photo id [<a href="http://d.pr/Q7xE" target="_new">?</a>] is used for the featured photo on the Ready Made page.
-        </p>
+    <div id="js-flickr">
+      <div class="field">
+          <%= f.label :flickr_set %>
+          <%= f.text_field :flickr_set, :'v-model' => "flickrSet" %>
+          <p class="hint">
+              The flickr set id. Used for the homepage hero.
+              <a target="_new" v-show="flickrSet" href="//flickr.com/photos/<%= APP_CONFIG[:flickr_user_id] %>/sets/{{ flickrSet }}">
+                View set photos</a>.
+          </p>
+      </div>
+      <div class="field">
+          <%= f.label :flickr_tag %>
+          <%= f.text_field :flickr_tag, :'v-model' => "flickrTag" %>
+          <p class="hint">
+              Enter a flickr tag to display a photo gallery. Leave blank for none.
+              <a target="_new" v-show="flickrTag" href="//flickr.com/photos/<%= APP_CONFIG[:flickr_user_id] %>/tags/{{ flickrTag }}">
+                View tag photos</a>.
+          </p>
+      </div>
+      <div class="field">
+          <%= f.label :flickr_photo %>
+          <%= f.text_field :flickr_photo, :'v-model' => "flickrPhoto" %>
+          <p class="hint">
+              The flickr photo id [<a href="http://d.pr/Q7xE" target="_new">?</a>] is used for the featured photo on the Ready Made page.
+              <a target="_new" v-show="flickrPhoto" href="//flickr.com/photos/<%= APP_CONFIG[:flickr_user_id] %>/{{ flickrPhoto }}">
+                View photo</a>.
+          </p>
+      </div>
     </div>
     <h3>
         Shipping
@@ -218,5 +226,7 @@
         $(document).ready(function() {
             $.toggleColors();
         });
+
+        new Vue({ el: '#js-flickr' });
     </script>
 <% end %>
