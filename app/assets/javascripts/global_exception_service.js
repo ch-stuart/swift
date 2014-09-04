@@ -19,7 +19,6 @@
 
     var scriptUrlBlockList = [
         'assets.pinterest.com/js/pinit.js',
-        'ssl.google-analytics.com/ga.js',
         'google-analytics.com/ga.js',
         'newrelic.com',
         'blockpage.cgi',
