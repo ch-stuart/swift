@@ -66,7 +66,6 @@ class ProductsController < ApplicationController
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @company = Company.first
-    @colors = Color.all
     @photos = Product.get_photos_by_tag @product.flickr_tag
     @subtitle = @product.title
 
