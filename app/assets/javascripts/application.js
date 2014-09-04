@@ -2,6 +2,7 @@
 // ...
 //= require dollardollar
 //= require jquery
+//= require jquery.cookie
 //= require flash
 //= require angular
 //= require ngSticky/sticky.js

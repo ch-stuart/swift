@@ -2,6 +2,7 @@
 //= require vue/dist/vue
 //= require jquery
 //= require jquery_ujs
+//= require jquery.cookie
 //= require flash
 //= require console
 //= require farbtastic/farbtastic
