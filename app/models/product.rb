@@ -6,7 +6,8 @@ class Product < ActiveRecord::Base
   :short_title, :humane_price, :flickr_photo, :question, :answer, :not_for_sale,
   :not_for_sale_message, :featured_on_homepage, :flickr_set, :short_description,
   :wholesale_humane_price, :wholesale_price, :width, :height, :length, :weight,
-  :package_type, :sizes_attributes, :parts_attributes, :category_id, :testimonials_attributes
+  :package_type, :sizes_attributes, :parts_attributes, :category_id, :testimonials_attributes,
+  :related_products
 
   has_many :parts, :dependent => :destroy
   has_many :testimonials, :dependent => :destroy
@@ -47,6 +48,8 @@ class Product < ActiveRecord::Base
   validates_format_of :price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :price?
   validates_format_of :wholesale_price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :wholesale_price?
 
+  before_save :serialize_related_products
+
   def public?
     self.status == "Public"
   end
@@ -67,13 +70,16 @@ class Product < ActiveRecord::Base
     self.not_for_sale == true
   end
 
-  # Not used
-  # def price_for is_wholesale_user
-  #     is_wholesale_user ? self.wholesale_price : self.price
-  # end
-
   def humane_price_for current_user
     current_user.try(:wholesale?) ? self.wholesale_humane_price : self.humane_price
+  end
+
+  private
+
+  def serialize_related_products
+    if self.related_products.present?
+      self.related_products = related_products.to_json
+    end
   end
 
 end

@@ -27,6 +27,22 @@
     <p>
         <%= @product.humane_price_for(current_user) %>
     </p>
+    <% if @related_products.present? %>
+        <h3>
+            Related Products
+        </h3>
+        <div class="grid">
+            <% @related_products.each do |product| %>
+                <div class="unit one-half" style="padding-left: 10px;">
+                    <a href="/products/<%= product.id %>" style="color: inherit">
+                        <img src='<%= Product.get_photo_by_id(product.flickr_photo, "Square") %>'>
+                        <br>
+                        <%= product.title %>
+                    </a>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
     <%= render 'testimonials' %>
 </div>
 <br class="clear">

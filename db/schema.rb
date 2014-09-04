@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140827041549) do
+ActiveRecord::Schema.define(:version => 20140904041829) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20140827041549) do
     t.integer  "length"
     t.float    "weight"
     t.string   "package_type",           :default => "CUSTOM"
+    t.text     "related_products"
   end
 
   create_table "sales", :force => true do |t|

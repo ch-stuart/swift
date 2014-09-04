@@ -18,6 +18,12 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @related_products = nil
+
+    if @product.related_products.present?
+        @related_products = Product.find(JSON.parse(@product.related_products))
+    end
+
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
     @photos = Product.get_photos_by_tag @product.flickr_tag
@@ -78,6 +84,8 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    @public_products = Product.where('id != ?', params[:id]).where(status: "Public")
+    @private_products = Product.where('id != ?', params[:id]).where(status: "Private")
   end
 
   def create

@@ -184,6 +184,33 @@
         <%= f.text_area :not_for_sale_message %>
     </div>
     <h3>
+        Related Products
+    </h3>
+    <div class="field">
+      <div class="container">
+        <div class="eight columns">
+          <label>
+            Public Products
+          </label>
+          <% @public_products.each do |product| %>
+            <div>
+              <input type="checkbox" name="product[related_products][]" value="<%= product.id %>"> <%= product.title %>
+            </div>
+          <% end %>
+        </div>
+        <div class="eight columns">
+          <label>
+            Private Products
+          </label>
+          <% @private_products.each do |product| %>
+            <div>
+              <input type="checkbox" name="product[related_products][]" value="<%= product.id %>"> <%= product.title %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <h3>
         Sizes
     </h3>
     <%= f.fields_for :sizes do |sizes_fields| %>
