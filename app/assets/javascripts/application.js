@@ -3,7 +3,6 @@
 //= require dollardollar
 //= require jquery
 //= require flash
-//= require jquery.cookie
 //= require angular
 //= require ngSticky/sticky.js
 //= require global_exception_service

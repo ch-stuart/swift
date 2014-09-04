@@ -3,7 +3,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require flash
-//= require jquery.cookie
 //= require console
 //= require farbtastic/farbtastic
 //= require jquery.tabs
