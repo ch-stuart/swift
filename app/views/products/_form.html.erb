@@ -189,23 +189,45 @@
     <div class="field">
       <div class="container">
         <div class="eight columns">
-          <label>
+          <h4>
             Public Products
-          </label>
+          </h4>
           <% @public_products.each do |product| %>
-            <div>
-              <input type="checkbox" name="product[related_products][]" value="<%= product.id %>"> <%= product.title %>
-            </div>
+              <label>
+              <input
+                type="checkbox"
+                name="product[related_products][]"
+                value="<%= product.id %>"
+                <%= JSON.parse(@product.related_products).include?(product.id.to_s) ? "checked" : "" %>>
+                <%= product.title %>
+                <a
+                  href="/products/<%= product.id %>"
+                  target="_new"
+                  title="Link to product page">
+                  &rArr;
+                </a>
+              </label>
           <% end %>
         </div>
         <div class="eight columns">
-          <label>
+          <h4>
             Private Products
-          </label>
+          </h4>
           <% @private_products.each do |product| %>
-            <div>
-              <input type="checkbox" name="product[related_products][]" value="<%= product.id %>"> <%= product.title %>
-            </div>
+            <label>
+            <input
+              type="checkbox"
+              name="product[related_products][]"
+              value="<%= product.id %>"
+              <%= JSON.parse(@product.related_products).include?(product.id.to_s) ? "checked" : "" %>>
+              <%= product.title %>
+              <a
+                href="/products/<%= product.id %>"
+                target="_new"
+                title="Link to product page">
+                &rArr;
+              </a>
+            </label>
           <% end %>
         </div>
       </div>

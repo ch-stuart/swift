@@ -271,5 +271,8 @@ date:        time (minutes):       comment:
 2014-08-26 30  Don't blow up homepage if flickr photos cannot be found
 2014-08-26 20  Fix issue where two “Buy It” buttons could appear on checkout page
 2014-08-26 15  Link to flickr sets, tags and photos in product form
+2014-09-03 30  Cleanup JavaScript exception reporting
+2014-09-03 60  WIP: show related products on products page
+2014-09-04 20  WIP: show related products on products page
 
 http://www.timer-tab.com
