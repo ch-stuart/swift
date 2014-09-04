@@ -98,6 +98,14 @@
   <script>window.__iswsu__=true</script>
   <% end %>
   <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>
+  <script>
+    // Polyfill JSON for old browsers
+    if (!Object.prototype.hasOwnProperty.call(window, "JSON")) {
+      var script = document.createElement('script');
+      script.src = "//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js";
+      document.write(script.outerHTML);
+    }
+  </script>
   <%= javascript_include_tag "application" %>
   <%= yield :js %>
   <%= render "shared/analytics" unless Rails.env == "development" %>
