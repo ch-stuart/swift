@@ -1,0 +1,23 @@
+.related-products__product {
+    display: block;
+    color: inherit;
+    margin-bottom: 10px;
+
+    &:visited {
+        color: inherit;
+    }
+    &:hover {
+        color: $hotpink;
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.related-products__img {
+    display: block;
+    border: 1px solid $background_gray;
+}
+.related-products__title {
+    display: block;
+}
