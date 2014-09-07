@@ -172,6 +172,9 @@
                       Shipping Address
                   </h4>
                   <p>
+                      <% if @sale.shipping_contact.present? %>
+                          <%= @sale.shipping_contact %><br>
+                      <% end %>
                       <%= @sale.line1 %><br>
                       <%= @sale.city %>, <%= @sale.state %> <%= @sale.zip_code %>
                   </p>

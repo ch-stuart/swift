@@ -88,6 +88,18 @@
                         ng-disabled="pickup"
                         required>
                 </div>
+                <div class="label-input-pair pickup-is-{{ pickup }}">
+                    <label class="label">
+                        Recipient's Name <span class="demph">(optional)</span>
+                    </label>
+                    <input
+                        type="text"
+                        ng-model="shippingContact"
+                        ng-disabled="pickup">
+                    <p class="label-input-pair__hint">
+                        Sending a gift? Enter their name here.
+                    </p>
+                </div>
                 <div ng-show="customerNeedsToVerifyAddress" class="label-input-pair pickup-is-{{ pickup }}">
                     <p class="woah">
                         It appears your address may be entered incorrectly.

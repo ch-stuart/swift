@@ -6,8 +6,19 @@
   <input type="hidden" name="id" value="<%= @sale.id %>">
   <div class="eight columns">
     <h3>To</h3>
-    <label class="label">Contact</label>
-    <input type="text" value="<%= @sale.contact %>" name="shipment[contact]">
+
+    <% if @sale.shipping_contact.present? %>
+        <label class="label">Contact</label>
+        <input type="text" value="<%= @sale.shipping_contact %>" name="shipment[contact]">
+        <p class="hint">
+            This sale is being shipped to the shipping contact rather than the
+            purchaser. Might be a gift...
+        </p>
+    <% else %>
+        <label class="label">Contact</label>
+        <input type="text" value="<%= @sale.contact %>" name="shipment[contact]">
+    <% end %>
+
     <label class="label">Company (optional)</label>
     <input type="text" value="<%= @sale.company %>" name="shipment[company]">
     <label class="label">Line 1</label>
