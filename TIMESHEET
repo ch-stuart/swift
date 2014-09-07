@@ -257,7 +257,6 @@ date:        time (minutes):       comment:
 2014-07-23 180 WIP Gift Certificate: API endpoint for getting gift certificate data
 2014-07-23 50  WIP Gift Certificate: Allow customer to input gift cert redemption code to retrieve remaining amount
 
-
 /// INVOICED
 
 2014-08-03 180 WIP Gift Certificate: Allow customer to redeem gift certificate
@@ -275,5 +274,7 @@ date:        time (minutes):       comment:
 2014-09-03 60  WIP: show related products on products page
 2014-09-04 20  WIP: show related products on products page
 2014-09-05 45  Finish v1: show related products on products page
+
+/// INVOICED
 
 http://www.timer-tab.com
