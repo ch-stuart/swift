@@ -115,26 +115,33 @@ class ProductsController < ApplicationController
   def load_related_products product
     related_products = []
 
-    # if product.related_products.present?
-    #   related_products_ids = JSON.parse(product.related_products)
-    #
-    #   related_products_ids.each do |id|
-    #     # Need to check if product exists first since we don't actually
-    #     # remove items from this array if a product is deleted
-    #     # from active record
-    #     if Product.exists? id
-    #       related_product = Product.find(id)
-    #
-    #       # Do not include private products
-    #       if related_product.status == "Public"
-    #         related_products.push(Product.find(id))
-    #       end
-    #     else
-    #       logger.warn "Related product with id of #{id} does not exist."
-    #     end
-    #   end
-    # end
+    if product.related_products.present?
+      logger.info "=> Hey look we have related products"
+      related_products_ids = JSON.parse(product.related_products)
 
+      logger.info "=> Hey look we have related products #{related_products_ids.inspect}"
+
+      related_products_ids.each do |id|
+        # Need to check if product exists first since we don't actually
+        # remove items from this array if a product is deleted
+        # from active record
+        if Product.exists? id
+          related_product = Product.find(id)
+
+          logger.info "=> I have a related product #{related_product.inspect}"
+
+          # Do not include private products
+          if related_product.status == "Public"
+            logger.info "=> This ^ product is public, so I'm going to keep it!"
+            related_products.push(Product.find(id))
+          end
+        else
+          logger.warn "=> Related product with id of #{id} does not exist."
+        end
+      end
+    end
+
+    # logger.info "=> I have all of these related_products #{related_products}"
     related_products
   end
 end
