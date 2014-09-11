@@ -18,6 +18,11 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+
+    if @product.related_products.present?
+      @product.related_products = JSON.parse @product.related_products
+    end
+
     @related_products = load_related_products @product
     @categories = Category.all
     @products = Product.where(:status => 'Public', :kind => 'Product')
@@ -79,6 +84,11 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+
+    if @product.related_products.present?
+      @product.related_products = JSON.parse @product.related_products
+    end
+
     @related_products = load_related_products @product
     @public_products = Product.where('id != ?', params[:id]).where(status: "Public")
     @private_products = Product.where('id != ?', params[:id]).where(status: "Private")
@@ -117,11 +127,10 @@ class ProductsController < ApplicationController
 
     if product.related_products.present?
       logger.info "=> Hey look we have related products"
-      related_products_ids = JSON.parse(product.related_products)
 
-      logger.info "=> Hey look we have related products #{related_products_ids.inspect}"
+      logger.info "=> Hey look we have related products #{product.related_products.inspect}"
 
-      related_products_ids.each do |id|
+      product.related_products.each do |id|
         # Need to check if product exists first since we don't actually
         # remove items from this array if a product is deleted
         # from active record
