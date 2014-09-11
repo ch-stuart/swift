@@ -202,7 +202,7 @@
                 type="checkbox"
                 name="product[related_products][]"
                 value="<%= product.id %>"
-                <%= JSON.parse(@product.related_products).include?(product.id.to_s) ? "checked" : "" %>>
+                <%= @related_products.include?(product.id.to_s) ? "checked" : "" %>>
                 <%= product.title %>
                 <a
                   href="/products/<%= product.id %>"
@@ -227,7 +227,7 @@
               type="checkbox"
               name="product[related_products][]"
               value="<%= product.id %>"
-              <%= JSON.parse(@product.related_products).include?(product.id.to_s) ? "checked" : "" %>>
+              <%= @related_products.include?(product.id.to_s) ? "checked" : "" %>>
               <%= product.title %>
               <a
                 href="/products/<%= product.id %>"

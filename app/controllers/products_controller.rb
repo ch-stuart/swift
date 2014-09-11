@@ -113,8 +113,9 @@ class ProductsController < ApplicationController
   private
 
   def load_related_products product
+    related_products = []
+
     if product.related_products.present?
-      related_products = []
       related_products_ids = JSON.parse(product.related_products)
 
       related_products_ids.each do |id|
@@ -132,14 +133,8 @@ class ProductsController < ApplicationController
           logger.warn "Related product with id of #{id} does not exist."
         end
       end
-
-      if related_products.length > 0
-        return related_products
-      else
-        return nil
-      end
-    else
-      return nil
     end
+
+    related_products
   end
 end
