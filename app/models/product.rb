@@ -77,7 +77,7 @@ class Product < ActiveRecord::Base
   private
 
   def serialize_related_products
-    if self.related_products.present?
+    if self.related_products.present? && self.related_products.kind_of?(Array)
       self.related_products = related_products.to_json
     end
   end
