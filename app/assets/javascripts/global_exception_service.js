@@ -1,6 +1,7 @@
 /*global window jQuery console */
 
 ;(function(window, jQuery) {
+
     var msgBlockList = [
         'Script error.',
         // ReferenceError: Can\'t find ...
@@ -14,7 +15,9 @@
         'variable: sCapGloRef',
         'variable: admwl',
         'variable: gcdemodata',
-        'variable: atomicFindClose'
+        'variable: atomicFindClose',
+        'variable: __gCrWeb',
+        'Error calling method on NPObject'
     ];
 
     var scriptUrlBlockList = [
