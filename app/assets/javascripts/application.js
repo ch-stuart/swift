@@ -1,5 +1,6 @@
 /*global document jQuery UA window*/
 // ...
+//= require matchMedia/matchMedia
 //= require dollardollar
 //= require jquery
 //= require jquery.cookie

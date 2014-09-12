@@ -8,6 +8,7 @@
     "skeleton": "*",
     "ua.js": "git@github.com:g13n/ua.js.git",
     "ngSticky": "enure/angular-sticky",
-    "vue": "~0.10.6"
+    "vue": "~0.10.6",
+    "matchMedia": "~0.2.0"
   }
 }
