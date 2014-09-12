@@ -8,3 +8,6 @@ log/*.log
 .powenv
 node_modules/
 ssl/
+
+# This is included via a Gem
+vendor/assets/bower_components/angular/*
