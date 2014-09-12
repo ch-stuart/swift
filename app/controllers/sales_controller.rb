@@ -155,6 +155,7 @@ class SalesController < ApplicationController
       commercial:        params[:commercial] || false,
       weight:            params[:weight],
       pickup:            params[:pickup] || false,
+      shipping_contact:  params[:shipping_contact],
       shipping_provider: params[:shipping_provider],
       shipping_charge:   params[:shipping_charge],
       shipping_service:  params[:shipping_service],

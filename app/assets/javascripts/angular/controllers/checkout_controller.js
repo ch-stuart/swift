@@ -292,6 +292,7 @@ SwiftApp.controller('CheckoutCtrl', [
         SaleService
             .create({
                 contact: $scope.contact,
+                shipping_contact: $scope.shippingContact || null,
                 company: $scope.company,
                 email: $scope.email,
                 description: localStorage.getItem('cart'),

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140904041829) do
+ActiveRecord::Schema.define(:version => 20140907200412) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20140904041829) do
     t.integer  "total_with_gift_cert"
     t.boolean  "pickup",                :default => false, :null => false
     t.boolean  "commercial",            :default => false, :null => false
+    t.text     "shipping_contact"
   end
 
   create_table "shipments", :force => true do |t|

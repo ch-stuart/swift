@@ -38,7 +38,12 @@
         <td>
           <%= @sale.shipping_provider.upcase %><br>
           <%= @sale.shipping_service %><br>
-          <%= @sale.weight %>lbs.
+          <%= @sale.weight %>lbs.<br>
+          <% if @sale.shipping_contact.present? %>
+              Ship to <%= @sale.shipping_contact %>.
+          <% else %>
+              Ship to <%= @sale.contact %>.
+          <% end %>
         </td>
       </tr>
     <% end %>
