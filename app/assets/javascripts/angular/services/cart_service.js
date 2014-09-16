@@ -1,4 +1,4 @@
-/*global angular SwiftApp _ localStorage console */
+/*global angular SwiftApp _ localStorage console SwiftUtils */
 
 // TODO clean up this API
 // it's messy!
@@ -103,9 +103,11 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             // We will copy properties from `prod` obj on to
             // `save` obj (rather than removing properties we
             // don't want)
-            var prod = angular.copy(newProduct);
-            var save = {};
-                save.parts = [];
+            var prod = angular.copy(newProduct),
+                save = {},
+                localStorageResult;
+
+            save.parts = [];
 
             // Save a property if it is present
             function saveIf(prop) {
@@ -161,9 +163,11 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             this.products.push(save);
 
             this.getPrice();
-            this.saveToLocalStorage();
+            localStorageResult = this.saveToLocalStorage();
 
             $rootScope.$broadcast('cart:products:update', this.products);
+
+            return localStorageResult;
         },
         // Remove an item from the cart
         //
@@ -184,12 +188,21 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             this.saveToLocalStorage();
         },
         loadFromLocalStorage: function() {
+            var cartFromLocalStorage,
+                cartContents;
+
             // Check if we have products stored in a cart
             // in localStorage
-            var cartContents = localStorage.getItem('cart');
-            if (cartContents) {
+            try {
+                cartFromLocalStorage = localStorage.getItem('cart');
+            } catch(ex) {
+                SwiftUtils.notifyNoLocalStorage(ex);
+                return console.error("Could not access local storage.");
+            }
+
+            if (cartFromLocalStorage) {
                 // if we do, parse them.
-                cartContents = JSON.parse(cartContents);
+                cartContents = JSON.parse(cartFromLocalStorage);
 
                 // So either need to never save this
                 // or delete it here.
@@ -226,7 +239,14 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
 
             console.log('CartService#saveToLocalStorage');
 
-            localStorage.setItem('cart', serialized);
+            try {
+                localStorage.setItem('cart', serialized);
+                return true;
+            } catch (ex) {
+                SwiftUtils.notifyNoLocalStorage(ex);
+                console.error("Could not access local storage.");
+                return false;
+            }
         },
         // Retrieve gift certificate value
         getGiftCertificateValue: function(guid) {

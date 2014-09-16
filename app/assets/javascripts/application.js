@@ -1,17 +1,17 @@
 /*global document jQuery UA window*/
 // ...
+//= require console
+//= require jquery
+//= require ua.js/src/ua
+//= require browser_and_feature_checks
 //= require matchMedia/matchMedia
 //= require dollardollar
-//= require jquery
 //= require jquery.cookie
 //= require flash
 //= require angular
 //= require ngSticky/sticky.js
 //= require global_exception_service
-//= require console
 //= require underscore
-//= require ua.js/src/ua
-//= require jquery.browser
 //= require jquery_ujs
 //= require tinycolor
 //= require jquery.fitvids
@@ -36,31 +36,6 @@
 //= require angular/controllers/checkout_controller
 
 jQuery(document).ready(function($) {
-
-    var $root = $(document.documentElement);
-
-    $root.removeClass('nojs');
-
-    if (UA.isMobile()) {
-        $root.addClass('is-mobile');
-    }
-    if (UA.isSafari()) {
-        $root.addClass('is-safari');
-    }
-
-    if (UA.isIOS()) {
-        $root.addClass('is-iOS');
-    }
-
-    if ($.browser.msie && $.browser.version <= 10) {
-        $(document.body).prepend(
-            ['<p class=browsehappy>',
-            'You are using an <strong>outdated</strong> browser.',
-            '<a href=//browsehappy.com>Upgrade your browser</a>',
-            'to improve your experience.</p>'].join('\n')
-        );
-        $("html").addClass("ie");
-    }
 
     $('#global-menu-btn').click(function() {
         $(this).toggleClass('active');

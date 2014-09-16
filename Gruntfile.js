@@ -8,12 +8,15 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
+            options: {
+                jshintrc: true
+            },
             all: [
                 "app/assets/javascripts/**/*.js",
+                "!app/assets/javascripts/tinycolor.js",
                 "!app/assets/javascripts/jquery.lightbox_me.js",
                 "!app/assets/javascripts/jquery.fitvids.js",
-                "!app/assets/javascripts/farbtastic/farbtastic.js",
-                "!app/assets/javascripts/jquery.mustache.js"
+                "!app/assets/javascripts/farbtastic/farbtastic.js"
             ]
         }
     });
@@ -24,6 +27,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-notify");
 
     // Default task(s).
-    grunt.registerTask("default", ["watch"]);
+    grunt.registerTask("default", ["jshint", "watch"]);
 
 };

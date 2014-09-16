@@ -1,0 +1,28 @@
+{
+  "curly": false,
+  "eqnull": true,
+  "eqeqeq": true,
+  "undef": true,
+  "globals": {
+    "jQuery": true,
+    "angular": true,
+    "console": true,
+    "module": true,
+    "window": true,
+    "$": true,
+    "UA": true,
+    "_": true,
+    "document": true,
+    "location": true,
+    "SwiftUtils": true,
+    "Image": true,
+    "Flash": true,
+    "alert": true,
+    "localStorage": true,
+    "SwiftApp": true,
+    "confirm": true,
+    "Stripe": true,
+    "setTimeout": true,
+    "$$": true
+  }
+}

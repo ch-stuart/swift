@@ -279,6 +279,8 @@ SwiftApp.controller('CheckoutCtrl', [
     }
 
     function saleChargeSuccessCallback(response) {
+        var cartFromLocalStorage;
+
         console.log('saleChargeSuccessCallback', response);
 
         if (!$scope.shipping) {
@@ -289,13 +291,20 @@ SwiftApp.controller('CheckoutCtrl', [
             };
         }
 
+        try {
+            cartFromLocalStorage = localStorage.getItem('cart');
+        } catch(ex) {
+            SwiftUtils.notifyNoLocalStorage(ex);
+            return console.error("Could not access local storage.");
+        }
+
         SaleService
             .create({
                 contact: $scope.contact,
                 shipping_contact: $scope.shippingContact || null,
                 company: $scope.company,
                 email: $scope.email,
-                description: localStorage.getItem('cart'),
+                description: cartFromLocalStorage,
                 amount: $scope.cart.price,
                 total: $scope.cart.total,
                 gift_certificate_guid: $scope.giftCertificateRedemptionCode,
@@ -410,7 +419,7 @@ SwiftApp.controller('CheckoutCtrl', [
 
     $scope['onCountrySelectChanged'] = function() {
 
-        $scope.isShippingDomestic = $scope.country == 'US' ? true : false;
+        $scope.isShippingDomestic = $scope.country === 'US' ? true : false;
 
         switch ($scope.country) {
         case 'US':

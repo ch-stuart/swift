@@ -1,14 +1,15 @@
-/*global jQuery $ */
+/*global jQuery $ window */
 jQuery.fn.tabs = function(params) {
 
     var defaults = {
-        'tabs': '.tab',
-        'cards': '.card',
-        'index': '0'
-    };
+            'tabs': '.tab',
+            'cards': '.card',
+            'index': '0'
+        },
+        loc = window.location;
 
-    if (location.hash.indexOf('tab')) {
-        defaults.index = location.hash.replace('#tab', '');
+    if (loc.hash.indexOf('tab')) {
+        defaults.index = loc.hash.replace('#tab', '');
     }
 
     params = $.extend(defaults, params);
@@ -29,7 +30,7 @@ jQuery.fn.tabs = function(params) {
                 .eq(idx)
                 .addClass('active');
 
-            location.hash = '#tab'+idx;
+            loc.hash = '#tab'+idx;
         };
 
         set(params.index);

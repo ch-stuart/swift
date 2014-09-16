@@ -167,9 +167,18 @@ SwiftApp.service('ProductService', [
             }, this);
         },
         setupUpdate: function() {
-            if (!localStorage.getItem('update')) return;
+            var update;
 
-            var update = JSON.parse(localStorage.getItem('update'));
+            try {
+                update = localStorage.getItem('update');
+            } catch (ex) {
+                SwiftUtils.notifyNoLocalStorage(ex);
+                return console.error("Could not access local storage.");
+            }
+
+            if (!update) return;
+
+            update = JSON.parse(update);
 
             // kill it so we don't get in a loop
             localStorage.removeItem('update');

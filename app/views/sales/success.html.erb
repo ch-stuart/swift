@@ -218,7 +218,11 @@
         (function() {
             // Now that the items have been purchased,
             // remove them from the cart
-            localStorage.removeItem('cart')
+            try {
+              localStorage.removeItem('cart')
+            } catch (ex) {
+              SwiftUtils.notifyNoLocalStorage(ex);
+            }
         })()
     </script>
 <% end %>

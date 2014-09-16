@@ -16,7 +16,7 @@ jQuery.fn.slideshow = function() {
         function go(dir) {
             $items.hide();
 
-            if (dir == 'next') {
+            if (dir === 'next') {
                 if (current + 1 > size) current = 1;
                 else current++;
             } else {

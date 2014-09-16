@@ -38,7 +38,12 @@ SwiftApp.controller('CartCtrl', ['$scope', '$rootScope', 'CartService', function
         CartService.saveToLocalStorage();
 
         // Save this puppy to localStorage
-        localStorage.setItem('update', JSON.stringify(product));
+        try {
+            localStorage.setItem('update', JSON.stringify(product));
+        } catch(ex) {
+            SwiftUtils.notifyNoLocalStorage(ex);
+            return console.error("Could not access local storage.");
+        }
 
         // Redirect
         window.location = '/products/' + product.id + '/order';

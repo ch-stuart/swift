@@ -231,6 +231,8 @@ SwiftApp.controller('OrderCtrl', [
     };
 
     $scope['onFormSubmit'] = function() {
+        var result;
+
         if (validateForm()) {
             $scope.product.totalPrice = calculateTotalPrice();
 
@@ -238,9 +240,11 @@ SwiftApp.controller('OrderCtrl', [
                 alert('Could not calculate price. Try submitting again.');
                 ExceptionService.report('OrderCtrl#onFormSubmit: Could not get total price.', [$scope.product]);
             } else {
-                CartService.add($scope.product);
+                result = CartService.add($scope.product);
 
-                window.location = '/cart';
+                if (result) {
+                    window.location = '/cart';
+                }
             }
 
         }

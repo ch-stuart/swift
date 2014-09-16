@@ -107,6 +107,12 @@
     }
   </script>
   <script src="//d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js" data-token="0883ca2113e44e67b7570c941adb0061"></script>
+  <script>
+  // Ripped from http://tanalin.com/en/articles/ie-version-js/
+  (function() {
+      window.ieVersion = /*@cc_on (function() {switch(@_jscript_version) {case 5.8: return 8; case 9: return 9; case 10: return 10;}})() || @*/ 0;
+  })();
+  </script>
   <%= javascript_include_tag "application" %>
   <%= yield :js %>
   <%= render "shared/analytics" unless Rails.env == "development" %>
