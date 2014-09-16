@@ -1,7 +1,5 @@
 module Flickr
 
-  flickr_photo_sizes = %w{Large Medium Small Thumbnail}
-
   def get_photos_by_tag tag
     Rails.logger.info "Flickr#get_photos_by_tag: #{tag}"
 
@@ -113,7 +111,7 @@ module Flickr
     if size
       photo = sizes.find {|s| s.label == size }
     else
-      flickr_photo_sizes.each do |size|
+      %w{Large Medium Small Thumbnail}.each do |size|
         photo = sizes.find {|s| s.label == size }
         break unless photo.nil?
       end
