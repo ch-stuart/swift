@@ -74,6 +74,7 @@ SwiftSite::Application.routes.draw do
 
   post 'exceptions/report', to: 'exceptions#report'
 
-  root :to => 'homes#index'
+  get 'prime_flickr_cache', :to => 'application#prime_flickr_cache'
 
+  root :to => 'homes#index'
 end
