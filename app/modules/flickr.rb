@@ -89,11 +89,17 @@ module Flickr
   def get_photo_by_id(id, size=nil)
     Rails.logger.info "Flickr#get_photos_by_id #{id}"
 
+    if size.nil?
+      cache_key = "#{id}-nothing"
+    else
+      cache_key = "#{id}-#{size}"
+    end
+
     if id.blank?
       return ""
     else
-      if Rails.cache.exist?(id) && Rails.cache.read(id).present?
-        return Rails.cache.read(id)
+      if Rails.cache.exist?(cache_key) && Rails.cache.read(cache_key).present?
+        return Rails.cache.read(cache_key)
       end
     end
 
@@ -113,7 +119,7 @@ module Flickr
       end
     end
 
-    Rails.cache.write(id, photo.source)
+    Rails.cache.write(cache_key, photo.source)
 
     photo.source.gsub("http:", "")
   end
