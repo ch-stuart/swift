@@ -80,6 +80,9 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+
+    @public_products = Product.where(status: "Public")
+    @private_products = Product.where(status: "Private")
   end
 
   def edit
@@ -99,6 +102,9 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to(@product, :notice => 'Product was successfully created.')
     else
+      @public_products = Product.where(status: "Public")
+      @private_products = Product.where(status: "Private")
+
       render :action => "new"
     end
   end
