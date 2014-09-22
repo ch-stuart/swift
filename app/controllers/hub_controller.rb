@@ -18,10 +18,10 @@ class HubController < ApplicationController
         expire_action :controller => 'homes', :action => 'index', :user_type => 'USER_SIGNED_IN'
         expire_action :controller => 'homes', :action => 'index', :user_type => 'USER_NOT_SIGNED_IN'
         expire_fragment 'homes_index'
-        render :text => "cache cleared"
+        redirect_to hub_path, notice: 'Home cache cleared.'
       rescue => e
         logger.info e
-        render :text => "cache NOT cleared"
+        redirect_to hub_path, alert: 'Home cache NOT cleared. Try again.'
       end
   end
 
@@ -32,10 +32,10 @@ class HubController < ApplicationController
   def expire_flickr_cache
     begin
       Rails.cache.clear
-      redirect_to hub_prime_flickr_cache_path
+      redirect_to hub_path, notice: 'Flickr cache primed.'
     rescue => e
       logger.info e
-      render :text => "cache NOT cleared. :("
+      redirect_to hub_path, alert: 'Flickr cache NOT primed.'
     end
   end
 
@@ -61,7 +61,7 @@ class HubController < ApplicationController
       end
     end
 
-    redirect_to hub_path, :notice => 'The flickr cache has been cleared, and then primed.'
+    redirect_to hub_path, notice: 'Flickr cache primed.'
   end
 
 end
