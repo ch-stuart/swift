@@ -17,6 +17,11 @@ SwiftSite::Application.routes.draw do
   #   }
   # end
 
+  get 'hub' => 'hub#index'
+  get 'hub/expire_flickr_cache' => 'hub#expire_flickr_cache'
+  get 'hub/prime_flickr_cache' => 'hub#prime_flickr_cache'
+  get 'hub/expire_home_cache' => 'hub#expire_home_cache'
+
   devise_for :users
   resources :users, only: [:index, :edit, :update, :destroy]
   get '/users/my_info', to: 'users#my_info', as: 'my_info'
@@ -25,10 +30,7 @@ SwiftSite::Application.routes.draw do
   get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
 
-  get 'hub/expire_home' => 'hub#expire_home'
-  get 'hub/expire_flickr' => 'hub#expire_flickr'
-
-  resources :pages, :products, :companies, :hub, :colors, :parts, :sizes, :testimonials, :categories, :pre_approved_dealers
+  resources :pages, :products, :companies, :colors, :parts, :sizes, :testimonials, :categories, :pre_approved_dealers
   resources :products do
     get 'order', on: :member
   end
@@ -73,8 +75,6 @@ SwiftSite::Application.routes.draw do
   get "accessories" => redirect("/store")
 
   post 'exceptions/report', to: 'exceptions#report'
-
-  get 'prime_flickr_cache', :to => 'application#prime_flickr_cache'
 
   root :to => 'homes#index'
 end

@@ -44,13 +44,13 @@
   <ul>
     <li>
       <div>
-        <%= link_to "Clear home page page cache", hub_expire_home_path, class: "button remove-bottom" %>
+        <%= link_to "Clear home page page cache", hub_expire_home_cache_path, class: "button remove-bottom" %>
       </div>
         <p style="margin-top:5px; color: #888">Because of page caching (which makes the home page load as fast as possible), the home page content will not automatically update when the "Cycle Swift" blog has been updated.</p>
     </li>
     <li>
       <div>
-        <%= link_to "Clear the flickr cache", hub_expire_flickr_path, class: "button remove-bottom" %><br>
+        <%= link_to "Clear the flickr cache", hub_expire_flickr_cache_path, class: "button remove-bottom" %><br>
       </div>
         <p style="margin-top:5px; color: #888">If you've updated photos at Flickr, click this to clear the Flickr cache.</p>
     </li>
