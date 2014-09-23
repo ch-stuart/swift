@@ -278,6 +278,15 @@ date:        time (minutes):       comment:
 /// INVOICED
 
 2014-09-07 45 Add ability for customer to set shipping name
-2014-09-19 TODO LOOK AT GIT LOG AND UPDATE
+2014-09-10 30 Fix bug in product edit form related to related_products
+2014-09-11 10 Make sure related product images are always the right size
+2014-09-12 10 Add matchMedia polyfill for older browsers
+2014-09-15 30 Fixing JavaScript issues related to users browsing site in privacy mode
+2014-09-15 10 Additional fix for related product image sizes
+2014-09-19 10 Fix issue where you could not create a product
+2014-09-22 20 Allow sale to be manually moved to "shipped" category
+2014-09-22 30 WIP: Prime flickr cache via heroku scheduler to avoid long response times
+
+
 
 http://www.timer-tab.com
