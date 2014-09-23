@@ -22,6 +22,7 @@ gem 'rack-rewrite'
 gem 'devise'
 gem 'cacheable_flash'
 gem 'awesome_print'
+gem 'rails_12factor'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3 '
