@@ -32,10 +32,10 @@ class HubController < ApplicationController
   def expire_flickr_cache
     begin
       Rails.cache.clear
-      redirect_to hub_path, notice: 'Flickr cache primed.'
+      redirect_to hub_path, notice: 'Flickr cache cleared.'
     rescue => e
       logger.info e
-      redirect_to hub_path, alert: 'Flickr cache NOT primed.'
+      redirect_to hub_path, alert: 'Flickr cache NOT cleared.'
     end
   end
 
