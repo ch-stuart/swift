@@ -19,7 +19,6 @@ SwiftSite::Application.routes.draw do
 
   get 'hub' => 'hub#index'
   get 'hub/expire_flickr_cache' => 'hub#expire_flickr_cache'
-  get 'hub/prime_flickr_cache' => 'hub#prime_flickr_cache'
   get 'hub/expire_home_cache' => 'hub#expire_home_cache'
 
   devise_for :users
