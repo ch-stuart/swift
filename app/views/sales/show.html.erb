@@ -83,6 +83,28 @@
     alert('An error occurred. Try again.');
   });
 
+  $('#markAsShipped').on('ajax:success', function(event) {
+    $('#markAsShipped')
+      .text('Yay!')
+      .fadeOut(function() {
+        location.reload()
+      });
+  });
+  $('#markAsShipped').on('ajax:error', function(event) {
+    alert('An error occurred. Try again.');
+  });
+
+  $('#undoMarkAsShipped').on('ajax:success', function(event) {
+    $('#undoMarkAsShipped')
+      .text('Yay!')
+      .fadeOut(function() {
+        location.reload()
+      });
+  });
+  $('#undoMarkAsShipped').on('ajax:error', function(event) {
+    alert('An error occurred. Try again.');
+  });
+
   $('#markAsDeleted').on('ajax:success', function(event) {
     $('#markAsDeleted')
       .text('Wah!')

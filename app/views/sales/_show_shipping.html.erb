@@ -13,12 +13,30 @@
   </p>
 <% else %>
   <% if @shipments.blank? %>
-    <p>
-      <span class="hey--wah">Order has not yet been shipped.</span>
-    </p>
-    <p>
-      <%= link_to 'Ship it', { controller: "postmaster", action: "edit_shipment", id: @sale }, class: 'btn' %>
-    </p>
+    <% if @sale.status == "Shipped" %>
+      <p>
+        This sale was manually moved to shipped. You can undo and change the status back to "Printed".
+      </p>
+      <p>
+        <%= link_to "Undo", sale_path(id: @sale.id, sale: { status: "Printed" }), :remote => true, :method => :put, "data-type" => :json, id: 'undoMarkAsShipped', class: 'btn' %>
+      </p>
+    <% else %>
+      <h4>
+        Ship Sale via Postmaster
+      </h4>
+      <p>
+        <%= link_to 'Ship it', { controller: "postmaster", action: "edit_shipment", id: @sale }, class: 'btn' %>
+      </p>
+      <h4>
+        Or, Move Sale to "Shipped" Manually
+      </h4>
+      <p>
+        <strong>Note</strong>: The customer will not receive a confirmation email.
+      </p>
+      <p>
+        <%= link_to "Mark as 'Shipped'", sale_path(id: @sale.id, sale: { status: "Shipped" }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsShipped', class: 'btn' %>
+      </p>
+    <% end %>
   <% else %>
     <p>
       <span class="hey--yay">
