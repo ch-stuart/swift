@@ -1,8 +1,12 @@
 <% endcap = (index + 1).modulo(3) == 0 ? true : false %>
 <div class="one-third column store-item">
-    <% photo_url = Product.get_photo_by_id(item.flickr_photo, "Small").gsub("http:", "") %>
+    <% photo_url = Product.get_photo_by_id(item.flickr_photo, "Small") %>
 
-    <%= link_to(image_tag(photo_url, :class => "store-item--image"), item) %>
+    <% if photo_url.present? %>
+        <%= link_to(image_tag(photo_url, :class => "store-item--image"), item) %>
+    <% else %>
+        <%= link_to("Image not found", item) %>
+    <% end %>
     <h3 class="store-item--heading">
         <%= link_to item.title, item, :class => "store-item--heading-link" %> (<%= item.humane_price_for(current_user) %>)
     </h3>
