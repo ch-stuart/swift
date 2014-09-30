@@ -285,7 +285,8 @@ date:        time (minutes):       comment:
 2014-09-15 10 Additional fix for related product image sizes
 2014-09-19 10 Fix issue where you could not create a product
 2014-09-22 20 Allow sale to be manually moved to "shipped" category
-2014-09-22 30 WIP: Prime flickr cache via heroku scheduler to avoid long response times
+2014-09-22 45 Prime flickr cache via heroku scheduler to avoid long response times
+2014-09-24 10 Admin
 
 
 
