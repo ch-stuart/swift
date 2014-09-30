@@ -34,10 +34,46 @@
   Add Box
 </h3>
 <form action="create_box" method="post">
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
   <p>
-    <input class="input--dim" name="w" placeholder="W"> &#215;
-    <input class="input--dim" name="h" placeholder="H"> &#215;
-    <input class="input--dim" name="l" placeholder="L">
+    <input class="input--dim" name="w" id="inputWeight" placeholder="W"> &#215;
+    <input class="input--dim" name="h" id="inputHeight" placeholder="H"> &#215;
+    <input class="input--dim" name="l" id="inputLength" placeholder="L">
   </p>
-  <p><input type="submit" class="btn" value="Submit"></p>
+  <p><input id="btnSubmit" type="submit" class="btn" value="Submit"></p>
 </form>
+<%= content_for :js do %>
+  <script>
+    function isInteger(n) {
+        n = parseFloat(n);
+        return n === +n && n === (n|0);
+    }
+    function $$(selector) {
+      return document.querySelector(selector);
+    }
+    function errInput(input) {
+      input.style.border = '1px solid red'
+    }
+    function cleanInput(input) {
+      input.removeAttribute('style')
+    }
+    var btnSubmit   = $$('#btnSubmit'),
+        inputWeight = $$('#inputWeight'),
+        inputHeight = $$('#inputHeight'),
+        inputLength = $$('#inputLength');
+
+    btnSubmit.onclick = function(e) {
+      if (isInteger(inputWeight.value) && isInteger(inputHeight.value) && isInteger(inputLength.value)) {
+        cleanInput(inputWeight)
+        cleanInput(inputHeight)
+        cleanInput(inputLength)
+      } else {
+        alert('WxHxL must be integers')
+        errInput(inputWeight)
+        errInput(inputHeight)
+        errInput(inputLength)
+        e.preventDefault()
+      }
+    }
+  </script>
+<% end %>
