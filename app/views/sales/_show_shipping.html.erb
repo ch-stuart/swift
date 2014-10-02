@@ -1,15 +1,24 @@
 <% if @sale.pickup? && @sale.status == "Printed" %>
-  <p>
-    Customer will pick up their order.
-  </p>
-  <p>
-    <%= link_to 'Email customer and let them know their order is ready for pickup', { controller: "sales", action: "ready_for_pickup", id: @sale }, class: 'btn' %>
-  </p>
+  <div class="grid">
+    <div class="unit">
+      Customer will pick up their order.
+    </div>
+  </div>
+  <div class="grid">
+    <div class="unit half">
+      <strong>Send "ready for pickup" email to customer and move to shipped.</strong>
+      <br><br>
+      <%= link_to 'Moved to Shipped + Email', { controller: "sales", action: "ready_for_pickup", id: @sale }, class: 'btn' %>
+    </div>
+    <div class="unit half">
+      Or, move the sale to shipped with no email.
+      <br><br>
+      <%= link_to "Move to Shipped", sale_path(id: @sale.id, sale: { status: "Shipped" }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsShipped', class: 'btn' %>
+    </div>
+  </div>
 <% elsif @sale.pickup? && @sale.status == "Shipped" %>
   <p>
-    <span class="hey--wah">
-      Order is ready for pickup and customer has been emailed.
-    </span>
+      Order is ready for pickup.
   </p>
 <% else %>
   <% if @shipments.blank? %>
