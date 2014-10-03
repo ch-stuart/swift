@@ -52,7 +52,6 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
     function addPackagingWeight(weight) {
         if (allFitLetter()) {
             console.log('PackagingService#addPackagingWeight: Add 0lb for packaging weight (LETTER)', weight);
-            // weight += 0.2;
         } else {
             console.log('PackagingService#addPackagingWeight: Add 1lb for packaging weight (CUSTOM)', weight, weight + 1);
             weight += 1;
@@ -85,6 +84,19 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         // Empty the array
         packages.splice(0, packages.length);
 
+        if (allFitLetter()) {
+            packages.allFitLetter = true;
+            packages.push({
+                weight: 0.01,
+                width: 1,
+                height: 1,
+                length: 1,
+                packaging: 'LETTER'
+            });
+            console.log('PackagingService#getPackages: All items fit in letter.');
+            return packages;
+        }
+
         // Initially we assume we have one package
         var package_count = 1;
         // Get the volume, weight and one side
@@ -94,16 +106,6 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         var weight = volumeAndWeight.weight;
         var side   = volumeAndWeight.side;
         var volume = volumeAndWeight.volume;
-
-        // Waiting on Postmaster to respond to support request
-        // if (allFitLetter()) {
-        //     packages.push({
-        //         weight: weight,
-        //         packaging: 'LETTER'
-        //     });
-        //     console.log('PackagingService#getPackages: All items fit in letter.');
-        //     return packages;
-        // }
 
         // If our volume exceeds that of our largest box...
         if (volume > LARGEST_PACKAGE_VOLUME) {

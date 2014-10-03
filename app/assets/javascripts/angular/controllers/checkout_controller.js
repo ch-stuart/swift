@@ -52,10 +52,10 @@ SwiftApp.controller('CheckoutCtrl', [
     // Defaults!
     $scope.country = 'US';
     $scope.state = 'MT';
-    // $scope.line1 = '425 E Sussex AVE';
-    // $scope.city = 'Missoula';
-    // $scope.zipCode = '59801';
-    // $scope.phoneNo = '555 5552';
+    $scope.line1 = '425 E Sussex AVE';
+    $scope.city = 'Missoula';
+    $scope.zipCode = '59801';
+    $scope.phoneNo = '555 5552';
 
     $scope.shippingServiceLevel = 'GROUND';
     $scope.countryIsUSCA = true;
@@ -87,17 +87,18 @@ SwiftApp.controller('CheckoutCtrl', [
             width:      packages[0].width,
             height:     packages[0].height,
             length:     packages[0].length,
-            // packaging:  packages[0].packaging,
+            packaging:  "CUSTOM",
             service:    $scope.shippingServiceLevel,
             carrier:    $scope.shippingCarrier
         };
 
         // Don't include these guys if shipping via LETTER
-        // if ($scope.rateParams.packaging === 'LETTER') {
-        //     delete $scope.rateParams.width;
-        //     delete $scope.rateParams.height;
-        //     delete $scope.rateParams.length;
-        // }
+        if ('allFitLetter' in packages) {
+            delete $scope.rateParams.width;
+            delete $scope.rateParams.height;
+            delete $scope.rateParams.length;
+            packaging = "LETTER";
+        }
 
         console.log('postmasterValidateSuccessCallback', data);
 
@@ -116,11 +117,15 @@ SwiftApp.controller('CheckoutCtrl', [
                     .then(taxSuccessCallback, taxErrorCallback);
             }
 
-            _.each(packages, function() {
-                PostmasterService
-                    .rates($scope.rateParams)
-                    .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
-            });
+            if ('allFitLetter' in packages) {
+                postmasterRateSuccessCallback('allFitLetter');
+            } else {
+                _.each(packages, function() {
+                    PostmasterService
+                        .rates($scope.rateParams)
+                        .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
+                });
+            }
         } else {
             ExceptionService.report('CheckoutCtrl#postmasterValidateSuccessCallback: data.status not "OK"', [data]);
         }
@@ -165,6 +170,25 @@ SwiftApp.controller('CheckoutCtrl', [
 
     var rateResponses = [];
     function postmasterRateSuccessCallback(response) {
+        $scope.rates = [];
+        $scope.shipping = {};
+        $scope.busyShipping = false;
+        $scope.isShippingReady = true;
+
+        if (response === 'allFitLetter') {
+            $scope.domesticServiceLevels = { 'GROUND': 'Ground' };
+            $scope.intlServiceLevels = { 'INTL_SURFACE': '1st Class International' };
+
+            $scope.rates.push({
+                best: true,
+                charge: $scope.isShippingDomestic ? 100 : 200,
+                provider: 'USPS',
+                service: 'ENVELOPE'
+            });
+            return console.log('postmasterRateSuccessCallback: allFitLetter');
+        }
+
+
         console.log('postmasterRateSuccessCallback: response', response);
         // Cannot proceed until we have received all of the callbacks
         rates_response_count++;
@@ -212,11 +236,6 @@ SwiftApp.controller('CheckoutCtrl', [
                 console.log('charge for', provider, 'should be', combinedResponse[provider].charge);
             });
         }
-
-        $scope.rates = [];
-        $scope.shipping = {};
-        $scope.busyShipping = false;
-        $scope.isShippingReady = true;
 
         // Use the most recent response data
         // for some things
