@@ -51,8 +51,8 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
 
     function addPackagingWeight(weight) {
         if (allFitLetter()) {
-            console.log('PackagingService#addPackagingWeight: Add .2lb for packaging weight (LETTER)', weight, weight + 0.2);
-            weight += 0.2;
+            console.log('PackagingService#addPackagingWeight: Add 0lb for packaging weight (LETTER)', weight);
+            // weight += 0.2;
         } else {
             console.log('PackagingService#addPackagingWeight: Add 1lb for packaging weight (CUSTOM)', weight, weight + 1);
             weight += 1;
