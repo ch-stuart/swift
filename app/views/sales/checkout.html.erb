@@ -209,7 +209,7 @@
                 <h4>
                     Gift Certificate
                 </h4>
-                <p ng-show="isShippingReady || pickup && cart.totalWithGiftCert == 0">
+                <p ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
                     Your gift certificate covers the amount due. Click "Buy It" to complete your purchase.
                 </p>
                 <div class="row row--order">

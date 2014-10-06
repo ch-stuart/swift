@@ -1,5 +1,5 @@
 /*jshint browser: true, sub:true */
-/*global SwiftApp console alert _ $$ $ Stripe */
+/*global SwiftApp console alert _ $$ $ Stripe SwiftUtils */
 
 SwiftApp.controller('CheckoutCtrl', [
     '$scope',
@@ -97,7 +97,7 @@ SwiftApp.controller('CheckoutCtrl', [
             delete $scope.rateParams.width;
             delete $scope.rateParams.height;
             delete $scope.rateParams.length;
-            packaging = "LETTER";
+            $scope.rateParams.packaging = "LETTER";
         }
 
         console.log('postmasterValidateSuccessCallback', data);
@@ -118,7 +118,7 @@ SwiftApp.controller('CheckoutCtrl', [
             }
 
             if ('allFitLetter' in packages) {
-                postmasterRateSuccessCallback('allFitLetter');
+                displayFlatRateShipping();
             } else {
                 _.each(packages, function() {
                     PostmasterService
@@ -134,6 +134,7 @@ SwiftApp.controller('CheckoutCtrl', [
     function postmasterValidateErrorCallback(response) {
         $scope.busyShipping = false;
         $scope.customerNeedsToVerifyAddress = true;
+        $scope.isShippingReady = false;
 
         // Commenting this out. TMI
         // ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: Address validation failed.', [response]);
@@ -168,26 +169,44 @@ SwiftApp.controller('CheckoutCtrl', [
         console.log('taxErrorCallback', response);
     }
 
+    function displayFlatRateShipping() {
+        console.log('displayFlatRateShipping');
+
+        var shippingCharge = $scope.isShippingDomestic ? 100 : 500;
+        $scope.rates = [];
+        $scope.busyShipping = false;
+        $scope.isShippingReady = true;
+
+        // Lock the services to one. Customer cannot
+        // choose shipping service on flat rate.
+        $scope.domesticServiceLevels = { 'GROUND': 'Ground' };
+        $scope.intlServiceLevels = { 'INTL_SURFACE': '1st Class International' };
+
+        // Provider is always USPS for flat rate.
+        $scope.rates.push({
+            // This selects it
+            best: true,
+            // Set the flat rate charge
+            charge: shippingCharge,
+            // Always USPS
+            provider: 'USPS',
+            // Doesn't matter.
+            service: 'ENVELOPE'
+        });
+
+        $scope.shipping = {
+            charge: shippingCharge,
+            provider: 'USPS',
+            service: 'GROUND'
+        };
+    }
+
     var rateResponses = [];
     function postmasterRateSuccessCallback(response) {
         $scope.rates = [];
         $scope.shipping = {};
         $scope.busyShipping = false;
         $scope.isShippingReady = true;
-
-        if (response === 'allFitLetter') {
-            $scope.domesticServiceLevels = { 'GROUND': 'Ground' };
-            $scope.intlServiceLevels = { 'INTL_SURFACE': '1st Class International' };
-
-            $scope.rates.push({
-                best: true,
-                charge: $scope.isShippingDomestic ? 100 : 200,
-                provider: 'USPS',
-                service: 'ENVELOPE'
-            });
-            return console.log('postmasterRateSuccessCallback: allFitLetter');
-        }
-
 
         console.log('postmasterRateSuccessCallback: response', response);
         // Cannot proceed until we have received all of the callbacks

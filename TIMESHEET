@@ -289,6 +289,9 @@ date:        time (minutes):       comment:
 2014-09-22 20 Allow sale to be manually moved to "shipped" category
 2014-09-22 45 Prime flickr cache via heroku scheduler to avoid long response times
 2014-09-24 10 Admin
+2014-10-02 75  WIP: allow flat rate for LETTER products
+2014-10-05 20  WIP: allow flat rate for LETTER products
+
 
 
 
