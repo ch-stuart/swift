@@ -1,18 +1,22 @@
-/*global SwiftApp _ console */
+/*global SwiftApp _ console angular */
 
 SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, CartService) {
 
     var packages = [];
     var LARGEST_PACKAGE_VOLUME = 4488;
 
-    // Find out if all products in cart fit in a LETTER
+    // Find out if all products in cart are Flat Rate
     // @returns Boolean
-    function allFitLetter() {
-        console.log('PackagingService#allFitLetter');
-        var productsThatDontFitInLetter = _.filter(CartService.products, function(product) {
-            return product.package_type !== 'LETTER';
+    function allFlatRate() {
+        console.log('PackagingService#allFlatRate');
+        var productsThatArentFlatRate = _.filter(CartService.products, function(product) {
+            var doms = product.domestic_flat_rate_shipping_charge,
+                intl = product.international_flat_rate_shipping_charge;
+
+                console.log(product, doms, intl);
+            return !angular.isNumber(doms) || !angular.isNumber(intl);
         });
-        return productsThatDontFitInLetter.length === 0;
+        return productsThatArentFlatRate.length === 0;
     }
 
     // NOTE USPS does not support PAK :(
@@ -50,7 +54,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
     }
 
     function addPackagingWeight(weight) {
-        if (allFitLetter()) {
+        if (allFlatRate()) {
             console.log('PackagingService#addPackagingWeight: Add 0lb for packaging weight (LETTER)', weight);
         } else {
             console.log('PackagingService#addPackagingWeight: Add 1lb for packaging weight (CUSTOM)', weight, weight + 1);
@@ -84,8 +88,8 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         // Empty the array
         packages.splice(0, packages.length);
 
-        if (allFitLetter()) {
-            packages.allFitLetter = true;
+        if (allFlatRate()) {
+            packages.allFlatRate = true;
             packages.push({
                 weight: 0.01,
                 width: 1,

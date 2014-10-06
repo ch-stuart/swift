@@ -128,8 +128,11 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             }
 
             // Save each of these properties on the product
-            _.each(['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer', 'kind',
-              'question', 'selectedSize', 'mostExpensiveFabric', 'width', 'height', 'length', 'weight', 'package_type'], saveIf);
+            _.each(['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer',
+              'selectedAnswer', 'kind', 'question', 'selectedSize',
+              'mostExpensiveFabric', 'width', 'height', 'length', 'weight',
+              'package_type', 'domestic_flat_rate_shipping_charge',
+              'international_flat_rate_shipping_charge'], saveIf);
 
             // Save parts on the product
             _.chain(prod.parts)

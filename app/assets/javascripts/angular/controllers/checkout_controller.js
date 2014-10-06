@@ -93,7 +93,7 @@ SwiftApp.controller('CheckoutCtrl', [
         };
 
         // Don't include these guys if shipping via LETTER
-        if ('allFitLetter' in packages) {
+        if ('allFlatRate' in packages) {
             delete $scope.rateParams.width;
             delete $scope.rateParams.height;
             delete $scope.rateParams.length;
@@ -117,7 +117,7 @@ SwiftApp.controller('CheckoutCtrl', [
                     .then(taxSuccessCallback, taxErrorCallback);
             }
 
-            if ('allFitLetter' in packages) {
+            if ('allFlatRate' in packages) {
                 displayFlatRateShipping();
             } else {
                 _.each(packages, function() {
