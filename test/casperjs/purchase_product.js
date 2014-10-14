@@ -1,27 +1,81 @@
-casper.test.begin('Can purchase product', function suite(test) {
-    casper.start("http://swift.dev/", function() {
-        this.click('.nav-list--group-item-link:first-child')
-    })
+var oneDollarShippingCart = {"price":1800,"total":1800,"products":[{"parts":[],"id":79,"title":"Celestial Kerchief","price":9,"totalPrice":9,"answer":"","kind":"Accessory","question":"","width":6,"height":6,"length":1,"weight":0.12,"package_type":"PAK","domestic_flat_rate_shipping_charge":200,"international_flat_rate_shipping_charge":200,"quantity":1,"uniqueId":1413254245877},{"parts":[],"id":79,"title":"Celestial Kerchief","price":9,"totalPrice":9,"answer":"","kind":"Accessory","question":"","width":6,"height":6,"length":1,"weight":0.12,"package_type":"PAK","domestic_flat_rate_shipping_charge":200,"international_flat_rate_shipping_charge":200,"quantity":1,"uniqueId":1413254917654}]};
+var manyDollarShippingCart = {"price":30000,"total":30000,"products":[{"parts":[{"id":39,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Body"},{"id":40,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Lid"},{"id":42,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Rear Pocket"},{"id":44,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Thread"},{"id":96,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Trim"},{"id":36,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Front Pocket"}],"id":2,"title":"Short Stack Panniers","price":300,"totalPrice":300,"answer":"","kind":"Product","question":"","width":16,"height":13,"length":7,"weight":5.2,"package_type":"CUSTOM","domestic_flat_rate_shipping_charge":null,"international_flat_rate_shipping_charge":null,"quantity":1,"uniqueId":1413259261984}]};
+
+var noop = function(){};
+
+casper.test.begin('Testing Shipping', function suite(test) {
+
+    // casper.on('remote.message', function(msg) {
+    //     casper.echo(msg);
+    // });
+
+    casper.start('http://localhost:3000/products/79', function() {
+        this.evaluate(function(oneDollarShippingCart) {
+            localStorage.removeItem('cart');
+            localStorage.setItem('cart', JSON.stringify(oneDollarShippingCart));
+        }, oneDollarShippingCart);
+    });
+
+    casper.thenOpen('http://localhost:3000/cart/checkout', function() {
+        this.echo(this.getCurrentUrl());
+        this.waitForSelector('#js-input-pickup', noop);
+    });
 
     casper.then(function() {
-        var isProductPage = this.evaluate(function() {
-            return location.href.indexOf('product') !== -1
-        })
-        this.test.assert(isProductPage, 'got to product page')
-    })
+        this.fillSelectors('#js-shipping-form', {
+            '#js-input-pickup':  false,
+            '#js-input-country': 'US',
+            '#js-input-line1': '425 E Sussex AVE',
+            '#js-input-city': 'Missoula',
+            '#js-input-state': 'MT',
+            '#js-input-zip': '59801',
+            '#js-input-phone': '406 219 1062',
+            '#js-input-shipping-contact': 'Nobody But Me'
+        }, false);
+
+        this.echo('=> Getting rates...');
+        this.click('#js-rates-submit');
+        this.waitUntilVisible('#js-best-price-true', noop);
+    });
 
     casper.then(function() {
-        this.click('#submit_order')
-    })
+        this.echo('=> Evaluating rates...');
+        var bestEnvelopePrice = this.evaluate(function() {
+            return jQuery('#js-best-price-true').val();
+        });
+        this.test.assert(bestEnvelopePrice === 'USPS:ENVELOPE:100', 'Shipping is USPS:ENVELOPE:100');
+    });
 
     casper.then(function() {
-        var isOrderPage = this.evaluate(function() {
-            return location.href.indexOf('order') !== -1
-        })
-        this.test.assert(isOrderPage, 'got to order page')
-    })
+        this.echo('=> Updating cart...');
+        this.evaluate(function(manyDollarShippingCart) {
+            localStorage.removeItem('cart');
+            localStorage.setItem('cart', JSON.stringify(manyDollarShippingCart));
+        }, manyDollarShippingCart);
+
+        this.reload(noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Getting rates...');
+        this.click('#js-rates-submit');
+        this.waitUntilVisible('#js-best-price-true', noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Evaluating rates...');
+        var bestCustomPrice = this.evaluate(function() {
+            return jQuery('#js-best-price-true').val();
+        });
+        var priceParts = bestCustomPrice.split(':');
+
+        this.test.assert(priceParts[0] === 'ups', 'Best provider should be UPS');
+        this.test.assert(priceParts[1] === 'GROUND', 'Best services should be GROUND');
+        this.test.assert(parseFloat(priceParts[2]) > 900 && parseFloat(priceParts[2]) < 1100, 'Best price should be between 9 and 11 dollars');
+    });
 
     casper.run(function() {
-        test.done()
-    })
+        test.done();
+    });
+
 });

@@ -19,9 +19,9 @@
 <div class="five columns col-sidebar">
     <p>
         <% if @product.is_product? %>
-            <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
+            <%= link_to "Design your bags", order_product_path(@product), id: "js-go_to_order", class: "btn-bike" %>
         <% else %>
-            <%= link_to "Buy it", order_product_path(@product), :id => "submit_order" %>
+            <%= link_to "Buy it", order_product_path(@product), id: "js-go_to_order", class: "btn-bike" %>
         <% end %>
     </p>
     <p>

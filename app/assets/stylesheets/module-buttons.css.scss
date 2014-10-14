@@ -1,18 +1,11 @@
-// TODO
-//
-// - Use classes rather than IDs
-
-
-#submit_order, #bike_btn {
-    font-size: 14px;
-}
-#submit_order {
+.btn-bike {
     margin: 0;
     padding: 0;
     border: 0;
     display: block;
     background: transparent image-url('swift-bike.png') no-repeat;
     cursor: pointer;
+    font-size: 14px;
     width: 150px;
     height: 81px;
     text-align: center;
@@ -20,23 +13,11 @@
     font-family: courier new, menlo, monaco;
     font-weight: bold;
 }
-a#submit_order {
-    line-height: 104px;
+a.btn-bike {
+    line-height: 104px !important;
 }
-button#submit_order {
+button.btn-bike {
     padding-top: 23px;
-}
-#bike_btn {
-    background: transparent image-url('swift-wheel.png') no-repeat;
-    display: block;
-    text-transform: uppercase;
-    text-align: center;
-    text-indent: -7px;
-    width: 118px;
-    height: 81px;
-    line-height: 79px;
-    padding: 0;
-    font-family: courier new, menlo, monaco;
 }
 
 .btn {

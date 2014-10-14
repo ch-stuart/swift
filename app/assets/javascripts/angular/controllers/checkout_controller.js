@@ -522,7 +522,7 @@ SwiftApp.controller('CheckoutCtrl', [
         if ($(window).width() > 767) {
             $scrollToElem = $("#row-shipping");
         } else {
-            $scrollToElem = $("#rates-submit");
+            $scrollToElem = $("#js-rates-submit");
         }
         $('html, body').animate({
             scrollTop: $scrollToElem.offset().top

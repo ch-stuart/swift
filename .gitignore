@@ -11,3 +11,4 @@ ssl/
 
 # This is included via a Gem
 vendor/assets/bower_components/angular/*
+casper-results.xml
