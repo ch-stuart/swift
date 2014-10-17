@@ -3,7 +3,10 @@ module.exports = function(grunt) {
     grunt.initConfig({
         watch: {
             js: {
-                files: ['app/assets/javascripts/**/*.js'],
+                files: [
+                    'app/assets/javascripts/**/*.js',
+                    'test/casperjs/*.js'
+                ],
                 tasks: ['jshint']
             },
             casper: {
