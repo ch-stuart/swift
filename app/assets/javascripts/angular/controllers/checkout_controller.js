@@ -52,10 +52,14 @@ SwiftApp.controller('CheckoutCtrl', [
     // Defaults!
     $scope.country = 'US';
     $scope.state = 'MT';
-    $scope.line1 = '425 E Sussex AVE';
-    $scope.city = 'Missoula';
-    $scope.zipCode = '59801';
-    $scope.phoneNo = '555 5552';
+
+    // Making testing easier...
+    if (location.hostname.match(/localhost/)) {
+        $scope.line1 = '425 E Sussex AVE';
+        $scope.city = 'Missoula';
+        $scope.zipCode = '59801';
+        $scope.phoneNo = '555 5552';
+    }
 
     $scope.shippingServiceLevel = 'GROUND';
     $scope.countryIsUSCA = true;
