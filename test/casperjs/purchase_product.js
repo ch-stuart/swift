@@ -1,6 +1,273 @@
-var oneDollarShippingCart = {"price":1800,"total":1800,"products":[{"parts":[],"id":79,"title":"Celestial Kerchief","price":9,"totalPrice":9,"answer":"","kind":"Accessory","question":"","width":6,"height":6,"length":1,"weight":0.12,"package_type":"PAK","domestic_flat_rate_shipping_charge":200,"international_flat_rate_shipping_charge":200,"quantity":1,"uniqueId":1413254245877},{"parts":[],"id":79,"title":"Celestial Kerchief","price":9,"totalPrice":9,"answer":"","kind":"Accessory","question":"","width":6,"height":6,"length":1,"weight":0.12,"package_type":"PAK","domestic_flat_rate_shipping_charge":200,"international_flat_rate_shipping_charge":200,"quantity":1,"uniqueId":1413254917654}]};
-var manyDollarShippingCart = {"price":30000,"total":30000,"products":[{"parts":[{"id":39,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Body"},{"id":40,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Lid"},{"id":42,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Rear Pocket"},{"id":44,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Thread"},{"id":96,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Trim"},{"id":36,"price":null,"selectedColor":{"hex":"#000","id":1,"price":null,"title":"Black","wholesale_price":null},"title":"Front Pocket"}],"id":2,"title":"Short Stack Panniers","price":300,"totalPrice":300,"answer":"","kind":"Product","question":"","width":16,"height":13,"length":7,"weight":5.2,"package_type":"CUSTOM","domestic_flat_rate_shipping_charge":null,"international_flat_rate_shipping_charge":null,"quantity":1,"uniqueId":1413259261984}]};
-
+var oneDollarShippingCart = {
+    "price": 1800,
+    "total": 1800,
+    "products": [{
+        "parts": [],
+        "id": 79,
+        "title": "Celestial Kerchief",
+        "price": 9,
+        "totalPrice": 9,
+        "answer": "",
+        "kind": "Accessory",
+        "question": "",
+        "width": 6,
+        "height": 6,
+        "length": 1,
+        "weight": 0.12,
+        "package_type": "PAK",
+        "domestic_flat_rate_shipping_charge": 200,
+        "international_flat_rate_shipping_charge": 200,
+        "quantity": 1,
+        "uniqueId": 1413254245877
+    }, {
+        "parts": [],
+        "id": 79,
+        "title": "Celestial Kerchief",
+        "price": 9,
+        "totalPrice": 9,
+        "answer": "",
+        "kind": "Accessory",
+        "question": "",
+        "width": 6,
+        "height": 6,
+        "length": 1,
+        "weight": 0.12,
+        "package_type": "PAK",
+        "domestic_flat_rate_shipping_charge": 200,
+        "international_flat_rate_shipping_charge": 200,
+        "quantity": 1,
+        "uniqueId": 1413254917654
+    }]
+};
+var veryHeavyShippingCart = {
+    "price": 1800,
+    "total": 1800,
+    "products": [{
+        "parts": [],
+        "id": 79,
+        "title": "Celestial Kerchief",
+        "price": 9,
+        "totalPrice": 9,
+        "answer": "",
+        "kind": "Accessory",
+        "question": "",
+        "width": 6,
+        "height": 6,
+        "length": 6,
+        "weight": 40,
+        "package_type": "CUSTOM",
+        "domestic_flat_rate_shipping_charge": null,
+        "international_flat_rate_shipping_charge": null,
+        "quantity": 1,
+        "uniqueId": 1413254245870
+    }]
+};
+var manyDollarShippingCart = {
+    "price": 30000,
+    "total": 30000,
+    "products": [{
+        "parts": [{
+            "id": 39,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Body"
+        }, {
+            "id": 40,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Lid"
+        }, {
+            "id": 42,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Rear Pocket"
+        }, {
+            "id": 44,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Thread"
+        }, {
+            "id": 96,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Trim"
+        }, {
+            "id": 36,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Front Pocket"
+        }],
+        "id": 2,
+        "title": "Short Stack Panniers",
+        "price": 300,
+        "totalPrice": 300,
+        "answer": "",
+        "kind": "Product",
+        "question": "",
+        "width": 16,
+        "height": 13,
+        "length": 7,
+        "weight": 5.2,
+        "package_type": "CUSTOM",
+        "domestic_flat_rate_shipping_charge": null,
+        "international_flat_rate_shipping_charge": null,
+        "quantity": 1,
+        "uniqueId": 1413259261984
+    }]
+};
+var manyDollarMultiItemShippingCart = {
+    "price": 30900,
+    "total": 30900,
+    "products": [{
+        "parts": [{
+            "id": 39,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Body"
+        }, {
+            "id": 40,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Lid"
+        }, {
+            "id": 42,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Rear Pocket"
+        }, {
+            "id": 44,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Thread"
+        }, {
+            "id": 96,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Trim"
+        }, {
+            "id": 36,
+            "price": null,
+            "selectedColor": {
+                "hex": "#000",
+                "id": 1,
+                "price": null,
+                "title": "Black",
+                "wholesale_price": null
+            },
+            "title": "Front Pocket"
+        }],
+        "id": 2,
+        "title": "Short Stack Panniers",
+        "price": 300,
+        "totalPrice": 300,
+        "answer": "",
+        "kind": "Product",
+        "question": "",
+        "width": 16,
+        "height": 13,
+        "length": 7,
+        "weight": 5.2,
+        "package_type": "CUSTOM",
+        "domestic_flat_rate_shipping_charge": null,
+        "international_flat_rate_shipping_charge": null,
+        "quantity": 1,
+        "uniqueId": 1413259261984
+    }, {
+        "parts": [],
+        "id": 79,
+        "title": "Celestial Kerchief",
+        "price": 9,
+        "totalPrice": 9,
+        "answer": "",
+        "kind": "Accessory",
+        "question": "",
+        "width": 6,
+        "height": 6,
+        "length": 1,
+        "weight": 0.12,
+        "package_type": "PAK",
+        "domestic_flat_rate_shipping_charge": 200,
+        "international_flat_rate_shipping_charge": 200,
+        "quantity": 1,
+        "uniqueId": 1413340302632
+    }]
+};
+var shippingFormValues = {
+    '#js-input-pickup':  false,
+    '#js-input-country': 'US',
+    '#js-input-line1': '425 E Sussex AVE',
+    '#js-input-city': 'Missoula',
+    '#js-input-state': 'MT',
+    '#js-input-zip': '59801',
+    '#js-input-phone': '406 219 1062',
+    '#js-input-shipping-contact': 'Nobody But Me'
+};
 var noop = function(){};
 
 casper.test.begin('Testing Shipping', function suite(test) {
@@ -22,17 +289,7 @@ casper.test.begin('Testing Shipping', function suite(test) {
     });
 
     casper.then(function() {
-        this.fillSelectors('#js-shipping-form', {
-            '#js-input-pickup':  false,
-            '#js-input-country': 'US',
-            '#js-input-line1': '425 E Sussex AVE',
-            '#js-input-city': 'Missoula',
-            '#js-input-state': 'MT',
-            '#js-input-zip': '59801',
-            '#js-input-phone': '406 219 1062',
-            '#js-input-shipping-contact': 'Nobody But Me'
-        }, false);
-
+        this.fillSelectors('#js-shipping-form', shippingFormValues, false);
         this.echo('=> Getting rates...');
         this.click('#js-rates-submit');
         this.waitUntilVisible('#js-best-price-true', noop);
@@ -40,10 +297,11 @@ casper.test.begin('Testing Shipping', function suite(test) {
 
     casper.then(function() {
         this.echo('=> Evaluating rates...');
-        var bestEnvelopePrice = this.evaluate(function() {
+        var bestPrice = this.evaluate(function() {
             return jQuery('#js-best-price-true').val();
         });
-        this.test.assert(bestEnvelopePrice === 'USPS:ENVELOPE:100', 'Shipping is USPS:ENVELOPE:100');
+        this.echo('=> Shipping ', bestPrice);
+        this.test.assert(bestPrice === 'USPS:ENVELOPE:100', 'Shipping is USPS:ENVELOPE:100');
     });
 
     casper.then(function() {
@@ -58,20 +316,82 @@ casper.test.begin('Testing Shipping', function suite(test) {
 
     casper.then(function() {
         this.echo('=> Getting rates...');
+        this.fillSelectors('#js-shipping-form', shippingFormValues, false);
         this.click('#js-rates-submit');
         this.waitUntilVisible('#js-best-price-true', noop);
     });
 
     casper.then(function() {
         this.echo('=> Evaluating rates...');
-        var bestCustomPrice = this.evaluate(function() {
+        var bestPrice = this.evaluate(function() {
             return jQuery('#js-best-price-true').val();
         });
-        var priceParts = bestCustomPrice.split(':');
+        this.echo('=> Shipping ' + bestPrice);
+        var priceParts = bestPrice.split(':');
 
         this.test.assert(priceParts[0] === 'ups', 'Best provider should be UPS');
         this.test.assert(priceParts[1] === 'GROUND', 'Best services should be GROUND');
         this.test.assert(parseFloat(priceParts[2]) > 900 && parseFloat(priceParts[2]) < 1100, 'Best price should be between 9 and 11 dollars');
+    });
+
+    casper.then(function() {
+        this.echo('=> Updating cart...');
+        this.evaluate(function(manyDollarMultiItemShippingCart) {
+            localStorage.removeItem('cart');
+            localStorage.setItem('cart', JSON.stringify(manyDollarMultiItemShippingCart));
+        }, manyDollarMultiItemShippingCart);
+
+        this.reload(noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Getting rates...');
+        this.fillSelectors('#js-shipping-form', shippingFormValues, false);
+        this.click('#js-rates-submit');
+        this.waitUntilVisible('#js-best-price-true', noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Evaluating rates...');
+        var bestPrice = this.evaluate(function() {
+            return jQuery('#js-best-price-true').val();
+        });
+        this.echo('=> Shipping ' + bestPrice);
+        var priceParts = bestPrice.split(':');
+
+        this.test.assert(priceParts[0] === 'ups', 'Best provider should be UPS');
+        this.test.assert(priceParts[1] === 'GROUND', 'Best services should be GROUND');
+        this.test.assert(parseFloat(priceParts[2]) > 900 && parseFloat(priceParts[2]) < 1100, 'Best price should be between 9 and 11 dollars');
+    });
+
+    casper.then(function() {
+        this.echo('=> Updating cart...');
+        this.evaluate(function(veryHeavyShippingCart) {
+            localStorage.removeItem('cart');
+            localStorage.setItem('cart', JSON.stringify(veryHeavyShippingCart));
+        }, veryHeavyShippingCart);
+
+        this.reload(noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Getting rates...');
+        this.fillSelectors('#js-shipping-form', shippingFormValues, false);
+        this.click('#js-rates-submit');
+        this.waitUntilVisible('#js-best-price-true', noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Evaluating rates...');
+        var bestPrice = this.evaluate(function() {
+            return jQuery('#js-best-price-true').val();
+        });
+        this.echo('=> Shipping ' + bestPrice);
+        var priceParts = bestPrice.split(':');
+
+        this.test.assert(priceParts[0] === 'ups', 'Best provider should be UPS');
+        this.test.assert(priceParts[1] === 'GROUND', 'Best services should be GROUND');
+        this.test.assert(parseFloat(priceParts[2]) > 2000 && parseFloat(priceParts[2]) < 2200, 'Best price should be between 20 and 22 dollars');
     });
 
     casper.run(function() {
