@@ -366,7 +366,11 @@ SwiftApp.controller('CheckoutCtrl', [
                 phone_no: $scope.phoneNo,
                 commercial: $scope.commercial,
                 // FIXME this should actually get the weight
-                // for one package?
+                // for one package? No, doesn't really matter
+                // because we charge them the appropriate amount
+                // for all of their packages. The weight here is
+                // not really used anywhere... just keep it around
+                // for our records I guess.
                 weight: PackagingService.getShippingWeight(),
                 pickup: $scope.pickup,
                 shipping_provider: $scope.shipping.provider,
