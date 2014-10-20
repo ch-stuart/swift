@@ -14,7 +14,7 @@ var oneDollarShippingCart = {
         "height": 6,
         "length": 1,
         "weight": 0.12,
-        "package_type": "PAK",
+        "package_type": "CUSTOM",
         "domestic_flat_rate_shipping_charge": 200,
         "international_flat_rate_shipping_charge": 200,
         "quantity": 1,
@@ -32,7 +32,7 @@ var oneDollarShippingCart = {
         "height": 6,
         "length": 1,
         "weight": 0.12,
-        "package_type": "PAK",
+        "package_type": "CUSTOM",
         "domestic_flat_rate_shipping_charge": 200,
         "international_flat_rate_shipping_charge": 200,
         "quantity": 1,
@@ -301,8 +301,8 @@ casper.test.begin('Testing Shipping', function suite(test) {
         var bestPrice = this.evaluate(function() {
             return jQuery('#js-best-price-true').val();
         });
-        this.echo('=> Shipping ', bestPrice);
-        this.test.assert(bestPrice === 'USPS:ENVELOPE:100', 'Shipping is USPS:ENVELOPE:100');
+        this.echo('=> Shipping ' + bestPrice);
+        this.test.assert(bestPrice === 'USPS:GROUND:200', 'Shipping is USPS:GROUND:200');
     });
 
     casper.then(function() {
