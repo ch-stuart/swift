@@ -244,9 +244,6 @@ SwiftApp.controller('CheckoutCtrl', [
                 if (!response.data.hasOwnProperty('ups')) {
                     SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'ups');
                 }
-                if (!response.data.hasOwnProperty('fedex')) {
-                    SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'fedex');
-                }
                 if (!response.data.hasOwnProperty('usps')) {
                     SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'usps');
                 }
