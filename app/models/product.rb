@@ -25,7 +25,8 @@ class Product < ActiveRecord::Base
   attr_reader :KINDS
   validates :kind, :inclusion => { :in => KINDS, :message => "%{value} is not a valid type" }
 
-  PACKAGE_TYPE = ["CUSTOM", "LETTER", "PAK"]
+  # PACKAGE_TYPE = ["CUSTOM", "LETTER", "PAK"]
+  PACKAGE_TYPE = ["CUSTOM"]
   attr_reader :PACKAGE_TYPE
   validates :package_type, :inclusion => { :in => PACKAGE_TYPE, :message => "%{value} is not a valid type" }
 

@@ -136,7 +136,8 @@
     <div class="field">
         <%= f.label :package_type, "Type" %>
         <%= f.select :package_type, Product::PACKAGE_TYPE, :selected => @product.package_type %>
-        <p class="hint">
+        <p class="hint" style="display:none">
+            <!-- WELL, we only currently support CUSTOM -->
             Products that go in boxes should use "CUSTOM". Items that fit in envelopes should use "LETTER". Items that fit in padded envelopes should use "PAK".
         </p>
     </div>
