@@ -312,9 +312,8 @@ SwiftApp.controller('CheckoutCtrl', [
                     });
                 } else if (data[provider] && data[provider].error) {
                     var msg = 'We are currently unable to provide shipping rates for ' + provider.toUpperCase() + '.';
-                    ExceptionService.report(msg);
+                    ExceptionService.report(msg, data[provider]);
                     alert(msg);
-                    console.warn(data[provider].error.message);
                 }
             });
         }
