@@ -56,10 +56,20 @@ SwiftApp.controller('CheckoutCtrl', [
 
     // Making testing easier...
     if (location.hostname.match(/localhost/)) {
-        $scope.line1 = '425 E Sussex AVE';
-        $scope.city = 'Missoula';
-        $scope.zipCode = '59801';
-        $scope.phoneNo = '555 5552';
+        // $scope.line1 = '425 E Sussex AVE';
+        // $scope.city = 'Missoula';
+        // $scope.zipCode = '59801';
+        // $scope.phoneNo = '555 5552';
+
+        // $scope.country = 'CA';
+        // $scope.state = 'BC';
+        //
+        // $scope.line1 = '750 Hornby Street';
+        // $scope.city = 'Vancouver';
+        // $scope.zipCode = 'V6Z 2H7';
+        // $scope.phoneNo = '555 5552';
+        //
+        // $scope.isShippingDomestic = false;
     }
 
     $scope.shippingServiceLevel = 'GROUND';
@@ -179,6 +189,8 @@ SwiftApp.controller('CheckoutCtrl', [
         console.log('displayFlatRateShipping');
 
         var shippingCharge = FlatRateService.getShippingCharge($scope.isShippingDomestic ? 'domestic' : 'international');
+        var service = $scope.isShippingDomestic ? 'GROUND' : 'INTL_SURFACE';
+
         $scope.rates = [];
         $scope.busyShipping = false;
         $scope.isShippingReady = true;
@@ -187,6 +199,8 @@ SwiftApp.controller('CheckoutCtrl', [
         // choose shipping service on flat rate.
         $scope.domesticServiceLevels = { 'GROUND': 'Ground' };
         $scope.intlServiceLevels = { 'INTL_SURFACE': '1st Class International' };
+
+        $scope.shippingServiceLevel = service;
 
         // Provider is always USPS for flat rate.
         $scope.rates.push({
@@ -197,13 +211,13 @@ SwiftApp.controller('CheckoutCtrl', [
             // Always USPS
             provider: 'USPS',
             // Doesn't matter.
-            service: 'GROUND'
+            service: service
         });
 
         $scope.shipping = {
             charge: shippingCharge,
             provider: 'USPS',
-            service: 'GROUND',
+            service: service,
             serviceIsFlatRate: true
         };
     }

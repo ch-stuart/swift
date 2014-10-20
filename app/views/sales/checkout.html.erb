@@ -143,6 +143,7 @@
                     ng-options="k as v for (k,v) in domesticServiceLevels"
                     ng-model="shippingServiceLevel"
                     ng-change="onShippingServiceLevelChange()"
+                    id="js-domestic-shipping-service-levels"
                     class="input">
                 </select>
                 <select
@@ -150,6 +151,7 @@
                     ng-options="k as v for (k,v) in intlServiceLevels"
                     ng-model="shippingServiceLevel"
                     ng-change="onShippingServiceLevelChange()"
+                    id="js-intl-shipping-service-levels"
                     class="input">
                 </select>
                 <p class="pickup-is-{{ pickup }} best-price-{{ provider.best }}" ng-repeat="provider in rates">

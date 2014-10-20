@@ -15,7 +15,7 @@ var oneDollarShippingCart = {
         "length": 1,
         "weight": 0.12,
         "package_type": "CUSTOM",
-        "domestic_flat_rate_shipping_charge": 200,
+        "domestic_flat_rate_shipping_charge": 100,
         "international_flat_rate_shipping_charge": 200,
         "quantity": 1,
         "uniqueId": 1413254245877
@@ -33,7 +33,7 @@ var oneDollarShippingCart = {
         "length": 1,
         "weight": 0.12,
         "package_type": "CUSTOM",
-        "domestic_flat_rate_shipping_charge": 200,
+        "domestic_flat_rate_shipping_charge": 100,
         "international_flat_rate_shipping_charge": 200,
         "quantity": 1,
         "uniqueId": 1413254917654
@@ -258,7 +258,7 @@ var manyDollarMultiItemShippingCart = {
         "uniqueId": 1413340302632
     }]
 };
-var shippingFormValues = {
+var domesticShippingFormValues = {
     '#js-input-pickup':  false,
     '#js-input-country': 'US',
     '#js-input-line1': '425 E Sussex AVE',
@@ -268,6 +268,17 @@ var shippingFormValues = {
     '#js-input-phone': '406 219 1062',
     '#js-input-shipping-contact': 'Nobody But Me'
 };
+var intlShippingFormValues = {
+    '#js-input-pickup':  false,
+    '#js-input-country': 'CA',
+    '#js-input-line1': '750 Hornby Street',
+    '#js-input-city': 'Vancouver',
+    '#js-input-state': 'BC',
+    '#js-input-zip': 'V6Z 2H7',
+    '#js-input-phone': '604.662.4700',
+    '#js-input-shipping-contact': 'Nobody But Me'
+};
+
 var noop = function(){};
 
 casper.test.begin('Testing Shipping', function suite(test) {
@@ -289,8 +300,9 @@ casper.test.begin('Testing Shipping', function suite(test) {
         this.waitForSelector('#js-input-pickup', noop);
     });
 
+    // Domestic shipping
     casper.then(function() {
-        this.fillSelectors('#js-shipping-form', shippingFormValues, false);
+        this.fillSelectors('#js-shipping-form', domesticShippingFormValues, false);
         this.echo('=> Getting rates...');
         this.click('#js-rates-submit');
         this.waitUntilVisible('#js-best-price-true', noop);
@@ -302,7 +314,97 @@ casper.test.begin('Testing Shipping', function suite(test) {
             return jQuery('#js-best-price-true').val();
         });
         this.echo('=> Shipping ' + bestPrice);
-        this.test.assert(bestPrice === 'USPS:GROUND:200', 'Shipping is USPS:GROUND:200');
+        this.test.assert(bestPrice === 'USPS:GROUND:100', 'Shipping is USPS:GROUND:100');
+    });
+
+    casper.then(function() {
+       var shippingServiceOptions = this.evaluate(function() {
+           return jQuery('#js-domestic-shipping-service-levels').val();
+       });
+       this.test.assert(shippingServiceOptions === 'GROUND');
+    });
+
+    casper.then(function() {
+       var shippingServiceOptionsLength = this.evaluate(function() {
+           return document.getElementById('js-domestic-shipping-service-levels').options.length;
+       });
+       this.test.assert(shippingServiceOptionsLength === 1);
+    });
+
+    // Flat Rate INTL Shipping
+    casper.then(function() {
+        this.echo('=> Updating cart...');
+        this.evaluate(function(oneDollarShippingCart) {
+            localStorage.removeItem('cart');
+            localStorage.setItem('cart', JSON.stringify(oneDollarShippingCart));
+        }, oneDollarShippingCart);
+
+        this.reload(noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Getting rates...');
+        this.fillSelectors('#js-shipping-form', intlShippingFormValues, false);
+        this.click('#js-rates-submit');
+        this.waitUntilVisible('#js-best-price-true', noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Evaluating rates...');
+        var bestPrice = this.evaluate(function() {
+            return jQuery('#js-best-price-true').val();
+        });
+        this.echo('=> Shipping ' + bestPrice);
+        var priceParts = bestPrice.split(':');
+
+        this.test.assert(priceParts[0] === 'USPS', 'Best provider should be USPS');
+        this.test.assert(priceParts[1] === 'INTL_SURFACE', 'Best service should be INTL_SURFACE');
+        this.test.assert(parseFloat(priceParts[2]) === 200, 'Best price should be 2 dollars');
+    });
+
+    casper.then(function() {
+       var shippingServiceOptions = this.evaluate(function() {
+           return jQuery('#js-intl-shipping-service-levels').val();
+       });
+       this.test.assert(shippingServiceOptions === 'INTL_SURFACE');
+    });
+
+    casper.then(function() {
+       var shippingServiceOptionsLength = this.evaluate(function() {
+           return document.getElementById('js-intl-shipping-service-levels').options.length;
+       });
+       this.test.assert(shippingServiceOptionsLength === 1);
+    });
+
+    // Many dollar, multi-item domestic
+    casper.then(function() {
+        this.echo('=> Updating cart...');
+        this.evaluate(function(manyDollarMultiItemShippingCart) {
+            localStorage.removeItem('cart');
+            localStorage.setItem('cart', JSON.stringify(manyDollarMultiItemShippingCart));
+        }, manyDollarMultiItemShippingCart);
+
+        this.reload(noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Getting rates...');
+        this.fillSelectors('#js-shipping-form', domesticShippingFormValues, false);
+        this.click('#js-rates-submit');
+        this.waitUntilVisible('#js-best-price-true', noop);
+    });
+
+    casper.then(function() {
+        this.echo('=> Evaluating rates...');
+        var bestPrice = this.evaluate(function() {
+            return jQuery('#js-best-price-true').val();
+        });
+        this.echo('=> Shipping ' + bestPrice);
+        var priceParts = bestPrice.split(':');
+
+        this.test.assert(priceParts[0] === 'ups', 'Best provider should be UPS');
+        this.test.assert(priceParts[1] === 'GROUND', 'Best services should be GROUND');
+        this.test.assert(parseFloat(priceParts[2]) > 900 && parseFloat(priceParts[2]) < 1100, 'Best price should be between 9 and 11 dollars');
     });
 
     casper.then(function() {
@@ -317,7 +419,7 @@ casper.test.begin('Testing Shipping', function suite(test) {
 
     casper.then(function() {
         this.echo('=> Getting rates...');
-        this.fillSelectors('#js-shipping-form', shippingFormValues, false);
+        this.fillSelectors('#js-shipping-form', domesticShippingFormValues, false);
         this.click('#js-rates-submit');
         this.waitUntilVisible('#js-best-price-true', noop);
     });
@@ -347,7 +449,7 @@ casper.test.begin('Testing Shipping', function suite(test) {
 
     casper.then(function() {
         this.echo('=> Getting rates...');
-        this.fillSelectors('#js-shipping-form', shippingFormValues, false);
+        this.fillSelectors('#js-shipping-form', domesticShippingFormValues, false);
         this.click('#js-rates-submit');
         this.waitUntilVisible('#js-best-price-true', noop);
     });
@@ -377,7 +479,7 @@ casper.test.begin('Testing Shipping', function suite(test) {
 
     casper.then(function() {
         this.echo('=> Getting rates...');
-        this.fillSelectors('#js-shipping-form', shippingFormValues, false);
+        this.fillSelectors('#js-shipping-form', domesticShippingFormValues, false);
         this.click('#js-rates-submit');
         this.waitUntilVisible('#js-best-price-true', noop);
     });
