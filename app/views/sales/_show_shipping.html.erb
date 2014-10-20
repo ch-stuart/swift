@@ -30,6 +30,9 @@
         <%= link_to "Undo", sale_path(id: @sale.id, sale: { status: "Printed" }), :remote => true, :method => :put, "data-type" => :json, id: 'undoMarkAsShipped', class: 'btn' %>
       </p>
     <% else %>
+      <% if @sale.shipping_service_is_flat_rate? %>
+        Customer was charged <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %> via flat rate shipping.
+      <% end %>
       <h4>
         Ship Sale via Postmaster
       </h4>

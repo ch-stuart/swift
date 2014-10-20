@@ -11,6 +11,7 @@ SwiftApp.controller('CheckoutCtrl', [
     'SaleService',
     'ExceptionService',
     'PackagingService',
+    'FlatRateService',
     function(
         $scope,
         ConfigService,
@@ -20,7 +21,8 @@ SwiftApp.controller('CheckoutCtrl', [
         WaStateTaxService,
         SaleService,
         ExceptionService,
-        PackagingService) {
+        PackagingService,
+        FlatRateService) {
 
     var package_count = 1;
     var rates_response_count = 0;
@@ -49,7 +51,6 @@ SwiftApp.controller('CheckoutCtrl', [
 
     $scope.rateParams = {};
 
-    // Defaults!
     $scope.country = 'US';
     $scope.state = 'MT';
 
@@ -97,12 +98,13 @@ SwiftApp.controller('CheckoutCtrl', [
         };
 
         // Don't include these guys if shipping via LETTER
-        if ('allFlatRate' in packages) {
-            delete $scope.rateParams.width;
-            delete $scope.rateParams.height;
-            delete $scope.rateParams.length;
-            $scope.rateParams.packaging = "LETTER";
-        }
+        // Actually, doesn't matter.
+        // if ('allFlatRate' in packages) {
+        //     delete $scope.rateParams.width;
+        //     delete $scope.rateParams.height;
+        //     delete $scope.rateParams.length;
+        //     $scope.rateParams.packaging = "LETTER";
+        // }
 
         console.log('postmasterValidateSuccessCallback', data);
 
@@ -176,7 +178,7 @@ SwiftApp.controller('CheckoutCtrl', [
     function displayFlatRateShipping() {
         console.log('displayFlatRateShipping');
 
-        var shippingCharge = $scope.isShippingDomestic ? 100 : 500;
+        var shippingCharge = FlatRateService.getShippingCharge($scope.isShippingDomestic ? 'domestic' : 'international');
         $scope.rates = [];
         $scope.busyShipping = false;
         $scope.isShippingReady = true;
@@ -195,13 +197,14 @@ SwiftApp.controller('CheckoutCtrl', [
             // Always USPS
             provider: 'USPS',
             // Doesn't matter.
-            service: 'ENVELOPE'
+            service: 'GROUND'
         });
 
         $scope.shipping = {
             charge: shippingCharge,
             provider: 'USPS',
-            service: 'GROUND'
+            service: 'GROUND',
+            serviceIsFlatRate: true
         };
     }
 
@@ -373,6 +376,7 @@ SwiftApp.controller('CheckoutCtrl', [
                 shipping_provider: $scope.shipping.provider,
                 shipping_charge: $scope.shipping.charge,
                 shipping_service: $scope.shipping.service,
+                shipping_service_is_flat_rate: $scope.shipping.serviceIsFlatRate || false,
                 stripe_id: response.data ? response.data.id : null,
                 send_me_marketing_emails: $scope.sendMeMarketingEmails
             })

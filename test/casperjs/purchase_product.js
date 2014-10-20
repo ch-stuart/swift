@@ -272,18 +272,19 @@ var noop = function(){};
 
 casper.test.begin('Testing Shipping', function suite(test) {
 
-    // casper.on('remote.message', function(msg) {
-    //     casper.echo(msg);
-    // });
+    casper.on('remote.message', function(msg) {
+        casper.echo(msg);
+    });
 
-    casper.start('http://localhost:3000/products/79', function() {
+    casper.start('http://localhost:3000/cart/checkout', function() {
         this.evaluate(function(oneDollarShippingCart) {
             localStorage.removeItem('cart');
             localStorage.setItem('cart', JSON.stringify(oneDollarShippingCart));
         }, oneDollarShippingCart);
+        this.reload(noop);
     });
 
-    casper.thenOpen('http://localhost:3000/cart/checkout', function() {
+    casper.then(function() {
         this.echo(this.getCurrentUrl());
         this.waitForSelector('#js-input-pickup', noop);
     });

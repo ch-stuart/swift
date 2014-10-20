@@ -10,11 +10,10 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
     function allFlatRate() {
         console.log('PackagingService#allFlatRate');
         var productsThatArentFlatRate = _.filter(CartService.products, function(product) {
-            var doms = product.domestic_flat_rate_shipping_charge,
-                intl = product.international_flat_rate_shipping_charge;
+            var domesticFlatRateCharge = product.domestic_flat_rate_shipping_charge,
+                intlFlatRateCharge = product.international_flat_rate_shipping_charge;
 
-                console.log(product, doms, intl);
-            return !angular.isNumber(doms) || !angular.isNumber(intl);
+            return !angular.isNumber(domesticFlatRateCharge) || !angular.isNumber(intlFlatRateCharge);
         });
         return productsThatArentFlatRate.length === 0;
     }
@@ -55,9 +54,9 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
 
     function addPackagingWeight(weight) {
         if (allFlatRate()) {
-            console.log('PackagingService#addPackagingWeight: Add 0lb for packaging weight (LETTER)', weight);
+            console.log('PackagingService#addPackagingWeight: Add 0lb for packaging weight (Flat Rate)', weight);
         } else {
-            console.log('PackagingService#addPackagingWeight: Add 1lb for packaging weight (CUSTOM)', weight, weight + 1);
+            console.log('PackagingService#addPackagingWeight: Add 1lb for packaging weight (CUSTOM)', weight);
             weight += 1;
         }
         return roundFloat(weight);
@@ -67,14 +66,16 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         return Math.ceil(x * 100) / 100;
     }
 
+    // Get total volume and weight for all products in cart
     function getVolumeAndWeight() {
-        var f = parseFloat;
-        var volume = 0;
-        var weight = 0;
+        console.log('PackagingService#getPackages');
+        var pF = parseFloat,
+            volume = 0,
+            weight = 0;
 
         _.each(CartService.products, function(product) {
-            volume += (f(getProp(product, 'width')) * f(getProp(product, 'height')) * f(getProp(product, 'length')));
-            weight += f(getProp(product, 'weight'));
+            volume += (pF(getProp(product, 'width')) * pF(getProp(product, 'height')) * pF(getProp(product, 'length')));
+            weight += pF(getProp(product, 'weight'));
         });
 
         return {
@@ -85,6 +86,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
     }
 
     function getPackages() {
+        console.log('PackagingService#getPackages');
         // Empty the array
         packages.splice(0, packages.length);
 
@@ -95,9 +97,9 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
                 width: 1,
                 height: 1,
                 length: 1,
-                packaging: 'LETTER'
+                packaging: 'FLAT_RATE'
             });
-            console.log('PackagingService#getPackages: All items fit in letter.');
+            console.log('PackagingService#getPackages: All items are flat rate.');
             return packages;
         }
 
@@ -140,6 +142,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
 
     return {
         fit: function() {
+            console.log('PackagingService#fit');
             return getPackages();
         },
         // FIXME so this is only used to report the weight
@@ -147,6 +150,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         // does not take in to account if PackagingService
         // thought it would require multiple boxes
         getShippingWeight: function() {
+            console.log('PackagingService#getShippingWeight');
             return addPackagingWeight(getVolumeAndWeight().weight);
         }
     };

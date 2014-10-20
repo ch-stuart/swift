@@ -38,6 +38,11 @@
         <td>
           <%= @sale.shipping_provider.upcase %><br>
           <%= @sale.shipping_service %><br>
+          <% if @sale.shipping_service_is_flat_rate? %>
+            (Flat Rate)<br>
+          <% else %>
+            (Postmaster)
+          <% end %>
           <%= @sale.weight %>lbs.<br>
           <% if @sale.shipping_contact.present? %>
               Ship to <%= @sale.shipping_contact %>.

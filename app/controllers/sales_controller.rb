@@ -159,6 +159,7 @@ class SalesController < ApplicationController
       shipping_provider: params[:shipping_provider],
       shipping_charge:   params[:shipping_charge],
       shipping_service:  params[:shipping_service],
+      shipping_service_is_flat_rate:  params[:shipping_service_is_flat_rate],
       stripe_id:         params[:stripe_id],
       status:            "Not Shipped",
       gift_certificate_guid: params[:gift_certificate_guid],
