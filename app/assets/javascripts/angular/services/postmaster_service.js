@@ -20,11 +20,11 @@ SwiftApp.service('PostmasterService', ['$http', 'ConfigService', 'PackagingServi
             return $http.post('/postmaster/rates', angular.extend(defaults, params));
         },
         // Worthless endpoint. Bad postmaster.
-        fit: function(params) {
-            console.log('PostmasterService.fit', params);
-
-            return $http.post('/postmaster/fit', params);
-        },
+        // fit: function(params) {
+        //     console.log('PostmasterService.fit', params);
+        //
+        //     return $http.post('/postmaster/fit', params);
+        // },
         getDomesticServiceLevels: function() {
             return {
                 'GROUND': 'Ground',
