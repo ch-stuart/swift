@@ -374,7 +374,7 @@ SwiftApp.controller('CheckoutCtrl', [
                 shipping_charge: $scope.shipping.charge,
                 shipping_service: $scope.shipping.service,
                 stripe_id: response.data ? response.data.id : null,
-                send_me_marketing_emails: $scope.send_me_marketing_emails
+                send_me_marketing_emails: $scope.sendMeMarketingEmails
             })
             .then(saleCreateSuccessCallback, saleCreateErrorCallback);
     }
