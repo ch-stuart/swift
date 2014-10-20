@@ -3,14 +3,14 @@
 SwiftApp.service('PostmasterService', ['$http', 'ConfigService', 'PackagingService', function($http, ConfigService, PackagingService) {
 
     return {
-        // post 'postmaster/validate'
+        // POST 'postmaster/validate'
         validate: function(params) {
-            console.log('PostmasterService.validate', params);
+            console.log('PostmasterService#validate', params);
             return $http.post('/postmaster/validate', params);
         },
-        // post 'postmaster/rates'
+        // POST 'postmaster/rates'
         rates: function(params) {
-            console.log('PostmasterService.rates', params);
+            console.log('PostmasterService#rates', params);
 
             var defaults = {
                 from_zip: ConfigService.get('swiftAddress').zip,
@@ -26,6 +26,7 @@ SwiftApp.service('PostmasterService', ['$http', 'ConfigService', 'PackagingServi
         //     return $http.post('/postmaster/fit', params);
         // },
         getDomesticServiceLevels: function() {
+            console.log('PostmasterService#getDomesticServiceLevels');
             return {
                 'GROUND': 'Ground',
                 '3DAY': '3 Day/Priority',
@@ -34,6 +35,7 @@ SwiftApp.service('PostmasterService', ['$http', 'ConfigService', 'PackagingServi
             };
         },
         getIntlServiceLevels: function() {
+            console.log('PostmasterService#getIntlServiceLevels');
             var levels = {
                 'INTL_SURFACE': '1st Class International',
                 'INTL_PRIORITY': 'Priority International',
