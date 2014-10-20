@@ -27,7 +27,7 @@ SwiftApp.controller('CheckoutCtrl', [
 
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Verify that you have entered your country and zip code correctly. If this issue continues to occur contact info@builtbyswift.com.";
 
-    var SHIPPING_PROVIDERS = ['fedex', 'usps', 'ups'];
+    var SHIPPING_PROVIDERS = ['usps', 'ups'];
 
     $scope.cart = CartService.loadFromLocalStorage();
     $scope.WS = ConfigService.get('WS');
