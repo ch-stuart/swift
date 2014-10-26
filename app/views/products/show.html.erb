@@ -1,47 +1,47 @@
 <% unless @product.public? %>
-    <p id="private_notice">
-        private!
-    </p>
+  <p id="private_notice">
+    private!
+  </p>
 <% end %>
 <div class="eleven columns col-main">
-    <h2>
-        <%= @product.title %>
-    </h2>
-    <%= render "shared/slideshow" %>
-    <%= raw md @product.description %>
-    <h3>
-        Specifications
-    </h3>
-    <p>
-        <%= raw md @product.specs %>
-    </p>
+  <h2>
+    <%= @product.title %>
+  </h2>
+  <%= render "shared/slideshow" %>
+  <%= raw md @product.description %>
+  <h3>
+    Specifications
+  </h3>
+  <p>
+    <%= raw md @product.specs %>
+  </p>
 </div>
 <div class="five columns col-sidebar">
-    <p>
-        <% if @product.is_product? %>
-            <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
-        <% else %>
-            <%= link_to "Buy it", order_product_path(@product), :id => "submit_order" %>
-        <% end %>
-    </p>
-    <p>
-        <%= @product.humane_price_for(current_user) %>
-    </p>
-    <% if @related_products.present? %>
-        <h3>
-            Related Products
-        </h3>
-        <div class="related-products">
-            <% @related_products.each do |product| %>
-                <a href="/products/<%= product.id %>" class="related-products__product">
-                    <img src='<%= Product.get_photo_by_id(product.flickr_photo, "Square") %>' class="related-products__img">
-                    <span class="related-products__title">
-                        <%= product.title %>
-                    </span>
-                </a>
-            <% end %>
-        </div>
+  <p>
+    <% if @product.is_product? %>
+      <%= link_to "Design your bags", order_product_path(@product), :id => "submit_order" %>
+    <% else %>
+      <%= link_to "Buy it", order_product_path(@product), :id => "submit_order" %>
     <% end %>
-    <%= render 'testimonials' %>
+  </p>
+  <p>
+    <%= @product.humane_price_for(current_user) %>
+  </p>
+  <% if @related_products.present? %>
+    <h3>
+      Related Products
+    </h3>
+    <div class="related-products">
+      <% @related_products.each do |product| %>
+        <a href="/products/<%= product.id %>" class="related-products__product">
+          <img src='<%= Product.get_photo_by_id(product.flickr_photo, "Square") %>' class="related-products__img">
+          <span class="related-products__title">
+            <%= product.title %>
+          </span>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+  <%= render 'testimonials' %>
 </div>
 <br class="clear">
