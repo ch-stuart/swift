@@ -183,7 +183,10 @@
                         <label class="label">
                             Name
                         </label>
-                        <input type="text" ng-model="contact" required>
+                        <input
+                            type="text"
+                            ng-model="contact"
+                            required>
                     </div>
                     <div class="label-input-pair">
                         <label class="label">
@@ -195,7 +198,11 @@
                         <label class="label">
                             Email Address
                         </label>
-                        <input type="email" placeholder="you@example.com" ng-model="email" required>
+                        <input
+                            type="email"
+                            placeholder="you@example.com"
+                            ng-model="email"
+                            required>
                         <p class="label-input-pair__hint">
                             We will email you at this address when you're product is ready to pickup or ship.
                         </p>
@@ -251,6 +258,9 @@
                             Credit Card #
                         </label>
                         <input
+                            <% if Rails.env == "development" %>
+                              value="4242424242424242"
+                            <% end %>
                             type="text"
                             size="20"
                             data-stripe="number"
@@ -263,6 +273,9 @@
                             CVC
                         </label>
                         <input
+                            <% if Rails.env == "development" %>
+                              value="123"
+                            <% end %>
                             style="width: 3em"
                             type="text"
                             size="3"
@@ -277,6 +290,9 @@
                             Exp Month/Year
                         </label>
                         <input
+                            <% if Rails.env == "development" %>
+                              value="12"
+                            <% end %>
                             style="width: 3em;"
                             class="input--inline"
                             type="text"
@@ -287,6 +303,9 @@
                             ng-pattern="\d*"
                             required>
                         <input
+                            <% if Rails.env == "development" %>
+                              value="2015"
+                            <% end %>
                             style="width: 4em;"
                             class="input--inline"
                             type="text"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140907200412) do
+ActiveRecord::Schema.define(:version => 20141026033850) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -119,10 +119,10 @@ ActiveRecord::Schema.define(:version => 20140907200412) do
     t.string   "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "not_for_sale",           :default => false,                                                              :null => false
-    t.text     "not_for_sale_message",   :default => "This product is currently not for sale. Please check back later."
+    t.boolean  "not_for_sale",                            :default => false,                                                              :null => false
+    t.text     "not_for_sale_message",                    :default => "This product is currently not for sale. Please check back later."
     t.integer  "category_id"
-    t.boolean  "featured_on_homepage",   :default => false,                                                              :null => false
+    t.boolean  "featured_on_homepage",                    :default => false,                                                              :null => false
     t.text     "flickr_set"
     t.text     "short_description"
     t.string   "wholesale_humane_price"
@@ -131,16 +131,19 @@ ActiveRecord::Schema.define(:version => 20140907200412) do
     t.integer  "height"
     t.integer  "length"
     t.float    "weight"
-    t.string   "package_type",           :default => "CUSTOM"
+    t.string   "package_type",                            :default => "CUSTOM"
     t.text     "related_products"
+    t.integer  "domestic_flat_rate_shipping_charge"
+    t.integer  "international_flat_rate_shipping_charge"
+    t.integer  "inventory_count"
   end
 
   create_table "sales", :force => true do |t|
     t.text     "email"
     t.string   "guid"
     t.text     "description"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.string   "amount"
     t.string   "weight"
     t.string   "line1"
@@ -164,9 +167,10 @@ ActiveRecord::Schema.define(:version => 20140907200412) do
     t.integer  "gift_cert_remain"
     t.integer  "gift_cert_applied"
     t.integer  "total_with_gift_cert"
-    t.boolean  "pickup",                :default => false, :null => false
-    t.boolean  "commercial",            :default => false, :null => false
+    t.boolean  "pickup",                        :default => false, :null => false
+    t.boolean  "commercial",                    :default => false, :null => false
     t.text     "shipping_contact"
+    t.boolean  "shipping_service_is_flat_rate"
   end
 
   create_table "shipments", :force => true do |t|

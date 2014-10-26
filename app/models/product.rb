@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
   :not_for_sale_message, :featured_on_homepage, :flickr_set, :short_description,
   :wholesale_humane_price, :wholesale_price, :width, :height, :length, :weight,
   :package_type, :sizes_attributes, :parts_attributes, :category_id, :testimonials_attributes,
-  :related_products
+  :related_products, :inventory_count
 
   has_many :parts, :dependent => :destroy
   has_many :testimonials, :dependent => :destroy
@@ -72,6 +72,22 @@ class Product < ActiveRecord::Base
 
   def humane_price_for current_user
     current_user.try(:wholesale?) ? self.wholesale_humane_price : self.humane_price
+  end
+
+  def update_inventory quantity
+    if self.inventory_count.present? && quantity.present?
+      self.inventory_count = self.inventory_count - quantity.to_i
+
+      if self.inventory_count < 1
+        self.status = "Private"
+        ProductsMailer.inventory_count_update(self).deliver
+      end
+
+      self.save
+    else
+      logger.warn "Product#update_inventory: Missing quantity" if quantity.nil?
+      logger.info "Product#update_inventory: Product has no inventory_count" if self.inventory_count.blank?
+    end
   end
 
   private
