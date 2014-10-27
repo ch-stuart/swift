@@ -1,0 +1,5 @@
+<% if product.inventory_count.present? && product.inventory_count < 5 %>
+  <p>
+    <%= product.inventory_count %> left in stock.
+  </p>
+<% end %>

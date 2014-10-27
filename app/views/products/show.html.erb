@@ -27,6 +27,7 @@
   <p>
     <%= @product.humane_price_for(current_user) %>
   </p>
+  <%= render "inventory_count", product: @product %>
   <% if @related_products.present? %>
     <h3>
       Related Products
