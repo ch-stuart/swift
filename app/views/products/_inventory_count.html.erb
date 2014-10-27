@@ -1,4 +1,4 @@
-<% if product.inventory_count.present? && product.inventory_count < 5 %>
+<% if product.inventory_count.present? && (product.inventory_count < 5 || current_user.try(:wholesale?)) %>
   <p>
     <%= product.inventory_count %> left in stock.
   </p>
