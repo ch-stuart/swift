@@ -284,12 +284,15 @@ class SalesController < ApplicationController
 
   def update_inventory sale
     description = JSON.parse sale[:description]
-
     sold_products = description["products"]
 
     sold_products.each do |sold_product|
+      if sold_product["selectedSize"].present?
+        size = Size.find sold_product["selectedSize"]["id"]
+      end
+
       product = Product.find sold_product["id"]
-      product.update_inventory(sold_product["quantity"]) unless product.nil?
+      product.update_inventory(sold_product["quantity"], size) unless product.nil?
     end
   end
 

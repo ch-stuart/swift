@@ -74,9 +74,32 @@ class Product < ActiveRecord::Base
     current_user.try(:wholesale?) ? self.wholesale_humane_price : self.humane_price
   end
 
-  def update_inventory quantity
-    if self.inventory_count.present? && quantity.present?
-      self.inventory_count = self.inventory_count - quantity.to_i
+  def update_inventory qty, size
+    # Need a quantity
+    if qty.nil?
+      return logger.warn "Product#update_inventory: Missing qty"
+    end
+
+    # If we have a size, the size must have an inventory_count
+    if size.present? && size.inventory_count.blank?
+      return logger.info "Product#update_inventory: Size missing inventory_count"
+    end
+
+    # If we don't have a size, the product must have an inventory_count
+    if size.blank? && self.inventory_count.blank?
+      return logger.info "Product#update_inventory: Product missing inventory_count"
+    end
+
+    if size.present?
+      size.inventory_count = size.inventory_count - qty.to_i
+
+      if size.inventory_count < 1
+        ProductsMailer.inventory_count_update(self, size).deliver
+      end
+
+      self.save
+    else
+      self.inventory_count = self.inventory_count - qty.to_i
 
       if self.inventory_count < 1
         self.status = "Private"
@@ -84,9 +107,6 @@ class Product < ActiveRecord::Base
       end
 
       self.save
-    else
-      logger.warn "Product#update_inventory: Missing quantity" if quantity.nil?
-      logger.info "Product#update_inventory: Product has no inventory_count" if self.inventory_count.blank?
     end
   end
 
