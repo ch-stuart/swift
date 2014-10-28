@@ -289,7 +289,7 @@ date:        time (minutes):       comment:
 2014-09-22 20 Allow sale to be manually moved to "shipped" category
 2014-09-22 45 Prime flickr cache via heroku scheduler to avoid long response times
 2014-09-24 10 Admin
-
+2014-10-27 20 Allow user to click big image in slideshow to navigate to next
 
 
 http://www.timer-tab.com
