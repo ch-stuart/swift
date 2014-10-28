@@ -3,10 +3,10 @@ jQuery.fn.slideshow = function() {
 
     return this.each(function() {
 
-        var $wrapper = $(this);
-        var $items = $wrapper.find('.slideshow-item');
-        var size = $items.size();
-        var current = 1;
+        var $wrapper = $(this),
+            $items = $wrapper.find('.slideshow-item'),
+            size = $items.size(),
+            current = 1;
 
         if (size === 1) {
             // Nowhere to navigate to, so hide it.
@@ -17,15 +17,26 @@ jQuery.fn.slideshow = function() {
             $items.hide();
 
             if (dir === 'next') {
-                if (current + 1 > size) current = 1;
-                else current++;
+                if (current + 1 > size) {
+                    current = 1;
+                }
+                else {
+                    current++;
+                }
             } else {
-                if (current - 1 === 0) current = size;
-                else current--;
+                if (current - 1 === 0) {
+                    current = size;
+                }
+                else {
+                    current--;
+                }
             }
             // eq is 0-based
-            $items.eq(current - 1).show();
-
+            $items
+                .removeClass('slideshow-item--active')
+                .eq(current - 1)
+                .show()
+                .addClass('slideshow-item--active');
         }
 
         $items.hide().first().show();
@@ -44,7 +55,19 @@ jQuery.fn.slideshow = function() {
                     document.location = $(this).data('large');
                 // Otherwise, show the litebox
                 } else {
-                    $('.lightbox-img').attr('src', $(this).data('large'));
+                    $('.lightbox-img')
+                        .attr('src', $(this).data('large'))
+                        .on('click', function() {
+                            var $activePhoto;
+
+                            go('next');
+
+                            $activePhoto = $('.slideshow-item--active').find('.slideshow-photo');
+                            $('.lightbox-img')
+                                .css('cursor', 'pointer')
+                                .attr('src', $activePhoto.data('large'));
+                        });
+
                     $('.lightbox').lightbox_me({
                         centered: true,
                         closeSelector: '.lightbox-close',
@@ -55,7 +78,8 @@ jQuery.fn.slideshow = function() {
 
         if (!UA.isMobile()) {
             $wrapper
-                .find('.slideshow-photo').each(function() {
+                .find('.slideshow-photo')
+                .each(function() {
                     var img = new Image();
                     img.src = $(this).data('large');
                 });
