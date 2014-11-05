@@ -206,6 +206,10 @@ class SalesController < ApplicationController
   def update
     @sale = Sale.find(params[:id])
 
+    if params[:sale][:status] == "Shipped" && params[:sale][:email] == "true"
+      SalesMailer.shipped_flat_rate(@sale).deliver
+    end
+
     respond_to do |format|
       if @sale.update_attributes(params[:sale])
         format.html { redirect_to @sale, notice: 'Sale was successfully updated.' }

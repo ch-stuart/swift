@@ -25,6 +25,12 @@ class SalesMailer < ActionMailer::Base
     mail(to: sale.email, subject: "Your order from Swift Industries has shipped")
   end
 
+  # Notify customer when order has been shipped
+  def shipped_flat_rate sale
+    @sale = sale
+    mail(to: sale.email, subject: "Your order from Swift Industries has shipped")
+  end
+
   # Notify customer when order is ready to be picked up
   def ready_for_pickup sale
     @sale = sale

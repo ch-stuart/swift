@@ -1,3 +1,4 @@
+<%# Pickup sale and it's been printed %>
 <% if @sale.pickup? && @sale.status == "Printed" %>
   <div class="grid">
     <div class="unit">
@@ -16,12 +17,16 @@
       <%= link_to "Move to Shipped", sale_path(id: @sale.id, sale: { status: "Shipped" }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsShipped', class: 'btn' %>
     </div>
   </div>
+<%# Pickup sale and it's been shipped %>
 <% elsif @sale.pickup? && @sale.status == "Shipped" %>
   <p>
       Order is ready for pickup.
   </p>
+<%# Not a pickup %>
 <% else %>
+  <%# Not shipped yet %>
   <% if @shipments.blank? %>
+    <%# Sale is shipped, but has no shipments. Manual move. %>
     <% if @sale.status == "Shipped" %>
       <p>
         This sale was manually moved to shipped. You can undo and change the status back to "Printed".
@@ -29,6 +34,7 @@
       <p>
         <%= link_to "Undo", sale_path(id: @sale.id, sale: { status: "Printed" }), :remote => true, :method => :put, "data-type" => :json, id: 'undoMarkAsShipped', class: 'btn' %>
       </p>
+    <%# Sale not shipped. %>
     <% else %>
       <% if @sale.shipping_service_is_flat_rate? %>
         Customer was charged <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %> via flat rate shipping.
@@ -43,12 +49,13 @@
         Or, Move Sale to "Shipped" Manually
       </h4>
       <p>
-        <strong>Note</strong>: The customer will not receive a confirmation email.
+        <%= link_to "Mark as 'Shipped' with email to customer", sale_path(id: @sale.id, sale: { status: "Shipped", email: true }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsShipped', class: 'btn' %>
       </p>
       <p>
-        <%= link_to "Mark as 'Shipped'", sale_path(id: @sale.id, sale: { status: "Shipped" }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsShipped', class: 'btn' %>
+        <%= link_to "Mark as 'Shipped' without email", sale_path(id: @sale.id, sale: { status: "Shipped", email: false }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsShipped', class: 'btn' %>
       </p>
     <% end %>
+  <%# Sale is shipped. Can add more shipments to sale. %>
   <% else %>
     <p>
       <span class="hey--yay">
