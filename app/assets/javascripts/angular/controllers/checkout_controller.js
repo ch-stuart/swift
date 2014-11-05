@@ -56,10 +56,10 @@ SwiftApp.controller('CheckoutCtrl', [
 
     // Making testing easier...
     if (location.hostname.match(/localhost/)) {
-        // $scope.line1 = '425 E Sussex AVE';
-        // $scope.city = 'Missoula';
-        // $scope.zipCode = '59801';
-        // $scope.phoneNo = '555 5552';
+        $scope.line1 = '425 E Sussex AVE';
+        $scope.city = 'Missoula';
+        $scope.zipCode = '59801';
+        $scope.phoneNo = '555 5552';
 
         // $scope.country = 'CA';
         // $scope.state = 'BC';
