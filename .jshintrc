@@ -3,10 +3,11 @@
   "eqnull": true,
   "eqeqeq": true,
   "undef": true,
-  "globals": {
+  "predef": {
     "jQuery": true,
     "angular": true,
     "console": true,
+    "casper": true,
     "module": true,
     "window": true,
     "$": true,

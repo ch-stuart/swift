@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
   :not_for_sale_message, :featured_on_homepage, :flickr_set, :short_description,
   :wholesale_humane_price, :wholesale_price, :width, :height, :length, :weight,
   :package_type, :sizes_attributes, :parts_attributes, :category_id, :testimonials_attributes,
-  :related_products
+  :related_products, :domestic_flat_rate_shipping_charge, :international_flat_rate_shipping_charge
 
   has_many :parts, :dependent => :destroy
   has_many :testimonials, :dependent => :destroy
@@ -25,7 +25,8 @@ class Product < ActiveRecord::Base
   attr_reader :KINDS
   validates :kind, :inclusion => { :in => KINDS, :message => "%{value} is not a valid type" }
 
-  PACKAGE_TYPE = ["CUSTOM", "LETTER", "PAK"]
+  # PACKAGE_TYPE = ["CUSTOM", "LETTER", "PAK"]
+  PACKAGE_TYPE = ["CUSTOM"]
   attr_reader :PACKAGE_TYPE
   validates :package_type, :inclusion => { :in => PACKAGE_TYPE, :message => "%{value} is not a valid type" }
 

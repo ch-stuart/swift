@@ -1,18 +1,21 @@
-/*global SwiftApp _ console */
+/*global SwiftApp _ console angular */
 
 SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, CartService) {
 
     var packages = [];
     var LARGEST_PACKAGE_VOLUME = 4488;
 
-    // Find out if all products in cart fit in a LETTER
+    // Find out if all products in cart are Flat Rate
     // @returns Boolean
-    function allFitLetter() {
-        console.log('PackagingService#allFitLetter');
-        var productsThatDontFitInLetter = _.filter(CartService.products, function(product) {
-            return product.package_type !== 'LETTER';
+    function allFlatRate() {
+        console.log('PackagingService#allFlatRate');
+        var productsThatArentFlatRate = _.filter(CartService.products, function(product) {
+            var domesticFlatRateCharge = product.domestic_flat_rate_shipping_charge,
+                intlFlatRateCharge = product.international_flat_rate_shipping_charge;
+
+            return !angular.isNumber(domesticFlatRateCharge) || !angular.isNumber(intlFlatRateCharge);
         });
-        return productsThatDontFitInLetter.length === 0;
+        return productsThatArentFlatRate.length === 0;
     }
 
     // NOTE USPS does not support PAK :(
@@ -50,11 +53,10 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
     }
 
     function addPackagingWeight(weight) {
-        if (allFitLetter()) {
-            console.log('PackagingService#addPackagingWeight: Add 0lb for packaging weight (LETTER)', weight);
-            // weight += 0.2;
+        if (allFlatRate()) {
+            console.log('PackagingService#addPackagingWeight: Add 0lb for packaging weight (Flat Rate)', weight);
         } else {
-            console.log('PackagingService#addPackagingWeight: Add 1lb for packaging weight (CUSTOM)', weight, weight + 1);
+            console.log('PackagingService#addPackagingWeight: Add 1lb for packaging weight (CUSTOM)', weight);
             weight += 1;
         }
         return roundFloat(weight);
@@ -64,14 +66,16 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         return Math.ceil(x * 100) / 100;
     }
 
+    // Get total volume and weight for all products in cart
     function getVolumeAndWeight() {
-        var f = parseFloat;
-        var volume = 0;
-        var weight = 0;
+        console.log('PackagingService#getPackages');
+        var pF = parseFloat,
+            volume = 0,
+            weight = 0;
 
         _.each(CartService.products, function(product) {
-            volume += (f(getProp(product, 'width')) * f(getProp(product, 'height')) * f(getProp(product, 'length')));
-            weight += f(getProp(product, 'weight'));
+            volume += (pF(getProp(product, 'width')) * pF(getProp(product, 'height')) * pF(getProp(product, 'length')));
+            weight += pF(getProp(product, 'weight'));
         });
 
         return {
@@ -82,8 +86,22 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
     }
 
     function getPackages() {
+        console.log('PackagingService#getPackages');
         // Empty the array
         packages.splice(0, packages.length);
+
+        if (allFlatRate()) {
+            packages.allFlatRate = true;
+            packages.push({
+                weight: 0.01,
+                width: 1,
+                height: 1,
+                length: 1,
+                packaging: 'FLAT_RATE'
+            });
+            console.log('PackagingService#getPackages: All items are flat rate.');
+            return packages;
+        }
 
         // Initially we assume we have one package
         var package_count = 1;
@@ -94,16 +112,6 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         var weight = volumeAndWeight.weight;
         var side   = volumeAndWeight.side;
         var volume = volumeAndWeight.volume;
-
-        // Waiting on Postmaster to respond to support request
-        // if (allFitLetter()) {
-        //     packages.push({
-        //         weight: weight,
-        //         packaging: 'LETTER'
-        //     });
-        //     console.log('PackagingService#getPackages: All items fit in letter.');
-        //     return packages;
-        // }
 
         // If our volume exceeds that of our largest box...
         if (volume > LARGEST_PACKAGE_VOLUME) {
@@ -134,6 +142,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
 
     return {
         fit: function() {
+            console.log('PackagingService#fit');
             return getPackages();
         },
         // FIXME so this is only used to report the weight
@@ -141,6 +150,7 @@ SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, Ca
         // does not take in to account if PackagingService
         // thought it would require multiple boxes
         getShippingWeight: function() {
+            console.log('PackagingService#getShippingWeight');
             return addPackagingWeight(getVolumeAndWeight().weight);
         }
     };

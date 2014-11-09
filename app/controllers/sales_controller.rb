@@ -159,6 +159,7 @@ class SalesController < ApplicationController
       shipping_provider: params[:shipping_provider],
       shipping_charge:   params[:shipping_charge],
       shipping_service:  params[:shipping_service],
+      shipping_service_is_flat_rate:  params[:shipping_service_is_flat_rate],
       stripe_id:         params[:stripe_id],
       status:            "Not Shipped",
       gift_certificate_guid: params[:gift_certificate_guid],
@@ -204,6 +205,10 @@ class SalesController < ApplicationController
   # PUT /sales/1.json
   def update
     @sale = Sale.find(params[:id])
+
+    if params[:sale][:status] == "Shipped" && params[:sale][:email] == "true"
+      SalesMailer.shipped_flat_rate(@sale).deliver
+    end
 
     respond_to do |format|
       if @sale.update_attributes(params[:sale])

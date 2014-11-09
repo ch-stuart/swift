@@ -1,5 +1,5 @@
 /*jshint browser: true, sub:true */
-/*global SwiftApp console alert _ $$ $ Stripe */
+/*global SwiftApp console alert _ $$ $ Stripe SwiftUtils */
 
 SwiftApp.controller('CheckoutCtrl', [
     '$scope',
@@ -11,6 +11,7 @@ SwiftApp.controller('CheckoutCtrl', [
     'SaleService',
     'ExceptionService',
     'PackagingService',
+    'FlatRateService',
     function(
         $scope,
         ConfigService,
@@ -20,14 +21,15 @@ SwiftApp.controller('CheckoutCtrl', [
         WaStateTaxService,
         SaleService,
         ExceptionService,
-        PackagingService) {
+        PackagingService,
+        FlatRateService) {
 
     var package_count = 1;
     var rates_response_count = 0;
 
     var RATE_ERROR_MSG = "We were unable to retrieve shipping rates. Verify that you have entered your country and zip code correctly. If this issue continues to occur contact info@builtbyswift.com.";
 
-    var SHIPPING_PROVIDERS = ['fedex', 'usps', 'ups'];
+    var SHIPPING_PROVIDERS = ['usps', 'ups'];
 
     $scope.cart = CartService.loadFromLocalStorage();
     $scope.WS = ConfigService.get('WS');
@@ -49,13 +51,26 @@ SwiftApp.controller('CheckoutCtrl', [
 
     $scope.rateParams = {};
 
-    // Defaults!
     $scope.country = 'US';
     $scope.state = 'MT';
-    // $scope.line1 = '425 E Sussex AVE';
-    // $scope.city = 'Missoula';
-    // $scope.zipCode = '59801';
-    // $scope.phoneNo = '555 5552';
+
+    // Making testing easier...
+    if (location.hostname.match(/localhost/)) {
+        $scope.line1 = '425 E Sussex AVE';
+        $scope.city = 'Missoula';
+        $scope.zipCode = '59801';
+        $scope.phoneNo = '555 5552';
+
+        // $scope.country = 'CA';
+        // $scope.state = 'BC';
+        //
+        // $scope.line1 = '750 Hornby Street';
+        // $scope.city = 'Vancouver';
+        // $scope.zipCode = 'V6Z 2H7';
+        // $scope.phoneNo = '555 5552';
+        //
+        // $scope.isShippingDomestic = false;
+    }
 
     $scope.shippingServiceLevel = 'GROUND';
     $scope.countryIsUSCA = true;
@@ -87,16 +102,18 @@ SwiftApp.controller('CheckoutCtrl', [
             width:      packages[0].width,
             height:     packages[0].height,
             length:     packages[0].length,
-            // packaging:  packages[0].packaging,
+            packaging:  "CUSTOM",
             service:    $scope.shippingServiceLevel,
             carrier:    $scope.shippingCarrier
         };
 
         // Don't include these guys if shipping via LETTER
-        // if ($scope.rateParams.packaging === 'LETTER') {
+        // Actually, doesn't matter.
+        // if ('allFlatRate' in packages) {
         //     delete $scope.rateParams.width;
         //     delete $scope.rateParams.height;
         //     delete $scope.rateParams.length;
+        //     $scope.rateParams.packaging = "LETTER";
         // }
 
         console.log('postmasterValidateSuccessCallback', data);
@@ -116,11 +133,15 @@ SwiftApp.controller('CheckoutCtrl', [
                     .then(taxSuccessCallback, taxErrorCallback);
             }
 
-            _.each(packages, function() {
-                PostmasterService
-                    .rates($scope.rateParams)
-                    .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
-            });
+            if ('allFlatRate' in packages) {
+                displayFlatRateShipping();
+            } else {
+                _.each(packages, function() {
+                    PostmasterService
+                        .rates($scope.rateParams)
+                        .then(postmasterRateSuccessCallback, postmasterRateErrorCallback);
+                });
+            }
         } else {
             ExceptionService.report('CheckoutCtrl#postmasterValidateSuccessCallback: data.status not "OK"', [data]);
         }
@@ -129,6 +150,7 @@ SwiftApp.controller('CheckoutCtrl', [
     function postmasterValidateErrorCallback(response) {
         $scope.busyShipping = false;
         $scope.customerNeedsToVerifyAddress = true;
+        $scope.isShippingReady = false;
 
         // Commenting this out. TMI
         // ExceptionService.report('CheckoutCtrl#postmasterValidateErrorCallback: Address validation failed.', [response]);
@@ -163,8 +185,50 @@ SwiftApp.controller('CheckoutCtrl', [
         console.log('taxErrorCallback', response);
     }
 
+    function displayFlatRateShipping() {
+        console.log('displayFlatRateShipping');
+
+        var shippingCharge = FlatRateService.getShippingCharge($scope.isShippingDomestic ? 'domestic' : 'international');
+        var service = $scope.isShippingDomestic ? 'GROUND' : 'INTL_SURFACE';
+
+        $scope.rates = [];
+        $scope.busyShipping = false;
+        $scope.isShippingReady = true;
+
+        // Lock the services to one. Customer cannot
+        // choose shipping service on flat rate.
+        $scope.domesticServiceLevels = { 'GROUND': 'Ground' };
+        $scope.intlServiceLevels = { 'INTL_SURFACE': '1st Class International' };
+
+        $scope.shippingServiceLevel = service;
+
+        // Provider is always USPS for flat rate.
+        $scope.rates.push({
+            // This selects it
+            best: true,
+            // Set the flat rate charge
+            charge: shippingCharge,
+            // Always USPS
+            provider: 'USPS',
+            // Doesn't matter.
+            service: service
+        });
+
+        $scope.shipping = {
+            charge: shippingCharge,
+            provider: 'USPS',
+            service: service,
+            serviceIsFlatRate: true
+        };
+    }
+
     var rateResponses = [];
     function postmasterRateSuccessCallback(response) {
+        $scope.rates = [];
+        $scope.shipping = {};
+        $scope.busyShipping = false;
+        $scope.isShippingReady = true;
+
         console.log('postmasterRateSuccessCallback: response', response);
         // Cannot proceed until we have received all of the callbacks
         rates_response_count++;
@@ -194,9 +258,6 @@ SwiftApp.controller('CheckoutCtrl', [
                 if (!response.data.hasOwnProperty('ups')) {
                     SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'ups');
                 }
-                if (!response.data.hasOwnProperty('fedex')) {
-                    SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'fedex');
-                }
                 if (!response.data.hasOwnProperty('usps')) {
                     SHIPPING_PROVIDERS = _.without(SHIPPING_PROVIDERS, 'usps');
                 }
@@ -212,11 +273,6 @@ SwiftApp.controller('CheckoutCtrl', [
                 console.log('charge for', provider, 'should be', combinedResponse[provider].charge);
             });
         }
-
-        $scope.rates = [];
-        $scope.shipping = {};
-        $scope.busyShipping = false;
-        $scope.isShippingReady = true;
 
         // Use the most recent response data
         // for some things
@@ -267,9 +323,8 @@ SwiftApp.controller('CheckoutCtrl', [
                     });
                 } else if (data[provider] && data[provider].error) {
                     var msg = 'We are currently unable to provide shipping rates for ' + provider.toUpperCase() + '.';
-                    ExceptionService.report(msg);
+                    ExceptionService.report(msg, data[provider]);
                     alert(msg);
-                    console.warn(data[provider].error.message);
                 }
             });
         }
@@ -325,14 +380,19 @@ SwiftApp.controller('CheckoutCtrl', [
                 phone_no: $scope.phoneNo,
                 commercial: $scope.commercial,
                 // FIXME this should actually get the weight
-                // for one package?
+                // for one package? No, doesn't really matter
+                // because we charge them the appropriate amount
+                // for all of their packages. The weight here is
+                // not really used anywhere... just keep it around
+                // for our records I guess.
                 weight: PackagingService.getShippingWeight(),
                 pickup: $scope.pickup,
                 shipping_provider: $scope.shipping.provider,
                 shipping_charge: $scope.shipping.charge,
                 shipping_service: $scope.shipping.service,
+                shipping_service_is_flat_rate: $scope.shipping.serviceIsFlatRate || false,
                 stripe_id: response.data ? response.data.id : null,
-                send_me_marketing_emails: $scope.send_me_marketing_emails
+                send_me_marketing_emails: $scope.sendMeMarketingEmails
             })
             .then(saleCreateSuccessCallback, saleCreateErrorCallback);
     }
@@ -484,7 +544,7 @@ SwiftApp.controller('CheckoutCtrl', [
         if ($(window).width() > 767) {
             $scrollToElem = $("#row-shipping");
         } else {
-            $scrollToElem = $("#rates-submit");
+            $scrollToElem = $("#js-rates-submit");
         }
         $('html, body').animate({
             scrollTop: $scrollToElem.offset().top

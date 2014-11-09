@@ -21,9 +21,12 @@ Contact: <%= @sale.contact %>
 <% if @sale.pickup? %>
   <br>Customer will pick up order.
 <% else %>
-  <br>Shipping Charge: <%= @sale.shipping_charge %>
-  <br>Shipping Service: <%= @sale.shipping_service %>
-  <br>Shipping Provider: <%= @sale.shipping_provider %>
+  <br>Shipping:
+  <br>
+  <br>Charge: <%= @sale.shipping_charge %>
+  <br>Provider: <%= @sale.shipping_provider %>
+  <br>Service: <%= @sale.shipping_service %>
+  <br>Flat Rate?: <%= @sale.shipping_service_is_flat_rate? %>
 <% end %>
 </body>
 </html>

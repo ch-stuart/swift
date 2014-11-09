@@ -8,6 +8,7 @@
     <th>Last Name</th>
     <th>Amount</th>
     <th>Pickup?</th>
+    <th>Flat Rate?</th>
     <th>Boxes</th>
     <th>Tracking URL(s)</th>
     <th>Shipping $ +/-</th>
@@ -40,6 +41,17 @@
     <td><%= number_to_currency(cents_to_dollars(sale.total)) %></td>
     <td>
       <% if sale.pickup? %>
+        <span style="color:green; font-size: 120%;">
+          ✓
+        </span>
+      <% else %>
+        <span style="color:red; font-size: 120%;">
+          ✗
+        </span>
+      <% end %>
+    </td>
+    <td>
+      <% if sale.shipping_service_is_flat_rate? %>
         <span style="color:green; font-size: 120%;">
           ✓
         </span>

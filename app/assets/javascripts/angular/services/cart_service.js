@@ -1,11 +1,9 @@
-/*global angular SwiftApp _ localStorage console SwiftUtils */
-
 // TODO clean up this API
 // it's messy!
 
 SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScope, $http, $q) {
 
-    var service = {
+    return {
         products: [],
         // Cost of products without shipping, tax, etc.
         price: null,
@@ -128,8 +126,11 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             }
 
             // Save each of these properties on the product
-            _.each(['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer', 'selectedAnswer', 'kind',
-              'question', 'selectedSize', 'mostExpensiveFabric', 'width', 'height', 'length', 'weight', 'package_type'], saveIf);
+            _.each(['id', 'uniqueId', 'title', 'price', 'totalPrice', 'answer',
+              'selectedAnswer', 'kind', 'question', 'selectedSize',
+              'mostExpensiveFabric', 'width', 'height', 'length', 'weight',
+              'package_type', 'domestic_flat_rate_shipping_charge',
+              'international_flat_rate_shipping_charge'], saveIf);
 
             // Save parts on the product
             _.chain(prod.parts)
@@ -150,7 +151,7 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             // Set a uniqueId so that we can track if the product
             // was already in the cart and the user is editing it
             if (!save.uniqueId) {
-                save.uniqueId = Date.now();
+                save.uniqueId = SwiftUtils.guid();
             }
 
             // If this is a product that was already in the cart that
@@ -276,5 +277,4 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             this.getPrice();
         }
     };
-    return service;
 }]);

@@ -3,6 +3,10 @@
 
     window.SwiftUtils = {};
 
+    SwiftUtils.guid = function() {
+        return Math.random().toString(16).slice(2);
+    };
+
     var $root = jQuery(document.documentElement);
 
     $root.removeClass('nojs');

@@ -26,6 +26,7 @@
 //= require angular/services/wa_state_tax_service
 //= require angular/services/sale_service
 //= require angular/services/packaging_service
+//= require angular/services/flat_rate_service
 //= require angular/services/place_service
 //= require angular/services/cart_service
 //= require angular/services/product_service

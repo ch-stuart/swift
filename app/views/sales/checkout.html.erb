@@ -7,10 +7,11 @@
             Shipping
         </h4>
         <div class="row row--order" id="row-shipping">
-            <form name="shippingForm" ng-submit="onCalculateShippingCostBtnClicked(shippingForm.$valid)" novalidate>
+            <form name="shippingForm" id="js-shipping-form" ng-submit="onCalculateShippingCostBtnClicked(shippingForm.$valid)" novalidate>
                 <div class="label-input-pair">
                     <label class="label">
                         <input
+                            id="js-input-pickup"
                             type="checkbox"
                             ng-model="pickup"
                             ng-change="onPickupChanged()"> Check if you will be picking up your order
@@ -21,6 +22,7 @@
                         Country
                     </label>
                     <select
+                        id="js-input-country"
                         ng-change="onCountrySelectChanged()"
                         ng-model="country"
                         ng-options="k as v for (k,v) in countryCodes"
@@ -34,6 +36,7 @@
                         Street
                     </label>
                     <input
+                        id="js-input-line1"
                         type="text"
                         ng-model="line1"
                         ng-disabled="pickup"
@@ -44,6 +47,7 @@
                         City
                     </label>
                     <input
+                      id="js-input-city"
                         type="text"
                         ng-model="city"
                         ng-disabled="pickup"
@@ -54,12 +58,14 @@
                         State/Province
                     </label>
                     <input
+                        id="js-input-state-not-usca"
                         type="text"
                         ng-model="state"
                         ng-hide="countryIsUSCA"
                         ng-disabled="pickup"
                         required>
                     <select
+                        id="js-input-state"
                         ng-model="state"
                         ng-show="countryIsUSCA"
                         ng-options="k as v for (k,v) in states"
@@ -73,6 +79,7 @@
                         Zip/Postal Code
                     </label>
                     <input
+                        id="js-input-zip"
                         type="text"
                         ng-model="zipCode"
                         ng-disabled="pickup"
@@ -83,6 +90,7 @@
                         Phone
                     </label>
                     <input
+                        id="js-input-phone"
                         type="text"
                         ng-model="phoneNo"
                         ng-disabled="pickup"
@@ -93,6 +101,7 @@
                         Recipient's Name <span class="demph">(optional)</span>
                     </label>
                     <input
+                        id="js-input-shipping-contact"
                         type="text"
                         ng-model="shippingContact"
                         ng-disabled="pickup">
@@ -114,7 +123,7 @@
                     </label>
                 </div>
                 <div class="label-input-pair pickup-is-{{ pickup }}">
-                    <button id="rates-submit" type="submit" class="btn btn--progress" ng-disabled="pickup || busyShipping">
+                    <button id="js-rates-submit" type="submit" class="btn btn--progress" ng-disabled="pickup || busyShipping">
                         <span sw-visible="!busyShipping">
                             Calculate Shipping Cost
                         </span>
@@ -134,6 +143,7 @@
                     ng-options="k as v for (k,v) in domesticServiceLevels"
                     ng-model="shippingServiceLevel"
                     ng-change="onShippingServiceLevelChange()"
+                    id="js-domestic-shipping-service-levels"
                     class="input">
                 </select>
                 <select
@@ -141,12 +151,14 @@
                     ng-options="k as v for (k,v) in intlServiceLevels"
                     ng-model="shippingServiceLevel"
                     ng-change="onShippingServiceLevelChange()"
+                    id="js-intl-shipping-service-levels"
                     class="input">
                 </select>
                 <p class="pickup-is-{{ pickup }} best-price-{{ provider.best }}" ng-repeat="provider in rates">
                     <label>
                         <input
                             type="radio"
+                            id="js-best-price-{{ provider.best }}"
                             ng-checked="provider.best"
                             name="shippingRadio"
                             ng-model="selectedRate"
@@ -201,7 +213,7 @@
                         </p>
                     </div>
                     <div class="label-input-pair">
-                        <label><input name="send_me_marketing_emails" type="checkbox"> Send me product, promo, and event updates!</label>
+                        <label><input name="sendMeMarketingEmails" type="checkbox"> Send me product, promo, and event updates!</label>
                     </div>
                 </div>
             </div>
@@ -209,7 +221,7 @@
                 <h4>
                     Gift Certificate
                 </h4>
-                <p ng-show="isShippingReady || pickup && cart.totalWithGiftCert == 0">
+                <p ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
                     Your gift certificate covers the amount due. Click "Buy It" to complete your purchase.
                 </p>
                 <div class="row row--order">

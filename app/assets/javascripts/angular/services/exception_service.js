@@ -32,7 +32,7 @@ SwiftApp.service('ExceptionService', ['$http', function($http) {
         // Include URL
         msg += '\n\n' + window.location.href;
 
-        if (window.location.href.indexOf("swift.dev") !== -1) {
+        if (window.location.href.indexOf("swift.dev") !== -1 || window.location.href.indexOf("localhost") !== -1) {
             console.error(msg);
         } else {
             $http

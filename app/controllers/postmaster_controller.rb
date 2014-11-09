@@ -23,6 +23,7 @@ class PostmasterController < ApplicationController
 
     begin
       response = Postmaster::AddressValidation.validate params
+      logger.info "Postmaster::AddressValidation.validate #{response}"
 
       # The response from Postmaster is shitty (does not follow docs)
       # Walk the array and figure out if this is a commercial address
@@ -60,6 +61,7 @@ class PostmasterController < ApplicationController
 
     begin
       response = Postmaster::Rates.get params
+      logger.info "Postmaster::Rates.get #{response}"
 
       respond_to do |format|
         format.html  { render :text => response }

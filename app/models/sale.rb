@@ -7,7 +7,7 @@ class Sale < ActiveRecord::Base
   :zip_code, :country, :shipping_provider, :shipping_service, :shipping_charge, :stripe_id, :tax_rate,
   :tax_amount, :total, :pickup, :status, :phone_no, :contact, :company, :commercial, :postmaster_id,
   :shipping_tracking_number, :gift_certificate_guid, :gift_cert_remain, :gift_cert_applied,
-  :total_with_gift_cert, :shipping_contact
+  :total_with_gift_cert, :shipping_contact, :shipping_service_is_flat_rate
 
   before_create :populate_guid
 
