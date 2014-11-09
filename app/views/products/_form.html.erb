@@ -31,10 +31,12 @@
         </p>
     </div>
     <div class="field">
-        <label for="product_featured_on_homepage">
-            <%= f.check_box :featured_on_homepage %>
-            Feature on homepage?
-        </label>
+        <%= f.label :inventory_count %>
+        <%= f.text_field :inventory_count, type: 'number' %>
+        <p class="hint">
+            If you are changing the inventory count from 0, make sure you also
+            set the status to "Public".
+        </p>
     </div>
     <h3>
         Marketing
@@ -68,7 +70,7 @@
         <%= render 'shared/markdown_hint' %>
     </div>
     <h3>
-      Pricing
+        Pricing
     </h3>
     <div class="field">
         <%= f.label :price %>
@@ -97,6 +99,15 @@
         <p class="hint">
             ex: "$249 for a pair"
         </p>
+    </div>
+    <h3>
+        Placement
+    </h3>
+    <div class="field row">
+        <label for="product_featured_on_homepage">
+            <%= f.check_box :featured_on_homepage %>
+            Feature on homepage?
+        </label>
     </div>
     <h3>
         Photos

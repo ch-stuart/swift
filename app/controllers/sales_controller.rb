@@ -175,25 +175,33 @@ class SalesController < ApplicationController
       # but it'd be nice to know if it's happening
       begin
         create_gift_certificates @sale
+      rescue Exception => e
+        throw_exception e
+      end
+
+      begin
         update_gift_certificates @sale
+      rescue Exception => e
+        throw_exception e
+      end
 
-        SalesMailer.success(params[:email], @sale.guid).deliver
-        SalesMailer.notify_swift(@sale).deliver
+      begin
+        update_inventory @sale
+      rescue Exception => e
+        throw_exception e
+      end
 
+      begin
         # Create the contact if they sign up for spam
         if params[:send_me_marketing_emails]
           Contact.create(email: params[:email])
         end
-
       rescue Exception => e
-        logger.error e
-
-        ExceptionNotifier.notify_exception(
-          e,
-          env: request.env,
-          data: { message: "Post sale task failed." }
-        )
+        throw_exception e
       end
+
+      SalesMailer.success(params[:email], @sale.guid).deliver
+      SalesMailer.notify_swift(@sale).deliver
 
       render json: { guid: @sale.guid }.to_json
     else
@@ -277,5 +285,29 @@ class SalesController < ApplicationController
     else
       logger.info "SalesController#update_gift_certificates: Sale has no gift certificate"
     end
+  end
+
+  def update_inventory sale
+    description = JSON.parse sale[:description]
+    sold_products = description["products"]
+
+    sold_products.each do |sold_product|
+      if sold_product["selectedSize"].present?
+        size = Size.find sold_product["selectedSize"]["id"]
+      end
+
+      product = Product.find sold_product["id"]
+      product.update_inventory(sold_product["quantity"], size) unless product.nil?
+    end
+  end
+
+  def throw_exception e
+    logger.error e
+
+    ExceptionNotifier.notify_exception(
+      e,
+      env: request.env,
+      data: { message: "Post sale task failed." }
+    )
   end
 end

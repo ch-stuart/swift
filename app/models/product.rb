@@ -7,7 +7,8 @@ class Product < ActiveRecord::Base
   :not_for_sale_message, :featured_on_homepage, :flickr_set, :short_description,
   :wholesale_humane_price, :wholesale_price, :width, :height, :length, :weight,
   :package_type, :sizes_attributes, :parts_attributes, :category_id, :testimonials_attributes,
-  :related_products, :domestic_flat_rate_shipping_charge, :international_flat_rate_shipping_charge
+  :related_products, :domestic_flat_rate_shipping_charge, :international_flat_rate_shipping_charge,
+  :inventory_count
 
   has_many :parts, :dependent => :destroy
   has_many :testimonials, :dependent => :destroy
@@ -73,6 +74,42 @@ class Product < ActiveRecord::Base
 
   def humane_price_for current_user
     current_user.try(:wholesale?) ? self.wholesale_humane_price : self.humane_price
+  end
+
+  def update_inventory qty, size
+    # Need a quantity
+    if qty.nil?
+      return logger.warn "Product#update_inventory: Missing qty"
+    end
+
+    # If we have a size, the size must have an inventory_count
+    if size.present? && size.inventory_count.blank?
+      return logger.info "Product#update_inventory: Size missing inventory_count"
+    end
+
+    # If we don't have a size, the product must have an inventory_count
+    if size.blank? && self.inventory_count.blank?
+      return logger.info "Product#update_inventory: Product missing inventory_count"
+    end
+
+    if size.present?
+      size.inventory_count = size.inventory_count - qty.to_i
+
+      if size.inventory_count < 1
+        ProductsMailer.inventory_count_update(self, size).deliver
+      end
+
+      self.save
+    else
+      self.inventory_count = self.inventory_count - qty.to_i
+
+      if self.inventory_count < 1
+        self.status = "Private"
+        ProductsMailer.inventory_count_update(self).deliver
+      end
+
+      self.save
+    end
   end
 
   private

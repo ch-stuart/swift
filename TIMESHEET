@@ -300,6 +300,8 @@ date:        time (minutes):       comment:
 2014-10-19  60 WIP: allow flat rate for LETTER products
 2014-11-04  30 WIP: allow flat rate for LETTER products
 
+2014-10-25 90 WIP: Support inventory
+2014-10-26 20 WIP: Support inventory: show inventory count to customers if under 5, or always for wholesale
 
 
 http://www.timer-tab.com
