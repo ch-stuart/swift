@@ -595,29 +595,31 @@ SwiftApp.controller('CheckoutCtrl', [
         $scope.couponError = null;
         $scope.couponStatus = null;
 
-        if (code) {
-            CouponService
-                .get(code)
-                .then(
-                    function(response) {
-                        $scope.coupon = response.data.coupon;
+        if (!code) { return; }
 
-                        CartService.applyCoupon($scope.coupon);
-                    },
-                    function(response) {
-                        $scope.coupon = null;
+        CouponService
+            .get(code)
+            .then(
+                function successHandler(coupon) {
+                    $scope.coupon = coupon;
 
-                        if (response.status === 404) {
-                            $scope.couponError = 'That coupon could not be found.';
-                        } else {
-                            $scope.couponError = 'An error occured and that coupon could not be found.';
-                        }
+                    CartService.applyCoupon(coupon);
+                },
+                function errorHandler(response) {
+                    $scope.coupon = null;
 
-                        CartService.nullCoupon();
+                    console.log('response', response);
+                    if (response.errorMsg) {
+                        $scope.couponError = response.errorMsg;
+                    } else if (response.status === 404) {
+                        $scope.couponError = 'That coupon could not be found.';
+                    } else {
+                        $scope.couponError = 'An error occured and that coupon could not be found.';
                     }
-                );
 
-        }
+                    CartService.nullCoupon();
+                }
+            );
     };
 
     $scope['onGiftCertificateRedemptionCodeChanged'] = function() {
