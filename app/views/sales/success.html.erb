@@ -36,8 +36,8 @@
                         <br>
                         <br>
                         <% if product["selectedAnswer"].present? && product["question"].present? %>
-                          <%= product["question"] %>?<br>
-                          <%= product["selectedAnswer"] %>
+                          <span class=demph><%= product["question"] %>:</span><br>
+                          <span class=demph><em><%= product["selectedAnswer"] %></em></span>
                         <% end %>
                     </div>
                     <div class="unit w-1-4">
