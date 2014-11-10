@@ -33,6 +33,12 @@
                         <a href=/products/<%= product["id"] %> class="demph pr--none">
                             View Product
                         </a>
+                        <br>
+                        <br>
+                        <% if product["selectedAnswer"].present? && product["question"].present? %>
+                          <%= product["question"] %>?<br>
+                          <%= product["selectedAnswer"] %>
+                        <% end %>
                     </div>
                     <div class="unit w-1-4">
                         <% if product["parts"].present? %>
