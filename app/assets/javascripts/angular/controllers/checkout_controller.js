@@ -394,7 +394,8 @@ SwiftApp.controller('CheckoutCtrl', [
                 shipping_service: $scope.shipping.service,
                 shipping_service_is_flat_rate: $scope.shipping.serviceIsFlatRate || false,
                 stripe_id: response.data ? response.data.id : null,
-                send_me_marketing_emails: $scope.sendMeMarketingEmails
+                send_me_marketing_emails: $scope.sendMeMarketingEmails,
+                coupon_code: ($scope.coupon && $scope.coupon.code) ? $scope.coupon.code : null
             })
             .then(saleCreateSuccessCallback, saleCreateErrorCallback);
     }
@@ -585,6 +586,7 @@ SwiftApp.controller('CheckoutCtrl', [
 
         if (!code) {
             $scope.couponError = null;
+            $scope.couponStatus = null;
             $scope.coupon = null;
             CartService.nullCoupon();
         }
@@ -594,6 +596,7 @@ SwiftApp.controller('CheckoutCtrl', [
 
         $scope.couponError = null;
         $scope.couponStatus = null;
+        $scope.coupon = null;
 
         if (!code) { return; }
 

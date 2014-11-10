@@ -290,6 +290,8 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             this.getPrice();
         },
         applyCoupon: function(coupon) {
+            this.centsOff = this.percentOff = null;
+
             if (coupon.cents_off) {
                 this.centsOff = coupon.cents_off;
             }

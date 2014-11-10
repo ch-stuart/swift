@@ -37,7 +37,9 @@ class CouponsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @coupon }
+      format.json do
+        render :json => @coupon.to_json(:only => [:percent_off, :cents_off, :code])
+      end
     end
   end
 

@@ -24,6 +24,10 @@
       </td>
       <td>
         <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
+        <br>
+        <% if @coupon.present? %>
+          Coupon Code: <%= link_to @coupon.code, @coupon %>
+        <% end %>
       </td>
       <td></td>
     </tr>

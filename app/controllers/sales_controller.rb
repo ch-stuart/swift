@@ -38,6 +38,14 @@ class SalesController < ApplicationController
     @sale = Sale.find(params[:id])
     @shipments = @sale.shipments
 
+    if @sale.coupon_code.present?
+      begin
+        @coupon = Coupon.find_by_code! @sale.coupon_code
+      rescue Exception => e
+        logger.warn e
+      end
+    end
+
     render :layout => "hub"
   end
 
@@ -165,7 +173,8 @@ class SalesController < ApplicationController
       gift_certificate_guid: params[:gift_certificate_guid],
       gift_cert_remain:      params[:gift_cert_remain],
       gift_cert_applied:     params[:gift_cert_applied],
-      total_with_gift_cert:  params[:total_with_gift_cert]
+      total_with_gift_cert:  params[:total_with_gift_cert],
+      coupon_code:           params[:coupon_code] || false
     )
 
     if @sale.save
