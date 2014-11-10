@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141027001233) do
+ActiveRecord::Schema.define(:version => 20141110031223) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -54,6 +54,19 @@ ActiveRecord::Schema.define(:version => 20141027001233) do
     t.boolean  "archived",   :default => false, :null => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "coupons", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "published"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "percent_off"
+    t.integer  "cents_off"
+    t.string   "code"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "gift_certificates", :force => true do |t|

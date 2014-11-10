@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @coupon.title %>
+</p>
+
+<p>
+  <b>Code:</b>
+  <%= @coupon.code %>
+</p>
+
+<p>
+  <b>Percent off:</b>
+  <%= @coupon.percent_off %>
+</p>
+
+<p>
+  <b>Cents off:</b>
+  <%= @coupon.cents_off %>
+</p>
+
+<p>
+  <b>Published:</b>
+  <%= @coupon.published %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @coupon.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @coupon.end_date %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @coupon.description %>
+</p>
+
+<%= link_to 'Edit', edit_coupon_path(@coupon) %> |
+<%= link_to 'Back', coupons_path %>

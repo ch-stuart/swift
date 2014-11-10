@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  description: MyText
+  published: false
+  start_date: 2014-11-09 20:12:23
+  end_date: 2014-11-09 20:12:23
+  percent_off: 1
+  cents_off: 1
+  code: MyString
+
+two:
+  title: MyString
+  description: MyText
+  published: false
+  start_date: 2014-11-09 20:12:23
+  end_date: 2014-11-09 20:12:23
+  percent_off: 1
+  cents_off: 1
+  code: MyString

@@ -1,5 +1,8 @@
 SwiftSite::Application.routes.draw do
 
+  resources :coupons
+
+
   resources :gift_certificates
 
 
