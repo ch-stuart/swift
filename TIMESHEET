@@ -279,18 +279,16 @@ date:        time (minutes):       comment:
 
 /// INVOICED
 
-2014-09-07 45 Add ability for customer to set shipping name
-2014-09-10 30 Fix bug in product edit form related to related_products
-2014-09-11 10 Make sure related product images are always the right size
-2014-09-12 10 Add matchMedia polyfill for older browsers
-2014-09-15 30 Fixing JavaScript issues related to users browsing site in privacy mode
-2014-09-15 10 Additional fix for related product image sizes
-2014-09-19 10 Fix issue where you could not create a product
-2014-09-22 20 Allow sale to be manually moved to "shipped" category
-2014-09-22 45 Prime flickr cache via heroku scheduler to avoid long response times
-2014-09-24 10 Admin
-2014-10-27 20 Allow user to click big image in slideshow to navigate to next
-
+2014-09-07  45 Add ability for customer to set shipping name
+2014-09-10  30 Fix bug in product edit form related to related_products
+2014-09-11  10 Make sure related product images are always the right size
+2014-09-12  10 Add matchMedia polyfill for older browsers
+2014-09-15  30 Fixing JavaScript issues related to users browsing site in privacy mode
+2014-09-15  10 Additional fix for related product image sizes
+2014-09-19  10 Fix issue where you could not create a product
+2014-09-22  20 Allow sale to be manually moved to "shipped" category
+2014-09-22  45 Prime flickr cache via heroku scheduler to avoid long response times
+2014-09-24  10 Admin
 2014-10-02  75 WIP: allow flat rate for LETTER products
 2014-10-05  20 WIP: allow flat rate for LETTER products
 2014-10-05  20 WIP: allow flat rate for LETTER products
@@ -298,10 +296,14 @@ date:        time (minutes):       comment:
 2014-10-14  30 WIP: allow flat rate for LETTER products
 2014-10-18 120 WIP: allow flat rate for LETTER products
 2014-10-19  60 WIP: allow flat rate for LETTER products
+2014-10-25  90 WIP: Support inventory
+2014-10-26  20 WIP: Support inventory: show inventory count to customers if under 5, or always for wholesale
+2014-10-27  20 Allow user to click big image in slideshow to navigate to next
 2014-11-04  30 WIP: allow flat rate for LETTER products
+2014-11-09  20 Fix issue where Q&A was not displayed on printable sale page
+2014-11-09  20 Deploying latest changes
+2014-11-09  20 Basecamp, project management
 
-2014-10-25 90 WIP: Support inventory
-2014-10-26 20 WIP: Support inventory: show inventory count to customers if under 5, or always for wholesale
 
 
 http://www.timer-tab.com
