@@ -38,4 +38,23 @@ class Coupon < ActiveRecord::Base
   # Code and title must be unique
   validates :code, :title, :uniqueness => true
 
+  # Code can only include good characters
+  validates :code, :format => { :with => /^[A-Za-z0-9_-]+$/, :message => "code can only contain letters, numbers, hyphens and underscores" }
+
+  def is_invalid?
+    return true unless self.published?
+
+    now = Time.now
+
+    if self.start_date.present?
+      return true if now < start_date
+    end
+
+    if self.end_date.present?
+      return true if now > end_date
+    end
+
+    return false
+  end
+
 end

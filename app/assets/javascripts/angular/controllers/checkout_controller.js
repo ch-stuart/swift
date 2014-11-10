@@ -12,6 +12,7 @@ SwiftApp.controller('CheckoutCtrl', [
     'ExceptionService',
     'PackagingService',
     'FlatRateService',
+    'CouponService',
     function(
         $scope,
         ConfigService,
@@ -22,7 +23,8 @@ SwiftApp.controller('CheckoutCtrl', [
         SaleService,
         ExceptionService,
         PackagingService,
-        FlatRateService) {
+        FlatRateService,
+        CouponService) {
 
     var package_count = 1;
     var rates_response_count = 0;
@@ -576,6 +578,46 @@ SwiftApp.controller('CheckoutCtrl', [
         };
 
         CartService.setShippingCharge(provider.charge);
+    };
+
+    $scope['onCouponCodeChanged'] = function() {
+        var code = $scope.couponCode;
+
+        if (!code) {
+            $scope.couponError = null;
+            $scope.coupon = null;
+            CartService.nullCoupon();
+        }
+    };
+    $scope['onCouponCodeBlur'] = function() {
+        var code = $scope.couponCode;
+
+        $scope.couponError = null;
+        $scope.couponStatus = null;
+
+        if (code) {
+            CouponService
+                .get(code)
+                .then(
+                    function(response) {
+                        $scope.coupon = response.data.coupon;
+
+                        CartService.applyCoupon($scope.coupon);
+                    },
+                    function(response) {
+                        $scope.coupon = null;
+
+                        if (response.status === 404) {
+                            $scope.couponError = 'That coupon could not be found.';
+                        } else {
+                            $scope.couponError = 'An error occured and that coupon could not be found.';
+                        }
+
+                        CartService.nullCoupon();
+                    }
+                );
+
+        }
     };
 
     $scope['onGiftCertificateRedemptionCodeChanged'] = function() {

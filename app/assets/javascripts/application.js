@@ -23,6 +23,7 @@
 //= require angular/services/exception_service
 //= require angular/directives/visible_directive
 //= require angular/services/config_service
+//= require angular/services/coupon_service
 //= require angular/services/wa_state_tax_service
 //= require angular/services/sale_service
 //= require angular/services/packaging_service

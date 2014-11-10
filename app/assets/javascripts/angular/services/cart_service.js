@@ -24,6 +24,19 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
                 price = price + ((product.totalPrice * 100) * product.quantity);
             });
 
+            if (this.centsOff) {
+                console.log('price is... ', price);
+                price = price - this.centsOff;
+                console.log('price is now...', price);
+            }
+
+            if (this.percentOff) {
+                console.log('% is', this.percentOff, 'price is', price);
+                price = price - (price * (this.percentOff / 100));
+
+                console.log('price is', price);
+            }
+
             this.price = this.total = price;
 
             // Adjust total if there is a Tax Rate
@@ -274,6 +287,19 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
         // Null gift certificate value
         nullGiftCertificateValue: function() {
             this.giftCertRemain = null;
+            this.getPrice();
+        },
+        applyCoupon: function(coupon) {
+            if (coupon.cents_off) {
+                this.centsOff = coupon.cents_off;
+            }
+            if (coupon.percent_off) {
+                this.percentOff = coupon.percent_off;
+            }
+            this.getPrice();
+        },
+        nullCoupon: function() {
+            this.centsOff = this.percentOff = null;
             this.getPrice();
         }
     };

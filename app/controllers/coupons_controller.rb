@@ -1,6 +1,6 @@
 class CouponsController < ApplicationController
 
-  before_filter :verify_is_admin, :except => [:show]
+  before_filter :verify_is_admin, :except => [:valid]
 
   layout "hub"
 
@@ -19,6 +19,21 @@ class CouponsController < ApplicationController
   # GET /coupons/1.json
   def show
     @coupon = Coupon.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @coupon }
+    end
+  end
+
+  # GET /coupons/1/valid
+  # GET /coupons/1/valid.json
+  def valid
+    @coupon = Coupon.find_by_code! params[:id]
+
+    if @coupon.is_invalid?
+      render_404
+    end
 
     respond_to do |format|
       format.html # show.html.erb

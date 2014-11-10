@@ -257,6 +257,40 @@
                     </button>
                 </div>
             </div>
+            <div ng-show="isShippingReady || pickup">
+                <h4>
+                    Coupon
+                </h4>
+                <div class="row row--order">
+                    <div class="label-input-pair">
+                        <label class="label">
+                            Coupon Code
+                        </label>
+                        <input
+                            type="text"
+                            ng-model="couponCode"
+                            ng-change="onCouponCodeChanged()"
+                            ng-blur="onCouponCodeBlur()">
+                    </div>
+                    <div class="label-input-pair" ng-show="couponError">
+                        <p style="color:red">
+                            {{ couponError }}
+                        </p>
+                    </div>
+                    <div class="label-input-pair" ng-show="coupon">
+                        <p>
+                            Your coupon code entitles you to
+                            <span ng-if="coupon.cents_off">
+                                {{ (coupon.cents_off / 100) | currency }}
+                            </span>
+                            <span ng-if="coupon.percent_off">
+                                {{ coupon.percent_off }}%
+                            </span>
+                            off the price of your purchased products.
+                        </p>
+                    </div>
+                </div>
+            </div>
             <div ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert != 0" id="row-payment">
                 <h4>
                     Payment info
