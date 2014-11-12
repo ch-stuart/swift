@@ -191,3 +191,15 @@ textarea {
         padding: 15px;
     }
 }
+
+.has-datetime-select select {
+    display: inline-block;
+    width: 50px;
+
+    &:nth-of-type(1) {
+        width: 60px;
+    }
+    &:nth-of-type(2) {
+        width: 100px;
+    }
+}
