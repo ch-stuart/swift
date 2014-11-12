@@ -1,37 +1,38 @@
 <h1>Listing coupons</h1>
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Title</th>
-    <th>Description</th>
+    <th>Code</th>
+    <th>Percent off</th>
+    <th>Cents off</th>
     <th>Published</th>
     <th>Start date</th>
     <th>End date</th>
-    <th>Percent off</th>
-    <th>Cents off</th>
-    <th>Code</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
+</thead>
+<tbody>
 <% @coupons.each do |coupon| %>
   <tr>
     <td><%= coupon.title %></td>
-    <td><%= coupon.description %></td>
-    <td><%= coupon.published %></td>
-    <td><%= coupon.start_date %></td>
-    <td><%= coupon.end_date %></td>
+    <td style="font-family: monospace"><%= coupon.code %></td>
     <td><%= coupon.percent_off %></td>
     <td><%= coupon.cents_off %></td>
-    <td><%= coupon.code %></td>
-    <td><%= link_to 'Show', coupon %></td>
-    <td><%= link_to 'Edit', edit_coupon_path(coupon) %></td>
-    <td><%= link_to 'Destroy', coupon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= coupon.published %></td>
+    <td><%= coupon.start_date.strftime("%b %e, %Y %l:%M %p ") %></td>
+    <td><%= coupon.end_date.strftime("%b %e, %Y %l:%M %p ") %></td>
+    <td><%= link_to 'Show', coupon, class: 'btn btn--table' %></td>
+    <td><%= link_to 'Edit', edit_coupon_path(coupon), class: 'btn btn--table' %></td>
+    <td><%= link_to 'Destroy', coupon, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn--table' %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Coupon', new_coupon_path %>
+<%= link_to 'New Coupon', new_coupon_path, class: "btn"%>
