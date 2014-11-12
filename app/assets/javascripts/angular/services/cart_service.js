@@ -25,16 +25,13 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             });
 
             if (this.centsOff) {
-                console.log('price is... ', price);
+                this.originalPrice = price;
                 price = price - this.centsOff;
-                console.log('price is now...', price);
             }
 
             if (this.percentOff) {
-                console.log('% is', this.percentOff, 'price is', price);
+                this.originalPrice = price;
                 price = price - (price * (this.percentOff / 100));
-
-                console.log('price is', price);
             }
 
             this.price = this.total = price;
@@ -74,7 +71,17 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
                 this.giftCertApplied = this.giftCertRemain = this.totalWithGiftCert = null;
             }
 
-            $rootScope.$broadcast('cart:prices:update', this.price, this.total, this.taxAmount, this.taxRate, this.shippingCharge, this.giftCertRemain, this.giftCertApplied, this.totalWithGiftCert);
+            $rootScope.$broadcast(
+                'cart:prices:update',
+                this.price,
+                this.total,
+                this.taxAmount,
+                this.taxRate,
+                this.shippingCharge,
+                this.giftCertRemain,
+                this.giftCertApplied,
+                this.totalWithGiftCert,
+                this.originalPrice);
         },
         setTaxRate: function(rate) {
             if (rate) {

@@ -77,7 +77,7 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.shippingServiceLevel = 'GROUND';
     $scope.countryIsUSCA = true;
 
-    $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge, giftCertRemain, giftCertApplied, totalWithGiftCert) {
+    $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge, giftCertRemain, giftCertApplied, totalWithGiftCert, originalPrice) {
         $scope.cart.price             = price;
         $scope.cart.total             = total;
         $scope.cart.taxAmount         = taxAmount;
