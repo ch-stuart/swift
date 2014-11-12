@@ -13,9 +13,5 @@ APP_CONFIG = {
   facebook_url:         'http://www.facebook.com/pages/SwiftIndustries/319490293426',
   instagram_url:        'http://instagram.com/swiftindustries/',
   flickr_group_url:     'http://www.flickr.com/groups/swiftindustries/pool/',
-  # store_host:           'http://ww6.aitsafe.com',
-  # add_to_cart_path:     '/cf/addmulti.cfm',
-  # store_userid:         '87211780',
-  # review_cart_path:     '/cf/review.cfm?userid=',
   google_analytics_id:  'UA-21808495-1'
 }
