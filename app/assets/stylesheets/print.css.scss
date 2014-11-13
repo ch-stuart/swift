@@ -1,39 +1,39 @@
 body {
-    font-family: helvetica, arial, sans-serif;
-    font-size: 80%;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 80%;
 }
 ul {
-    margin-left: 0;
-    padding-left: 16px;
+  margin-left: 0;
+  padding-left: 16px;
 }
 li {
-    line-height: 1.4;
+  line-height: 1.4;
 }
 .container-menu-wrap,
 .container-logo,
 .container-footer-wrap {
-    display: none;
+  display: none;
 }
 p,div,h1,h2,h3,h4,h5 {
-    margin: 0 0 6pt;
+  margin: 0 0 6pt;
 }
 
 .pr--bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 .pr--block {
-    display: block;
+  display: block;
 }
 .pr--inline {
-    display: inline;
+  display: inline;
 }
 .pr--none {
-    display: none;
+  display: none;
 }
 .pr--float {
-    float: left;
-    width: 48%;
+  float: left;
+  width: 48%;
 }
 .pr--clear {
-    clear: left;
+  clear: left;
 }

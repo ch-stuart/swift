@@ -6,6 +6,6 @@ softTabs          = true
 exclude           = "{$exclude,*.log,tmp/*,*.sqlite*}"
 include           = "{$include,.gitignore,.bower.json}"
 
-[ *.rb, *.html.erb ]
+[ *.rb, *.html.erb, *.css.scss ]
 tabSize           = 2
 softTabs          = true

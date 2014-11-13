@@ -10,35 +10,29 @@
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
 // Skeleton is not compatible with border-box
 .container {
-    box-sizing: content-box;
+  box-sizing: content-box;
 }
-
 .pr--block,
 .pr--inline {
-    display: none;
+  display: none;
 }
 
 // Includes
 @import 'include-color';
 @import 'include-media';
-
 // Base
 @import 'base-entypo';
 @import 'base-type';
 @import 'base-list';
-
 // Layouts
 @import 'layout-pub';
 @import 'layout-footer';
 @import 'layout-humans';
-
 // Pages
 @import 'glob-homes';
 @import 'glob-page';
-
 // Modules
 @import 'module-blog';
 @import 'module-buttons';
@@ -64,51 +58,39 @@
 
 // Override the base style set by Skeleton
 a, a:visited {
-    color: $hotpink;
-    text-decoration: none;
+  color: $hotpink;
+  text-decoration: none;
 }
 a:hover, a:focus {
-    color: $hotpink;
+  color: $hotpink;
 }
 // End override
-
-
 img.center-in-grid {
-    display: block;
-    margin: 0 auto; }
-
-
-.nice-list {
-    list-style-type: square;
-    margin-left: 14px;
-    margin-top: 15px;
-    li {
-        margin-bottom: 4px;
-    }
+  display: block;
+  margin: 0 auto;
 }
-
-
-
+.nice-list {
+  list-style-type: square;
+  margin-left: 14px;
+  margin-top: 15px;
+  li {
+    margin-bottom: 4px;
+  }
+}
 select.ng-invalid.ng-dirty,
 input.ng-invalid.ng-dirty {
   border: 1px solid red;
 }
-
-
-
 .label.input--dirty {
-    color: red;
+  color: red;
 }
-
 .browsehappy {
-    margin: 0;
-    text-align: center;
-    background-color: #FFF088;
-    padding: 20px;
-    line-height: 1.4;
+  margin: 0;
+  text-align: center;
+  background-color: #FFF088;
+  padding: 20px;
+  line-height: 1.4;
 }
-
-
 // This makes ng-cloak actually work
 [ng-cloak] {
   display: none !important;

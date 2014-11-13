@@ -1,52 +1,52 @@
 .row--order {
-    padding: 20px;
-    background-color: #fbfbfb;
-    border: 1px solid #eee;
-    margin: 0 0 20px;
+  padding: 20px;
+  background-color: #fbfbfb;
+  border: 1px solid #eee;
+  margin: 0 0 20px;
 }
 .order-section-heading {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 .label-input-pair {
-    margin: 0 0 20px;
+  margin: 0 0 20px;
 }
 .submit-wrap {
-    clear: left;
-    margin: 20px 0;
+  clear: left;
+  margin: 20px 0;
 }
 .input-color-with-optional-part {
-    margin-top: 10px;
-    margin-left: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 .label {
-    margin-bottom: 0;
+  margin-bottom: 0;
 
-    &.error {
-        color: red;
-    }
+  &.error {
+    color: red;
+  }
 }
 .label .input-checkbox {
-    transform: translateY(-1px);
-    display: inline-block;
-    margin-right: 2px;
+  transform: translateY(-1px);
+  display: inline-block;
+  margin-right: 2px;
 }
 
 .handmade_label {
-    display: block;
-    background: transparent image-url('scissors.png') no-repeat;
-    text-transform: lowercase;
-    text-align: center;
-    text-indent: -19px;
-    width: 121px;
-    height: 42px;
-    line-height: 67px;
-    margin-bottom: 10px;
+  display: block;
+  background: transparent image-url('scissors.png') no-repeat;
+  text-transform: lowercase;
+  text-align: center;
+  text-indent: -19px;
+  width: 121px;
+  height: 42px;
+  line-height: 67px;
+  margin-bottom: 10px;
 }
 
 .woah {
-    padding: 1px;
-    background-color: #ff9;
-    line-height: 1.4;
+  padding: 1px;
+  background-color: #ff9;
+  line-height: 1.4;
 }
 
 

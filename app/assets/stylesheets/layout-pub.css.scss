@@ -1,152 +1,161 @@
 body {
-    background-color: $background_offwhite;
-    border-top: 4px solid $hotpink;
+  background-color: $background_offwhite;
+  border-top: 4px solid $hotpink;
 }
 
 .img-fox {
-    opacity: .6;
-    width: 45px;
+  opacity: .6;
+  width: 45px;
 }
 // TODO: there should be a global nav css,
 //       and this should be in it
 .container-menu-wrap {
-    background-color: rgba(245,245,245,0.7);
-    border-bottom: 1px solid #dadada;
+  background-color: rgba(245,245,245,0.7);
+  border-bottom: 1px solid #dadada;
 }
 .container-menu {
-    padding: 8px;
-    position: relative;
+  padding: 8px;
+  position: relative;
 
-    .menu-fox {
-        display: block;
-    }
-    .menu-fox {
-        position: absolute;
-        left: 50%;
-        margin-left: -22px;
-        top: 8px;
+  .menu-fox {
+    display: block;
+  }
+  .menu-fox {
+    position: absolute;
+    left: 50%;
+    margin-left: -22px;
+    top: 8px;
+  }
+
+  .entypo {
+    cursor: pointer;
+    display: block;
+
+    &:hover,
+    &.active,
+    &.cart-happy--true {
+      color: $hotpink;
     }
 
-    .entypo {
-        cursor: pointer;
-        display: block;
+  }
+  .entypo-menu,
+  .entypo-home {
+    float: left;
+  }
+  .entypo-cart {
+    float: right;
+    font-size: 48px;
+    margin-left: 7px;
+  }
+  .dealer-sign-in-link,
+  .dealer-sign-out-link {
+    float: right;
+    color: lighten($text_lightgray, 20%);
+    font-size: 12px;
 
-        &:hover,
-        &.active,
-        &.cart-happy--true {
-            color: $hotpink;
-        }
+    &:hover {
+      color: $hotpink;
     }
-    .entypo-menu,
-    .entypo-home {
-        float: left;
-    }
+
+  }
+  .menu--row-nav {
+    padding: 30px 0;
+  }
+
+}
+.ie .entypo-menu {
+  position: relative;
+  top: -3px;
+}
+@media only screen and (min-width: 768px) {
+  .container-menu {
     .entypo-cart {
-        float: right;
-        font-size: 48px;
-        margin-left: 7px;
+      margin-left: 18px;
     }
     .dealer-sign-in-link,
     .dealer-sign-out-link {
-        float: right;
-        color: lighten($text_lightgray, 20%);
-        font-size: 12px;
-
-        &:hover {
-            color: $hotpink;
-        }
+      font-size: 13px;
     }
-    .menu--row-nav {
-        padding: 30px 0;
-    }
-}
-.ie .entypo-menu {
-    position: relative;
-    top: -3px;
-}
-@media only screen and (min-width: 768px) {
-    .container-menu {
-        .entypo-cart {
-            margin-left: 18px;
-        }
-        .dealer-sign-in-link,
-        .dealer-sign-out-link {
-            font-size: 13px;
-        }
-    }
+  }
 }
 .container-main {
-    border: 1px solid #ddd;
-    background-color: #fff;
+  border: 1px solid #ddd;
+  background-color: #fff;
 }
 @media only screen and (min-width: 1001px) {
-    .container-w-padding {
-        padding: 20px;
-    }
+  .container-w-padding {
+    padding: 20px;
+  }
 }
 @media only screen and (min-width: 789px) {
-    .container-w-padding {
-        padding: 10px;
-    }
+  .container-w-padding {
+    padding: 10px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-    .container-main {
-        border: 0;
-        background-color: transparent;
-    }
+  .container-main {
+    border: 0;
+    background-color: transparent;
+  }
 }
 @media only screen and (min-width: 768px) {
-    .container-main {
-        box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.03);
-    }
+  .container-main {
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.03);
+  }
 }
 
 .col-sidebar {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 .col-main {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 .col-session {
-    padding-bottom: 30px;
+  padding-bottom: 30px;
 }
 
 .container-logo,
 .container-main,
 .container-footer {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .row-header--logo-wrap {
-    margin-bottom: 2px;
+  margin-bottom: 2px;
 }
 .row-header--logo {
-    width: 300px;
+  width: 300px;
 }
 .row-header--description {
-    max-width: 720px;
-    margin: 0 auto;
-    line-height: 1.4;
-    font-size: 19px;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.4;
+  font-size: 19px;
 }
 @media only screen and (max-width: 767px) {
-    .row-header--logo {
-        width: 280px;
-    }
-    .row-header--description {
-        font-size: 15px;
-    }
+  .row-header--logo {
+    width: 280px;
+  }
+  .row-header--description {
+    font-size: 15px;
+  }
+
 }
-.container-main { margin-top: 15px; }
-.container-logo { margin-bottom: 15px; }
+.container-main {
+  margin-top: 15px;
+}
+.container-logo {
+  margin-bottom: 15px;
+}
 
 @media only screen and (min-width: 768px) {
-    .link-checkout {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        color: #888 !important;
-        display: none;
-    }
+  .link-checkout {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #888 !important;
+    display: none;
+  }
+
 }

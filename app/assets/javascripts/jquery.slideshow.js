@@ -1,89 +1,89 @@
 /*global jQuery $ UA document Image */
 jQuery.fn.slideshow = function() {
 
-    return this.each(function() {
+  return this.each(function() {
 
-        var $wrapper = $(this),
-            $items = $wrapper.find('.slideshow-item'),
-            size = $items.size(),
-            current = 1;
+    var $wrapper = $(this),
+      $items = $wrapper.find('.slideshow-item'),
+      size = $items.size(),
+      current = 1;
 
-        if (size === 1) {
-            // Nowhere to navigate to, so hide it.
-            $wrapper.find('.slideshow-nav').hide();
+    if (size === 1) {
+      // Nowhere to navigate to, so hide it.
+      $wrapper.find('.slideshow-nav').hide();
+    }
+
+    function go(dir) {
+      $items.hide();
+
+      if (dir === 'next') {
+        if (current + 1 > size) {
+          current = 1;
+        } else {
+          current++;
         }
-
-        function go(dir) {
-            $items.hide();
-
-            if (dir === 'next') {
-                if (current + 1 > size) {
-                    current = 1;
-                }
-                else {
-                    current++;
-                }
-            } else {
-                if (current - 1 === 0) {
-                    current = size;
-                }
-                else {
-                    current--;
-                }
-            }
-            // eq is 0-based
-            $items
-                .removeClass('slideshow-item--active')
-                .eq(current - 1)
-                .show()
-                .addClass('slideshow-item--active');
+      } else {
+        if (current - 1 === 0) {
+          current = size;
+        } else {
+          current--;
         }
+      }
+      // eq is 0-based
+      $items
+        .removeClass('slideshow-item--active')
+        .eq(current - 1)
+        .show()
+        .addClass('slideshow-item--active');
+    }
 
-        $items.hide().first().show();
+    $items.hide().first().show();
 
-        $wrapper
-            .find('.slideshow-nav-item')
+    $wrapper
+      .find('.slideshow-nav-item')
+      .on('click', function() {
+        go($(this).data('dir'));
+      })
+      .end()
+      .find('.slideshow-photo')
+      .on('click', function() {
+        // Just go to the image directly
+        // if they're on a mobile device
+        if (UA.isMobile()) {
+          document.location = $(this).data('large');
+          // Otherwise, show the litebox
+        } else {
+          $('.lightbox-img')
+            .attr('src', $(this).data('large'))
             .on('click', function() {
-                go( $(this).data('dir') );
-            })
-            .end()
-            .find('.slideshow-photo')
-            .on('click', function() {
-                // Just go to the image directly
-                // if they're on a mobile device
-                if (UA.isMobile()) {
-                    document.location = $(this).data('large');
-                // Otherwise, show the litebox
-                } else {
-                    $('.lightbox-img')
-                        .attr('src', $(this).data('large'))
-                        .on('click', function() {
-                            var $activePhoto;
+              var $activePhoto;
 
-                            go('next');
+              go('next');
 
-                            $activePhoto = $('.slideshow-item--active').find('.slideshow-photo');
-                            $('.lightbox-img')
-                                .css('cursor', 'pointer')
-                                .attr('src', $activePhoto.data('large'));
-                        });
-
-                    $('.lightbox').lightbox_me({
-                        centered: true,
-                        closeSelector: '.lightbox-close',
-                        overlayCSS: { 'background-color': 'rgba(0,0,0,.7)' }
-                    });
-                }
+              $activePhoto = $('.slideshow-item--active').find('.slideshow-photo');
+              $('.lightbox-img')
+                .css('cursor', 'pointer')
+                .attr('src', $activePhoto.data('large'));
             });
 
-        if (!UA.isMobile()) {
-            $wrapper
-                .find('.slideshow-photo')
-                .each(function() {
-                    var img = new Image();
-                    img.src = $(this).data('large');
-                });
+          $('.lightbox').lightbox_me({
+            centered: true,
+            closeSelector: '.lightbox-close',
+            overlayCSS: {
+              'background-color': 'rgba(0,0,0,.7)'
+            }
+          });
         }
+      });
 
-    });
+    if (!UA.isMobile()) {
+      $wrapper
+        .find('.slideshow-photo')
+        .each(function() {
+          var img = new Image();
+          img.src = $(this).data('large');
+        });
+    }
+
+  });
 };

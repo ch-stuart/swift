@@ -1,52 +1,51 @@
 html, body {
-    height: 100%;
+  height: 100%;
 }
 .shoppin-cart {
-    background-color: #fff;
-    padding: 10px;
-    height: 100%;
+  background-color: #fff;
+  padding: 10px;
+  height: 100%;
 }
 .shoppin-cart__header {
-    font-weight: bold;
-    color: #333;
+  font-weight: bold;
+  color: #333;
 }
 
 .shoppin-cart__quantity {
-    width: 3.5em !important;
+  width: 3.5em !important;
 }
 
 .shoppin-cart__cart-price-row {
-    border-top: 1px solid lighten($border_gray, 10%);
-    border-bottom: 1px solid lighten($border_gray, 10%);
+  border-top: 1px solid lighten($border_gray, 10%);
+  border-bottom: 1px solid lighten($border_gray, 10%);
 }
 .shoppin-cart__fabric-charge-notice {
-    margin-top: 30px;
+  margin-top: 30px;
 
-    h6, li {
-        color: #444;
-    }
-    h6 {
-        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
+  h6, li {
+    color: #444;
+  }
+  h6 {
+    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
 }
 .shoppin-cart__fabric-charge-notice__ul {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .shoppin-cart__toolbar {
-    margin-top: 20px !important;
-    text-align: right;
+  margin-top: 20px !important;
+  text-align: right;
 }
 
 .demph {
-    font-size: 90%;
-    color: #777;
+  font-size: 90%;
+  color: #777;
 }
 
 .shoppin-cart__part-list {
+  margin-bottom: 0;
+  li: last-child {
     margin-bottom: 0;
-
-    li:last-child {
-        margin-bottom: 0;
-    };
+  }
 }

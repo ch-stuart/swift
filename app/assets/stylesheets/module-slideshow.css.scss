@@ -1,88 +1,84 @@
 .slideshow-wrapper {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .slideshow-photo-wrapper {
-    position: relative;
-    @extend .media-bg;
+  position: relative;
+  @extend .media-bg;
 }
 .slideshow-photo {
-    max-width: 100%;
-    max-height: 333px;
-    display: block;
-    margin: 0 auto;
-    cursor: -webkit-zoom-in;
-    cursor: -moz-zoom-in;
+  max-width: 100%;
+  max-height: 333px;
+  display: block;
+  margin: 0 auto;
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: zoom-in;
 }
 .slideshow-desc {
-    margin: 0;
-    font-family: helvetica, sans-serif;
-    padding: 5px;
-    background-color: $background_gray;
-    position: relative;
+  margin: 0;
+  font-family: helvetica, sans-serif;
+  padding: 5px;
+  background-color: $background_gray;
+  position: relative;
 }
 .slideshow-nav-item {
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-
-    background-color: #fff;
-    font-size: 30px;
-    padding: 10px;
-    opacity: 0.9;
-    color: #222;
-
-    font-family: georgia, serif;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  background-color: #fff;
+  font-size: 30px;
+  padding: 10px;
+  opacity: 0.9;
+  color: #222;
+  font-family: georgia, serif;
 }
 .slideshow-nav--next {
-    right: 0;
+  right: 0;
 }
 .slideshow-nav--previous {
-    left: 0;
+  left: 0;
 }
 .slideshow-info--flickr-link {
-    font-weight: normal;
-    text-transform: lowercase;
-    color: #888;
-    font-size: 80%;
-    font-family: helvetica neue, helvetica, arial, sans-serif;
+  font-weight: normal;
+  text-transform: lowercase;
+  color: #888;
+  font-size: 80%;
+  font-family: helvetica neue, helvetica, arial, sans-serif;
 }
 
 .lightbox {
-    display: none;
-    position: relative;
-    max-width: 80%;
+  display: none;
+  position: relative;
+  max-width: 80%;
 }
 .lightbox-img {
-    max-width: 100%;
+  max-width: 100%;
 }
 .lightbox-close {
-    background-image: url(/assets/closebox.png);
-    background-repeat: no-repeat;
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
+  background-image: url(/assets/closebox.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
-
 .pin-it-button-wrapper {
-    position: absolute;
-    bottom: 0;
-    left: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 5px;
 }
-
-
 .slideshow__no-photos {
-    height: 240px;
-    border: 1px solid #ddd;
-    margin: 10px 0;
-    display: table;
+  height: 240px;
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  display: table;
 }
 .slideshow__no-photos-text {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    padding-right: 20%;
-    padding-left: 20%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  padding-right: 20%;
+  padding-left: 20%;
 }
