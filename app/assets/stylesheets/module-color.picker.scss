@@ -1,35 +1,35 @@
 .color-picker--wrapper {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 .color-picker--swatch {
-    padding: 4px;
-    width: 50%;
-    height: 55px;
-    float: left;
-    color: #fff;
-    font-size: 13px;
-    cursor: pointer;
-    font-family: Lucida Grande, Calibri, sans-serif;
-    font-weight: bold;
+  padding: 4px;
+  width: 50%;
+  height: 55px;
+  float: left;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: Lucida Grande, Calibri, sans-serif;
+  font-weight: bold;
 }
 
 .color-picker--change {
-    float: left;
+  float: left;
 }
 .color-picker--swatches {
-    margin-right: 15px;
-    float: left;
+  margin-right: 15px;
+  float: left;
 }
 .color-picker--swatch-selected {
-    margin-right: 15px;
-    width: 40%;
-    line-height: 1.1;
-    height: 70px;
+  margin-right: 15px;
+  width: 40%;
+  line-height: 1.1;
+  height: 70px;
 }
 @media only screen and (min-width: 768px) {
-    .color-picker--swatch-selected {
-        width: 50%;
-        line-height: 1.2;
-        height: 55px;
-    }
+  .color-picker--swatch-selected {
+    width: 50%;
+    line-height: 1.2;
+    height: 55px;
+  }
 }

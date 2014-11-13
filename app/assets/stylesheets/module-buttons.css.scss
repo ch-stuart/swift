@@ -1,67 +1,67 @@
 .btn-bike {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    display: block;
-    background: transparent image-url('swift-bike.png') no-repeat;
-    cursor: pointer;
-    font-size: 14px;
-    width: 150px;
-    height: 81px;
-    text-align: center;
-    text-transform: uppercase;
-    font-family: courier new, menlo, monaco;
-    font-weight: bold;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: block;
+  background: transparent image-url('swift-bike.png') no-repeat;
+  cursor: pointer;
+  font-size: 14px;
+  width: 150px;
+  height: 81px;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: courier new, menlo, monaco;
+  font-weight: bold;
 }
 a.btn-bike {
-    line-height: 104px !important;
+  line-height: 104px !important;
 }
 button.btn-bike {
-    padding-top: 23px;
+  padding-top: 23px;
 }
 
 .btn {
-    /* Structure */
-    display: inline-block;
-    *display: inline; /*IE 6/7*/
-    zoom: 1;
-    line-height: normal;
-    white-space: nowrap;
-    vertical-align: baseline;
-    text-align: center;
-    cursor: pointer;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    user-select: none;
-    font-family: inherit;
-    font-size: 100%;
-    padding: 0.5em 1em;
-    color: #666;
-    border: 1px solid #999;  /*IE 6/7/8*/
-    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
-    background-color: #E6E6E6;
-    text-decoration: none;
-    border-radius: 2px;
+  /* Structure */
+  display: inline-block;
+  *display: inline; /*IE 6/7*/
+  zoom: 1;
+  line-height: normal;
+  white-space: nowrap;
+  vertical-align: baseline;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+  font-family: inherit;
+  font-size: 100%;
+  padding: 0.5em 1em;
+  color: #666;
+  border: 1px solid #999;  /*IE 6/7/8*/
+  border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+  background-color: #E6E6E6;
+  text-decoration: none;
+  border-radius: 2px;
 }
 .btn--table {
-    padding: 0.2em 0.8em;
-    font-size: 90%;
+  padding: 0.2em 0.8em;
+  font-size: 90%;
 }
 
 a.btn,
 a.btn:visited {
-    color: #666;
+  color: #666;
 }
 a.btn:hover {
-    border: 0;
+  border: 0;
 }
 .btn-primary {
-    background-color: #E328BB;
-    color: #fff;
+  background-color: #E328BB;
+  color: #fff;
 }
 
 /* Firefox: Get rid of the inner focus border */
 .btn::-moz-focus-inner {
-    padding: 0;
-    border: 0;
+  padding: 0;
+  border: 0;
 }

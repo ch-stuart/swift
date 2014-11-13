@@ -1,44 +1,44 @@
 /*global jQuery $ window */
 jQuery.fn.tabs = function(params) {
 
-    var defaults = {
-            'tabs': '.tab',
-            'cards': '.card',
-            'index': '0'
-        },
-        loc = window.location;
+  var defaults = {
+    'tabs': '.tab',
+    'cards': '.card',
+    'index': '0'
+  },
+    loc = window.location;
 
-    if (loc.hash.indexOf('tab')) {
-        defaults.index = loc.hash.replace('#tab', '');
-    }
+  if (loc.hash.indexOf('tab')) {
+    defaults.index = loc.hash.replace('#tab', '');
+  }
 
-    params = $.extend(defaults, params);
+  params = $.extend(defaults, params);
 
-    return this.each(function() {
-        var $tabWrapper = $(this);
+  return this.each(function() {
+    var $tabWrapper = $(this);
 
-        var set = function(idx) {
-            $tabWrapper
-                .find(params.tabs)
-                .removeClass('active')
-                .eq(idx)
-                .addClass('active');
+    var set = function(idx) {
+      $tabWrapper
+        .find(params.tabs)
+        .removeClass('active')
+        .eq(idx)
+        .addClass('active');
 
-            $tabWrapper
-                .find(params.cards)
-                .removeClass('active')
-                .eq(idx)
-                .addClass('active');
+      $tabWrapper
+        .find(params.cards)
+        .removeClass('active')
+        .eq(idx)
+        .addClass('active');
 
-            loc.hash = '#tab'+idx;
-        };
+      loc.hash = '#tab' + idx;
+    };
 
-        set(params.index);
+    set(params.index);
 
-        $tabWrapper.on('click', params.tabs, function(e) {
-            e.preventDefault();
-            set( $(this).index() );
-        });
-
+    $tabWrapper.on('click', params.tabs, function(e) {
+      e.preventDefault();
+      set($(this).index());
     });
+
+  });
 };

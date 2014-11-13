@@ -1,17 +1,16 @@
 .card {
-    display: none;
+  display: none;
 
-    &.active {
-        display: block;
-    }
+  &.active {
+    display: block;
+  }
 }
-
 .tab {
-    cursor: pointer;
-    display: inline-block;
-    padding: 4px 6px;
-    margin: 5px;
+  cursor: pointer;
+  display: inline-block;
+  padding: 4px 6px;
+  margin: 5px;
 }
 .tab.active {
-    background-color: #ffa;
+  background-color: #ffa;
 }

@@ -1,41 +1,42 @@
 .hl-link,
 .hl-link:visited {
-    color: $hotpink;
+  color: $hotpink;
 
-    &:hover {
-        color: $hotpink;
-        border-bottom: 1px solid $hotpink;
-    }
+  &:hover {
+    color: $hotpink;
+    border-bottom: 1px solid $hotpink;
+  }
+
 }
 
 // TODO
 //
 // - move to module
 .front_door_sign {
-    background-color: $hotpink;
-    text-transform: none;
-    text-align: center;
-    color: #fff;
-    font-weight: normal;
-    font-size: 20px;
-    padding: 10px;
-    line-height: 1.2;
-    margin: -4px 0 0 0;
+  background-color: $hotpink;
+  text-transform: none;
+  text-align: center;
+  color: #fff;
+  font-weight: normal;
+  font-size: 20px;
+  padding: 10px;
+  line-height: 1.2;
+  margin: -4px 0 0 0;
 }
 .app-notice,
 .app-alert {
-    text-transform: none;
-    text-align: center;
-    color: #fff;
-    font-weight: normal;
-    font-size: 20px;
-    padding: 10px;
-    line-height: 1.2;
-    margin: -4px 0 0 0;
+  text-transform: none;
+  text-align: center;
+  color: #fff;
+  font-weight: normal;
+  font-size: 20px;
+  padding: 10px;
+  line-height: 1.2;
+  margin: -4px 0 0 0;
 }
 .app-alert {
-    background-color: #FF851B;
+  background-color: #FF851B;
 }
 .app-notice {
-    background-color: #39CCCC;
+  background-color: #39CCCC;
 }

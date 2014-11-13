@@ -38,29 +38,29 @@
 
 jQuery(document).ready(function($) {
 
-    $('#global-menu-btn').click(function() {
-        $(this).toggleClass('active');
-        $('#global-menu').slideToggle();
-    });
+  $('#global-menu-btn').click(function() {
+    $(this).toggleClass('active');
+    $('#global-menu').slideToggle();
+  });
 
-    // $(window).on('resize', function() {
-    //     $('#width').text( $(document.body).css('width') );
-    // });
+  // $(window).on('resize', function() {
+  //     $('#width').text( $(document.body).css('width') );
+  // });
 
-    // https://github.com/pivotal/cacheable-flash
-    Flash.transferFromCookies();
+  // https://github.com/pivotal/cacheable-flash
+  Flash.transferFromCookies();
 
-    // Don't show "Signed in successfully.",
-    // and don't throw an error if this fails
-    try {
-        if (Flash.data.notice === "Signed+in+successfully.") {
-            delete Flash.data.notice;
-        }
-        if (Flash.data.notice === "Welcome!+You+have+signed+up+successfully.") {
-            delete Flash.data.notice;
-        }
-    } catch (e) {}
+  // Don't show "Signed in successfully.",
+  // and don't throw an error if this fails
+  try {
+    if (Flash.data.notice === "Signed+in+successfully.") {
+      delete Flash.data.notice;
+    }
+    if (Flash.data.notice === "Welcome!+You+have+signed+up+successfully.") {
+      delete Flash.data.notice;
+    }
+  } catch (e) {}
 
-    Flash.writeDataTo('alert', $('#js_app-alert'));
-    Flash.writeDataTo('notice', $('#js_app-notice'));
+  Flash.writeDataTo('alert', $('#js_app-alert'));
+  Flash.writeDataTo('notice', $('#js_app-notice'));
 });

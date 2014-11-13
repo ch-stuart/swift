@@ -22,18 +22,15 @@ function add_fields(link, association, content) {
 }
 
 $.toggleColors = function() {
-    $('.color_label').on('click', function(e){
-        e.preventDefault();
-        $(this).closest('.color_fields').find('.color_boxes').slideToggle();
-    });
+  $('.color_label').on('click', function(e) {
+    e.preventDefault();
+    $(this).closest('.color_fields').find('.color_boxes').slideToggle();
+  });
 };
 
 jQuery(function() {
-    // https://github.com/pivotal/cacheable-flash
-    Flash.transferFromCookies();
-    Flash.writeDataTo('alert', $('#js_app-alert'));
-    Flash.writeDataTo('notice', $('#js_app-notice'));
-
+  // https://github.com/pivotal/cacheable-flash
+  Flash.transferFromCookies();
+  Flash.writeDataTo('alert', $('#js_app-alert'));
+  Flash.writeDataTo('notice', $('#js_app-notice'));
 });
-
-
