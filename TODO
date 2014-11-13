@@ -1,3 +1,8 @@
 ## TODO
 
 Store cart price, cart price with shipping with tax and shipping, tax price and shipping price
+
+- PRI1 is to get shipping/billing addresses
+- Add apply button to gift certs and coupons
+- Apply coupon code to only some products, or all. Deploy out v1 of this first
+- unstash tab changes on the tab branch
