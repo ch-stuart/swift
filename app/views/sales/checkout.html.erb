@@ -1,434 +1,434 @@
 <div ng-controller="CheckoutCtrl" ng-cloak>
-    <div class="twelve columns">
-        <h2>
-            Checkout
-        </h2>
+  <div class="twelve columns">
+    <h2>
+      Checkout
+    </h2>
+    <h4>
+      Shipping
+    </h4>
+    <div class="row row--order" id="row-shipping">
+      <form name="shippingForm" id="js-shipping-form" ng-submit="onCalculateShippingCostBtnClicked(shippingForm.$valid)" novalidate>
+        <div class="label-input-pair">
+          <label class="label">
+            <input
+              id="js-input-pickup"
+              type="checkbox"
+              ng-model="pickup"
+              ng-change="onPickupChanged()"> Check if you will be picking up your order
+          </label>
+        </div>
+        <div class="label-input-pair pickup-is-{{ pickup }}">
+          <label class="label">
+            Country
+          </label>
+          <select
+            id="js-input-country"
+            ng-change="onCountrySelectChanged()"
+            ng-model="country"
+            ng-options="k as v for (k,v) in countryCodes"
+            ng-disabled="pickup"
+            required
+            class="input">
+          </select>
+        </div>
+        <div class="label-input-pair pickup-is-{{ pickup }}">
+          <label class="label">
+            Street
+          </label>
+          <input
+            id="js-input-line1"
+            type="text"
+            ng-model="line1"
+            ng-disabled="pickup"
+            required>
+        </div>
+        <div class="label-input-pair pickup-is-{{ pickup }}">
+          <label class="label">
+            City
+          </label>
+          <input
+            id="js-input-city"
+            type="text"
+            ng-model="city"
+            ng-disabled="pickup"
+            required>
+        </div>
+        <div class="label-input-pair pickup-is-{{ pickup }}">
+          <label class="label">
+            State/Province
+          </label>
+          <input
+            id="js-input-state-not-usca"
+            type="text"
+            ng-model="state"
+            ng-hide="countryIsUSCA"
+            ng-disabled="pickup"
+            required>
+          <select
+            id="js-input-state"
+            ng-model="state"
+            ng-show="countryIsUSCA"
+            ng-options="k as v for (k,v) in states"
+            ng-disabled="pickup"
+            required
+            class="input">
+          </select>
+        </div>
+        <div class="label-input-pair pickup-is-{{ pickup }}">
+          <label class="label">
+            Zip/Postal Code
+          </label>
+          <input
+            id="js-input-zip"
+            type="text"
+            ng-model="zipCode"
+            ng-disabled="pickup"
+            required>
+        </div>
+        <div class="label-input-pair pickup-is-{{ pickup }}">
+          <label class="label">
+            Phone
+          </label>
+          <input
+            id="js-input-phone"
+            type="text"
+            ng-model="phoneNo"
+            ng-disabled="pickup"
+            required>
+        </div>
+        <div class="label-input-pair pickup-is-{{ pickup }}">
+          <label class="label">
+            Recipient's Name <span class="demph">(optional)</span>
+          </label>
+          <input
+            id="js-input-shipping-contact"
+            type="text"
+            ng-model="shippingContact"
+            ng-disabled="pickup">
+          <p class="label-input-pair__hint">
+            Sending a gift? Enter their name here.
+          </p>
+        </div>
+        <div ng-show="customerNeedsToVerifyAddress" class="label-input-pair pickup-is-{{ pickup }}">
+          <p class="woah">
+            It appears your address may be entered incorrectly.
+            Please double-check it and make any necessary corrections.
+            If it looks all good, tick the checkbox below.
+          </p>
+          <label class="label">
+          <input
+            type="checkbox"
+            ng-model="customerVerifiedAddress"
+            ng-disabled="pickup"> My address is entered correctly!
+          </label>
+        </div>
+        <div class="label-input-pair pickup-is-{{ pickup }}">
+          <button id="js-rates-submit" type="submit" class="btn btn--progress" ng-disabled="pickup || busyShipping">
+            <span sw-visible="!busyShipping">
+              Calculate Shipping Cost
+            </span>
+            <img sw-visible="busyShipping" src="/assets/spin.gif" class="btn--progress__spin">
+          </button>
+        </div>
+      </form>
+      <div ng-show="isShippingReady">
         <h4>
-            Shipping
+          Shipping Options
         </h4>
-        <div class="row row--order" id="row-shipping">
-            <form name="shippingForm" id="js-shipping-form" ng-submit="onCalculateShippingCostBtnClicked(shippingForm.$valid)" novalidate>
-                <div class="label-input-pair">
-                    <label class="label">
-                        <input
-                            id="js-input-pickup"
-                            type="checkbox"
-                            ng-model="pickup"
-                            ng-change="onPickupChanged()"> Check if you will be picking up your order
-                    </label>
-                </div>
-                <div class="label-input-pair pickup-is-{{ pickup }}">
-                    <label class="label">
-                        Country
-                    </label>
-                    <select
-                        id="js-input-country"
-                        ng-change="onCountrySelectChanged()"
-                        ng-model="country"
-                        ng-options="k as v for (k,v) in countryCodes"
-                        ng-disabled="pickup"
-                        required
-                        class="input">
-                    </select>
-                </div>
-                <div class="label-input-pair pickup-is-{{ pickup }}">
-                    <label class="label">
-                        Street
-                    </label>
-                    <input
-                        id="js-input-line1"
-                        type="text"
-                        ng-model="line1"
-                        ng-disabled="pickup"
-                        required>
-                </div>
-                <div class="label-input-pair pickup-is-{{ pickup }}">
-                    <label class="label">
-                        City
-                    </label>
-                    <input
-                      id="js-input-city"
-                        type="text"
-                        ng-model="city"
-                        ng-disabled="pickup"
-                        required>
-                </div>
-                <div class="label-input-pair pickup-is-{{ pickup }}">
-                    <label class="label">
-                        State/Province
-                    </label>
-                    <input
-                        id="js-input-state-not-usca"
-                        type="text"
-                        ng-model="state"
-                        ng-hide="countryIsUSCA"
-                        ng-disabled="pickup"
-                        required>
-                    <select
-                        id="js-input-state"
-                        ng-model="state"
-                        ng-show="countryIsUSCA"
-                        ng-options="k as v for (k,v) in states"
-                        ng-disabled="pickup"
-                        required
-                        class="input">
-                    </select>
-                </div>
-                <div class="label-input-pair pickup-is-{{ pickup }}">
-                    <label class="label">
-                        Zip/Postal Code
-                    </label>
-                    <input
-                        id="js-input-zip"
-                        type="text"
-                        ng-model="zipCode"
-                        ng-disabled="pickup"
-                        required>
-                </div>
-                <div class="label-input-pair pickup-is-{{ pickup }}">
-                    <label class="label">
-                        Phone
-                    </label>
-                    <input
-                        id="js-input-phone"
-                        type="text"
-                        ng-model="phoneNo"
-                        ng-disabled="pickup"
-                        required>
-                </div>
-                <div class="label-input-pair pickup-is-{{ pickup }}">
-                    <label class="label">
-                        Recipient's Name <span class="demph">(optional)</span>
-                    </label>
-                    <input
-                        id="js-input-shipping-contact"
-                        type="text"
-                        ng-model="shippingContact"
-                        ng-disabled="pickup">
-                    <p class="label-input-pair__hint">
-                        Sending a gift? Enter their name here.
-                    </p>
-                </div>
-                <div ng-show="customerNeedsToVerifyAddress" class="label-input-pair pickup-is-{{ pickup }}">
-                    <p class="woah">
-                        It appears your address may be entered incorrectly.
-                        Please double-check it and make any necessary corrections.
-                        If it looks all good, tick the checkbox below.
-                    </p>
-                    <label class="label">
-                    <input
-                        type="checkbox"
-                        ng-model="customerVerifiedAddress"
-                        ng-disabled="pickup"> My address is entered correctly!
-                    </label>
-                </div>
-                <div class="label-input-pair pickup-is-{{ pickup }}">
-                    <button id="js-rates-submit" type="submit" class="btn btn--progress" ng-disabled="pickup || busyShipping">
-                        <span sw-visible="!busyShipping">
-                            Calculate Shipping Cost
-                        </span>
-                        <img sw-visible="busyShipping" src="/assets/spin.gif" class="btn--progress__spin">
-                    </button>
-                </div>
-            </form>
-            <div ng-show="isShippingReady">
-                <h4>
-                    Shipping Options
-                </h4>
-                <p ng-hide="isShippingDomestic">
-                    For international shipping, we offer USPS. UPS and Fedex are not available.
-                </p>
-                <select
-                    ng-show="isShippingDomestic"
-                    ng-options="k as v for (k,v) in domesticServiceLevels"
-                    ng-model="shippingServiceLevel"
-                    ng-change="onShippingServiceLevelChange()"
-                    id="js-domestic-shipping-service-levels"
-                    class="input">
-                </select>
-                <select
-                    ng-hide="isShippingDomestic"
-                    ng-options="k as v for (k,v) in intlServiceLevels"
-                    ng-model="shippingServiceLevel"
-                    ng-change="onShippingServiceLevelChange()"
-                    id="js-intl-shipping-service-levels"
-                    class="input">
-                </select>
-                <p class="pickup-is-{{ pickup }} best-price-{{ provider.best }}" ng-repeat="provider in rates">
-                    <label>
-                        <input
-                            type="radio"
-                            id="js-best-price-{{ provider.best }}"
-                            ng-checked="provider.best"
-                            name="shippingRadio"
-                            ng-model="selectedRate"
-                            value="{{ provider.provider }}:{{ provider.service }}:{{ provider.charge }}"
-                            ng-change="onRatesRadioChanged(provider)">
-                        {{ provider.provider | uppercase }}: {{ provider.charge / 100 | currency }}
-                    </label>
-                </p>
-            </div>
+        <p ng-hide="isShippingDomestic">
+          For international shipping, we offer USPS. UPS and Fedex are not available.
+        </p>
+        <select
+          ng-show="isShippingDomestic"
+          ng-options="k as v for (k,v) in domesticServiceLevels"
+          ng-model="shippingServiceLevel"
+          ng-change="onShippingServiceLevelChange()"
+          id="js-domestic-shipping-service-levels"
+          class="input">
+        </select>
+        <select
+          ng-hide="isShippingDomestic"
+          ng-options="k as v for (k,v) in intlServiceLevels"
+          ng-model="shippingServiceLevel"
+          ng-change="onShippingServiceLevelChange()"
+          id="js-intl-shipping-service-levels"
+          class="input">
+        </select>
+        <p class="pickup-is-{{ pickup }} best-price-{{ provider.best }}" ng-repeat="provider in rates">
+          <label>
+            <input
+              type="radio"
+              id="js-best-price-{{ provider.best }}"
+              ng-checked="provider.best"
+              name="shippingRadio"
+              ng-model="selectedRate"
+              value="{{ provider.provider }}:{{ provider.service }}:{{ provider.charge }}"
+              ng-change="onRatesRadioChanged(provider)">
+            {{ provider.provider | uppercase }}: {{ provider.charge / 100 | currency }}
+          </label>
+        </p>
+      </div>
+    </div>
+    <div ng-show="pickup && !WS" id="row-wa-tax-check">
+      <h4>
+        Do you live in the state of Washington?
+      </h4>
+      <p>
+        We ask in order to charge taxes appropriately.
+      </p>
+      <div class="row row--order">
+        <div class="label-input-pair">
+          <label class="label">
+            <input type="checkbox" ng-model="waStateResident" ng-change="waStateResidentChanged()">
+            Washington state resident?
+          </label>
         </div>
-        <div ng-show="pickup && !WS" id="row-wa-tax-check">
-            <h4>
-                Do you live in the state of Washington?
-            </h4>
-            <p>
-                We ask in order to charge taxes appropriately.
+      </div>
+    </div>
+    <form name="contactAndPaymentForm" ng-submit="onBuyItButtonClicked(contactAndPaymentForm.$valid)" novalidate>
+      <div ng-show="isShippingReady || pickup" id="row-contact">
+        <h4>
+          Contact info
+        </h4>
+        <div class="row row--order">
+          <div class="label-input-pair">
+            <label class="label">
+              Name
+            </label>
+            <input
+              type="text"
+              ng-model="contact"
+              required>
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              Company <span class="demph">(optional)</span>
+            </label>
+            <input type="text" ng-model="company">
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              Email Address
+            </label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              ng-model="email"
+              required>
+            <p class="label-input-pair__hint">
+              We will email you at this address when you're product is ready to pickup or ship.
             </p>
-            <div class="row row--order">
-                <div class="label-input-pair">
-                    <label class="label">
-                        <input type="checkbox" ng-model="waStateResident" ng-change="waStateResidentChanged()">
-                        Washington state resident?
-                    </label>
-                </div>
-            </div>
+          </div>
+          <div class="label-input-pair">
+            <label><input name="sendMeMarketingEmails" type="checkbox"> Send me product, promo, and event updates!</label>
+          </div>
         </div>
-        <form name="contactAndPaymentForm" ng-submit="onBuyItButtonClicked(contactAndPaymentForm.$valid)" novalidate>
-            <div ng-show="isShippingReady || pickup" id="row-contact">
-                <h4>
-                    Contact info
-                </h4>
-                <div class="row row--order">
-                    <div class="label-input-pair">
-                        <label class="label">
-                            Name
-                        </label>
-                        <input
-                            type="text"
-                            ng-model="contact"
-                            required>
-                    </div>
-                    <div class="label-input-pair">
-                        <label class="label">
-                            Company <span class="demph">(optional)</span>
-                        </label>
-                        <input type="text" ng-model="company">
-                    </div>
-                    <div class="label-input-pair">
-                        <label class="label">
-                            Email Address
-                        </label>
-                        <input
-                            type="email"
-                            placeholder="you@example.com"
-                            ng-model="email"
-                            required>
-                        <p class="label-input-pair__hint">
-                            We will email you at this address when you're product is ready to pickup or ship.
-                        </p>
-                    </div>
-                    <div class="label-input-pair">
-                        <label><input name="sendMeMarketingEmails" type="checkbox"> Send me product, promo, and event updates!</label>
-                    </div>
-                </div>
-            </div>
-            <div ng-show="isShippingReady || pickup">
-                <h4>
-                    Gift Certificate
-                </h4>
-                <p ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
-                    Your gift certificate covers the amount due. Click "Buy It" to complete your purchase.
-                </p>
-                <div class="row row--order">
-                    <div class="label-input-pair">
-                        <label class="label">
-                            Redemption Code
-                        </label>
-                        <input
-                            type="text"
-                            ng-model="giftCertificateRedemptionCode"
-                            ng-change="onGiftCertificateRedemptionCodeChanged()"
-                            ng-blur="onGiftCertificateRedemptionCodeBlur()">
-                    </div>
-                    <div class="label-input-pair" ng-show="giftCertificateError">
-                        <p style="color:red">
-                            {{ giftCertificateError }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row row--order" ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
-                    <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
-                        <span sw-visible="!busyBuying">
-                            Buy It
-                        </span>
-                        <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
-                    </button>
-                </div>
-            </div>
-            <div ng-show="isShippingReady || pickup">
-                <h4>
-                    Coupon
-                </h4>
-                <div class="row row--order">
-                    <div class="label-input-pair">
-                        <label class="label">
-                            Coupon Code
-                        </label>
-                        <input
-                            type="text"
-                            ng-model="couponCode"
-                            ng-change="onCouponCodeChanged()"
-                            ng-blur="onCouponCodeBlur()">
-                    </div>
-                    <div class="label-input-pair" ng-show="couponError">
-                        <p style="color:red">
-                            {{ couponError }}
-                        </p>
-                    </div>
-                    <div class="label-input-pair" ng-show="coupon">
-                        <p>
-                            Your coupon code entitles you to
-                            <span ng-if="coupon.cents_off">
-                                {{ (coupon.cents_off / 100) | currency }}
-                            </span>
-                            <span ng-if="coupon.percent_off">
-                                {{ coupon.percent_off }}%
-                            </span>
-                            off the price of your purchased products.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert != 0" id="row-payment">
-                <h4>
-                    Payment info
-                </h4>
-                <p>
-                    We accept Visa, MasterCard, American Express, JCB, Discover, and Diners Club.
-                </p>
-                <div class="row row--order">
-                    <div class="label-input-pair">
-                        <label class="label">
-                            Credit Card #
-                        </label>
-                        <input
-                            <% if Rails.env == "development" %>
-                              value="4242424242424242"
-                            <% end %>
-                            type="text"
-                            size="20"
-                            data-stripe="number"
-                            placeholder="**** **** **** ****"
-                            ng-pattern="[\d ]*"
-                            required>
-                    </div>
-                    <div class="label-input-pair">
-                        <label class="label">
-                            CVC
-                        </label>
-                        <input
-                            <% if Rails.env == "development" %>
-                              value="123"
-                            <% end %>
-                            style="width: 3em"
-                            type="text"
-                            size="3"
-                            ng-maxlength="3"
-                            data-stripe="cvc"
-                            placeholder="***"
-                            ng-pattern="\d*"
-                            required>
-                    </div>
-                    <div class="label-input-pair">
-                        <label class="label">
-                            Exp Month/Year
-                        </label>
-                        <input
-                            <% if Rails.env == "development" %>
-                              value="12"
-                            <% end %>
-                            style="width: 3em;"
-                            class="input--inline"
-                            type="text"
-                            size="2"
-                            ng-maxlength="2"
-                            data-stripe="exp-month"
-                            placeholder="MM"
-                            ng-pattern="\d*"
-                            required>
-                        <input
-                            <% if Rails.env == "development" %>
-                              value="2015"
-                            <% end %>
-                            style="width: 4em;"
-                            class="input--inline"
-                            type="text"
-                            size="4"
-                            ng-maxlength="4"
-                            id="exp-year"
-                            data-stripe="exp-year"
-                            placeholder="YYYY"
-                            ng-pattern="\d*"
-                            required>
-                    </div>
-                </div>
-                <div class="row row--order">
-                    <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
-                        <span sw-visible="!busyBuying">
-                            Buy It
-                        </span>
-                        <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="four columns">
-        <div class="sticky-order-column" sticky offset="5" min-width="768">
-            <div class="row row--checkout-sidebar">
-                <h4>
-                    Your Order
-                </h4>
-            </div>
-            <div class="row row--checkout-sidebar">
-                <b>Items in Cart</b>:
-                <ul ng-repeat="product in cart.products">
-                    <li>
-                        {{ product.title }}
-                        <span class="demph" title="Quantity: {{ product.quantity }}">
-                            ({{ product.quantity }})
-                        </span>
-                    </li>
-                </ul>
-            </div>
-            <div class="row row--checkout-sidebar" ng-show="cart.taxAmount">
-                <b>WA State Tax Amount</b>:
-                {{ cart.taxAmount / 100 | currency }}
-            </div>
-            <div class="row row--checkout-sidebar" ng-show="cart.shippingCharge">
-                <b>Shipping</b>:
-                {{ cart.shippingCharge / 100 | currency }}
-            </div>
-            <div class="row row--checkout-sidebar" ng-show="cart.giftCertApplied">
-                <b>Gift Certificate</b>:
-                {{ cart.giftCertApplied / 100 | currency }}
-                <br>
-                <span class="demph">
-                  {{ cart.giftCertRemain / 100 | currency }} available.
-                </span>
-            </div>
-            <div class="row row--checkout-sidebar" ng-hide="cart.giftCertApplied">
-                <b>Total Price</b>:
-                {{ cart.total / 100 | currency }}
-            </div>
-            <div class="row row--checkout-sidebar" ng-show="cart.giftCertApplied">
-                <b>Total Price</b>:
-                ({{ cart.total / 100 | currency }}
-                - {{ cart.giftCertApplied / 100 | currency }})
-                = {{ cart.totalWithGiftCert / 100 | currency }}
-            </div>
+      </div>
+      <div ng-show="isShippingReady || pickup">
+        <h4>
+          Gift Certificate
+        </h4>
+        <p ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
+          Your gift certificate covers the amount due. Click "Buy It" to complete your purchase.
+        </p>
+        <div class="row row--order">
+          <div class="label-input-pair">
+            <label class="label">
+              Redemption Code
+            </label>
+            <input
+              type="text"
+              ng-model="giftCertificateRedemptionCode"
+              ng-change="onGiftCertificateRedemptionCodeChanged()"
+              ng-blur="onGiftCertificateRedemptionCodeBlur()">
+          </div>
+          <div class="label-input-pair" ng-show="giftCertificateError">
+            <p style="color:red">
+              {{ giftCertificateError }}
+            </p>
+          </div>
         </div>
+        <div class="row row--order" ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
+          <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
+            <span sw-visible="!busyBuying">
+              Buy It
+            </span>
+            <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
+          </button>
+        </div>
+      </div>
+      <div ng-show="isShippingReady || pickup">
+        <h4>
+          Coupon
+        </h4>
+        <div class="row row--order">
+          <div class="label-input-pair">
+            <label class="label">
+              Coupon Code
+            </label>
+            <input
+              type="text"
+              ng-model="couponCode"
+              ng-change="onCouponCodeChanged()"
+              ng-blur="onCouponCodeBlur()">
+          </div>
+          <div class="label-input-pair" ng-show="couponError">
+            <p style="color:red">
+              {{ couponError }}
+            </p>
+          </div>
+          <div class="label-input-pair" ng-show="coupon">
+            <p>
+              Your coupon code entitles you to
+              <span ng-if="coupon.cents_off">
+                {{ (coupon.cents_off / 100) | currency }}
+              </span>
+              <span ng-if="coupon.percent_off">
+                {{ coupon.percent_off }}%
+              </span>
+              off the price of your purchased products.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert != 0" id="row-payment">
+        <h4>
+          Payment info
+        </h4>
+        <p>
+          We accept Visa, MasterCard, American Express, JCB, Discover, and Diners Club.
+        </p>
+        <div class="row row--order">
+          <div class="label-input-pair">
+            <label class="label">
+              Credit Card #
+            </label>
+            <input
+              <% if Rails.env == "development" %>
+                value="4242424242424242"
+              <% end %>
+              type="text"
+              size="20"
+              data-stripe="number"
+              placeholder="**** **** **** ****"
+              ng-pattern="[\d ]*"
+              required>
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              CVC
+            </label>
+            <input
+              <% if Rails.env == "development" %>
+                value="123"
+              <% end %>
+              style="width: 3em"
+              type="text"
+              size="3"
+              ng-maxlength="3"
+              data-stripe="cvc"
+              placeholder="***"
+              ng-pattern="\d*"
+              required>
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              Exp Month/Year
+            </label>
+            <input
+              <% if Rails.env == "development" %>
+                value="12"
+              <% end %>
+              style="width: 3em;"
+              class="input--inline"
+              type="text"
+              size="2"
+              ng-maxlength="2"
+              data-stripe="exp-month"
+              placeholder="MM"
+              ng-pattern="\d*"
+              required>
+            <input
+              <% if Rails.env == "development" %>
+                value="2015"
+              <% end %>
+              style="width: 4em;"
+              class="input--inline"
+              type="text"
+              size="4"
+              ng-maxlength="4"
+              id="exp-year"
+              data-stripe="exp-year"
+              placeholder="YYYY"
+              ng-pattern="\d*"
+              required>
+          </div>
+        </div>
+        <div class="row row--order">
+          <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
+            <span sw-visible="!busyBuying">
+              Buy It
+            </span>
+            <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="four columns">
+    <div class="sticky-order-column" sticky offset="5" min-width="768">
+      <div class="row row--checkout-sidebar">
+        <h4>
+          Your Order
+        </h4>
+      </div>
+      <div class="row row--checkout-sidebar">
+        <b>Items in Cart</b>:
+        <ul ng-repeat="product in cart.products">
+          <li>
+            {{ product.title }}
+            <span class="demph" title="Quantity: {{ product.quantity }}">
+              ({{ product.quantity }})
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="row row--checkout-sidebar" ng-show="cart.taxAmount">
+        <b>WA State Tax Amount</b>:
+        {{ cart.taxAmount / 100 | currency }}
+      </div>
+      <div class="row row--checkout-sidebar" ng-show="cart.shippingCharge">
+        <b>Shipping</b>:
+        {{ cart.shippingCharge / 100 | currency }}
+      </div>
+      <div class="row row--checkout-sidebar" ng-show="cart.giftCertApplied">
+        <b>Gift Certificate</b>:
+        {{ cart.giftCertApplied / 100 | currency }}
+        <br>
+        <span class="demph">
+          {{ cart.giftCertRemain / 100 | currency }} available.
+        </span>
+      </div>
+      <div class="row row--checkout-sidebar" ng-hide="cart.giftCertApplied">
+        <b>Total Price</b>:
+        {{ cart.total / 100 | currency }}
+      </div>
+      <div class="row row--checkout-sidebar" ng-show="cart.giftCertApplied">
+        <b>Total Price</b>:
+        ({{ cart.total / 100 | currency }}
+        - {{ cart.giftCertApplied / 100 | currency }})
+        = {{ cart.totalWithGiftCert / 100 | currency }}
+      </div>
     </div>
+  </div>
 </div>
 <%= content_for :js do %>
-    <script src="https://js.stripe.com/v2/"></script>
-    <script>
-        var key = '<%= Rails.configuration.stripe[:publishable_key] %>';
-        if (!key.length) {
-            throw new Error('Stripe#setPublishableKey: Missing publishable key. Shopping cart is broken!');
-        }
-        Stripe.setPublishableKey(key);
-    </script>
+  <script src="https://js.stripe.com/v2/"></script>
+  <script>
+    var key = '<%= Rails.configuration.stripe[:publishable_key] %>';
+    if (!key.length) {
+      throw new Error('Stripe#setPublishableKey: Missing publishable key. Shopping cart is broken!');
+    }
+    Stripe.setPublishableKey(key);
+  </script>
 <% end %>
