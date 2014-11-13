@@ -16,16 +16,25 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :published %>
-    <%= f.check_box :published %>
+    <label for="coupon_published">
+      <%= f.check_box :published %>
+      Published?
+    </label>
+    <br>
   </div>
   <div class="field">
     <%= f.label :percent_off %>
     <%= f.number_field :percent_off, class: "input--dim" %>
   </div>
-  <div class="field">
+  <div class="field" id="js-centsOff">
     <%= f.label :cents_off %>
-    <%= f.number_field :cents_off, class: "input--dim" %>
+    <%= f.number_field :cents_off, class: "input--dim", :'v-model' => "centsOff" %>
+    <p class="hint">
+      Enter the amount off in cents.
+      <span v-show="centsOff">
+        ({{ (centsOff / 100) | currency }})
+      </span>
+    </p>
   </div>
   <div class="field">
     <%= f.label :code %>
@@ -49,4 +58,9 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+<% end %>
+<%= content_for :js do %>
+    <script>
+        new Vue({ el: '#js-centsOff' });
+    </script>
 <% end %>
