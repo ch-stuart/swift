@@ -270,7 +270,7 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             }
         },
         // Retrieve gift certificate value
-        getGiftCertificateValue: function(guid) {
+        getGiftCertValue: function(guid) {
             var request = $q.defer(),
                 that = this;
 
@@ -292,7 +292,7 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             return request.promise;
         },
         // Null gift certificate value
-        nullGiftCertificateValue: function() {
+        nullGiftCertValue: function() {
             this.giftCertRemain = null;
             this.getPrice();
         },

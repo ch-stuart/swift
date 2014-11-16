@@ -236,15 +236,24 @@
             <label class="label">
               Redemption Code
             </label>
-            <input
-              type="text"
-              ng-model="giftCertificateRedemptionCode"
-              ng-change="onGiftCertificateRedemptionCodeChanged()"
-              ng-blur="onGiftCertificateRedemptionCodeBlur()">
+            <div class="Grid">
+              <div class="Grid-unit">
+                <input
+                  type="text"
+                  ng-model="giftCertCode"
+                  ng-change="onGiftCertCodeChanged()"
+                  ng-blur="onGiftCertCodeBlur()">
+              </div>
+              <div class="Grid-unit">
+                <button ng-click="onGiftCertCodeBtnClicked()" class="btn">
+                  Apply
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="label-input-pair" ng-show="giftCertificateError">
+          <div class="label-input-pair" ng-show="giftCertError">
             <p style="color:red">
-              {{ giftCertificateError }}
+              {{ giftCertError }}
             </p>
           </div>
         </div>
@@ -266,11 +275,20 @@
             <label class="label">
               Coupon Code
             </label>
-            <input
-              type="text"
-              ng-model="couponCode"
-              ng-change="onCouponCodeChanged()"
-              ng-blur="onCouponCodeBlur()">
+            <div class="Grid">
+              <div class="Grid-unit">
+                <input
+                  type="text"
+                  ng-model="couponCode"
+                  ng-change="onCouponCodeChanged()"
+                  ng-blur="onCouponCodeBlur()">
+              </div>
+              <div class="Grid-unit">
+                <button ng-click="onCouponCodeBtnClicked()" class="btn">
+                  Apply
+                </button>
+              </div>
+            </div>
           </div>
           <div class="label-input-pair" ng-show="couponError">
             <p style="color:red">

@@ -1,0 +1,10 @@
+.Grid {
+  display: flex;
+}
+.Grid-unit {
+  padding-left: 10px;
+
+  &:first-of-type {
+    padding-left: 0;
+  }
+}
