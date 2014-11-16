@@ -98,6 +98,10 @@ GEM
       test-unit (~> 2.2)
     haml (4.0.5)
       tilt
+    heroku_rails_deflate (1.0.3)
+      actionpack (>= 3.2.13)
+      activesupport (>= 3.2.13)
+      rack (>= 1.4.5)
     highline (1.6.21)
     hike (1.2.3)
     httpclient (2.3.4.1)
@@ -249,6 +253,7 @@ DEPENDENCIES
   guard
   guard-shell
   guard-test
+  heroku_rails_deflate
   httpclient
   jquery-rails (~> 2.2.1)
   mandrill-api

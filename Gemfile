@@ -34,6 +34,7 @@ end
 
 group :production do
   gem 'foreman'
+  gem 'heroku_rails_deflate'
 end
 
 group :development do
