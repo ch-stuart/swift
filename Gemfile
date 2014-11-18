@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.17'
+gem 'rails', '~> 3.2.21'
 gem 'pg', '0.17.1'
 gem "thin"
 gem 'flickraw', '0.9.8'
 gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails', '~> 2.2.1'
-gem 'angularjs-rails', '~> 1.2.16'
+gem 'angularjs-rails', '~> 1.2.26'
 gem 'dalli' # memcachier
 gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
@@ -25,9 +25,9 @@ gem 'awesome_print'
 gem 'rails_12factor'
 
 group :assets do
-  gem 'sass-rails', '~> 3.2.3 '
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails', '~> 3.2.6'
+  gem 'coffee-rails', '~> 3.2.2'
+  gem 'uglifier', '~> 2.5.3'
   gem "autoprefixer-rails"
   gem "underscore-rails"
 end
@@ -43,7 +43,6 @@ group :development do
   gem 'guard'
   gem 'guard-test'
   gem 'guard-shell'
-  gem 'brakeman'
   gem 'table_print'
 end
 
