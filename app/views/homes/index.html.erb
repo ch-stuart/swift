@@ -50,11 +50,11 @@
     <div class="eight columns">
       <article class="blog">
         <h3>
-          <%= @blog['title'] %>
+          <%= @blog["title"] %>
         </h3>
         <p>
-          <%= image_tag @blog['img'], :class => "blog_img" %>
-          <%= raw @blog['description'] %>
+          <%= image_tag "#{@blog['img']}?w=300", class: "blog_img", srcset: "#{@blog['img']}?w=420 420w, #{@blog['img']}?w=640 640w" %>
+          <%= raw @blog["description"] %>
         </p>
         <p>
           <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'], :class => "hl-link" %>

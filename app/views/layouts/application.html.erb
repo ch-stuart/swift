@@ -46,7 +46,7 @@
         <i id="global-menu-btn" class="entypo entypo-menu">&#9776;</i>
         <% cache 'fox_and_cart' do %>
           <a href="/" title="Home">
-            <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
+            <%= image_set_tag "fox-45.png", { "fox-45.png" => "2x" }, { class: "menu-fox img-fox" }%>
           </a>
           <a
               href="/cart"
@@ -73,7 +73,7 @@
       <div class="sixteen columns clearfix row-header" style="text-align: center">
         <h1 class="row-header--logo-wrap">
           <a href="/" class="row-header--link" title="Go Home">
-            <%= image_tag "logo_560.png", :class => "row-header--logo", :alt => "Swift Industries" %>
+            <%= image_set_tag "logo_280.png", { "logo_560.png" => "2x" }, { class: "row-header--logo", alt: "Swift Industries" } %>
           </a>
         </h1>
         <h2 class="row-header--description">
