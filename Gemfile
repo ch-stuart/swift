@@ -25,7 +25,7 @@ gem 'awesome_print'
 gem 'rails_12factor'
 
 group :assets do
-  gem 'sass-rails', '~> 3.2.6'
+  gem 'sass-rails', '3.2.3'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '~> 2.5.3'
   gem "autoprefixer-rails"
