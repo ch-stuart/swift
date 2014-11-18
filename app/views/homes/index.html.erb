@@ -29,7 +29,9 @@
           <% if featured_page.show_photo_on_homepage %>
             <div class="featured-page__photo-wrap">
               <% photo_url = Page.get_photo_by_id(featured_page.flickr_photo, "Medium") %>
-              <%= link_to(image_tag(photo_url, :class => "scale-with-grid"), featured_page) %>
+              <% if photo_url.present? %>
+                <%= link_to(image_tag(photo_url, :class => "scale-with-grid"), featured_page) %>
+              <% end %>
             </div>
           <% end %>
           <% if featured_page.summary.present? %>
