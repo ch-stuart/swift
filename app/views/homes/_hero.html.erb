@@ -3,6 +3,7 @@
     <% @photos.each do |photo| %>
       <img
         src="<%= photo[:small_320_url].gsub('http:', '') %>"
+        srcset="<%= photo[:medium_640_url].gsub('http:', '') %> 2x"
         class="hero-img">
     <% end %>
   </div>

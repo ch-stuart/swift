@@ -141,6 +141,7 @@ module Flickr
       sizes = flickr.photos.getSizes :photo_id => photo["id"]
 
       medium_800 = sizes.find {|size| size.label == "Medium 800" }
+      medium_640 = sizes.find {|size| size.label == "Medium 640" }
       medium = sizes.find {|size| size.label == "Medium" }
       small_320 = sizes.find {|size| size.label == "Small 320" }
 
@@ -149,6 +150,7 @@ module Flickr
         :small_320_url => small_320.source,
         :medium_url => medium.source,
         :url => medium.source,
+        :medium_640_url => medium_640.source,
         :medium_800_url => medium_800.source
       })
     end
