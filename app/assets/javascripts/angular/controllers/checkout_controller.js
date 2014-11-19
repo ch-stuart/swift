@@ -48,11 +48,15 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.busyBuying = false;
     $scope.countryCodes = PlaceService.countries();
     $scope.states = PlaceService.usStates();
+    $scope.billingStates = PlaceService.usStates();
 
     $scope.rateParams = {};
 
     $scope.country = 'US';
     $scope.state = 'MT';
+
+    $scope.billingCountry = 'US';
+    $scope.billingState = 'MT';
 
     // Making testing easier...
     if (location.hostname.match(/localhost/)) {
@@ -74,6 +78,7 @@ SwiftApp.controller('CheckoutCtrl', [
 
     $scope.shippingServiceLevel = 'GROUND';
     $scope.countryIsUSCA = true;
+    $scope.billingCountryIsUSCA = true;
 
     $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge, giftCertRemain, giftCertApplied, totalWithGiftCert) {
         $scope.cart.price             = price;
@@ -481,9 +486,20 @@ SwiftApp.controller('CheckoutCtrl', [
         CartService.set('waStateResident', !!$scope.waStateResident);
     };
 
+    $scope['onBillingCountrySelectChanged'] = function() {
+        $scope.billingCountryIsUSCA = $scope.billingCountry === 'US' || $scope.billingCountry === 'CA';
+
+        if ($scope.billingCountry === 'US') {
+            $scope.billingStates = PlaceService.usStates();
+        }
+        if ($scope.billingCountry === 'CA') {
+            $scope.billingStates = PlaceService.caProvinces();
+        }
+    };
+
     $scope['onCountrySelectChanged'] = function() {
 
-        $scope.isShippingDomestic = $scope.country === 'US' ? true : false;
+        $scope.isShippingDomestic = $scope.country === 'US';
 
         switch ($scope.country) {
         case 'US':

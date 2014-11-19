@@ -6,8 +6,10 @@
     <h4>
       Shipping
     </h4>
+    <p>
+      Provide the shipping address. You'll enter your billing address later.
+    </p>
     <div class="row row--order" id="row-shipping">
-      <p>
       <form name="shippingForm" id="js-shipping-form" ng-submit="onCalculateShippingCostBtnClicked(shippingForm.$valid)" novalidate>
         <div class="label-input-pair">
           <label class="label">
@@ -330,6 +332,64 @@
               ng-pattern="\d*"
               required>
           </div>
+          <div class="label-input-pair">
+            <label class="label">
+              Country
+            </label>
+            <select
+              ng-model="billingCountry"
+              ng-change="onBillingCountrySelectChanged()"
+              ng-options="k as v for (k,v) in countryCodes"
+              data-stripe="address_country"
+              class="input">
+            </select>
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              Street
+            </label>
+            <input
+              type="text"
+              data-stripe="address_line1">
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              City
+            </label>
+            <input
+              type="text"
+              data-stripe="address_city">
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              State/Province
+            </label>
+            <input
+              type="text"
+              ng-model="billingState"
+              data-stripe="address_state"
+              ng-if="!billingCountryIsUSCA">
+            <select
+              ng-model="billingState"
+              ng-if="billingCountryIsUSCA"
+              ng-options="k as v for (k,v) in billingStates"
+              data-stripe="address_state"
+              class="input">
+            </select>
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              Zip/Postal Code
+            </label>
+            <input
+              type="text"
+              data-stripe="address_zip">
+          </div>
+          <%# Send name to stripe %>
+          <input
+            type="hidden"
+            ng-value="contact"
+            data-stripe="name">
         </div>
         <div class="row row--order">
           <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
