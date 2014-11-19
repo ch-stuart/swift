@@ -8,7 +8,7 @@ gem 'flickraw', '0.9.8'
 gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails', '~> 2.2.1'
-gem 'angularjs-rails', '~> 1.2.16'
+gem 'angularjs-rails', '~> 1.2.26'
 gem 'dalli' # memcachier
 gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
