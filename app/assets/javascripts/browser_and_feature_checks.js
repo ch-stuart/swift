@@ -1,5 +1,5 @@
-/*global jQuery UA document window localStorage SwiftUtils */ ;
-(function($) {
+/*global jQuery UA document window localStorage SwiftUtils */
+;(function($) {
 
   window.SwiftUtils = {};
 
