@@ -3,7 +3,11 @@
   <% photo_url = Product.get_photo_by_id(item.flickr_photo, "Small") %>
 
   <% if photo_url.present? %>
-    <%= link_to(image_tag("store-preload.png", data: { src: photo_url }, class: "store-item--image"), item) %>
+    <% if index < 3 %>
+      <%= link_to(image_tag(photo_url, class: "store-item--image"), item) %>
+    <% else %>
+      <%= link_to(image_tag("store-preload.png", data: { src: photo_url }, class: "store-item--image store-item--image-lazyload"), item) %>
+    <% end %>
   <% else %>
     <%= link_to("Image not found", item) %>
   <% end %>
