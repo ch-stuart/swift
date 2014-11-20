@@ -46,7 +46,7 @@ class HomesController < ApplicationController
         @blog = {}
 
         begin
-          xml = open("http://cycleswift.wordpress.com/feed/")
+          xml = open("https://cycleswift.wordpress.com/feed/")
           doc = Nokogiri::XML(xml)
 
           @blog["title"] = doc.at_css("rss channel item title").text
