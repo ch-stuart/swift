@@ -306,6 +306,7 @@ date:        time (minutes):       comment:
 2014-11-16  20 Serve compressed assets
 2014-11-17  45 Perf improvements
 2014-11-18  45 Collect billing info (optional) and send to Stripe
-
+2014-11-19  30 Perf improvements for store page
+2014-11-19  05 Fix broken homepage due to wordpress changing RSS feed from http -> https
 
 http://www.timer-tab.com
