@@ -3,7 +3,7 @@
   <% photo_url = Product.get_photo_by_id(item.flickr_photo, "Small") %>
 
   <% if photo_url.present? %>
-    <%= link_to(image_tag(photo_url, :class => "store-item--image"), item) %>
+    <%= link_to(image_tag("store-preload.png", data: { src: photo_url }, class: "store-item--image"), item) %>
   <% else %>
     <%= link_to("Image not found", item) %>
   <% end %>
