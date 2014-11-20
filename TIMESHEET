@@ -308,5 +308,7 @@ date:        time (minutes):       comment:
 2014-11-18  45 Collect billing info (optional) and send to Stripe
 2014-11-19  30 Perf improvements for store page
 2014-11-19  05 Fix broken homepage due to wordpress changing RSS feed from http -> https
+2014-11-20  15 Make blog retrieval more robust (don't blow up the page if it can't be retrieved)
+2014-11-20  10 Fix width for blog image, don't show heading and description if they're not there
 
 http://www.timer-tab.com
