@@ -225,6 +225,8 @@ SwiftApp.controller('CheckoutCtrl', [
             service: service,
             serviceIsFlatRate: true
         };
+
+        CartService.setShippingCharge(shippingCharge);
     }
 
     var rateResponses = [];
