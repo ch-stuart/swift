@@ -52,7 +52,7 @@
         <%= link_to "Mark as 'Shipped' with email to customer", sale_path(id: @sale.id, sale: { status: "Shipped", email: true }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsShipped', class: 'btn' %>
       </p>
       <p>
-        <%= link_to "Mark as 'Shipped' without email", sale_path(id: @sale.id, sale: { status: "Shipped", email: false }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsShipped', class: 'btn' %>
+        <%= link_to "Mark as 'Shipped' without email", sale_path(id: @sale.id, sale: { status: "Shipped", email: false }), :remote => true, :method => :put, "data-type" => :json, id: 'markAsShippedNoEmail', class: 'btn' %>
       </p>
     <% end %>
   <%# Sale is shipped. Can add more shipments to sale. %>

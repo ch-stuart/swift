@@ -310,5 +310,7 @@ date:        time (minutes):       comment:
 2014-11-19  05 Fix broken homepage due to wordpress changing RSS feed from http -> https
 2014-11-20  15 Make blog retrieval more robust (don't blow up the page if it can't be retrieved)
 2014-11-20  10 Fix width for blog image, don't show heading and description if they're not there
+2014-11-23  00 Fix issue where customer was not charged for flat rate shipping
+2014-11-24  10 Fix issue where mark as shipped without email button didn't appear to work
 
 http://www.timer-tab.com
