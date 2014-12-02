@@ -312,5 +312,9 @@ date:        time (minutes):       comment:
 2014-11-20  10 Fix width for blog image, don't show heading and description if they're not there
 2014-11-23  00 Fix issue where customer was not charged for flat rate shipping
 2014-11-24  10 Fix issue where mark as shipped without email button didn't appear to work
+2014-11-24  20 Source control cleanup
+2014-12-02  10 Render 404 if order cannot be found at /orders/:guid
+
+/// INVOICED 2014-11-24
 
 http://www.timer-tab.com

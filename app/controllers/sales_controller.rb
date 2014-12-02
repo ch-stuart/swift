@@ -45,6 +45,8 @@ class SalesController < ApplicationController
   # GET /sales/1234/success.json
   def success
     @sale = Sale.find_by_guid(params[:guid])
+    render_404 if @sale.nil?
+
     @shipments = @sale.shipments
 
     # This is bad if this happens
