@@ -6,6 +6,9 @@
     <h4>
       Shipping
     </h4>
+    <p>
+      Provide the shipping address. You'll enter your billing address later.
+    </p>
     <div class="row row--order" id="row-shipping">
       <form name="shippingForm" id="js-shipping-form" ng-submit="onCalculateShippingCostBtnClicked(shippingForm.$valid)" novalidate>
         <div class="label-input-pair">
@@ -236,24 +239,15 @@
             <label class="label">
               Redemption Code
             </label>
-            <div class="Grid">
-              <div class="Grid-unit">
-                <input
-                  type="text"
-                  ng-model="giftCertCode"
-                  ng-change="onGiftCertCodeChanged()"
-                  ng-blur="onGiftCertCodeBlur()">
-              </div>
-              <div class="Grid-unit">
-                <button ng-click="onGiftCertCodeBtnClicked()" class="btn">
-                  Apply
-                </button>
-              </div>
-            </div>
+            <input
+              type="text"
+              ng-model="giftCertificateRedemptionCode"
+              ng-change="onGiftCertificateRedemptionCodeChanged()"
+              ng-blur="onGiftCertificateRedemptionCodeBlur()">
           </div>
-          <div class="label-input-pair" ng-show="giftCertError">
+          <div class="label-input-pair" ng-show="giftCertificateError">
             <p style="color:red">
-              {{ giftCertError }}
+              {{ giftCertificateError }}
             </p>
           </div>
         </div>
@@ -264,49 +258,6 @@
             </span>
             <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
           </button>
-        </div>
-      </div>
-      <div ng-show="isShippingReady || pickup">
-        <h4>
-          Coupon
-        </h4>
-        <div class="row row--order">
-          <div class="label-input-pair">
-            <label class="label">
-              Coupon Code
-            </label>
-            <div class="Grid">
-              <div class="Grid-unit">
-                <input
-                  type="text"
-                  ng-model="couponCode"
-                  ng-change="onCouponCodeChanged()"
-                  ng-blur="onCouponCodeBlur()">
-              </div>
-              <div class="Grid-unit">
-                <button ng-click="onCouponCodeBtnClicked()" class="btn">
-                  Apply
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="label-input-pair" ng-show="couponError">
-            <p style="color:red">
-              {{ couponError }}
-            </p>
-          </div>
-          <div class="label-input-pair" ng-show="coupon">
-            <p>
-              Your coupon code entitles you to
-              <span ng-if="coupon.cents_off">
-                {{ (coupon.cents_off / 100) | currency }}
-              </span>
-              <span ng-if="coupon.percent_off">
-                {{ coupon.percent_off }}%
-              </span>
-              off the price of your purchased products.
-            </p>
-          </div>
         </div>
       </div>
       <div ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert != 0" id="row-payment">
@@ -381,6 +332,64 @@
               ng-pattern="\d*"
               required>
           </div>
+          <div class="label-input-pair">
+            <label class="label">
+              Country
+            </label>
+            <select
+              ng-model="billingCountry"
+              ng-change="onBillingCountrySelectChanged()"
+              ng-options="k as v for (k,v) in countryCodes"
+              data-stripe="address_country"
+              class="input">
+            </select>
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              Street
+            </label>
+            <input
+              type="text"
+              data-stripe="address_line1">
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              City
+            </label>
+            <input
+              type="text"
+              data-stripe="address_city">
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              State/Province
+            </label>
+            <input
+              type="text"
+              ng-model="billingState"
+              data-stripe="address_state"
+              ng-if="!billingCountryIsUSCA">
+            <select
+              ng-model="billingState"
+              ng-if="billingCountryIsUSCA"
+              ng-options="k as v for (k,v) in billingStates"
+              data-stripe="address_state"
+              class="input">
+            </select>
+          </div>
+          <div class="label-input-pair">
+            <label class="label">
+              Zip/Postal Code
+            </label>
+            <input
+              type="text"
+              data-stripe="address_zip">
+          </div>
+          <%# Send name to stripe %>
+          <input
+            type="hidden"
+            ng-value="contact"
+            data-stripe="name">
         </div>
         <div class="row row--order">
           <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">

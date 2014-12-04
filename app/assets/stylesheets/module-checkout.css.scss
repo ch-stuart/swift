@@ -2,11 +2,9 @@ input.input--inline {
   display: inline-block;
   margin-bottom: 0;
 }
-
 .checkout-summary-item {
   margin-bottom: 20px;
 }
-
 .row--checkout-sidebar {
   margin-bottom: 10px;
 }
@@ -15,8 +13,8 @@ input.input--inline {
   opacity: 0.4;
 }
 // .best-price-true {
-//     text-decoration: underline;
-//}
+//   text-decoration: underline;
+// }
 
 .btn--progress {
   position: relative;
@@ -27,7 +25,6 @@ input.input--inline {
   margin-left: -8px;
   width: 16px;
 }
-
 
 //
 // This element is position: fixed,
@@ -40,11 +37,9 @@ input.input--inline {
   .sticky-order-column {
     max-width: 172px;
   }
-
 }
 @media (min-width: 960px) {
   .sticky-order-column {
     max-width: 220px;
   }
-
 }

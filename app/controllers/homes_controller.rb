@@ -43,18 +43,28 @@ class HomesController < ApplicationController
     protected
 
     def get_latest_blog_post
-        @blog = {}
+        @blog = nil
 
         begin
-          xml = open("http://cycleswift.wordpress.com/feed/")
+          @blog = {}
+          xml = open("https://cycleswift.wordpress.com/feed/")
+
+          return @blog unless xml.status[0] == "200"
+
           doc = Nokogiri::XML(xml)
 
           @blog["title"] = doc.at_css("rss channel item title").text
           @blog["link"] = doc.at_css("rss channel item link").text
           @blog["description"] = doc.at_css("rss channel item description").text.gsub("http:", "")
-          img = doc.css("media|content")[1]
-          @blog["img"] = img["url"].gsub("http:", "")
+
+          img = doc.css("media|content")[1]["url"]
+          img = img.gsub("http:", "")
+          img = img.gsub("https:", "")
+          img = img.gsub(/\?w=\d+$/, "")
+
+          @blog["img"] = img unless img.blank?
         rescue Exception => e
+          @blog = nil
           logger.error e
         end
 

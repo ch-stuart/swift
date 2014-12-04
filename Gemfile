@@ -8,7 +8,7 @@ gem 'flickraw', '0.9.8'
 gem 'rdiscount'
 gem 'nokogiri'
 gem 'jquery-rails', '~> 2.2.1'
-gem 'angularjs-rails', '~> 1.2.16'
+gem 'angularjs-rails', '~> 1.2.26'
 gem 'dalli' # memcachier
 gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
@@ -25,7 +25,7 @@ gem 'awesome_print'
 gem 'rails_12factor'
 
 group :assets do
-  gem 'sass-rails', '~> 3.2.3 '
+  gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem "autoprefixer-rails"
@@ -34,6 +34,7 @@ end
 
 group :production do
   gem 'foreman'
+  gem 'heroku_rails_deflate'
 end
 
 group :development do

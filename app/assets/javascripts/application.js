@@ -2,6 +2,7 @@
 // ...
 //= require console
 //= require jquery
+//= require unveil/jquery.unveil
 //= require ua.js/src/ua
 //= require browser_and_feature_checks
 //= require matchMedia/matchMedia

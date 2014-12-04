@@ -29,7 +29,9 @@
           <% if featured_page.show_photo_on_homepage %>
             <div class="featured-page__photo-wrap">
               <% photo_url = Page.get_photo_by_id(featured_page.flickr_photo, "Medium") %>
-              <%= link_to(image_tag(photo_url, :class => "scale-with-grid"), featured_page) %>
+              <% if photo_url.present? %>
+                <%= link_to(image_tag(photo_url, :class => "scale-with-grid"), featured_page) %>
+              <% end %>
             </div>
           <% end %>
           <% if featured_page.summary.present? %>
@@ -47,16 +49,30 @@
     </div>
     <div class="eight columns">
       <article class="blog">
-        <h3>
-          <%= @blog['title'] %>
-        </h3>
-        <p>
-          <%= image_tag @blog['img'], :class => "blog_img" %>
-          <%= raw @blog['description'] %>
-        </p>
-        <p>
-          <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'], :class => "hl-link" %>
-        </p>
+        <% if @blog.nil? %>
+          <!-- some error occurred and the blog could not be retrieved -->
+        <% else %>
+          <% if @blog["title"].present? %>
+            <h3>
+              <%= @blog["title"] %>
+            </h3>
+          <% end %>
+          <% if @blog['img'].present? && @blog['description'].present? %>
+            <p>
+              <% if @blog['img'].present? %>
+                <%= image_tag "#{@blog['img']}?w=300", class: "blog_img", srcset: "#{@blog['img']}?w=420 420w, #{@blog['img']}?w=640 640w" %>
+              <% end %>
+              <% if @blog['description'].present? %>
+                <%= raw @blog["description"] %>
+              <% end %>
+            </p>
+          <% end %>
+          <% if @blog['link'].present? %>
+            <p>
+              <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'], :class => "hl-link" %>
+            </p>
+          <% end %>
+        <% end %>
       </article>
     </div>
   </div>

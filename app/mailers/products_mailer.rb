@@ -3,7 +3,7 @@ class ProductsMailer < ActionMailer::Base
   default from: 'info@builtbyswift.com'
 
   # Notify business when customer has placed an order
-  def inventory_count_update product, size
+  def inventory_count_update product, size=nil
     @product = product
     @size = size
 

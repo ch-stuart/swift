@@ -94,6 +94,17 @@
     alert('An error occurred. Try again.');
   });
 
+  $('#markAsShippedNoEmail').on('ajax:success', function(event) {
+    $('#markAsShippedNoEmail')
+      .text('Yay!')
+      .fadeOut(function() {
+        location.reload()
+      });
+  });
+  $('#markAsShippedNoEmail').on('ajax:error', function(event) {
+    alert('An error occurred. Try again.');
+  });
+
   $('#undoMarkAsShipped').on('ajax:success', function(event) {
     $('#undoMarkAsShipped')
       .text('Yay!')

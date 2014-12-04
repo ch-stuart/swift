@@ -18,3 +18,11 @@
 <% end %>
 
 <br class="clear">
+
+<%= content_for :js do %>
+<script>
+  $(document).ready(function() {
+    $('.store-item--image-lazyload').unveil();
+  });
+</script>
+<% end %>
