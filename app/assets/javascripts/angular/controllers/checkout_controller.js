@@ -13,6 +13,7 @@ SwiftApp.controller('CheckoutCtrl', [
     'PackagingService',
     'FlatRateService',
     'CouponService',
+    'GiftCertService',
     function(
         $scope,
         ConfigService,
@@ -24,7 +25,8 @@ SwiftApp.controller('CheckoutCtrl', [
         ExceptionService,
         PackagingService,
         FlatRateService,
-        CouponService) {
+        CouponService,
+        GiftCertService) {
 
     var package_count = 1;
     var rates_response_count = 0;
@@ -91,6 +93,7 @@ SwiftApp.controller('CheckoutCtrl', [
         $scope.cart.giftCertRemain    = giftCertRemain;
         $scope.cart.giftCertApplied   = giftCertApplied;
         $scope.cart.totalWithGiftCert = totalWithGiftCert;
+        $scope.cart.originalPrice     = originalPrice;
     });
 
     function postmasterValidateSuccessCallback(response) {
@@ -599,17 +602,17 @@ SwiftApp.controller('CheckoutCtrl', [
         CartService.setShippingCharge(provider.charge);
     };
 
-    $scope['onCouponCodeChanged'] = function() {
-        var code = $scope.couponCode;
-
-        if (!code) {
-            $scope.couponError = null;
-            $scope.couponStatus = null;
-            $scope.coupon = null;
-            CartService.nullCoupon();
-        }
-    };
-    $scope['onCouponCodeBlur'] = function() {
+    // $scope['onCouponCodeChanged'] = function() {
+    //     var code = $scope.couponCode;
+    //
+    //     if (!code) {
+    //         $scope.couponError = null;
+    //         $scope.couponStatus = null;
+    //         $scope.coupon = null;
+    //         CartService.nullCoupon();
+    //     }
+    // };
+    $scope['onCouponCodeApply'] = function() {
         var code = $scope.couponCode;
 
         $scope.couponError = null;
@@ -641,15 +644,15 @@ SwiftApp.controller('CheckoutCtrl', [
             );
     };
 
-    $scope['onGiftCertificateRedemptionCodeChanged'] = function() {
+    $scope['onGiftCertificateRedemptionCodeApply'] = function() {
         var guid = $scope.giftCertificateRedemptionCode;
 
         if (!guid) {
             $scope.giftCertificateError = null;
             CartService.nullGiftCertificateValue();
         } else if (guid.length === 8) {
-            CartService
-                .getGiftCertificateValue(guid)
+            GiftCertService
+                .get(guid)
                 .then(
                     function success(response) {
                         $scope.giftCertificateError = null;
@@ -658,26 +661,28 @@ SwiftApp.controller('CheckoutCtrl', [
                             $scope.giftCertificateError = "No credit is left on this gift certificate.";
                         }
                     },
-                    function error() {
-                        $scope.giftCertificateError = "Could not find gift certificate.";
+                    function error(response) {
+                        if (response.errorMsg) {
+                            $scope.giftCertificateError = response.errorMsg;
+                        } else if (response.status === 404) {
+                            $scope.giftCertificateError = "Could not find gift certificate.";
+                        } else {
+                            $scope.giftCertificateError = "An error occured and could not find gift certificate.";
+                        }
+                        CartService.nullGiftCertificateValue();
                     }
                 );
-        } else {
-            // There is text entered, but it is not the correct length,
-            // therefore there is no remaining amount
-            CartService.nullGiftCertificateValue();
-            $scope.giftCertificateError = "Could not find gift certificate.";
         }
     };
 
-    $scope['onGiftCertificateRedemptionCodeBlur'] = function() {
-        var guid = $scope.giftCertificateRedemptionCode;
-
-        if (guid && guid.length !== 8) {
-            $scope.giftCertificateError = "Could not find gift certificate.";
-            CartService.nullGiftCertificateValue();
-        }
-    };
+    // $scope['onGiftCertificateRedemptionCodeBlur'] = function() {
+    //     var guid = $scope.giftCertificateRedemptionCode;
+    //
+    //     if (guid && guid.length !== 8) {
+    //         $scope.giftCertificateError = "Could not find gift certificate.";
+    //         CartService.nullGiftCertificateValue();
+    //     }
+    // };
 
     $scope['onBuyItButtonClicked'] = function(isValid) {
         if (!isValid) {

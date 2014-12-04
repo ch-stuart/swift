@@ -227,7 +227,7 @@
           </div>
         </div>
       </div>
-      <div ng-show="isShippingReady || pickup">
+      <div ng-sshow="isShippingReady || pickup">
         <h4>
           Gift Certificate
         </h4>
@@ -236,14 +236,29 @@
         </p>
         <div class="row row--order">
           <div class="label-input-pair">
-            <label class="label">
-              Redemption Code
-            </label>
-            <input
-              type="text"
-              ng-model="giftCertificateRedemptionCode"
-              ng-change="onGiftCertificateRedemptionCodeChanged()"
-              ng-blur="onGiftCertificateRedemptionCodeBlur()">
+            <div class="Grid">
+              <div class="Grid-unit">
+                <label class="label">
+                  Redemption Code
+                </label>
+              </div>
+              <div class="Grid-unit">
+                <input
+                  type="text"
+                  ng-model="giftCertificateRedemptionCode">
+              </div>
+              <div class="Grid-unit">
+                <div class="btn" ng-click="onGiftCertificateRedemptionCodeApply()">
+                  Apply
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="label-input-pair" ng-show="cart.giftCertApplied">
+            <p>
+              {{ cart.giftCertApplied / 100 | currency }} from your gift certificate has been applied to this order.
+              {{ (cart.giftCertRemain - cart.giftCertApplied) / 100 | currency }} remains on the gift certificate.
+            </p>
           </div>
           <div class="label-input-pair" ng-show="giftCertificateError">
             <p style="color:red">
@@ -260,20 +275,29 @@
           </button>
         </div>
       </div>
-      <div ng-show="isShippingReady || pickup">
+      <div ng-shows="isShippingReady || pickup">
           <h4>
               Coupon
           </h4>
           <div class="row row--order">
               <div class="label-input-pair">
-                  <label class="label">
-                      Coupon Code
-                  </label>
-                  <input
-                      type="text"
-                      ng-model="couponCode"
-                      ng-change="onCouponCodeChanged()"
-                      ng-blur="onCouponCodeBlur()">
+                  <div class="Grid">
+                      <div class="Grid-unit">
+                          <label class="label">
+                              Coupon Code
+                          </label>
+                      </div>
+                      <div class="Grid-unit">
+                          <input
+                              type="text"
+                              ng-model="couponCode">
+                    </div>
+                    <div class='Grid-unit'>
+                        <div class="btn" ng-click="onCouponCodeApply()">
+                            Apply
+                        </div>
+                    </div>
+                </div>
               </div>
               <div class="label-input-pair" ng-show="couponError">
                   <p style="color:red">
@@ -290,6 +314,7 @@
                           {{ coupon.percent_off }}%
                       </span>
                       off the price of your purchased products.
+                      You save {{ (cart.originalPrice - cart.price) / 100 | currency }}.
                   </p>
               </div>
           </div>

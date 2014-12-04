@@ -1,5 +1,6 @@
 .Grid {
   display: flex;
+  align-items: center;
 }
 .Grid-unit {
   padding-left: 10px;
@@ -7,4 +8,8 @@
   &:first-of-type {
     padding-left: 0;
   }
+}
+
+.Grid-unit input[type=text] {
+  margin-bottom: 0;
 }
