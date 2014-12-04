@@ -12,6 +12,7 @@ SwiftApp.controller('CheckoutCtrl', [
     'ExceptionService',
     'PackagingService',
     'FlatRateService',
+    'CouponService',
     function(
         $scope,
         ConfigService,
@@ -22,7 +23,8 @@ SwiftApp.controller('CheckoutCtrl', [
         SaleService,
         ExceptionService,
         PackagingService,
-        FlatRateService) {
+        FlatRateService,
+        CouponService) {
 
     var package_count = 1;
     var rates_response_count = 0;
@@ -80,7 +82,7 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.countryIsUSCA = true;
     $scope.billingCountryIsUSCA = true;
 
-    $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge, giftCertRemain, giftCertApplied, totalWithGiftCert) {
+    $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge, giftCertRemain, giftCertApplied, totalWithGiftCert, originalPrice) {
         $scope.cart.price             = price;
         $scope.cart.total             = total;
         $scope.cart.taxAmount         = taxAmount;
@@ -399,7 +401,8 @@ SwiftApp.controller('CheckoutCtrl', [
                 shipping_service: $scope.shipping.service,
                 shipping_service_is_flat_rate: $scope.shipping.serviceIsFlatRate || false,
                 stripe_id: response.data ? response.data.id : null,
-                send_me_marketing_emails: $scope.sendMeMarketingEmails
+                send_me_marketing_emails: $scope.sendMeMarketingEmails,
+                coupon_code: ($scope.coupon && $scope.coupon.code) ? $scope.coupon.code : null
             })
             .then(saleCreateSuccessCallback, saleCreateErrorCallback);
     }
@@ -594,6 +597,48 @@ SwiftApp.controller('CheckoutCtrl', [
         };
 
         CartService.setShippingCharge(provider.charge);
+    };
+
+    $scope['onCouponCodeChanged'] = function() {
+        var code = $scope.couponCode;
+
+        if (!code) {
+            $scope.couponError = null;
+            $scope.couponStatus = null;
+            $scope.coupon = null;
+            CartService.nullCoupon();
+        }
+    };
+    $scope['onCouponCodeBlur'] = function() {
+        var code = $scope.couponCode;
+
+        $scope.couponError = null;
+        $scope.couponStatus = null;
+        $scope.coupon = null;
+
+        if (!code) { return; }
+
+        CouponService
+            .get(code)
+            .then(
+                function successHandler(coupon) {
+                    $scope.coupon = coupon;
+
+                    CartService.applyCoupon(coupon);
+                },
+                function errorHandler(response) {
+                    $scope.coupon = null;
+
+                    if (response.errorMsg) {
+                        $scope.couponError = response.errorMsg;
+                    } else if (response.status === 404) {
+                        $scope.couponError = 'That coupon could not be found.';
+                    } else {
+                        $scope.couponError = 'An error occured and that coupon could not be found.';
+                    }
+                    CartService.nullCoupon();
+                }
+            );
     };
 
     $scope['onGiftCertificateRedemptionCodeChanged'] = function() {
