@@ -602,16 +602,6 @@ SwiftApp.controller('CheckoutCtrl', [
         CartService.setShippingCharge(provider.charge);
     };
 
-    // $scope['onCouponCodeChanged'] = function() {
-    //     var code = $scope.couponCode;
-    //
-    //     if (!code) {
-    //         $scope.couponError = null;
-    //         $scope.couponStatus = null;
-    //         $scope.coupon = null;
-    //         CartService.nullCoupon();
-    //     }
-    // };
     $scope['onCouponCodeApply'] = function() {
         var code = $scope.couponCode;
 
@@ -619,19 +609,18 @@ SwiftApp.controller('CheckoutCtrl', [
         $scope.couponStatus = null;
         $scope.coupon = null;
 
-        if (!code) { return; }
+        if (!code) {
+            return CartService.nullCoupon();
+        }
 
         CouponService
             .get(code)
             .then(
                 function successHandler(coupon) {
                     $scope.coupon = coupon;
-
                     CartService.applyCoupon(coupon);
                 },
                 function errorHandler(response) {
-                    $scope.coupon = null;
-
                     if (response.errorMsg) {
                         $scope.couponError = response.errorMsg;
                     } else if (response.status === 404) {
@@ -647,42 +636,35 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope['onGiftCertificateRedemptionCodeApply'] = function() {
         var guid = $scope.giftCertificateRedemptionCode;
 
+        $scope.giftCertificateError = null;
+
         if (!guid) {
-            $scope.giftCertificateError = null;
-            CartService.nullGiftCertificateValue();
-        } else if (guid.length === 8) {
-            GiftCertService
-                .get(guid)
-                .then(
-                    function success(response) {
-                        $scope.giftCertificateError = null;
-
-                        if (response.remainingAmount === 0) {
-                            $scope.giftCertificateError = "No credit is left on this gift certificate.";
-                        }
-                    },
-                    function error(response) {
-                        if (response.errorMsg) {
-                            $scope.giftCertificateError = response.errorMsg;
-                        } else if (response.status === 404) {
-                            $scope.giftCertificateError = "Could not find gift certificate.";
-                        } else {
-                            $scope.giftCertificateError = "An error occured and could not find gift certificate.";
-                        }
-                        CartService.nullGiftCertificateValue();
-                    }
-                );
+            return CartService.nullGiftCert();
         }
-    };
 
-    // $scope['onGiftCertificateRedemptionCodeBlur'] = function() {
-    //     var guid = $scope.giftCertificateRedemptionCode;
-    //
-    //     if (guid && guid.length !== 8) {
-    //         $scope.giftCertificateError = "Could not find gift certificate.";
-    //         CartService.nullGiftCertificateValue();
-    //     }
-    // };
+        GiftCertService
+            .get(guid)
+            .then(
+                function success(response) {
+                    if (response.remainingAmount === 0) {
+                        $scope.giftCertificateError = "No credit is left on this gift certificate.";
+                        CartService.nullGiftCert();
+                    } else {
+                        CartService.applyGiftCert(response.remainingAmount);
+                    }
+                },
+                function error(response) {
+                    if (response.errorMsg) {
+                        $scope.giftCertificateError = response.errorMsg;
+                    } else if (response.status === 404) {
+                        $scope.giftCertificateError = "Could not find gift certificate.";
+                    } else {
+                        $scope.giftCertificateError = "An error occured and could not find gift certificate.";
+                    }
+                    CartService.nullGiftCert();
+                }
+            );
+    };
 
     $scope['onBuyItButtonClicked'] = function(isValid) {
         if (!isValid) {

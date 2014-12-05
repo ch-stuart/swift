@@ -33,6 +33,7 @@
 //= require angular/services/cart_service
 //= require angular/services/product_service
 //= require angular/services/postmaster_service
+//= require angular/services/gift_cert_service
 //= require angular/controllers/order_controller
 //= require angular/controllers/cart_controller
 //= require angular/controllers/cart_status_controller

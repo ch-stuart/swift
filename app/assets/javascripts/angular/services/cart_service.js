@@ -1,7 +1,7 @@
 // TODO clean up this API
 // it's messy!
 
-SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScope, $http, $q) {
+SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
 
     return {
         products: [],
@@ -17,9 +17,8 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
         giftCertApplied: null,
         // Calculates base price, tax amount, shipping charge
         // Broadcasts updates
-        // TODO rename
         getPrice: function() {
-            // TODO should be able to null any values
+            // Should be able to null any values
             // that we calculate here ... so price, total,
             // tax amount, gift cert amount applied, etc.
             // that way we can run this at any time and have
@@ -29,7 +28,7 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
             // one and have the new total, etc. work out
             // correctly
             var price = this.price = this.total = 0;
-
+            this.giftCertApplied = this.totalWithGiftCert = null;
             this.taxAmount = null;
 
             _.each(this.products, function(product) {
@@ -65,20 +64,17 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
                 this.total += this.shippingCharge;
             }
 
-            // If no Gift Cert, reset
-            if (!this.giftCertRemain) {
-                this.giftCertApplied = this.giftCertRemain = this.totalWithGiftCert = null;
-            } else {
+            if (this.giftCertRemainingAmount) {
                 // If available gift certificate is greater
                 // than total... zero out total
-                if (this.giftCertRemain >= this.total) {
+                if (this.giftCertRemainingAmount >= this.total) {
                     this.giftCertApplied = this.total;
                     this.totalWithGiftCert = 0;
                 // If available gift certificate is less
                 // than total... use as much as possible
                 } else {
-                    this.totalWithGiftCert = this.total - this.giftCertRemain;
-                    this.giftCertApplied = this.giftCertRemain;
+                    this.totalWithGiftCert = this.total - this.giftCertRemainingAmount;
+                    this.giftCertApplied = this.giftCertRemainingAmount;
                 }
             }
 
@@ -89,7 +85,7 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
                 this.taxAmount,
                 this.taxRate,
                 this.shippingCharge,
-                this.giftCertRemain,
+                this.giftCertRemainingAmount,
                 this.giftCertApplied,
                 this.totalWithGiftCert,
                 this.originalPrice);
@@ -280,41 +276,12 @@ SwiftApp.service('CartService', ['$rootScope', '$http', '$q', function($rootScop
                 return false;
             }
         },
-        // Retrieve gift certificate value
-        // getGiftCertValue: function(guid) {
-        //     var request = $q.defer(),
-        //         that = this;
-        //
-        //     $http
-        //         .get('/gift_certificates/show?format=json&guid=' + guid)
-        //         .success(function(response) {
-        //             that.giftCertRemain = parseFloat(response.gift_certificate.remaining_amount);
-        //
-        //             request.resolve({
-        //                 remainingAmount: that.giftCertRemain
-        //             });
-        //
-        //             that.getPrice();
-        //         })
-        //         .error(function() {
-        //             request.reject();
-        //         });
-        //
-        //     return request.promise;
-        // },
-        // TODO pass in val of gift cert
-        // and then getPrice()
         applyGiftCert: function(val) {
-
+            this.giftCertRemainingAmount = val;
+            this.getPrice();
         },
-        // TODO null val of gift cert
-        // and then getPrice()
         nullGiftCert: function() {
-
-        },
-        // Null gift certificate value
-        nullGiftCertValue: function() {
-            this.giftCertRemain = null;
+            this.giftCertRemainingAmount = null;
             this.getPrice();
         },
         applyCoupon: function(coupon) {
