@@ -29,17 +29,17 @@ class Coupon < ActiveRecord::Base
   attr_accessible :cents_off, :code, :description, :end_date, :percent_off, :published, :start_date, :title
 
   # Must have title and code
-  validates :title, :code, :presence => true
+  validates :title, :code, presence: true
 
   # Cents off and percent off must be ints
-  validates :cents_off, :numericality => { :only_integer => true }, :if => :cents_off?
-  validates :percent_off, :numericality => { :only_integer => true }, :if => :percent_off?
+  validates :cents_off, numericality: { only_integer: true }, if: :cents_off?
+  validates :percent_off, numericality: { only_integer: true }, if: :percent_off?
 
   # Code and title must be unique
   validates :code, :title, :uniqueness => true
 
   # Code can only include good characters
-  validates :code, :format => { :with => /^[A-Za-z0-9_-]+$/, :message => "code can only contain letters, numbers, hyphens and underscores" }
+  validates :code, format: { with: /^[A-Za-z0-9_-]+$/, message: "code can only contain letters, numbers, hyphens and underscores" }
 
   def is_invalid?
     return true unless self.published?
