@@ -84,16 +84,17 @@ SwiftApp.controller('CheckoutCtrl', [
     $scope.countryIsUSCA = true;
     $scope.billingCountryIsUSCA = true;
 
-    $scope.$on('cart:prices:update', function(e, price, total, taxAmount, taxRate, shippingCharge, giftCertRemain, giftCertApplied, totalWithGiftCert, originalPrice) {
-        $scope.cart.price             = price;
-        $scope.cart.total             = total;
-        $scope.cart.taxAmount         = taxAmount;
-        $scope.cart.taxRate           = taxRate;
-        $scope.cart.shippingCharge    = shippingCharge;
-        $scope.cart.giftCertRemain    = giftCertRemain;
-        $scope.cart.giftCertApplied   = giftCertApplied;
-        $scope.cart.totalWithGiftCert = totalWithGiftCert;
-        $scope.cart.originalPrice     = originalPrice;
+    $scope.$on('cart:prices:update', function(event, data) {
+        $scope.cart.price             = data.price;
+        $scope.cart.total             = data.total;
+        $scope.cart.taxAmount         = data.taxAmount;
+        $scope.cart.taxRate           = data.taxRate;
+        $scope.cart.shippingCharge    = data.shippingCharge;
+        $scope.cart.giftCertRemain    = data.giftCertRemain;
+        $scope.cart.giftCertApplied   = data.giftCertApplied;
+        $scope.cart.totalWithGiftCert = data.totalWithGiftCert;
+        $scope.cart.originalPrice     = data.originalPrice;
+        $scope.cart.savedWithCoupon   = data.savedWithCoupon;
     });
 
     function postmasterValidateSuccessCallback(response) {
@@ -405,7 +406,8 @@ SwiftApp.controller('CheckoutCtrl', [
                 shipping_service_is_flat_rate: $scope.shipping.serviceIsFlatRate || false,
                 stripe_id: response.data ? response.data.id : null,
                 send_me_marketing_emails: $scope.sendMeMarketingEmails,
-                coupon_code: ($scope.coupon && $scope.coupon.code) ? $scope.coupon.code : null
+                coupon_code: ($scope.coupon && $scope.coupon.code) ? $scope.coupon.code : null,
+                saved_with_coupon: $scope.cart.savedWithCoupon || null
             })
             .then(saleCreateSuccessCallback, saleCreateErrorCallback);
     }

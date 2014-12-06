@@ -81,6 +81,14 @@
             </p>
         <% end %>
         <hr class="pr--block pr--clear">
+        <% if @sale[:coupon_code].present? %>
+          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="unit w-3-4 hide-on-mobiles"></div>
+              <div class="unit w-1-4">
+                  Coupon: -<%= number_to_currency(cents_to_dollars(@sale[:saved_with_coupon]))%> (<%= @sale[:coupon_code] %>)
+              </div>
+          </div>
+        <% end %>
         <% if @sale[:tax_amount].present? %>
           <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
               <div class="unit w-3-4 hide-on-mobiles"></div>

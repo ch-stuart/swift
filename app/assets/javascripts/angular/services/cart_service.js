@@ -41,10 +41,12 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
 
             if (this.centsOff) {
                 price = price - this.centsOff;
+                this.savedWithCoupon = this.centsOff;
             }
 
             if (this.percentOff) {
                 price = price - (price * (this.percentOff / 100));
+                this.savedWithCoupon = this.originalPrice - price;
             }
 
             this.price = this.total = price;
@@ -78,17 +80,18 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
                 }
             }
 
-            $rootScope.$broadcast(
-                'cart:prices:update',
-                this.price,
-                this.total,
-                this.taxAmount,
-                this.taxRate,
-                this.shippingCharge,
-                this.giftCertRemainingAmount,
-                this.giftCertApplied,
-                this.totalWithGiftCert,
-                this.originalPrice);
+            $rootScope.$broadcast('cart:prices:update', {
+                price: this.price,
+                total: this.total,
+                taxAmount: this.taxAmount,
+                taxRate: this.taxRate,
+                shippingCharge: this.shippingCharge,
+                giftCertRemainingAmount: this.giftCertRemainingAmount,
+                giftCertApplied: this.giftCertApplied,
+                totalWithGiftCert: this.totalWithGiftCert,
+                originalPrice: this.originalPrice,
+                savedWithCoupon: this.savedWithCoupon
+            });
         },
         setTaxRate: function(rate) {
             if (rate) {

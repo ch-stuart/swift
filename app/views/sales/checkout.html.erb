@@ -227,7 +227,7 @@
           </div>
         </div>
       </div>
-      <div ng-sshow="isShippingReady || pickup">
+      <div ng-show="isShippingReady || pickup">
         <h4>
           Gift Certificate
         </h4>
@@ -275,7 +275,7 @@
           </button>
         </div>
       </div>
-      <div ng-shows="isShippingReady || pickup">
+      <div ng-show="isShippingReady || pickup">
           <h4>
               Coupon
           </h4>
@@ -478,6 +478,9 @@
             </span>
           </li>
         </ul>
+      </div>
+      <div class="row row--checkout-sidebar" ng-show="cart.savedWithCoupon">
+        <b>Saved with Coupon</b>: {{ cart.savedWithCoupon / 100 | currency }}
       </div>
       <div class="row row--checkout-sidebar" ng-show="cart.taxAmount">
         <b>WA State Tax Amount</b>:

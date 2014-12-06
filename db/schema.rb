@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141110052623) do
+ActiveRecord::Schema.define(:version => 20141206042042) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(:version => 20141110052623) do
     t.text     "shipping_contact"
     t.boolean  "shipping_service_is_flat_rate"
     t.string   "coupon_code"
+    t.integer  "saved_with_coupon"
   end
 
   create_table "shipments", :force => true do |t|
