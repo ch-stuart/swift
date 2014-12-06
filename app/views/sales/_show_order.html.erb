@@ -24,13 +24,26 @@
       </td>
       <td>
         <%= number_to_currency(cents_to_dollars(@sale.amount)) %>
-        <br>
-        <% if @coupon.present? %>
-          Coupon Code: <%= link_to @coupon.code, @coupon %>
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Coupon
+      </td>
+      <td>
+        <% if @sale.saved_with_coupon.present? %>
+          -<%= number_to_currency(cents_to_dollars(@sale.saved_with_coupon)) %>
+        <% else %>
+          n/a
         <% end %>
       </td>
-      <td></td>
-    </tr>
+      <td>
+        <% if @coupon.present? %>
+          Coupon Code: <%= link_to @coupon.code, @coupon %><br>
+        <% end %>
+      </td>
     <% unless @sale.pickup? %>
       <tr>
         <td>
