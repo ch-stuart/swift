@@ -1,0 +1,22 @@
+{
+  "name": "srcset",
+  "main": "srcset.js",
+  "ignore": [
+    ".*",
+    "test",
+    "component.json",
+    "package.json"
+  ],
+  "homepage": "https://github.com/sindresorhus/srcset",
+  "version": "0.1.1",
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.1",
+    "commit": "cf0de23c4f284bf594108c69972c03a049c0b533"
+  },
+  "_source": "git://github.com/sindresorhus/srcset.git",
+  "_target": "~0.1.1",
+  "_originalSource": "srcset",
+  "_direct": true
+}

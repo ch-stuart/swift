@@ -1,23 +1,23 @@
-/*global document jQuery UA window*/
 // ...
 //= require console
+//= require srcset/srcset
 //= require jquery
+//= require underscore
 //= require unveil/jquery.unveil
-//= require ua.js/src/ua
-//= require browser_and_feature_checks
-//= require matchMedia/matchMedia
-//= require dollardollar
+//= require jquery.lightbox_me
+//= require jquery.fitvids
 //= require jquery.cookie
 //= require flash
+//= require matchMedia/matchMedia
+//= require ua.js/src/ua
+//= require browser_and_feature_checks
+//= require dollardollar
 //= require angular
 //= require ngSticky/sticky.js
 //= require global_exception_service
-//= require underscore
 //= require jquery_ujs
 //= require tinycolor
-//= require jquery.fitvids
 //= require jquery.hero
-//= require jquery.lightbox_me
 //= require jquery.tabs
 //= require jquery.slideshow
 //= require angular/app

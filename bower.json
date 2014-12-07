@@ -10,6 +10,7 @@
     "ngSticky": "enure/angular-sticky",
     "vue": "~0.10.6",
     "matchMedia": "~0.2.0",
-    "unveil": "~1.3.0"
+    "unveil": "~1.3.0",
+    "srcset": "~0.1.1"
   }
 }

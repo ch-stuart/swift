@@ -13,7 +13,7 @@
 
   if (UA.isMobile()) $root.addClass('is-mobile');
   if (UA.isSafari()) $root.addClass('is-safari');
-  if (UA.isIOS()) $root.addClass('is-iOS');
+  if (UA.isIOS())    $root.addClass('is-iOS');
 
   SwiftUtils.notifyOldBrowser = function() {
     $(document.body).prepend(
@@ -62,6 +62,25 @@
       // Wait until later to alert() when their localStorage fails
       // when used from Application code
       SwiftUtils.notifyOldBrowser();
+    }
+  }
+
+  // Ghetto polyfill for srcset
+  if ($('.blog_img').size()) {
+    var $blog_img = $('.blog_img'),
+        src = $blog_img.attr('src'),
+        srcSet = $blog_img.attr('srcset'),
+        newUrl;
+
+    _.each(srcset.parse(srcSet), function(srcSetOption) {
+      if ($(window).width() > srcSetOption.width) {
+        newUrl = srcSetOption.url;
+      }
+    });
+
+
+    if (newUrl) {
+      $blog_img.attr('src', newUrl);
     }
   }
 
