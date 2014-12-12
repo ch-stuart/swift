@@ -31,7 +31,7 @@ Staging environment is at: https://fierce-island-8829.herokuapp.com/
 
 Manually...
 
-    $ rails s thin
+    $ rails s
 
 Or, use [pow](//pow.cx).
 
