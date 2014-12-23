@@ -81,7 +81,7 @@
             </p>
         <% end %>
         <hr class="pr--block pr--clear">
-        <% if @sale[:coupon_code].present? %>
+        <% if @sale[:coupon_code].present? && @sale[:coupon_code] != "f" %>
           <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
               <div class="unit w-3-4 hide-on-mobiles"></div>
               <div class="unit w-1-4">

@@ -176,7 +176,7 @@ class SalesController < ApplicationController
       gift_cert_remain:      params[:gift_cert_remain],
       gift_cert_applied:     params[:gift_cert_applied],
       total_with_gift_cert:  params[:total_with_gift_cert],
-      coupon_code:           params[:coupon_code] || false,
+      coupon_code:           params[:coupon_code] || nil,
       saved_with_coupon:     params[:saved_with_coupon] || false
     )
 
