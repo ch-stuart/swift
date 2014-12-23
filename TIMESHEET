@@ -326,5 +326,8 @@ date:        time (minutes):       comment:
 2014-12-04  40 WIP: coupons
 2014-12-06  25 WIP: coupons
 2014-12-07  25 Fix up blog image
+2014-12-22  15 Fix issue where coupon was always showing for sales success
+2014-12-22  15 Fix issue where email signup is not working
+2014-12-22  25 Figuring out what was wrong with GCs and querying db for GC orders
 
 http://www.timer-tab.com
