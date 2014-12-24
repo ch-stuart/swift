@@ -1,21 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: MyString
-  description: MyText
+  title: MyString1
+  code: MY_STRING_1
   published: false
   start_date: 2014-11-09 20:12:23
   end_date: 2014-11-09 20:12:23
-  percent_off: 1
-  cents_off: 1
-  code: MyString
+  percent_off: 10
 
 two:
-  title: MyString
+  title: MyString2
+  code: MY_STRING_2
   description: MyText
   published: false
   start_date: 2014-11-09 20:12:23
   end_date: 2014-11-09 20:12:23
-  percent_off: 1
-  cents_off: 1
-  code: MyString
+  cents_off: 10
