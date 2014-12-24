@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class CompaniesControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
-    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("builder:buildhandmadecommunity")
+    sign_in User.first
     @company = companies(:one)
   end
 
@@ -19,7 +22,7 @@ class CompaniesControllerTest < ActionController::TestCase
 
   test "should create company" do
     assert_difference('Company.count') do
-      post :create, :company => @company.attributes
+      post :create, :company => @company.attributes.except("id", "created_at", "updated_at")
     end
 
     assert_redirected_to company_path(assigns(:company))
@@ -36,7 +39,7 @@ class CompaniesControllerTest < ActionController::TestCase
   end
 
   test "should update company" do
-    put :update, :id => @company.to_param, :company => @company.attributes
+    put :update, :id => @company.to_param, :company => @company.attributes.except("id", "created_at", "updated_at")
     assert_redirected_to company_path(assigns(:company))
   end
 
