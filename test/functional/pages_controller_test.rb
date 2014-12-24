@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class PagesControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
-    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("builder:buildhandmadecommunity")
+    sign_in User.first
     @page = pages(:one)
   end
 
@@ -21,7 +24,7 @@ class PagesControllerTest < ActionController::TestCase
     assert_difference('Page.count') do
       @page.title = 'Uniquely unique'
       @page.path = 'lorem'
-      post :create, :page => @page.attributes
+      post :create, :page => @page.attributes.except("id", "created_at", "updated_at")
     end
 
     assert_redirected_to page_path(assigns(:page))
@@ -32,7 +35,7 @@ class PagesControllerTest < ActionController::TestCase
       @page = pages(:three)
       @page.title = 'Uniquely unique'
       @page.path = 'lorem'
-      post :create, :page => @page.attributes
+      post :create, :page => @page.attributes.except("id", "created_at", "updated_at")
     end
 
     assert_redirected_to page_path(assigns(:page))
@@ -49,7 +52,7 @@ class PagesControllerTest < ActionController::TestCase
   end
 
   test "should update page" do
-    put :update, :id => @page.to_param, :page => @page.attributes
+    put :update, :id => @page.to_param, :page => @page.attributes.except("id", "created_at", "updated_at")
     assert_redirected_to page_path(assigns(:page))
   end
 
