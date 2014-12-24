@@ -5,7 +5,8 @@ class SizeTest < ActiveSupport::TestCase
   def setup
     @size = {
       :title => "Large",
-      :price => "12.00"
+      :price => "12.00",
+      :wholesale_price => "10.00"
     }
   end
 
