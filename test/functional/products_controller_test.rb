@@ -1,15 +1,23 @@
 require 'test_helper'
 
 class ProductsControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
-    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("builder:buildhandmadecommunity")
+    sign_in User.first
     @product = products(:three)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:products)
+    assert_not_nil assigns(:public_products)
+    assert_not_nil assigns(:private_products)
+    assert_not_nil assigns(:public_stock)
+    assert_not_nil assigns(:private_stock)
+    assert_not_nil assigns(:public_accessories)
+    assert_not_nil assigns(:private_accessories)
   end
 
   test "should get new" do
@@ -21,7 +29,7 @@ class ProductsControllerTest < ActionController::TestCase
     assert_difference('Product.count') do
       @product.title = "Unique Title"
       @product.short_title = "Unique Title"
-      post(:create, :product => @product.attributes)
+      post(:create, :product => @product.attributes.except("id", "created_at", "updated_at"))
     end
 
     assert_redirected_to product_path(assigns(:product))
@@ -43,7 +51,7 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "should update product" do
-    put :update, :id => @product.to_param, :product => @product.attributes
+    put :update, :id => @product.to_param, :product => @product.attributes.except("id", "created_at", "updated_at")
     assert_redirected_to product_path(assigns(:product))
   end
 

@@ -1,5 +1,6 @@
 one:
   title: Prod1 Title
+  short_title: Prod1Short
   description: prod1 description
   flickr_tag: smrtp001
   specs: specs
@@ -9,7 +10,6 @@ one:
   wholesale_price: 0.99
   wholesale_humane_price: $2.99 for pair
   kind: Product
-  short_title: Prod1Short
   flickr_photo: 3993933993
   # question: What is your question?
   # answer: This is your answer
@@ -19,9 +19,11 @@ one:
   flickr_set: 72157638081847424
   short_description: This is the short description.
   category: one
+  package_type: CUSTOM
 
 two:
   title: Prod2 Title
+  short_title: Prod2Short
   description: prod2 description
   flickr_tag: sss001
   specs: specs
@@ -31,7 +33,6 @@ two:
   wholesale_price: 0.99
   wholesale_humane_price: $2.99 for pair
   kind: Product
-  short_title: Prod2Short
   flickr_photo: 3993933993
   # question: What is your question?
   # answer: This is your answer
@@ -41,9 +42,11 @@ two:
   flickr_set: 72157637886349806
   short_description: This is the short description.
   category: two
+  package_type: CUSTOM
 
 three:
   title: Prod3 Title
+  short_title: Prod3Short
   description: prod3 description
   flickr_tag: toolpouch
   specs: specs
@@ -53,7 +56,6 @@ three:
   wholesale_price: 0.99
   wholesale_humane_price: $2.99 for pair
   kind: Product
-  short_title: Prod3Short
   flickr_photo: 3993933993
   # question: What is your question?
   # answer: This is your answer
@@ -63,3 +65,4 @@ three:
   flickr_set: 72157637894428825
   short_description: This is the short description.
   category: one
+  package_type: CUSTOM
