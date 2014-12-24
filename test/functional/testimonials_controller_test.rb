@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class TestimonialsControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
-    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("builder:buildhandmadecommunity")
+    sign_in User.first
     @testimonial = testimonials(:one)
   end
 
@@ -19,7 +22,7 @@ class TestimonialsControllerTest < ActionController::TestCase
 
   test "should create testimonial" do
     assert_difference('Testimonial.count') do
-      post :create, :testimonial => @testimonial.attributes
+      post :create, :testimonial => @testimonial.attributes.slice("body", "author", "product_id")
     end
 
     assert_redirected_to testimonial_path(assigns(:testimonial))
@@ -36,7 +39,7 @@ class TestimonialsControllerTest < ActionController::TestCase
   end
 
   test "should update testimonial" do
-    put :update, :id => @testimonial.to_param, :testimonial => @testimonial.attributes
+    put :update, :id => @testimonial.to_param, :testimonial => @testimonial.attributes.slice("body", "author", "product_id")
     assert_redirected_to testimonial_path(assigns(:testimonial))
   end
 

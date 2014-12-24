@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class CategoriesControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
-    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("builder:buildhandmadecommunity")
+    sign_in User.first
     @category = categories(:one)
   end
 
@@ -19,7 +22,7 @@ class CategoriesControllerTest < ActionController::TestCase
 
   test "should create category" do
     assert_difference('Category.count') do
-      post :create, :category => @category.attributes
+      post :create, :category => @category.attributes.slice("title")
     end
 
     assert_redirected_to category_path(assigns(:category))
@@ -36,7 +39,7 @@ class CategoriesControllerTest < ActionController::TestCase
   end
 
   test "should update category" do
-    put :update, :id => @category.to_param, :category => @category.attributes
+    put :update, :id => @category.to_param, :category => @category.attributes.slice("title")
     assert_redirected_to category_path(assigns(:category))
   end
 
