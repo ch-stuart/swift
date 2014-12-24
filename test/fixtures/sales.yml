@@ -1,11 +1,11 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 one:
-  email: MyText
-  guid: MyString
-  description: MyText
+  email: goo@mar.com
+  amount: 111
+  total: 112
+  description: "{}"
 
 two:
-  email: MyText
-  guid: MyString
-  description: MyText
+  email: foo@bar.com
+  amount: 111
+  total: 112
+  description: "{}"

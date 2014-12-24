@@ -28,7 +28,7 @@ class Sale < ActiveRecord::Base
   scope :deleted,     where(status: 'Deleted').sort_by_created_at
 
   # This needs to exclude instances where the product hasn't
-  # shipped, and isntances where it shipped, but was not shipped
+  # shipped, and instances where it shipped, but was not shipped
   # with Postmaster
   # def self.get_all_shipping_price_diff
   #   total_actual   = Shipment.sum(:cost)

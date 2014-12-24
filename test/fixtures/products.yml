@@ -15,8 +15,8 @@ one:
   # answer: This is your answer
   not_for_sale: false
   not_for_sale_message: This is not currently for sale.
-  featured_on_homepage: false
-  flickr_set: 72157638081847424
+  featured_on_homepage: true
+  flickr_set: 72157629573074896
   short_description: This is the short description.
   category: one
   package_type: CUSTOM

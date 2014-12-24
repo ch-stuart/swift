@@ -47,7 +47,7 @@ SwiftSite::Application.routes.draw do
   # https://www.builtbyswift.com/cart/checkout
   #
   # # completed purchase
-  # https://www.builtbyswift.com/orders/7e59b9a5-4055-46eb-944c-185051f9ebf7
+  # https://www.builtbyswift.com/orders/7e59b9a5
 
   resources :sales do
     get 'success', on: :member
