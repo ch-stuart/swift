@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class SizesControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
-    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("builder:buildhandmadecommunity")
+    sign_in User.first
     @size = sizes(:one)
   end
 
@@ -19,7 +22,7 @@ class SizesControllerTest < ActionController::TestCase
 
   test "should create size" do
     assert_difference('Size.count') do
-      post :create, :size => @size.attributes
+      post :create, :size => @size.attributes.except("id", "created_at", "updated_at")
     end
 
     assert_redirected_to size_path(assigns(:size))
@@ -36,7 +39,7 @@ class SizesControllerTest < ActionController::TestCase
   end
 
   test "should update size" do
-    put :update, :id => @size.to_param, :size => @size.attributes
+    put :update, :id => @size.to_param, :size => @size.attributes.except("id", "created_at", "updated_at")
     assert_redirected_to size_path(assigns(:size))
   end
 
