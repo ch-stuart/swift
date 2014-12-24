@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class HubControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
-    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("builder:buildhandmadecommunity")
+    sign_in User.first
   end
 
   test "should get index" do
