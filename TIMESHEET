@@ -329,5 +329,6 @@ date:        time (minutes):       comment:
 2014-12-22  15 Fix issue where coupon was always showing for sales success
 2014-12-22  15 Fix issue where email signup is not working
 2014-12-22  25 Figuring out what was wrong with GCs and querying db for GC orders
+2014-12-23  60 Preparing to upgrade to Rails 4.2
 
 http://www.timer-tab.com
