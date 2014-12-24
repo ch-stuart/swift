@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class ContactsControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
+    sign_in User.first
     @contact = contacts(:one)
   end
 
