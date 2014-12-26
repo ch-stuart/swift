@@ -15,6 +15,10 @@ task :deploy, [:remote, :branch, :should_clear_cache, :should_db_migrate] do |t,
   end
 
   if yesno == "yes"
+
+    Rake::Task['test'].invoke
+    Rake::Task['casper'].invoke
+
     system "heroku maintenance:on --remote #{args[:remote]}"
 
     puts "git push #{args[:remote]} #{args[:branch]}:master --force"
