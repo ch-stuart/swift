@@ -105,9 +105,6 @@ SwiftSite::Application.configure do
     :host => 'www.builtbyswift.com'
   }
 
-  # fix for heroku
-  config.assets.precompile += %w( application-hub.css  )
-
   # Cache static assets for 1 year
   config.static_cache_control = "public, max-age=31536000"
 
