@@ -1,4 +1,4 @@
-SwiftSite::Application.config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do
+SwiftSite::Application.config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
 
     if Rails.env == "production"
 

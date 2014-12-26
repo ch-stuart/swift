@@ -2,10 +2,8 @@ require 'test_helper'
 
 class TestimonialsControllerTest < ActionController::TestCase
 
-  include Devise::TestHelpers
-
   setup do
-    sign_in User.first
+    sign_in users(:admin)
     @testimonial = testimonials(:one)
   end
 

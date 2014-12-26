@@ -1,4 +1,4 @@
-class ApplicationSweeper < ActionController::Caching::Sweeper
+class ApplicationObserver < ActiveRecord::Observer
 
     observe Color, Company, Page, Product, Size, Testimonial, Category
 

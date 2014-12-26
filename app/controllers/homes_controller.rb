@@ -10,16 +10,16 @@ class HomesController < ApplicationController
     }
 
     def index
-        @pages = Page.find_all_by_status("Public")
-        @featured_pages = Page.where(:featured => "Featured").reverse
-        @products = Product.where(:status => "Public", :kind => "Product")
+        @pages = Page.where(status: "Public")
+        @featured_pages = Page.where(featured: "Featured").reverse
+        @products = Product.where(status: "Public", kind: "Product")
         @categories = Category.all
-        @accessories = Product.where(:status => "Public", :kind => "Accessory")
+        @accessories = Product.where(status: "Public", kind: "Accessory")
         @company = Company.first
 
         @blog = get_latest_blog_post
 
-        @featured_product = Product.where(:featured_on_homepage => true).first
+        @featured_product = Product.where(featured_on_homepage: true).first
 
         if @featured_product.blank?
             @featured_product = Product.first
@@ -27,16 +27,19 @@ class HomesController < ApplicationController
 
         if @featured_product.flickr_set.present?
             @photos = Home.get_photos_by_set @featured_product.flickr_set
+
         else
             @photos = Home.get_photos_by_tag @featured_product.flickr_tag
         end
+
+        logger.info "hat is wrong wrong with #{@photos.inspect}"
     end
 
     def store
         @categories = Category.all
-        @products = Product.where(:status => "Public", :kind => "Product")
-        @accessories = Product.where(:status => "Public", :kind => "Accessory")
-        @stock = Product.where(:status => "Public", :kind => "Stock")
+        @products = Product.where(status: "Public", kind: "Product")
+        @accessories = Product.where(status: "Public", kind: "Accessory")
+        @stock = Product.where(status: "Public", kind: "Stock")
         @company = Company.first
     end
 

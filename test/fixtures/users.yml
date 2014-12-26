@@ -1,4 +1,4 @@
-one:
+admin:
   admin: true
   wholesale: false
   email: admin@builtbyswift.com

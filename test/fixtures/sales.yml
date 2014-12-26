@@ -3,9 +3,11 @@ one:
   amount: 111
   total: 112
   description: "{}"
+  country: US
 
 two:
   email: foo@bar.com
   amount: 111
   total: 112
   description: "{}"
+  country: CA

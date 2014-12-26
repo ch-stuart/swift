@@ -74,5 +74,6 @@ SwiftSite::Application.configure do
       :exception_recipients => %w{app.logging@builtbyswift.com}
     }
 
+  config.eager_load = true
 end
 

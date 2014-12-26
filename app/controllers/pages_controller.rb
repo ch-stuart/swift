@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     { 'user_type' => get_user_type }
   }
 
-  cache_sweeper ApplicationSweeper
+  # cache_sweeper ApplicationSweeper
 
   def index
     @pages = Page.all

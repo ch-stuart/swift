@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   caches_action :show, :order, :cache_path => Proc.new { |c|
     { 'user_type' => get_user_type }
   }
-  cache_sweeper ApplicationSweeper
+  # cache_sweeper ApplicationSweeper
 
   def index
     @public_products = Product.where(status: 'Public', kind: 'Product').order('title ASC')

@@ -7,7 +7,7 @@ class Color < ActiveRecord::Base
     validates_presence_of :title, :hex
     validates :hex, :hex_color => true
 
-    PRICE_MATCH = /^\d{0,10}\.\d{2}$/
+    PRICE_MATCH = /\A\d{0,10}\.\d{2}\z/
     PRICE_MESSAGE = "must be in the following format: 12.00"
     validates_format_of :price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :price?
     validates_format_of :wholesale_price, :with => PRICE_MATCH, :message => PRICE_MESSAGE, :if => :wholesale_price?

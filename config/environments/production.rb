@@ -101,6 +101,6 @@ SwiftSite::Application.configure do
     :host => 'www.builtbyswift.com'
   }
 
-
+  config.eager_load = true
 end
 

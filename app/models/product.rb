@@ -19,8 +19,8 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :testimonials, :reject_if => lambda { |a| a[:body].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :sizes, :reject_if => lambda { |a| a[:title].blank? }, :allow_destroy => true
 
-  FLICKR_ID_MATCH = /^\d{10,11}$/
-  FLICKR_SET_MATCH = /^\d{17}$/
+  FLICKR_ID_MATCH = /\A\d{10,11}\z/
+  FLICKR_SET_MATCH = /\A\d{17}\z/
 
   KINDS = ["Product", "Accessory", "Stock", "Gift Certificate"]
   attr_reader :KINDS

@@ -70,7 +70,7 @@ SwiftSite::Application.routes.draw do
   get  'postmaster/boxes', to: 'postmaster#boxes'
   post 'postmaster/create_box', to: 'postmaster#create_box'
 
-  match 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
+  post 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
 
   get 'store', :to => 'homes#store'
   get "accessories" => redirect("/store")

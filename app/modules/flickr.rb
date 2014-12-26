@@ -159,6 +159,8 @@ module Flickr
       photos = photos[0..9]
     end
 
+    # photos = JSON.parse(photos)
+
     Rails.cache.write(id, photos)
 
     photos

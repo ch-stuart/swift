@@ -1,14 +1,12 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.21'
+gem 'rails', '~> 4.0.0'
 gem 'pg', '0.17.1'
 gem "thin"
 gem 'flickraw', '0.9.8'
 gem 'rdiscount'
 gem 'nokogiri'
-gem 'jquery-rails', '~> 2.2.1'
-gem 'angularjs-rails', '~> 1.2.26'
 gem 'dalli' # memcachier
 gem 'memcachier' # memcachier
 gem 'newrelic_rpm' # https://devcenter.heroku.com/articles/newrelic#cedar
@@ -23,14 +21,18 @@ gem 'devise'
 gem 'cacheable_flash'
 gem 'awesome_print'
 gem 'rails_12factor'
+gem 'protected_attributes'
+gem 'actionpack-action_caching'
+gem 'rails-observers'
 
-group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+# group :assets do
+  gem 'sass-rails', '~> 4.0.0'
+  gem 'uglifier', '>= 1.3.0'
   gem "autoprefixer-rails"
   gem "underscore-rails"
-end
+  gem 'jquery-rails', '~> 3.1.2'
+  gem 'angularjs-rails', '~> 1.2.26'
+# end
 
 group :production do
   gem 'foreman'

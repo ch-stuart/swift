@@ -39,7 +39,7 @@ class Coupon < ActiveRecord::Base
   validates :code, :title, :uniqueness => true
 
   # Code can only include good characters
-  validates :code, format: { with: /^[A-Za-z0-9_-]+$/, message: "code can only contain letters, numbers, hyphens and underscores" }
+  validates :code, format: { with: /\A[A-Za-z0-9_-]+\z/, message: "code can only contain letters, numbers, hyphens and underscores" }
 
   def is_invalid?
     return true unless self.published?
