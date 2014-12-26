@@ -2,6 +2,8 @@ require 'test_helper'
 
 class CouponsControllerTest < ActionController::TestCase
 
+  include Devise::TestHelpers
+
   setup do
     sign_in users(:admin)
     @coupon = coupons(:one)

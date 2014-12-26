@@ -2,6 +2,8 @@ require 'test_helper'
 
 class HomesControllerTest < ActionController::TestCase
 
+  include Devise::TestHelpers
+
   setup do
 
   end

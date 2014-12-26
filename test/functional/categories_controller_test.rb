@@ -2,6 +2,8 @@ require 'test_helper'
 
 class CategoriesControllerTest < ActionController::TestCase
 
+  include Devise::TestHelpers
+
   setup do
     sign_in users(:admin)
     @category = categories(:one)

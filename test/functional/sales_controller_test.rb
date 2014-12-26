@@ -2,6 +2,8 @@ require 'test_helper'
 
 class SalesControllerTest < ActionController::TestCase
 
+  include Devise::TestHelpers
+
   setup do
     sign_in users(:admin)
     @sale = sales(:one)
