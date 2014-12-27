@@ -20,6 +20,8 @@
   <p>
     <% if @product.is_product? %>
       <%= link_to "Design your bags", order_product_path(@product), id: "js-goto-order", class: "btn-bike" %>
+    <% elsif @product.is_event? %>
+      <%= link_to "Sign Up", order_product_path(@product), id: "js-goto-order", class: "btn-bike" %>
     <% else %>
       <%= link_to "Buy it", order_product_path(@product), id: "js-goto-order", class: "btn-bike" %>
     <% end %>
