@@ -114,10 +114,18 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
 
+    if @product.related_products.present?
+      @product.related_products = JSON.parse @product.related_products
+    end
+
+    @related_products = load_related_products @product
+    @public_products = Product.where('id != ?', params[:id]).where(status: "Public")
+    @private_products = Product.where('id != ?', params[:id]).where(status: "Private")
+
     if @product.update_attributes(product_params)
       redirect_to(@product, :notice => 'Product was successfully updated.')
     else
-      render :action => "edit"
+      render :edit
     end
   end
 
@@ -134,8 +142,6 @@ class ProductsController < ApplicationController
     related_products = []
 
     if product.related_products.present?
-      logger.info "=> Hey look we have related products"
-
       logger.info "=> Hey look we have related products #{product.related_products.inspect}"
 
       product.related_products.each do |id|
@@ -167,6 +173,7 @@ class ProductsController < ApplicationController
     params
       .require(:product)
       .permit(
+        :id,
         :title,
         :description,
         :flickr_tag,
@@ -195,7 +202,11 @@ class ProductsController < ApplicationController
         :related_products,
         :domestic_flat_rate_shipping_charge,
         :international_flat_rate_shipping_charge,
-        :inventory_count
+        :inventory_count,
+        :related_products => [],
+        :sizes_attributes => [ :title, :price, :wholesale_price, :inventory_count ],
+        :parts_attributes => [ :title, :price, :wholesale_price ],
+        :testimonials_attributes => [ :body, :author ]
       )
   end
 
