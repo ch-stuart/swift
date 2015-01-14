@@ -36,7 +36,7 @@ class SizesController < ApplicationController
   end
 
   def create
-    @size = Size.new(params[:size])
+    @size = Size.new(size_params)
 
     respond_to do |format|
       if @size.save
@@ -53,7 +53,7 @@ class SizesController < ApplicationController
     @size = Size.find(params[:id])
 
     respond_to do |format|
-      if @size.update_attributes(params[:size])
+      if @size.update_attributes(size_params)
         format.html { redirect_to(@size, :notice => 'Size was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -72,4 +72,11 @@ class SizesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+
+  def size_params
+    params.require(:size).permit(:title, :price, :wholesale_price)
+  end
+
 end

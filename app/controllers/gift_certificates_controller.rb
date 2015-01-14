@@ -51,7 +51,7 @@ class GiftCertificatesController < ApplicationController
   # POST /gift_certificates
   # POST /gift_certificates.json
   def create
-    @gift_certificate = GiftCertificate.new(params[:gift_certificate])
+    @gift_certificate = GiftCertificate.new(gift_certificate_params)
 
     respond_to do |format|
       if @gift_certificate.save
@@ -70,7 +70,7 @@ class GiftCertificatesController < ApplicationController
     @gift_certificate = GiftCertificate.find(params[:id])
 
     respond_to do |format|
-      if @gift_certificate.update_attributes(params[:gift_certificate])
+      if @gift_certificate.update_attributes(gift_certificate_params)
         format.html { redirect_to @gift_certificate, notice: 'Gift certificate was successfully updated.' }
         format.json { head :no_content }
       else
@@ -90,5 +90,11 @@ class GiftCertificatesController < ApplicationController
       format.html { redirect_to gift_certificates_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def gift_certificate_params
+    require(:gift_certificate).permit(:sale_id, :amount, :remaining_amount)
   end
 end

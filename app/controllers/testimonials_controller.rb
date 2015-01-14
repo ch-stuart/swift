@@ -38,7 +38,7 @@ class TestimonialsController < ApplicationController
   end
 
   def create
-    @testimonial = Testimonial.new(params[:testimonial])
+    @testimonial = Testimonial.new(testimonial_params)
 
     respond_to do |format|
       if @testimonial.save
@@ -55,7 +55,7 @@ class TestimonialsController < ApplicationController
     @testimonial = Testimonial.find(params[:id])
 
     respond_to do |format|
-      if @testimonial.update_attributes(params[:testimonial])
+      if @testimonial.update_attributes(testimonial_params)
         format.html { redirect_to(@testimonial, :notice => 'Testimonial was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -74,4 +74,11 @@ class TestimonialsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+
+  def testimonial_params
+    params.require(:testimonial).permit(:body, :author, :product_id)
+  end
+
 end

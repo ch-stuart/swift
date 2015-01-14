@@ -49,7 +49,7 @@ class PagesController < ApplicationController
   end
 
   def create
-    @page = Page.new(params[:page])
+    @page = Page.new(page_params)
 
     if @page.save
       redirect_to(@page, :notice => 'Page was successfully created.')
@@ -61,7 +61,7 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
 
-    if @page.update_attributes(params[:page])
+    if @page.update_attributes(page_params)
       redirect_to(@page, :notice => 'Page was successfully updated.')
     else
       render :action => "edit"
@@ -73,6 +73,12 @@ class PagesController < ApplicationController
     @page.destroy
 
     redirect_to(pages_url)
+  end
+
+  private
+
+  def page_params
+    params.require(:page).permit(:title, :body, :path, :status, :video_html, :flickr_tag, :featured, :summary, :show_video_on_homepage, :show_photo_on_homepage, :flickr_photo, :hide_title_on_homepage, :hide_read_more_link_on_homepage, :include_in_about_us_navigation)
   end
 
 end

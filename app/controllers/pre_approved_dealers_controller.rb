@@ -45,7 +45,7 @@ class PreApprovedDealersController < ApplicationController
   # POST /pre_approved_dealers
   # POST /pre_approved_dealers.json
   def create
-    @pre_approved_dealer = PreApprovedDealer.new(params[:pre_approved_dealer])
+    @pre_approved_dealer = PreApprovedDealer.new(pre_approved_dealer_params)
 
     respond_to do |format|
       if @pre_approved_dealer.save
@@ -64,7 +64,7 @@ class PreApprovedDealersController < ApplicationController
     @pre_approved_dealer = PreApprovedDealer.find(params[:id])
 
     respond_to do |format|
-      if @pre_approved_dealer.update_attributes(params[:pre_approved_dealer])
+      if @pre_approved_dealer.update_attributes(pre_approved_dealer_params)
         format.html { redirect_to @pre_approved_dealer, notice: 'Pre approved dealer was successfully updated.' }
         format.json { head :no_content }
       else
@@ -84,5 +84,11 @@ class PreApprovedDealersController < ApplicationController
       format.html { redirect_to pre_approved_dealers_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def pre_approved_dealer_params
+    require(:pre_approved_dealer).permit(:email)
   end
 end

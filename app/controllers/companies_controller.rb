@@ -36,7 +36,7 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @company = Company.new(params[:company])
+    @company = Company.new(company_params)
 
     respond_to do |format|
       if @company.save
@@ -53,7 +53,7 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
 
     respond_to do |format|
-      if @company.update_attributes(params[:company])
+      if @company.update_attributes(company_params)
         format.html { redirect_to(@company, :notice => 'Company was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -71,5 +71,11 @@ class CompaniesController < ApplicationController
       format.html { redirect_to(companies_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def company_params
+    params.require(:company).permit(:title, :email, :phone, :address, :description, :delivery_time, :front_door_sign, :close_shop, :close_shop_message)
   end
 end

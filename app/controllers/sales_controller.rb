@@ -171,7 +171,6 @@ class SalesController < ApplicationController
       shipping_service:  params[:shipping_service],
       shipping_service_is_flat_rate:  params[:shipping_service_is_flat_rate],
       stripe_id:         params[:stripe_id],
-      status:            "Not Shipped",
       gift_certificate_guid: params[:gift_certificate_guid],
       gift_cert_remain:      params[:gift_cert_remain],
       gift_cert_applied:     params[:gift_cert_applied],
@@ -231,7 +230,7 @@ class SalesController < ApplicationController
     end
 
     respond_to do |format|
-      if @sale.update_attributes(params[:sale])
+      if @sale.update_attributes(sale_params)
         format.html { redirect_to @sale, notice: 'Sale was successfully updated.' }
         format.json { head :no_content }
       else
@@ -321,5 +320,9 @@ class SalesController < ApplicationController
       env: request.env,
       data: { message: "Post sale task failed." }
     )
+  end
+
+  def sale_params
+    params.require(:sale).permit(:description, :email, :amount, :weight, :line1, :line2, :city, :state, :zip_code, :country, :shipping_provider, :shipping_service, :shipping_charge, :stripe_id, :tax_rate, :tax_amount, :total, :pickup, :status, :phone_no, :contact, :company, :commercial, :postmaster_id, :shipping_tracking_number, :gift_certificate_guid, :gift_cert_remain, :gift_cert_applied, :total_with_gift_cert, :shipping_contact, :shipping_service_is_flat_rate, :coupon_code, :saved_with_coupon)
   end
 end

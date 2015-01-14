@@ -1,9 +1,10 @@
 one:
-  email: goo@mar.com
+  email: foo@bar.com
   amount: 111
   total: 112
   description: "{}"
   country: US
+  shipping_provider: USPS
 
 two:
   email: foo@bar.com
@@ -11,3 +12,20 @@ two:
   total: 112
   description: "{}"
   country: CA
+  shipping_provider: UPS
+
+three:
+  email: foo@bar.com
+  amount: 111
+  total: 112
+  description: "{}"
+  country: CA
+  shipping_provider: UPS
+
+four:
+  email: not_foo@bar.com
+  amount: 111
+  total: 112
+  description: "{}"
+  country: CA
+  shipping_provider: UPS

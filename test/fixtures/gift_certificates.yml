@@ -1,0 +1,9 @@
+one:
+  sale: one
+  amount: 1000
+  remaining_amount: 1000
+
+two:
+  sale:
+  amount:
+  remaining_amount:

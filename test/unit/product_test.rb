@@ -112,4 +112,14 @@ class ProductTest < ActiveSupport::TestCase
     assert product2.save, "not unique"
   end
 
+  test "should create product with part" do
+    part = Part.new title: "foo"
+    part2 = Part.new title: "goo"
+
+    @product[:parts] = [part, part2]
+    product = Product.new @product
+    assert product.save, "should save"
+    assert product.parts.size == 2
+  end
+
 end

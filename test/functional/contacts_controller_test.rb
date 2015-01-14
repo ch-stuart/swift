@@ -22,7 +22,7 @@ class ContactsControllerTest < ActionController::TestCase
 
   test "should create contact" do
     assert_difference('Contact.count') do
-      post :create, contact: {  }
+      post :create, contact: { email: "test@test.com" }
     end
 
     assert_redirected_to contact_path(assigns(:contact))
@@ -39,7 +39,7 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   test "should update contact" do
-    put :update, id: @contact, contact: {  }
+    put :update, id: @contact, contact: { email: "test2@test.com" }
     assert_redirected_to contact_path(assigns(:contact))
   end
 

@@ -26,8 +26,6 @@ class Coupon < ActiveRecord::Base
   include ActiveModel::Validations
   validates_with CouponValidator
 
-  attr_accessible :cents_off, :code, :description, :end_date, :percent_off, :published, :start_date, :title
-
   # Must have title and code
   validates :title, :code, presence: true
 

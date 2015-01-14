@@ -36,7 +36,7 @@ SwiftSite::Application.configure do
 
   # TODO remove me after update to rails 4.2 is complete?
   # Raise exception on mass assignment protection for Active Record models
-  config.active_record.mass_assignment_sanitizer = :strict
+  # config.active_record.mass_assignment_sanitizer = :strict
 end
 
 

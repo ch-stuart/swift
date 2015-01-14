@@ -145,14 +145,19 @@ module Flickr
       medium = sizes.find {|size| size.label == "Medium" }
       small_320 = sizes.find {|size| size.label == "Small 320" }
 
-      photos.push({
-        id: photo["id"],
-        small_320_url: small_320.source,
-        # medium_url: medium.source,
-        # url: medium.source,
-        medium_640_url: medium_640.source
-        # medium_800_url: medium_800.source
-      })
+      photo_hash = {}
+
+      photo_hash[:id] = photo["id"]
+
+      unless small_320.nil?
+        photo_hash[:small_320_url] = small_320.source
+      end
+
+      unless medium_640.nil?
+        photo_hash[:medium_640_url] = medium_640.source
+      end
+
+      photos.push photo_hash
     end
 
     if photos.length > 10

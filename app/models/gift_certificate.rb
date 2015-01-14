@@ -1,11 +1,7 @@
 class GiftCertificate < ActiveRecord::Base
 
   belongs_to :sale
-
-  attr_accessible :amount, :guid, :sale_id, :remaining_amount
-
   before_create :populate_guid_and_remaining_amount
-
   before_save :update_remaining_amount, if: "remaining_amount?"
 
   private

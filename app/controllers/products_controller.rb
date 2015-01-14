@@ -100,7 +100,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(params[:product])
+    @product = Product.new(product_params)
     if @product.save
       redirect_to(@product, :notice => 'Product was successfully created.')
     else
@@ -114,7 +114,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
 
-    if @product.update_attributes(params[:product])
+    if @product.update_attributes(product_params)
       redirect_to(@product, :notice => 'Product was successfully updated.')
     else
       render :action => "edit"
@@ -161,4 +161,42 @@ class ProductsController < ApplicationController
     # logger.info "=> I have all of these related_products #{related_products}"
     related_products
   end
+
+  def product_params
+
+    params
+      .require(:product)
+      .permit(
+        :title,
+        :description,
+        :flickr_tag,
+        :specs,
+        :status,
+        :price,
+        :kind,
+        :short_title,
+        :humane_price,
+        :flickr_photo,
+        :question,
+        :answer,
+        :not_for_sale,
+        :not_for_sale_message,
+        :category_id,
+        :featured_on_homepage,
+        :flickr_set,
+        :short_description,
+        :wholesale_humane_price,
+        :wholesale_price,
+        :width,
+        :height,
+        :length,
+        :weight,
+        :package_type,
+        :related_products,
+        :domestic_flat_rate_shipping_charge,
+        :international_flat_rate_shipping_charge,
+        :inventory_count
+      )
+  end
+
 end

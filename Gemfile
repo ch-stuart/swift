@@ -21,7 +21,6 @@ gem 'devise'
 gem 'cacheable_flash'
 gem 'awesome_print'
 gem 'rails_12factor'
-gem 'protected_attributes'
 gem 'actionpack-action_caching'
 gem 'rails-observers'
 
