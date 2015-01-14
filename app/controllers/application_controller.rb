@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_is_admin
-    logger.info "== CURRENT_USER is #{current_user.inspect}"
     if current_user.try(:admin?)
       return
     else
