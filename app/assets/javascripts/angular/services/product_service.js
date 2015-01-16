@@ -14,10 +14,10 @@ SwiftApp.service('ProductService', [
     function sortParts() {
         console.log('Product#sortParts');
         // Sort by whether or not a part has colors
-        if (response.product.parts) {
-            var parts = response.product.parts;
+        if (response.parts) {
+            var parts = response.parts;
 
-            response.product.parts = _.filter(parts, function(part) {
+            response.parts = _.filter(parts, function(part) {
                 return part.colors.length;
             }).concat(_.filter(parts, function(part) {
                 return !part.colors.length;
@@ -30,30 +30,30 @@ SwiftApp.service('ProductService', [
     // @returns nothing
     function setupSizes() {
         console.log('Product#setupSizes');
-        if (response.product.sizes.length) {
-            response.product.selectedSize = response.product.sizes[0];
+        if (response.sizes.length) {
+            response.selectedSize = response.sizes[0];
 
             // Set this so we can use it later when setting the
             // new title if the user picks a size
-            response.product.originalTitle = response.product.title;
+            response.originalTitle = response.title;
             // Not used
-            // response.product.originalPrice = response.product.price;
+            // response.originalPrice = response.price;
 
             // Set the price on page load
-            if (response.product.selectedSize.price) {
-                response.product.price = response.product.selectedSize.price;
+            if (response.selectedSize.price) {
+                response.price = response.selectedSize.price;
             } else {
-                ExceptionService.report('ProductService#setupSizes: Missing price for default size.', [response.product]);
+                ExceptionService.report('ProductService#setupSizes: Missing price for default size.', [response]);
             }
 
             // Must not set wholesale_price to empty string. That will break things.
-            if (response.product.selectedSize.wholesale_price) {
-                response.product.wholesale_price = response.product.selectedSize.wholesale_price;
+            if (response.selectedSize.wholesale_price) {
+                response.wholesale_price = response.selectedSize.wholesale_price;
             } else {
-                ExceptionService.report('ProductService#setupSizes: Missing wholesale price for default size.', [response.product]);
+                ExceptionService.report('ProductService#setupSizes: Missing wholesale price for default size.', [response]);
             }
 
-            console.log('ProductService#setupSizes: We have sizes', response.product.price);
+            console.log('ProductService#setupSizes: We have sizes', response.price);
         }
     }
 
@@ -64,15 +64,15 @@ SwiftApp.service('ProductService', [
         console.log('Product#setupQA');
         // Set this so we can hide/show the input/select
         // based on whether or not it's
-        response.product.originalAnswer = response.product.answer;
+        response.originalAnswer = response.answer;
 
         // Turn answer choices String into Array
-        if (response.product.answer) {
+        if (response.answer) {
             // Split it up
-            response.product.answer = response.product.answer.split(', ');
+            response.answer = response.answer.split(', ');
 
             // Default
-            response.product.selectedAnswer = response.product.answer[0];
+            response.selectedAnswer = response.answer[0];
         }
     }
 
@@ -82,11 +82,11 @@ SwiftApp.service('ProductService', [
         console.log('Product#setupPricesForWholesale');
 
         // Adjust main price
-        response.product.price = response.product.wholesale_price;
-        response.product.humane_price = response.product.wholesale_humane_price;
+        response.price = response.wholesale_price;
+        response.humane_price = response.wholesale_humane_price;
 
         // Adjust size prices
-        _.each(response.product.sizes, function(size) {
+        _.each(response.sizes, function(size) {
             if (size.wholesale_price) {
                 size.price = size.wholesale_price;
             } else {
@@ -94,7 +94,7 @@ SwiftApp.service('ProductService', [
             }
         });
         // Adjust part prices
-        _.each(response.product.parts, function(part) {
+        _.each(response.parts, function(part) {
             if (part.price) {
                 part.price = part.wholesale_price;
             } else {
@@ -102,7 +102,7 @@ SwiftApp.service('ProductService', [
             }
         });
         // Adjust fabric prices
-        _.each(response.product.parts, function(part) {
+        _.each(response.parts, function(part) {
             if (part.colors) {
                 _.each(part.colors, function(color) {
                     if (color.price) {

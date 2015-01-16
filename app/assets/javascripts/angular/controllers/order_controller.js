@@ -21,7 +21,7 @@ SwiftApp.controller('OrderCtrl', [
         .then(successCallback, errorCallback);
 
     function successCallback(response) {
-        $scope.product = response.data.product;
+        $scope.product = response.data;
 
         // Change currency strings into floats
         ProductService.setTypes.call($scope.product);
