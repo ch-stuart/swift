@@ -205,8 +205,11 @@ class ProductsController < ApplicationController
         :inventory_count,
         :related_products => [],
         :sizes_attributes => [ :title, :price, :wholesale_price, :inventory_count ],
-        :parts_attributes => [ :title, :price, :wholesale_price ],
-        :testimonials_attributes => [ :body, :author ]
+        :parts_attributes => [
+          :title, :price, :wholesale_price, :id, "_destroy",
+          :color_ids => []
+        ],
+        :testimonials_attributes => [ :body, :author, :id, "_destroy" ]
       )
   end
 
