@@ -95,6 +95,8 @@ class GiftCertificatesController < ApplicationController
   private
 
   def gift_certificate_params
-    require(:gift_certificate).permit(:sale_id, :amount, :remaining_amount)
+    params
+      .require(:gift_certificate)
+      .permit(:sale_id, :amount, :id)
   end
 end
