@@ -19,6 +19,12 @@ class SalesController < ApplicationController
     # end
   end
 
+  def all
+    @sales = Sale.all.order("created_at DESC")
+
+    render layout: "hub"
+  end
+
   # GET /sales
   # GET /sales.json
   def cart

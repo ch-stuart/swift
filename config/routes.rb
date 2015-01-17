@@ -55,6 +55,7 @@ SwiftSite::Application.routes.draw do
     get 'checkout', on: :new
     post 'charge', on: :collection
     post 'coupon', on: :collection
+    get 'all', on: :collection
   end
 
   get 'cart', to: 'sales#cart'

@@ -16,7 +16,9 @@
     Trash <span class="demph"><%= @sales_deleted.length %></span>
   </div>
   <div class="tab">
-    All
+    <a href="all">
+      All
+    </a>
   </div>
   <div class="tab-divider"></div>
   <div class="card">
@@ -32,9 +34,8 @@
     <%= render 'sales_table', sales: @sales_deleted, title: 'Deleted' %>
   </div>
   <div class="card">
-    <%= render 'sales_table', sales: @sales_not_shipped, title: 'Not Shipped' %>
-    <%= render 'sales_table', sales: @sales_printed, title: 'Printed' %>
-    <%= render 'sales_table', sales: @sales_shipped, title: 'Shipped' %>
+    <p>
+      <%= link_to "View all", all_sales_path, class: "btn" %>
   </div>
 </div>
 
