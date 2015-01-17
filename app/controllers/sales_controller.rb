@@ -263,7 +263,8 @@ class SalesController < ApplicationController
         gift_certificate = GiftCertificate.new(sale_id: sale.id, amount: price_in_cents)
 
         if gift_certificate.save
-          logger.info "YAY I MADE A GIFT CERTIFICATE"
+          logger.info "Created Gift Certificate"
+          GiftCertificatesMailer.notify_swift(gift_certificate).deliver
         else
           ExceptionNotifier.notify_exception(
             e,

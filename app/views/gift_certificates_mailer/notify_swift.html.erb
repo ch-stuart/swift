@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Helvetica, Arial, san-serif;
+        }
+    </style>
+</head>
+<body>
+  <a href="https://www.builtbyswift.com/gift_certificates/<%= @gift_certificate.id %>">
+    https://www.builtbyswift.com/gift_certificates/<%= @gift_certificate.id %>
+  </a>
+  <br><br>
+  <%= number_to_currency(cents_to_dollars(@gift_certificate.amount)) %>
+</body>
+</html>
