@@ -5,12 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
 
-  # Setup accessible (or protected) attributes for your model
-  # attr_accessible :email, :password, :password_confirmation, :remember_me,
-  #                 :failed_attempts, :unlock_token, :locked_at, :wholesale,
-  #                 :line1, :line2, :city, :state, :zip_code, :country, :phone_no,
-  #                 :company, :company_url, :contact
-
   before_create :add_wholesale_if_user_is_preapproved
 
   private
