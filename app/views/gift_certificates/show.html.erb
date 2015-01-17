@@ -1,10 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-
 <p>
   <b>Sale:</b>
   <% if @gift_certificate.sale_id.present? %>
-    <%= link_to @gift_certificate.sale_id, "/sales/#{@gift_certificate.sale_id}" %>
+    <ul>
+      <li>
+        <%= @gift_certificate.sale.contact %>
+        <% if @gift_certificate.sale.email.present? %>
+          (<%= @gift_certificate.sale.email %>)
+        <% end %>
+      </li>
+      <li>
+        <%= link_to "/sales/#{@gift_certificate.sale_id}", "/sales/#{@gift_certificate.sale_id}" %>
+      </li>
+    </ul>
   <% else %>
     n/a
   <% end %>
