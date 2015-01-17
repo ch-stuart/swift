@@ -7,9 +7,9 @@ class SalesController < ApplicationController
   # GET /sales.json
   def index
     @sales_not_shipped = Sale.not_shipped
-    @sales_printed = Sale.printed
-    @sales_shipped = Sale.shipped
-    @sales_deleted = Sale.deleted
+    @sales_printed     = Sale.printed
+    @sales_shipped     = Sale.shipped
+    @sales_deleted     = Sale.deleted
 
     render :layout => "hub"
     #

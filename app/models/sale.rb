@@ -14,12 +14,10 @@ class Sale < ActiveRecord::Base
 
   validates_presence_of :email, :amount, :total, :guid, :status
 
-  scope :sort_by_created_at, order("created_at DESC")
-
-  scope :not_shipped, where(status: 'Not Shipped').sort_by_created_at
-  scope :printed,     where(status: 'Printed').sort_by_created_at
-  scope :shipped,     where(status: 'Shipped').sort_by_created_at
-  scope :deleted,     where(status: 'Deleted').sort_by_created_at
+  scope :not_shipped, -> { where(status: 'Not Shipped').order("created_at DESC") }
+  scope :printed,     -> { where(status: 'Printed').order("created_at DESC") }
+  scope :shipped,     -> { where(status: 'Shipped').order("created_at DESC") }
+  scope :deleted,     -> { where(status: 'Deleted').order("created_at DESC") }
 
   # This needs to exclude instances where the product hasn't
   # shipped, and instances where it shipped, but was not shipped
