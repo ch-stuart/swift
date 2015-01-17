@@ -204,7 +204,7 @@ class ProductsController < ApplicationController
         :international_flat_rate_shipping_charge,
         :inventory_count,
         :related_products => [],
-        :sizes_attributes => [ :title, :price, :wholesale_price, :inventory_count ],
+        :sizes_attributes => [ :title, :price, :wholesale_price, :inventory_count, :id, "_destroy" ],
         :parts_attributes => [
           :title, :price, :wholesale_price, :id, "_destroy",
           :color_ids => []
