@@ -24,7 +24,7 @@ class PagesControllerTest < ActionController::TestCase
     assert_difference('Page.count') do
       @page.title = 'Uniquely unique'
       @page.path = 'lorem'
-      post :create, :page => @page.attributes.except("id", "created_at", "updated_at")
+      post :create, :page => @page.attributes.except("id")
     end
 
     assert_redirected_to page_path(assigns(:page))
@@ -35,7 +35,7 @@ class PagesControllerTest < ActionController::TestCase
       @page = pages(:three)
       @page.title = 'Uniquely unique'
       @page.path = 'lorem'
-      post :create, :page => @page.attributes.except("id", "created_at", "updated_at")
+      post :create, :page => @page.attributes.except("id")
     end
 
     assert_redirected_to page_path(assigns(:page))
@@ -52,7 +52,7 @@ class PagesControllerTest < ActionController::TestCase
   end
 
   test "should update page" do
-    put :update, :id => @page.to_param, :page => @page.attributes.except("id", "created_at", "updated_at")
+    put :update, :id => @page.to_param, :page => @page.attributes.except("id")
     assert_redirected_to page_path(assigns(:page))
   end
 
