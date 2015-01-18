@@ -89,6 +89,8 @@ class PreApprovedDealersController < ApplicationController
   private
 
   def pre_approved_dealer_params
-    require(:pre_approved_dealer).permit(:email)
+    params
+      .require(:pre_approved_dealer)
+      .permit(:email)
   end
 end
