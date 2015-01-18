@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_filter :verify_is_admin, except: [:my_info, :edit_my_info, :update]
+  before_filter :verify_is_signed_in, only: [:my_info, :edit_my_info, :update]
   layout "hub", except: [:my_info, :edit_my_info]
 
   def index
@@ -30,33 +31,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    # Get the correct user
-    if current_user.try(:admin?)
+    # Check who is updating the form
+    if current_user.admin?
       @user = User.find params[:id]
     else
       @user = current_user
-    end
-
-    # Don't allow dealer to update anything that they're
-    # not supposed to.
-    unless current_user.try(:admin?)
       logger.info "Whitelisting inputs for dealer"
-      copy = params[:user]
-      params[:user] = {}
-      params[:user][:line1]       = copy[:line1]
-      params[:user][:city]        = copy[:city]
-      params[:user][:state]       = copy[:state]
-      params[:user][:zip_code]    = copy[:zip_code]
-      params[:user][:country]     = copy[:country]
-      params[:user][:phone_no]    = copy[:phone_no]
-      params[:user][:company]     = copy[:company]
-      params[:user][:company_url] = copy[:company_url]
-      params[:user][:contact]     = copy[:contact]
-      logger.info params[:user]
     end
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(user_params)
         if current_user.try(:admin?)
           format.html { redirect_to users_url, :notice => 'User was successfully updated.' }
         else
@@ -80,4 +64,29 @@ class UsersController < ApplicationController
     end
   end
 
+  private
+
+  def verify_is_signed_in
+    return if user_signed_in?
+
+    render :text => "403: Forbidden", :status => 403
+  end
+
+  def user_params
+    if current_user.admin?
+      params.require(:user).permit(:wholesale)
+    else
+      params.require(:user).permit(
+        :line1,
+        :city,
+        :state,
+        :zip_code,
+        :country,
+        :phone_no,
+        :company,
+        :company_url,
+        :contact
+      )
+    end
+  end
 end
