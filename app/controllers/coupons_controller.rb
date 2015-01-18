@@ -106,6 +106,25 @@ class CouponsController < ApplicationController
   private
 
   def coupon_params
-    params.require(:coupon).permit(:title, :description, :published, :start_date, :end_date, :percent_off, :cents_off, :code)
+    params
+      .require(:coupon)
+      .permit(
+        :title,
+        :description,
+        :published,
+        "start_date(1i)",
+        "start_date(2i)",
+        "start_date(3i)",
+        "start_date(4i)",
+        "start_date(5i)",
+        "end_date(1i)",
+        "end_date(2i)",
+        "end_date(3i)",
+        "end_date(4i)",
+        "end_date(5i)",
+        :percent_off,
+        :cents_off,
+        :code
+      )
   end
 end
