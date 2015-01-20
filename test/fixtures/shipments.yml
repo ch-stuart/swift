@@ -1,0 +1,23 @@
+one:
+  postmaster_id: 1
+  tracking_number: 123abc
+  carrier: USPS
+  weight: 2.0
+  width: 5
+  height: 5
+  length: 5
+  sale: sales(:one)
+  cost: 1200
+
+two:
+  postmaster_id: 2
+  tracking_number: 321cba
+  carrier: UPS
+  weight: 2.0
+  width: 5
+  height: 5
+  length: 5
+  sale: sales(:two)
+  cost: 1200
+
+

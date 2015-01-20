@@ -99,16 +99,8 @@ class PostmasterController < ApplicationController
   # end
 
   def edit_shipment
-    begin
-      @sale = Sale.find params[:id]
-      @boxes = Postmaster::Package.all({ limit: 66 })
-    rescue Exception => e
-      ExceptionNotifier.notify_exception(
-        e,
-        :env => request.env,
-        :data => {:message => "Showing the 'edit shipment' view failed"}
-      )
-    end
+    @sale = Sale.find params[:id]
+    @boxes = Postmaster::Package.all({ limit: 66 })
   end
 
   # Create a shipment

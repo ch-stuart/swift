@@ -1,5 +1,5 @@
 one:
-  email: foo@bar.com
+  email: noreply@builtbyswift.com
   amount: 111
   total: 112
   description: "{}"
@@ -7,7 +7,7 @@ one:
   shipping_provider: USPS
 
 two:
-  email: foo@bar.com
+  email: noreply@builtbyswift.com
   amount: 111
   total: 112
   description: "{}"
@@ -15,7 +15,7 @@ two:
   shipping_provider: UPS
 
 three:
-  email: foo@bar.com
+  email: noreply@builtbyswift.com
   amount: 111
   total: 112
   description: "{}"
@@ -23,7 +23,7 @@ three:
   shipping_provider: UPS
 
 four:
-  email: not_foo@bar.com
+  email: noreply@builtbyswift.com
   amount: 111
   total: 112
   description: "{}"
