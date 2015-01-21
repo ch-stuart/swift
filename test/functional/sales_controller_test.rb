@@ -46,7 +46,7 @@ class SalesControllerTest < ActionController::TestCase
   test "should show order history to customer" do
     sign_in users(:buyer)
     get :history
-    assert_equal assigns(:sales).size, 3
+    assert_equal assigns(:sales).size, 4
     assert_response :success
   end
 

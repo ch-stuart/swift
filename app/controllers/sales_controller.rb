@@ -101,7 +101,7 @@ class SalesController < ApplicationController
   def history
     @company = Company.first
     @categories = Category.all
-    @products = Product.where(:status => 'Public', :kind => 'Product')
+    @products = Product.where(status: 'Public', kind: 'Product')
 
     if user_signed_in?
       @sales = Sale.where(email: current_user.email)
