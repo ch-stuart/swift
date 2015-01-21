@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def my_info
     @company = Company.first
     @categories = Category.all
-    @products = Product.where(:status => 'Public', :kind => 'Product')
+    @products = Product.where(status: 'Public', kind: 'Product')
 
     @user = current_user
   end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def edit_my_info
     @company = Company.first
     @categories = Category.all
-    @products = Product.where(:status => 'Public', :kind => 'Product')
+    @products = Product.where(status: 'Public', kind: 'Product')
 
     @user = current_user
   end

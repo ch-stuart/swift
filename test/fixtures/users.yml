@@ -15,3 +15,9 @@ buyer:
   wholesale: false
   email: foo@bar.com
   encrypted_password: <%= User.new.send(:password_digest, '123greetings') %
+
+buyer2:
+  admin: false
+  wholesale: false
+  email: foot@bar.com
+  encrypted_password: <%= User.new.send(:password_digest, '123greetings') %

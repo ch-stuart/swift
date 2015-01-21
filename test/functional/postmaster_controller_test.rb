@@ -24,6 +24,7 @@ class PostmasterControllerTest < ActionController::TestCase
     assert_not_nil JSON.parse(@response.body)['best']
   end
 
+  # don't need to test this b/c we don't use it
   # post 'postmaster/fit'
   # test "should fit boxes" do
   #
@@ -77,9 +78,10 @@ class PostmasterControllerTest < ActionController::TestCase
   end
 
   # post 'postmaster/create_box'
-  test "should create boxes" do
-    sign_in users(:admin)
-
-  end
+  # test "should create boxes" do
+  #   sign_in users(:admin)
+  #
+  #
+  # end
 
 end

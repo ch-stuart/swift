@@ -200,6 +200,21 @@ class PostmasterController < ApplicationController
 
   end
 
+  # List available boxes
+  def boxes
+    begin
+      @response = Postmaster::Package.all({ limit: 66 })
+      logger.info "=> BOXES: #{@response}"
+    rescue Exception => e
+      ExceptionNotifier.notify_exception(
+        e,
+        :env => request.env,
+        :data => {:message => "Listing boxes failed"}
+      )
+      @error = e
+    end
+  end
+
   # Create a box
   def create_box
     logger.info "=> WxHxL: #{params[:w]}x#{params[:h]}x#{params[:l]}"
@@ -218,21 +233,6 @@ class PostmasterController < ApplicationController
         :env => request.env,
         :data => {:message => "Creating a box failed"}
       )
-    end
-  end
-
-  # List available boxes
-  def boxes
-    begin
-      @response = Postmaster::Package.all({ limit: 66 })
-      logger.info "=> BOXES: #{@response}"
-    rescue Exception => e
-      ExceptionNotifier.notify_exception(
-        e,
-        :env => request.env,
-        :data => {:message => "Listing boxes failed"}
-      )
-      @error = e
     end
   end
 
