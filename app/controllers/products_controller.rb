@@ -142,7 +142,7 @@ class ProductsController < ApplicationController
     related_products = []
 
     if product.related_products.present?
-      logger.info "=> Hey look we have related products #{product.related_products.inspect}"
+      logger.info "=> load_related_products for #{product.related_products.title}"
 
       product.related_products.each do |id|
         # Need to check if product exists first since we don't actually
@@ -151,20 +151,18 @@ class ProductsController < ApplicationController
         if Product.exists? id
           related_product = Product.find(id)
 
-          logger.info "=> I have a related product #{related_product.inspect}"
+          logger.info "=> load_related_products found #{related_product.title}"
 
           # Do not include private products
           if related_product.status == "Public"
-            logger.info "=> This ^ product is public, so I'm going to keep it!"
             related_products.push(Product.find(id))
           end
         else
-          logger.warn "=> Related product with id of #{id} does not exist."
+          logger.warn "=> load_related_products: product with id #{id} does not exist."
         end
       end
     end
 
-    # logger.info "=> I have all of these related_products #{related_products}"
     related_products
   end
 
