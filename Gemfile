@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '~> 4.1.9'
+gem 'rails', '~> 4.2.0'
 gem 'pg', '0.17.1'
 gem "thin"
 gem 'flickraw', '0.9.8'
