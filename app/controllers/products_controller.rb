@@ -144,7 +144,7 @@ class ProductsController < ApplicationController
     if product.related_products.present?
       logger.info "=> load_related_products for #{product.related_products.to_s}"
 
-      product.related_products.each do |id|
+      JSON.parse(product.related_products).each do |id|
         # Need to check if product exists first since we don't actually
         # remove items from this array if a product is deleted
         # from active record
