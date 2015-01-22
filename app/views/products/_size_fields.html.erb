@@ -1,4 +1,4 @@
-<div class="indent group">
+<div class="indent group nested-fields">
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -23,8 +23,7 @@
   </div>
   <div class="field destroy">
     <label>
-      <%= f.hidden_field :_destroy %>
-      <%= link_to_function "Remove Size", "remove_fields(this)" %>
+      <%= link_to_remove_association "remove size", f %>
     </label>
   </div>
 </div>

@@ -23,6 +23,7 @@ gem 'awesome_print'
 gem 'rails_12factor'
 gem 'actionpack-action_caching'
 gem 'rails-observers'
+gem 'cocoon'
 
 # group :assets do
   gem 'sass-rails', '~> 4.0.0'

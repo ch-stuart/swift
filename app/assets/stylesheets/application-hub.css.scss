@@ -196,3 +196,28 @@ textarea {
 .minimal-list__item {
 
 }
+
+
+.color_boxes {
+  column-count: 2;
+  column-gap: 10px;
+}
+
+.mini-swatch {
+  padding-left: 10px;
+  margin-right: 1px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+
+.nested-fields {
+  position: relative;
+
+  .field.destroy {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+}

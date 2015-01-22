@@ -284,12 +284,12 @@
       <h3>
           Sizes
       </h3>
-      <%= f.fields_for :sizes do |sizes_fields| %>
-          <%= render :partial => 'sizes_fields', :locals => { :f => sizes_fields } %>
+      <%= f.fields_for :sizes do |size_fields| %>
+          <%= render :partial => 'size_fields', :locals => { :f => size_fields } %>
       <% end %>
       <div class="field add">
           <label>
-              <%= link_to_add_fields "Add Size", f, :sizes %>
+              <%= link_to_add_association 'add size', f, :sizes %>
           </label>
       </div>
     </div>
@@ -297,12 +297,12 @@
       <h3>
           Parts
       </h3>
-      <%= f.fields_for :parts do |parts_fields| %>
-          <%= render :partial => 'parts_fields', :locals => { :f => parts_fields } %>
+      <%= f.fields_for :parts do |part_fields| %>
+          <%= render :partial => 'part_fields', :locals => { :f => part_fields } %>
       <% end %>
       <div class="field add">
           <label>
-              <%= link_to_add_fields "Add Part", f, :parts %>
+              <%= link_to_add_association 'add part', f, :parts %>
           </label>
       </div>
     </div>
@@ -310,12 +310,12 @@
       <h3>
           Testimonials
       </h3>
-      <%= f.fields_for :testimonials do |testimonials_fields| %>
-          <%= render :partial => 'testimonials_fields', :locals => { :f => testimonials_fields } %>
+      <%= f.fields_for :testimonials do |testimonial_fields| %>
+          <%= render :partial => 'testimonial_fields', :locals => { :f => testimonial_fields } %>
       <% end %>
       <div class="field add">
           <label>
-              <%= link_to_add_fields "Add Testimonial", f, :testimonials %>
+            <%= link_to_add_association 'add testimonial', f, :testimonials %>
           </label>
       </div>
     </div>
@@ -328,8 +328,16 @@
 <%= content_for :js do %>
     <script>
         $(document).ready(function() {
-            $.toggleColors();
             $('.tabs').tabs();
+
+            $(document.body).on('click', '.color_label', function(e) {
+              e.preventDefault();
+
+              $(this)
+                .closest('.color_fields')
+                .find('.color_boxes')
+                .slideToggle();
+            });
         });
 
         new Vue({ el: '#js-flickr' });

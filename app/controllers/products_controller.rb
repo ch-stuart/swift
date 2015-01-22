@@ -142,7 +142,7 @@ class ProductsController < ApplicationController
     related_products = []
 
     if product.related_products.present?
-      logger.info "=> load_related_products for #{product.related_products.title}"
+      logger.info "=> load_related_products for #{product.related_products.to_s}"
 
       product.related_products.each do |id|
         # Need to check if product exists first since we don't actually

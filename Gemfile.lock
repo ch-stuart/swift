@@ -50,6 +50,7 @@ GEM
       stackable_flash (>= 0.0.7)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    cocoon (1.2.6)
     coderay (1.1.0)
     daemons (1.1.9)
     dalli (2.6.4)
@@ -230,6 +231,7 @@ DEPENDENCIES
   awesome_print
   brakeman
   cacheable_flash
+  cocoon
   dalli
   devise
   exception_notification
