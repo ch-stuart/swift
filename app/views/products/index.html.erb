@@ -5,22 +5,49 @@
   <%= link_to raw('&larr; Hub'), hub_path, class: "btn" %>
   <%= link_to 'Create New Product', new_product_path, class: "btn" %>
 </p>
-<p>
-    Click the table headings to hide/show the table.
-</p>
-<%= render 'products_table', products: @public_products, title: 'Public Products' %>
-<%= render 'products_table', products: @private_products, title: 'Private Products' %>
-<%= render 'products_table', products: @public_stock, title: 'Public Stock' %>
-<%= render 'products_table', products: @private_stock, title: 'Private Stock' %>
-<%= render 'products_table', products: @public_accessories, title: 'Public Accessories' %>
-<%= render 'products_table', products: @private_accessories, title: 'Private Accessories' %>
-
+<div class="tabs">
+  <div class="tab">
+    Public Products
+  </div>
+  <div class="tab">
+    Private Products
+  </div>
+  <div class="tab">
+    Public Stock
+  </div>
+  <div class="tab">
+    Private Stock
+  </div>
+  <div class="tab">
+    Public Accessories
+  </div>
+  <div class="tab">
+    Private Accessories
+  </div>
+  <div class="tab-divider"></div>
+  <div class="card">
+    <%= render 'products_table', products: @public_products, title: 'Public Products' %>
+  </div>
+  <div class="card">
+    <%= render 'products_table', products: @private_products, title: 'Private Products' %>
+  </div>
+  <div class="card">
+    <%= render 'products_table', products: @public_stock, title: 'Public Stock' %>
+  </div>
+  <div class="card">
+    <%= render 'products_table', products: @private_stock, title: 'Private Stock' %>
+  </div>
+  <div class="card">
+    <%= render 'products_table', products: @public_accessories, title: 'Public Accessories' %>
+  </div>
+  <div class="card">
+    <%= render 'products_table', products: @private_accessories, title: 'Private Accessories' %>
+  </div>
+</div>
 <%= content_for :js do %>
 <script>
-    $('h3')
-        .css('cursor', 'pointer')
-        .on('click', function() {
-            $(this).next('table').toggle()
-        })
+  $(document).ready(function(){
+    $('.tabs').tabs();
+  });
 </script>
 <% end %>
