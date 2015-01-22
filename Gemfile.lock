@@ -31,6 +31,8 @@ GEM
       tzinfo (~> 1.1)
     angularjs-rails (1.2.26)
     arel (5.0.1.20140414130214)
+    autoprefixer-rails (4.0.0.1)
+      execjs
     awesome_print (1.2.0)
     bcrypt (3.1.7)
     brakeman (2.4.3)
@@ -230,6 +232,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack-action_caching
   angularjs-rails (~> 1.2.26)
+  autoprefixer-rails
   awesome_print
   brakeman
   cacheable_flash
@@ -257,11 +260,11 @@ DEPENDENCIES
   rails-observers
   rails_12factor
   rdiscount
-  sass-rails (~> 4.0.0)
+  sass-rails
   sqlite3
   stripe
   table_print
   taps
   thin
-  uglifier (>= 1.3.0)
+  uglifier
   underscore-rails
