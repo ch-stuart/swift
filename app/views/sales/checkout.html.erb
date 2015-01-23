@@ -130,7 +130,7 @@
             <span sw-visible="!busyShipping">
               Calculate Shipping Cost
             </span>
-            <img sw-visible="busyShipping" src="/assets/spin.gif" class="btn--progress__spin">
+            <%= image_tag "spin.gif", { :"sw-visible" => "busyShipping", :class => "btn--progress__spin" } %>
           </button>
         </div>
       </form>
@@ -271,7 +271,7 @@
             <span sw-visible="!busyBuying">
               Buy It
             </span>
-            <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
+            <%= image_tag "spin.gif", { :"sw-visible" => "busyBuying", :class => "btn--progress__spin" } %>
           </button>
         </div>
       </div>
@@ -455,7 +455,7 @@
             <span sw-visible="!busyBuying">
               Buy It
             </span>
-            <img sw-visible="busyBuying" src="/assets/spin.gif" class="btn--progress__spin">
+            <%= image_tag "spin.gif", { :"sw-visible" => "busyBuying", :class => "btn--progress__spin" } %>
           </button>
         </div>
       </div>
