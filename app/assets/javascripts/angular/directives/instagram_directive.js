@@ -1,5 +1,3 @@
-console.log('am i here?');
-
 SwiftApp
   .directive('swInstagram', ['InstagramService', function(instagramService) {
 
