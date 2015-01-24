@@ -140,11 +140,15 @@ module Flickr
     results["photo"].each do |photo|
       sizes = flickr.photos.getSizes :photo_id => photo["id"]
 
-      medium_800 = sizes.find {|size| size.label == "Medium 800" }
+      small_320  = sizes.find {|size| size.label == "Small 320" }
+      medium     = sizes.find {|size| size.label == "Medium" }
       medium_640 = sizes.find {|size| size.label == "Medium 640" }
-      medium = sizes.find {|size| size.label == "Medium" }
-      small_320 = sizes.find {|size| size.label == "Small 320" }
+      medium_800 = sizes.find {|size| size.label == "Medium 800" }
 
+      next if small_320.nil?
+      next if medium_640.nil?
+
+<<<<<<< HEAD
       photo_hash = {}
 
       photo_hash[:id] = photo["id"]
@@ -158,6 +162,13 @@ module Flickr
       end
 
       photos.push photo_hash
+=======
+      photos.push({
+        id: photo["id"],
+        small_320_url: small_320.source,
+        medium_640_url: medium_640.source
+      })
+>>>>>>> master
     end
 
     if photos.length > 10
