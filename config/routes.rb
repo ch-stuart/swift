@@ -71,6 +71,9 @@ SwiftSite::Application.routes.draw do
   get  'postmaster/boxes', to: 'postmaster#boxes'
   post 'postmaster/create_box', to: 'postmaster#create_box'
 
+  get 'instagram/get_by_tag/:tag', to: 'instagram#get_by_tag'
+  get 'solstice', to: 'solstice#index'
+
   post 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
 
   get 'store', :to => 'homes#store'

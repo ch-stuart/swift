@@ -24,6 +24,7 @@ gem 'rails_12factor'
 gem 'actionpack-action_caching'
 gem 'rails-observers'
 gem 'cocoon'
+gem 'instagram'
 
 # group :assets do
   gem 'sass-rails'
