@@ -9,7 +9,8 @@ class PagesController < ApplicationController
   # cache_sweeper ApplicationSweeper
 
   def index
-    @pages = Page.all
+    @public_pages = Page.where(status: "Public")
+    @private_pages = Page.where(status: "Private")
     @subtitle = controller_name.titlecase
     render :layout => 'hub'
   end

@@ -5,34 +5,26 @@
   <%= link_to raw('&larr; Hub'), hub_path, class: "btn" %>
   <%= link_to 'New Page', new_page_path, class: "btn" %>
 </p>
-<table class="table">
-  <thead>
-  <tr>
-    <th>Status</th>
-    <th>Title</th>
-    <th>Summary</th>
-    <th>Body</th>
-    <th>Path</th>
-    <th>Featured?</th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
-<% @pages.each do |page| %>
-  <tr>
-    <td><%= image_tag "#{page.status}.png" %></td>
-    <td>
-      <%= link_to page.title, page %>
-    </td>
-    <td><%= truncate(page.summary, :length => 30) %></td>
-    <td><%= truncate(page.body, :length => 30) %></td>
-    <td><%= page.path %></td>
-    <td class="<%= 'featured' unless page.featured? -%>"><%= page.featured %></td>
-    <td>
-        <%= link_to image_tag("edit.png"), edit_page_path(page) %>
-        <%= link_to image_tag("destroy.png"), page, :confirm => 'Are you sure?', :method => :delete %>
-    </td>
-  </tr>
+<div class="tabs">
+  <div class="tab">
+    Public
+  </div>
+  <div class="tab">
+    Private
+  </div>
+  <div class="tab-divider"></div>
+  <div class="card">
+    <%= render 'pages_table', pages: @public_pages %>
+  </div>
+  <div class="card">
+    <%= render 'pages_table', pages: @private_pages %>
+  </div>
+</div>
+
+<%= content_for :js do %>
+<script>
+  $(document).ready(function(){
+    $('.tabs').tabs();
+  });
+</script>
 <% end %>
-</tbody>
-</table>
