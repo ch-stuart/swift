@@ -354,5 +354,9 @@ date:        time (minutes):       comment:
 2015-01-23 45 WIP: twitter integration
 
 
+/// INVOICED 2015-01-23
+
+2015-01-24  10 UI cleanup on hub for pages
+2015-01-24  10 Fix issue where cache sweeping was not working
 
 http://www.timer-tab.com

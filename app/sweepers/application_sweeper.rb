@@ -1,6 +1,6 @@
-class ApplicationObserver < ActiveRecord::Observer
+class ApplicationSweeper < ActionController::Caching::Sweeper
 
-    observe Color, Company, Page, Product, Size, Testimonial, Category
+    observe Category, Color, Company, Page, Part, Product, Size, Testimonial
 
     def after_create record
         Rails.logger.info "ApplicationSweeper#after_create"

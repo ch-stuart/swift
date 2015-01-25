@@ -1,0 +1,41 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Featured?</th>
+    <th>Title</th>
+    <th>Summary</th>
+    <th>Path</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+<% pages.each do |page| %>
+  <tr>
+    <td>
+      <% if page.featured? %>
+        <span style="color:green; font-size: 120%;">
+          ✓
+        </span>
+      <% else %>
+        <span style="color:red; font-size: 120%;">
+          ✗
+        </span>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to page.title, page %>
+    </td>
+    <td><%= truncate(page.summary, :length => 30) %></td>
+    <td>
+      <a href="/pages/<%= page.path %>">
+        /pages/<%= page.path %>
+      </a>
+    </td>
+    <td>
+        <%= link_to image_tag("edit.png"), edit_page_path(page) %>
+        <%= link_to image_tag("destroy.png"), page, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
+  </tr>
+<% end %>
+</tbody>
+</table>

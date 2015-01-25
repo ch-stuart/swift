@@ -6,10 +6,11 @@ class PagesController < ApplicationController
     { 'user_type' => get_user_type }
   }
 
-  # cache_sweeper ApplicationSweeper
+  cache_sweeper ApplicationSweeper
 
   def index
-    @pages = Page.all
+    @public_pages = Page.where(status: "Public")
+    @private_pages = Page.where(status: "Private")
     @subtitle = controller_name.titlecase
     render :layout => 'hub'
   end
@@ -78,7 +79,24 @@ class PagesController < ApplicationController
   private
 
   def page_params
-    params.require(:page).permit(:title, :body, :path, :status, :video_html, :flickr_tag, :featured, :summary, :show_video_on_homepage, :show_photo_on_homepage, :flickr_photo, :hide_title_on_homepage, :hide_read_more_link_on_homepage, :include_in_about_us_navigation)
+    params
+      .require(:page)
+      .permit(
+        :title,
+        :body,
+        :path,
+        :status,
+        :video_html,
+        :flickr_tag,
+        :featured,
+        :summary,
+        :show_video_on_homepage,
+        :show_photo_on_homepage,
+        :flickr_photo,
+        :hide_title_on_homepage,
+        :hide_read_more_link_on_homepage,
+        :include_in_about_us_navigation
+      )
   end
 
 end

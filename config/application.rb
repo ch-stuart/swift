@@ -13,6 +13,10 @@ if defined?(Bundler)
   Bundler.require(:default, Rails.env)
 end
 
+# cache sweeping needs this
+# https://github.com/rails/rails-observers/issues/4
+require "rails/observers/activerecord/active_record"
+
 module SwiftSite
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
