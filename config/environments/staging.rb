@@ -92,18 +92,32 @@ SwiftSite::Application.configure do
       :exception_recipients => %w{app.logging@builtbyswift.com}
     }
 
+  # ActionMailer::Base.smtp_settings = {
+  #     port:           '587',
+  #     address:        'smtp.mandrillapp.com',
+  #     user_name:      ENV['MANDRILL_PRODUCTION_USERNAME'],
+  #     password:       ENV['MANDRILL_PRODUCTION_APIKEY'],
+  #     domain:         'heroku.com',
+  #     authentication: :plain
+  # }
+  # ActionMailer::Base.delivery_method = :smtp
+  # config.action_mailer.default_url_options = {
+  #   :host => 'www.builtbyswift.com'
+  # }
+
+  ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
       port:           '587',
       address:        'smtp.mandrillapp.com',
-      user_name:      ENV['MANDRILL_PRODUCTION_USERNAME'],
-      password:       ENV['MANDRILL_PRODUCTION_APIKEY'],
+      user_name:      ENV['MANDRILL_STAGING_USERNAME'],
+      password:       ENV['MANDRILL_STAGING_APIKEY'],
       domain:         'heroku.com',
       authentication: :plain
   }
-  ActionMailer::Base.delivery_method = :smtp
   config.action_mailer.default_url_options = {
-    :host => 'www.builtbyswift.com'
+    :host => 'fierce-island-8829.herokuapp.com'
   }
+
 
   # Cache static assets for 1 year
   config.static_cache_control = "public, max-age=31536000"
