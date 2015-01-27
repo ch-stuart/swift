@@ -3,7 +3,7 @@ class Sale < ActiveRecord::Base
   has_many :shipments
   has_many :gift_certificates
 
-  before_create :populate_status, :populate_guid
+  before_validation :populate_status, :populate_guid, on: :create
 
   # validates_presence_of :email, :description
   # validates :email, format: /@/
