@@ -521,7 +521,7 @@ SwiftApp.controller('CheckoutCtrl', [
             $scope.state = 'MT';
             // Show the <select>
             $scope.countryIsUSCA = true;
-            // Don't choose one carrier (use UPS, USPS and Fedex)
+            // Don't choose one carrier (use UPS or USPS)
             $scope.shippingCarrier = null;
             break;
         case 'CA':
