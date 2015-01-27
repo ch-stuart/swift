@@ -5,6 +5,7 @@ one:
   description: "{}"
   country: US
   shipping_provider: USPS
+  guid: 11111111
 
 two:
   email: noreply@builtbyswift.com
@@ -13,6 +14,7 @@ two:
   description: "{}"
   country: CA
   shipping_provider: UPS
+  guid: 22222222
 
 three:
   email: noreply@builtbyswift.com
@@ -21,6 +23,7 @@ three:
   description: "{}"
   country: CA
   shipping_provider: UPS
+  guid: 33333333
 
 four:
   email: noreply@builtbyswift.com
@@ -29,3 +32,4 @@ four:
   description: "{}"
   country: CA
   shipping_provider: UPS
+  guid: 44444444

@@ -3,7 +3,7 @@ class Sale < ActiveRecord::Base
   has_many :shipments
   has_many :gift_certificates
 
-  before_validation :populate_status, :populate_guid
+  before_create :populate_status, :populate_guid
 
   # validates_presence_of :email, :description
   # validates :email, format: /@/
@@ -76,11 +76,19 @@ class Sale < ActiveRecord::Base
   end
 
   def populate_guid
-    self.guid = SecureRandom.hex(4)
+    if self.guid.present?
+      raise "Cannot set guid on sale. It's already set."
+    else
+      self.guid = SecureRandom.hex(4)
+    end
   end
 
   def populate_status
-    self.status = "Not Shipped"
+    if self.status.present?
+      raise "Cannot set status on sale. It's already set."
+    else
+      self.status = "Not Shipped"
+    end
   end
 
 end
