@@ -32,14 +32,14 @@ class PostmasterController < ApplicationController
           response.commercial = true
         end
       end
+
+      respond_to do |format|
+        format.html  { render :text => response }
+        format.json  { render :json => response }
+      end
     rescue Exception => e
       logger.info e
       render json: e, status: :bad_request
-    end
-
-    respond_to do |format|
-      format.html  { render :text => response }
-      format.json  { render :json => response }
     end
   end
 
@@ -61,14 +61,15 @@ class PostmasterController < ApplicationController
     begin
       response = Postmaster::Rates.get params
       logger.info "Postmaster::Rates.get #{response}"
+
+      respond_to do |format|
+        format.html  { render :text => response }
+        format.json  { render :json => response }
+      end
     rescue Exception => e
       render json: e, status: :bad_request
     end
 
-    respond_to do |format|
-      format.html  { render :text => response }
-      format.json  { render :json => response }
-    end
   end
 
   # Fit packages in the best box
