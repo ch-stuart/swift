@@ -1,9 +1,14 @@
 class TwitterController < ApplicationController
 
   def get_by_tag
+    tag = params[:tag]
     client = get_client
-    response = client.search("##{params[:tag]}")
-    render json: response
+
+    @tweets = Rails.cache.fetch("twitter-get-by-tag-#{tag}") do
+      client.search("##{tag}").take(15).to_json
+    end
+
+    render json: @tweets
   end
 
   private
