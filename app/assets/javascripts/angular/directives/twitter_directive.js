@@ -10,8 +10,6 @@ SwiftApp
           .getByTag('solstice')
           .success(function(data) {
             $scope.tweets = data;
-
-            console.log(data);
           })
           .error(function(data) {
             console.error(data);
