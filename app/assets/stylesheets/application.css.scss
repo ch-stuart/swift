@@ -31,6 +31,7 @@
 @import 'layout-pub';
 @import 'layout-footer';
 @import 'layout-humans';
+@import 'layout-solstice';
 // Pages
 @import 'glob-homes';
 @import 'glob-page';
@@ -56,6 +57,8 @@
 @import 'module-testimonials';
 @import 'module-video';
 @import 'module-dialog';
+@import 'module-twitter-dir';
+@import 'module-insta-dir';
 
 // Override the base style set by Skeleton
 a, a:visited {

@@ -3,13 +3,15 @@ SwiftApp
 
     return {
       scope: {},
-      template: "<ul><li ng-repeat='tweet in tweets'>{{ tweet.text }}</li></ul>",
+      templateUrl: "twitter.html",
       restrict: "E",
       link: function($scope) {
         twitterService
           .getByTag('solstice')
           .success(function(data) {
             $scope.tweets = data;
+
+            console.log(data);
           })
           .error(function(data) {
             console.error(data);

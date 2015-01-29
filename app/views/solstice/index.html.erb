@@ -1,7 +1,34 @@
 <div ng-controller="SolsticeCtrl">
-  Solstice
-
-  <sw-twitter></sw-twitter>
-  <br>
-  <sw-instagram></sw-instagram>
+  <div class="grid">
+    <div class="unit whole">
+      <h2>
+        Swift Campout
+      </h2>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="unit half">
+      <sw-twitter></sw-twitter>
+    </div>
+    <div class="unit half">
+      <sw-instagram></sw-instagram>
+    </div>
+  </div>
+  <script type="text/ng-template" id="twitter.html">
+    <ul class="TwitterDir-items">
+      <li class="TwitterDir-item" ng-repeat='tweet in tweets'>
+        {{ tweet.text }}
+      </li>
+    </ul>
+  </script>
+  <script type="text/ng-template" id="instagram.html">
+    <ul class="InstaDir-items">
+      <li class="InstaDir-item" ng-repeat='media in mediaItems'>
+        <img class="InstaDir-img" ng-src='{{ media.thumbnail }}'>
+        <div class="InstaDir-username">
+          {{ media.username }}
+        </div>
+      </li>
+    </ul>
+  </script>
 </div>

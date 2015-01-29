@@ -3,11 +3,11 @@ SwiftApp
 
     return {
       scope: {},
-      template: "<ul><li style='float:left' ng-repeat='media in mediaItems'><img src='{{ media.thumbnail }}'><br>{{ media.username }}</li></ul>",
+      templateUrl: "instagram.html",
       restrict: "E",
       link: function($scope) {
         instagramService
-          .getByTag('solstice')
+          .getByTag('montana')
           .success(function(data) {
             $scope.mediaItems = data;
           })
