@@ -2,12 +2,14 @@ SwiftApp
   .directive('swTwitter', ['TwitterService', function(twitterService) {
 
     return {
-      scope: {},
+      scope: {
+          tag: '@'
+      },
       templateUrl: "twitter.html",
       restrict: "E",
       link: function($scope) {
         twitterService
-          .getByTag('solstice')
+          .getByTag($scope.tag)
           .success(function(data) {
             $scope.tweets = data;
           })

@@ -60,7 +60,8 @@ module SwiftSite
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # heroku requires this to be false
+    # heroku requires this to be false (actually this might just be a requirement
+    # when running devise with rails 3.2 on heroku)
     config.assets.initialize_on_precompile = false
 
     # let rails know about bower components

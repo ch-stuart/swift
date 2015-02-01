@@ -1,13 +1,21 @@
 .InstaDir-items {
-
+  display: flex;
+  flex-wrap: wrap;
 }
 .InstaDir-item {
-  display: inline-block;
-  margin: 0 10px 10px 0;
+  margin: 0 20px 20px 0;
+  width: 160px;
 }
 .InstaDir-img {
-
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ddd;
 }
 .InstaDir-username {
-
+  display: block;
+}
+.InstaDir-text {
+  word-wrap: break-word;
+  max-height: 128px;
+  overflow-y: auto;
 }

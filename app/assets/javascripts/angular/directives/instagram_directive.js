@@ -2,12 +2,14 @@ SwiftApp
   .directive('swInstagram', ['InstagramService', function(instagramService) {
 
     return {
-      scope: {},
+      scope: {
+          tag: '@'
+      },
       templateUrl: "instagram.html",
       restrict: "E",
       link: function($scope) {
         instagramService
-          .getByTag('montana')
+          .getByTag($scope.tag)
           .success(function(data) {
             $scope.mediaItems = data;
           })

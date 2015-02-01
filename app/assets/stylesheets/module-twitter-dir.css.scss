@@ -1,2 +1,19 @@
 .TwitterDir-items {}
-.TwitterDir-item {}
+.TwitterDir-item {
+  display: flex;
+}
+.TwitterDir-user-icon {
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  padding: 2px !important;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  transform: translateY(3px);
+}
+.TwitterDir-tweet-text {
+  word-wrap: break-word;
+}
+.TwitterDir-tweet-screenName {
+
+}

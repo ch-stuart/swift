@@ -2,12 +2,19 @@
   display: flex;
   align-items: center;
 }
+.Grid--top {
+  align-items: flex-start;
+}
 .Grid-unit {
   padding-left: 10px;
+  flex-shrink: 1;
 
-  &:first-of-type {
+  &:first-child {
     padding-left: 0;
   }
+}
+.Grid-unit--rock {
+  flex-shrink: 0;
 }
 
 .Grid-unit input[type=text] {

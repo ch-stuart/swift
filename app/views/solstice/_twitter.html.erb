@@ -1,0 +1,17 @@
+<script type="text/ng-template" id="twitter.html">
+  <ul class="TwitterDir-items">
+    <li class="TwitterDir-item Grid Grid--top" ng-repeat='tweet in tweets'>
+      <img class="TwitterDir-user-icon Grid-unit Grid-unit--rock" ng-src="{{ tweet.profile_image }}">
+      <div class="Grid-unit">
+        <div class="TwitterDir-tweet-text">
+          {{ tweet.text }}
+        </div>
+        <div class="TwitterDir-tweet-screenName">
+          <a ng-href="//twitter.com/{{ tweet.user.screen_name }}">
+            {{ tweet.screen_name }}
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</script>

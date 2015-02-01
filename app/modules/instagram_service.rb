@@ -5,17 +5,20 @@ class InstagramService
   end
 
   def get_by_tag tag
-    photos = []
+    medias = []
 
     for media_item in @client.tag_recent_media(tag)
-      photos.push({
+      medias.push({
         thumbnail: media_item.images.thumbnail.url,
         standard: media_item.images.standard_resolution.url,
-        username: media_item.user.username
+        username: media_item.user.username,
+        type: media_item.type,
+        link: media_item.link,
+        text: media_item.caption && media_item.caption.text ? media_item.caption.text : nil
       })
     end
 
-    photos.to_json
+    medias.to_json
   end
 
 end

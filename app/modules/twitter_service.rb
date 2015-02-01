@@ -10,7 +10,20 @@ class TwitterService
   end
 
   def get_by_tag tag
-    @client.search("##{tag}").take(15).to_json
+    response = @client.search("##{tag}").take(15)
+    tweets = []
+
+    for tweet in response
+      image_data = tweet.user.profile_image_url_https
+
+      tweets.push({
+        profile_image: "#{image_data.scheme}://#{image_data.host}#{image_data.path}",
+        text: tweet.text,
+        screen_name: tweet.user.screen_name
+      })
+    end
+
+    tweets.to_json
   end
 
 end

@@ -1,0 +1,18 @@
+<script type="text/ng-template" id="instagram.html">
+  <ul class="InstaDir-items">
+    <li class="InstaDir-item" ng-repeat='media in mediaItems'>
+      <a ng-href="{{ media.link }}">
+        <img
+          class="InstaDir-img"
+          ng-if="media.type == 'image'"
+          ng-src='{{ media.thumbnail }}'>
+      </a>
+      <div class="InstaDir-text" ng-if="media.text">
+        {{ media.text }}
+      </div>
+      <a class="InstaDir-username" ng-href="//instagram.com/{{ media.username }}">
+        {{ media.username }}
+      </a>
+    </li>
+  </ul>
+</script>
