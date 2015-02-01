@@ -1,5 +1,5 @@
 /*global angular $ */
-var SwiftApp = angular.module('SwiftApp', ['sticky']);
+var SwiftApp = angular.module('SwiftApp', ['sticky', 'leaflet-directive']);
 
 SwiftApp.config([
   "$httpProvider", function($httpProvider) {

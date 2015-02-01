@@ -23,6 +23,8 @@
 //= require angular/app
 //= require angular/directives/visible_directive
 //= require angular/directives/instagram_directive
+//= require leaflet/leaflet
+//= require angular-leaflet-directive/dist/angular-leaflet-directive
 //= require angular/directives/twitter_directive
 //= require angular/services/exception_service
 //= require angular/services/config_service

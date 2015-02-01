@@ -350,16 +350,13 @@ date:        time (minutes):       comment:
 
 /// INVOICED 2015-01-23
 
-2015-01-23 70 WIP: instagram integration
-2015-01-23 45 WIP: twitter integration
-
-
-/// INVOICED 2015-01-23
-
+2015-01-23 70 WIP: solstice instagram integration
+2015-01-23 45 WIP: solstice twitter integration
 2015-01-24  10 UI cleanup on hub for pages
 2015-01-24  10 Fix issue where cache sweeping was not working
 2015-01-29  25 Caching for twitter and instagram
 2015-01-29  10 Moving angular templates inline
 2015-01-29  20 Moving api calls to service
+2015-01-31  60 WIP: solstice map
 
 http://www.timer-tab.com

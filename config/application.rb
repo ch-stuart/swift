@@ -65,6 +65,7 @@ module SwiftSite
 
     # let rails know about bower components
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+    config.assets.paths << Rails.root.join('vendor', 'assets')
 
     ActionMailer::Base.smtp_settings = {
         port:           '587',

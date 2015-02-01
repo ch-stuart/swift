@@ -12,3 +12,20 @@ ssl/
 # This is included via a Gem
 vendor/assets/bower_components/angular/*
 casper-results.xml
+vendor/assets/bower_components/angular-leaflet-directive/grunt/aliases.yaml
+vendor/assets/bower_components/angular-leaflet-directive/grunt/bower.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/bump.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/changelog.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/concat.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/connect.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/coveralls.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/jshint.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/karma.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/ngAnnotate.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/open.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/pkg.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/protractor.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/shell.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/uglify.js
+vendor/assets/bower_components/angular-leaflet-directive/grunt/watch.js
+vendor/assets/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js
