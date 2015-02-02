@@ -1,20 +1,20 @@
 <div class="sixteen columns clearfix">
-    <% if @stock.present? %>
-        <h2 class="store-section-heading">Ready Made</h2>
-    <% end %>
+  <% if @stock.present? %>
+    <h2 class="store-section-heading">Ready Made</h2>
+  <% end %>
 </div>
 <% @stock.each_with_index do |stock, index| %>
-    <%= render "store_items", :item => stock, :index => index %>
+  <%= render "store_items", :item => stock, :index => index %>
 <% end %>
 
 <div class="sixteen columns">
-    <% if @accessories.present? %>
-        <h2 class="store-section-heading">Accessories</h2>
-    <% end %>
+  <% if @accessories.present? %>
+    <h2 class="store-section-heading">Accessories</h2>
+  <% end %>
 </div>
 
 <% @accessories.each_with_index do |accessory, index| %>
-    <%= render "store_items", :item => accessory, :index => index %>
+  <%= render "store_items", :item => accessory, :index => index %>
 <% end %>
 
 <br class="clear">
