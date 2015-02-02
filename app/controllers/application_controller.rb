@@ -25,7 +25,6 @@ class ApplicationController < ActionController::Base
   end
 
   def resolve_layout
-    Rails.logger.info controller_name
     if controller_name == "sessions"
       "devise"
     else
