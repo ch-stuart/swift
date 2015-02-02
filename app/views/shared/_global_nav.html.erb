@@ -5,7 +5,7 @@
   <div class="clearfix row">
     <ul class="nav-list">
       <% if current_user.try(:wholesale?) %>
-        <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+        <li class="nav-list--item <%= set_column_classes(Category.all.length) %>">
           <strong class="nav-list--group-heading">Your Account</strong>
           <ul class="nav-list--group">
             <li class="nav-list--group-item">
@@ -17,7 +17,7 @@
           </ul>
         </li>
       <% end %>
-      <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+      <li class="nav-list--item <%= set_column_classes(Category.all.length) %>">
         <strong class="nav-list--group-heading">About Us</strong>
         <ul class="nav-list--group">
           <% Page.where(:include_in_about_us_navigation => true).each do |page| %>
@@ -30,18 +30,20 @@
           </li>
         </ul>
       </li>
-      <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
-        <strong class="nav-list--group-heading">Get in Touch</strong>
-        <ul class="nav-list--group">
-          <li class="nav-list--group-item">
-            <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "nav-list--group-item-link" %>
-          </li>
-          <li class="nav-list--group-item">
-            <%= link_to @company.phone, @company.phone_link, :class => "nav-list--group-item-link" %>
-          </li>
-        </ul>
+      <li class="nav-list--item <%= set_column_classes(Category.all.length) %>">
+        <% cache ["global_nav_company_contact", Company.first ] do %>
+          <strong class="nav-list--group-heading">Get in Touch</strong>
+          <ul class="nav-list--group">
+            <li class="nav-list--group-item">
+              <%= mail_to Company.first.email, Company.first.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "nav-list--group-item-link" %>
+            </li>
+            <li class="nav-list--group-item">
+              <%= link_to Company.first.phone, Company.first.phone_link, :class => "nav-list--group-item-link" %>
+            </li>
+          </ul>
+        <% end %>
       </li>
-      <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+      <li class="nav-list--item <%= set_column_classes(Category.all.length) %>">
         <strong class="nav-list--group-heading">Be Social</strong>
         <ul class="nav-list--group nav-list--group-social nav-list--group-inline">
           <li class="nav-list--group-item">
@@ -58,7 +60,7 @@
           </li>
         </ul>
       </li>
-      <li class="nav-list--item <%= set_column_classes(@categories.length) %>">
+      <li class="nav-list--item <%= set_column_classes(Category.all.length) %>">
         <strong class="nav-list--group-heading">Ready Made</strong>
         <ul class="nav-list--group">
           <li class="nav-list--group-item">

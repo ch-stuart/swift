@@ -44,6 +44,11 @@ class Product < ActiveRecord::Base
 
   before_save :serialize_related_products
 
+  scope :public_products, -> { where(status: "Public", kind: "Product") }
+  scope :public_accessories, -> { where(status: "Public", kind: "Accessory") }
+  scope :featured_product, -> { where(featured_on_homepage: true).first }
+  scope :public_stock, -> { where(status: "Public", kind: "Stock") }
+
   def public?
     self.status == "Public"
   end

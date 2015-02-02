@@ -6,6 +6,9 @@ class Page < ActiveRecord::Base
   validates_presence_of :title, :path
   validates_format_of :path, :with =>  /\A[a-zA-Z_-]+\z/, :message => "Must be only alpha characters, or hyphens or underscores."
 
+  scope :about_us_nav, -> { where(include_in_about_us_navigation: true) }
+  scope :featured_pages, -> { where(featured: "Featured").reverse }
+
   def public?
     self.status == "Public"
   end

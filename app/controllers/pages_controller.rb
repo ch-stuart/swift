@@ -6,8 +6,6 @@ class PagesController < ApplicationController
     { 'user_type' => get_user_type }
   }
 
-  cache_sweeper ApplicationSweeper
-
   def index
     @public_pages = Page.where(status: "Public")
     @private_pages = Page.where(status: "Private")
@@ -23,9 +21,6 @@ class PagesController < ApplicationController
       @page = Page.find(params[:id])
     end
 
-    @categories = Category.all
-    @company    = Company.first
-    @products   = Product.where(:status => 'Public', :kind => 'Product')
     @photos     = Page.get_photos_by_tag @page.flickr_tag
     @video_html = @page.video_html
     @subtitle   = @page.title

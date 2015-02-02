@@ -12,7 +12,7 @@
     <%= link_to("Image not found", item) %>
   <% end %>
   <h3 class="store-item--heading">
-    <%= link_to item.title, item, :class => "store-item--heading-link" %> (<%= item.humane_price_for(current_user) %>)
+    <%= link_to item.title, item, class: "store-item--heading-link" %> (<%= item.humane_price_for(current_user) %>)
   </h3>
 </div>
 <% if endcap %>

@@ -9,7 +9,7 @@
   <title>
     <%= "#{@subtitle} from " if @subtitle.present? %><%= @title %> | handmade bicycle panniers and accessories
   </title>
-  <% cache 'meta_description' do %>
+  <% cache ["meta_description", Company.first ] do %>
     <meta description="<%= Company.first.description if Company.first.description.present? %>">
   <% end %>
   <link type="text/plain" rel="author" href="//www.builtbyswift.com/humans.txt">
@@ -22,10 +22,12 @@
   <%= csrf_meta_tag %>
 </head>
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
-  <% if @company.front_door_sign.present? %>
-    <h2 class="front_door_sign">
-      <%= @company.front_door_sign %>
-    </h2>
+  <% cache ["layout_company_front_door_sign"] do %>
+    <% if Company.first.front_door_sign.present? %>
+      <h2 class="front_door_sign">
+        <%= Company.first.front_door_sign %>
+      </h2>
+    <% end %>
   <% end %>
   <% if current_user.try(:wholesale?) %>
     <h2 class="front_door_sign">
@@ -44,18 +46,16 @@
     <div class="container container-menu">
       <div class="sixteen columns menu--row-btns">
         <i id="global-menu-btn" class="entypo entypo-menu">&#9776;</i>
-        <% cache 'fox_and_cart' do %>
-          <a href="/" title="Home">
-            <%= image_set_tag "fox-45.png", { "fox-45.png" => "2x" }, { class: "menu-fox img-fox" }%>
-          </a>
-          <a
-              href="/cart"
-              ng-controller="CartStatusCtrl"
-              ng-cloak
-              title="View Your Cart {{ cart.message }}">
-            <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
-          </a>
-        <% end %>
+        <a href="/" title="Home">
+          <%= image_set_tag "fox-45.png", { "fox-45.png" => "2x" }, { class: "menu-fox img-fox" }%>
+        </a>
+        <a
+            href="/cart"
+            ng-controller="CartStatusCtrl"
+            ng-cloak
+            title="View Your Cart {{ cart.message }}">
+          <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
+        </a>
         <% if user_signed_in? %>
           <%= link_to("Sign Out", destroy_user_session_path, :method => :delete, :class => "dealer-sign-out-link") %>
         <% else %>
@@ -63,12 +63,10 @@
         <% end %>
         <br class="clear">
       </div>
-      <% cache 'global_nav' do %>
-        <%= render 'shared/global_nav' %>
-      <% end %>
+      <%= render 'shared/global_nav' %>
     </div>
   </div>
-  <% cache 'company_description_etc' do %>
+  <% cache ["company_description_etc", Company.first] do %>
     <div class="container container-logo">
       <div class="sixteen columns clearfix row-header" style="text-align: center">
         <h1 class="row-header--logo-wrap">
@@ -85,15 +83,13 @@
   <div class="container container-main container-w-padding">
     <%= yield %>
   </div>
-  <% cache 'footer' do %>
-    <div class="container-footer-wrap">
-      <div class="container container-footer">
-        <%= render "shared/footer" %>
-        <%# render "shared/no_js" %>
-        <%= render "shared/humans" %>
-      </div>
+  <div class="container-footer-wrap">
+    <div class="container container-footer">
+      <%= render "shared/footer" %>
+      <%# render "shared/no_js" %>
+      <%= render "shared/humans" %>
     </div>
-  <% end %>
+  </div>
   <% if current_user.try(:wholesale?) %>
   <script>window.__iswsu__=true</script>
   <% end %>

@@ -209,34 +209,38 @@
         <p>
             If you have any questions about your order, contact us:
         </p>
-        <ul class="nice-list">
-            <li>
-                <%= mail_to @company.email, @company.email, encode: "hex", body: "\n\n--\nSale ID: #{@sale.guid}" %>
-            </li>
-            <li>
-                <%= link_to @company.phone, @company.phone_link %>
-            </li>
-        </ul>
+        <% cache ["product_success_contact", Company.first, @sale] do %>
+          <ul class="nice-list">
+              <li>
+                  <%= mail_to Company.first.email, Company.first.email, encode: "hex", body: "\n\n--\nSale ID: #{@sale.guid}" %>
+              </li>
+              <li>
+                  <%= link_to Company.first.phone, Company.first.phone_link %>
+              </li>
+          </ul>
+        <% end %>
         <h4>
             Delivery Time
         </h4>
         <div class="handmade_label">handmade</div>
-        <p>
-            <%= @company.delivery_time %>
-        </p>
+        <% cache ["product_success_delivery_time", Company.first] do %>
+          <p>
+            <%= Company.first.delivery_time %>
+          </p>
+        <% end %>
     </div>
 </div>
 
 <%= content_for :js do %>
-    <script>
-        (function() {
-            // Now that the items have been purchased,
-            // remove them from the cart
-            try {
-              localStorage.removeItem('cart')
-            } catch (ex) {
-              SwiftUtils.notifyNoLocalStorage(ex);
-            }
-        })()
-    </script>
+  <script>
+    (function() {
+      // Now that the items have been purchased,
+      // remove them from the cart
+      try {
+        localStorage.removeItem('cart')
+      } catch (ex) {
+        SwiftUtils.notifyNoLocalStorage(ex);
+      }
+    })()
+  </script>
 <% end %>

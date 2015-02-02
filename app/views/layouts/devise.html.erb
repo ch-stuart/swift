@@ -27,16 +27,14 @@
         <a href="/">
           <i id="global-home-btn" class="entypo entypo-home">&#8962;</i>
         </a>
-        <% cache 'fox_and_cart' do %>
-          <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
-          <a
-              href="/cart"
-              ng-controller="CartStatusCtrl"
-              ng-cloak
-              title="View Your Cart {{ cart.message }}">
-            <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
-          </a>
-        <% end %>
+        <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
+        <a
+            href="/cart"
+            ng-controller="CartStatusCtrl"
+            ng-cloak
+            title="View Your Cart {{ cart.message }}">
+          <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
+        </a>
         <% if user_signed_in? %>
           <%= link_to("Sign Out", destroy_user_session_path, :method => :delete, :class => "dealer-sign-out-link") %>
         <% else %>
@@ -54,7 +52,7 @@
         </a>
       </h1>
       <h2 class="row-header--description">
-        <% cache 'company_description' do %>
+        <% cache ['company_description', Company.first] do %>
           <%= Company.first.description if Company.first.description.present? %>
         <% end %>
       </h2>

@@ -3,7 +3,6 @@
 class TestimonialsController < ApplicationController
 
   before_filter :verify_is_admin
-  cache_sweeper ApplicationSweeper
   layout 'hub'
 
   def index

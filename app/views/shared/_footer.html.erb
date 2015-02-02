@@ -1,61 +1,71 @@
 <footer class="row-footer">
-    <ul class="nav-list">
-        <li class="nav-list--item four columns">
-            <strong class="nav-list--group-heading">Our Products</strong>
-            <ul class="nav-list--group">
-                <% @products.each do |product| %>
-                    <li class="nav-list--group-item">
-                        <%= link_to product.title, product, :class => "nav-list--group-item-link" %>
-                    </li>
-                <% end %>
-                <li class="nav-list--group-item">
-                    <%= link_to "Ready Made", store_path, :class => "nav-list--group-item-link" %>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-list--item four columns">
-            <strong class="nav-list--group-heading">About Us</strong>
-            <ul class="nav-list--group">
-                <% Page.where(:include_in_about_us_navigation => true).each do |page| %>
-                    <li class="nav-list--group-item">
-                        <%= link_to page.title, page, :class => "nav-list--group-item-link" %>
-                    </li>
-                <% end %>
-                <li class="nav-list--group-item">
-                    <%= link_to "Cycle Swift Blog", APP_CONFIG[:personal_blog_url], :class => "nav-list--group-item-link" %>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-list--item four columns">
-            <strong class="nav-list--group-heading">Get in Touch</strong>
-            <ul class="nav-list--group">
-                <li class="nav-list--group-item">
-                    <%= mail_to @company.email, @company.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "nav-list--group-item-link" %>
-                </li>
-                <li class="nav-list--group-item">
-                    <%= link_to @company.phone, @company.phone_link, :class => "nav-list--group-item-link" %>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-list--item four columns">
-            <strong class="nav-list--group-heading">Be Social</strong>
-            <ul class="nav-list--group nav-list--group-inline">
-                <li class="nav-list--group-item">
-                    <%= link_to raw("&#62217;"), APP_CONFIG[:twitter_url], :class => "nav-list--group-item-link entypo-social", :title => "Follow us on Twitter" %>
-                </li>
-                <li class="nav-list--group-item">
-                    <%= link_to raw("&#62220;"), APP_CONFIG[:facebook_url], :class => "nav-list--group-item-link entypo-social", :title => "Like us on Facebook" %>
-                </li>
-                <li class="nav-list--group-item">
-                    <%= link_to raw("&#62253;"), APP_CONFIG[:instagram_url], :class => "nav-list--group-item-link entypo-social", :title => "Follow us on Instagram" %>
-                </li>
-                <li class="nav-list--group-item" style="display:none">
-                    <%= link_to raw("&#62211;"), APP_CONFIG[:flickr_group_url], :class => "nav-list--group-item-link entypo-social", :title => "View our Flickr Group" %>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <%= image_set_tag "fox-45.png", { "fox-45.png" => "2x" }, { class: "footer-fox img-fox" }%>
+  <ul class="nav-list">
+    <% cache ["footer_products_nav", Product.public_products] do %>
+      <li class="nav-list--item four columns">
+        <strong class="nav-list--group-heading">Our Products</strong>
+        <ul class="nav-list--group">
+          <% Product.public_products.each do |product| %>
+            <li class="nav-list--group-item">
+              <%= link_to product.title, product, class: "nav-list--group-item-link" %>
+            </li>
+          <% end %>
+          <li class="nav-list--group-item">
+            <%= link_to "Ready Made", store_path, class: "nav-list--group-item-link" %>
+          </li>
+        </ul>
+      </li>
+    <% end %>
+    <li class="nav-list--item four columns">
+      <strong class="nav-list--group-heading">About Us</strong>
+      <ul class="nav-list--group">
+        <% cache ["footer_about_us_nav", Page.about_us_nav] do %>
+          <% Page.about_us_nav.each do |page| %>
+            <li class="nav-list--group-item">
+              <%= link_to page.title, page, class: "nav-list--group-item-link" %>
+            </li>
+          <% end %>
+        <% end %>
+        <% cache ["footer_blog_link", APP_CONFIG] do %>
+          <li class="nav-list--group-item">
+            <%= link_to "Cycle Swift Blog", APP_CONFIG[:personal_blog_url], class: "nav-list--group-item-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+    <% cache ["footer_company_contact", Company.first] do %>
+      <li class="nav-list--item four columns">
+        <strong class="nav-list--group-heading">Get in Touch</strong>
+        <ul class="nav-list--group">
+          <li class="nav-list--group-item">
+            <%= mail_to Company.first.email, Company.first.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "nav-list--group-item-link" %>
+          </li>
+          <li class="nav-list--group-item">
+            <%= link_to Company.first.phone, Company.first.phone_link, :class => "nav-list--group-item-link" %>
+          </li>
+        </ul>
+      </li>
+    <% end %>
+    <% cache ["footer_social_links", APP_CONFIG] do %>
+      <li class="nav-list--item four columns">
+        <strong class="nav-list--group-heading">Be Social</strong>
+        <ul class="nav-list--group nav-list--group-inline">
+          <li class="nav-list--group-item">
+            <%= link_to raw("&#62217;"), APP_CONFIG[:twitter_url], :class => "nav-list--group-item-link entypo-social", :title => "Follow us on Twitter" %>
+          </li>
+          <li class="nav-list--group-item">
+            <%= link_to raw("&#62220;"), APP_CONFIG[:facebook_url], :class => "nav-list--group-item-link entypo-social", :title => "Like us on Facebook" %>
+          </li>
+          <li class="nav-list--group-item">
+            <%= link_to raw("&#62253;"), APP_CONFIG[:instagram_url], :class => "nav-list--group-item-link entypo-social", :title => "Follow us on Instagram" %>
+          </li>
+          <li class="nav-list--group-item" style="display:none">
+            <%= link_to raw("&#62211;"), APP_CONFIG[:flickr_group_url], :class => "nav-list--group-item-link entypo-social", :title => "View our Flickr Group" %>
+          </li>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+  <%= image_set_tag "fox-45.png", { "fox-45.png" => "2x" }, { class: "footer-fox img-fox" } %>
 </footer>
 <br class="clear">
 

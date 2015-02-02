@@ -15,18 +15,10 @@ class UsersController < ApplicationController
   end
 
   def my_info
-    @company = Company.first
-    @categories = Category.all
-    @products = Product.where(status: 'Public', kind: 'Product')
-
     @user = current_user
   end
 
   def edit_my_info
-    @company = Company.first
-    @categories = Category.all
-    @products = Product.where(status: 'Public', kind: 'Product')
-
     @user = current_user
   end
 
