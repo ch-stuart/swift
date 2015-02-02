@@ -345,6 +345,7 @@ date:        time (minutes):       comment:
 2015-01-24  10 Fix issue where cache sweeping was not working
 2015-01-25  30 Meeting
 2015-01-26  60 Fixing issues around creating a shipment
-
+2015-02-01  30 Fixing compatibility issues with rails 4 and heroku, specifically cannot run `heroku run console`
+2015-02-01 120 Fixing fragment caching
 
 http://www.timer-tab.com
