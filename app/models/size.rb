@@ -1,6 +1,6 @@
 class Size < ActiveRecord::Base
 
-  belongs_to :product
+  belongs_to :product, touch: true
   validates_presence_of :title, :price, :wholesale_price
 
   PRICE_MATCH = /\A\d{0,10}\.\d{2}\z/

@@ -1,6 +1,6 @@
 class GiftCertificate < ActiveRecord::Base
 
-  belongs_to :sale
+  belongs_to :sale, touch: true
   before_create :populate_guid_and_remaining_amount
   before_save :update_remaining_amount, if: "remaining_amount?"
 
