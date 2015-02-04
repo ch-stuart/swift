@@ -4,5 +4,6 @@
     padding: 10px;
   }
 </style>
-
-<%= render 'sales_table', sales: @sales, title: 'All' %>
+<% cache @sales do %>
+  <%= render 'sales_table', sales: @sales, title: 'All' %>
+<% end %>
