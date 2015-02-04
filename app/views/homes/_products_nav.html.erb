@@ -10,12 +10,10 @@
         <% cache ["products_nav_category_products", category.products] do %>
           <ul class="nav-list--group">
             <% category.products.each do |product| %>
-              <% cache ["products_nav_category_product", product] do %>
-                <% next unless product.public? %>
-                <li class="nav-list--group-item">
-                  <%= link_to product.short_title, product, class: "nav-list--group-item-link" %>
-                </li>
-              <% end %>
+              <% next unless product.public? %>
+              <li class="nav-list--group-item">
+                <%= link_to product.short_title, product, class: "nav-list--group-item-link" %>
+              </li>
             <% end %>
           </ul>
         <% end %>
