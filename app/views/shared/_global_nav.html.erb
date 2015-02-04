@@ -1,6 +1,6 @@
 <div id="global-menu" class="sixteen columns row menu--row-nav" style="display:none">
   <div class="clearfix row">
-    <%= render "homes/products_nav" %>
+    <%= render "shared/products_nav" %>
   </div>
   <div class="clearfix row">
     <ul class="nav-list">
@@ -20,11 +20,7 @@
       <li class="nav-list--item <%= set_column_classes(Category.all.length) %>">
         <strong class="nav-list--group-heading">About Us</strong>
         <ul class="nav-list--group">
-          <% Page.where(:include_in_about_us_navigation => true).each do |page| %>
-            <li class="nav-list--group-item">
-              <%= link_to page.title, page, :class => "nav-list--group-item-link" %>
-            </li>
-          <% end %>
+          <%= render 'shared/pages_nav' %>
           <li>
             <%= link_to "Cycle Swift Blog", APP_CONFIG[:personal_blog_url], :class => "nav-list--group-item-link" %>
           </li>

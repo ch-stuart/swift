@@ -18,13 +18,7 @@
     <li class="nav-list--item four columns">
       <strong class="nav-list--group-heading">About Us</strong>
       <ul class="nav-list--group">
-        <% cache ["footer_about_us_nav", Page.about_us_nav] do %>
-          <% Page.about_us_nav.each do |page| %>
-            <li class="nav-list--group-item">
-              <%= link_to page.title, page, class: "nav-list--group-item-link" %>
-            </li>
-          <% end %>
-        <% end %>
+        <%= render 'shared/pages_nav' %>
         <% cache ["footer_blog_link", APP_CONFIG] do %>
           <li class="nav-list--group-item">
             <%= link_to "Cycle Swift Blog", APP_CONFIG[:personal_blog_url], class: "nav-list--group-item-link" %>
