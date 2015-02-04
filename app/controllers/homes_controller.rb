@@ -12,7 +12,7 @@ class HomesController < ApplicationController
     def index
       @blog = get_latest_blog_post
 
-      @featured_product = Product.where(featured_on_homepage: true).first
+      @featured_product = Product.where(featured_on_homepage: true, status: "Public").first
 
       if @featured_product.blank?
         @featured_product = Product.first
@@ -20,8 +20,6 @@ class HomesController < ApplicationController
 
       if @featured_product.flickr_set.present?
         @photos = Home.get_photos_by_set @featured_product.flickr_set
-      else
-        @photos = Home.get_photos_by_tag @featured_product.flickr_tag
       end
     end
 

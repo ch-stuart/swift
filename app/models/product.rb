@@ -30,7 +30,8 @@ class Product < ActiveRecord::Base
   validates_presence_of :title, :short_title, :flickr_tag, :flickr_photo, :price, :humane_price, :wholesale_price, :wholesale_humane_price
   # Accessories and Stock cannot have categories, otherwise they show up in the
   # home page navigation categories.
-  validates_presence_of :category_id, :if => :is_product?
+  validates_presence_of :category_id, if: :is_product?
+  validates_presence_of :flickr_set, if: :featured_on_homepage?, message: "flickr set can't be blank if product is featured on homepage"
 
   validates_uniqueness_of :title, :short_title
   validates_format_of :flickr_tag, with: /\A[A-Za-z0-9_\-]+\z/, if: :flickr_tag?

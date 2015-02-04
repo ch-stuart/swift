@@ -1,14 +1,16 @@
 <div id="hero" class="sixteen columns hero">
-  <div id="hero-scroll">
-    <% @photos.each do |photo| %>
-      <img
-        src="<%= photo[:small_320_url].gsub('http:', '') %>"
-        <% if photo[:medium_640_url].present? %>
-          srcset="<%= photo[:medium_640_url].gsub('http:', '') %> 2x"
-        <% end %>
-        class="hero-img">
-    <% end %>
-  </div>
+  <% if @photos.present? %>
+    <div id="hero-scroll">
+      <% @photos.each do |photo| %>
+        <img
+          src="<%= photo[:small_320_url].gsub('http:', '') %>"
+          <% if photo[:medium_640_url].present? %>
+            srcset="<%= photo[:medium_640_url].gsub('http:', '') %> 2x"
+          <% end %>
+          class="hero-img">
+      <% end %>
+    </div>
+  <% end %>
   <% cache ["home_featured_product", @featured_product] do %>
     <div class="hero-text">
       <h5 class="hero-heading">
