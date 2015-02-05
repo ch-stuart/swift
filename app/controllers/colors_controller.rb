@@ -1,8 +1,8 @@
 class ColorsController < ApplicationController
 
   before_filter :verify_is_admin
-  cache_sweeper ApplicationSweeper
   layout "hub"
+  cache_sweeper ApplicationSweeper
 
   def index
     @colors = Color.all

@@ -12,7 +12,8 @@ class PagesControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:pages)
+    assert_not_nil assigns(:public_pages)
+    assert_not_nil assigns(:private_pages)
   end
 
   test "should get new" do

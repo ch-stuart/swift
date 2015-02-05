@@ -1,12 +1,10 @@
 class PagesController < ApplicationController
 
   before_filter :verify_is_admin, :except => [ :show ]
-
+  cache_sweeper ApplicationSweeper
   caches_action :show, :cache_path => Proc.new { |c|
     { 'user_type' => get_user_type }
   }
-
-  cache_sweeper ApplicationSweeper
 
   def index
     @public_pages = Page.where(status: "Public")
@@ -23,9 +21,6 @@ class PagesController < ApplicationController
       @page = Page.find(params[:id])
     end
 
-    @categories = Category.all
-    @company    = Company.first
-    @products   = Product.where(:status => 'Public', :kind => 'Product')
     @photos     = Page.get_photos_by_tag @page.flickr_tag
     @video_html = @page.video_html
     @subtitle   = @page.title

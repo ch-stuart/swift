@@ -37,7 +37,6 @@ class PostmasterController < ApplicationController
         format.html  { render :text => response }
         format.json  { render :json => response }
       end
-
     rescue Exception => e
       logger.info e
       render json: e, status: :bad_request
@@ -105,7 +104,7 @@ class PostmasterController < ApplicationController
 
   # Create a shipment
   def create_shipment
-    @sale = Sale.find params[:id]
+    @sale = Sale.find params[:sale][:id]
     shipment_params = params[:shipment]
 
     postmaster_params = {
@@ -159,36 +158,14 @@ class PostmasterController < ApplicationController
       postmaster_params[:package][:type] = shipment_params[:envelope]
     end
 
-    logger.info "=> Creating shipment for: #{postmaster_params.inspect}"
+
+    logger.info "SALE PARAMS ARE #{sale_params}"
+    if @sale.update_attributes!(sale_params)
+      logger.info "Updated sale"
+    end
 
     begin
       @response = Postmaster::Shipment.create postmaster_params
-
-      logger.info "=> Postmaster::Shipment.create response: #{@response.inspect}"
-
-      new_shipment_params = {
-        postmaster_id: @response[:id],
-        cost: @response[:cost],
-        tracking_number: @response[:tracking].first,
-        carrier: shipment_params[:shipping_provider],
-        weight: shipment_params[:weight],
-        width: shipment_params[:width],
-        height: shipment_params[:height],
-        length: shipment_params[:length],
-        envelope: shipment_params[:envelope],
-        sale_id: @sale.id
-      }
-
-      @shipment = Shipment.new new_shipment_params
-
-      @sale.update_attributes({ status: "Shipped" })
-
-      if @shipment.save
-        SalesMailer.shipped(@sale, @shipment).deliver
-        redirect_to(@sale, notice: 'Shipment was successfully created.')
-      else
-        render text: @shipment.save!
-      end
     rescue Exception => e
       ExceptionNotifier.notify_exception(
         e,
@@ -198,6 +175,29 @@ class PostmasterController < ApplicationController
       render text: e
     end
 
+    logger.info "=> Postmaster::Shipment.create response: #{@response.inspect}"
+
+    new_shipment_params = {
+      postmaster_id: @response[:id],
+      cost: @response[:cost],
+      tracking_number: @response[:tracking].first,
+      carrier: shipment_params[:shipping_provider],
+      weight: shipment_params[:weight],
+      width: shipment_params[:width],
+      height: shipment_params[:height],
+      length: shipment_params[:length],
+      envelope: shipment_params[:envelope],
+      sale_id: @sale.id
+    }
+
+    @shipment = Shipment.new new_shipment_params
+
+    if @shipment.save
+      SalesMailer.shipped(@sale, @shipment).deliver
+      redirect_to(@sale, notice: 'Shipment was successfully created.')
+    else
+      render text: @shipment.save!
+    end
   end
 
   # List available boxes
@@ -233,7 +233,16 @@ class PostmasterController < ApplicationController
         :env => request.env,
         :data => {:message => "Creating a box failed"}
       )
+      render text: e
     end
+  end
+
+  private
+
+  def sale_params
+    params
+      .require(:sale)
+      .permit(:status)
   end
 
 end

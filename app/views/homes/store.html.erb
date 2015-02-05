@@ -1,20 +1,26 @@
-<div class="sixteen columns clearfix">
-    <% if @stock.present? %>
-        <h2 class="store-section-heading">Ready Made</h2>
+<% cache ["store_stock", Product.public_stock] do %>
+  <div class="sixteen columns clearfix">
+    <% if Product.public_stock.present? %>
+      <h2 class="store-section-heading">
+        Ready Made
+      </h2>
     <% end %>
-</div>
-<% @stock.each_with_index do |stock, index| %>
+  </div>
+  <% Product.public_stock.each_with_index do |stock, index| %>
     <%= render "store_items", :item => stock, :index => index %>
+  <% end %>
 <% end %>
-
-<div class="sixteen columns">
-    <% if @accessories.present? %>
-        <h2 class="store-section-heading">Accessories</h2>
+<% cache ["store_accessories", Product.public_accessories] do %>
+  <div class="sixteen columns">
+    <% if Product.public_accessories.present? %>
+      <h2 class="store-section-heading">
+        Accessories
+      </h2>
     <% end %>
-</div>
-
-<% @accessories.each_with_index do |accessory, index| %>
+  </div>
+  <% Product.public_accessories.each_with_index do |accessory, index| %>
     <%= render "store_items", :item => accessory, :index => index %>
+  <% end %>
 <% end %>
 
 <br class="clear">

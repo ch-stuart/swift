@@ -1,20 +1,20 @@
-<% cache 'homes_index' do %>
-  <div class="row">
-    <%= render 'hero' %>
+<div class="row">
+  <%= render 'hero' %>
+</div>
+<div class="row">
+  <%= render "shared/products_nav" %>
+</div>
+<div class="row">
+  <div class="sixteen columns">
+    <p>
+      Also take a look at our <%= link_to "Ready Made", store_path, :class => "hl-link" %> store.
+    </p>
   </div>
-  <div class="row">
-    <%= render "products_nav" %>
-  </div>
-  <div class="row">
-    <div class="sixteen columns">
-      <p>
-        Also take a look at our <%= link_to "Ready Made", store_path, :class => "hl-link" %> store.
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="eight columns">
-      <% @featured_pages.each do |featured_page| %>
+</div>
+<div class="row">
+  <div class="eight columns">
+    <% cache ["home_featured_pages", Page.featured_pages ] do %>
+      <% Page.featured_pages.each do |featured_page| %>
         <article class="featured-page">
           <% unless featured_page.hide_title_on_homepage %>
             <h3>
@@ -46,43 +46,43 @@
           <% end %>
         </article>
       <% end %>
-    </div>
-    <div class="eight columns">
-      <article class="blog">
-        <% if @blog.nil? %>
-          <!-- some error occurred and the blog could not be retrieved -->
-        <% else %>
-          <% if @blog["title"].present? %>
-            <h3>
-              <%= @blog["title"] %>
-            </h3>
-          <% end %>
-          <% if @blog['img'].present? && @blog['description'].present? %>
-            <p>
-              <% if @blog['img'].present? %>
-                <%= image_tag "#{@blog['img']}?w=300", class: "blog_img", srcset: "#{@blog['img']}?w=420 420w, #{@blog['img']}?w=640 640w" %>
-              <% end %>
-              <% if @blog['description'].present? %>
-                <%= raw @blog["description"] %>
-              <% end %>
-            </p>
-          <% end %>
-          <% if @blog['link'].present? %>
-            <p>
-              <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'], :class => "hl-link" %>
-            </p>
-          <% end %>
-        <% end %>
-      </article>
-    </div>
+    <% end %>
   </div>
+  <div class="eight columns">
+    <article class="blog">
+      <% if @blog.nil? %>
+        <!-- some error occurred and the blog could not be retrieved -->
+      <% else %>
+        <% if @blog["title"].present? %>
+          <h3>
+            <%= @blog["title"] %>
+          </h3>
+        <% end %>
+        <% if @blog['img'].present? && @blog['description'].present? %>
+          <p>
+            <% if @blog['img'].present? %>
+              <%= image_tag "#{@blog['img']}?w=300", class: "blog_img", srcset: "#{@blog['img']}?w=420 420w, #{@blog['img']}?w=640 640w" %>
+            <% end %>
+            <% if @blog['description'].present? %>
+              <%= raw @blog["description"] %>
+            <% end %>
+          </p>
+        <% end %>
+        <% if @blog['link'].present? %>
+          <p>
+            <%= link_to raw("read more at the cycle swift blog &rarr;"), @blog['link'], :class => "hl-link" %>
+          </p>
+        <% end %>
+      <% end %>
+    </article>
+  </div>
+</div>
 
-  <% content_for :js do %>
-  <script>
-    $(document).ready(function() {
-      $('#hero').hero();
-      $('.featured-page__video-wrap').fitVids();
-    });
-  </script>
-  <% end %>
+<% content_for :js do %>
+<script>
+  $(document).ready(function() {
+    $('#hero').hero();
+    $('.featured-page__video-wrap').fitVids();
+  });
+</script>
 <% end %>

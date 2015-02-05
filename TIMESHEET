@@ -354,11 +354,17 @@ date:        time (minutes):       comment:
 2015-01-23 45 WIP: solstice twitter integration
 2015-01-24  10 UI cleanup on hub for pages
 2015-01-24  10 Fix issue where cache sweeping was not working
+2015-01-25  30 Meeting
+2015-01-26  60 Fixing issues around creating a shipment
 2015-01-29  25 Caching for twitter and instagram
 2015-01-29  10 Moving angular templates inline
 2015-01-29  20 Moving api calls to service
 2015-01-31  60 WIP: solstice map
 2015-02-01  10 WIP: solstice sign up
 2015-02-01  60 WIP: solstice
+2015-02-01  30 Fixing compatibility issues with rails 4 and heroku, specifically cannot run `heroku run console`
+2015-02-01 120 Fixing fragment caching
+2015-02-03 120 Fixing fragment caching, part II
+
 
 http://www.timer-tab.com

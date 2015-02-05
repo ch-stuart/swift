@@ -45,9 +45,10 @@ class PostmasterControllerTest < ActionController::TestCase
   # post 'postmaster/create_shipment'
   test "should create a shipment" do
     sign_in users(:admin)
+    sale_guid = sales(:one).guid
+    sale_email = sales(:one).email
 
     post "create_shipment", {
-      id: sales(:one).id,
       shipment: {
         contact: "bob",
         company: "bobs company",
@@ -63,8 +64,31 @@ class PostmasterControllerTest < ActionController::TestCase
         width: "4",
         height: "4",
         length: "4"
+       },
+       sale: {
+         status: "Shipped",
+         id: sales(:one).id
        }
     }
+
+    shipped_email = ActionMailer::Base.deliveries.last
+
+    assert_equal "Your order from Swift Industries has shipped", shipped_email.subject
+    assert_equal sale_email, shipped_email.to[0]
+
+    # BAH, not working. got no body
+    # assert_match("#{sale_guid}", shipped_email.body.to_s)
+
+    sale = Sale.find sales(:one).id
+
+    sale_status = sale.status
+    assert sale_status == "Shipped", "Status should be shipped instead of #{sale_status}"
+
+    assert_equal sale.shipments.size, 1
+    assert_equal sale.shipments.first.carrier, "USPS"
+    assert_equal sale.shipments.first.width, "4"
+    assert_equal sale.shipments.first.height, "4"
+    assert_equal sale.shipments.first.length, "4"
 
     assert_redirected_to sale_path(assigns(:sale))
   end

@@ -3,7 +3,9 @@
 </p>
 <form action="create_shipment" method="post">
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="id" value="<%= @sale.id %>">
+  <input type="hidden" value="<%= @sale.id %>" name="sale[id]">
+  <input type="hidden" value="Shipped" name="sale[status]">
+
   <div class="eight columns">
     <h3>To</h3>
 
@@ -40,7 +42,7 @@
     <label class="label">Carrier</label>
     <input type="text" value="<%= @sale.shipping_provider %>" name="shipment[shipping_provider]">
     <p class="hint">
-      Options are "ups", "usps" or "fedex". Use lower case.
+      Options are "ups" or "usps". Use lower case.
     </p>
     <label class="label">Service Level</label>
     <input type="text" value="<%= @sale.shipping_service %>" name="shipment[shipping_service]">

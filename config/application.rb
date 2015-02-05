@@ -68,18 +68,5 @@ module SwiftSite
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
     config.assets.paths << Rails.root.join('vendor', 'assets')
 
-    ActionMailer::Base.smtp_settings = {
-        port:           '587',
-        address:        'smtp.mandrillapp.com',
-        user_name:      ENV['MANDRILL_STAGING_USERNAME'],
-        password:       ENV['MANDRILL_STAGING_APIKEY'],
-        domain:         'heroku.com',
-        authentication: :plain
-    }
-    ActionMailer::Base.delivery_method = :smtp
-    config.action_mailer.default_url_options = {
-      :host => 'fierce-island-8829.herokuapp.com'
-    }
-
   end
 end

@@ -1,6 +1,8 @@
 class PartsController < ApplicationController
 
   before_filter :verify_is_admin
+  cache_sweeper ApplicationSweeper
+
   # caches_page :index, :show
   #
   # def index

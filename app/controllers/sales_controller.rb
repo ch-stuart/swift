@@ -1,7 +1,6 @@
 class SalesController < ApplicationController
 
   before_filter :verify_is_admin, :except => [ :checkout, :create, :success, :cart, :charge, :history, :coupon ]
-  cache_sweeper ApplicationSweeper
 
   # GET /sales
   # GET /sales.json
@@ -28,10 +27,6 @@ class SalesController < ApplicationController
   # GET /sales
   # GET /sales.json
   def cart
-    @company = Company.first
-    @categories = Category.all
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @sales }
@@ -70,10 +65,6 @@ class SalesController < ApplicationController
       @description = nil
     end
 
-    @company = Company.first
-    @categories = Category.all
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @sale }
@@ -88,10 +79,6 @@ class SalesController < ApplicationController
   end
 
   def checkout
-    @company = Company.first
-    @categories = Category.all
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-
     respond_to do |format|
       format.html # new.html.erb
       # format.json { render json: @sale }
@@ -99,10 +86,6 @@ class SalesController < ApplicationController
   end
 
   def history
-    @company = Company.first
-    @categories = Category.all
-    @products = Product.where(status: 'Public', kind: 'Product')
-
     if user_signed_in?
       @sales = Sale.where(email: current_user.email)
     else

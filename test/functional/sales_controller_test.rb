@@ -39,7 +39,7 @@ class SalesControllerTest < ActionController::TestCase
   end
 
   test "should show sale to customer" do
-    get :success, id: @sale
+    get :success, guid: @sale.guid
     assert_response :success
   end
 
@@ -56,7 +56,7 @@ class SalesControllerTest < ActionController::TestCase
   end
 
   test "should update sale" do
-    put :update, id: @sale, sale: { email: @sale.email, amount: 111, total: 122 }
+    put :update, id: @sale, sale: { status: "Shipped", email: @sale.email, amount: 111, total: 122 }
     assert_redirected_to sale_path(assigns(:sale))
   end
 

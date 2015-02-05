@@ -26,22 +26,34 @@
   </div>
   <div class="tab-divider"></div>
   <div class="card">
-    <%= render 'products_table', products: @public_products, title: 'Public Products' %>
+    <% cache @public_products do %>
+      <%= render 'products_table', products: @public_products, title: 'Public Products' %>
+    <% end %>
   </div>
   <div class="card">
-    <%= render 'products_table', products: @private_products, title: 'Private Products' %>
+    <% cache @private_products do %>
+      <%= render 'products_table', products: @private_products, title: 'Private Products' %>
+    <% end %>
   </div>
   <div class="card">
-    <%= render 'products_table', products: @public_stock, title: 'Public Stock' %>
+    <% cache @public_stock do %>
+      <%= render 'products_table', products: @public_stock, title: 'Public Stock' %>
+    <% end %>
   </div>
   <div class="card">
-    <%= render 'products_table', products: @private_stock, title: 'Private Stock' %>
+    <% cache @private_stock do %>
+      <%= render 'products_table', products: @private_stock, title: 'Private Stock' %>
+    <% end %>
   </div>
   <div class="card">
-    <%= render 'products_table', products: @public_accessories, title: 'Public Accessories' %>
+    <% cache @public_accessories do %>
+      <%= render 'products_table', products: @public_accessories, title: 'Public Accessories' %>
+    <% end %>
   </div>
   <div class="card">
-    <%= render 'products_table', products: @private_accessories, title: 'Private Accessories' %>
+    <% cache @private_accessories do %>
+      <%= render 'products_table', products: @private_accessories, title: 'Private Accessories' %>
+    <% end %>
   </div>
 </div>
 <%= content_for :js do %>

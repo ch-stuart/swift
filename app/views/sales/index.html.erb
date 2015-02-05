@@ -25,16 +25,24 @@
   </div>
   <div class="tab-divider"></div>
   <div class="card">
-    <%= render 'sales_table', sales: @sales_not_shipped, title: 'Not Shipped' %>
+    <% cache @sales_not_shipped do %>
+      <%= render 'sales_table', sales: @sales_not_shipped, title: 'Not Shipped' %>
+    <% end %>
   </div>
   <div class="card">
-    <%= render 'sales_table', sales: @sales_printed, title: 'Printed' %>
+    <% cache @sales_printed do %>
+      <%= render 'sales_table', sales: @sales_printed, title: 'Printed' %>
+    <% end %>
   </div>
   <div class="card">
-    <%= render 'sales_table', sales: @sales_shipped, title: 'Shipped' %>
+    <% cache @sales_shipped do %>
+      <%= render 'sales_table', sales: @sales_shipped, title: 'Shipped' %>
+    <% end %>
   </div>
   <div class="card">
-    <%= render 'sales_table', sales: @sales_deleted, title: 'Deleted' %>
+    <% cache @sales_deleted do %>
+      <%= render 'sales_table', sales: @sales_deleted, title: 'Deleted' %>
+    <% end %>
   </div>
   <div class="card">
     <p>

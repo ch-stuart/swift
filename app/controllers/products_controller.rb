@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
 
   before_filter :verify_is_admin, :except => [ :show, :order ]
+  cache_sweeper ApplicationSweeper
   caches_action :show, :order, :cache_path => Proc.new { |c|
     { 'user_type' => get_user_type }
   }
-  cache_sweeper ApplicationSweeper
 
   def index
     @public_products = Product.where(status: 'Public', kind: 'Product').order('title ASC')
@@ -24,10 +24,7 @@ class ProductsController < ApplicationController
     end
 
     @related_products = load_related_products @product
-    @categories = Category.all
-    @products = Product.where(:status => 'Public', :kind => 'Product')
     @photos = Product.get_photos_by_tag @product.flickr_tag
-    @company = Company.first
     @subtitle = @product.title
 
     respond_to do |format|
@@ -71,9 +68,6 @@ class ProductsController < ApplicationController
 
   def order
     @product = Product.find(params[:id])
-    @categories = Category.all
-    @products = Product.where(:status => 'Public', :kind => 'Product')
-    @company = Company.first
     @photos = Product.get_photos_by_tag @product.flickr_tag
     @subtitle = @product.title
 

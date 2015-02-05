@@ -12,9 +12,9 @@
             <% end %>
         </div>
         <%# if the shop is closed, don't show the order form. %>
-        <% if @company.close_shop? %>
+        <% if Company.first.close_shop? %>
             <h3>
-                <span class="woah"><%= @company.close_shop_message %></span>
+                <span class="woah"><%= Company.first.close_shop_message %></span>
             </h3>
         <%# if the product is not for sale, don't show the order form. %>
         <% elsif @product.is_not_for_sale? %>
@@ -34,9 +34,11 @@
                 Delivery Time
             </h3>
             <div class="handmade_label">handmade</div>
-            <p>
-                <%= @company.delivery_time %>
-            </p>
+            <% cache ["product_order_delivery_time", Company.first] do %>
+                <p>
+                    <%= Company.first.delivery_time %>
+                </p>
+            <% end %>
         <% end %>
         <%= render "inventory_count", product: @product %>
         <h3>

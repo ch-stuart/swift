@@ -1,0 +1,7 @@
+<% cache ["page_about_us_nav", Page.about_us_nav] do %>
+  <% Page.about_us_nav.each do |page| %>
+    <li class="nav-list--group-item">
+      <%= link_to page.title, page, :class => "nav-list--group-item-link" %>
+    </li>
+  <% end %>
+<% end %>

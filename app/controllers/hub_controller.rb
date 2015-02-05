@@ -4,11 +4,11 @@ class HubController < ApplicationController
   layout "hub"
 
   def index
-    @products = Product.all
-    @pages = Page.all
-    @colors = Color.all
-    @company = Company.first
-    @categories = Category.all
+    # @products = Product.all
+    # @pages = Page.all
+    # @colors = Color.all
+    # @company = Company.first
+    # @categories = Category.all
   end
 
   def expire_home_cache
@@ -17,7 +17,6 @@ class HubController < ApplicationController
         expire_action :controller => 'homes', :action => 'index', :user_type => 'ADMIN'
         expire_action :controller => 'homes', :action => 'index', :user_type => 'USER_SIGNED_IN'
         expire_action :controller => 'homes', :action => 'index', :user_type => 'USER_NOT_SIGNED_IN'
-        expire_fragment 'homes_index'
         redirect_to hub_path, notice: 'Home cache cleared.'
       rescue => e
         logger.info e

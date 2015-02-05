@@ -1,8 +1,8 @@
 class CompaniesController < ApplicationController
 
   before_filter :verify_is_admin
-  cache_sweeper ApplicationSweeper
   layout "hub"
+  cache_sweeper ApplicationSweeper
 
   def index
     @companies = Company.all
