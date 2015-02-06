@@ -74,7 +74,7 @@ class SalesController < ApplicationController
   def ready_for_pickup
     @sale = Sale.find params[:id]
     @sale.update_attributes({ status: "Shipped" })
-    SalesMailer.ready_for_pickup(@sale).deliver
+    SalesMailer.ready_for_pickup(@sale).deliver_now
     redirect_to(@sale, notice: 'Email successfully sent to customer.')
   end
 
@@ -200,8 +200,8 @@ class SalesController < ApplicationController
         throw_exception e
       end
 
-      SalesMailer.success(params[:email], @sale.guid).deliver
-      SalesMailer.notify_swift(@sale).deliver
+      SalesMailer.success(params[:email], @sale.guid).deliver_now
+      SalesMailer.notify_swift(@sale).deliver_now
 
       render json: { guid: @sale.guid }.to_json
     else
@@ -215,7 +215,7 @@ class SalesController < ApplicationController
     @sale = Sale.find(params[:id])
 
     if params[:sale][:status] == "Shipped" && params[:sale][:email] == "true"
-      SalesMailer.shipped_flat_rate(@sale).deliver
+      SalesMailer.shipped_flat_rate(@sale).deliver_now
     end
 
     respond_to do |format|
@@ -253,7 +253,7 @@ class SalesController < ApplicationController
 
         if gift_certificate.save
           logger.info "Created Gift Certificate"
-          GiftCertificatesMailer.notify_swift(gift_certificate).deliver
+          GiftCertificatesMailer.notify_swift(gift_certificate).deliver_now
         else
           ExceptionNotifier.notify_exception(
             e,

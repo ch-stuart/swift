@@ -98,7 +98,7 @@ class Product < ActiveRecord::Base
       size.inventory_count = size.inventory_count - qty.to_i
 
       if size.inventory_count < 1
-        ProductsMailer.inventory_count_update(self, size).deliver
+        ProductsMailer.inventory_count_update(self, size).deliver_now
       end
 
       self.save
@@ -107,7 +107,7 @@ class Product < ActiveRecord::Base
 
       if self.inventory_count < 1
         self.status = "Private"
-        ProductsMailer.inventory_count_update(self).deliver
+        ProductsMailer.inventory_count_update(self).deliver_now
       end
 
       self.save

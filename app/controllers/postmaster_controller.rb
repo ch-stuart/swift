@@ -193,7 +193,7 @@ class PostmasterController < ApplicationController
     @shipment = Shipment.new new_shipment_params
 
     if @shipment.save
-      SalesMailer.shipped(@sale, @shipment).deliver
+      SalesMailer.shipped(@sale, @shipment).deliver_now
       redirect_to(@sale, notice: 'Shipment was successfully created.')
     else
       render text: @shipment.save!
