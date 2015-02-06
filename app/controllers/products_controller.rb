@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   before_filter :verify_is_admin, :except => [ :show, :order ]
-  cache_sweeper ApplicationSweeper
+  cache_sweeper :application_sweeper
   caches_action :show, :order, :cache_path => Proc.new { |c|
     { 'user_type' => get_user_type }
   }

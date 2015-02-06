@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
 
   before_filter :verify_is_admin
   layout "hub"
-  cache_sweeper ApplicationSweeper
+  cache_sweeper :application_sweeper
 
   def index
     @companies = Company.all
