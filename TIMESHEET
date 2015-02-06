@@ -365,6 +365,6 @@ date:        time (minutes):       comment:
 2015-02-01  30 Fixing compatibility issues with rails 4 and heroku, specifically cannot run `heroku run console`
 2015-02-01 120 Fixing fragment caching
 2015-02-03 120 Fixing fragment caching, part II
-
+2015-02-05  30 Fix issue where tests failed b/c of caching
 
 http://www.timer-tab.com
