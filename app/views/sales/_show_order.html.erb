@@ -82,7 +82,7 @@
         <% end %>
       </td>
     </tr>
-    <% if @sale.gift_certificate_guid.present? %>
+    <% if @gift_certificate.present? %>
       <tr>
         <td>
           Gift Certificate
@@ -93,9 +93,7 @@
         <td>
           <ul style="margin: 0; padding: 0;">
             <li>
-              <a href="/gift_certificates/show?guid=<%= @sale.gift_certificate_guid %>">
-                <%= @sale.gift_certificate_guid %>
-              </a>
+              <%= link_to @gift_certificate.guid, @gift_certificate %>
             </li>
             <li>
               Remaining value of Gift Certificate after this sale: <%= number_to_currency(cents_to_dollars(@sale.gift_cert_remain)) %>
