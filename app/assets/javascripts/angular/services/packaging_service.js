@@ -1,6 +1,6 @@
 /*global SwiftApp _ console angular */
 
-SwiftApp.service('PackagingService', ['$http', 'CartService', function($http, CartService) {
+SwiftApp.service('PackagingService', ['CartService', function(CartService) {
 
     var packages = [];
     var LARGEST_PACKAGE_VOLUME = 4488;
