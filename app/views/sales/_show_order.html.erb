@@ -88,18 +88,39 @@
           Gift Certificate
         </td>
         <td>
-            <%= number_to_currency(cents_to_dollars(@sale.gift_cert_applied)) %>
+            <% if @sale.gift_cert_applied.nil? %>
+              --
+            <% else %>
+              <%= number_to_currency(cents_to_dollars(@sale.gift_cert_applied)) %>
+            <% end %>
         </td>
         <td>
+          <% if @sale.gift_cert_remain.nil? ||
+                @sale.gift_cert_applied.nil? ||
+                @sale.total_with_gift_cert.nil? %>
+            <p style="color:red">
+              An error occurred while processing this gift certificate.
+            </p>
+          <% end %>
           <ul style="margin: 0; padding: 0;">
             <li>
               <%= link_to @gift_certificate.guid, @gift_certificate %>
             </li>
             <li>
-              Remaining value of Gift Certificate after this sale: <%= number_to_currency(cents_to_dollars(@sale.gift_cert_remain)) %>
+              Remaining value of Gift Certificate after this sale:<br>
+              <% if @sale.gift_cert_remain.nil? %>
+                --
+              <% else %>
+                <%= number_to_currency(cents_to_dollars(@sale.gift_cert_remain)) %>
+              <% end %>
             </li>
             <li>
-              Total charged to customer via Stripe: <%= number_to_currency(cents_to_dollars(@sale.total_with_gift_cert)) %>
+              Total charged to customer via Stripe:<br>
+              <% if @sale.total_with_gift_cert.nil? %>
+                --
+              <% else %>
+                <%= number_to_currency(cents_to_dollars(@sale.total_with_gift_cert)) %>
+              <% end %>
             </li>
           </ul>
         </td>
