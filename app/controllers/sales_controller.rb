@@ -44,7 +44,7 @@ class SalesController < ApplicationController
 
       begin
         @gift_certificate = GiftCertificate.find_by_guid! @sale.gift_certificate_guid
-        logger.debug "=> Got GC #{@gift_certificate.length}"
+        logger.debug "=> Got GC"
       rescue Exception => e
         ExceptionNotifier.notify_exception(
           e,
