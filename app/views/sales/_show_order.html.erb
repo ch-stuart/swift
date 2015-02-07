@@ -33,10 +33,10 @@
         Coupon
       </td>
       <td>
-        <% if @sale.saved_with_coupon.present? %>
+        <% if @coupon.present? %>
           -<%= number_to_currency(cents_to_dollars(@sale.saved_with_coupon)) %>
         <% else %>
-          n/a
+          --
         <% end %>
       </td>
       <td>

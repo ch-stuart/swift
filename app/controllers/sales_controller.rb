@@ -39,10 +39,31 @@ class SalesController < ApplicationController
     @sale = Sale.find(params[:id])
     @shipments = @sale.shipments
 
+    if @sale.gift_certificate_guid.present?
+      logger.debug "=> Trying to get GC"
+
+      begin
+        @gift_certificate = GiftCertificate.find_by_guid! @sale.gift_certificate_guid
+        logger.debug "=> Got GC #{@gift_certificate.length}"
+      rescue Exception => e
+        ExceptionNotifier.notify_exception(
+          e,
+          :env => request.env,
+          :data => {:message => "Getting GC failed"}
+        )
+        logger.warn e
+      end
+    end
+
     if @sale.coupon_code.present?
       begin
         @coupon = Coupon.find_by_code! @sale.coupon_code
       rescue Exception => e
+        ExceptionNotifier.notify_exception(
+          e,
+          :env => request.env,
+          :data => {:message => "Getting Coupon failed"}
+        )
         logger.warn e
       end
     end
