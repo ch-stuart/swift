@@ -16,7 +16,7 @@ SwiftApp.service('GiftCertService', ['$http', '$q', function($http, $q) {
                     .get('/gift_certificates/show?format=json&guid=' + code)
                     .success(function(response) {
                         deferred.resolve({
-                          remainingAmount: parseFloat(response.gift_certificate.remaining_amount)
+                          remainingAmount: parseFloat(response.remaining_amount)
                         });
                     })
                     .error(function(data, status) {
