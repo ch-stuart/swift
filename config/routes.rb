@@ -26,7 +26,7 @@ SwiftSite::Application.routes.draw do
   get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
 
-  resources :pages, :products, :companies, :colors, :parts, :sizes, :testimonials, :categories, :pre_approved_dealers, :coupons, :gift_certificates
+  resources :pages, :products, :companies, :colors, :parts, :sizes, :testimonials, :categories, :pre_approved_dealers, :coupons
 
   resources :products do
     get 'order', on: :member
@@ -56,6 +56,10 @@ SwiftSite::Application.routes.draw do
     post 'charge', on: :collection
     post 'coupon', on: :collection
     get 'all', on: :collection
+  end
+
+  resources :gift_certificates do
+    get 'status', on: :member
   end
 
   get 'cart', to: 'sales#cart'

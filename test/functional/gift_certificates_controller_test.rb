@@ -35,6 +35,11 @@ class GiftCertificatesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show gift_certificate as JSON" do
+    get :status, id: gift_certificates(:two).guid
+    assert_response :success
+  end
+
   test "should get edit" do
     get :edit, id: @gift_certificate
     assert_response :success
