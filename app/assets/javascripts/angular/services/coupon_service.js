@@ -15,7 +15,7 @@ SwiftApp.service('CouponService', ['$http', '$q', function($http, $q) {
                 $http
                     .get('/coupons/' + code + '/valid.json')
                     .success(function(response) {
-                        deferred.resolve(response.coupon);
+                        deferred.resolve(response);
                     })
                     .error(function(data, status) {
                         deferred.reject({ status: status });

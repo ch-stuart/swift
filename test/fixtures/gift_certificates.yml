@@ -2,8 +2,9 @@ one:
   sale: one
   amount: 1000
   remaining_amount: 1000
+  guid: 7b627c1a
 
 two:
-  sale:
-  amount:
-  remaining_amount:
+  amount: 1000
+  remaining_amount: 1000
+  guid: 7b627c19
