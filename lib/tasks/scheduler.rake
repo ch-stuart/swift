@@ -1,13 +1,40 @@
 task :prime_flickr_cache => :environment do
-  FlickrCachePrimer.prime_cache
+  begin
+    FlickrCachePrimer.prime_cache
+  rescue Exception => e
+    ExceptionNotifier.notify_exception(
+      e,
+      env: request.env,
+      data: { message: "Priming flickr cache failed" }
+    )
+    puts e
+  end
 end
 
 task :prime_twitter_cache => :environment do
-  twitter_service = TwitterService.new
-  twitter_service.prime_cache
+  begin
+    twitter_service = TwitterService.new
+    twitter_service.prime_cache
+  rescue Exception => e
+    ExceptionNotifier.notify_exception(
+      e,
+      env: request.env,
+      data: { message: "Priming twitter cache failed" }
+    )
+    puts e
+  end
 end
 
 task :prime_instagram_cache => :environment do
-  instagram_service = InstagramService.new
-  instagram_service.prime_cache
+  begin
+    instagram_service = InstagramService.new
+    instagram_service.prime_cache
+  rescue Exception => e
+    ExceptionNotifier.notify_exception(
+      e,
+      env: request.env,
+      data: { message: "Priming instagram cache failed" }
+    )
+    puts e
+  end
 end
