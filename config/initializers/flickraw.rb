@@ -4,7 +4,7 @@ FlickRaw.shared_secret = APP_CONFIG[:flickr_shared_secret]
 class FlickrCachePrimer
   extend Flickr
 
-  def self.prime_flickr_cache
+  def self.prime_cache
     public_products = Product.where(status: "Public")
     public_products_count = public_products.length
 

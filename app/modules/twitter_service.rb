@@ -1,4 +1,4 @@
-class TwitterService
+class TwitterService < SocialService
 
   def initialize
     @client = Twitter::REST::Client.new do |config|
@@ -10,20 +10,26 @@ class TwitterService
   end
 
   def get_by_tag tag
-    response = @client.search("##{tag}").take(15)
-    tweets = []
+    Rails.cache.fetch("twitter-get-by-tag-#{tag}") do
+      response = @client.search("##{tag}").take(15)
+      tweets = []
 
-    for tweet in response
-      image_data = tweet.user.profile_image_url_https
+      for tweet in response
+        image_data = tweet.user.profile_image_url_https
 
-      tweets.push({
-        profile_image: "#{image_data.scheme}://#{image_data.host}#{image_data.path}",
-        text: tweet.text,
-        screen_name: tweet.user.screen_name
-      })
+        tweets.push({
+          profile_image: "#{image_data.scheme}://#{image_data.host}#{image_data.path}",
+          text: tweet.text,
+          screen_name: tweet.user.screen_name
+        })
+      end
+
+      tweets.to_json
     end
+  end
 
-    tweets.to_json
+  def prime_cache
+    super self, "twitter-get-by-tag-bicycle"
   end
 
 end
