@@ -365,6 +365,12 @@ SwiftApp.controller('CheckoutCtrl', [
 
         try {
             cartFromLocalStorage = localStorage.getItem('cart');
+
+            // In about 3 cases so far, the description submitted
+            // is nil. Don't know why.
+            if (cartFromLocalStorage === null) {
+                ExceptionService.report('CheckoutCtrl: cartFromLocalStorage is null');
+            }
         } catch(ex) {
             SwiftUtils.notifyNoLocalStorage(ex);
             return console.error("Could not access local storage.");
