@@ -20,7 +20,7 @@ gem 'rack-rewrite'
 gem 'devise'
 gem 'cacheable_flash'
 gem 'awesome_print'
-gem 'rails_12factor'
+
 gem 'actionpack-action_caching'
 gem 'rails-observers'
 gem 'cocoon'
@@ -37,6 +37,7 @@ gem 'cocoon'
 group :production do
   gem 'foreman'
   gem 'heroku_rails_deflate'
+  gem 'rails_12factor'
 end
 
 group :development do
