@@ -17,9 +17,8 @@
         'variable: internalLinks',
         'variable: __gCrWeb',
         'Error calling method on NPObject'
-    ];
-
-    var scriptUrlBlockList = [
+    ],
+    scriptUrlBlockList = [
         'assets.pinterest.com/js/pinit.js',
         'google-analytics.com/ga.js',
         'newrelic.com',
@@ -28,20 +27,33 @@
     ];
 
     window.onerror = function(msg, url, lineNumber) {
-        var string = '';
+        var string = '',
+            m,
+            s;
 
         // Don't bother if there isn't a msg
-        if (!msg) return;
+        if (!msg) { return; }
 
-        for (var m = msgBlockList.length - 1; m >= 0; m--) {
-            if (msg.indexOf(msgBlockList[m]) !== -1) return;
+        for (m = msgBlockList.length - 1; m >= 0; m--) {
+            if (msg.indexOf(msgBlockList[m]) !== -1) {
+                return;
+            }
         }
 
         if (url) {
-            for (var s = scriptUrlBlockList.length - 1; s >= 0; s--) {
-                if (url.indexOf(scriptUrlBlockList[s]) !== -1) return;
+            for (s = scriptUrlBlockList.length - 1; s >= 0; s--) {
+                if (url.indexOf(scriptUrlBlockList[s]) !== -1) {
+                    return;
+                }
             }
         }
+
+        // Don't care about "$.cookie is not a function" exception thrown
+        // by Baiduspider
+        if (window.navigator.userAgent.indexOf('Baiduspider') !== -1) {
+            return;
+        }
+
 
         string += '== Error\n';
         string += msg + '\n\n';
