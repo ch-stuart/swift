@@ -348,6 +348,8 @@ date:        time (minutes):       comment:
 2015-02-01  30 Fixing compatibility issues with rails 4 and heroku, specifically cannot run `heroku run console`
 2015-02-01 120 Fixing fragment caching
 2015-02-03 120 Fixing fragment caching, part II
-
+2015-02-09  20 Fix issue where action caching was throwing exceptions in some cases
+2015-02-15  20 Fix issue where it wasn't clear why value of shipments was higher than expected
+2015-02-15  20 Fix issue shipments weren't sending b/c address wasn't valid
 
 http://www.timer-tab.com
