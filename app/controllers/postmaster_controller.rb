@@ -118,7 +118,7 @@ class PostmasterController < ApplicationController
         country: shipment_params[:country],
         phone_no: shipment_params[:phone_no]
       },
-      carrier: shipment_params[:shipping_provider],
+      carrier: shipment_params[:shipping_provider].downcase,
       service: shipment_params[:shipping_service],
       package: {
         weight: shipment_params[:weight],
@@ -127,6 +127,13 @@ class PostmasterController < ApplicationController
         length: shipment_params[:length]
       }
     }
+
+    # Only add these if they're present
+    [:line2, :line3].each do |addy|
+      if shipment_params[addy].present?
+        postmaster_params[:to][addy] = shipment_params[addy]
+      end
+    end
 
     # Add customs data if we're shipping INTL
     if @sale.country != "US"
@@ -158,13 +165,13 @@ class PostmasterController < ApplicationController
       postmaster_params[:package][:type] = shipment_params[:envelope]
     end
 
-
     logger.info "SALE PARAMS ARE #{sale_params}"
     if @sale.update_attributes!(sale_params)
       logger.info "Updated sale"
     end
 
     begin
+      logger.debug "Postmaster params are #{postmaster_params}"
       @response = Postmaster::Shipment.create postmaster_params
     rescue Exception => e
       ExceptionNotifier.notify_exception(
@@ -172,10 +179,19 @@ class PostmasterController < ApplicationController
         :env => request.env,
         :data => {:message => "Creating a shipment failed"}
       )
-      render text: e
+      return render text: e
     end
 
     logger.info "=> Postmaster::Shipment.create response: #{@response.inspect}"
+
+    if @response.nil?
+      ExceptionNotifier.notify_exception(
+        "Response from Postmaster::Shipment.create was nil",
+        :env => request.env,
+        :data => {:message => "Creating a shipment failed"}
+      )
+      return render text: "Creating a shipment failed. The response from Postmaster was empty"
+    end
 
     new_shipment_params = {
       postmaster_id: @response[:id],
@@ -242,7 +258,7 @@ class PostmasterController < ApplicationController
   def sale_params
     params
       .require(:sale)
-      .permit(:status)
+      .permit(:status, :id)
   end
 
 end

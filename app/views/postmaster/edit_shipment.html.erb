@@ -25,6 +25,10 @@
     <input type="text" value="<%= @sale.company %>" name="shipment[company]">
     <label class="label">Line 1</label>
     <input type="text" value="<%= @sale.line1 %>" name="shipment[line1]">
+    <label class="label">Line 2</label>
+    <input type="text" value="" name="shipment[line2]">
+    <label class="label">Line 3</label>
+    <input type="text" value="" name="shipment[line3]">
     <label class="label">City</label>
     <input type="text" value="<%= @sale.city %>" name="shipment[city]">
     <label class="label">State/Province</label>
@@ -40,9 +44,9 @@
   <div class="eight columns">
     <h3>Carrier and Service Level</h3>
     <label class="label">Carrier</label>
-    <input type="text" value="<%= @sale.shipping_provider %>" name="shipment[shipping_provider]">
+    <input type="text" value="<%= @sale.shipping_provider.downcase %>" name="shipment[shipping_provider]">
     <p class="hint">
-      Options are "ups" or "usps". Use lower case.
+      Options are "ups" or "usps".
     </p>
     <label class="label">Service Level</label>
     <input type="text" value="<%= @sale.shipping_service %>" name="shipment[shipping_service]">
@@ -165,9 +169,14 @@
           <label class="label">Country of origin *</label>
           <input type="text" name="shipment[contents][][country_of_origin]" value="US">
           <label class="label">Quantity *</label>
-          <input type="number" name="shipment[contents][][quantity]">
+          <input type="number" name="shipment[contents][][quantity]" value="1">
           <label class="label">Value *</label>
           <input type="text" name="shipment[contents][][value]">
+          <p class="hint">
+            The cost of the item in USD (required).
+            <br> - Note: the sum of the item values must be less than the declared package value.
+            <br> - Note: The total value of the item is equal to this value multiplied by the quantity.
+          </p>
           <label class="number">Weight *</label>
           <input type="text" name="shipment[contents][][weight]">
           <label class="label">Weight Units</label>

@@ -20,7 +20,8 @@ class ApplicationSweeper < ActionController::Caching::Sweeper
   end
 
   def expire_cache
-    return if Rails.env == "test"
+    return if @controller.nil?
+    return unless @controller.respond_to? :expire_action
 
     ['index', 'store'].each do |action|
       USERS.each do |user|
