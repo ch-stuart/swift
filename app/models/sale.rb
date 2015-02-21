@@ -51,13 +51,16 @@ class Sale < ActiveRecord::Base
       end
       actual = shipping_costs.inject{|sum,x| sum + x }
 
+      # matched
       if expected == actual
-        "MATCHED"
+        return ["", "0", "0"]
+      # expected costs were greater than actual
       elsif expected > actual
         diff = expected - actual
         diff_percent = get_diff_percent diff, expected
 
         return ["+", diff, diff_percent]
+      # expected costs were less than actual
       else
         diff = actual - expected
         diff_percent = get_diff_percent diff, expected
