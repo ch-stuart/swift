@@ -1,33 +1,28 @@
 <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <div ng-controller="SolsticeCtrl" class="S-ctrl">
-  <div class="grid S-grid S-grid--heading">
-    <div class="unit whole">
-      <div class="S-grid--heading__content">
+  <div class="S-heading">
+    <div class="grid">
+      <div class="unit whole">
         <div class="S-logo"></div>
         <ul class="S-nav">
           <li class="S-nav__item">
-            <a class="S-nav__link" href="#">
-              #swiftcampout
-            </a>
-          </li>
-          <li class="S-nav__item">
-            <a class="S-nav__link" href="#">
+            <a class="S-nav__link" href="#about" target="_self">
               About
             </a>
           </li>
           <li class="S-nav__item">
-            <a class="S-nav__link" href="#">
+            <a class="S-nav__link" href="#signup" target="_self">
               Sign Up
             </a>
           </li>
           <li class="S-nav__item">
-            <a class="S-nav__link" href="#">
+            <a class="S-nav__link" href="#map" target="_self">
               Map
             </a>
           </li>
           <li class="S-nav__item">
-            <a class="S-nav__link" href="#">
+            <a class="S-nav__link" href="#social" target="_self">
               Social
             </a>
           </li>
@@ -35,7 +30,7 @@
       </div>
     </div>
   </div>
-  <div class="grid S-grid S-grid--intro">
+  <div class="grid S-grid S-grid--intro" id="about">
     <div class="unit whole">
       <p class="S-p">
         Calling bicycle adventurers worldwide!
@@ -58,11 +53,8 @@
       <p class="S-p">
         In the spirit of bike camping all  we ask is that your adventure is self-supported and that you *leave no trace*
       </p>
-      <p class="S-p">
+      <p class="S-p" id="signup">
         #swiftcampout
-      </p>
-      <p class="S-p">
-        Swift Industries is here to inspire your wandering ways, but we are in no way liable for safety or mishaps related to the Swift Campout. By creating a Swift Campout account you are taking full responsibility to travel safely and you are acknowledging the personal risks of traveling by bicycle.
       </p>
       <div class="Solistice-signup-btn-wrap">
         <a
@@ -71,9 +63,12 @@
           Sign Up
         </a>
       </div>
+      <p class="S-p S-p--disclaimer">
+        Swift Industries is here to inspire your wandering ways, but we are in no way liable for safety or mishaps related to the Swift Campout. By creating a Swift Campout account you are taking full responsibility to travel safely and you are acknowledging the personal risks of traveling by bicycle.
+      </p>
     </div>
   </div>
-  <div class="grid S-grid S-grid--map">
+  <div class="grid S-grid S-grid--map" id="map">
     <div class="unit whole">
       <p class="S-p">
         Sign on to mark the map with your campout.
@@ -86,7 +81,7 @@
       </leaflet>
     </div>
   </div>
-  <div class="grid S-grid S-grid--social">
+  <div class="grid S-grid S-grid--social" id="social">
     <div class="unit whole">
       <p class="S-p" style="text-align:center">
         #swiftcampout
@@ -109,12 +104,15 @@
 <script>
 
   var $win = $(window),
-      $solsticeHeading = $('.S-grid--heading'),
       $stickyElem = $('.S-nav'),
       stickyTop = $stickyElem.offset().top;
 
   $(window)
     .scroll(function(e) {
+      if (new Date() % 2 === 0 && !window.hasOwnProperty('ontouchstart')) {
+        return;
+      }
+
       setTimeout(function () {
         if ($win.scrollTop() > stickyTop) {
           if (!$stickyElem.hasClass('S-nav--fixed')) {
