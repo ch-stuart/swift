@@ -1,13 +1,83 @@
-<div ng-controller="SolsticeCtrl">
-  <div class="grid">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<div ng-controller="SolsticeCtrl" class="S-ctrl">
+  <div class="grid S-grid S-grid--heading">
     <div class="unit whole">
-      <h2>
-        Swift Campout
-      </h2>
+      <div class="S-grid--heading__content">
+        <div class="S-logo"></div>
+        <ul class="S-nav">
+          <li class="S-nav__item">
+            <a class="S-nav__link" href="#">
+              #swiftcampout
+            </a>
+          </li>
+          <li class="S-nav__item">
+            <a class="S-nav__link" href="#">
+              About
+            </a>
+          </li>
+          <li class="S-nav__item">
+            <a class="S-nav__link" href="#">
+              Sign Up
+            </a>
+          </li>
+          <li class="S-nav__item">
+            <a class="S-nav__link" href="#">
+              Map
+            </a>
+          </li>
+          <li class="S-nav__item">
+            <a class="S-nav__link" href="#">
+              Social
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div class="grid">
+  <div class="grid S-grid S-grid--intro">
     <div class="unit whole">
+      <p class="S-p">
+        Calling bicycle adventurers worldwide!
+      </p>
+      <p class="S-p">
+        Swift Industries invites you to pack up and skip town for the Swift Campout, June 20th + 21st 2015.
+      </p>
+      <p class="S-p">
+        At Swift, we’re endlessly inspired by the notion of thousands of kindred spirits warming hands next to crackling fires. Ride roads in Cascadia, the Australian outback, follow the winding slopes of Mt. Diablo and pre-colombian trails of Ecuador. Pitch tents in the Great Himalayas, hang hammocks in the Pine Barons, and sleep under the stars outside of Tokyo. The possibilities are endless.
+      </p>
+      <p class="S-p">
+        Sign on to mark the map with your campout, then invite friends far and wide to band together for a night afield.
+      </p>
+      <p class="S-p">
+        Once you’ve joined, trip journals and adventure filmlets will be gathered at <a href="/" class="S-a">builtbyswift.com</a>. There’s lots to win: gear, guides, and camp accessories. The first 100 campers receive a Swift Campout patch.
+      </p>
+      <p class="S-p">
+        Roll to camp and settle in for a night under starry skies. Discover the solitude of an uncharted spot or head into the hills with a bunch of friends. Your call.
+      </p>
+      <p class="S-p">
+        In the spirit of bike camping all  we ask is that your adventure is self-supported and that you *leave no trace*
+      </p>
+      <p class="S-p">
+        #swiftcampout
+      </p>
+      <p class="S-p">
+        Swift Industries is here to inspire your wandering ways, but we are in no way liable for safety or mishaps related to the Swift Campout. By creating a Swift Campout account you are taking full responsibility to travel safely and you are acknowledging the personal risks of traveling by bicycle.
+      </p>
+      <div class="Solistice-signup-btn-wrap">
+        <a
+          href="#"
+          class="Solistice-signup-btn">
+          Sign Up
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="grid S-grid S-grid--map">
+    <div class="unit whole">
+      <p class="S-p">
+        Sign on to mark the map with your campout.
+      </p>
       <leaflet
         center="kc"
         markers="markers"
@@ -16,14 +86,47 @@
       </leaflet>
     </div>
   </div>
-  <div class="grid">
-    <div class="unit half">
-      <sw-twitter tag="bicycle"></sw-twitter>
+  <div class="grid S-grid S-grid--social">
+    <div class="unit whole">
+      <p class="S-p" style="text-align:center">
+        #swiftcampout
+      </p>
     </div>
     <div class="unit half">
-      <sw-instagram tag="bicycle"></sw-instagram>
+      <sw-twitter tag="swiftcampout"></sw-twitter>
+    </div>
+    <div class="unit half">
+      <sw-instagram tag="swiftcampout"></sw-instagram>
     </div>
   </div>
-  <%= render 'twitter' %>
-  <%= render 'instagram' %>
 </div>
+
+<%= render 'twitter' %>
+<%= render 'instagram' %>
+
+
+<%= content_for :js do %>
+<script>
+
+  var $win = $(window),
+      $solsticeHeading = $('.S-grid--heading'),
+      $stickyElem = $('.S-nav'),
+      stickyTop = $stickyElem.offset().top;
+
+  $(window)
+    .scroll(function(e) {
+      setTimeout(function () {
+        if ($win.scrollTop() > stickyTop) {
+          if (!$stickyElem.hasClass('S-nav--fixed')) {
+            $stickyElem.addClass('S-nav--fixed')
+          }
+        } else {
+          if ($stickyElem.hasClass('S-nav--fixed')) {
+            $stickyElem.removeClass('S-nav--fixed')
+          }
+        }
+      }, 200);
+    });
+
+</script>
+<% end %>

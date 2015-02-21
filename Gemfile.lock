@@ -41,8 +41,9 @@ GEM
     addressable (2.3.6)
     angularjs-rails (1.2.26)
     arel (6.0.0)
-    autoprefixer-rails (4.0.0.1)
+    autoprefixer-rails (5.1.5)
       execjs
+      json
     awesome_print (1.2.0)
     bcrypt (3.1.9)
     brakeman (2.4.3)
@@ -82,7 +83,7 @@ GEM
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
     excon (0.31.0)
-    execjs (2.2.2)
+    execjs (2.3.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)

@@ -4,18 +4,19 @@
 }
 .InstaDir-item {
   margin: 0 20px 20px 0;
-  width: 160px;
+//  width: auto;
 }
 .InstaDir-img {
   padding: 4px;
   background-color: #fff;
   border: 1px solid #ddd;
+  max-width: 100%;
 }
 .InstaDir-username {
   display: block;
 }
 .InstaDir-text {
   word-wrap: break-word;
-  max-height: 128px;
+  max-height: 58px;
   overflow-y: auto;
 }

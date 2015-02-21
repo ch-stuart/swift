@@ -8,7 +8,9 @@ class InstagramService < SocialService
     Rails.cache.fetch("instagram-get-by-tag-#{tag}") do
       medias = []
 
-      for media_item in @client.tag_recent_media(tag)
+      media_items = @client.tag_recent_media(tag)
+
+      media_items[0...10].each do |media_item|
         medias.push({
           thumbnail: media_item.images.thumbnail.url,
           standard: media_item.images.standard_resolution.url,
