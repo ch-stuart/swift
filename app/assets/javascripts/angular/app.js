@@ -1,5 +1,5 @@
 /*global angular $ */
-var SwiftApp = angular.module('SwiftApp', ['sticky', 'leaflet-directive']);
+var SwiftApp = angular.module('SwiftApp', ['sticky', 'leaflet-directive', 'afkl.lazyImage']);
 
 SwiftApp.config([
   "$httpProvider", function($httpProvider) {

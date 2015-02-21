@@ -1,7 +1,10 @@
 <script type="text/ng-template" id="twitter.html">
   <ul class="TwitterDir-items">
     <li class="TwitterDir-item Grid Grid--top" ng-repeat='tweet in tweets'>
-      <img class="TwitterDir-user-icon Grid-unit Grid-unit--rock" ng-src="{{ tweet.profile_image }}">
+      <div
+        class="TwitterDir-user-icon Grid-unit Grid-unit--rock"
+        afkl-lazy-image="{{ tweet.profile_image }}">
+      </div>
       <div class="Grid-unit">
         <div class="TwitterDir-tweet-text">
           {{ tweet.text }}

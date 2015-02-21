@@ -2,9 +2,10 @@
   <ul class="InstaDir-items">
     <li class="InstaDir-item" ng-repeat='media in mediaItems'>
       <a ng-href="{{ media.link }}">
-        <img
+        <div
           class="InstaDir-img"
-          ng-src='{{ media.standard }}'>
+          afkl-lazy-image='{{ media.standard }}'>
+        </div>
       </a>
       <div class="InstaDir-text" ng-if="media.text">
         {{ media.text }}

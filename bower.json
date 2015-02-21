@@ -12,6 +12,7 @@
     "matchMedia": "~0.2.0",
     "unveil": "~1.3.0",
     "srcset": "~0.1.1",
-    "angular-leaflet-directive": "tombatossals/angular-leaflet-directive"
+    "angular-leaflet-directive": "tombatossals/angular-leaflet-directive",
+    "afkl-lazy-image": "~0.0.11"
   }
 }

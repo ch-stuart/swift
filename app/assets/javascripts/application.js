@@ -14,6 +14,7 @@
 //= require dollardollar
 //= require angular
 //= require ngSticky/sticky.js
+//= require afkl-lazy-image/release/lazy-image
 //= require global_exception_service
 //= require jquery_ujs
 //= require tinycolor
