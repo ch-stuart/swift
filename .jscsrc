@@ -1,0 +1,51 @@
+{
+    "disallowEmptyBlocks": true,
+    "disallowMixedSpacesAndTabs": true,
+    "disallowSpacesInsideParentheses": true,
+    "disallowTrailingComma": true,
+    "disallowTrailingWhitespace": true,
+    "disallowYodaConditions": true,
+    "disallowNewlineBeforeBlockStatements": true,
+    "disallowSpacesInsideArrayBrackets": true,
+    "disallowSpacesInCallExpression": true,
+    "maximumLineLength": 220,
+    "requireSpaceBeforeObjectValues": true,
+    "requireSpaceBetweenArguments": true,
+    "requireCurlyBraces": [
+        "if",
+        "else",
+        "for",
+        "while",
+        "do",
+        "try",
+        "catch"
+    ],
+    "requireSpaceAfterKeywords": [
+        "do",
+        "for",
+        "if",
+        "else",
+        "case",
+        "try",
+        "void",
+        "while",
+        "with",
+        "return",
+        "typeof"
+    ],
+    "requireSpaceBeforeKeywords": [
+        "else",
+        "while",
+        "catch"
+    ],
+    "requireSpaceAfterLineComment": true,
+    "requireSpaceBeforeBlockStatements": true,
+    "requireLineBreakAfterVariableAssignment": true,
+    "requireMultipleVarDecl": "onevar",
+    "requireDotNotation": true,
+    "requireOperatorBeforeLineBreak": [",", "+"],
+    "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+    "requireSpacesInConditionalExpression": true,
+    "validateParameterSeparator": ", ",
+    "requireSpaceAfterBinaryOperators": ["=", ",", "-", "/", "*", "==", "===", "!=", "!=="]
+}
