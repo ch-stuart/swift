@@ -93,6 +93,8 @@ $solstice-white: #eef0d3;
   line-height: 25px;
   font-size: 13px;
   transition: all 0.2s;
+  background-color: $solstice-orange;
+  border-radius: 4px;
 
   &:hover {
     color: $solstice-orange;
@@ -108,11 +110,12 @@ $solstice-white: #eef0d3;
   right: 0;
   padding: 5px 30px;
   background-color: $solstice-muted-green;
+  background-image: image-url('solstice/pattern-100h-50o.png');
+  background-size: auto 50px;
   text-align: right;
   z-index: 1001;
   box-shadow: 0 0 5px rgba(0,0,0,.6);
 }
-
 .S-grid--intro {
   background-color: $solstice-dark-brown;
   padding-bottom: 80px;
@@ -121,10 +124,10 @@ $solstice-white: #eef0d3;
   background-color: $solstice-white;
 }
 .S-grid--social {
-  background-color: $solstice-muted-green;
+  background-color: $solstice-white;
 }
 .S-p {
-  font-family: Georgia, Times New Roman, Serif;
+  font-family: Vollkorn, Georgia, Times New Roman, Serif;
   font-size: 16px;
   color: $solstice-dark-brown;
   line-height: 1.7;
