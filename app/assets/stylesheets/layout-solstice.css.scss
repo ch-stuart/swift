@@ -193,7 +193,11 @@ $solstice-white: #eef0d3;
   }
 }
 
-
+.S-p--map-heading {
+  max-width: none;
+  text-align: center;
+  margin-top: 20px;
+}
 .angular-leaflet-map {
   height: 320px;
   border: 4px #fff solid;
@@ -208,4 +212,17 @@ $solstice-white: #eef0d3;
   .angular-leaflet-map {
     height: 640px;
   }
+}
+.S-map--chooser {
+  margin-top: 10px;
+}
+.S-map--btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  display: inline;
+  color: $solstice-orange;
+  font-size: inherit;
+  &:focus { outline: none; }
 }

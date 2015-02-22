@@ -1,6 +1,12 @@
 SwiftApp.controller('SolsticeCtrl', ['$scope', function($scope) {
 
     var tilesDict = {
+        openstreetmap: {
+            url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            options: {
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }
+        },
         stamenmap: {
             url: "http://tile.stamen.com/watercolor/{z}/{x}/{y}.png",
             options: {
@@ -34,6 +40,9 @@ SwiftApp.controller('SolsticeCtrl', ['$scope', function($scope) {
         tiles: tilesDict.stamenmap,
         defaults: {
             scrollWheelZoom: false
+        },
+        changeMap: function(map) {
+            $scope.tiles = tilesDict[map];
         }
     });
 
