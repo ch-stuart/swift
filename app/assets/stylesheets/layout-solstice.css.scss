@@ -3,26 +3,8 @@ $solstice-red: #e9301b;
 $solstice-dark-brown: #332920;
 $solstice-muted-green: #68715e;
 $solstice-white: #eef0d3;
+$solstice-font-stack: Noto Sans, Calibri, Candara, Arial, sans-serif;
 
-.page_solstice_index {
-  .container-logo {
-    display: none;
-  }
-  .container-main {
-    box-shadow: none;
-    width: auto;
-    margin: 0;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-  }
-  .container-footer {
-    margin-top: 50px;
-  }
-  .container-w-padding {
-    padding: 0;
-  }
-}
 .S-heading {
   background-image: image-url('solstice/header-640.jpg');
   background-position: center;
@@ -93,7 +75,7 @@ $solstice-white: #eef0d3;
 .S-nav__link {
   display: inline-block;
   color: $solstice-white;
-  font-weight: bold;
+  font-weight: 600;
   text-transform: uppercase;
   padding: 0 10px;
   height: 25px;
@@ -102,6 +84,7 @@ $solstice-white: #eef0d3;
   transition: all 0.2s;
   background-color: $solstice-orange;
   border-radius: 4px;
+  font-family: $solstice-font-stack;
 
   &:hover {
     color: $solstice-orange;
@@ -117,7 +100,7 @@ $solstice-white: #eef0d3;
   right: 0;
   padding: 5px 30px;
   background-color: $solstice-muted-green;
-  background-image: image-url('solstice/pattern-100h-50o.png');
+  background-image: linear-gradient(rgba(255,255,255,0.2), transparent);
   background-size: auto 50px;
   text-align: right;
   z-index: 1001;
@@ -134,7 +117,8 @@ $solstice-white: #eef0d3;
   background-color: $solstice-white;
 }
 .S-p {
-  font-family: Vollkorn, Georgia, Times New Roman, Serif;
+  font-family: $solstice-font-stack;
+  font-weight: 600;
   font-size: 16px;
   color: $solstice-dark-brown;
   line-height: 1.7;
@@ -171,24 +155,26 @@ $solstice-white: #eef0d3;
 .S-a,
 .S-a:link,
 .S-a:visited {
-  color: $solstice-red;
+  color: $solstice-orange;
 }
 .Solistice-signup-btn-wrap {
   margin: 100px 0 20px;
   text-align: center;
 }
 .Solistice-signup-btn {
-  color: #fff;
   font-size: 30px;
-  font-family: Georgia, Times New Roman, Serif;
-  display: inline-block;
   background-color: $solstice-orange;
+  font-family: $solstice-font-stack;
+  font-weight: 600;
+  color: $solstice-white;
+  display: inline-block;
   padding: 0 40px;
   line-height: 60px;
   height: 60px;
   border-radius: 3px;
+
   &:hover {
-    color: #fff;
+    color: $solstice-white;
     background-color: darken($solstice-orange, 3%);
   }
 }
@@ -202,19 +188,23 @@ $solstice-white: #eef0d3;
   height: 320px;
   border: 4px #fff solid;
   box-shadow: 0 0 5px -1px rgba(0, 0, 0, 1);
+  margin: 0 auto;
 }
 @media (min-width: 768px) {
   .angular-leaflet-map {
     height: 520px;
+    width: 90%;
   }
 }
 @media (min-width: 1024px) {
   .angular-leaflet-map {
     height: 640px;
+    width: 80%;
   }
 }
 .S-map--chooser {
   margin-top: 10px;
+  color: darken($solstice-white, 60%);
 }
 .S-map--btn {
   margin: 0;

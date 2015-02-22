@@ -1,5 +1,24 @@
 <%= content_for :css do %>
-  <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+  <style>
+  .container-logo {
+    display: none;
+  }
+  .container-main {
+    box-shadow: none;
+    width: auto;
+    margin: 0;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+  }
+  .container-footer {
+    margin-top: 50px;
+  }
+  .container-w-padding {
+    padding: 0;
+  }
+  </style>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 <% end %>
 <div ng-controller="SolsticeCtrl" class="S-ctrl">
   <div class="S-heading">
@@ -54,7 +73,8 @@
       <p class="S-p">
         In the spirit of bike camping all  we ask is that your adventure is self-supported and that you *leave no trace*
       </p>
-      <p class="S-p" id="signup">
+      <p class="S-p" id="signup" style="text-align: center">
+        <br><br>
         #swiftcampout
       </p>
       <div class="Solistice-signup-btn-wrap">
