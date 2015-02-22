@@ -134,8 +134,11 @@
 <script>
 
   var $win = $(window),
-      $stickyElem = $('.S-nav'),
-      stickyTop = $stickyElem.offset().top;
+      $stickyNav = $('.S-nav'),
+      stickyNavTop = $stickyNav.offset().top,
+      $stickyLogo = $('.S-logo'),
+      stickyLogoTop = $stickyLogo.offset().top,
+      stickyLogoHeight = parseFloat($stickyLogo.css('height'));
 
   $(window)
     .scroll(function(e) {
@@ -144,13 +147,24 @@
       }
 
       setTimeout(function () {
-        if ($win.scrollTop() > stickyTop) {
-          if (!$stickyElem.hasClass('S-nav--fixed')) {
-            $stickyElem.addClass('S-nav--fixed')
+        if ($win.scrollTop() > stickyNavTop) {
+          if (!$stickyNav.hasClass('S-nav--fixed')) {
+            $stickyNav.addClass('S-nav--fixed')
           }
         } else {
-          if ($stickyElem.hasClass('S-nav--fixed')) {
-            $stickyElem.removeClass('S-nav--fixed')
+          if ($stickyNav.hasClass('S-nav--fixed')) {
+            $stickyNav.removeClass('S-nav--fixed')
+          }
+        }
+
+
+        if (!UA.isMobile() && $win.scrollTop() > stickyLogoTop + stickyLogoHeight) {
+          if (!$stickyLogo.hasClass('S-logo--fixed')) {
+            $stickyLogo.addClass('S-logo--fixed')
+          }
+        } else {
+          if ($stickyLogo.hasClass('S-logo--fixed')) {
+            $stickyLogo.removeClass('S-logo--fixed')
           }
         }
       }, 200);

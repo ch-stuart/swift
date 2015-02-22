@@ -20,6 +20,7 @@ $solstice-font-stack: Noto Sans, Calibri, Candara, Arial, sans-serif;
   background-image: image-url('solstice/logo-120.png');
   margin-top: 20px;
 }
+
 @media (min-width: 768px) {
   .S-logo {
     margin-top: 40px;
@@ -50,6 +51,18 @@ $solstice-font-stack: Noto Sans, Calibri, Candara, Arial, sans-serif;
     background-image: image-url('solstice/header-1440.jpg');
   }
 }
+.S-logo--fixed {
+  width: 120px * .666;
+  height: 198px * .666;
+  background-size: cover;
+  background-image: image-url('solstice/logo-120.png');
+  position: fixed;
+  margin: 0;
+  top: 5px;
+  left: 30px;
+  z-index: 1002;
+}
+
 .S-nav {
   position: absolute;
   top: 10px;
