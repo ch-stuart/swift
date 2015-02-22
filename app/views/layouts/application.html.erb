@@ -23,7 +23,7 @@
   <%= stylesheet_link_tag "print", media: "print" %>
   <%= csrf_meta_tag %>
 </head>
-<body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
+<body class="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
   <% cache ["layout_company_front_door_sign", Company.first] do %>
     <% if Company.first.front_door_sign.present? %>
       <h2 class="front_door_sign">
