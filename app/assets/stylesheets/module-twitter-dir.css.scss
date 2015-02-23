@@ -1,6 +1,9 @@
+@import 'vars-solstice';
+
 .TwitterDir-items {}
 .TwitterDir-item {
   display: flex;
+  font-family: $solstice-font-stack;
 }
 .TwitterDir-user-icon img {
   box-sizing: border-box;
@@ -13,7 +16,13 @@
 }
 .TwitterDir-tweet-text {
   word-wrap: break-word;
+  color: $solstice-white;
 }
 .TwitterDir-tweet-screenName {
-
+  color: $solstice-white;
+}
+.TwitterDir-tweet-screenName-link,
+.TwitterDir-tweet-screenName-link:visited,
+.TwitterDir-tweet-screenName-link:hover {
+  color: $solstice-orange;
 }

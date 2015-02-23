@@ -1,10 +1,12 @@
+@import 'vars-solstice';
+
 .InstaDir-items {
   display: flex;
   flex-wrap: wrap;
 }
 .InstaDir-item {
   margin: 0 20px 20px 0;
-//  width: auto;
+  font-family: $solstice-font-stack;
 }
 .InstaDir-img img {
   padding: 4px;
@@ -12,8 +14,11 @@
   border: 1px solid #ddd;
   max-width: 100%;
 }
-.InstaDir-username {
+.InstaDir-username,
+.InstaDir-username:hover,
+.InstaDir-username:visited {
   display: block;
+  color: $solstice-orange;
 }
 .InstaDir-text {
   word-wrap: break-word;
