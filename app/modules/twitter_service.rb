@@ -11,7 +11,7 @@ class TwitterService < SocialService
 
   def get_by_tag tag
     Rails.cache.fetch("twitter-get-by-tag-#{tag}") do
-      response = @client.search("##{tag}").take(6)
+      response = @client.search("##{tag}").take(4)
       tweets = []
 
       for tweet in response
