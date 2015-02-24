@@ -6,6 +6,7 @@
 //= require unveil/jquery.unveil
 //= require jquery.lightbox_me
 //= require jquery.fitvids
+//= require flexslider/jquery.flexslider
 //= require jquery.cookie
 //= require flash
 //= require matchMedia/matchMedia
@@ -15,6 +16,7 @@
 //= require angular
 //= require ngSticky/sticky.js
 //= require afkl-lazy-image/release/lazy-image
+//= require angular-flexslider/angular-flexslider.js
 //= require global_exception_service
 //= require jquery_ujs
 //= require tinycolor

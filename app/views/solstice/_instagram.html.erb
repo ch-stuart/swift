@@ -1,18 +1,20 @@
 <script type="text/ng-template" id="instagram.html">
-  <ul class="InstaDir-items">
-    <li class="InstaDir-item" ng-repeat='media in mediaItems'>
-      <a ng-href="{{ media.link }}">
-        <div
-          class="InstaDir-img"
-          afkl-lazy-image='{{ media.standard }}'>
+  <div class="InstaDir-items">
+    <flex-slider slide="media in mediaItems track by $index">
+      <li>
+        <a ng-href="{{ media.link }}">
+          <div
+            class="InstaDir-img"
+            afkl-lazy-image='{{ media.standard }}'>
+          </div>
+        </a>
+        <div class="InstaDir-text" ng-if="media.text" style="display:none">
+          {{ media.text }}
         </div>
-      </a>
-      <div class="InstaDir-text" ng-if="media.text" style="display:none">
-        {{ media.text }}
-      </div>
-      <a class="InstaDir-username" ng-href="//instagram.com/{{ media.username }}">
-        {{ media.username }}
-      </a>
-    </li>
-  </ul>
+        <a class="InstaDir-username" ng-href="//instagram.com/{{ media.username }}">
+          {{ media.username }}
+        </a>
+      </li>
+    </flex-slider>
+  </div>
 </script>

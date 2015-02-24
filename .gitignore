@@ -11,6 +11,10 @@ ssl/
 
 # This is included via a Gem
 vendor/assets/bower_components/angular/*
+vendor/assets/bower_components/jquery/*
+vendor/assets/bower_components/flexslider/demo/*
+vendor/assets/bower_components/flexslider/fonts/*
+vendor/assets/bower_components/angular-flexslider/examples/*
 casper-results.xml
 vendor/assets/bower_components/angular-leaflet-directive/grunt/*
 vendor/assets/bower_components/font-awesome/*
