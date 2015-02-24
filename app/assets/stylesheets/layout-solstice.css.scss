@@ -98,7 +98,7 @@
   font-family: $solstice-font-stack;
 
   &:hover {
-    color: $solstice-orange;
+    color: lighten($solstice-white, 10%);
   }
   &:visited {
     color: $solstice-white;
@@ -111,7 +111,10 @@
   right: 0;
   padding: 5px 30px;
   background-color: $solstice-muted-green;
-  background-image: linear-gradient(rgba(255,255,255,0.2), transparent);
+  background-image: linear-gradient(
+    brighten($solstice-muted-green, 10%) 15%,
+    transparent 30%
+  );
   background-size: auto 50px;
   text-align: right;
   z-index: 1001;
@@ -194,12 +197,19 @@
   margin: 0 auto;
 }
 @media (min-width: 768px) {
+  .S-grid--social {
+    max-width: 90%;
+    margin: 0 auto;
+  }
   .angular-leaflet-map {
     height: 520px;
     width: 90%;
   }
 }
 @media (min-width: 1024px) {
+  .S-grid--social {
+    max-width: 80%;
+  }
   .angular-leaflet-map {
     height: 640px;
     width: 80%;
@@ -218,4 +228,8 @@
   color: $solstice-orange;
   font-size: inherit;
   &:focus { outline: none; }
+}
+
+.S-hashtag-img {
+  width: 240px;
 }
