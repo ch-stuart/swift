@@ -197,22 +197,24 @@
   margin: 0 auto;
 }
 @media (min-width: 768px) {
-  .S-grid--social {
+  .S-grid--social,
+  .S-grid--map,
+  .S-grid--prizes {
     max-width: 90%;
     margin: 0 auto;
   }
   .angular-leaflet-map {
     height: 520px;
-    width: 90%;
   }
 }
 @media (min-width: 1024px) {
-  .S-grid--social {
+  .S-grid--social,
+  .S-grid--map,
+  .S-grid--prizes {
     max-width: 80%;
   }
   .angular-leaflet-map {
     height: 640px;
-    width: 80%;
   }
 }
 .S-map--chooser {
