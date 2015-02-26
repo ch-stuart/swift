@@ -52,35 +52,63 @@
   </div>
   <div class="grid S-grid S-grid--intro" id="about">
     <div class="unit whole">
-      <p class="S-p">
-        Calling bicycle adventurers worldwide!
-      </p>
-      <p class="S-p">
-        Swift Industries invites you to pack up and skip town for the Swift Campout, June 20th + 21st 2015.
-      </p>
-      <p class="S-p">
-        Sign on to mark the map with your campout, then invite friends far and wide to band together for a night afield.
-      </p>
-      <p class="S-p">
-        Wherever you may be, roll to camp and settle in for a night under starry skies. Go explore the Coast Range of California, hang a hammock in the Pine Barons, or wake to camp-coffee outside of Tokyo. Discover the solitude of an uncharted spot or head into the hills with a bunch of friends. Your call.
-      </p>
-      <p class="S-p">
-        In the spirit of bike camping all we ask is that your adventure is self-supported and that you leave no trace.
-      </p>
-      <p class="S-p" id="signup" style="text-align: center">
-        <br><br>
-        <%= image_tag 'solstice/hashtag-green-800.png', alt: '#swiftcampout', class: 'S-hashtag-img' %>
-      </p>
-      <div class="Solistice-signup-btn-wrap">
-        <a
-          href="#"
-          class="Solistice-signup-btn">
-          Sign Up
-        </a>
+      <div class="Grid Grid--top">
+        <div class="Grid-unit Grid-unit--stretch">
+          <div class="S-col--prizes">
+            <p class="S-p S-col-heading">
+              Prizes
+            </p>
+            <sw-flickr-photo id="8447087731" label="Large Square" name="Full Touring Set-up"></sw-flickr-photo>
+            <sw-flickr-photo id="10801429955" label="Large Square" name="Patch"></sw-flickr-photo>
+            <sw-flickr-photo id="14376087946" label="Large Square" name="Swift T-Shirts"></sw-flickr-photo>
+            <sw-flickr-photo id="7706352484" label="Large Square" name="Tenkara Rod Co Teton Rod"></sw-flickr-photo>
+            <sw-flickr-photo id="16225581962" label="Large Square" name="Adventure Cycling Association Membership"></sw-flickr-photo>
+          </div>
+        </div>
+        <div class="Grid-unit" class="S-about-grid-unit">
+          <p class="S-p">
+            Calling bicycle adventurers worldwide!
+          </p>
+          <p class="S-p">
+            Swift Industries invites you to pack up and skip town for the Swift Campout, June 20th + 21st 2015.
+          </p>
+          <p class="S-p">
+            Sign on to mark the map with your campout, then invite friends far and wide to band together for a night afield.
+          </p>
+          <p class="S-p">
+            Wherever you may be, roll to camp and settle in for a night under starry skies. Go explore the Coast Range of California, hang a hammock in the Pine Barons, or wake to camp-coffee outside of Tokyo. Discover the solitude of an uncharted spot or head into the hills with a bunch of friends. Your call.
+          </p>
+          <p class="S-p">
+            In the spirit of bike camping all we ask is that your adventure is self-supported and that you leave no trace.
+          </p>
+          <p class="S-p" id="signup" style="text-align: center">
+            <br><br>
+            <%= image_tag 'solstice/hashtag-green-800.png', alt: '#swiftcampout', class: 'S-hashtag-img' %>
+          </p>
+          <div class="Solistice-signup-btn-wrap">
+            <a
+              href="#"
+              class="Solistice-signup-btn">
+              Sign Up
+            </a>
+          </div>
+          <p class="S-p S-p--disclaimer">
+            Swift Industries is here to inspire your wandering ways, but we are in no way liable for safety or mishaps related to the Swift Campout. By creating a Swift Campout account you are taking full responsibility to travel safely and you are acknowledging the personal risks of traveling by bicycle.
+          </p>
+        </div>
+        <div class="Grid-unit Grid-unit--stretch">
+          <div class="S-col--rec-gear">
+            <p class="S-p S-col-heading">
+              Recommended Gear
+            </p>
+            <sw-flickr-photo id="15333976991" label="Large Square" name="Junior Ranger Panniers"></sw-flickr-photo>
+            <sw-flickr-photo id="8033853108" label="Large Square" name="The Campout Kit: Kerchief, Patch, and Field Notes"></sw-flickr-photo>
+            <sw-flickr-photo id="14651627766" label="Large Square" name="Sno Peak Kitchen Kit"></sw-flickr-photo>
+            <sw-flickr-photo id="14915337428" label="Large Square" name="Zeitgeist Saddle Bag"></sw-flickr-photo>
+            <sw-flickr-photo id="15158290769" label="Large Square" name="Lark Travel Kite"></sw-flickr-photo>
+          </div>
+        </div>
       </div>
-      <p class="S-p S-p--disclaimer">
-        Swift Industries is here to inspire your wandering ways, but we are in no way liable for safety or mishaps related to the Swift Campout. By creating a Swift Campout account you are taking full responsibility to travel safely and you are acknowledging the personal risks of traveling by bicycle.
-      </p>
     </div>
     <div class="unit whole">
       <p class="S-p">
@@ -122,36 +150,11 @@
       <sw-instagram tag="bicycle"></sw-instagram>
     </div>
   </div>
-  <div class="grid S-grid S-grid--prizes" id="">
-    <div class="unit half">
-      <p class="S-p" style="font-weight:bold">
-        Prizes
-      </p>
-      <p class="S-p">
-        full touring set-up
-        <br>patch
-        <br>Swift t-shirts
-        <br>Tenkara Rod Co Teton Rod
-        <br>Adventure Cycling Association Membership
-      </ul>
-    </div>
-    <div class="unit half">
-      <p class="S-p" style="font-weight:bold">
-        Recommended Gear
-      </p>
-      <p class="S-p">
-        Junior Ranger Panniers
-        <br>The Campout Kit: Kerchief , Patch, and Field Notes
-        <br>Sno Peak Kitchen Kit
-        <br>Zeitgeist Saddle Bag
-        <br>Lark Travel Kite
-      </p>
-    </div>
-  </div>
 </div>
 
 <%= render 'twitter' %>
 <%= render 'instagram' %>
+<%= render 'flickr' %>
 
 <%= content_for :js do %>
 <script>

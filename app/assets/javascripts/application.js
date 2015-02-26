@@ -25,10 +25,11 @@
 //= require jquery.slideshow
 //= require angular/app
 //= require angular/directives/visible_directive
+//= require angular/directives/twitter_directive
 //= require angular/directives/instagram_directive
+//= require angular/directives/flickr_photo_directive
 //= require leaflet/leaflet
 //= require angular-leaflet-directive/dist/angular-leaflet-directive
-//= require angular/directives/twitter_directive
 //= require angular/services/exception_service
 //= require angular/services/config_service
 //= require angular/services/coupon_service
@@ -41,8 +42,9 @@
 //= require angular/services/product_service
 //= require angular/services/postmaster_service
 //= require angular/services/gift_cert_service
-//= require angular/services/instagram_service
 //= require angular/services/twitter_service
+//= require angular/services/instagram_service
+//= require angular/services/flickr_service
 //= require angular/controllers/order_controller
 //= require angular/controllers/cart_controller
 //= require angular/controllers/cart_status_controller

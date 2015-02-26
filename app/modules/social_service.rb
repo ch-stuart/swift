@@ -6,7 +6,7 @@ class SocialService
       Rails.cache.delete cache_key
 
       puts "SocialService: priming cache"
-      instance.get_by_tag "bicycle"
+      instance.get_by_tag "swiftcampout"
     else
       puts "SocialService: #{cache_key} is not cached. Nothing doing."
     end
