@@ -9,10 +9,19 @@
     background-color: #fff;
     border: 1px solid #ddd;
     max-width: 100%;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
 }
+@media (min-width: 768px) {
+  .FlickrDir-img {
+    img {
+      width: 120px;
+      height: 110px;
+    }
+  }
+}
+
 .FlickrDir-name {
   display: none;
 }

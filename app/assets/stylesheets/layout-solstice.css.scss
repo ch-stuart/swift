@@ -236,14 +236,29 @@
   width: 240px;
 }
 
-
-
-.S-col--rec-gear,
-.S-col--prizes {
-  width: 146px;
-  margin: 40px auto;
+.S-Grid {
+  flex-direction: column;
 }
 
+@media (min-width: 768px) {
+  .S-Grid {
+    flex-direction: row;
+  }
+  .S-Grid-unit--rec-gear {
+    order: 1;
+  }
+  .S-Grid-unit--about {
+    order: 2;
+  }
+  .S-Grid-unit--prizes {
+    order: 3;
+  }
+  .S-col--rec-gear,
+  .S-col--prizes {
+    width: 146px;
+    margin: 40px auto;
+  }
+}
 
 .S-col-heading {
   font-size: 16px;
