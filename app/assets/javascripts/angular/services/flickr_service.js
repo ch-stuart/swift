@@ -1,8 +1,8 @@
 SwiftApp.service('FlickrService', ['$http', function($http) {
 
     return {
-        getById: function(id) {
-            return $http.get('/flickr/get_by_id/' + id);
+        photo: function(id, label) {
+            return $http.get('/flickr/photo/' + id + '/' + label);
         }
     };
 

@@ -1,9 +1,9 @@
 class FlickrController < ApplicationController
 
-  def get_by_id
-    photos = FlickrService.get_by_id params[:id]
+  def photo
+    photo = FlickrService.photo params[:id], params[:label]
 
-    render json: photos
+    render json: photo
   end
 
 end

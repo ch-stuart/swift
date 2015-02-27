@@ -11,14 +11,9 @@ SwiftApp
       restrict: "E",
       link: function($scope) {
         flickrService
-          .getById($scope.id)
+          .photo($scope.id, $scope.label)
           .success(function(data) {
-            data.forEach(function(obj) {
-              if (obj.label === $scope.label) {
-                $scope.photo = obj;
-              }
-            });
-
+            $scope.photo = data;
           })
           .error(function(data) {
             console.error(data);

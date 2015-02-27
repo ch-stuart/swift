@@ -77,7 +77,7 @@ SwiftSite::Application.routes.draw do
 
   get 'instagram/get_by_tag/:tag', to: 'instagram#get_by_tag'
   get 'twitter/get_by_tag/:tag', to: 'twitter#get_by_tag'
-  get 'flickr/get_by_id/:id', to: 'flickr#get_by_id'
+  get 'flickr/photo/:id/:label', to: 'flickr#photo'
   get 'solstice', to: 'solstice#index'
 
   post 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'

@@ -1,8 +1,14 @@
 class FlickrService
 
-  def self.get_by_id id
+  def self.photo id, label
     Rails.cache.fetch("flickr-get-by-id-#{id}") do
-      flickr.photos.getSizes(photo_id: id).to_json
+      sizes = flickr.photos.getSizes(photo_id: id)
+
+      size = sizes.select do |size|
+        size["label"] == label
+      end
+
+      size[0].to_json
     end
   end
 
