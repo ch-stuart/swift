@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def resolve_layout
-    if controller_name == "sessions"
+    if %{sessions registrations unlocks passwords confirmations}.include? controller_name
       "devise"
     else
       case action_name
