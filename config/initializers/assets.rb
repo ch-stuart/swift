@@ -12,5 +12,9 @@ Rails.application.config.assets.precompile += [
   'entypo.eot',
   'entypo.svg',
   'entypo.ttf',
-  'entypo.woff'
+  'entypo.woff',
+  'fontello.eot',
+  'fontello.svg',
+  'fontello.ttf',
+  'fontello.woff'
 ]

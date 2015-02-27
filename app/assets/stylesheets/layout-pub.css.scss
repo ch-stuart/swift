@@ -27,7 +27,8 @@ body {
     top: 8px;
   }
 
-  .entypo {
+  .icon-menu,
+  .icon-basket {
     cursor: pointer;
     display: block;
 
@@ -38,13 +39,12 @@ body {
     }
 
   }
-  .entypo-menu,
-  .entypo-home {
+  .icon-menu,
+  .icon-home {
     float: left;
   }
-  .entypo-cart {
+  .icon-basket {
     float: right;
-    font-size: 48px;
     margin-left: 7px;
   }
   .dealer-sign-in-link,
@@ -63,13 +63,9 @@ body {
   }
 
 }
-.ie .entypo-menu {
-  position: relative;
-  top: -3px;
-}
 @media only screen and (min-width: 768px) {
   .container-menu {
-    .entypo-cart {
+    .icon-basket {
       margin-left: 18px;
     }
     .dealer-sign-in-link,

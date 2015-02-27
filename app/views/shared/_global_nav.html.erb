@@ -42,18 +42,7 @@
       <li class="nav-list--item <%= set_column_classes(Category.all.length) %>">
         <strong class="nav-list--group-heading">Be Social</strong>
         <ul class="nav-list--group nav-list--group-social nav-list--group-inline">
-          <li class="nav-list--group-item">
-            <%= link_to raw("&#62217;"), APP_CONFIG[:twitter_url], :class => "nav-list--group-item-link entypo-social", :title => "Follow us on Twitter" %>
-          </li>
-          <li class="nav-list--group-item">
-            <%= link_to raw("&#62220;"), APP_CONFIG[:facebook_url], :class => "nav-list--group-item-link entypo-social", :title => "Like us on Facebook" %>
-          </li>
-          <li class="nav-list--group-item">
-            <%= link_to raw("&#62253;"), APP_CONFIG[:instagram_url], :class => "nav-list--group-item-link entypo-social", :title => "Follow us on Instagram" %>
-          </li>
-          <li class="nav-list--group-item" style="display:none">
-            <%= link_to raw("&#62211;"), APP_CONFIG[:flickr_group_url], :class => "nav-list--group-item-link entypo-social", :title => "View our Flickr Group" %>
-          </li>
+          <%= render 'shared/social_nav' %>
         </ul>
       </li>
       <li class="nav-list--item <%= set_column_classes(Category.all.length) %>">

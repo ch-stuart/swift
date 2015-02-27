@@ -25,7 +25,7 @@
     <div class="container container-menu">
       <div class="sixteen columns menu--row-btns">
         <a href="/">
-          <i id="global-home-btn" class="entypo entypo-home">&#8962;</i>
+          <i id="global-home-btn" class="icon-home"></i>
         </a>
         <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
         <a
@@ -33,7 +33,7 @@
             ng-controller="CartStatusCtrl"
             ng-cloak
             title="View Your Cart {{ cart.message }}">
-          <i class='entypo entypo-cart cart-happy--{{ !!cart.products.length }}'>&#59197;</i>
+          <i class='entypo icon-basket cart-happy--{{ !!cart.products.length }}'></i>
         </a>
         <% if user_signed_in? %>
           <%= link_to("Sign Out", destroy_user_session_path, :method => :delete, :class => "dealer-sign-out-link") %>
