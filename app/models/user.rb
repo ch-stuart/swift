@@ -5,17 +5,20 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
 
-  before_create :add_wholesale_if_user_is_preapproved
+  after_create :add_wholesale_if_user_is_preapproved
 
   private
 
   def add_wholesale_if_user_is_preapproved
+    user = User.find_by_email self.email
+
     if PreApprovedDealer.find_by_email self.email
       self.wholesale = true
       self.is_pending_wholesale = false
-      UsersMailer.new_user(self.email, true).deliver_now
+      user.save!
+      UsersMailer.new_user(user: user, preapproved: true).deliver_now
     else
-      UsersMailer.new_user(self.email, false).deliver_now
+      UsersMailer.new_user(user: user, preapproved: false).deliver_now
     end
   end
 
