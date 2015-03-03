@@ -74,11 +74,7 @@
             <%= image_tag 'solstice/hashtag-green-800.png', alt: '#swiftcampout', class: 'S-hashtag-img' %>
           </p>
           <div class="Solistice-signup-btn-wrap">
-            <a
-              href="#"
-              class="Solistice-signup-btn">
-              Sign Up
-            </a>
+            <%= link_to "Sign Up", new_user_registration_path(swiftcampout: "1"), class: "Solistice-signup-btn" %>
           </div>
           <p class="S-p S-p--disclaimer">
             Swift Industries is here to inspire your wandering ways, but we are in no way liable for safety or mishaps related to the Swift Campout. By creating a Swift Campout account you are taking full responsibility to travel safely and you are acknowledging the personal risks of traveling by bicycle.

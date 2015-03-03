@@ -31,7 +31,7 @@
     </p>
   <% else %>
     <p>
-      You are not signed in. If you have a dealer account, <%= link_to "sign in", new_user_session_path %> to view your order history.
+      You are not signed in. If you have a dealer account, <%= link_to "sign in", new_user_session_path(wholesale: "1") %> to view your order history.
     </p>
   <% end %>
 </div>

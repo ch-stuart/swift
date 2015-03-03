@@ -35,7 +35,7 @@
     <h2 class="front_door_sign">
       Minimum $500 purchase required for wholesale purchases.
     </h2>
-  <% elsif user_signed_in? && !current_user.try(:admin?) %>
+  <% elsif user_signed_in? && current_user.is_pending_wholesale %>
     <h2 class="front_door_sign">
       Your account is pending approval. If you have submitted your dealer application: sit
       tight, we'll have you cleared within 24 hours. You will receive an email you when
@@ -59,9 +59,9 @@
           <i class='icon-basket cart-happy--{{ !!cart.products.length }}'></i>
         </a>
         <% if user_signed_in? %>
-          <%= link_to("Sign Out", destroy_user_session_path, :method => :delete, :class => "dealer-sign-out-link") %>
+          <%= link_to("Sign Out", destroy_user_session_path, method: :delete, class: "dealer-sign-out-link") %>
         <% else %>
-          <%= link_to("Dealer Sign In", new_user_session_path, :class => "dealer-sign-out-link") %>
+          <%= link_to("Dealer Sign In", new_user_session_path(wholesale: "1"), class: "dealer-sign-out-link") %>
         <% end %>
         <br class="clear">
       </div>

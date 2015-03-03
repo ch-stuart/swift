@@ -4,7 +4,7 @@
   </div>
   <div class="clearfix row">
     <ul class="nav-list">
-      <% if current_user.try(:wholesale?) %>
+      <% if user_signed_in? %>
         <li class="nav-list--item <%= set_column_classes(Category.all.length) %>">
           <strong class="nav-list--group-heading">Your Account</strong>
           <ul class="nav-list--group">

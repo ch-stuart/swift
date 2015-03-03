@@ -1,16 +1,12 @@
 ## TODO
 
-Store cart price, cart price with shipping with tax and shipping, tax price and shipping price
-
+- Store cart price, cart price with shipping with tax and shipping, tax price and shipping price
 - PRI1 is to get shipping/billing addresses
 - Add apply button to gift certs and coupons
 - Apply coupon code to only some products, or all. Deploy out v1 of this first
 - unstash tab changes on the tab branch
 
-
-
-
-Initial feedback
+## Solstice
 
 ✓ drop the kerchief pattern
 ✓ have logo scroll with page the same way the about, sign in, map buttons do
@@ -23,4 +19,8 @@ Initial feedback
 ✓ Map reduced by 20% width
 ✓ Swap #swiftcampout with Richard's hand drawn lettering from postcard
 - The social media feeds feel imposing. Can I see the smaller thumbnails? I know you said it looked tiny. Other thoughts?
-- I love the foundation of this page!
+
+## Testing
+
+- check all uses of begin/rescue and see if they are causing tests to pass
+- verify creating a sale works as expected

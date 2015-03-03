@@ -1,13 +1,27 @@
 <div class="sixteen columns col-session">
   <h2>
-    Dealer Sign Up
+    <% if request.fullpath.include? "swiftcampout" %>
+      Swift Campout Sign Up
+    <% elsif request.fullpath.include? "wholesale" %>
+      Dealer Sign Up
+    <% else %>
+      Sign Up
+    <% end %>
   </h2>
-  <p>
-    To become a Swift Industries dealer, you must apply by emailing
-    <%= mail_to Company.first.email, Company.first.email, encode: "hex", subject: "Dealer Sign Up" %>.
-  </p>
+  <% if request.fullpath.include? "wholesale" %>
+    <p>
+      To become a Swift Industries dealer, you must apply by emailing
+      <%= mail_to Company.first.email, Company.first.email, encode: "hex", subject: "Dealer Sign Up" %>.
+    </p>
+  <% end %>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
+    <% if request.fullpath.include? "swiftcampout" %>
+      <input type="hidden" name="user[is_attending_campout_in_2015]" value="true">
+    <% end %>
+    <% if request.fullpath.include? "wholesale" %>
+      <input type="hidden" name="user[is_pending_wholesale]" value="true">
+    <% end %>
 
     <div class="label-input-pair">
       <%= f.label :email, class: "label" %>
