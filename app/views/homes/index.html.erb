@@ -12,6 +12,15 @@
   </div>
 </div>
 <div class="row">
+  <div class="sixteen columns" style="position: relative">
+    <a href="/solstice">
+      <%= image_tag "solstice/header-1440.jpg", style: "max-width: 100%" %>
+      <%= image_tag "solstice/hashtag-green-800.png", style: "position: absolute; bottom: 20px; right: 20px; width: 400px" %>
+      <%= image_tag "solstice/logo-240.png", style: "position: absolute; top: 40px; left: 40px; width: 180px" %>
+    </a>
+  </div>
+</div>
+<div class="row">
   <div class="eight columns">
     <% cache ["home_featured_pages", Page.featured_pages ] do %>
       <% Page.featured_pages.each do |featured_page| %>
