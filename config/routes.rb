@@ -19,7 +19,7 @@ SwiftSite::Application.routes.draw do
   get 'hub/expire_home_cache' => 'hub#expire_home_cache'
 
   devise_for :users, controllers: { registrations: "registrations" }
-  resources :users, only: [:index, :edit, :update, :destroy]
+  resources :users, only: [:index, :edit, :update, :destroy, :show]
   get '/users/my_info', to: 'users#my_info', as: 'my_info'
   get '/users/edit_my_info', to: 'users#edit_my_info', as: 'edit_my_info'
 

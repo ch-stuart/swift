@@ -9,10 +9,10 @@
           <strong class="nav-list--group-heading">Your Account</strong>
           <ul class="nav-list--group">
             <li class="nav-list--group-item">
-            <%= link_to "My Info", my_info_path(id: current_user), :class => "nav-list--group-item-link" %>
+            <%= link_to "My Info", edit_user_registration_path, class: "nav-list--group-item-link" %>
             </li>
             <li class="nav-list--group-item">
-              <%= link_to "Order History", orders_path, :class => "nav-list--group-item-link" %>
+              <%= link_to "Order History", orders_path, class: "nav-list--group-item-link" %>
             </li>
           </ul>
         </li>
@@ -22,7 +22,7 @@
         <ul class="nav-list--group">
           <%= render 'shared/pages_nav' %>
           <li>
-            <%= link_to "Cycle Swift Blog", APP_CONFIG[:personal_blog_url], :class => "nav-list--group-item-link" %>
+            <%= link_to "Cycle Swift Blog", APP_CONFIG[:personal_blog_url], class: "nav-list--group-item-link" %>
           </li>
         </ul>
       </li>
@@ -31,10 +31,10 @@
           <strong class="nav-list--group-heading">Get in Touch</strong>
           <ul class="nav-list--group">
             <li class="nav-list--group-item">
-              <%= mail_to Company.first.email, Company.first.email, :encode => "hex", :subject => "[via builtbyswift.com] ", :class => "nav-list--group-item-link" %>
+              <%= mail_to Company.first.email, Company.first.email, encode: "hex", subject: "[via builtbyswift.com] ", class: "nav-list--group-item-link" %>
             </li>
             <li class="nav-list--group-item">
-              <%= link_to Company.first.phone, Company.first.phone_link, :class => "nav-list--group-item-link" %>
+              <%= link_to Company.first.phone, Company.first.phone_link, class: "nav-list--group-item-link" %>
             </li>
           </ul>
         <% end %>

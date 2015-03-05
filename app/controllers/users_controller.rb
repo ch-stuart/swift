@@ -8,6 +8,11 @@ class UsersController < ApplicationController
     @dealers = User.where(wholesale: true)
     @admins = User.where(admin: true)
     @users = User.where(admin: false, wholesale: false)
+    @campers2015 = User.where(is_attending_campout_in_2015: true)
+  end
+
+  def show
+    @user = User.find params[:id]
   end
 
   def edit
