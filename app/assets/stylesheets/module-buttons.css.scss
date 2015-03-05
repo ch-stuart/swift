@@ -36,12 +36,14 @@ button.btn-bike {
   font-family: inherit;
   font-size: 13px;
   padding: 0.5em 1em;
-  color: #666;
-  border: 1px solid #999;  /*IE 6/7/8*/
-  border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
-  background-color: #E6E6E6;
+//  border: 1px solid #999;  /*IE 6/7/8*/
+//  border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+  border: none;
+  background-color: $hotpink;
+  color: #fff;
   text-decoration: none;
   border-radius: 2px;
+  font-weight: bold;
 }
 .btn--table {
   padding: 0.2em 0.8em;
@@ -50,13 +52,17 @@ button.btn-bike {
 
 a.btn,
 a.btn:visited {
-  color: #666;
+  color: #fff;
 }
 a.btn:hover {
   border: 0;
 }
 .btn-primary {
-  background-color: #E328BB;
+  background-color: $hotpink;
+  color: #fff;
+}
+.btn-secondary {
+  background-color: #666;
   color: #fff;
 }
 
@@ -64,4 +70,9 @@ a.btn:hover {
 .btn::-moz-focus-inner {
   padding: 0;
   border: 0;
+}
+
+.btn[disabled] {
+  color: rgba(255,255,255,0.8);
+  cursor: not-allowed;
 }
