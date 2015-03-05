@@ -167,7 +167,8 @@
   margin: 100px 0 20px;
   text-align: center;
 }
-.Solistice-signup-btn {
+.Solistice-signup-btn,
+.Solistice-signup-btn:visited {
   font-size: 30px;
   background-color: $solstice-orange;
   font-family: $solstice-font-stack;
