@@ -108,17 +108,17 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
 
-    if @product.related_products.present?
-      @product.related_products = JSON.parse @product.related_products
-    end
-
-    @related_products = load_related_products @product
-    @public_products = Product.where('id != ?', params[:id]).where(status: "Public")
-    @private_products = Product.where('id != ?', params[:id]).where(status: "Private")
-
     if @product.update_attributes(product_params)
       redirect_to(@product, :notice => 'Product was successfully updated.')
     else
+      if @product.related_products.present?
+        @product.related_products = JSON.parse @product.related_products
+      end
+
+      @related_products = load_related_products @product
+      @public_products = Product.where('id != ?', params[:id]).where(status: "Public")
+      @private_products = Product.where('id != ?', params[:id]).where(status: "Private")
+
       render :edit
     end
   end
