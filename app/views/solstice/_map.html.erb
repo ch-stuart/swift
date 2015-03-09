@@ -1,0 +1,21 @@
+<div class="col-cntnt">
+  <p class="S-p S-p--map-heading">
+    Sign up to mark the map with your campout.
+  </p>
+  <leaflet
+    center="kc"
+    markers="markers"
+    tiles="tiles"
+    defaults="defaults">
+  </leaflet>
+  <div class="S-map--chooser">
+    Map style:
+    <button class="S-map--btn" ng-click="changeMap('stamenmap')">
+      Stamen
+    </button>
+    or
+    <button class="S-map--btn" ng-click="changeMap('openstreetmap')">
+      OpenStreetMap
+    </button>
+  </div>
+</div>

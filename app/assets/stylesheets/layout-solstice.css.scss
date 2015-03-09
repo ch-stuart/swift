@@ -120,8 +120,8 @@
   z-index: 1001;
   box-shadow: 0 0 5px rgba(0,0,0,.6);
 }
-.S-grid--intro {
-  padding-bottom: 80px;
+.S-Grid {
+  padding: 0 20px 80px;
 }
 .S-p {
   font-family: $solstice-font-stack;
@@ -148,13 +148,13 @@
     margin-right: auto;
   }
 }
-.S-grid--intro .S-p {
+.S-Grid--intro .S-p {
   &:first-child {
     margin-top: 30px;
   }
 }
 @media (min-width: 768px) {
-  .S-grid--intro .S-p:first-child {
+  .S-Grid--intro .S-p:first-child {
     margin-top: 50px;
   }
 }
@@ -198,9 +198,8 @@
   margin: 0 auto;
 }
 @media (min-width: 768px) {
-  .S-grid--social,
-  .S-grid--map,
-  .S-grid--prizes {
+  .S-Grid--social,
+  .S-Grid--map {
     max-width: 90%;
     margin: 0 auto;
   }
@@ -209,9 +208,8 @@
   }
 }
 @media (min-width: 1024px) {
-  .S-grid--social,
-  .S-grid--map,
-  .S-grid--prizes {
+  .S-Grid--social,
+  .S-Grid--map {
     max-width: 80%;
   }
   .angular-leaflet-map {
@@ -236,27 +234,10 @@
 .S-hashtag-img {
   width: 240px;
 }
-
-.S-Grid {
-  flex-direction: column;
-}
-
 @media (min-width: 768px) {
-  .S-Grid {
-    flex-direction: row;
-  }
-  .S-Grid-unit--rec-gear {
-    order: 1;
-  }
-  .S-Grid-unit--about {
-    order: 2;
-  }
-  .S-Grid-unit--prizes {
-    order: 3;
-  }
   .S-col--rec-gear,
   .S-col--prizes {
-    width: 146px;
+    width: 142px;
     margin: 40px auto;
   }
 }

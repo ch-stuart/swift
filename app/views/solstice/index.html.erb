@@ -25,7 +25,7 @@
 <% end %>
 <div ng-controller="SolsticeCtrl" class="S-ctrl">
   <div class="S-heading">
-    <div class="l-row row">
+    <div class="row">
       <div class="col-xs-12">
         <div class="S-logo"></div>
         <ul class="S-nav">
@@ -53,102 +53,41 @@
       </div>
     </div>
   </div>
-  <div class="l-row row S-grid S-grid--intro" id="about">
-    <div class="col-xs-12">
-      <div class="Grid Grid--top S-Grid">
-        <div class="Grid-unit S-Grid-unit--about">
-          <p class="S-p">
-            Calling bicycle adventurers worldwide!
-          </p>
-          <p class="S-p">
-            Swift Industries invites you to pack up and skip town for the Swift Campout, June 20th + 21st 2015.
-          </p>
-          <p class="S-p">
-            Sign on to mark the map with your campout, then invite friends far and wide to band together for a night afield.
-          </p>
-          <p class="S-p">
-            Wherever you may be, roll to camp and settle in for a night under starry skies. Go explore the Coast Range of California, hang a hammock in the Pine Barons, or wake to camp-coffee outside of Tokyo. Discover the solitude of an uncharted spot or head into the hills with a bunch of friends. Your call.
-          </p>
-          <p class="S-p">
-            In the spirit of bike camping all we ask is that your adventure is self-supported and that you leave no trace.
-          </p>
-          <p class="S-p" id="signup" style="text-align: center">
-            <br><br>
-            <%= image_tag 'solstice/hashtag-green-800.png', alt: '#swiftcampout', class: 'S-hashtag-img' %>
-          </p>
-          <div class="Solistice-signup-btn-wrap">
-            <%= link_to "Sign Up", new_user_registration_path(swiftcampout: "1"), class: "Solistice-signup-btn" %>
-          </div>
-          <p class="S-p S-p--disclaimer">
-            Swift Industries is here to inspire your wandering ways, but we are in no way liable for safety or mishaps related to the Swift Campout. By creating a Swift Campout account you are taking full responsibility to travel safely and you are acknowledging the personal risks of traveling by bicycle.
-          </p>
-        </div>
-        <div class="Grid-unit Grid-unit--stretch S-Grid-unit--prizes">
-          <div class="S-col--prizes S-Grid-unit--prizes">
-            <p class="S-p S-col-heading">
-              Prizes
-            </p>
-            <sw-flickr-photo id="8447087731" label="Large Square" name="Full Touring Set-up"></sw-flickr-photo>
-            <sw-flickr-photo id="10801429955" label="Large Square" name="Patch"></sw-flickr-photo>
-            <sw-flickr-photo id="14376087946" label="Large Square" name="Swift T-Shirts"></sw-flickr-photo>
-            <sw-flickr-photo id="7706352484" label="Large Square" name="Tenkara Rod Co Teton Rod"></sw-flickr-photo>
-            <sw-flickr-photo id="16225581962" label="Large Square" name="Adventure Cycling Association Membership"></sw-flickr-photo>
-          </div>
-        </div>
-        <div class="Grid-unit Grid-unit--stretch S-Grid-unit--rec-gear">
-          <div class="S-col--rec-gear">
-            <p class="S-p S-col-heading">
-              Recommended Gear
-            </p>
-            <sw-flickr-photo id="15333976991" label="Large Square" name="Junior Ranger Panniers"></sw-flickr-photo>
-            <sw-flickr-photo id="8033853108" label="Large Square" name="The Campout Kit: Kerchief, Patch, and Field Notes"></sw-flickr-photo>
-            <sw-flickr-photo id="14651627766" label="Large Square" name="Sno Peak Kitchen Kit"></sw-flickr-photo>
-            <sw-flickr-photo id="14915337428" label="Large Square" name="Zeitgeist Saddle Bag"></sw-flickr-photo>
-            <sw-flickr-photo id="15158290769" label="Large Square" name="Lark Travel Kite"></sw-flickr-photo>
-          </div>
-        </div>
+  <div class="S-Grid S-Grid--intro" id="about">
+    <div class="row top-sm">
+      <div class="col-xs-12 col-sm-4 around-sm">
+        <%= render partial: 'intro_text' %>
       </div>
-    </div>
-    <div class="col-xs-12">
-      <p class="S-p">
-        Once you’ve joined there’s lots to win!
-      </p>
-      <p class="S-p">
-        Share <a class="S-a" href="#">Campout Films</a> to earn a touring outfit from Swift Industries, complete with an Adventure Cycling Association membership and add <a class="S-a" href="#">Trip Journals</a> to win Swift Campout accessories. But there’s more: we’ll kick-start give-aways with patches for the first 25 campers to sign up, and the goodies will keep coming as Swift Campout weekend rolls around.
-      </p>
-    </div>
-  </div>
-  <div class="l-row row S-grid S-grid--map" id="map">
-    <div class="col-xs-12">
-      <div class="col-cntnt">
-        <p class="S-p S-p--map-heading">
-          Sign up to mark the map with your campout.
-        </p>
-        <leaflet
-          center="kc"
-          markers="markers"
-          tiles="tiles"
-          defaults="defaults">
-        </leaflet>
-        <div class="S-map--chooser">
-          Map style:
-          <button class="S-map--btn" ng-click="changeMap('stamenmap')">
-            Stamen
-          </button>
-          or
-          <button class="S-map--btn" ng-click="changeMap('openstreetmap')">
-            OpenStreetMap
-          </button>
-        </div>
+      <div class="col-xs-12 col-sm-4 first-sm around-sm">
+        <%= render partial: 'prizes' %>
+      </div>
+      <div class="col-xs-12 col-sm-4 last-sm around-sm">
+        <%= render partial: 'recommended_gear' %>
       </div>
     </div>
   </div>
-  <div class="l-row row S-grid S-grid--social" id="social">
-    <div class="col-xs-12 col-sm-6">
-      <sw-twitter tag="bicycle"></sw-twitter>
+  <div class="S-Grid S-Grid--post-intro">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'post_intro' %>
+      </div>
     </div>
-    <div class="col-xs-12 col-sm-6">
-      <sw-instagram tag="bicycle"></sw-instagram>
+  </div>
+  <div class="S-Grid S-Grid--map" id="map">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'map' %>
+      </div>
+    </div>
+  </div>
+  <div class="S-Grid S-Grid--social" id="social">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <sw-twitter tag="bicycle"></sw-twitter>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <sw-instagram tag="bicycle"></sw-instagram>
+      </div>
     </div>
   </div>
 </div>
