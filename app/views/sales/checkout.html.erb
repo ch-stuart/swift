@@ -1,5 +1,5 @@
-<div ng-controller="CheckoutCtrl" ng-cloak>
-  <div class="twelve columns">
+<div ng-controller="CheckoutCtrl" ng-cloak class="l-row row">
+  <div class="col-xs-12 col-sm-8">
     <h2>
       Checkout
     </h2>
@@ -179,7 +179,7 @@
       <p>
         We ask in order to charge taxes appropriately.
       </p>
-      <div class="row row--order">
+      <div class="row--order">
         <div class="label-input-pair">
           <label class="label">
             <input type="checkbox" ng-model="waStateResident" ng-change="waStateResidentChanged()">
@@ -193,7 +193,7 @@
         <h4>
           Contact info
         </h4>
-        <div class="row row--order">
+        <div class="row--order">
           <div class="label-input-pair">
             <label class="label">
               Name
@@ -234,7 +234,7 @@
         <p ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
           Your gift certificate covers the amount due. Click "Buy It" to complete your purchase.
         </p>
-        <div class="row row--order">
+        <div class="row--order">
           <div class="label-input-pair">
             <div class="Grid">
               <div class="Grid-unit">
@@ -266,7 +266,7 @@
             </p>
           </div>
         </div>
-        <div class="row row--order" ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
+        <div class="row--order" ng-show="(isShippingReady || pickup) && cart.totalWithGiftCert == 0">
           <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
             <span sw-visible="!busyBuying">
               Buy It
@@ -279,7 +279,7 @@
           <h4>
               Coupon
           </h4>
-          <div class="row row--order">
+          <div class="row--order">
               <div class="label-input-pair">
                   <div class="Grid">
                       <div class="Grid-unit">
@@ -326,7 +326,7 @@
         <p>
           We accept Visa, MasterCard, American Express, JCB, Discover, and Diners Club.
         </p>
-        <div class="row row--order">
+        <div class="row--order">
           <div class="label-input-pair">
             <label class="label">
               Credit Card #
@@ -450,7 +450,7 @@
             ng-value="contact"
             data-stripe="name">
         </div>
-        <div class="row row--order">
+        <div class="row--order">
           <button type="submit" class="btn btn--progress" ng-disabled="busyBuying">
             <span sw-visible="!busyBuying">
               Buy It
@@ -461,14 +461,14 @@
       </div>
     </form>
   </div>
-  <div class="four columns">
+  <div class="col-xs-12 col-sm-4">
     <div class="sticky-order-column" sticky offset="5" min-width="768">
-      <div class="row row--checkout-sidebar">
+      <div class="row--checkout-sidebar">
         <h4>
           Your Order
         </h4>
       </div>
-      <div class="row row--checkout-sidebar">
+      <div class="row--checkout-sidebar">
         <b>Items in Cart</b>:
         <ul ng-repeat="product in cart.products">
           <li>
@@ -479,18 +479,18 @@
           </li>
         </ul>
       </div>
-      <div class="row row--checkout-sidebar" ng-show="cart.savedWithCoupon">
+      <div class="row--checkout-sidebar" ng-show="cart.savedWithCoupon">
         <b>Saved with Coupon</b>: {{ cart.savedWithCoupon / 100 | currency }}
       </div>
-      <div class="row row--checkout-sidebar" ng-show="cart.taxAmount">
+      <div class="row--checkout-sidebar" ng-show="cart.taxAmount">
         <b>WA State Tax Amount</b>:
         {{ cart.taxAmount / 100 | currency }}
       </div>
-      <div class="row row--checkout-sidebar" ng-show="cart.shippingCharge">
+      <div class="row--checkout-sidebar" ng-show="cart.shippingCharge">
         <b>Shipping</b>:
         {{ cart.shippingCharge / 100 | currency }}
       </div>
-      <div class="row row--checkout-sidebar" ng-show="cart.giftCertApplied">
+      <div class="row--checkout-sidebar" ng-show="cart.giftCertApplied">
         <b>Gift Certificate</b>:
         {{ cart.giftCertApplied / 100 | currency }}
         <br>
@@ -498,11 +498,11 @@
           {{ cart.giftCertRemain / 100 | currency }} available.
         </span>
       </div>
-      <div class="row row--checkout-sidebar" ng-hide="cart.giftCertApplied">
+      <div class="row--checkout-sidebar" ng-hide="cart.giftCertApplied">
         <b>Total Price</b>:
         {{ cart.total / 100 | currency }}
       </div>
-      <div class="row row--checkout-sidebar" ng-show="cart.giftCertApplied">
+      <div class="row--checkout-sidebar" ng-show="cart.giftCertApplied">
         <b>Total Price</b>:
         ({{ cart.total / 100 | currency }}
         - {{ cart.giftCertApplied / 100 | currency }})

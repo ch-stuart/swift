@@ -35,11 +35,12 @@ input.input--inline {
 //
 @media (min-width: 768px) {
   .sticky-order-column {
-    max-width: 172px;
+    max-width: 152px;
+    padding-left: 20px;
   }
 }
 @media (min-width: 960px) {
   .sticky-order-column {
-    max-width: 220px;
+    max-width: 200px;
   }
 }

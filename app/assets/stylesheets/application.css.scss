@@ -1,9 +1,7 @@
 /*
 *= require normalize-css/normalize
 *= require skeleton-base-modified
-*= require skeleton/stylesheets/skeleton
-*= require skeleton/stylesheets/layout
-*= require gridism/gridism
+*= require flexboxgrid/dist/flexboxgrid
 *= require leaflet/leaflet
 */
 
@@ -12,9 +10,9 @@
   box-sizing: border-box;
 }
 // Skeleton is not compatible with border-box
-.container {
-  box-sizing: content-box;
-}
+//.container {
+//  box-sizing: content-box;
+//}
 .pr--block,
 .pr--inline {
   display: none;
@@ -30,6 +28,7 @@
 @import 'base-grid';
 // Layouts
 @import 'layout-pub';
+@import 'layout-global-nav';
 @import 'layout-footer';
 @import 'layout-humans';
 @import 'layout-solstice';
@@ -100,4 +99,13 @@ input.ng-invalid.ng-dirty {
 // This makes ng-cloak actually work
 [ng-cloak] {
   display: none !important;
+}
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
 }

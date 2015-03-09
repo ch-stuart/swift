@@ -44,9 +44,9 @@
   <% end %>
   <h2 id="js_app-notice" class="app-notice" style="display:none"></h2>
   <h2 id="js_app-alert" class="app-alert" style="display:none"></h2>
-  <div class="container-menu-wrap">
-    <div class="container container-menu">
-      <div class="sixteen columns menu--row-btns">
+  <div class="l-container-menu-wrap">
+    <div class="l-container-menu l-container-fluid">
+      <div class="menu--row-btns">
         <i id="global-menu-btn" class="icon-menu"></i>
         <a href="/" title="Home">
           <%= image_set_tag "fox-45.png", { "fox-45.png" => "2x" }, { class: "menu-fox img-fox" }%>
@@ -69,8 +69,8 @@
     </div>
   </div>
   <% cache ["company_description_etc", Company.first] do %>
-    <div class="container container-logo">
-      <div class="sixteen columns clearfix row-header" style="text-align: center">
+    <div class="l-container-fluid l-container-logo">
+      <div class="col-xs-12 row-header" style="text-align: center">
         <h1 class="row-header--logo-wrap">
           <a href="/" class="row-header--link" title="Go Home">
             <%= image_set_tag "logo_280.png", { "logo_560.png" => "2x" }, { class: "row-header--logo", alt: "Swift Industries" } %>
@@ -82,11 +82,11 @@
       </div>
     </div>
   <% end %>
-  <div class="container container-main container-w-padding">
+  <div class="l-container-fluid l-container-main l-container-constrained l-container-w-padding">
     <%= yield %>
   </div>
-  <div class="container-footer-wrap">
-    <div class="container container-footer">
+  <div class="l-container-footer-wrap l-container-constrained l-container-fluid">
+    <div class="l-container-footer">
       <%= render "shared/footer" %>
       <%# render "shared/no_js" %>
       <%= render "shared/humans" %>

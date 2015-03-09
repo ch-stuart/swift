@@ -1,9 +1,9 @@
 <%= content_for :css do %>
   <style>
-  .container-logo {
+  .l-container-logo {
     display: none;
   }
-  .container-main {
+  .l-container-main {
     box-shadow: none;
     width: auto;
     margin: 0;
@@ -11,19 +11,22 @@
     border-right: none;
     border-left: none;
   }
-  .container-footer {
+  .l-container-footer {
     margin-top: 50px;
   }
-  .container-w-padding {
+  .l-container-w-padding {
     padding: 0;
+  }
+  .page_solstice_index .l-container-fluid {
+    max-width: none;
   }
   </style>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 <% end %>
 <div ng-controller="SolsticeCtrl" class="S-ctrl">
   <div class="S-heading">
-    <div class="grid">
-      <div class="unit whole">
+    <div class="l-row row">
+      <div class="col-xs-12">
         <div class="S-logo"></div>
         <ul class="S-nav">
           <li class="S-nav__item">
@@ -50,8 +53,8 @@
       </div>
     </div>
   </div>
-  <div class="grid S-grid S-grid--intro" id="about">
-    <div class="unit whole">
+  <div class="l-row row S-grid S-grid--intro" id="about">
+    <div class="col-xs-12">
       <div class="Grid Grid--top S-Grid">
         <div class="Grid-unit S-Grid-unit--about">
           <p class="S-p">
@@ -106,43 +109,45 @@
         </div>
       </div>
     </div>
-    <div class="unit whole">
+    <div class="col-xs-12">
       <p class="S-p">
         Once you’ve joined there’s lots to win!
       </p>
       <p class="S-p">
-        Share <a class="S-a" href="#">Campout Films</a> to earn a touring outfit from Swift Industries, complete with an Adventure Cycling Association membership and add <a class="S-a" href="#">Trip Journals</a> for to win Swift Campout accessories. But there’s more: we’ll kick-start give-aways with patches for the first 25 campers to sign up, and the goodies will keep coming as Swift Campout weekend rolls around.
+        Share <a class="S-a" href="#">Campout Films</a> to earn a touring outfit from Swift Industries, complete with an Adventure Cycling Association membership and add <a class="S-a" href="#">Trip Journals</a> to win Swift Campout accessories. But there’s more: we’ll kick-start give-aways with patches for the first 25 campers to sign up, and the goodies will keep coming as Swift Campout weekend rolls around.
       </p>
     </div>
   </div>
-  <div class="grid S-grid S-grid--map" id="map">
-    <div class="unit whole">
-      <p class="S-p S-p--map-heading">
-        Sign up to mark the map with your campout.
-      </p>
-      <leaflet
-        center="kc"
-        markers="markers"
-        tiles="tiles"
-        defaults="defaults">
-      </leaflet>
-      <div class="S-map--chooser">
-        Map style:
-        <button class="S-map--btn" ng-click="changeMap('stamenmap')">
-          Stamen
-        </button>
-        or
-        <button class="S-map--btn" ng-click="changeMap('openstreetmap')">
-          OpenStreetMap
-        </button>
+  <div class="l-row row S-grid S-grid--map" id="map">
+    <div class="col-xs-12">
+      <div class="col-cntnt">
+        <p class="S-p S-p--map-heading">
+          Sign up to mark the map with your campout.
+        </p>
+        <leaflet
+          center="kc"
+          markers="markers"
+          tiles="tiles"
+          defaults="defaults">
+        </leaflet>
+        <div class="S-map--chooser">
+          Map style:
+          <button class="S-map--btn" ng-click="changeMap('stamenmap')">
+            Stamen
+          </button>
+          or
+          <button class="S-map--btn" ng-click="changeMap('openstreetmap')">
+            OpenStreetMap
+          </button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="grid S-grid S-grid--social" id="social">
-    <div class="unit half">
+  <div class="l-row row S-grid S-grid--social" id="social">
+    <div class="col-xs-12 col-sm-6">
       <sw-twitter tag="bicycle"></sw-twitter>
     </div>
-    <div class="unit half">
+    <div class="col-xs-12 col-sm-6">
       <sw-instagram tag="bicycle"></sw-instagram>
     </div>
   </div>
@@ -154,7 +159,6 @@
 
 <%= content_for :js do %>
 <script>
-
   var $win = $(window),
       $stickyNav = $('.S-nav'),
       stickyNavTop = $stickyNav.offset().top,
@@ -179,7 +183,6 @@
           }
         }
 
-
         if (!UA.isMobile() && $win.scrollTop() > stickyLogoTop + stickyLogoHeight) {
           if (!$stickyLogo.hasClass('S-logo--fixed')) {
             $stickyLogo.addClass('S-logo--fixed')
@@ -191,6 +194,5 @@
         }
       }, 200);
     });
-
 </script>
 <% end %>

@@ -1,82 +1,119 @@
 <div class="shoppin-cart" ng-controller="CartCtrl" ng-cloak>
-    <div class="grid wrap shopping-cart__top-row">
-        <div class="unit w-1-1">
-            <i class='entypo icon-basket active'></i>
-        </div>
+  <div class="l-row row shopping-cart__top-row">
+    <div class="col-xs-12">
+      <div class="col-cntnt">
+        <i class='entypo icon-basket active'></i>
+      </div>
     </div>
-    <div class="grid wrap hide-on-mobiles" ng-show="cart.products.length">
-        <div class="shoppin-cart__header unit w-1-4">Product</div>
-        <div class="shoppin-cart__header unit w-1-4">Parts</div>
-        <div class="shoppin-cart__header unit w-1-4">Quantity</div>
-        <div class="shoppin-cart__header unit w-1-4">Total Price</div>
+  </div>
+  <div class="l-row row hide-on-mobiles" ng-show="cart.products.length">
+    <div class="shoppin-cart__header col-xs-12 col-sm-3">
+      Product
     </div>
-    <div class="grid wrap" ng-repeat="savedProduct in cart.products" ng-show="cart.products.length">
-        <div class="unit w-1-4">
-            <strong>{{ savedProduct.title }}</strong>
-            <br>
-            <span class=demph>Base Price: {{ savedProduct.price | currency }}</span>
-            <br>
-            <a href class=demph ng-click="onEditFromCartButtonClicked(savedProduct, savedProduct.uniqueId)">
-                Edit
-            </a>
-            &nbsp;&nbsp;
-            <a href class=demph ng-click="onRemoveFromCartButtonClicked(savedProduct.uniqueId)">
-                Remove
-            </a>
-        </div>
-        <div class="unit w-1-4">
-            <ul class="shoppin-cart__part-list">
-                <li ng-repeat="part in savedProduct.parts">
-                    {{ part.title }}
-                    <span ng-show="part.price">({{ part.price | currency }})</span>
-
-                    <span ng-show="part.selectedColor" class="demph">
-                        <br>Fabric: {{ part.selectedColor.title }}
-                        <span ng-show="part.selectedColor.price">
-                            ({{ part.selectedColor.price | currency }})
-                        </span>
-                    </span>
-                </li>
-                <li ng-hide="savedProduct.parts.length">
-                    n/a
-                </li>
-            </ul>
-        </div>
-        <div class="unit w-1-4">
-            <input
-                type=number
-                min=1
-                max=999
-                class=shoppin-cart__quantity
-                ng-model=savedProduct.quantity
-                ng-change="onProductQuantityChanged()"
-                value="{{ savedProduct.quantity }}">
-        </div>
-        <div class="unit w-1-4">
-            <strong>{{ (savedProduct.totalPrice * savedProduct.quantity) | currency }}</strong>
-        </div>
+    <div class="shoppin-cart__header col-xs-12 col-sm-3">
+      Parts
     </div>
-    <div class="grid wrap shoppin-cart__cart-price-row" ng-show="cart.products.length">
-        <div class="unit w-3-4 hide-on-mobiles"></div>
-        <div class="unit w-1-4">
-            <strong>{{ (cart.total / 100) | currency }}</strong>
-        </div>
+    <div class="shoppin-cart__header col-xs-12 col-sm-3">
+      Quantity
     </div>
-    <div class="grid wrap shoppin-cart__toolbar" ng-show="cart.products.length">
+    <div class="shoppin-cart__header col-xs-12 col-sm-3">
+      Total Price
+    </div>
+  </div>
+  <div class="l-row row" ng-repeat="savedProduct in cart.products" ng-show="cart.products.length">
+    <div class="col-xs-12 col-sm-3">
+      <div class="col-cntnt">
+        <strong>
+          {{ savedProduct.title }}
+        </strong>
+        <br>
+        <span class=demph>
+          Base Price: {{ savedProduct.price | currency }}
+        </span>
+        <br>
+        <a href class=demph ng-click="onEditFromCartButtonClicked(savedProduct, savedProduct.uniqueId)">
+          Edit
+        </a>
+        &nbsp;&nbsp;
+        <a href class=demph ng-click="onRemoveFromCartButtonClicked(savedProduct.uniqueId)">
+          Remove
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <div class="col-cntnt">
+        <ul class="shoppin-cart__part-list">
+          <li ng-repeat="part in savedProduct.parts">
+            {{ part.title }}
+            <span ng-show="part.price">
+              ({{ part.price | currency }})
+            </span>
+            <span ng-show="part.selectedColor" class="demph">
+              <br>Fabric: {{ part.selectedColor.title }}
+              <span ng-show="part.selectedColor.price">
+                ({{ part.selectedColor.price | currency }})
+              </span>
+            </span>
+          </li>
+          <li ng-hide="savedProduct.parts.length">
+            n/a
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <div class="col-cntnt">
+        <input
+          type=number
+          min=1
+          max=999
+          class=shoppin-cart__quantity
+          ng-model=savedProduct.quantity
+          ng-change="onProductQuantityChanged()"
+          value="{{ savedProduct.quantity }}">
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <div class="col-cntnt">
+        <strong>
+          {{ (savedProduct.totalPrice * savedProduct.quantity) | currency }}
+        </strong>
+      </div>
+    </div>
+  </div>
+  <div class="l-row row shoppin-cart__cart-price-row" ng-show="cart.products.length">
+    <div class="col-xs-12 col-sm-9 hide-on-mobiles"></div>
+    <div class="col-xs-12 col-sm-3">
+      <div class="col-cntnt">
+        <strong>
+          {{ (cart.total / 100) | currency }}
+        </strong>
+      </div>
+    </div>
+  </div>
+  <div class="l-row shoppin-cart__toolbar" ng-show="cart.products.length">
+    <div class="col-xs-12">
+      <div class="col-cntnt">
         <a href="/" class="btn">
-            Continue Shopping
+          Continue Shopping
         </a>
         &nbsp;
         <button id="js-check-out" class="btn btn-primary" ng-click="onCheckOutButtonClicked()">
-            Check Out
+          Check Out
         </button>
+      </div>
     </div>
-    <div class="grid wrap shoppin-cart__empty" ng-hide="cart.products.length">
+  </div>
+  <div class="l-row shoppin-cart__empty" ng-hide="cart.products.length">
+    <div class="col-xs-12">
+      <div class="col-cntnt">
         <p>
-            Nothing is in your cart.
+          Nothing is in your cart.
         </p>
         <a href="/" class="btn">
-            Continue Shopping
+          Continue Shopping
         </a>
+      </div>
     </div>
+  </div>
 </div>

@@ -1,7 +1,7 @@
-<footer class="row-footer">
-  <ul class="nav-list">
+<footer class="l-row row-footer">
+  <ul class="nav-list row" style="width: 90%">
     <% cache ["footer_products_nav", Product.public_products] do %>
-      <li class="nav-list--item four columns">
+      <li class="nav-list--item col-xs-12 col-sm">
         <strong class="nav-list--group-heading">Our Products</strong>
         <ul class="nav-list--group">
           <% Product.public_products.each do |product| %>
@@ -15,7 +15,7 @@
         </ul>
       </li>
     <% end %>
-    <li class="nav-list--item four columns">
+    <li class="nav-list--item col-xs-12 col-sm">
       <strong class="nav-list--group-heading">About Us</strong>
       <ul class="nav-list--group">
         <%= render 'shared/pages_nav' %>
@@ -27,7 +27,7 @@
       </ul>
     </li>
     <% cache ["footer_company_contact", Company.first] do %>
-      <li class="nav-list--item four columns">
+      <li class="nav-list--item col-xs-12 col-sm">
         <strong class="nav-list--group-heading">Get in Touch</strong>
         <ul class="nav-list--group">
           <li class="nav-list--group-item">
@@ -40,7 +40,7 @@
       </li>
     <% end %>
     <% cache ["footer_social_links", APP_CONFIG] do %>
-      <li class="nav-list--item four columns">
+      <li class="nav-list--item col-xs-12 col-sm">
         <strong class="nav-list--group-heading">Be Social</strong>
         <ul class="nav-list--group nav-list--group-inline">
           <%= render 'shared/social_nav' %>

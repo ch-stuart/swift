@@ -21,9 +21,9 @@
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
   <h2 id="js_app-notice" class="app-notice" style="display:none"></h2>
   <h2 id="js_app-alert" class="app-alert" style="display:none"></h2>
-  <div class="container-menu-wrap">
-    <div class="container container-menu">
-      <div class="sixteen columns menu--row-btns">
+  <div class="l-container-menu-wrap">
+    <div class="l-container-menu l-container-fluid">
+      <div class="menu--row-btns">
         <a href="/">
           <i id="global-home-btn" class="icon-home"></i>
         </a>
@@ -44,8 +44,8 @@
       </div>
     </div>
   </div>
-  <div class="container container-logo">
-    <div class="sixteen columns clearfix row-header" style="text-align: center">
+  <div class="l-container-fluid l-container-logo">
+    <div class="col-xs-12 row-header" style="text-align: center">
       <h1 class="row-header--logo-wrap">
         <a href="/" class="row-header--link" title="Go Home">
           <%= image_tag "logo.png", :class => "row-header--logo", :alt => "Swift Industries" %>
@@ -58,7 +58,7 @@
       </h2>
     </div>
   </div>
-  <div class="container container-main container-w-padding">
+  <div class="l-container-fluid l-container-main l-container-constrained--devise l-container-w-padding">
     <%= yield %>
   </div>
   <div class=lightbox><img class=lightbox-img><div class=lightbox-close></div></div>

@@ -1,5 +1,4 @@
-<% endcap = (index + 1).modulo(3) == 0 ? true : false %>
-<div class="one-third column store-item">
+<div class="col-xs-12 col-sm-4 col-md-3 store-item">
   <% photo_url = Product.get_photo_by_id(item.flickr_photo, "Small") %>
 
   <% if photo_url.present? %>
@@ -15,6 +14,3 @@
     <%= link_to item.title, item, class: "store-item--heading-link" %> (<%= item.humane_price_for(current_user) %>)
   </h3>
 </div>
-<% if endcap %>
-  <br class=clear>
-<% end %>

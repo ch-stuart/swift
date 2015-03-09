@@ -3,62 +3,62 @@
     private!
   </p>
 <% end %>
-
-<div class="sixteen columns left_col">
-  <h2>
-    <%= @page.title %>
-  </h2>
-  <% if @photos.present? && @video_html.present? %>
-    <div class="tabs">
-      <div class="tab">
-        Photos
+<div class="l-row">
+  <div class="col-xs-12">
+    <h2>
+      <%= @page.title %>
+    </h2>
+    <% if @photos.present? && @video_html.present? %>
+      <div class="tabs">
+        <div class="tab">
+          Photos
+        </div>
+        <div class="tab">
+          Video
+        </div>
+        <div class="card">
+          <%= render 'shared/slideshow' %>
+        </div>
+        <div class="card video-wrapper">
+          <div class="video-wrapper-sizer">
+            <%= raw @video_html %>
+          </div>
+        </div>
       </div>
-      <div class="tab">
-        Video
+    <% elsif @photo.present? && @video_html.present? %>
+      <div class="tabs">
+        <div class="tab">
+          Photo
+        </div>
+        <div class="tab">
+          Video
+        </div>
+        <div class="card">
+          <%= image_tag(@photo, :class => "scale-with-grid center-in-grid") %>
+        </div>
+        <div class="card video-wrapper">
+          <div class="video-wrapper-sizer">
+            <%= raw @video_html %>
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <%= render 'shared/slideshow' %>
-      </div>
-      <div class="card video-wrapper">
+    <% elsif @photos.present? %>
+      <%= render 'shared/slideshow' %>
+    <% elsif @photo.present? %>
+      <%= image_tag(@photo, :class => "scale-with-grid center-in-grid") %>
+    <% elsif @video_html.present? %>
+      <div class="video-wrapper">
         <div class="video-wrapper-sizer">
           <%= raw @video_html %>
         </div>
       </div>
-    </div>
-  <% elsif @photo.present? && @video_html.present? %>
-    <div class="tabs">
-      <div class="tab">
-        Photo
-      </div>
-      <div class="tab">
-        Video
-      </div>
-      <div class="card">
-        <%= image_tag(@photo, :class => "scale-with-grid center-in-grid") %>
-      </div>
-      <div class="card video-wrapper">
-        <div class="video-wrapper-sizer">
-          <%= raw @video_html %>
-        </div>
-      </div>
-    </div>
-  <% elsif @photos.present? %>
-    <%= render 'shared/slideshow' %>
-  <% elsif @photo.present? %>
-    <%= image_tag(@photo, :class => "scale-with-grid center-in-grid") %>
-  <% elsif @video_html.present? %>
-    <div class="video-wrapper">
-      <div class="video-wrapper-sizer">
-        <%= raw @video_html %>
-      </div>
-    </div>
-  <% end %>
-  <article class="article">
-    <%= raw md @page.body %>
-  </article>
+    <% end %>
+    <article class="article">
+      <%= raw md @page.body %>
+    </article>
+  </div>
 </div>
 
-<br class="clear">
 
 <%= content_for :js do %>
 <script>

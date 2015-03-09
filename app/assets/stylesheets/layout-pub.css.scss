@@ -2,156 +2,113 @@ body {
   background-color: $background_offwhite;
   border-top: 4px solid $hotpink;
 }
-
-.img-fox {
-  opacity: .6;
-  width: 45px;
-}
-// TODO: there should be a global nav css,
-//       and this should be in it
-.container-menu-wrap {
-  background-color: rgba(245,245,245,0.7);
-  border-bottom: 1px solid #dadada;
-}
-.container-menu {
-  padding: 8px;
-  position: relative;
-
-  .menu-fox {
-    display: block;
-  }
-  .menu-fox {
-    position: absolute;
-    left: 50%;
-    margin-left: -22px;
-    top: 8px;
-  }
-
-  .icon-menu,
-  .icon-basket {
-    cursor: pointer;
-    display: block;
-
-    &:hover,
-    &.active,
-    &.cart-happy--true {
-      color: $hotpink;
-    }
-
-  }
-  .icon-menu,
-  .icon-home {
-    float: left;
-  }
-  .icon-basket {
-    float: right;
-    margin-left: 7px;
-  }
-  .dealer-sign-in-link,
-  .dealer-sign-out-link {
-    float: right;
-    color: lighten($text_lightgray, 20%);
-    font-size: 12px;
-
-    &:hover {
-      color: $hotpink;
-    }
-
-  }
-  .menu--row-nav {
-    padding: 30px 0;
-  }
-
+.l-container-fluid {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 @media only screen and (min-width: 768px) {
-  .container-menu {
-    .icon-basket {
-      margin-left: 18px;
-    }
-    .dealer-sign-in-link,
-    .dealer-sign-out-link {
-      font-size: 13px;
-    }
+  .l-container-constrained {
+    max-width: 90%;
   }
 }
-.container-main {
-  border: 1px solid #ddd;
-  background-color: #fff;
+@media only screen and (min-width: 1000px) {
+  .l-container-constrained {
+    max-width: 960px;
+  }
+}
+.l-container-constrained--devise {
+  max-width: 420px;
+  margin-top: 40px !important;
+  padding-top: 0 !important;
+}
+
+.l-container-logo,
+.l-container-main,
+.l-container-footer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.l-container-main {
+  margin-top: 15px;
+}
+.l-container-logo {
+  margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 768px) {
+  .l-container-w-padding {
+    padding: 0 20px;
+  }
+  .l-container-main {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.03);
+  }
 }
 @media only screen and (min-width: 1001px) {
-  .container-w-padding {
-    padding: 20px;
-  }
-}
-@media only screen and (min-width: 789px) {
-  .container-w-padding {
-    padding: 10px;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .container-main {
-    border: 0;
-    background-color: transparent;
-  }
-}
-@media only screen and (min-width: 768px) {
-  .container-main {
-    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.03);
+  .l-container-w-padding {
+    padding: 0 30px;
   }
 }
 
 .col-sidebar {
   padding-top: 20px;
+  padding-left: 20px;
 }
 .col-main {
-  padding-top: 10px;
+  padding-top: 0;
+  margin-top: -10px;
 }
 .col-session {
   padding-bottom: 30px;
 }
 
-.container-logo,
-.container-main,
-.container-footer {
-  margin-top: 20px;
+
+.l-row {
   margin-bottom: 20px;
 }
+.img-fox {
+  opacity: .6;
+  width: 45px;
+}
+
+
+
 .row-header--logo-wrap {
   margin-bottom: 2px;
 }
 .row-header--logo {
-  width: 300px;
+  width: 280px;
 }
 .row-header--description {
   max-width: 720px;
   margin: 0 auto;
   line-height: 1.4;
-  font-size: 19px;
+  font-size: 15px;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (min-width: 768px) {
   .row-header--logo {
-    width: 280px;
+    width: 300px;
   }
   .row-header--description {
-    font-size: 15px;
+    font-size: 19px;
   }
-
-}
-.container-main {
-  margin-top: 15px;
-}
-.container-logo {
-  margin-bottom: 15px;
 }
 
-@media only screen and (min-width: 768px) {
-  .link-checkout {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    color: #888 !important;
+//@media only screen and (min-width: 768px) {
+//  .link-checkout {
+//    position: absolute;
+//    right: 10px;
+//    top: 10px;
+//    color: #888 !important;
+//    display: none;
+//  }
+//}
+
+@media screen and (max-width: 767px) {
+  .hide-on-mobiles {
     display: none;
   }
-
 }

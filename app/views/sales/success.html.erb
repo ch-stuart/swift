@@ -1,25 +1,26 @@
-<div class="grid">
-    <div class="unit w-3-4">
-        <div class="grid">
-            <div class="unit w-4-4">
+<div class="l-row row">
+    <div class="col-xs-12 col-sm-8">
+        <div class="row">
+            <div class="col-xs-12">
                 <h2 class="pr--none">
                     Your Order
                 </h2>
             </div>
         </div>
-        <div class="grid hide-on-mobiles pr--none">
-            <div class="shoppin-cart__header unit w-1-4">Product</div>
-            <div class="shoppin-cart__header unit w-1-4">Parts</div>
-            <div class="shoppin-cart__header unit w-1-4">Quantity</div>
-            <div class="shoppin-cart__header unit w-1-4">Total Price</div>
+        <div class="row hide-on-mobiles pr--none">
+            <div class="shoppin-cart__header col-xs-12 col-sm-3">Product</div>
+            <div class="shoppin-cart__header col-xs-12 col-sm-3">Parts</div>
+            <div class="shoppin-cart__header col-xs-12 col-sm-3">Quantity</div>
+            <div class="shoppin-cart__header col-xs-12 col-sm-3">Total Price</div>
         </div>
         <% if @description.present? %>
             <% @description["products"].each_with_index do |product, idx| %>
                 <% if idx % 2 == 0 %>
                     <br class="pr--clear">
                 <% end %>
-                <div class="grid pr--float">
-                    <div class="unit w-1-4">
+                <div class="row pr--float">
+                    <div class="col-xs-12 col-sm-3">
+                      <div class="col-cntnt">
                         <strong>
                             <%= product["title"] %>
                         </strong>
@@ -39,8 +40,9 @@
                           <span class=demph><%= product["question"] %>:</span><br>
                           <span class=demph><em><%= product["selectedAnswer"] %></em></span>
                         <% end %>
+                      </div>
                     </div>
-                    <div class="unit w-1-4">
+                    <div class="col-xs-12 col-sm-3">
                         <% if product["parts"].present? %>
                             <ul class="shoppin-cart__part-list">
                                 <% product["parts"].each do |part| %>
@@ -65,10 +67,10 @@
                             n/a
                         <% end %>
                     </div>
-                    <div class="unit w-1-4">
+                    <div class="col-xs-12 col-sm-3">
                         Qty: <%= product["quantity"] %>
                     </div>
-                    <div class="unit w-1-4">
+                    <div class="col-xs-12 col-sm-3">
                         <strong>
                             <%= number_to_currency product["totalPrice"].to_i %>
                         </strong>
@@ -82,46 +84,43 @@
         <% end %>
         <hr class="pr--block pr--clear">
         <% if @sale[:coupon_code].present? && @sale[:coupon_code] != "f" %>
-          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
-              <div class="unit w-3-4 hide-on-mobiles"></div>
-              <div class="unit w-1-4">
+          <div class="row shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="col-xs-4 col-xs-offset-8">
                   Coupon: -<%= number_to_currency(cents_to_dollars(@sale[:saved_with_coupon]))%> (<%= @sale[:coupon_code] %>)
               </div>
           </div>
         <% end %>
         <% if @sale[:tax_amount].present? %>
-          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
-              <div class="unit w-3-4 hide-on-mobiles"></div>
-              <div class="unit w-1-4">
+          <div class="row shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="col-xs-4 col-xs-offset-8">
                   Tax: <%= number_to_currency(cents_to_dollars(@sale.tax_amount)) %>
               </div>
           </div>
         <% end %>
         <% if @sale[:shipping_charge].present? %>
-          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
-              <div class="unit w-3-4 hide-on-mobiles"></div>
-              <div class="unit w-1-4">
+          <div class="row shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="col-xs-4 col-xs-offset-8">
                   Shipping Charge: <%= number_to_currency(cents_to_dollars(@sale.shipping_charge)) %>
               </div>
           </div>
         <% end %>
         <% if @sale[:gift_certificate_guid].present? %>
-          <div class="grid shoppin-cart__cart-price-row" style="border-bottom: 0">
-              <div class="unit w-3-4 hide-on-mobiles"></div>
-              <div class="unit w-1-4">
+          <div class="row shoppin-cart__cart-price-row" style="border-bottom: 0">
+              <div class="col-xs-4 col-xs-offset-8">
                   Gift Certificate: <%= number_to_currency(cents_to_dollars(@sale[:gift_cert_applied])) %>
               </div>
           </div>
         <% end %>
-        <div class="grid shoppin-cart__cart-price-row">
-            <div class="unit w-3-4 hide-on-mobiles"></div>
-            <div class="unit w-1-4">
+        <div class="row shoppin-cart__cart-price-row">
+            <div class="col-xs-4 col-xs-offset-8">
+              <div class="col-cntnt">
                 Total: <strong><%= number_to_currency(cents_to_dollars(@sale.total)) %></strong>
+              </div>
             </div>
         </div>
         <hr class="pr--block">
-        <div class="grid">
-            <div class="unit w-1-2">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
                 <h4 class="pr--block">
                     Name
                 </h4>
@@ -149,7 +148,7 @@
                     <code><%= @sale.guid %></code>
                 </p>
             </div>
-            <div class="unit w-1-2">
+            <div class="col-xs-12 col-sm-6">
                 <% if @sale.pickup? %>
                   <h4>
                       Shipment Tracking
@@ -202,7 +201,7 @@
             </div>
         </div>
     </div>
-    <div class="unit w-1-4 pr--none">
+    <div class="col-xs-12 col-sm-4 pr--none">
         <h4>
             Questions?
         </h4>

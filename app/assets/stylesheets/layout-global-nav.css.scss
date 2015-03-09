@@ -1,0 +1,72 @@
+.l-container-menu-wrap {
+  background-color: rgb(245, 244, 244);
+  border-bottom: 1px solid #dadada;
+}
+.l-container-menu {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  position: relative;
+
+  .menu-fox {
+    display: block;
+  }
+  .menu-fox {
+    position: absolute;
+    left: 50%;
+    margin-left: -22px;
+    top: 8px;
+  }
+  .icon-menu,
+  .icon-basket {
+    cursor: pointer;
+    display: block;
+
+    &:hover,
+    &.active,
+    &.cart-happy--true {
+      color: $hotpink;
+    }
+  }
+  .icon-menu,
+  .icon-home {
+    float: left;
+  }
+  .icon-basket {
+    float: right;
+    margin-left: 7px;
+  }
+  .dealer-sign-in-link,
+  .dealer-sign-out-link {
+    float: right;
+    color: lighten($text_lightgray, 20%);
+    font-size: 12px;
+
+    &:hover {
+      color: $hotpink;
+    }
+  }
+  .menu--row-nav {
+    padding: 30px 0 0;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .l-container-menu {
+    .icon-basket {
+      margin-left: 18px;
+    }
+    .dealer-sign-in-link,
+    .dealer-sign-out-link {
+      font-size: 13px;
+    }
+  }
+  .nav-list--global {
+    &.l-row {
+      margin-bottom: 0;
+    }
+    .nav-list--item {
+      flex: 0 0 20%;
+      margin-bottom: 20px;
+    }
+  }
+}
+

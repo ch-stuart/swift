@@ -1,29 +1,27 @@
 <% cache ["store_stock", Product.public_stock] do %>
-  <div class="sixteen columns clearfix">
-    <% if Product.public_stock.present? %>
-      <h2 class="store-section-heading">
-        Ready Made
-      </h2>
+  <% if Product.public_stock.present? %>
+    <h2 class="store-section-heading">
+      Ready Made
+    </h2>
+  <% end %>
+  <div class="l-row row">
+    <% Product.public_stock.each_with_index do |stock, index| %>
+      <%= render "store_items", item: stock, index: index %>
     <% end %>
   </div>
-  <% Product.public_stock.each_with_index do |stock, index| %>
-    <%= render "store_items", :item => stock, :index => index %>
-  <% end %>
 <% end %>
 <% cache ["store_accessories", Product.public_accessories] do %>
-  <div class="sixteen columns">
-    <% if Product.public_accessories.present? %>
-      <h2 class="store-section-heading">
-        Accessories
-      </h2>
-    <% end %>
-  </div>
-  <% Product.public_accessories.each_with_index do |accessory, index| %>
-    <%= render "store_items", :item => accessory, :index => index %>
+  <% if Product.public_accessories.present? %>
+    <h2 class="store-section-heading">
+      Accessories
+    </h2>
   <% end %>
+  <div class="l-row row">
+    <% Product.public_accessories.each_with_index do |accessory, index| %>
+      <%= render "store_items", item: accessory, index: index %>
+      <% end %>
+  </div>
 <% end %>
-
-<br class="clear">
 
 <%= content_for :js do %>
 <script>

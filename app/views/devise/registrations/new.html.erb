@@ -1,4 +1,4 @@
-<div class="sixteen columns col-session">
+<div class="l-row l-row--session">
   <h2>
     <% if request.fullpath.include? "swiftcampout" %>
       Swift Campout Sign Up
@@ -91,7 +91,6 @@
 
   <%= render "devise/shared/links" %>
 </div>
-
 
 <%= content_for :js do %>
   <script>
