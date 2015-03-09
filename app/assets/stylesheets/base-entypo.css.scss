@@ -48,6 +48,8 @@
 .icon-twitter:before { content: '\e804'; } /* '' */
 .icon-home:before { content: '\e805'; } /* '' */
 .icon-flickr:before { content: '\e806'; } /* '' */
+.icon-up-open-big:before { content: '\e807'; } /* '' */
+.icon-down-open-big:before { content: '\e808'; } /* '' */
 
 .icon-menu,
 .icon-instagram,
@@ -55,7 +57,9 @@
 .icon-facebook,
 .icon-twitter,
 .icon-home,
-.icon-flickr {
+.icon-flickr,
+.icon-up-open-big,
+.icon-down-open-big {
   font-size: 24px;
 }
 

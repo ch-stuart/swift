@@ -55,23 +55,24 @@ var Runner = function(ms) {
 
 jQuery.fn.hero = function() {
 
-  var totalWidth = 0;
-  var widths = [];
-  var imgCount = 0;
-  var r = new Runner(3000);
-  var link;
-  var linkHtml;
+  var totalWidth = 0,
+      widths = [],
+      imgCount = 0,
+      r = new Runner(3000),
+      link,
+      linkHtml;
 
   return this.each(function() {
-    var $hero = $(this);
-    var $heroScroller = $hero.find('#hero-scroll');
-    var $imgs = $heroScroller.find('img');
+    var $hero = $(this),
+        $heroScroller = $hero.find('#hero-scroll'),
+        $imgs = $heroScroller.find('img');
 
     imgCount = $imgs.size();
 
     function init() {
       $imgs.each(function() {
         var imgWidth = $(this).width();
+
         totalWidth += imgWidth;
         widths.push(imgWidth);
       });
@@ -81,8 +82,8 @@ jQuery.fn.hero = function() {
 
       _.each(widths, function(dist) {
         r.add(function() {
-          var currentScrollDist = Math.abs(parseInt($heroScroller.css('margin-left'), 10));
-          var animDist = currentScrollDist + dist;
+          var currentScrollDist = Math.abs(parseInt($heroScroller.css('margin-left'), 10)),
+              animDist = currentScrollDist + dist;
 
           // console.log(animDist);
 

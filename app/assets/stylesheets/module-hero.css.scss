@@ -25,7 +25,6 @@
   .hero-text {
     width: 440px;
   }
-
 }
 
 .hero-heading,
@@ -56,15 +55,14 @@
     margin-bottom: 0;
   }
 }
-.hero-close,
-.hero-open {
+.hero-toggle {
   width: 24px;
   height: 24px;
+  font-size: 24px;
   background-size: contain;
   position: absolute;
   top: 5px;
   right: 5px;
-  font-size: 40px;
   color: #fff;
   cursor: pointer;
   display: none;
