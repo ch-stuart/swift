@@ -89,7 +89,7 @@
     <% end %>
 
     <div class="submit-wrap">
-      <%= f.submit "Sign up", class: "btn", disabled: "disabled", id: "submitBtn" %>
+      <%= f.submit "Sign up", class: "btn", id: "submitBtn" %>
     </div>
   <% end %>
 
@@ -106,15 +106,20 @@
         return;
       }
 
+      if (!agreeCheckbox.checked) {
+        submitBtn
+          .setAttribute('disabled', 'disabled');
+      }
+
       document
         .getElementById('agree')
-        .onchange = function(event) {
+        .addEventListener('change', function(event) {
           if (this.checked) {
             submitBtn.removeAttribute('disabled');
           } else {
             submitBtn.setAttribute('disabled', 'disabled');
           }
-        };
+        });
     })();
   </script>
 <% end %>
