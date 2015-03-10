@@ -59,7 +59,11 @@ body {
 }
 .col-main {
   padding-top: 0;
-  margin-top: -10px;
+}
+@media only screen and (min-width: 768px) {
+  .col-main {
+    margin-top: -20px;
+  }
 }
 .col-session {
   padding-bottom: 30px;
