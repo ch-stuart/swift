@@ -45,8 +45,8 @@ class UsersController < ApplicationController
         end
         format.json { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.json { render :json => @user.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
   def verify_is_signed_in
     return if user_signed_in?
 
-    render :text => "403: Forbidden", :status => 403
+    render text: "403: Forbidden", status: 403
   end
 
   def user_params
