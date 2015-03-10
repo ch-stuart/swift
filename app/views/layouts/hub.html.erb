@@ -12,9 +12,9 @@
   <%= javascript_include_tag "hub" %>
 </head>
 <body class="hub" id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
-  <div id="box" class="container">
-    <p id="js_app-notice" class="app-notice" style="display:none"></p>
-    <p id="js_app-alert" class="app-alert" style="display:none"></p>
+  <p id="js_app-notice" class="app-notice" style="display:none"></p>
+  <p id="js_app-alert" class="app-alert" style="display:none"></p>
+  <div class="l-container--fluid l-container--constrained">
     <%= yield %>
   </div>
   <%= yield :js %>

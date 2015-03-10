@@ -5,6 +5,7 @@
 <% if @error %>
   <code style=color:red><%= @error %></code>
 <% else %>
+  <div class="responsive-table-container">
   <table class="table">
     <thead>
       <tr>
@@ -28,6 +29,7 @@
       <% end %>
     </tbody>
   </table>
+  </div>
 <% end %>
 
 <h3>

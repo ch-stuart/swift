@@ -1,9 +1,11 @@
 @import 'normalize-css/normalize';
 @import 'skeleton-base-modified';
-@import 'skeleton/stylesheets/skeleton';
-@import 'skeleton/stylesheets/layout';
-@import 'gridism/gridism';
+@import 'flexboxgrid/dist/flexboxgrid';
+//@import 'skeleton/stylesheets/skeleton';
+//@import 'skeleton/stylesheets/layout';
+//@import 'gridism/gridism';
 @import '../javascripts/farbtastic/farbtastic';
+@import 'module-container';
 @import 'module-rails-form-errors';
 @import 'module-jquery.tabs';
 @import 'module-table';
