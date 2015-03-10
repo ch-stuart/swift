@@ -1,19 +1,20 @@
 <div class="l-row l-row--session">
   <h2>
     <% if request.fullpath.include? "swiftcampout" %>
+    <% if @is_attending_campout_in_2015 %>
       Swift Campout Sign Up
-    <% elsif request.fullpath.include? "wholesale" %>
+    <% elsif @is_pending_wholesale %>
       Dealer Sign Up
     <% else %>
       Sign Up
     <% end %>
   </h2>
-  <% if request.fullpath.include? "swiftcampout" %>
+  <% if @is_attending_campout_in_2015 %>
     <p>
       Blurb about signing up.
     </p>
   <% end %>
-  <% if request.fullpath.include? "wholesale" %>
+  <% if @is_pending_wholesale %>
     <p>
       To become a Swift Industries dealer, you must apply by emailing
       <%= mail_to Company.first.email, Company.first.email, encode: "hex", subject: "Dealer Sign Up" %>.
@@ -22,17 +23,22 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
     <% if request.fullpath.include? "swiftcampout" %>
-      <input type="hidden" name="user[is_attending_campout_in_2015]" value="true">
-
+    <% if @is_attending_campout_in_2015 %>
+      <input
+        type="hidden"
+        name="user[is_attending_campout_in_2015]"
+        value="true">
     <% end %>
-    <% if request.fullpath.include? "wholesale" %>
-      <input type="hidden" name="user[is_pending_wholesale]" value="true">
+    <% if @is_pending_wholesale %>
+      <input
+        type="hidden"
+        name="user[is_pending_wholesale]"
+        value="true">
     <% end %>
-
     <div class="label-input-pair">
       <%= f.label :contact, "Name", class: "label" %>
       <%= f.text_field :contact, autofocus: true, class: "input" %>
-      <% if request.fullpath.include? "swiftcampout" %>
+      <% if @is_attending_campout_in_2015 %>
         <p class="label-input-pair__hint">
           Your name will not be shared publicly.
         </p>
@@ -75,7 +81,7 @@
       <%= f.password_field :password_confirmation, autocomplete: "off", class: "input" %>
     </div>
 
-    <% if request.fullpath.include? "swiftcampout" %>
+    <% if @is_attending_campout_in_2015 %>
       <div class="label-input-pair">
         <label for="agree" class="label">
           <input type="checkbox" id="agree">
