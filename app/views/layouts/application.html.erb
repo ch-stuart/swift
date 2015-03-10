@@ -45,7 +45,7 @@
   <h2 id="js_app-notice" class="app-notice" style="display:none"></h2>
   <h2 id="js_app-alert" class="app-alert" style="display:none"></h2>
   <div class="l-container-menu-wrap">
-    <div class="l-container-menu l-container-fluid">
+    <div class="l-container-menu l-container--fluid">
       <div class="menu--row-btns">
         <i id="global-menu-btn" class="icon-menu"></i>
         <a href="/" title="Home">
@@ -69,7 +69,7 @@
     </div>
   </div>
   <% cache ["company_description_etc", Company.first] do %>
-    <div class="l-container-fluid l-container-logo">
+    <div class="l-container--fluid l-container--logo">
       <div class="col-xs-12 row-header" style="text-align: center">
         <h1 class="row-header--logo-wrap">
           <a href="/" class="row-header--link" title="Go Home">
@@ -82,11 +82,11 @@
       </div>
     </div>
   <% end %>
-  <div class="l-container-fluid l-container-main l-container-constrained l-container-w-padding">
+  <div class="l-container--fluid l-container-main l-container-constrained l-container--main">
     <%= yield %>
   </div>
-  <div class="l-container-footer-wrap l-container-constrained l-container-fluid">
-    <div class="l-container-footer">
+  <div class="l-container--footer-wrap l-container-constrained l-container--fluid">
+    <div class="l-container--footer">
       <%= render "shared/footer" %>
       <%# render "shared/no_js" %>
       <%= render "shared/humans" %>
