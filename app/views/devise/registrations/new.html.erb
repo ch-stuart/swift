@@ -1,6 +1,5 @@
 <div class="l-row l-row--session">
   <h2>
-    <% if request.fullpath.include? "swiftcampout" %>
     <% if @is_attending_campout_in_2015 %>
       Swift Campout Sign Up
     <% elsif @is_pending_wholesale %>
@@ -22,7 +21,6 @@
   <% end %>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
-    <% if request.fullpath.include? "swiftcampout" %>
     <% if @is_attending_campout_in_2015 %>
       <input
         type="hidden"
