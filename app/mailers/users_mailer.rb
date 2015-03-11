@@ -30,4 +30,8 @@ class UsersMailer < ActionMailer::Base
     )
   end
 
+  def new_camper_for_2015 user
+    mail(to: user.email, subject: "Thanks for joining Swift Campout!")
+  end
+
 end

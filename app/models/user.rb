@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :lockable
 
   after_create :add_wholesale_if_user_is_preapproved
+  after_create :email_if_attending_campout_in_2015
 
   private
 
@@ -20,6 +21,14 @@ class User < ActiveRecord::Base
     else
       UsersMailer.new_user(user: user, preapproved: false).deliver_now
     end
+  end
+
+  def email_if_attending_campout_in_2015
+    user = User.find_by_email self.email
+
+    return unless self.is_attending_campout_in_2015
+
+    UsersMailer.new_camper_for_2015(user: user).deliver_now
   end
 
 end
