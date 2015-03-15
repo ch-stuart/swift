@@ -18,10 +18,10 @@
         'solstice/header-960.jpg' => "960w",
         'solstice/header-1280.jpg' => "1280w"
       },
-      class: "S-banner-img"
+      class: "S-banner-img js-srcset-img u-resp-img"
     %>
     <%= image_tag "solstice/hashtag-green-800.png", class: "S-banner-hashtag" %>
-    <%= image_set_tag "solstice/logo-120.png", { 'solstice/logo-240.png' => '640w' }, class: "S-banner-logo" %>
+    <%= image_set_tag "solstice/logo-120.png", { 'solstice/logo-240.png' => '640w' }, class: "S-banner-logo js-srcset-img u-resp-img" %>
   </a>
 </div>
 <div class="l-row row">
@@ -43,7 +43,7 @@
             <div class="featured-page__photo-wrap">
               <% photo_url = Page.get_photo_by_id(featured_page.flickr_photo, "Medium") %>
               <% if photo_url.present? %>
-                <%= link_to(image_tag(photo_url, :class => "scale-with-grid"), featured_page) %>
+                <%= link_to(image_tag(photo_url, :class => "u-resp-img"), featured_page) %>
               <% end %>
             </div>
           <% end %>
@@ -74,7 +74,7 @@
         <% if @blog['img'].present? && @blog['description'].present? %>
           <p>
             <% if @blog['img'].present? %>
-              <%= image_tag "#{@blog['img']}?w=300", class: "blog_img", srcset: "#{@blog['img']}?w=420 420w, #{@blog['img']}?w=640 640w" %>
+              <%= image_tag "#{@blog['img']}?w=300", class: "js-srcset-img u-resp-img", srcset: "#{@blog['img']}?w=420 420w, #{@blog['img']}?w=640 640w" %>
             <% end %>
             <% if @blog['description'].present? %>
               <%= raw @blog["description"] %>

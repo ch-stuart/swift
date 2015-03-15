@@ -12,6 +12,7 @@
 //= require matchMedia/matchMedia
 //= require ua.js/src/ua
 //= require browser_and_feature_checks
+//= require srcset
 //= require dollardollar
 //= require angular
 //= require ngSticky/sticky.js
