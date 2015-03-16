@@ -1,11 +1,19 @@
 <div class="l-row l-row--session">
   <h2>
-    Sign In
+    <% if @is_attending_campout_in_2015 %>
+      Camper Sign In
+    <% elsif @is_wholesale %>
+      Dealer Sign In
+    <% else %>
+      Sign In
+    <% end %>
   </h2>
-  <p>
-    If you would like to become a Swift Industries dealer, you must apply by emailing
-    <%= mail_to Company.first.email, Company.first.email, encode: "hex", subject: "Dealer Sign Up" %>.
-  </p>
+  <% if @is_wholesale %>
+    <p>
+      If you would like to become a Swift Industries dealer, you must apply by emailing
+      <%= mail_to Company.first.email, Company.first.email, encode: "hex", subject: "Dealer Sign Up" %>.
+    </p>
+  <% end %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="label-input-pair">
       <%= f.label :email, class: "label" %>

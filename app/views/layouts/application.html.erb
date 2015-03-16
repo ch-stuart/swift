@@ -61,7 +61,11 @@
         <% if user_signed_in? %>
           <%= link_to("Sign Out", destroy_user_session_path, method: :delete, class: "dealer-sign-out-link") %>
         <% else %>
-          <%= link_to("Dealer Sign In", new_user_session_path(wholesale: "1"), class: "dealer-sign-out-link") %>
+          <% if controller_name === "solstice" %>
+            <%= link_to("Camper Sign In", new_user_session_path(swiftcampout: "1"), class: "dealer-sign-out-link") %>
+          <% else %>
+            <%= link_to("Dealer Sign In", new_user_session_path(wholesale: "1"), class: "dealer-sign-out-link") %>
+          <% end %>
         <% end %>
         <br class="clear">
       </div>
