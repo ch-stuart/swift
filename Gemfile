@@ -25,6 +25,7 @@ gem 'rails-observers'
 gem 'cocoon'
 gem 'instagram'
 gem 'twitter'
+gem 'geocoder'
 
 # group :assets do
   gem 'sass-rails'
