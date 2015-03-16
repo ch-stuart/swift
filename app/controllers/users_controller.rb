@@ -11,6 +11,12 @@ class UsersController < ApplicationController
     @campers2015 = User.where(is_attending_campout_in_2015: true)
   end
 
+  def campout_locations
+    @campers2015 = User.where(is_attending_campout_in_2015: true)
+
+    render json: @campers2015.to_json(only: [:latitude, :longitude, :city])
+  end
+
   def show
     @user = User.find params[:id]
   end

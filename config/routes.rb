@@ -18,15 +18,26 @@ SwiftSite::Application.routes.draw do
   get 'hub/expire_flickr_cache' => 'hub#expire_flickr_cache'
   get 'hub/expire_home_cache' => 'hub#expire_home_cache'
 
+
+  # get '/users/my_info', to: 'users#my_info', as: 'my_info'
+  # get '/users/edit_my_info', to: 'users#edit_my_info', as: 'edit_my_info'
+
   devise_for :users, controllers: { registrations: "registrations", sessions: "sessions" }
-  resources :users, only: [:index, :edit, :update, :destroy, :show]
-  get '/users/my_info', to: 'users#my_info', as: 'my_info'
-  get '/users/edit_my_info', to: 'users#edit_my_info', as: 'edit_my_info'
+  resources :users, only: [:index, :edit, :update, :destroy, :show] do
+    collection do
+      get 'campout_locations'
+    end
+    # member do
+    #   get :my_info
+    #   get :edit_my_info
+    # end
+  end
 
   get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
 
-  resources :pages, :products, :companies, :colors, :parts, :sizes, :testimonials, :categories, :pre_approved_dealers, :coupons
+  resources :pages, :products, :companies, :colors, :parts, :sizes, :testimonials,
+            :categories, :pre_approved_dealers, :coupons
 
   resources :products do
     get 'order', on: :member

@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 
     return unless self.is_attending_campout_in_2015
 
-    UsersMailer.new_camper_for_2015(user: user).deliver_now
+    UsersMailer.new_camper_for_2015(user).deliver_now
   end
 
 end
