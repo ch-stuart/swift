@@ -4,11 +4,13 @@
       srcSet,
       newUrl;
 
-  if ('srcset' in document.createElement('img')) {
-    return; // console.debug('Browser supports srcset');
-  }
+  // Safari says it supports src set (which it probably does via 1x, 2x)
+  // so for now can't do this
+  // if ('srcset' in document.createElement('img')) {
+  //   return; // console.debug('Browser supports srcset');
+  // }
 
-  if ($($srcSetImgs) === 0) {
+  if ($srcSetImgs.size() === 0) {
     return;
   }
 
