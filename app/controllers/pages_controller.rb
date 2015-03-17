@@ -10,7 +10,7 @@ class PagesController < ApplicationController
     @public_pages = Page.where(status: "Public")
     @private_pages = Page.where(status: "Private")
     @subtitle = controller_name.titlecase
-    render :layout => 'hub'
+    render layout: 'hub'
   end
 
   def show
