@@ -50,6 +50,7 @@
 .icon-flickr:before { content: '\e806'; } /* '' */
 .icon-up-open-big:before { content: '\e807'; } /* '' */
 .icon-down-open-big:before { content: '\e808'; } /* '' */
+.icon-user:before { content: '\e809'; } /* '' */
 
 .icon-menu,
 .icon-instagram,
@@ -59,10 +60,11 @@
 .icon-home,
 .icon-flickr,
 .icon-up-open-big,
-.icon-down-open-big {
+.icon-down-open-big,
+.icon-user {
   font-size: 24px;
 }
-
+.icon-user,
 .icon-basket {
   font-size: 22px;
 }

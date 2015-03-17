@@ -21,27 +21,38 @@
 <body id="page_<%= controller_name.downcase %>_<%= action_name.downcase %>">
   <h2 id="js_app-notice" class="app-notice" style="display:none"></h2>
   <h2 id="js_app-alert" class="app-alert" style="display:none"></h2>
-  <div class="l-container-menu-wrap">
-    <div class="l-container-menu l-container--fluid">
-      <div class="menu--row-btns">
-        <a href="/">
-          <i id="global-home-btn" class="icon-home"></i>
+  <div class="l-container-nav-bar-wrap">
+    <div class="l-container-nav-bar l-container--fluid">
+      <div class="NavBar">
+        <i id="global-menu-btn" class="NavBar-sandwich icon-menu"></i>
+        <a href="/" title="Home" class="NavBar-home-link">
+          <%= image_set_tag "fox-45.png", { "fox-45.png" => "2x" }, { class: "img-fox" }%>
         </a>
-        <%= image_tag "fox-100.png", :class => "menu-fox img-fox" %>
         <a
             href="/cart"
+            class="NavBar-cart"
             ng-controller="CartStatusCtrl"
             ng-cloak
             title="View Your Cart {{ cart.message }}">
-          <i class='entypo icon-basket cart-happy--{{ !!cart.products.length }}'></i>
+          <i class='icon-basket cart-happy--{{ !!cart.products.length }}'>
+            <span ng-if="cart.products.length" class="NavBar-cart-count">
+              {{ cart.products.length }}
+            </span>
+          </i>
         </a>
         <% if user_signed_in? %>
-          <%= link_to("Sign Out", destroy_user_session_path, :method => :delete, :class => "dealer-sign-out-link") %>
+          <%= link_to(raw("<i class='icon-user'></i>"), profile_path, class: "NavBar-user", title: "View Your Profile") %>
+          <%= link_to("Sign Out", destroy_user_session_path, method: :delete, class: "NavBar-sign-in-out NavBar-sign-out") %>
         <% else %>
-          <%# link_to("Dealer Sign In", new_user_session_path, :class => "dealer-sign-out-link") %>
+          <% if controller_name === "solstice" %>
+            <%= link_to("Camper Sign In", new_user_session_path(swiftcampout: "1"), class: "NavBar-sign-in-out NavBar-sign-in") %>
+          <% else %>
+            <%= link_to("Dealer Sign In", new_user_session_path(wholesale: "1"), class: "NavBar-sign-in-out NavBar-sign-in") %>
+          <% end %>
         <% end %>
         <br class="clear">
       </div>
+      <%= render 'shared/global_nav' %>
     </div>
   </div>
   <div class="l-container--fluid l-container--logo">

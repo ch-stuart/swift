@@ -1,0 +1,110 @@
+<h2>
+  My Profile <span style="font-size: 70%;">(<%= link_to "Edit", edit_user_registration_path %>)</span>
+</h2>
+
+<h3>
+   Contact Info
+</h3>
+<% unless @user.is_attending_campout_in_2015 %>
+  <div class="label-input-pair">
+    <label class="label">
+      Company
+    </label>
+    <p>
+      <% if @user.company.present? %>
+        <%= @user.company %>
+      <% else %>
+        &hellip;
+      <% end %>
+    </p>
+  </div>
+<% end %>
+<div class="label-input-pair">
+  <label class="label">
+    <% if @user.is_attending_campout_in_2015 %>
+      Name
+    <% else %>
+      Company Contact
+    <% end %>
+  </label>
+  <p>
+    <% if @user.contact.present? %>
+      <%= @user.contact %>
+    <% else %>
+      &hellip;
+    <% end %>
+  </p>
+</div>
+<% unless @user.is_attending_campout_in_2015 %>
+  <div class="label-input-pair">
+    <label class="label">
+      Website URL
+    </label>
+    <p>
+      <% if @user.company_url.present? %>
+        <%= @user.company_url %>
+      <% else %>
+        &hellip;
+      <% end %>
+    </p>
+  </div>
+  <div class="label-input-pair">
+    <label class="label">
+      Phone Number
+    </label>
+    <p>
+      <% if @user.phone_no.present? %>
+        <%= @user.phone_no %>
+      <% else %>
+        &hellip;
+      <% end %>
+    </p>
+  </div>
+<% end %>
+<% if @user.is_attending_campout_in_2015 %>
+  <div class="label-input-pair">
+    <label class="label">
+      Attending Swift Campout
+    </label>
+    <p>
+      Yes
+    </p>
+  </div>
+<% end %>
+<h3>
+  Postal Address
+</h3>
+<div class="label-input-pair">
+  <label class="label">
+    Address
+  </label>
+  <p>
+    <% if @user.line1.present? %>
+      <%= @user.line1 %>
+    <% else %>
+      &hellip;
+    <% end %>
+    <br>
+    <% if @user.city.present? %>
+      <%= @user.city %>
+    <% else %>
+      &hellip;
+    <% end %>
+    <% if @user.state.present? %>
+      <%= @user.state %>
+    <% else %>
+      &hellip;
+    <% end %>
+    <br>
+    <% if @user.state.present? %>
+      <%= @user.zip_code %>
+    <% else %>
+      &hellip;
+    <% end %>
+    <% if @user.state.present? %>
+      <%= @user.country %>
+    <% else %>
+      &hellip;
+    <% end %>
+  </p>
+</div>

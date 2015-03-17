@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
 
-  before_filter :verify_is_admin, except: [:my_info, :edit_my_info, :update]
-  before_filter :verify_is_signed_in, only: [:my_info, :edit_my_info, :update]
-  layout "hub", except: [:my_info, :edit_my_info]
+  before_filter :verify_is_admin, except: [:profile]
+  before_filter :verify_is_signed_in, only: [:profile]
+
+  layout "hub"
 
   def index
     @dealers = User.where(wholesale: true)
@@ -17,20 +18,17 @@ class UsersController < ApplicationController
     render json: @campers2015.to_json(only: [:latitude, :longitude, :city])
   end
 
+  def profile
+    @user = current_user
+    render layout: 'devise'
+  end
+
   def show
     @user = User.find params[:id]
   end
 
   def edit
     @user = User.find params[:id]
-  end
-
-  def my_info
-    @user = current_user
-  end
-
-  def edit_my_info
-    @user = current_user
   end
 
   def update

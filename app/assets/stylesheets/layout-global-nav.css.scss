@@ -1,63 +1,82 @@
-.l-container-menu-wrap {
+.l-container-nav-bar-wrap {
   background-color: rgb(245, 244, 244);
   border-bottom: 1px solid #dadada;
 }
-.l-container-menu {
+.l-container-nav-bar {
   padding-top: 8px;
   padding-bottom: 8px;
   position: relative;
+}
 
-  .menu-fox {
-    display: block;
-  }
-  .menu-fox {
-    position: absolute;
-    left: 50%;
-    margin-left: -22px;
-    top: 8px;
-  }
-  .icon-menu,
-  .icon-basket {
-    cursor: pointer;
-    display: block;
+.NavBar-home-link {
+  display: block;
+  position: absolute;
+  left: 50%;
+  margin-left: -22px;
+  top: 8px;
+}
+.NavBar-sandwich,
+.NavBar-cart {
+  cursor: pointer;
+  display: block;
 
-    &:hover,
-    &.active,
-    &.cart-happy--true {
-      color: $hotpink;
-    }
-  }
-  .icon-menu,
-  .icon-home {
-    float: left;
-  }
-  .icon-basket {
-    float: right;
-    margin-left: 7px;
-  }
-  .dealer-sign-in-link,
-  .dealer-sign-out-link {
-    float: right;
-    color: lighten($text_lightgray, 20%);
-    font-size: 12px;
-
-    &:hover {
-      color: $hotpink;
-    }
-  }
-  .menu--row-nav {
-    padding: 30px 0 0;
+  &:hover,
+  &.active,
+  &.cart-happy--true {
+    color: $hotpink;
   }
 }
+.NavBar-sandwich {
+  float: left;
+}
+.NavBar-cart,
+.NavBar-user,
+.NavBar-sign-in,
+.NavBar-sign-out {
+  float: right;
+  margin-left: 10px;
+}
+.NavBar-sign-in-out {
+  color: lighten($text_lightgray, 20%);
+  font-size: 12px;
+}
+.NavBar-sign-in-out:hover {
+  color: $hotpink;
+}
+.NavBar-user,
+.NavBar-cart {
+  color: #666;
+}
+
+.NavBar-cart {
+  position: relative;
+}
+.NavBar-cart-count {
+  background-color: $hotpink;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  padding: 1px 4px;
+  line-height: 1;
+  font-style: normal;
+  font-family: verdana, arial, sans-serif;
+  font-weight: bold;
+  font-size: 8px;
+  top: -2px;
+  right: -4px;
+}
+
+.menu--row-nav {
+  padding: 30px 0 0;
+}
+
+
 @media only screen and (min-width: 768px) {
-  .l-container-menu {
-    .icon-basket {
-      margin-left: 18px;
-    }
-    .dealer-sign-in-link,
-    .dealer-sign-out-link {
-      font-size: 13px;
-    }
+  .NavBar-sign-in-out {
+    font-size: 13px;
   }
   .nav-list--global {
     &.l-row {

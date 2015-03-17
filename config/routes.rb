@@ -27,11 +27,8 @@ SwiftSite::Application.routes.draw do
     collection do
       get 'campout_locations'
     end
-    # member do
-    #   get :my_info
-    #   get :edit_my_info
-    # end
   end
+  get 'profile', :to => 'users#profile'
 
   get 'pages/new' => 'pages#new'
   get 'pages/:path' => 'pages#show', :constraints => { :path => /[A-Za-z_-]+/ }
