@@ -6,6 +6,18 @@ class ApplicationController < ActionController::Base
   before_filter :title
   helper_method :title
 
+
+  def after_sign_in_path_for user
+    return swiftcampout_path if user.is_attending_campout_in_2015?
+    return root_path         if user.wholesale?
+    return hub_path          if user.admin?
+  end
+
+  def after_sign_up_path_for user
+    return swiftcampout_path if user.is_attending_campout_in_2015?
+    return root_path         if user.wholesale?
+  end
+
   protected
 
   def render_404
