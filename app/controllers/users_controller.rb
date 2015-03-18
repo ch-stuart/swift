@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :verify_is_admin, except: [:profile]
+  before_filter :verify_is_admin, except: [:profile, :campout_locations]
   before_filter :verify_is_signed_in, only: [:profile]
 
   layout "hub"
