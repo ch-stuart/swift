@@ -44,18 +44,28 @@ SwiftApp.controller('SolsticeCtrl', [
       .success(function(locs) {
         var markers = {};
 
+        $scope.camperCount = locs.length;
+
         locs.forEach(function(loc, idx) {
-          if (loc.latitude !== null && loc.longitude !== null && loc.city !== null) {
-            markers['m'+idx] = {
-              lat: loc.latitude,
-              lng: loc.longitude,
-              message: loc.city,
-              focus: false,
-              draggable: false
-            };
-          } else {
-            ExceptionService.report('Camper missing map data', loc);
+          var msg = loc.city;
+
+          if (loc.neighbors) {
+            msg += "<br>" + loc.neighbors;
+            if (loc.neighbors === 1) {
+              msg += " neighbor is";
+            } else {
+              msg += " neighbors are";
+            }
+            msg += " also attending.";
           }
+
+          markers['m'+idx] = {
+            lat: loc.latitude,
+            lng: loc.longitude,
+            message: msg,
+            focus: false,
+            draggable: false
+          };
         });
 
         $scope.markers = markers;
