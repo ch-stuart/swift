@@ -12,10 +12,27 @@ class UsersController < ApplicationController
     @campers2015 = User.where(is_attending_campout_in_2015: true)
   end
 
+  # http://stackoverflow.com/questions/5857915
   def campout_locations
-    @campers2015 = User.where(is_attending_campout_in_2015: true)
+    campers_2015 = User
+      .where(is_attending_campout_in_2015: true)
+      .where.not(latitude: nil)
+      .where.not(longitude: nil)
+      .where.not(city: nil)
 
-    render json: @campers2015.to_json(only: [:latitude, :longitude, :city])
+    @campers2015 = campers_2015
+
+    @campers2015 = @campers2015.as_json
+
+    @campers2015.each do |camper|
+      this_camper = User.find camper['id']
+
+      size = campers_2015.near(User.find(camper['id']), 10).size - 1
+
+      camper['neighbors'] = size
+    end
+
+    render json: @campers2015.to_json(only: ['latitude', 'longitude', 'city', 'neighbors'])
   end
 
   def profile
