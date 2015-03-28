@@ -1,6 +1,18 @@
 <div class="col-cntnt">
+  <% if user_signed_in? && current_user.is_camper? %>
+    <p class="S-p S-p--map-heading" ng-if="newCamper">
+      Thanks for joining Swift Campout. Find your pin on the
+      map, then check your inbox to get started planning your
+      great escape! XO Team Swift
+    </p>
+  <% end %>
   <p class="S-p S-p--map-heading">
-    Sign up to mark the map with your campout. <span ng-if="camperCount">{{ camperCount }} people are currently signed up.</span>
+    <% if !user_signed_in? || current_user.is_not_camper? %>
+      Sign up to mark the map with your campout.
+      <span ng-if="camperCount">{{ camperCount }}</span><span ng-if="!camperCount">...</span> people are currently signed up.
+    <% else %>
+      You and <span ng-if="camperCount">{{ camperCount }}</span><span ng-if="!camperCount">...</span> other people are currently signed up!
+    <% end %>
   </p>
   <leaflet
     center="kc"

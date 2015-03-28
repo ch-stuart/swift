@@ -35,6 +35,14 @@ class User < ActiveRecord::Base
     address.join(", ")
   end
 
+  def is_camper?
+    self.is_attending_campout_in_2015
+  end
+
+  def is_not_camper?
+    !self.is_attending_campout_in_2015
+  end
+
   private
 
   def add_wholesale_if_user_is_preapproved

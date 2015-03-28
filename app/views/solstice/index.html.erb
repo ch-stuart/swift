@@ -34,11 +34,13 @@
               About
             </a>
           </li>
-          <li class="S-nav__item">
-            <a class="S-nav__link" href="#signup" target="_self">
-              Sign Up
-            </a>
-          </li>
+          <% if !user_signed_in? || current_user.is_not_camper? %>
+            <li class="S-nav__item">
+              <a class="S-nav__link" href="#signup" target="_self">
+                Sign Up
+              </a>
+            </li>
+          <% end %>
           <li class="S-nav__item">
             <a class="S-nav__link" href="#map" target="_self">
               Map

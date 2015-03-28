@@ -185,7 +185,11 @@
     background-color: darken($solstice-orange, 3%);
   }
 }
-
+.Solistice-signup-btn--welcome {
+  line-height: 1.2;
+  height: auto;
+  padding: 10px 40px;
+}
 .S-p--map-heading {
   max-width: none;
   text-align: center;

@@ -79,7 +79,7 @@ SwiftApp.controller('SolsticeCtrl', [
           ExceptionService.report('Failed to get solstice map data', data);
         });
     }
-    $timeout(populateMap, 600);
+    $timeout(populateMap, 222);
   };
 
   initializeHeader = function() {
@@ -127,8 +127,10 @@ SwiftApp.controller('SolsticeCtrl', [
       return;
     }
 
+    $scope.newCamper = true;
+
     $('html, body').animate({
-      scrollTop: $('#map').offset().top - 50
+      scrollTop: $('#map').offset().top - 12
     }, 1200);
   };
 
