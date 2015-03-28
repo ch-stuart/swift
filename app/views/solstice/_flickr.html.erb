@@ -1,10 +1,12 @@
 <script type="text/ng-template" id="flickr.html">
   <div
     class="FlickrDir-img"
-    afkl-lazy-image='{{ photo.source }}'
-    afkl-lazy-image-options='{ "alt": "{{name}}"}'>
+    afkl-lazy-image='{{ photo.size.source }}'
+    afkl-lazy-image-options='{ "alt": "{{photo.title}}"}'>
     <div class="FlickrDir-name">
-      {{ name }}
+      <a ng-href="{{photo.url}}">
+        {{ photo.title }}
+      </a>
     </div>
   </div>
 </script>

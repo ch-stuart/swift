@@ -4,8 +4,7 @@ SwiftApp
     return {
       scope: {
           id: '@',
-          label: '@',
-          name: '@'
+          label: '@'
       },
       templateUrl: "flickr.html",
       restrict: "E",
