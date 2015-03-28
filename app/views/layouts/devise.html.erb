@@ -44,7 +44,7 @@
           <%= link_to(raw("<i class='icon-user'></i>"), profile_path, class: "NavBar-user", title: "View Your Profile") %>
           <%= link_to("Sign Out", destroy_user_session_path, method: :delete, class: "NavBar-sign-in-out NavBar-sign-out") %>
         <% else %>
-          <% if controller_name === "solstice" %>
+          <% if controller_name === "solstice" || @is_attending_campout_in_2015 %>
             <%= link_to("Camper Sign In", new_user_session_path(swiftcampout: "1"), class: "NavBar-sign-in-out NavBar-sign-in") %>
           <% else %>
             <%= link_to("Dealer Sign In", new_user_session_path(wholesale: "1"), class: "NavBar-sign-in-out NavBar-sign-in") %>
