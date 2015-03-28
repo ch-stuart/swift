@@ -9,21 +9,7 @@
     Also take a look at our <%= link_to "Ready Made", store_path, :class => "hl-link" %> store.
   </p>
 </div>
-<div class="l-row S-banner-wrap">
-  <a href="/swiftcampout" class="S-banner-link">
-    <%=
-      image_set_tag "solstice/header-320.jpg",
-      {
-        'solstice/header-640.jpg' => "640w",
-        'solstice/header-960.jpg' => "960w",
-        'solstice/header-1280.jpg' => "1280w"
-      },
-      class: "S-banner-img js-srcset-img u-resp-img"
-    %>
-    <%= image_tag "solstice/hashtag-green-800.png", class: "S-banner-hashtag" %>
-    <%= image_set_tag "solstice/logo-120.png", { 'solstice/logo-240.png' => '640w' }, class: "S-banner-logo js-srcset-img u-resp-img" %>
-  </a>
-</div>
+<%# render partial: 'solstice_home_banner' %>
 <div class="l-row row">
   <div class="col-xs-12 col-sm-6">
     <% cache ["home_featured_pages", Page.featured_pages ] do %>
