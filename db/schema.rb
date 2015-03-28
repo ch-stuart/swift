@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316021951) do
+ActiveRecord::Schema.define(version: 20150327033219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "campers", force: :cascade do |t|
+    t.text     "is_first_bike_overnight"
+    t.text     "campout_location_and_miles"
+    t.text     "favorite_gear"
+    t.text     "why_do_you_love_bike_camping"
+    t.text     "is_group_camping"
+    t.text     "which_bike"
+    t.text     "favorite_camp_meal"
+    t.text     "hear_about"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",      limit: 255

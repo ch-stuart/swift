@@ -71,6 +71,72 @@
     </p>
   </div>
 <% end %>
+<% if @user.camper.present? %>
+  <div class="label-input-pair">
+    <label class="label">
+      Is this your first bike-overnight?
+    </label>
+    <p>
+      <%= @user.camper.is_first_bike_overnight %>
+    </p>
+  </div>
+  <div class="label-input-pair">
+    <label class="label">
+      Where are you heading on your Swift Campout, and how far is it to your destination?
+    </label>
+    <p>
+      <%= @user.camper.campout_location_and_miles %>
+    </p>
+  </div>
+  <div class="label-input-pair">
+    <label class="label">
+      Tell us about your favorite piece of gear
+    </label>
+    <p>
+      <%= @user.camper.favorite_gear %>
+    </p>
+  </div>
+  <div class="label-input-pair">
+    <label class="label">
+      Why do you love camping by bicycle?
+    </label>
+    <p>
+      <%= @user.camper.why_do_you_love_bike_camping %>
+    </p>
+  </div>
+  <div class="label-input-pair">
+    <label class="label">
+      Are you heading out with a posse? What’s your crew’s name?
+    </label>
+    <p>
+      <%= @user.camper.is_group_camping %>
+    </p>
+  </div>
+  <div class="label-input-pair">
+    <label class="label">
+      What kind of bike are you riding?
+    </label>
+    <p>
+      <%= @user.camper.which_bike %>
+    </p>
+  </div>
+  <div class="label-input-pair">
+    <label class="label">
+      What’s your go-to camp meal?
+    </label>
+    <p>
+      <%= @user.camper.favorite_camp_meal %>
+    </p>
+  </div>
+  <div class="label-input-pair">
+    <label class="label">
+      How did you hear about Swift Campout?
+    </label>
+    <p>
+      <%= @user.camper.hear_about %>
+    </p>
+  </div>
+<% end %>
 <h3>
   Postal Address
 </h3>

@@ -1,0 +1,36 @@
+
+<%= f.fields_for :camper  do |camper_fields| %>
+  <div class="label-input-pair">
+    <%= camper_fields.label :is_first_bike_overnight, "Is this your first bike-overnight?", class: "label" %>
+    <%= f.select :is_first_bike_overnight, ["Yes", "No"], :selected => @user.camper.is_first_bike_overnight %>
+    <%# camper_fields.text_field :is_first_bike_overnight, class: "input" %>
+  </div>
+  <div class="label-input-pair">
+    <%= camper_fields.label :campout_location_and_miles, "Where are you heading on your Swift Campout, and how far is it to your destination?", class: "label" %>
+    <%= camper_fields.text_area :campout_location_and_miles, class: "input" %>
+  </div>
+  <div class="label-input-pair">
+    <%= camper_fields.label :favorite_gear, "Tell us about your favorite piece of gear", class: "label" %>
+    <%= camper_fields.text_area :favorite_gear, class: "input" %>
+  </div>
+  <div class="label-input-pair">
+    <%= camper_fields.label :why_do_you_love_bike_camping, "Why do you love camping by bicycle?", class: "label" %>
+    <%= camper_fields.text_area :why_do_you_love_bike_camping, class: "input" %>
+  </div>
+  <div class="label-input-pair">
+    <%= camper_fields.label :is_group_camping, "Are you heading out with a posse? What’s your crew’s name?", class: "label" %>
+    <%= camper_fields.text_area :is_group_camping, class: "input" %>
+  </div>
+  <div class="label-input-pair">
+    <%= camper_fields.label :which_bike, "What kind of bike are you riding?", class: "label" %>
+    <%= camper_fields.text_area :which_bike, class: "input" %>
+  </div>
+  <div class="label-input-pair">
+    <%= camper_fields.label :favorite_camp_meal, "What’s your go-to camp meal?", class: "label" %>
+    <%= camper_fields.text_area :favorite_camp_meal, class: "input" %>
+  </div>
+  <div class="label-input-pair">
+    <%= camper_fields.label :hear_about, "How did you hear about Swift Campout?", class: "label" %>
+    <%= camper_fields.text_area :hear_about, class: "input" %>
+  </div>
+<% end %>

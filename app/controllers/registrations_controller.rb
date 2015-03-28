@@ -27,7 +27,18 @@ class RegistrationsController < Devise::RegistrationsController
           :contact,
           :city,
           :state,
-          :zip_code
+          :zip_code,
+          camper_attributes: [
+            :is_first_bike_overnight,
+            :campout_location_and_miles,
+            :favorite_gear,
+            :why_do_you_love_bike_camping,
+            :is_group_camping,
+            :which_bike,
+            :favorite_camp_meal,
+            :hear_about,
+            :user_id
+          ]
         )
     end
 
@@ -43,9 +54,21 @@ class RegistrationsController < Devise::RegistrationsController
           :contact,
           :city,
           :state,
-          :zip_code
+          :zip_code,
+          camper_attributes: [
+            :is_first_bike_overnight,
+            :campout_location_and_miles,
+            :favorite_gear,
+            :why_do_you_love_bike_camping,
+            :is_group_camping,
+            :which_bike,
+            :favorite_camp_meal,
+            :hear_about,
+            :user_id
+          ]
         )
     end
+
 
   end
 

@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
 
+  has_one :camper, dependent: :destroy
+  accepts_nested_attributes_for :camper, :reject_if => :all_blank
+
   after_create :add_wholesale_if_user_is_preapproved
   after_create :email_if_attending_campout_in_2015
 

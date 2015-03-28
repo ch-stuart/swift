@@ -22,6 +22,11 @@
       <%= mail_to Company.first.email, Company.first.email, encode: "hex", subject: "Dealer Sign Up" %>.
     </p>
   <% end %>
+
+  <% if @is_attending_campout_in_2015 %>
+    <% resource.build_camper if resource.camper.nil? %>
+  <% end %>
+
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
     <% if @is_attending_campout_in_2015 %>
@@ -68,6 +73,10 @@
         We will not share your email address.
       </p>
     </div>
+
+    <% if @is_attending_campout_in_2015 %>
+      <%= render partial: 'camper_fields', locals: { f: f } %>
+    <% end %>
 
     <div class="label-input-pair">
       <%= f.label :password, class: "label" %>
