@@ -9,13 +9,17 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for user
     return swiftcampout_path if user.is_attending_campout_in_2015?
-    return root_path         if user.wholesale?
     return hub_path          if user.admin?
+
+    root_path
   end
 
   def after_sign_up_path_for user
-    return swiftcampout_path if user.is_attending_campout_in_2015?
-    return root_path         if user.wholesale?
+    if user.is_attending_campout_in_2015?
+      return swiftcampout_welcome_path
+    end
+
+    root_path
   end
 
   protected

@@ -4,6 +4,14 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def after_sign_up_path_for user
+    if user.is_attending_campout_in_2015?
+      return swiftcampout_welcome_path
+    end
+
+    root_path
+  end
+
   def check_user_type
     if params[:user].present?
       @is_attending_campout_in_2015 = true if params[:user][:is_attending_campout_in_2015]
