@@ -42,7 +42,7 @@
         value="true">
     <% end %>
     <div class="label-input-pair">
-      <%= f.label :contact, "Name", class: "label" %>
+      <%= f.label :contact, "Name", class: "label label--required" %>
       <%= f.text_field :contact, autofocus: true, class: "input" %>
       <% if @is_attending_campout_in_2015 %>
         <p class="label-input-pair__hint">
@@ -52,34 +52,30 @@
     </div>
 
     <div class="label-input-pair">
-      <%= f.label :city, class: "label" %>
+      <%= f.label :city, class: "label label--required" %>
       <%= f.text_field :city, class: "input" %>
     </div>
 
     <div class="label-input-pair">
-      <%= f.label :state, class: "label" %>
+      <%= f.label :state, class: "label label--required" %>
       <%= f.text_field :state, class: "input" %>
     </div>
 
     <div class="label-input-pair">
-      <%= f.label :zip_code, class: "label" %>
+      <%= f.label :zip_code, class: "label label--required" %>
       <%= f.text_field :zip_code, class: "input" %>
     </div>
 
     <div class="label-input-pair">
-      <%= f.label :email, class: "label" %>
+      <%= f.label :email, class: "label label--required" %>
       <%= f.email_field :email, class: "input" %>
       <p class="label-input-pair__hint">
         We will not share your email address.
       </p>
     </div>
 
-    <% if @is_attending_campout_in_2015 %>
-      <%= render partial: 'camper_fields', locals: { f: f } %>
-    <% end %>
-
     <div class="label-input-pair">
-      <%= f.label :password, class: "label" %>
+      <%= f.label :password, class: "label label--required" %>
       <%= f.password_field :password, autocomplete: "off", class: "input" %>
       <p class="label-input-pair__hint">
         Password must be a minimum of 10 characters.
@@ -87,9 +83,12 @@
     </div>
 
     <div class="label-input-pair">
-      <%= f.label :password_confirmation, class: "label" %>
+      <%= f.label :password_confirmation, class: "label label--required" %>
       <%= f.password_field :password_confirmation, autocomplete: "off", class: "input" %>
     </div>
+    <% if @is_attending_campout_in_2015 %>
+      <%= render partial: 'camper_fields', locals: { f: f } %>
+    <% end %>
 
     <% if @is_attending_campout_in_2015 %>
       <div class="label-input-pair">

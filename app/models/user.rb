@@ -8,6 +8,14 @@ class User < ActiveRecord::Base
   has_one :camper, dependent: :destroy
   accepts_nested_attributes_for :camper, :reject_if => :all_blank
 
+
+  validates :contact, presence: true
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :zip_code, presence: true
+  # Devise already validates email
+  # validates :email, presence: true, uniqueness: true, length: { maximum: 200 }
+
   after_create :add_wholesale_if_user_is_preapproved
   after_create :email_if_attending_campout_in_2015
 
