@@ -29,7 +29,7 @@ class TwitterService < SocialService
   end
 
   def prime_cache
-    super self, "twitter-get-by-tag-bicycle"
+    super self, "twitter-get-by-tag-swiftcampout"
   end
 
 end

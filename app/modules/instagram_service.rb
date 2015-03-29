@@ -26,7 +26,7 @@ class InstagramService < SocialService
   end
 
   def prime_cache
-    super self, "instagram-get-by-tag-bicycle"
+    super self, "instagram-get-by-tag-swiftcampout"
   end
 
 end
