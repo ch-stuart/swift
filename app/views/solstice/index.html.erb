@@ -85,7 +85,7 @@
   <div class="S-Grid S-Grid--social" id="social">
     <div class="row">
       <div class="col-xs-12">
-        <p class="S-p" style="max-width:none">
+        <p class="S-p S-p--heading" style="max-width:none">
           Tag your tweets and instagram photos and videos with #swiftcampout.
         </p>
       </div>
@@ -94,6 +94,16 @@
       </div>
       <div class="col-xs-12 col-sm-6">
         <sw-instagram tag="swiftcampout"></sw-instagram>
+      </div>
+    </div>
+  </div>
+  <div class="S-Grid S-Grid--journal-films" id="journal-and-films">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <%= render partial: 'submit_journals' %>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <%= render partial: 'submit_films' %>
       </div>
     </div>
   </div>

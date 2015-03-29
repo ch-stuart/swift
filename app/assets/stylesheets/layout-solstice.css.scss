@@ -123,15 +123,25 @@
 .S-Grid {
   padding: 0 20px 80px;
 }
-.S-p {
+.S-p, .S-ul {
   font-family: $solstice-font-stack;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   color: $solstice-white;
+}
+.S-p--heading {
+  font-weight: bold;
+}
+.S-li,
+.S-p {
   line-height: 1.7;
 }
+.S-li:before {
+  content: "- ";
+}
 @media (min-width: 768px) {
-  .S-p {
+  .S-p,
+  .S-ul {
     font-size: 18px;
   }
 }
@@ -142,7 +152,8 @@
   opacity: 0.8;
 }
 @media (min-width: 768px) {
-  .S-p {
+  .S-p,
+  .S-ul {
     max-width: 520px;
     margin-left: auto;
     margin-right: auto;
