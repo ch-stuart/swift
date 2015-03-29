@@ -30,24 +30,24 @@
         <div class="S-logo"></div>
         <ul class="S-nav">
           <li class="S-nav__item">
-            <a class="S-nav__link" href="#about" target="_self">
+            <a class="S-nav__link" href="#about" target="_self" scroll-on-click>
               About
             </a>
           </li>
           <% if !user_signed_in? || current_user.is_not_camper? %>
             <li class="S-nav__item">
-              <a class="S-nav__link" href="#signup" target="_self">
+              <a class="S-nav__link" href="#signup" target="_self" scroll-on-click>
                 Sign Up
               </a>
             </li>
           <% end %>
           <li class="S-nav__item">
-            <a class="S-nav__link" href="#map" target="_self">
+            <a class="S-nav__link" href="#map" target="_self" scroll-on-click>
               Map
             </a>
           </li>
           <li class="S-nav__item">
-            <a class="S-nav__link" href="#social" target="_self">
+            <a class="S-nav__link" href="#social" target="_self" scroll-on-click>
               Social
             </a>
           </li>
@@ -97,18 +97,10 @@
       </div>
     </div>
   </div>
-  <div class="S-Grid S-Grid--journal-films" id="journal-and-films">
-    <div class="row">
-      <div class="col-xs-12 col-sm-6">
-        <%= render partial: 'submit_journals' %>
-      </div>
-      <div class="col-xs-12 col-sm-6">
-        <%= render partial: 'submit_films' %>
-      </div>
-    </div>
-  </div>
 </div>
 
 <%= render 'twitter' %>
 <%= render 'instagram' %>
 <%= render 'flickr' %>
+<%= render 'submit_journals' %>
+<%= render 'submit_films' %>

@@ -18,6 +18,7 @@
 //= require ngSticky/sticky.js
 //= require afkl-lazy-image/release/lazy-image
 //= require angular-flexslider/angular-flexslider.js
+//= require ngDialog/js/ngDialog
 //= require global_exception_service
 //= require jquery_ujs
 //= require tinycolor
