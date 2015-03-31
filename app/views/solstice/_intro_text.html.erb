@@ -17,9 +17,13 @@
   <br><br>
   <%= image_tag 'solstice/hashtag-green-800.png', alt: '#swiftcampout', class: 'S-hashtag-img' %>
 </p>
-<% if !user_signed_in? || current_user.is_not_camper? %>
+<% if !user_signed_in? %>
   <div class="Solistice-signup-btn-wrap">
     <%= link_to "Sign Up", new_user_registration_path(swiftcampout: "1"), class: "Solistice-signup-btn" %>
+  </div>
+<% elsif user_signed_in? && current_user.is_not_camper? %>
+  <div class="Solistice-signup-btn-wrap">
+    <%= link_to "Sign Up", edit_user_registration_path, class: "Solistice-signup-btn" %>
   </div>
 <% else %>
   <div class="Solistice-signup-btn-wrap">
