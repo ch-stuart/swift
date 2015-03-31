@@ -1,3 +1,10 @@
 <div style="background-color: #F5EED7; padding: 5px;">
   <%= raw(ap(@user)) %>
 </div>
+<div style="background-color: #F5EED7; padding: 5px; margin-top: 20px">
+  <% if @user.camper.present? %>
+    <%= raw(ap(@user.camper)) %>
+  <% else %>
+    This user has no camper data.
+  <% end %>
+</div>
