@@ -2,7 +2,7 @@
 <%= f.fields_for :camper  do |camper_fields| %>
   <div class="label-input-pair">
     <%= camper_fields.label :is_first_bike_overnight, "Is this your first bike-overnight?", class: "label" %>
-    <%= f.select :is_first_bike_overnight, ["", "Yes", "No"], :selected => @user.camper.is_first_bike_overnight %>
+    <%= camper_fields.select :is_first_bike_overnight, ["", "Yes", "No"], :selected => @user.camper.is_first_bike_overnight %>
   </div>
   <div class="label-input-pair">
     <%= camper_fields.label :campout_location_and_miles, "Where are you heading on your Swift Campout, and how far is it to your destination?", class: "label" %>
