@@ -102,7 +102,11 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="Solistice-signup-btn-wrap">
-            <%= link_to "Sign Up", new_user_registration_path(swiftcampout: "1"), class: "Solistice-signup-btn" %>
+            <% if !user_signed_in? %>
+              <%= link_to "Sign Up", new_user_registration_path(swiftcampout: "1"), class: "Solistice-signup-btn" %>
+            <% else %>
+              <%= link_to "Sign Up", edit_user_registration_path, class: "Solistice-signup-btn" %>
+            <% end %>
           </div>
           <p class="S-p S-p--disclaimer">
             Swift Industries is here to inspire your wandering ways, but we are in no way liable for safety or mishaps related to the Swift Campout. By creating a Swift Campout account you are taking full responsibility to travel safely and you are acknowledging the personal risks of traveling by bicycle.
