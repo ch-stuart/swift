@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   has_one :camper, dependent: :destroy
   accepts_nested_attributes_for :camper, :reject_if => :all_blank
 
-
   validates :contact, presence: true
   validates :city, presence: true
   validates :state, presence: true
@@ -18,6 +17,8 @@ class User < ActiveRecord::Base
 
   after_create :add_wholesale_if_user_is_preapproved
   after_create :email_if_attending_campout_in_2015
+
+  after_save :clear_campout_locations_cache
 
   geocoded_by :address
   after_validation :geocode
@@ -64,6 +65,11 @@ class User < ActiveRecord::Base
     return unless self.is_attending_campout_in_2015
 
     UsersMailer.new_camper_for_2015(user).deliver_now
+  end
+
+  def clear_campout_locations_cache
+    Rails.logger.debug "Clearing cache for camper locations"
+    Rails.cache.delete "users_campout_locations"
   end
 
 end
