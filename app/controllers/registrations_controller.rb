@@ -4,6 +4,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  # redirect to swiftcampout after user
+  # signs up if they are a camper
   def after_sign_up_path_for user
     if user.is_attending_campout_in_2015?
       return swiftcampout_welcome_path
@@ -11,6 +13,17 @@ class RegistrationsController < Devise::RegistrationsController
 
     root_path
   end
+
+  # redirect to swiftcampout after user
+  # edits their profile if they are a camper
+  def after_update_path_for user
+    if user.is_attending_campout_in_2015?
+      return swiftcampout_welcome_path
+    end
+
+    root_path
+  end
+
 
   def check_user_type
     if params[:user].present?
