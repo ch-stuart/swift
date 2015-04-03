@@ -34,13 +34,15 @@
         // Don't bother if there isn't a msg
         if (!msg) { return; }
 
-        for (m = msgBlockList.length - 1; m >= 0; m--) {
-            if (msg.indexOf(msgBlockList[m]) !== -1) {
-                return;
+        if (typeof msg === 'string') {
+            for (m = msgBlockList.length - 1; m >= 0; m--) {
+                if (msg.indexOf(msgBlockList[m]) !== -1) {
+                    return;
+                }
             }
         }
 
-        if (url) {
+        if (url && typeof url === 'string') {
             for (s = scriptUrlBlockList.length - 1; s >= 0; s--) {
                 if (url.indexOf(scriptUrlBlockList[s]) !== -1) {
                     return;
