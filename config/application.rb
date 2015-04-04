@@ -68,5 +68,8 @@ module SwiftSite
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
     config.assets.paths << Rails.root.join('vendor', 'assets')
 
+    # image tags in emails need hosts
+    config.action_mailer.asset_host = "https://www.builtbyswift.com"
+
   end
 end
