@@ -118,9 +118,11 @@ SwiftSite::Application.configure do
     :host => 'fierce-island-8829.herokuapp.com'
   }
 
-
   # Cache static assets for 1 year
   config.static_cache_control = "public, max-age=31536000"
+
+  # image tags in emails need hosts
+  config.action_mailer.asset_host = "http://fierce-island-8829.herokuapp.com"
 
 end
 
