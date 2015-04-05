@@ -9,3 +9,7 @@ include           = "{$include,.gitignore,.bower.json}"
 [ *.rb, *.html.erb, *.css.scss ]
 tabSize           = 2
 softTabs          = true
+
+[ *.js ]
+tabSize           = 4
+softTabs          = true
