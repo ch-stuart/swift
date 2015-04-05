@@ -20,7 +20,8 @@ class TwitterService < SocialService
         tweets.push({
           profile_image: "#{image_data.scheme}://#{image_data.host}#{image_data.path}",
           text: tweet.text,
-          screen_name: tweet.user.screen_name
+          screen_name: tweet.user.screen_name,
+          link: "https://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}"
         })
       end
 
