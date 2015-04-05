@@ -1,7 +1,7 @@
 <% cache ["products_nav_categories", Category.all] do %>
   <% Category.all.each_with_index do |category, idx| %>
     <% next unless category.products.where(status: "Public").length > 0 %>
-    <li class="nav-list--item col-xs-12 col-sm">
+    <li class="nav-list--item col-xs-12 col-sm-3 col-md-2">
       <% cache ["products_nav_category_title", category] do %>
         <strong class="nav-list--group-heading">
           <%= category.title %>

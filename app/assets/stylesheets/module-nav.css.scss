@@ -1,6 +1,11 @@
 .nav-list--item {
   margin: 0;
 }
+@media only screen and (min-width: 768px) {
+  .nav-list--item {
+    margin-bottom: 15px;
+  }
+}
 .nav-list--group {
   margin-left: 0;
 }

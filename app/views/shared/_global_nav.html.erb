@@ -2,7 +2,7 @@
   <ul class="l-row row nav-list nav-list--global">
     <%= render "shared/products_nav" %>
     <% if user_signed_in? %>
-      <li class="nav-list--item col-xs-12 col-sm">
+      <li class="nav-list--item col-xs-12 col-sm-3 col-md-2">
         <strong class="nav-list--group-heading">Your Account</strong>
         <ul class="nav-list--group">
           <li class="nav-list--group-item">
@@ -14,7 +14,7 @@
         </ul>
       </li>
     <% end %>
-    <li class="nav-list--item col-xs-12 col-sm">
+    <li class="nav-list--item col-xs-12 col-sm-3 col-md-2">
       <strong class="nav-list--group-heading">About Us</strong>
       <ul class="nav-list--group">
         <%= render 'shared/pages_nav' %>
@@ -23,7 +23,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-list--item col-xs-12 col-sm">
+    <li class="nav-list--item col-xs-12 col-sm-3 col-md-2">
       <% cache ["global_nav_company_contact", Company.first ] do %>
         <strong class="nav-list--group-heading">Get in Touch</strong>
         <ul class="nav-list--group">
@@ -36,13 +36,13 @@
         </ul>
       <% end %>
     </li>
-    <li class="nav-list--item col-xs-12 col-sm">
+    <li class="nav-list--item col-xs-12 col-sm-3 col-md-2">
       <strong class="nav-list--group-heading">Be Social</strong>
       <ul class="nav-list--group nav-list--group-social nav-list--group-inline">
         <%= render 'shared/social_nav' %>
       </ul>
     </li>
-    <li class="nav-list--item col-xs-12 col-sm">
+    <li class="nav-list--item col-xs-12 col-sm-3 col-md-2">
       <strong class="nav-list--group-heading">Ready Made</strong>
       <ul class="nav-list--group">
         <li class="nav-list--group-item">
