@@ -25,7 +25,7 @@
 <% end %>
 <div ng-controller="SolsticeCtrl" class="S-ctrl">
   <div class="S-heading">
-    <div class="row">
+    <div class="row row--no-margin">
       <div class="col-xs-12">
         <div class="S-logo"></div>
         <ul class="S-nav">
@@ -56,22 +56,22 @@
     </div>
   </div>
   <div class="S-Grid S-Grid--intro" id="about">
-    <div class="row top-sm">
-      <div class="col-xs-12 col-sm-4 around-sm">
+    <div class="row row--no-margin top-sm">
+      <div class="col-xs-12 col-sm-6 around-sm">
         <%= render partial: 'intro_text' %>
 
       </div>
-      <div class="col-xs-12 col-sm-4 first-sm around-sm">
+      <div class="col-xs-12 col-sm-3 first-sm around-sm">
         <%= render partial: 'prizes' %>
       </div>
-      <div class="col-xs-12 col-sm-4 last-sm around-sm">
+      <div class="col-xs-12 col-sm-3 last-sm around-sm">
         <%= render partial: 'recommended_gear' %>
       </div>
     </div>
   </div>
   <%#
   <div class="S-Grid S-Grid--post-intro">
-    <div class="row">
+    <div class="row row--no-margin">
       <div class="col-xs-12">
         render partial: 'post_intro'
       </div>
@@ -79,14 +79,14 @@
   </div>
   %>
   <div class="S-Grid S-Grid--map" id="map">
-    <div class="row">
+    <div class="row row--no-margin">
       <div class="col-xs-12">
         <%= render partial: 'map' %>
       </div>
     </div>
   </div>
   <div class="S-Grid S-Grid--social" id="social">
-    <div class="row">
+    <div class="row row--no-margin">
       <div class="col-xs-12">
         <p class="S-p S-p--heading" style="max-width:none">
           Tag your tweets and instagram photos and videos with #swiftcampout.
@@ -102,7 +102,7 @@
   </div>
   <% if !user_signed_in? || current_user.is_not_camper? %>
     <div class="S-grid S-grid--signup2">
-      <div class="row">
+      <div class="row row--no-margin">
         <div class="col-xs-12">
           <div class="Solistice-signup-btn-wrap">
             <% if !user_signed_in? %>
