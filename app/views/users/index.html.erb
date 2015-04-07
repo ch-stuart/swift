@@ -20,16 +20,16 @@
   </div>
   <div class="tab-divider"></div>
   <div class="card">
-    <%= render 'users_table', users: @dealers %>
+    <%= render 'users_table', users: @dealers, type: :dealer %>
   </div>
   <div class="card">
-    <%= render 'users_table', users: @users %>
+    <%= render 'users_table', users: @users, type: :user %>
   </div>
   <div class="card">
-    <%= render 'users_table', users: @campers_2015 %>
+    <%= render 'users_table', users: @campers_2015, type: :camper %>
   </div>
   <div class="card">
-    <%= render 'users_table', users: @admins %>
+    <%= render 'users_table', users: @admins, type: :admin %>
   </div>
 </div>
 

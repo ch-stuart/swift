@@ -11,6 +11,9 @@
       <th>
         Dealer
       </th>
+      <% if type == :camper %>
+        <th>Loc</th>
+      <% end %>
       <th></th>
       <th></th>
     </tr>
@@ -43,6 +46,26 @@
             </span>
           <% end %>
         </td>
+        <% if type == :camper %>
+          <td>
+            <% if user.is_attending_campout_in_2015 && user.latitude.present? %>
+              <span>
+                <%= user.city %>,
+                <%= user.state %>
+                <br>
+                <a
+                  style="font-size: 12px"
+                  href="https://maps.google.com/maps?z=1&t=m&q=<%= user.latitude %>,<%= user.longitude %>">
+                  (<%= user.latitude %> <%= user.longitude %>)
+                </a>
+              </span>
+            <% else %>
+              <span style="color:red;">
+                ✗ no lat/long
+              </span>
+            <% end %>
+          </td>
+        <% end %>
         <td>
           <%= link_to "Show", user_path(user), class: "btn btn--table" %>
           <%= link_to "Edit", edit_user_path(user), class: "btn btn--table" %>
