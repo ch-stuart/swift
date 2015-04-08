@@ -7,70 +7,86 @@
 </p>
 <div class="tabs">
   <div class="tab">
-    Public Products
+    Products
   </div>
+  <% if @private_products.present? %>
+    <div class="tab tab--demph">
+      Private Products
+    </div>
+  <% end %>
   <div class="tab">
-    Private Products
+    Stock
   </div>
+  <% if @private_stock.present? %>
+    <div class="tab tab--demph">
+      Private Stock
+    </div>
+  <% end %>
   <div class="tab">
-    Public Stock
+    Accessories
   </div>
+  <% if @private_accessories.present? %>
+    <div class="tab tab--demph">
+      Private Accessories
+    </div>
+  <% end %>
   <div class="tab">
-    Private Stock
+    Gift Certificates
   </div>
-  <div class="tab">
-    Public Accessories
-  </div>
-  <div class="tab">
-    Private Accessories
-  </div>
-  <div class="tab">
-    Public Gift Certificates
-  </div>
-  <div class="tab">
-    Private Gift Certificates
-  </div>
+  <% if @private_gift_certificates.present? %>
+    <div class="tab tab--demph">
+      Private Gift Certificates
+    </div>
+  <% end %>
   <div class="tab-divider"></div>
   <div class="card">
     <% cache @public_products do %>
       <%= render 'products_table', products: @public_products, title: 'Public Products' %>
     <% end %>
   </div>
-  <div class="card">
-    <% cache @private_products do %>
-      <%= render 'products_table', products: @private_products, title: 'Private Products' %>
-    <% end %>
-  </div>
+  <% if @private_products.present? %>
+    <div class="card">
+      <% cache @private_products do %>
+        <%= render 'products_table', products: @private_products, title: 'Private Products' %>
+      <% end %>
+    </div>
+  <% end %>
   <div class="card">
     <% cache @public_stock do %>
       <%= render 'products_table', products: @public_stock, title: 'Public Stock' %>
     <% end %>
   </div>
-  <div class="card">
-    <% cache @private_stock do %>
-      <%= render 'products_table', products: @private_stock, title: 'Private Stock' %>
-    <% end %>
-  </div>
+  <% if @private_stock.present? %>
+    <div class="card">
+      <% cache @private_stock do %>
+        <%= render 'products_table', products: @private_stock, title: 'Private Stock' %>
+      <% end %>
+    </div>
+  <% end %>
   <div class="card">
     <% cache @public_accessories do %>
       <%= render 'products_table', products: @public_accessories, title: 'Public Accessories' %>
     <% end %>
   </div>
-  <div class="card">
-    <% cache @private_accessories do %>
-      <%= render 'products_table', products: @private_accessories, title: 'Private Accessories' %>
-    <% end %>
-  </div>
+  <% if @private_accessories.present? %>
+    <div class="card">
+      <% cache @private_accessories do %>
+        <%= render 'products_table', products: @private_accessories, title: 'Private Accessories' %>
+      <% end %>
+    </div>
+  <% end %>
   <div class="card">
     <% cache @public_gift_certificates do %>
       <%= render 'products_table', products: @public_gift_certificates, title: 'Public Gift Certs' %>
     <% end %>
   </div>
-  <div class="card">
-    <% cache @private_gift_certificates do %>
-      <%= render 'products_table', products: @private_gift_certificates, title: 'Private Gift Certs' %>
-    <% end %>
-  </div>
+  <% if @private_gift_certificates.present? %>
+    <div class="card">
+      <% cache @private_gift_certificates do %>
+        <%= render 'products_table', products: @private_gift_certificates, title: 'Private Gift Certs' %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 <%= content_for :js do %>
 <script>

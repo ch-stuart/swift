@@ -22,7 +22,7 @@
   <tbody>
 <% products.each do |product| %>
   <tr>
-    <td><%= image_tag "#{product.kind}.png" %></td>
+    <td><%= image_tag "#{product.kind.gsub(' ', '')}.png" %></td>
     <td><%= image_tag "#{product.status}.png" %></td>
     <td>
       <% if product.featured_on_homepage? %>
