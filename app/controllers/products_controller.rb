@@ -13,7 +13,10 @@ class ProductsController < ApplicationController
     @private_stock = Product.where(status: 'Private', kind: 'Stock').order('title ASC')
     @public_accessories = Product.where(status: 'Public', kind: 'Accessory').order('title ASC')
     @private_accessories = Product.where(status: 'Private', kind: 'Accessory').order('title ASC')
-    render :layout => "hub"
+    @public_gift_certificates = Product.where(status: 'Public', kind: 'Gift Certificate').order('title ASC')
+    @private_gift_certificates = Product.where(status: 'Private', kind: 'Gift Certificate').order('title ASC')
+
+    render layout: "hub"
   end
 
   def show

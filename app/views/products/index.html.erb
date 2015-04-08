@@ -24,6 +24,12 @@
   <div class="tab">
     Private Accessories
   </div>
+  <div class="tab">
+    Public Gift Certificates
+  </div>
+  <div class="tab">
+    Private Gift Certificates
+  </div>
   <div class="tab-divider"></div>
   <div class="card">
     <% cache @public_products do %>
@@ -53,6 +59,16 @@
   <div class="card">
     <% cache @private_accessories do %>
       <%= render 'products_table', products: @private_accessories, title: 'Private Accessories' %>
+    <% end %>
+  </div>
+  <div class="card">
+    <% cache @public_gift_certificates do %>
+      <%= render 'products_table', products: @public_gift_certificates, title: 'Public Gift Certs' %>
+    <% end %>
+  </div>
+  <div class="card">
+    <% cache @private_gift_certificates do %>
+      <%= render 'products_table', products: @private_gift_certificates, title: 'Private Gift Certs' %>
     <% end %>
   </div>
 </div>
