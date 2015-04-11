@@ -15,6 +15,8 @@ class ProductsController < ApplicationController
     @private_accessories = Product.where(status: 'Private', kind: 'Accessory').order('title ASC')
     @public_gift_certificates = Product.where(status: 'Public', kind: 'Gift Certificate').order('title ASC')
     @private_gift_certificates = Product.where(status: 'Private', kind: 'Gift Certificate').order('title ASC')
+    @public_events = Product.where(status: 'Public', kind: 'Event').order('title ASC')
+    @private_events = Product.where(status: 'Private', kind: 'Event').order('title ASC')
 
     render layout: "hub"
   end

@@ -59,7 +59,6 @@ class UsersController < ApplicationController
       @user = User.find params[:id]
     else
       @user = current_user
-      logger.info "Whitelisting inputs for dealer"
     end
 
     respond_to do |format|
@@ -97,7 +96,18 @@ class UsersController < ApplicationController
 
   def user_params
     if current_user.admin?
-      params.require(:user).permit(:wholesale)
+      params.require(:user).permit(
+        :line1,
+        :city,
+        :state,
+        :zip_code,
+        :country,
+        :phone_no,
+        :company,
+        :company_url,
+        :contact,
+        :wholesale
+      )
     else
       params.require(:user).permit(
         :line1,

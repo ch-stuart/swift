@@ -40,6 +40,10 @@ SwiftSite::Application.routes.draw do
     get 'order', on: :member
   end
 
+  resources :categories do
+    get 'move', on: :member
+  end
+
   resources :coupons do
     get 'valid', on: :member, :constraints => { :id => /[A-Za-z0-9_-]+/ }
   end

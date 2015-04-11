@@ -26,6 +26,7 @@ gem 'cocoon'
 gem 'instagram'
 gem 'twitter'
 gem 'geocoder'
+gem 'acts_as_list'
 
 # group :assets do
   gem 'sass-rails'

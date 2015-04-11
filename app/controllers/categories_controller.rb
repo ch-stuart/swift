@@ -86,6 +86,25 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def move
+    category = Category.find(params[:id])
+
+    if params[:dir] == "up"
+      category.move_higher
+    end
+
+    if params[:dir] == "down"
+      category.move_lower
+    end
+
+    category.save
+
+    respond_to do |format|
+      format.html { redirect_to categories_url }
+      format.json { head :ok }
+    end
+  end
+
   private
 
   def category_params

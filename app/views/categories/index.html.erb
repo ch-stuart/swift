@@ -15,8 +15,12 @@
 <% @categories.each do |category| %>
   <tr>
     <td><%= category.title %></td>
-    <td><%= link_to 'Edit', edit_category_path(category), class: "btn btn--table" %>
-    <%= link_to 'Destroy', category, confirm: 'Are you sure?', method: :delete, class: "btn btn--table" %></td>
+    <td>
+      <%= link_to raw("UP"), move_category_path(category, dir: "up"), class: "btn btn--table" %>
+      <%= link_to raw("DOWN"), move_category_path(category, dir: "down"), class: "btn btn--table" %>
+      <%= link_to 'Edit', edit_category_path(category), class: "btn btn--table" %>
+      <%= link_to 'Destroy', category, confirm: 'Are you sure?', method: :delete, class: "btn btn--table" %>
+    </td>
   </tr>
 <% end %>
 </tbody>

@@ -38,6 +38,14 @@
       Private Gift Certificates
     </div>
   <% end %>
+  <div class="tab">
+    Events
+  </div>
+  <% if @private_events.present? %>
+    <div class="tab tab--demph">
+      Private Events
+    </div>
+  <% end %>
   <div class="tab-divider"></div>
   <div class="card">
     <% cache @public_products do %>
@@ -84,6 +92,18 @@
     <div class="card">
       <% cache @private_gift_certificates do %>
         <%= render 'products_table', products: @private_gift_certificates, title: 'Private Gift Certs' %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="card">
+    <% cache @public_events do %>
+      <%= render 'products_table', products: @public_events, title: 'Public Events' %>
+    <% end %>
+  </div>
+  <% if @private_events.present? %>
+    <div class="card">
+      <% cache @private_events do %>
+        <%= render 'products_table', products: @private_events, title: 'Private Events' %>
       <% end %>
     </div>
   <% end %>
