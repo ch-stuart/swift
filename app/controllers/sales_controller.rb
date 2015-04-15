@@ -2,6 +2,8 @@ class SalesController < ApplicationController
 
   before_filter :verify_is_admin, :except => [ :checkout, :create, :success, :cart, :charge, :history, :coupon ]
 
+  cache_sweeper :application_sweeper
+
   # GET /sales
   # GET /sales.json
   def index

@@ -1,6 +1,6 @@
 class ApplicationSweeper < ActionController::Caching::Sweeper
 
-  observe Category, Color, Company, Page, Part, Product, Size, Testimonial
+  observe Category, Color, Company, Page, Part, Product, Sale, Size, Testimonial
 
   USERS = ['WHOLESALE', 'ADMIN', 'USER_SIGNED_IN', 'USER_NOT_SIGNED_IN']
 
