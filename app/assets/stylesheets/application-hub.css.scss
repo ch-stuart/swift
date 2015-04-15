@@ -230,3 +230,19 @@ textarea {
 .app-alert {
   text-align: center;
 }
+
+
+.u-inventory--low,
+.u-inventory--zero {
+  border-radius: 2px;
+  padding: 0 2px;
+  color: #fff;
+  font-weight: bold;
+}
+.u-inventory--low {
+  background-color: #B97AFD;
+}
+.u-inventory--zero {
+  background-color: #E60000;
+
+}
