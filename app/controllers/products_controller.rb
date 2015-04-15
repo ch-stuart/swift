@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.find params[:id]
 
     if @product.related_products.present?
       @product.related_products = JSON.parse @product.related_products
