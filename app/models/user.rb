@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
   has_one :camper, dependent: :destroy
   accepts_nested_attributes_for :camper, :reject_if => :all_blank
 
-  validates :contact, presence: true
-  validates :city, presence: true
-  validates :state, presence: true
-  validates :zip_code, presence: true
+  validates :contact, presence: true, on: :create
+  validates :city, presence: true, on: :create
+  validates :state, presence: true, on: :create
+  validates :zip_code, presence: true, on: :create
   # Devise already validates email
   # validates :email, presence: true, uniqueness: true, length: { maximum: 200 }
 
