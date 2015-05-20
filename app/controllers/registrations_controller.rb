@@ -58,6 +58,7 @@ class RegistrationsController < Devise::RegistrationsController
             :which_bike,
             :favorite_camp_meal,
             :hear_about,
+            :public,
             :user_id
           ]
         )
@@ -85,6 +86,7 @@ class RegistrationsController < Devise::RegistrationsController
             :which_bike,
             :favorite_camp_meal,
             :hear_about,
+            :public,
             :user_id
           ]
         )

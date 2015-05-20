@@ -1,0 +1,24 @@
+<script type="text/ng-template" id="camper_profile.html">
+  <div class="CamperProfile" ng-if="data">
+    <p class="S-p S-p--heading CamperProfile-heading">
+      This is your camper profile information. Do you want to share it on this page?
+    </p>
+    <ul class="S-ul CamperProfile-ul">
+      <li class="S-li CamperProfile-li" ng-repeat="qas in data.qa">
+        <span class="CamperProfile-q">
+          {{ qas.q }}
+        </span>
+        <span class="CamperProfile-a">
+          {{ qas.a }}
+        </span>
+      </li>
+    </ul>
+    <p>
+      <a
+        class="Solistice-btn Solistice-btn--active"
+        href="/swiftcampout/share">
+        Share my info
+      </a>
+    </p>
+  </div>
+</script>

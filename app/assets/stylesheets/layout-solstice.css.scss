@@ -131,8 +131,9 @@
 .S-p--heading {
   font-weight: bold;
 }
-.S-ul {
-  line-height: 1.4;
+.S-ul,
+.S-li {
+  line-height: 1.5;
 }
 .S-p {
   line-height: 1.7;
@@ -177,21 +178,17 @@
   cursor: pointer;
   color: $solstice-orange;
 }
-.Solistice-signup-btn-wrap {
-  margin: 100px 0 20px;
-  text-align: center;
-}
-.Solistice-signup-btn,
-.Solistice-signup-btn:visited {
-  font-size: 30px;
+.Solistice-btn,
+.Solistice-btn:visited {
+  font-size: 20px;
   background-color: $solstice-orange;
   font-family: $solstice-font-stack;
   font-weight: 600;
   color: $solstice-white;
   display: inline-block;
-  padding: 0 40px;
-  line-height: 60px;
-  height: 60px;
+  padding: 0 20px;
+  line-height: 35px;
+  height: 35px;
   border-radius: 3px;
 
   &:hover {
@@ -199,7 +196,21 @@
     background-color: darken($solstice-orange, 3%);
   }
 }
-.Solistice-signup-btn--welcome {
+.Solistice-btn--active {
+  cursor: pointer;
+}
+.Solistice-signup-btn-wrap {
+  margin: 100px 0 20px;
+  text-align: center;
+}
+.Solistice-btn--signup,
+.Solistice-btn--signup:visited {
+  font-size: 30px;
+  padding: 0 40px;
+  line-height: 60px;
+  height: 60px;
+}
+.Solistice-btn--signup--welcome {
   line-height: 1.2;
   height: auto;
   padding: 10px 40px;

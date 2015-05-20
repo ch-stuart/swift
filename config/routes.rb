@@ -26,6 +26,7 @@ SwiftSite::Application.routes.draw do
   resources :users, only: [:index, :edit, :update, :destroy, :show] do
     collection do
       get 'campout_locations'
+      get 'camper_profile'
     end
   end
   get 'profile', :to => 'users#profile'
@@ -96,6 +97,7 @@ SwiftSite::Application.routes.draw do
   get "swiftcampout/sign_in" => redirect("/users/sign_in?swiftcampout=1")
   get "swiftcampout/sign_up" => redirect("/users/sign_up?swiftcampout=1")
   get "swiftcampout/welcome", to: 'solstice#index'
+  get "swiftcampout/share", to: 'solstice#share'
 
   post 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
 

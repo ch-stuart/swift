@@ -30,15 +30,15 @@
 </p>
 <% if !user_signed_in? %>
   <div class="Solistice-signup-btn-wrap">
-    <%= link_to "Sign Up", new_user_registration_path(swiftcampout: "1"), class: "Solistice-signup-btn" %>
+    <%= link_to "Sign Up", new_user_registration_path(swiftcampout: "1"), class: "Solistice-btn Solistice-btn--signup" %>
   </div>
 <% elsif user_signed_in? && current_user.is_not_camper? %>
   <div class="Solistice-signup-btn-wrap">
-    <%= link_to "Sign Up", edit_user_registration_path, class: "Solistice-signup-btn" %>
+    <%= link_to "Sign Up", edit_user_registration_path, class: "Solistice-btn Solistice-btn--signup" %>
   </div>
 <% else %>
   <div class="Solistice-signup-btn-wrap">
-    <div class="Solistice-signup-btn Solistice-signup-btn--welcome">
+    <div class="Solistice-btn Solistice-btn--signup Solistice-btn--signup--welcome">
       Thanks for Signing Up!
     </div>
   </div>

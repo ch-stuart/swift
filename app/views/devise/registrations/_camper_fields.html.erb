@@ -32,4 +32,12 @@
     <%= camper_fields.label :hear_about, "How did you hear about Swift Campout?", class: "label" %>
     <%= camper_fields.text_area :hear_about, class: "input textarea input--stretch" %>
   </div>
+  <div class="label-input-pair">
+    <label class="label" for="user_camper_attributes_public">
+      <%= camper_fields.check_box :public, class: "input" %>
+      Do you want to share your campout profile?
+    </label>
+
+  </div>
+
 <% end %>

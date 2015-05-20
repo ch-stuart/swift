@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :verify_is_admin, except: [:profile, :campout_locations]
+  before_filter :verify_is_admin, except: [:profile, :campout_locations, :camper_profile]
   before_filter :verify_is_signed_in, only: [:profile]
 
   layout "hub"
@@ -38,6 +38,60 @@ class UsersController < ApplicationController
     end
 
     render json: json
+  end
+
+  def camper_profile
+    if current_user.blank? || current_user.camper.blank?
+      return render text: "", status: :unauthorized
+    end
+
+    if current_user.camper.public?
+      return render text: "", status: 204
+    end
+
+    response = {}
+
+    c = current_user.camper
+
+    qa = []
+    qa.push({
+      q: "Is this your first bike-overnight?",
+      a: c.is_first_bike_overnight
+    })
+    qa.push({
+      q: "Where are you heading on your Swift Campout, and how far is it to your destination?",
+      a: c.campout_location_and_miles
+    })
+    qa.push({
+      q: "Tell us about your favorite piece of gear",
+      a: c.favorite_gear
+    })
+    qa.push({
+      q: "Why do you love camping by bicycle?",
+      a: c.why_do_you_love_bike_camping
+    })
+    qa.push({
+      q: "Are you heading out with a posse? What's your crew's name?",
+      a: c.is_group_camping
+    })
+    qa.push({
+      q: "What kind of bike are you riding?",
+      a: c.which_bike
+    })
+    qa.push({
+      q: "What's your go-to camp meal?",
+      a: c.favorite_camp_meal
+    })
+    qa.push({
+      q: "How did you hear about Swift Campout?",
+      a: c.hear_about
+    })
+
+    response[:qa] = qa
+    response[:userid] = current_user.id
+    response[:public] = current_user.camper.public?
+
+    render json: response
   end
 
   def profile
@@ -106,7 +160,8 @@ class UsersController < ApplicationController
         :company,
         :company_url,
         :contact,
-        :wholesale
+        :wholesale,
+        :public
       )
     else
       params.require(:user).permit(
@@ -118,7 +173,8 @@ class UsersController < ApplicationController
         :phone_no,
         :company,
         :company_url,
-        :contact
+        :contact,
+        :public
       )
     end
   end

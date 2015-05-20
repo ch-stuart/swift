@@ -30,10 +30,11 @@
 //= require angular/directives/twitter_directive
 //= require angular/directives/instagram_directive
 //= require angular/directives/flickr_photo_directive
+//= require angular/directives/camper_profile_directive
 //= require leaflet/leaflet
 //= require angular-leaflet-directive/dist/angular-leaflet-directive
 //= require angular/services/exception_service
-//= require angular/services/campout_location_service
+//= require angular/services/campout_user_service
 //= require angular/services/config_service
 //= require angular/services/coupon_service
 //= require angular/services/wa_state_tax_service

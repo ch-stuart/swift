@@ -82,6 +82,16 @@
     <div class="row row--no-margin">
       <div class="col-xs-12">
         <%= render partial: 'map' %>
+        <div class="S-Camper-profiles">
+          <% @public_campers.each do |user| %>
+            <div class="S-Camper-profile">
+              <%= render partial: "public_profile", locals: { user: user } %>
+            </div>
+          <% end %>
+          <div class="S-Camper-profile">
+            <sw-camper-profile></sw-camper-profile>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -123,5 +133,6 @@
 <%= render 'twitter' %>
 <%= render 'instagram' %>
 <%= render 'flickr' %>
+<%= render 'camper_profile' %>
 <%= render 'submit_journals' %>
 <%= render 'submit_films' %>

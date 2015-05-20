@@ -2,8 +2,8 @@ SwiftApp.controller('SolsticeCtrl', [
   '$scope',
   '$timeout',
   'ExceptionService',
-  'CampoutLocationService',
-  function($scope, $timeout, ExceptionService, CampoutLocationService) {
+  'CampoutUserService',
+  function($scope, $timeout, ExceptionService, CampoutUserService) {
 
   'use strict';
 
@@ -34,13 +34,13 @@ SwiftApp.controller('SolsticeCtrl', [
             lat: 42,
             lng: -83,
             zoom: 2
-        }
+        };
     } else {
         mapCenter = {
             lat: 14,
             lng: -14,
             zoom: 2
-        }
+        };
     }
 
     angular.extend($scope, {
@@ -54,10 +54,9 @@ SwiftApp.controller('SolsticeCtrl', [
         }
     });
 
-
     function populateMap() {
-      CampoutLocationService
-        .get()
+      CampoutUserService
+        .getCampoutLocations()
         .success(function(locs) {
           var markers = {};
 
@@ -91,6 +90,7 @@ SwiftApp.controller('SolsticeCtrl', [
           ExceptionService.report('Failed to get solstice map data', data);
         });
     }
+
     $timeout(populateMap, 222);
   };
 
@@ -145,7 +145,6 @@ SwiftApp.controller('SolsticeCtrl', [
       scrollTop: $('#map').offset().top - 12
     }, 1200);
   };
-
 
   initializeMap();
 
