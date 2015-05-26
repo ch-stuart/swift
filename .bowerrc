@@ -1,5 +1,10 @@
 {
   "directory": "vendor/assets/bower_components/",
   "analytics": false,
-  "timeout": 120000
+  "timeout": 120000,
+  "storage" : {
+    "cache" : "/Users/charles.stuart/.bower/cache.swift",
+    "registry" : "/Users/charles.stuart/.bower/registry.swift"
+  }
 }
+

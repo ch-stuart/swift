@@ -1,12 +1,12 @@
 /*global jQuery $ window */
 jQuery.fn.tabs = function(params) {
 
-  var defaults = {
-    'tabs': '.tab',
-    'cards': '.card',
-    'index': '0'
-  },
-    loc = window.location;
+  var loc = window.location,
+      defaults = {
+        'tabs': '.tab',
+        'cards': '.card',
+        'index': '0'
+      };
 
   if (loc.hash.indexOf('tab')) {
     defaults.index = loc.hash.replace('#tab', '');
@@ -15,9 +15,12 @@ jQuery.fn.tabs = function(params) {
   params = $.extend(defaults, params);
 
   return this.each(function() {
-    var $tabWrapper = $(this);
+    var $tabWrapper,
+        setActive;
 
-    var set = function(idx) {
+    $tabWrapper = $(this);
+
+    setActive = function(idx) {
       $tabWrapper
         .find(params.tabs)
         .removeClass('active')
@@ -30,14 +33,16 @@ jQuery.fn.tabs = function(params) {
         .eq(idx)
         .addClass('active');
 
-      loc.hash = '#tab' + idx;
+      if (params.routing) {
+        loc.hash = '#tab' + idx;
+      }
     };
 
-    set(params.index);
+    setActive(params.index);
 
     $tabWrapper.on('click', params.tabs, function(e) {
       e.preventDefault();
-      set($(this).index());
+      setActive($(this).index());
     });
 
   });

@@ -27,6 +27,7 @@ SwiftSite::Application.routes.draw do
     collection do
       get 'campout_locations'
       get 'camper_profile'
+      get 'camper_profiles'
     end
   end
   get 'profile', :to => 'users#profile'

@@ -9,7 +9,8 @@ SwiftApp.controller('SolsticeCtrl', [
 
   var initializeMap,
       initializeHeader,
-      initializeWelcome;
+      initializeWelcome,
+      initializePublicProfiles;
 
   initializeMap = function() {
       var mapCenter,
@@ -146,10 +147,22 @@ SwiftApp.controller('SolsticeCtrl', [
     }, 1200);
   };
 
+  initializePublicProfiles = function() {
+    CampoutUserService
+      .getCamperProfiles()
+      .success(function(data, status) {
+        $scope.publicProfiles = data;
+      })
+      .error(function(response) {
+        console.error(response);
+      });
+  };
+
   initializeMap();
 
   $(window).on('load', function() {
     initializeHeader();
     initializeWelcome();
+    initializePublicProfiles();
   });
 }]);

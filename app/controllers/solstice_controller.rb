@@ -4,7 +4,6 @@ class SolsticeController < ApplicationController
     @company = Company.first
     @categories = Category.all
     @products = Product.where(status: "Public", kind: "Product")
-    @public_campers = User.joins(:camper).where(campers: { public: true })
   end
 
   def share
@@ -18,7 +17,9 @@ class SolsticeController < ApplicationController
       return redirect_to new_user_session_path
     end
 
-    current_user.camper.status = "Public"
+    # TODO verify user has camper association?
+
+    current_user.camper.is_public = true
     current_user.save
 
     flash[:notice] = "You have successfully shared your camper profile"

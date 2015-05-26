@@ -1,5 +1,5 @@
 SwiftApp
-  .directive('swCamperProfile', ['CampoutUserService', function(campoutUserService) {
+  .directive('swCamperProfile', ['$log', 'CampoutUserService', function($log, campoutUserService) {
 
     return {
       scope: {},
@@ -7,9 +7,17 @@ SwiftApp
       restrict: "E",
       link: function($scope, $elem, $attrs) {
 
-        $scope.share = function() {
-          // campoutUserService
+        var qaMap = window.camper_qa_map;
+
+        $scope.getQ = function(key) {
+          return qaMap[key];
         };
+
+        if ($attrs.profile) {
+          $scope.data = JSON.parse($attrs.profile);
+          $scope.isPublicProfile = true;
+          return;
+        }
 
         campoutUserService
           .getCamperProfile()
@@ -22,7 +30,9 @@ SwiftApp
             $scope.data = data;
             $scope.userid = data.userid;
           })
-          .error(console.warn);
+          .error(function(response) {
+            console.error(response);
+          });
 
       }
     };

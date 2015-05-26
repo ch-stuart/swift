@@ -120,6 +120,7 @@
       window.ieVersion = /*@cc_on (function() {switch(@_jscript_version) {case 5.8: return 8; case 9: return 9; case 10: return 10;}})() || @*/ 0;
   })();
   </script>
+  <%= yield :before_js %>
   <%= javascript_include_tag "application" %>
   <%= yield :js %>
   <%= render "shared/analytics" unless Rails.env == "development" %>

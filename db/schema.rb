@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150520030629) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "public",                       default: false, null: false
+    t.boolean  "is_public",                    default: false, null: false
   end
 
   create_table "categories", force: :cascade do |t|

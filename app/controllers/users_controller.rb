@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :verify_is_admin, except: [:profile, :campout_locations, :camper_profile]
+  before_filter :verify_is_admin, except: [:profile, :campout_locations, :camper_profile, :camper_profiles]
   before_filter :verify_is_signed_in, only: [:profile]
 
   layout "hub"
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # http://stackoverflow.com/questions/5857915
   def campout_locations
     # This cache is cleared in User.rb
-    json = Rails.cache.fetch "users_campout_locations" do
+    json = Rails.cache.fetch "users_campout_locations2" do
       campers_2015 = User
         .where(is_attending_campout_in_2015: true)
         .where.not(latitude: nil)
@@ -26,15 +26,29 @@ class UsersController < ApplicationController
 
       @campers_2015 = @campers_2015.as_json
 
-      @campers_2015.each do |camper|
-        this_camper = User.find camper['id']
+      @campers_2015.each do |user_data|
+        user = User.find(user_data["id"])
 
-        size = campers_2015.near(User.find(camper['id']), 10).size - 1
+        size = campers_2015.near(user, 10).size - 1
 
-        camper['neighbors'] = size
+        # not all campers have a camper association
+        if user.camper.present?
+          user_data["public_profile"] = user.camper.is_public?
+          if user.camper.is_public?
+            user_data["public_contact"] = user.contact
+          end
+        end
+        user_data["neighbors"] = size
       end
 
-      @campers_2015.to_json(only: ['latitude', 'longitude', 'city', 'neighbors'])
+      logger.info @campers_2015
+
+      json = @campers_2015.to_json(
+        only: [
+          "latitude", "longitude", "city", "public_contact",
+          "neighbors", "public_profile"
+        ]
+      )
     end
 
     render json: json
@@ -42,61 +56,101 @@ class UsersController < ApplicationController
 
   def camper_profile
     if current_user.blank? || current_user.camper.blank?
-      return render text: "", status: :unauthorized
+      return render text: "User not signed in or is not a camper", status: :unauthorized
     end
 
-    if current_user.camper.public?
+    if current_user.camper.is_public?
       return render text: "", status: 204
     end
 
-    response = {}
+    # response = {}
+    #
+    # c = current_user.camper
+    #
+    # qa = []
+    # qa.push({
+    #   q: Camper.is_first_bike_overnight_label,
+    #   a: c.is_first_bike_overnight
+    # })
+    # qa.push({
+    #   q: Camper.campout_location_and_miles_label,
+    #   a: c.campout_location_and_miles
+    # })
+    # qa.push({
+    #   q: Camper.favorite_gear_label,
+    #   a: c.favorite_gear
+    # })
+    # qa.push({
+    #   q: Camper.why_do_you_love_bike_camping_label,
+    #   a: c.why_do_you_love_bike_camping
+    # })
+    # qa.push({
+    #   q: Camper.is_group_camping_label,
+    #   a: c.is_group_camping
+    # })
+    # qa.push({
+    #   q: Camper.which_bike_label,
+    #   a: c.which_bike
+    # })
+    # qa.push({
+    #   q: Camper.favorite_camp_meal_label,
+    #   a: c.favorite_camp_meal
+    # })
+    # qa.push({
+    #   q: Camper.hear_about_label,
+    #   a: c.hear_about
+    # })
+    #
+    # response[:qa] = qa
+    # response[:userid] = current_user.id
+    # response[:public] = current_user.camper.is_public?
+    #
+    # render json: response
 
-    c = current_user.camper
+    render json: current_user,
+      only: [:city, :contact],
+      include: {
+        camper: {
+          only: [
+            :is_first_bike_overnight,
+            :campout_location_and_miles,
+            :favorite_gear,
+            :why_do_you_love_bike_camping,
+            :is_group_camping,
+            :which_bike,
+            :favorite_camp_meal,
+            :hear_about
+          ]
+        }
+      }
 
-    qa = []
-    qa.push({
-      q: "Is this your first bike-overnight?",
-      a: c.is_first_bike_overnight
-    })
-    qa.push({
-      q: "Where are you heading on your Swift Campout, and how far is it to your destination?",
-      a: c.campout_location_and_miles
-    })
-    qa.push({
-      q: "Tell us about your favorite piece of gear",
-      a: c.favorite_gear
-    })
-    qa.push({
-      q: "Why do you love camping by bicycle?",
-      a: c.why_do_you_love_bike_camping
-    })
-    qa.push({
-      q: "Are you heading out with a posse? What's your crew's name?",
-      a: c.is_group_camping
-    })
-    qa.push({
-      q: "What kind of bike are you riding?",
-      a: c.which_bike
-    })
-    qa.push({
-      q: "What's your go-to camp meal?",
-      a: c.favorite_camp_meal
-    })
-    qa.push({
-      q: "How did you hear about Swift Campout?",
-      a: c.hear_about
-    })
+  end
 
-    response[:qa] = qa
-    response[:userid] = current_user.id
-    response[:public] = current_user.camper.public?
+  def camper_profiles
+    campers = User.where(is_attending_campout_in_2015: true)
+    public_campers = campers.joins(:camper).where(campers: { is_public: true })
 
-    render json: response
+    render json: public_campers,
+      only: [:city, :contact, :id],
+      include: {
+        camper: {
+          only: [
+            :is_first_bike_overnight,
+            :campout_location_and_miles,
+            :favorite_gear,
+            :why_do_you_love_bike_camping,
+            :is_group_camping,
+            :which_bike,
+            :favorite_camp_meal,
+            :hear_about
+          ]
+        }
+      }
   end
 
   def profile
     @user = current_user
-    render layout: 'devise'
+    render layout: "devise"
   end
 
   def show
@@ -118,7 +172,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update_attributes(user_params)
         if current_user.try(:admin?)
-          format.html { redirect_to users_url, :notice => 'User was successfully updated.' }
+          format.html { redirect_to users_url, :notice => "User was successfully updated." }
         else
           format.html { redirect_to my_info_path, :notice => '"My Info" was successfully updated.' }
         end

@@ -20,6 +20,9 @@
   display: none;
 }
 
+// Third party
+@import 'flexslider/flexslider';
+
 // Includes
 @import 'include-color';
 @import 'include-media';
@@ -34,7 +37,6 @@
 @import 'layout-global-nav';
 @import 'layout-footer';
 @import 'layout-humans';
-@import 'layout-solstice';
 // Pages
 @import 'glob-homes';
 @import 'glob-page';
@@ -42,7 +44,6 @@
 @import 'module-container';
 @import 'module-blog';
 @import 'module-buttons';
-@import 'module-camper-profile';
 @import 'module-cart';
 @import 'module-checkout';
 @import 'module-color.picker';
@@ -66,6 +67,12 @@
 @import 'module-twitter-dir';
 @import 'module-insta-dir';
 @import 'module-flickr-dir';
+
+// Really this is mostly a collection
+// of "modules", therefore I'm putting
+// it last
+@import 'layout-solstice';
+@import 'module-camper-profile';
 
 // Override the base style set by Skeleton
 a {

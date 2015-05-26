@@ -279,14 +279,26 @@
   font-size: 16px;
 }
 
-
 .ngdialog.ngdialog-theme-default .ngdialog-content {
   background-color: $solstice-orange;
   width: 100%;
   max-width: 550px;
 }
-
 .row--no-margin {
   margin-left: 0;
   margin-right: 0;
+}
+.S-tabs {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+.S-tab {
+  background-color: transparent;
+  text-transform: uppercase;
+  font-family: $solstice-font-stack;
+  color: $solstice-white;
+}
+.S-tab.active {
+  background-color: lighten($solstice-dark-brown, 10%);
+  color: $solstice-white;
 }

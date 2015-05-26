@@ -1,9 +1,11 @@
+@import 'vars-solstice';
+
 .CamperProfile {
   color: $solstice-white;
   font-size: 14px;
   padding: 30px;
   background-color: lighten($solstice-dark-brown, 10%);
-  margin-top: 30px;
+  margin-top: 10px;
   border-radius: 2px;
 }
 .CamperProfile-heading {
@@ -30,4 +32,8 @@
 .CamperProfile-a {
   margin: 5px 0 0;
   padding: 0;
+}
+.S-flexslider .flexslider {
+  border: none;
+  background-color: transparent;
 }

@@ -1,24 +1,31 @@
 <script type="text/ng-template" id="camper_profile.html">
   <div class="CamperProfile" ng-if="data">
-    <p class="S-p S-p--heading CamperProfile-heading">
+    <p class="S-p S-p--heading CamperProfile-heading" ng-hide="isPublicProfile">
       This is your camper profile information. Do you want to share it on this page?
-    </p>
-    <ul class="S-ul CamperProfile-ul">
-      <li class="S-li CamperProfile-li" ng-repeat="qas in data.qa">
-        <span class="CamperProfile-q">
-          {{ qas.q }}
-        </span>
-        <span class="CamperProfile-a">
-          {{ qas.a }}
-        </span>
-      </li>
-    </ul>
-    <p>
+      <br>
+      <br>
       <a
         class="Solistice-btn Solistice-btn--active"
         href="/swiftcampout/share">
         Share my info
       </a>
     </p>
+    <p class="S-p" ng-hide="isPublicProfile">
+      --
+      <br>
+    </p>
+    <p class="S-p S-p--heading CamperProfile-heading">
+      {{ data.contact }}, {{ data.city }}
+    </p>
+    <ul class="S-ul CamperProfile-ul">
+      <li class="S-li CamperProfile-li" ng-repeat="(key, value) in data.camper">
+        <span class="CamperProfile-q">
+          {{ getQ(key) }}
+        </span>
+        <span class="CamperProfile-a">
+          {{ value }}
+        </span>
+      </li>
+    </ul>
   </div>
 </script>
