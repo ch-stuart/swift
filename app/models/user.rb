@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
 
   after_save :clear_campout_locations_cache
 
+  before_validation :populate_guid, on: :create
+
   geocoded_by :address
   after_validation :geocode
 
@@ -70,6 +72,14 @@ class User < ActiveRecord::Base
   def clear_campout_locations_cache
     Rails.logger.debug "Clearing cache for camper locations"
     Rails.cache.delete "users_campout_locations"
+  end
+
+  def populate_guid
+    if self.guid.present?
+      raise "Cannot set guid on user. It's already set."
+    else
+      self.guid = SecureRandom.hex(4)
+    end
   end
 
 end

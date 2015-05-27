@@ -131,7 +131,7 @@ class UsersController < ApplicationController
     public_campers = campers.joins(:camper).where(campers: { is_public: true })
 
     render json: public_campers,
-      only: [:city, :contact, :id],
+      only: [:city, :contact, :guid],
       include: {
         camper: {
           only: [
