@@ -1,9 +1,10 @@
 <script type="text/ng-template" id="instagram.html">
   <div class="InstaDir-items">
     <flex-slider
+      class="S-flexslider"
       slide="media in mediaItems track by $index"
-      keyboard="false"
-      animation-loop="false">
+      control-nav="false"
+      keyboard="false">
       <li>
         <a ng-href="{{ media.link }}">
           <div

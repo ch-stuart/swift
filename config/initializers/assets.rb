@@ -16,5 +16,9 @@ Rails.application.config.assets.precompile += [
   'fontello.eot',
   'fontello.svg',
   'fontello.ttf',
-  'fontello.woff'
+  'fontello.woff',
+  'flexslider-icon.eot',
+  'flexslider-icon.svg',
+  'flexslider-icon.ttf',
+  'flexslider-icon.woff'
 ]

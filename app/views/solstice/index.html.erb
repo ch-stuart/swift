@@ -71,7 +71,6 @@
     <div class="row row--no-margin top-sm">
       <div class="col-xs-12 col-sm-6 around-sm">
         <%= render partial: 'intro_text' %>
-
       </div>
       <div class="col-xs-12 col-sm-3 first-sm around-sm">
         <%= render partial: 'prizes' %>
@@ -99,26 +98,34 @@
             <div class="tab S-tab">
               Public Profiles
             </div>
-            <div class="tab S-tab">
-              Your Profile
-            </div>
+            <% if user_signed_in? %>
+              <div class="tab S-tab">
+                Your Profile
+              </div>
+            <% end %>
             <div class="card S-card">
               <flex-slider
                 class="S-flexslider"
                 slide="profile in publicProfiles track by profile.id"
                 animation="slide"
+                slideshow-speed="99999"
                 keyboard="false"
-                animation-loop="false">
+                animation-loop="true"
+                control-nav="false"
+                next-text=""
+                prev-text="">
                 <li>
                   <sw-camper-profile profile="{{ profile }}"></sw-camper-profile>
                 </li>
               </flex-slider>
             </div>
-            <div class="card S-card">
-              <div class="S-Camper-profile">
-                <sw-camper-profile></sw-camper-profile>
+            <% if user_signed_in? %>
+              <div class="card S-card">
+                <div class="S-Camper-profile">
+                  <sw-camper-profile></sw-camper-profile>
+                </div>
               </div>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -145,9 +152,9 @@
         <div class="col-xs-12">
           <div class="Solistice-signup-btn-wrap">
             <% if !user_signed_in? %>
-              <%= link_to "Sign Up", new_user_registration_path(swiftcampout: "1"), class: "Solistice-signup-btn" %>
+              <%= link_to "Sign Up", new_user_registration_path(swiftcampout: "1"), class: "Solistice-btn" %>
             <% else %>
-              <%= link_to "Sign Up", edit_user_registration_path, class: "Solistice-signup-btn" %>
+              <%= link_to "Sign Up", edit_user_registration_path, class: "Solistice-btn" %>
             <% end %>
           </div>
           <p class="S-p S-p--disclaimer">

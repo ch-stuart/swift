@@ -1,0 +1,25 @@
+// flexslider path is fonts/font-file.woff
+// rails asset pipeline wants it to be just font-file.woff
+
+@font-face {
+  font-family: 'flexslider-icon';
+  src: url('flexslider-icon.eot');
+  src: url('flexslider-icon.eot?#iefix') format('embedded-opentype'), url('flexslider-icon.woff') format('woff'), url('flexslider-icon.ttf') format('truetype'), url('flexslider-icon.svg#flexslider-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+// Move navigation arrows up
+.flex-direction-nav a {
+  top: 20%;
+
+  &:hover,
+  &:focus {
+    color: lighten(rgba(0, 0, 0, 0.8), 10%);
+  }
+  // arrow is not aligned properly in container
+  &:before {
+    line-height: 40px;
+  }
+}
