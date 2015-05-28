@@ -26,4 +26,12 @@ class SolsticeController < ApplicationController
     redirect_to swiftcampout_path
   end
 
+  def profile
+    render 404 if params[:guid].blank?
+
+    @user = User.find_by_guid params[:guid]
+
+    render layout: nil
+  end
+
 end

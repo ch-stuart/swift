@@ -1,0 +1,17 @@
+<div class="CamperProfile" style="background-color: transparent">
+  <p class="S-p S-p--heading CamperProfile-heading">
+    Name: <%= @user.contact %>
+    <br>
+    Location: <%= @user.city %>
+  </p>
+  <ul class="S-ul CamperProfile-ul">
+    <li class="S-li CamperProfile-li"><span class="CamperProfile-q"><%= Camper.qa_map[:is_first_bike_overnight] %></span><span class="CamperProfile-q"><%= @user.camper.is_first_bike_overnight %></span></li>
+    <li class="S-li CamperProfile-li"><span class="CamperProfile-q"><%= Camper.qa_map[:campout_location_and_miles] %></span><span class="CamperProfile-q"><%= @user.camper.campout_location_and_miles %></span></li>
+    <li class="S-li CamperProfile-li"><span class="CamperProfile-q"><%= Camper.qa_map[:favorite_gear] %></span><span class="CamperProfile-q"><%= @user.camper.favorite_gear %></span></li>
+    <li class="S-li CamperProfile-li"><span class="CamperProfile-q"><%= Camper.qa_map[:why_do_you_love_bike_camping] %></span><span class="CamperProfile-q"><%= @user.camper.why_do_you_love_bike_camping %></span></li>
+    <li class="S-li CamperProfile-li"><span class="CamperProfile-q"><%= Camper.qa_map[:is_group_camping] %></span><span class="CamperProfile-q"><%= @user.camper.is_group_camping %></span></li>
+    <li class="S-li CamperProfile-li"><span class="CamperProfile-q"><%= Camper.qa_map[:which_bike] %></span><span class="CamperProfile-q"><%= @user.camper.which_bike %></span></li>
+    <li class="S-li CamperProfile-li"><span class="CamperProfile-q"><%= Camper.qa_map[:favorite_camp_meal] %></span><span class="CamperProfile-q"><%= @user.camper.favorite_camp_meal %></span></li>
+    <li class="S-li CamperProfile-li"><span class="CamperProfile-q"><%= Camper.qa_map[:hear_about] %></span><span class="CamperProfile-q"><%= @user.camper.hear_about %></span></li>
+  </ul>
+</div>

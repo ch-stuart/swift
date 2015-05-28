@@ -99,6 +99,7 @@ SwiftSite::Application.routes.draw do
   get "swiftcampout/sign_up" => redirect("/users/sign_up?swiftcampout=1")
   get "swiftcampout/welcome", to: 'solstice#index'
   get "swiftcampout/share", to: 'solstice#share'
+  get "swiftcampout/profile/:guid", to: 'solstice#profile'
 
   post 'wa_state_taxes/rate', to: 'wa_state_taxes#rate'
 

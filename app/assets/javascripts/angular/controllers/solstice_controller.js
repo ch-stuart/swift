@@ -1,9 +1,11 @@
 SwiftApp.controller('SolsticeCtrl', [
   '$scope',
   '$timeout',
+  '$http',
+  'ngDialog',
   'ExceptionService',
   'CampoutUserService',
-  function($scope, $timeout, ExceptionService, CampoutUserService) {
+  function($scope, $timeout, $http, ngDialog, ExceptionService, CampoutUserService) {
 
   'use strict';
 
@@ -12,9 +14,33 @@ SwiftApp.controller('SolsticeCtrl', [
       initializeWelcome,
       initializePublicProfiles;
 
+  $scope.loadCamperProfileInDialog = function(event) {
+    var url,
+        dialogSettings;
+
+    if (!event.target.getAttribute('url')) {
+      return console.error('Could not get profile url');
+    }
+
+    url = event.target.getAttribute('url');
+
+    $http
+      .get(url)
+      .then(function success(response) {
+        ngDialog.open({
+          template: response.data,
+          plain: true
+        });
+      }, function error(response) {
+        ExceptionService.report('Failed to get camper profile for dialog', response);
+      });
+  };
+
   initializeMap = function() {
-      var mapCenter,
-          tilesDict = {
+    var mapCenter,
+        tilesDict;
+
+    tilesDict = {
           openstreetmap: {
               url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
               options: {
@@ -45,14 +71,14 @@ SwiftApp.controller('SolsticeCtrl', [
     }
 
     angular.extend($scope, {
-        kc: mapCenter,
-        tiles: tilesDict.stamenmap,
-        defaults: {
-            scrollWheelZoom: false
-        },
-        changeMap: function(map) {
-            $scope.tiles = tilesDict[map];
-        }
+      kc: mapCenter,
+      tiles: tilesDict.stamenmap,
+      defaults: {
+        scrollWheelZoom: false
+      },
+      changeMap: function(map) {
+        $scope.tiles = tilesDict[map];
+      }
     });
 
     function populateMap() {
@@ -64,7 +90,8 @@ SwiftApp.controller('SolsticeCtrl', [
           $scope.camperCount = locs.length;
 
           locs.forEach(function(loc, idx) {
-            var msg = loc.city;
+            var msg = "<div>";
+            msg += loc.city;
 
             if (loc.neighbors) {
               msg += "<br>" + loc.neighbors;
@@ -76,13 +103,30 @@ SwiftApp.controller('SolsticeCtrl', [
               msg += " also attending.";
             }
 
+            if (loc.public_profile) {
+              msg += "<br><br>";
+              msg += loc.public_contact;
+              msg += "<br>";
+              msg += "<span ";
+              msg +=   "class='S-a' ";
+              msg +=   "url='/swiftcampout/profile/" + loc.guid + "' ";
+              msg +=   "ng-click='loadCamperProfileInDialog($event)'>";
+              msg += "View Profile";
+              msg += "</span>";
+            }
+
+            msg += "</div>";
+
             markers['m'+idx] = {
               lat: loc.latitude,
               lng: loc.longitude,
               message: msg,
               focus: false,
-              draggable: false
+              draggable: false,
+              // this will allow directives to be nested in marker HTML
+              getMessageScope: function() { return $scope; }
             };
+
           });
 
           $scope.markers = markers;

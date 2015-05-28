@@ -46,7 +46,7 @@ class UsersController < ApplicationController
       json = @campers_2015.to_json(
         only: [
           "latitude", "longitude", "city", "public_contact",
-          "neighbors", "public_profile"
+          "neighbors", "public_profile", "guid"
         ]
       )
     end
