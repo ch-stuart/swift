@@ -98,7 +98,7 @@
             <div class="tab S-tab">
               Public Profiles
             </div>
-            <% if user_signed_in? %>
+            <% if user_signed_in? && current_user.camper.present? && !current_user.camper.is_public? %>
               <div class="tab S-tab">
                 Your Profile
               </div>
@@ -120,7 +120,7 @@
                 </li>
               </flex-slider>
             </div>
-            <% if user_signed_in? %>
+            <% if user_signed_in? && current_user.camper.present? && !current_user.camper.is_public? %>
               <div class="card S-card">
                 <div class="S-Camper-profile">
                   <sw-camper-profile></sw-camper-profile>

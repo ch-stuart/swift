@@ -44,11 +44,6 @@
     <div class="label-input-pair">
       <%= f.label :contact, "Name", class: "label label--required" %>
       <%= f.text_field :contact, autofocus: true, class: "input" %>
-      <% if @is_attending_campout_in_2015 %>
-        <p class="label-input-pair__hint">
-          Your name will not be shared publicly.
-        </p>
-      <% end %>
     </div>
 
     <div class="label-input-pair">

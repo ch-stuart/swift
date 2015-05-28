@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # http://stackoverflow.com/questions/5857915
   def campout_locations
     # This cache is cleared in User.rb
-    json = Rails.cache.fetch "users_campout_locations2" do
+    json = Rails.cache.fetch "users_campout_locations" do
       campers_2015 = User
         .where(is_attending_campout_in_2015: true)
         .where.not(latitude: nil)
@@ -62,50 +62,6 @@ class UsersController < ApplicationController
     if current_user.camper.is_public?
       return render text: "", status: 204
     end
-
-    # response = {}
-    #
-    # c = current_user.camper
-    #
-    # qa = []
-    # qa.push({
-    #   q: Camper.is_first_bike_overnight_label,
-    #   a: c.is_first_bike_overnight
-    # })
-    # qa.push({
-    #   q: Camper.campout_location_and_miles_label,
-    #   a: c.campout_location_and_miles
-    # })
-    # qa.push({
-    #   q: Camper.favorite_gear_label,
-    #   a: c.favorite_gear
-    # })
-    # qa.push({
-    #   q: Camper.why_do_you_love_bike_camping_label,
-    #   a: c.why_do_you_love_bike_camping
-    # })
-    # qa.push({
-    #   q: Camper.is_group_camping_label,
-    #   a: c.is_group_camping
-    # })
-    # qa.push({
-    #   q: Camper.which_bike_label,
-    #   a: c.which_bike
-    # })
-    # qa.push({
-    #   q: Camper.favorite_camp_meal_label,
-    #   a: c.favorite_camp_meal
-    # })
-    # qa.push({
-    #   q: Camper.hear_about_label,
-    #   a: c.hear_about
-    # })
-    #
-    # response[:qa] = qa
-    # response[:userid] = current_user.id
-    # response[:public] = current_user.camper.is_public?
-    #
-    # render json: response
 
     render json: current_user,
       only: [:city, :contact],
@@ -214,8 +170,7 @@ class UsersController < ApplicationController
         :company,
         :company_url,
         :contact,
-        :wholesale,
-        :public
+        :wholesale
       )
     else
       params.require(:user).permit(
@@ -227,8 +182,7 @@ class UsersController < ApplicationController
         :phone_no,
         :company,
         :company_url,
-        :contact,
-        :public
+        :contact
       )
     end
   end

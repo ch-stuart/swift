@@ -24,11 +24,6 @@
     <div class="label-input-pair">
       <%= f.label :contact, "Name", class: "label" %>
       <%= f.text_field :contact, autofocus: true, class: "input" %>
-      <% if request.fullpath.include? "swiftcampout" %>
-        <p class="label-input-pair__hint">
-          Your name will not be shared publicly.
-        </p>
-      <% end %>
     </div>
 
     <div class="label-input-pair">
