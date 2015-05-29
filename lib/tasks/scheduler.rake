@@ -4,7 +4,7 @@ task :prime_flickr_cache => :environment do
   rescue Exception => e
     ExceptionNotifier.notify_exception(
       e,
-      env: request.env,
+      env: 'unknown FIXME',
       data: { message: "Priming flickr cache failed" }
     )
     puts e
@@ -18,7 +18,7 @@ task :prime_twitter_cache => :environment do
   rescue Exception => e
     ExceptionNotifier.notify_exception(
       e,
-      env: request.env,
+      env: 'unknown FIXME',
       data: { message: "Priming twitter cache failed" }
     )
     puts e
@@ -32,7 +32,7 @@ task :prime_instagram_cache => :environment do
   rescue Exception => e
     ExceptionNotifier.notify_exception(
       e,
-      env: request.env,
+      env: 'unknown FIXME',
       data: { message: "Priming instagram cache failed" }
     )
     puts e
