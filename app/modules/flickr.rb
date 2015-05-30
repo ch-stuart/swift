@@ -13,7 +13,7 @@ module Flickr
       if Rails.cache.exist?(tag) && Rails.cache.read(tag).present?
         Rails.logger.info "Flickr#get_photos_by_tag: Using cached result"
         Rails.logger.info "#{Rails.cache.read(tag)}"
-        # return Rails.cache.read(tag)
+        return Rails.cache.read(tag)
       else
         Rails.logger.info "Flickr#get_photos_by_tag: No cached result available"
       end
@@ -88,7 +88,7 @@ module Flickr
       return ""
     else
       if Rails.cache.exist?(cache_key) && Rails.cache.read(cache_key).present?
-        # return Rails.cache.read(cache_key)
+        return Rails.cache.read(cache_key)
       end
     end
 
@@ -123,7 +123,7 @@ module Flickr
       return []
     else
       if Rails.cache.exist?(id) && Rails.cache.read(id).present?
-        # return Rails.cache.read(id)
+        return Rails.cache.read(id)
       end
     end
 
