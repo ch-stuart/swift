@@ -12,7 +12,17 @@ SwiftApp.controller('SolsticeCtrl', [
   var initializeMap,
       initializeHeader,
       initializeWelcome,
-      initializePublicProfiles;
+      initializePublicProfiles,
+      allMarkers = {},
+      publicMarkers = {};
+
+  $scope.changePins = function(pins) {
+    if (pins === 'public') {
+      $scope.markers = publicMarkers;
+    } else {
+      $scope.markers = allMarkers;
+    }
+  };
 
   $scope.loadCamperProfileInDialog = function(event) {
     var url,
@@ -85,12 +95,13 @@ SwiftApp.controller('SolsticeCtrl', [
       CampoutUserService
         .getCampoutLocations()
         .success(function(locs) {
-          var markers = {};
-
           $scope.camperCount = locs.length;
 
           locs.forEach(function(loc, idx) {
-            var msg = "<div>";
+            var msg,
+                marker;
+
+            msg += "<div>";
             msg += loc.city;
 
             if (loc.neighbors) {
@@ -117,7 +128,7 @@ SwiftApp.controller('SolsticeCtrl', [
 
             msg += "</div>";
 
-            markers['m'+idx] = {
+            marker = {
               lat: loc.latitude,
               lng: loc.longitude,
               message: msg,
@@ -127,9 +138,15 @@ SwiftApp.controller('SolsticeCtrl', [
               getMessageScope: function() { return $scope; }
             };
 
+            allMarkers['m'+idx] = marker;
+
+            if (loc.public_profile) {
+              publicMarkers['m'+idx] = marker;
+            }
+
           });
 
-          $scope.markers = markers;
+          $scope.markers = allMarkers;
         })
         .error(function(data) {
           ExceptionService.report('Failed to get solstice map data', data);
