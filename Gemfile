@@ -27,6 +27,7 @@ gem 'instagram'
 gem 'twitter'
 gem 'geocoder'
 gem 'acts_as_list'
+gem 'rack-timeout'
 
 # group :assets do
   gem 'sass-rails'
