@@ -129,31 +129,19 @@ module Flickr
 
     photos = []
 
-    results = flickr.photosets.getPhotos :photoset_id => id
+    results = flickr.photosets.getPhotos(photoset_id: id, extras: "url_n, url_z", per_page: 10)
 
-    results["photo"].each do |photo|
-      sizes = flickr.photos.getSizes :photo_id => photo["id"]
+    results["photo"].each do |p|
 
-      small_320  = sizes.find {|size| size.label == "Small 320" }
-      # medium     = sizes.find {|size| size.label == "Medium" }
-      medium_640 = sizes.find {|size| size.label == "Medium 640" }
-      # medium_800 = sizes.find {|size| size.label == "Medium 800" }
-
-      next if small_320.nil?
-      next if medium_640.nil?
+      next if p["url_n"].blank?
+      next if p["url_z"].blank?
 
       photos.push({
-        id: photo["id"],
-        small_320_url: small_320.source,
-        medium_640_url: medium_640.source
+        id: p["id"],
+        small_320_url: p["url_n"],
+        medium_640_url: p["url_z"]
       })
     end
-
-    if photos.length > 10
-      photos = photos[0..9]
-    end
-
-    # photos = JSON.parse(photos)
 
     Rails.cache.write(id, photos)
 
