@@ -104,7 +104,7 @@ module Flickr
     end
 
     begin
-      sizes = flickr.photos.getSizes :photo_id => id
+      sizes = flickr.photos.getSizes photo_id: id
     rescue Exception => e
       Rails.logger.info "Flickr.get_photo_by_id failed. #{e}"
       return ""
