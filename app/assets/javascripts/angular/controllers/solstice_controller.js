@@ -98,7 +98,7 @@ SwiftApp.controller('SolsticeCtrl', [
           $scope.camperCount = locs.length;
 
           locs.forEach(function(loc, idx) {
-            var msg,
+            var msg = "",
                 marker;
 
             msg += "<div>";
