@@ -1,5 +1,16 @@
 module Flickr
 
+  # url_s : Square
+  # url_q : Large Square
+  # url_t : Thumbnail
+  # url_m : Small
+  # url_n : Small 320
+  # url   : Medium
+  # url_z : Medium 640
+  # url_c : Medium 800
+  # url_b : Large
+  # url_o : Original
+
   def get_photos_by_tag tag
     Rails.logger.info "Flickr#get_photos_by_tag: #{tag}"
     start = Time.now
