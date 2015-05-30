@@ -2,6 +2,7 @@ module Flickr
 
   def get_photos_by_tag tag
     Rails.logger.info "Flickr#get_photos_by_tag: #{tag}"
+    start = Time.now
 
     # return [] if not tag
     if tag.blank?
@@ -12,7 +13,7 @@ module Flickr
       if Rails.cache.exist?(tag) && Rails.cache.read(tag).present?
         Rails.logger.info "Flickr#get_photos_by_tag: Using cached result"
         Rails.logger.info "#{Rails.cache.read(tag)}"
-        return Rails.cache.read(tag)
+        # return Rails.cache.read(tag)
       else
         Rails.logger.info "Flickr#get_photos_by_tag: No cached result available"
       end
@@ -21,50 +22,37 @@ module Flickr
     # go get them if they are not cached
     photos = []
 
-    # This unforunately takes many calls to flickr in order to get the photo URLs
-    # Say you have 5 photos in a slideshow
-    # ... 1 call to get all of the tags
-    # ... 5 more to get the sizes
-    # ... 5 more to get the medium size photos
-    # boo
-    flickr.photos.search(:user_id => APP_CONFIG[:flickr_user_id], :tags => URI.escape(tag)).each do |p|
-      # Rails.logger.info "Flickr#get_photos_by_tag: Photo returned: #{p.inspect}"
-
-      # Get photo info
-      photo_info = flickr.photos.getInfo(:photo_id => p.id) # retrieve additional details
+    flickr.photos.search(
+      user_id: APP_CONFIG[:flickr_user_id],
+      tags: URI.escape(tag),
+      extras: "description, owner_name, url_z, url_b"
+    ).each do |p|
 
       # Save some photo info
       photo               = {}
-      photo[:id]          = photo_info['id']
-      photo[:description] = photo_info['description']
-      photo[:title]       = photo_info['title']
-      photo[:flickr_url]  = photo_info['urls'][0]['_content'].gsub("http:", "")
-      # Get photo sizes
-      photo_sizes         = flickr.photos.getSizes :photo_id => photo_info['id']
-
-      # Get medium size photo
-      medium_photo        = photo_sizes.find {|s| s.label == 'Medium' }
+      photo[:id]          = p['id']
+      photo[:description] = p['description']
+      photo[:title]       = p['title']
+      # https://www.flickr.com/photos/swiftpanniers/14973750878/
+      photo[:flickr_url]  = "https://www.flickr.com/photos/#{p['owner_name']}/#{p['id']}"
 
       # Don't proceed if we can't get a medium photo
-      if medium_photo.blank?
-        Rails.logger.warn "Cannot get medium sized photo. Skipping."
+      if p['url_z'].blank?
+        Rails.logger.warn "Flickr#get_photos_by_tag: Cannot get medium sized photo. Skipping."
         next
       end
 
       # Save medium size photo info
-      photo[:url]         = medium_photo.source.gsub("http:", "")
-      photo[:height]      = medium_photo.height
+      photo[:url]         = p['url_z']
+      photo[:height]      = p['height_z']
 
-      # Get large size photo
-      large_photo = photo_sizes.find {|s| s.label == 'Large' }
-
-      if large_photo.present?
-        photo[:large_url]    = large_photo.source.gsub("http:", "")
-        photo[:large_height] = large_photo.height
+      if p['url_b'].present?
+        photo[:large_url]    = p['url_b']
+        photo[:large_height] = p['height_b']
       else
-        Rails.logger.warn "Could not get large photo. Using medium photo instead."
-        photo[:large_url]    = medium_photo.source.gsub("http:", "")
-        photo[:large_height] = medium_photo.height
+        Rails.logger.warn "Flickr#get_photos_by_tag: Could not get large photo. Using medium photo instead."
+        photo[:large_url]    = photo[:url]
+        photo[:large_height] = photo[:height]
       end
 
       photos.push photo
@@ -81,11 +69,14 @@ module Flickr
 
     Rails.cache.write(tag, photos)
 
+    Rails.logger.info "--> Flickr#get_photos_by_tag #{Time.now - start}s"
+
     photos
   end
 
   def get_photo_by_id(id, size=nil)
     Rails.logger.info "Flickr#get_photos_by_id #{id}"
+    start = Time.now
 
     if size.nil?
       cache_key = "#{id}-nothing"
@@ -97,7 +88,7 @@ module Flickr
       return ""
     else
       if Rails.cache.exist?(cache_key) && Rails.cache.read(cache_key).present?
-        return Rails.cache.read(cache_key)
+        # return Rails.cache.read(cache_key)
       end
     end
 
@@ -119,17 +110,20 @@ module Flickr
 
     Rails.cache.write(cache_key, photo.source)
 
+    Rails.logger.info "--> Flickr#get_photo_by_id #{Time.now - start}s"
+
     photo.source.gsub("http:", "")
   end
 
   def get_photos_by_set id
     Rails.logger.info "Flickr#get_photos_by_set #{id}"
+    start = Time.now
 
     if id.blank?
       return []
     else
       if Rails.cache.exist?(id) && Rails.cache.read(id).present?
-        return Rails.cache.read(id)
+        # return Rails.cache.read(id)
       end
     end
 
@@ -162,6 +156,8 @@ module Flickr
     # photos = JSON.parse(photos)
 
     Rails.cache.write(id, photos)
+
+    Rails.logger.info "--> Flickr#get_photos_by_set #{Time.now - start}s"
 
     photos
   end
