@@ -14,6 +14,10 @@ class UsersController < ApplicationController
 
   # http://stackoverflow.com/questions/5857915
   def campout_locations
+    start = Time.now
+
+    response = []
+
     # This cache is cleared in User.rb
     json = Rails.cache.fetch "users_campout_locations" do
       campers_2015 = User
@@ -22,35 +26,29 @@ class UsersController < ApplicationController
         .where.not(longitude: nil)
         .where.not(city: nil)
 
-      @campers_2015 = campers_2015
+      campers_2015.each do |user|
+        data = {}
 
-      @campers_2015 = @campers_2015.as_json
-
-      @campers_2015.each do |user_data|
-        user = User.find(user_data["id"])
-
-        size = campers_2015.near(user, 10).size - 1
+        data[:latitude] = user.latitude
+        data[:longitude] = user.longitude
+        data[:city] = user.city
+        data[:guid] = user.guid
+        data[:neighbors] = campers_2015.near(user, 10).size - 1
 
         # not all campers have a camper association
         if user.camper.present?
-          user_data["public_profile"] = user.camper.is_public?
+          data[:public_profile] = user.camper.is_public?
           if user.camper.is_public?
-            user_data["public_contact"] = user.contact
+            data[:public_contact] = user.contact
           end
         end
-        user_data["neighbors"] = size
+
+        response.push data
       end
 
-      logger.info @campers_2015
-
-      json = @campers_2015.to_json(
-        only: [
-          "latitude", "longitude", "city", "public_contact",
-          "neighbors", "public_profile", "guid"
-        ]
-      )
+      json = response.to_json
     end
-
+    Rails.logger.info "UsersController#campout_locations: #{Time.now - start}s"
     render json: json
   end
 
