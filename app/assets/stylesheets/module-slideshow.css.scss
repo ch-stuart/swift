@@ -55,7 +55,7 @@
   max-width: 100%;
 }
 .lightbox-close {
-  background-image: url(/assets/closebox.png);
+  background-image: url(asset_path('closebox.png'));
   background-repeat: no-repeat;
   position: absolute;
   top: -15px;
