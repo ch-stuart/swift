@@ -185,6 +185,7 @@ class SalesController < ApplicationController
       stripe_id:         params[:stripe_id],
       gift_certificate_guid: params[:gift_certificate_guid],
       gift_cert_remain:      params[:gift_cert_remain],
+      gift_cert_available:   params[:gift_cert_available],
       gift_cert_applied:     params[:gift_cert_applied],
       total_with_gift_cert:  params[:total_with_gift_cert],
       coupon_code:           params[:coupon_code] || nil,

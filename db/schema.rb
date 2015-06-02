@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150527145412) do
+ActiveRecord::Schema.define(version: 20150602041059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 20150527145412) do
     t.boolean  "shipping_service_is_flat_rate"
     t.string   "coupon_code",                   limit: 255
     t.integer  "saved_with_coupon"
+    t.integer  "gift_cert_available"
   end
 
   create_table "shipments", force: :cascade do |t|

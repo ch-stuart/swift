@@ -90,6 +90,7 @@ SwiftApp.controller('CheckoutCtrl', [
         $scope.cart.taxAmount         = data.taxAmount;
         $scope.cart.taxRate           = data.taxRate;
         $scope.cart.shippingCharge    = data.shippingCharge;
+        $scope.cart.giftCertAvailable = data.giftCertAvailable;
         $scope.cart.giftCertRemain    = data.giftCertRemain;
         $scope.cart.giftCertApplied   = data.giftCertApplied;
         $scope.cart.totalWithGiftCert = data.totalWithGiftCert;
@@ -386,6 +387,7 @@ SwiftApp.controller('CheckoutCtrl', [
                 amount: $scope.cart.price,
                 total: $scope.cart.total,
                 gift_certificate_guid: $scope.giftCertificateRedemptionCode,
+                gift_cert_available: $scope.cart.giftCertAvailable,
                 gift_cert_remain: $scope.cart.giftCertRemain,
                 gift_cert_applied: $scope.cart.giftCertApplied,
                 total_with_gift_cert: $scope.cart.totalWithGiftCert,
@@ -667,7 +669,7 @@ SwiftApp.controller('CheckoutCtrl', [
                     } else if (response.status === 404) {
                         $scope.giftCertificateError = "Could not find gift certificate.";
                     } else {
-                        $scope.giftCertificateError = "An error occured and could not find gift certificate.";
+                        $scope.giftCertificateError = "An error occurred and could not find gift certificate.";
                     }
                     CartService.nullGiftCert();
                 }

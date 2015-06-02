@@ -13,7 +13,11 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
         shippingCharge: null,
         taxRate: null,
         taxAmount: null,
+        // GC value available to apply to this order
+        giftCertAvailable: null,
+        // GC value remaining after this purchase
         giftCertRemain: null,
+        // GC value applied to this order
         giftCertApplied: null,
         // Calculates base price, tax amount, shipping charge
         // Broadcasts updates
@@ -66,17 +70,29 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
                 this.total += this.shippingCharge;
             }
 
-            if (this.giftCertRemainingAmount) {
+            if (this.giftCertAvailable) {
                 // If available gift certificate is greater
                 // than total... zero out total
-                if (this.giftCertRemainingAmount >= this.total) {
+                // GC: $200
+                // T:  $150
+              if (this.giftCertAvailable >= this.total) {
+                    // $150
                     this.giftCertApplied = this.total;
+                    // $50
+                    this.giftCertRemain = this.giftCertAvailable - this.giftCertApplied;
+                    // $0
                     this.totalWithGiftCert = 0;
+
                 // If available gift certificate is less
                 // than total... use as much as possible
+                // GC: $20
+                // T:  $100
                 } else {
-                    this.totalWithGiftCert = this.total - this.giftCertRemainingAmount;
-                    this.giftCertApplied = this.giftCertRemainingAmount;
+                    // $100 - $20 = $80
+                    this.totalWithGiftCert = this.total - this.giftCertAvailable;
+                    // $20
+                    this.giftCertApplied = this.giftCertAvailable;
+                    this.giftCertRemain = 0;
                 }
             }
 
@@ -86,7 +102,8 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
                 taxAmount: this.taxAmount,
                 taxRate: this.taxRate,
                 shippingCharge: this.shippingCharge,
-                giftCertRemainingAmount: this.giftCertRemainingAmount,
+                giftCertRemain: this.giftCertRemain,
+                giftCertAvailable: this.giftCertAvailable,
                 giftCertApplied: this.giftCertApplied,
                 totalWithGiftCert: this.totalWithGiftCert,
                 originalPrice: this.originalPrice,
@@ -280,11 +297,11 @@ SwiftApp.service('CartService', ['$rootScope', function($rootScope) {
             }
         },
         applyGiftCert: function(val) {
-            this.giftCertRemainingAmount = val;
+            this.giftCertAvailable = val;
             this.getPrice();
         },
         nullGiftCert: function() {
-            this.giftCertRemainingAmount = null;
+            this.giftCertAvailable = null;
             this.getPrice();
         },
         applyCoupon: function(coupon) {

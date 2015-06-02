@@ -257,7 +257,7 @@
           <div class="label-input-pair" ng-show="cart.giftCertApplied">
             <p>
               {{ cart.giftCertApplied / 100 | currency }} from your gift certificate has been applied to this order.
-              {{ (cart.giftCertRemain - cart.giftCertApplied) / 100 | currency }} remains on the gift certificate.
+              {{ cart.giftCertRemain / 100 | currency }} remains on the gift certificate.
             </p>
           </div>
           <div class="label-input-pair" ng-show="giftCertificateError">
@@ -495,7 +495,7 @@
         {{ cart.giftCertApplied / 100 | currency }}
         <br>
         <span class="demph">
-          {{ cart.giftCertRemain / 100 | currency }} available.
+          {{ cart.giftCertRemain / 100 | currency }} remaining.
         </span>
       </div>
       <div class="row--checkout-sidebar" ng-hide="cart.giftCertApplied">

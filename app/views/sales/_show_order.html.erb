@@ -36,7 +36,7 @@
         <% if @coupon.present? %>
           -<%= number_to_currency(cents_to_dollars(@sale.saved_with_coupon)) %>
         <% else %>
-          --
+          n/a
         <% end %>
       </td>
       <td>
@@ -82,6 +82,14 @@
         <% end %>
       </td>
     </tr>
+    <tr>
+      <td>
+        Order Total
+      </td>
+      <td colspan=2>
+        <strong><%= number_to_currency(cents_to_dollars(@sale.total)) %></strong>
+      </td>
+    </tr>
     <% if @gift_certificate.present? %>
       <tr>
         <td>
@@ -91,7 +99,7 @@
             <% if @sale.gift_cert_applied.nil? %>
               --
             <% else %>
-              <%= number_to_currency(cents_to_dollars(@sale.gift_cert_applied)) %>
+              -<%= number_to_currency(cents_to_dollars(@sale.gift_cert_applied)) %>
             <% end %>
         </td>
         <td>
@@ -114,25 +122,24 @@
                 <%= number_to_currency(cents_to_dollars(@sale.gift_cert_remain)) %>
               <% end %>
             </li>
-            <li>
-              Total charged to customer via Stripe:<br>
-              <% if @sale.total_with_gift_cert.nil? %>
-                --
-              <% else %>
-                <%= number_to_currency(cents_to_dollars(@sale.total_with_gift_cert)) %>
-              <% end %>
-            </li>
           </ul>
         </td>
+      </tr>
+      <tr>
+        <td>
+          Total charged to customer via Stripe:
+        </td>
+        <td colspan=2>
+          <% if @sale.total_with_gift_cert.nil? %>
+            --
+          <% else %>
+            <%= number_to_currency(cents_to_dollars(@sale.total_with_gift_cert)) %>
+          <% end %>
+        </td>
+      </tr>
     <% else %>
       <!-- NO GC -->
     <% end %>
-    <tr>
-      <td></td>
-      <td colspan=2>
-        <strong><%= number_to_currency(cents_to_dollars(@sale.total)) %></strong>
-      </td>
-    </tr>
   </tbody>
 </table>
 
