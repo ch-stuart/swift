@@ -39,13 +39,16 @@ module Flickr
       extras: "description, owner_name, url_z, url_b"
     ).each do |p|
 
+      logger.info "response from flickr is..."
+      logger.info p.inspect
+
       # Save some photo info
       photo               = {}
       photo[:id]          = p['id']
       photo[:description] = p['description']
       photo[:title]       = p['title']
       # https://www.flickr.com/photos/swiftpanniers/14973750878/
-      photo[:flickr_url]  = "https://www.flickr.com/photos/#{p['owner_name']}/#{p['id']}"
+      photo[:flickr_url]  = "https://www.flickr.com/photos/#{APP_CONFIG[:flickr_user_id]}/#{p['id']}"
 
       # Don't proceed if we can't get a medium photo
       if p['url_z'].blank?
