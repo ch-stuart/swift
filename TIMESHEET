@@ -380,5 +380,6 @@ date:        time (minutes):       comment:
 2015-06-02  25 Fixing gift certificates
 2015-06-12  15 Fix issue where link to flickr photos was broken
 2015-06-12  15 Change heroku pricing to "hobby"
+2015-07-09  10 Remove solstice from homepage
 
 http://www.timer-tab.com
