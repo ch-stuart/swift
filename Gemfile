@@ -28,6 +28,7 @@ gem 'twitter'
 gem 'geocoder'
 gem 'acts_as_list'
 gem 'rack-timeout'
+gem 'kaminari'
 
 # group :assets do
   gem 'sass-rails'

@@ -1,9 +1,24 @@
-<style>
-  .container {
-    width: auto;
-    padding: 10px;
-  }
-</style>
+<%= content_for :css do %>
+  <style>
+    .container {
+      width: auto;
+      padding: 10px;
+    }
+    .page.current {
+      background-color: #ffa;
+    }
+  </style>
+<% end %>
+
+<h1>
+  All Sales
+</h1>
+<p>
+  <%= link_to raw('&larr; Hub'), hub_path, class: "btn" %>
+  <%= link_to raw('&larr; Sales'), sales_path, class: "btn" %>
+</p>
 <% cache @sales do %>
+  <%= paginate @sales %>
   <%= render 'sales_table', sales: @sales, title: 'All' %>
+  <%= paginate @sales %>
 <% end %>

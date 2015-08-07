@@ -21,7 +21,7 @@ class SalesController < ApplicationController
   end
 
   def all
-    @sales = Sale.all.order("created_at DESC")
+    @sales = Sale.order("created_at DESC").page params[:page]
 
     render layout: "hub"
   end
