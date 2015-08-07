@@ -15,7 +15,7 @@ class Sale < ActiveRecord::Base
   validates_presence_of :email, :amount, :total, :guid, :status
 
   scope :not_shipped, -> { where(status: 'Not Shipped').order("created_at DESC") }
-  scope :printed,     -> { where(status: 'Printed').order("created_at DESC").limit(60) }
+  scope :printed,     -> { where(status: 'Printed').order("created_at DESC").limit(120) }
   scope :shipped,     -> { where(status: 'Shipped').order("created_at DESC").limit(60) }
   scope :deleted,     -> { where(status: 'Deleted').order("created_at DESC").limit(60) }
 
