@@ -388,4 +388,8 @@ date:        time (minutes):       comment:
 2015-08-06  10 Temporary fix for issue where not all printed sales could be viewed
 2015-08-06  30 Add pagination to "all sales" view so it renders before rack timeout
 
+// INVOICED 2015-08-06
+
+2015-08-08  30 Progress on preventing duplicate orders
+
 http://www.timer-tab.com
