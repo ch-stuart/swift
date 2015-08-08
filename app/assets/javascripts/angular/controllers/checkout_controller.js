@@ -458,7 +458,7 @@ SwiftApp.controller('CheckoutCtrl', [
         rates_response_count = 0;
     }
 
-    $scope['onPickupChanged'] = function() {
+    $scope.onPickupChanged = function() {
         var scrollToThisId = ConfigService.get('WS') ? '#row-contact' : "#row-wa-tax-check";
 
         // Customer is picking up
@@ -486,12 +486,12 @@ SwiftApp.controller('CheckoutCtrl', [
             // This turns off the WA taxes, since we'll grab
             // them again using the customer's shipping
             // address, assuming they live in WA.
-            $scope['waStateResidentChanged']();
+            $scope.waStateResidentChanged();
         }
         CartService.set('pickup', !!$scope.pickup);
     };
 
-    $scope['waStateResidentChanged'] = function() {
+    $scope.waStateResidentChanged = function() {
         if ($scope.waStateResident) {
             WaStateTaxService
                 .rate(ConfigService.get('swiftAddress'))
@@ -502,7 +502,7 @@ SwiftApp.controller('CheckoutCtrl', [
         CartService.set('waStateResident', !!$scope.waStateResident);
     };
 
-    $scope['onBillingCountrySelectChanged'] = function() {
+    $scope.onBillingCountrySelectChanged = function() {
         $scope.billingCountryIsUSCA = $scope.billingCountry === 'US' || $scope.billingCountry === 'CA';
 
         if ($scope.billingCountry === 'US') {
@@ -513,7 +513,7 @@ SwiftApp.controller('CheckoutCtrl', [
         }
     };
 
-    $scope['onCountrySelectChanged'] = function() {
+    $scope.onCountrySelectChanged = function() {
 
         $scope.isShippingDomestic = $scope.country === 'US';
 
@@ -554,7 +554,7 @@ SwiftApp.controller('CheckoutCtrl', [
         }
     };
 
-    $scope['onCalculateShippingCostBtnClicked'] = function(isValid) {
+    $scope.onCalculateShippingCostBtnClicked = function(isValid) {
         var $scrollToElem;
 
         if (!isValid) {
@@ -587,7 +587,7 @@ SwiftApp.controller('CheckoutCtrl', [
             .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
     };
 
-    $scope['onShippingServiceLevelChange'] = function() {
+    $scope.onShippingServiceLevelChange = function() {
         resetRateResponsesAndCounters();
 
         console.log('CheckoutCtrl#onShippingServiceLevelChange', $scope.shippingServiceLevel);
@@ -598,7 +598,7 @@ SwiftApp.controller('CheckoutCtrl', [
             .then(postmasterValidateSuccessCallback, postmasterValidateErrorCallback);
     };
 
-    $scope['onRatesRadioChanged'] = function(provider) {
+    $scope.onRatesRadioChanged = function(provider) {
         console.log('CheckoutCtrl#onRatesRadioChanged', provider);
 
         $scope.shipping = {
@@ -610,7 +610,7 @@ SwiftApp.controller('CheckoutCtrl', [
         CartService.setShippingCharge(provider.charge);
     };
 
-    $scope['onCouponCodeApply'] = function() {
+    $scope.onCouponCodeApply = function() {
         var code = $scope.couponCode;
 
         $scope.couponError = null;
@@ -641,7 +641,7 @@ SwiftApp.controller('CheckoutCtrl', [
             );
     };
 
-    $scope['onGiftCertificateRedemptionCodeApply'] = function() {
+    $scope.onGiftCertificateRedemptionCodeApply = function() {
         var guid = $scope.giftCertificateRedemptionCode;
 
         $scope.giftCertificateError = null;
@@ -674,7 +674,7 @@ SwiftApp.controller('CheckoutCtrl', [
             );
     };
 
-    $scope['onBuyItButtonClicked'] = function(isValid) {
+    $scope.onBuyItButtonClicked = function(isValid) {
         if (!isValid) {
             return alert('The information you entered is incomplete. Fill in all fields and try again.');
         }
