@@ -431,8 +431,6 @@ SwiftApp.controller('CheckoutCtrl', [
 
     function saleCreateSuccessCallback(response) {
         console.log('saleCreateSuccessCallback', response);
-        $scope.busyBuying = false;
-
         window.location = "/orders/" + response.data.guid;
     }
 
