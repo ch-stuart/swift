@@ -63,6 +63,8 @@ SwiftSite::Application.routes.draw do
   # # completed purchase
   # https://www.builtbyswift.com/orders/7e59b9a5
 
+  get 'sales/search', to: 'sales#search'
+
   resources :sales do
     get 'success', on: :member
     get 'ready_for_pickup', on: :member

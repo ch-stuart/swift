@@ -2,9 +2,16 @@
 <p>
   The first 60 sales for each tab are shown. To view older sales <%= link_to "view all", all_sales_path %>.
 </p>
-<p>
-  <%= link_to raw('&larr; Hub'), hub_path, class: "btn" %>
-</p>
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <p>
+      <%= link_to raw('&larr; Hub'), hub_path, class: "btn" %>
+    </p>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <%= render 'search' %>
+  </div>
+</div>
 <div class="tabs">
   <div class="tab">
     New <span class="demph"><%= @sales_not_shipped.length %></span>

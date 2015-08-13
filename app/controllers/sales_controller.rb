@@ -132,6 +132,11 @@ class SalesController < ApplicationController
     @sale = Sale.find(params[:id])
   end
 
+  def search
+    @results = Sale.search params[:q]
+    render layout: "hub"
+  end
+
   # POST /sales/charge.json
   def charge
     begin

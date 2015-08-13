@@ -391,5 +391,9 @@ date:        time (minutes):       comment:
 // INVOICED 2015-08-06
 
 2015-08-08  30 Progress on preventing duplicate orders
+2015-08-12  10 Pre-Approved Dealer can't sign up
+2015-08-12  10 When we navigate from a customer order to stripe it bugs out really hard
+2015-08-12  05 dealer log-ins: change log in landing page from Swift Campout back to homepage
+2015-08-12  90 add search bar in sales hub. search by order #, last name, or email address
 
 http://www.timer-tab.com

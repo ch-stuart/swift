@@ -1,5 +1,7 @@
 class Sale < ActiveRecord::Base
 
+  include PgSearch
+
   has_many :shipments
   has_many :gift_certificates
 
@@ -18,6 +20,12 @@ class Sale < ActiveRecord::Base
   scope :printed,     -> { where(status: 'Printed').order("created_at DESC").limit(120) }
   scope :shipped,     -> { where(status: 'Shipped').order("created_at DESC").limit(60) }
   scope :deleted,     -> { where(status: 'Deleted').order("created_at DESC").limit(60) }
+
+  pg_search_scope :search, against: [
+    :email, :guid, :city, :state, :zip_code, :country, :stripe_id, :phone_no,
+    :contact, :company, :gift_certificate_guid, :shipping_contact, :coupon_code,
+    :line1
+  ]
 
   # This needs to exclude instances where the product hasn't
   # shipped, and instances where it shipped, but was not shipped

@@ -1,0 +1,5 @@
+<h1>
+  Search results for <b><%= params[:q] %></b>
+</h1>
+<%= render 'search' %>
+<%= render 'sales_table', sales: @results, title: 'Results' %>

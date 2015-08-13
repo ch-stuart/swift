@@ -29,6 +29,8 @@ gem 'geocoder'
 gem 'acts_as_list'
 gem 'rack-timeout'
 gem 'kaminari'
+gem 'pg_search'
+
 
 # group :assets do
   gem 'sass-rails'
