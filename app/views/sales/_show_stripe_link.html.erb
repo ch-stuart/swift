@@ -1,9 +1,9 @@
 <% if Rails.env == "production" %>
-  <a href="https://manage.stripe.com/prod/payments/<%= @sale.stripe_id %>" class="btn">
+  <a href="https://dashboard.stripe.com/prod/payments/<%= @sale.stripe_id %>" class="btn">
     View on Stripe
   </a>
 <% else %>
-  <a href="https://manage.stripe.com/test/payments/<%= @sale.stripe_id %>" class="btn">
+  <a href="https://dashboard.stripe.com/test/payments/<%= @sale.stripe_id %>" class="btn">
     View on Stripe
   </a>
 <% end %>
