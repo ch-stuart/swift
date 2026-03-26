@@ -1,6 +1,6 @@
 # Overview
 
-_This was the website for Swift Industries from 2013-2015._
+_This was the website for Swift Industries from 2010-2015._
 
 Full-stack Rails ecommerce and marketing platform built for [Swift Industries](https://builtbyswift.com), a Seattle-based bike bags manufacturer.
 

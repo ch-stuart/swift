@@ -2,7 +2,7 @@
 
 ~~The website for Swift Industries. Runs on Heroku.~~
 
-_This was the website for Swift Industries from 2013-2015._
+_This was the website for Swift Industries from 2010-2015._
 
 _[OVERVIEW.md](OVERVIEW.md) lists the feature set and technical implementation._
 
